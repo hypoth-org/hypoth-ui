@@ -1,0 +1,150 @@
+/* Button Component Styles */
+@layer components {
+  .ds-button {
+    /* Base styles */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ds-spacing-component-gap-sm);
+    border: 1px solid transparent;
+    border-radius: var(--ds-radius-md);
+    font-family: inherit;
+    font-weight: var(--ds-font-weight-medium);
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    text-decoration: none;
+    white-space: nowrap;
+
+    /* Default padding */
+    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-lg);
+  }
+
+  /* Size variants */
+  .ds-button--sm {
+    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-md);
+    font-size: var(--ds-font-size-sm);
+  }
+
+  .ds-button--md {
+    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-lg);
+    font-size: var(--ds-font-size-base);
+  }
+
+  .ds-button--lg {
+    padding: var(--ds-spacing-component-padding-md) var(--ds-spacing-component-padding-xl);
+    font-size: var(--ds-font-size-lg);
+  }
+
+  /* Primary variant */
+  .ds-button--primary {
+    background-color: var(--ds-color-primary-default);
+    color: var(--ds-color-primary-foreground);
+    border-color: var(--ds-color-primary-default);
+  }
+
+  .ds-button--primary:hover:not(:disabled) {
+    background-color: var(--ds-color-primary-hover);
+    border-color: var(--ds-color-primary-hover);
+  }
+
+  .ds-button--primary:active:not(:disabled) {
+    background-color: var(--ds-color-primary-active);
+    border-color: var(--ds-color-primary-active);
+  }
+
+  /* Secondary variant */
+  .ds-button--secondary {
+    background-color: var(--ds-color-background-default);
+    color: var(--ds-color-foreground-default);
+    border-color: var(--ds-color-border-default);
+  }
+
+  .ds-button--secondary:hover:not(:disabled) {
+    background-color: var(--ds-color-background-subtle);
+    border-color: var(--ds-color-border-emphasis);
+  }
+
+  .ds-button--secondary:active:not(:disabled) {
+    background-color: var(--ds-color-background-muted);
+  }
+
+  /* Ghost variant */
+  .ds-button--ghost {
+    background-color: transparent;
+    color: var(--ds-color-foreground-default);
+    border-color: transparent;
+  }
+
+  .ds-button--ghost:hover:not(:disabled) {
+    background-color: var(--ds-color-background-subtle);
+  }
+
+  .ds-button--ghost:active:not(:disabled) {
+    background-color: var(--ds-color-background-muted);
+  }
+
+  /* Destructive variant */
+  .ds-button--destructive {
+    background-color: var(--ds-color-destructive-default);
+    color: var(--ds-color-destructive-foreground);
+    border-color: var(--ds-color-destructive-default);
+  }
+
+  .ds-button--destructive:hover:not(:disabled) {
+    background-color: var(--ds-color-destructive-hover);
+    border-color: var(--ds-color-destructive-hover);
+  }
+
+  .ds-button--destructive:active:not(:disabled) {
+    background-color: var(--ds-color-destructive-active);
+    border-color: var(--ds-color-destructive-active);
+  }
+
+  /* Disabled state */
+  .ds-button:disabled,
+  .ds-button--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Focus state */
+  .ds-button:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Loading state */
+  .ds-button--loading {
+    position: relative;
+    cursor: wait;
+  }
+
+  .ds-button--loading .ds-button__content {
+    visibility: hidden;
+  }
+
+  .ds-button__spinner {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: ds-button-spin 0.6s linear infinite;
+  }
+
+  @keyframes ds-button-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Button content wrapper */
+  .ds-button__content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-spacing-component-gap-sm);
+  }
+}

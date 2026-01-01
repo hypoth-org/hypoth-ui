@@ -1,0 +1,148 @@
+/* Base Element Styles */
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  font-family: var(--ds-font-family-sans);
+  font-size: var(--ds-font-size-base, 1rem);
+  line-height: var(--ds-font-lineHeight-normal, 1.5);
+  color: var(--ds-color-foreground-default);
+  background-color: var(--ds-color-background-default);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-font-lineHeight-tight, 1.25);
+}
+
+h1 {
+  font-size: var(--ds-font-size-4xl);
+}
+
+h2 {
+  font-size: var(--ds-font-size-3xl);
+}
+
+h3 {
+  font-size: var(--ds-font-size-2xl);
+}
+
+h4 {
+  font-size: var(--ds-font-size-xl);
+}
+
+h5 {
+  font-size: var(--ds-font-size-lg);
+}
+
+h6 {
+  font-size: var(--ds-font-size-base);
+}
+
+p {
+  margin-block: var(--ds-spacing-component-gap-sm);
+}
+
+strong,
+b {
+  font-weight: var(--ds-font-weight-bold);
+}
+
+small {
+  font-size: var(--ds-font-size-sm);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--ds-font-family-mono);
+  font-size: 0.875em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--ds-spacing-component-padding-md);
+  background-color: var(--ds-color-background-muted);
+  border-radius: var(--ds-radius-md);
+}
+
+code {
+  padding: 0.125em 0.25em;
+  background-color: var(--ds-color-background-muted);
+  border-radius: var(--ds-radius-sm);
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+/* Links */
+a:not([class]) {
+  color: var(--ds-color-primary-default);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a:not([class]):hover {
+  color: var(--ds-color-primary-hover);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--ds-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--ds-color-primary-subtle);
+  color: var(--ds-color-foreground-default);
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--ds-color-border-default);
+  margin-block: var(--ds-spacing-layout-stack-md);
+}
+
+/* Lists with class styling opt-in */
+ul:where(:not([class])),
+ol:where(:not([class])) {
+  padding-left: var(--ds-spacing-component-padding-xl);
+}
+
+ul:where(:not([class])) {
+  list-style-type: disc;
+}
+
+ol:where(:not([class])) {
+  list-style-type: decimal;
+}
+
+li:where(:not([class])) {
+  margin-block: var(--ds-spacing-component-gap-xs);
+}
+
+/* Blockquote */
+blockquote {
+  padding-left: var(--ds-spacing-component-padding-lg);
+  border-left: 4px solid var(--ds-color-border-emphasis);
+  color: var(--ds-color-foreground-muted);
+  font-style: italic;
+}

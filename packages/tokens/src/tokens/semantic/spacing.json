@@ -1,0 +1,34 @@
+{
+  "spacing": {
+    "component": {
+      "padding": {
+        "xs": { "$value": "{spacing.primitives.1}", "$type": "dimension" },
+        "sm": { "$value": "{spacing.primitives.2}", "$type": "dimension" },
+        "md": { "$value": "{spacing.primitives.3}", "$type": "dimension" },
+        "lg": { "$value": "{spacing.primitives.4}", "$type": "dimension" },
+        "xl": { "$value": "{spacing.primitives.6}", "$type": "dimension" }
+      },
+      "gap": {
+        "xs": { "$value": "{spacing.primitives.1}", "$type": "dimension" },
+        "sm": { "$value": "{spacing.primitives.2}", "$type": "dimension" },
+        "md": { "$value": "{spacing.primitives.4}", "$type": "dimension" },
+        "lg": { "$value": "{spacing.primitives.6}", "$type": "dimension" },
+        "xl": { "$value": "{spacing.primitives.8}", "$type": "dimension" }
+      }
+    },
+    "layout": {
+      "container": {
+        "padding": { "$value": "{spacing.primitives.4}", "$type": "dimension" },
+        "maxWidth": { "$value": "80rem", "$type": "dimension" }
+      },
+      "section": {
+        "gap": { "$value": "{spacing.primitives.16}", "$type": "dimension" }
+      },
+      "stack": {
+        "sm": { "$value": "{spacing.primitives.2}", "$type": "dimension" },
+        "md": { "$value": "{spacing.primitives.4}", "$type": "dimension" },
+        "lg": { "$value": "{spacing.primitives.8}", "$type": "dimension" }
+      }
+    }
+  }
+}

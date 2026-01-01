@@ -1,0 +1,10 @@
+{
+  "name": "@ds/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./base": "./tsconfig.base.json",
+    "./react": "./tsconfig.react.json",
+    "./node": "./tsconfig.node.json"
+  }
+}

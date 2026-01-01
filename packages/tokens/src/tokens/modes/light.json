@@ -1,0 +1,22 @@
+{
+  "$description": "Light mode token overrides - default mode",
+  "color": {
+    "background": {
+      "default": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.gray.50}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.100}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.gray.900}", "$type": "color" }
+    },
+    "foreground": {
+      "default": { "$value": "{color.primitives.gray.900}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.600}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.gray.400}", "$type": "color" },
+      "inverted": { "$value": "{color.primitives.white}", "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.primitives.gray.200}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.100}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.gray.400}", "$type": "color" }
+    }
+  }
+}

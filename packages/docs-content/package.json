@@ -1,0 +1,30 @@
+{
+  "name": "@ds/docs-content",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Base documentation content pack",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./manifests/*": "./manifests/*.json",
+    "./components/*": "./components/*.mdx",
+    "./guides/*": "./guides/*.mdx",
+    "./editions/*": "./editions/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "manifests", "components", "guides", "editions"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ds/docs-core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/design-token.schema.json",
+  "title": "Design Token",
+  "description": "DTCG-compliant design token format",
+  "definitions": {
+    "tokenType": {
+      "type": "string",
+      "enum": [
+        "color",
+        "dimension",
+        "fontFamily",
+        "fontWeight",
+        "fontSize",
+        "lineHeight",
+        "letterSpacing",
+        "opacity",
+        "shadow",
+        "border",
+        "transition",
+        "typography",
+        "gradient"
+      ],
+      "description": "Token type per DTCG specification"
+    },
+    "token": {
+      "type": "object",
+      "required": ["$value", "$type"],
+      "properties": {
+        "$value": {
+          "description": "The token value (type depends on $type)"
+        },
+        "$type": {
+          "$ref": "#/definitions/tokenType"
+        },
+        "$description": {
+          "type": "string",
+          "description": "Human-readable description"
+        },
+        "$extensions": {
+          "type": "object",
+          "description": "Extensions for tooling"
+        }
+      }
+    },
+    "tokenGroup": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/definitions/token" },
+          { "$ref": "#/definitions/tokenGroup" }
+        ]
+      },
+      "description": "Nested token group"
+    }
+  },
+  "type": "object",
+  "additionalProperties": {
+    "oneOf": [
+      { "$ref": "#/definitions/token" },
+      { "$ref": "#/definitions/tokenGroup" }
+    ]
+  },
+  "description": "Token file containing nested token groups and tokens"
+}

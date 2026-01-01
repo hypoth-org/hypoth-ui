@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/edition-config.schema.json",
+  "title": "Edition Config",
+  "description": "Configuration for white-label documentation filtering",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "availabilityFilter",
+    "excludeComponents",
+    "contentOverlays",
+    "branding"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique edition identifier (kebab-case)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display name"
+    },
+    "availabilityFilter": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["public", "enterprise", "internal-only", "regulated"]
+      },
+      "minItems": 1,
+      "description": "Included availability tags (intersection filter)"
+    },
+    "excludeComponents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Explicitly excluded component IDs"
+    },
+    "contentOverlays": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Content file overrides (base path → overlay path)"
+    },
+    "branding": {
+      "type": "object",
+      "required": ["logoUrl", "primaryColor"],
+      "properties": {
+        "logoUrl": {
+          "type": "string",
+          "description": "Logo URL"
+        },
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Primary brand color (hex)"
+        },
+        "siteTitle": {
+          "type": "string",
+          "description": "Site title"
+        },
+        "faviconUrl": {
+          "type": "string",
+          "description": "Favicon URL"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Branding customization"
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "showSourceLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show component source links"
+        },
+        "enableSearch": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable search"
+        },
+        "showVersions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show version selector"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Feature flags"
+    }
+  },
+  "additionalProperties": false
+}

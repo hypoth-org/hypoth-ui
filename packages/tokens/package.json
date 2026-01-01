@@ -1,0 +1,28 @@
+{
+  "name": "@ds/tokens",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "DTCG design tokens with CSS and TypeScript outputs",
+  "exports": {
+    ".": {
+      "types": "./dist/ts/index.d.ts",
+      "import": "./dist/ts/index.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsx src/build/build.ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}
