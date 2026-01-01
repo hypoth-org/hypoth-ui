@@ -88,8 +88,9 @@ test.describe("Edition-based Content Filtering", () => {
 
     await page.waitForSelector("nav a, [role='navigation'] a");
 
-    // Get initial nav state
-    const _initialNav = await page.locator("nav, [role='navigation']").innerHTML();
+    // Get initial nav state - use first() to avoid strict mode violation
+    const navElement = page.locator("nav, [role='navigation']").first();
+    await expect(navElement).toBeVisible();
 
     // Navigate to a component
     const link = page.locator("nav a, [role='navigation'] a").first();
