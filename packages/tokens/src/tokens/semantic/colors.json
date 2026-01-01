@@ -1,0 +1,50 @@
+{
+  "color": {
+    "background": {
+      "default": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.gray.50}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.100}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.gray.900}", "$type": "color" }
+    },
+    "foreground": {
+      "default": { "$value": "{color.primitives.gray.900}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.600}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.gray.400}", "$type": "color" },
+      "inverted": { "$value": "{color.primitives.white}", "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.primitives.gray.200}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.100}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.gray.400}", "$type": "color" }
+    },
+    "primary": {
+      "default": { "$value": "{color.primitives.blue.600}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.blue.700}", "$type": "color" },
+      "active": { "$value": "{color.primitives.blue.800}", "$type": "color" },
+      "foreground": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.blue.50}", "$type": "color" }
+    },
+    "destructive": {
+      "default": { "$value": "{color.primitives.red.600}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.red.700}", "$type": "color" },
+      "active": { "$value": "{color.primitives.red.800}", "$type": "color" },
+      "foreground": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.red.50}", "$type": "color" }
+    },
+    "success": {
+      "default": { "$value": "{color.primitives.green.600}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.green.700}", "$type": "color" },
+      "foreground": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.green.50}", "$type": "color" }
+    },
+    "warning": {
+      "default": { "$value": "{color.primitives.amber.500}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.amber.600}", "$type": "color" },
+      "foreground": { "$value": "{color.primitives.gray.900}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.amber.50}", "$type": "color" }
+    },
+    "focus": {
+      "ring": { "$value": "{color.primitives.blue.500}", "$type": "color" }
+    }
+  }
+}

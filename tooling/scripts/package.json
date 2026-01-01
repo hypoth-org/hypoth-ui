@@ -1,0 +1,10 @@
+{
+  "name": "@ds/scripts",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Development scripts for the design system",
+  "devDependencies": {
+    "tsx": "^4.7.0"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/component-manifest.schema.json",
+  "title": "Component Manifest",
+  "description": "Machine-readable metadata for a design system component",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "status",
+    "availabilityTags",
+    "platforms",
+    "a11y",
+    "tokensUsed",
+    "recommendedUsage",
+    "antiPatterns",
+    "category"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique identifier (kebab-case)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display name"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["alpha", "beta", "stable", "deprecated"],
+      "description": "Release status"
+    },
+    "availabilityTags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["public", "enterprise", "internal-only", "regulated"]
+      },
+      "minItems": 1,
+      "description": "Visibility/licensing tags"
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["wc", "react", "html-recipe"]
+      },
+      "minItems": 1,
+      "contains": {
+        "const": "wc"
+      },
+      "description": "Supported platform implementations (must include 'wc')"
+    },
+    "a11y": {
+      "type": "object",
+      "required": ["apgPattern", "keyboardSupport", "knownLimitations"],
+      "properties": {
+        "apgPattern": {
+          "type": "string",
+          "description": "APG pattern name or 'custom'"
+        },
+        "keyboardSupport": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Keyboard interactions supported"
+        },
+        "knownLimitations": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known accessibility gaps"
+        },
+        "ariaRoles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ARIA roles used"
+        }
+      },
+      "description": "Accessibility information"
+    },
+    "tokensUsed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Semantic token groups consumed"
+    },
+    "recommendedUsage": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Brief usage guidance"
+    },
+    "antiPatterns": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What NOT to do"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Component category for navigation"
+    },
+    "relatedComponents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Related component IDs"
+    },
+    "since": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version introduced (semver)"
+    }
+  },
+  "additionalProperties": false
+}

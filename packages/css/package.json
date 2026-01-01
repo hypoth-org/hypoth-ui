@@ -1,0 +1,24 @@
+{
+  "name": "@ds/css",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "CSS layers and base styles for the design system",
+  "exports": {
+    ".": "./dist/index.css",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "postcss src/index.css -o dist/index.css",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:unit": "vitest run"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.0",
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.0.0",
+    "cssnano": "^6.0.0",
+    "vitest": "^1.0.0"
+  }
+}

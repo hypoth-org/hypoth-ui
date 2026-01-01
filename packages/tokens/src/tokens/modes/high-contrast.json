@@ -1,0 +1,35 @@
+{
+  "$description": "High contrast mode token overrides for accessibility",
+  "color": {
+    "background": {
+      "default": { "$value": "{color.primitives.white}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.white}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.100}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.black}", "$type": "color" }
+    },
+    "foreground": {
+      "default": { "$value": "{color.primitives.black}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.black}", "$type": "color" },
+      "subtle": { "$value": "{color.primitives.gray.700}", "$type": "color" },
+      "inverted": { "$value": "{color.primitives.white}", "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.primitives.black}", "$type": "color" },
+      "muted": { "$value": "{color.primitives.gray.700}", "$type": "color" },
+      "emphasis": { "$value": "{color.primitives.black}", "$type": "color" }
+    },
+    "primary": {
+      "default": { "$value": "{color.primitives.blue.800}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.blue.900}", "$type": "color" },
+      "active": { "$value": "{color.primitives.blue.950}", "$type": "color" }
+    },
+    "destructive": {
+      "default": { "$value": "{color.primitives.red.800}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.red.900}", "$type": "color" },
+      "active": { "$value": "{color.primitives.red.950}", "$type": "color" }
+    },
+    "focus": {
+      "ring": { "$value": "{color.primitives.black}", "$type": "color" }
+    }
+  }
+}

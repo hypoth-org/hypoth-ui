@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/content-frontmatter.schema.json",
+  "title": "Content Frontmatter",
+  "description": "Frontmatter schema for MDX documentation files",
+  "type": "object",
+  "required": ["title"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Page title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description for SEO and previews"
+    },
+    "category": {
+      "type": "string",
+      "description": "Navigation category"
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sort order within category"
+    },
+    "componentId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Component ID (for component pages)"
+    },
+    "hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide from navigation"
+    },
+    "editions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Edition-specific visibility (empty = all editions)"
+    }
+  },
+  "additionalProperties": false
+}

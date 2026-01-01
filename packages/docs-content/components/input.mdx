@@ -1,0 +1,186 @@
+---
+title: Input
+description: A text input field for collecting user data.
+componentId: input
+category: forms
+order: 1
+---
+
+# Input
+
+Text inputs allow users to enter and edit text. They're used in forms, search fields, and anywhere text input is needed.
+
+## Usage
+
+```html
+<ds-input placeholder="Enter your name"></ds-input>
+```
+
+### React
+
+```tsx
+import { Input } from "@ds/react";
+
+function MyComponent() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Input
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      placeholder="Enter your name"
+    />
+  );
+}
+```
+
+## Types
+
+The input supports various types for different data:
+
+### Text (Default)
+
+```html
+<ds-input type="text" placeholder="Enter text"></ds-input>
+```
+
+### Email
+
+```html
+<ds-input type="email" placeholder="email@example.com"></ds-input>
+```
+
+### Password
+
+```html
+<ds-input type="password" placeholder="Enter password"></ds-input>
+```
+
+### Number
+
+```html
+<ds-input type="number" placeholder="0"></ds-input>
+```
+
+### Search
+
+```html
+<ds-input type="search" placeholder="Search..."></ds-input>
+```
+
+## Sizes
+
+```html
+<ds-input size="sm" placeholder="Small"></ds-input>
+<ds-input size="md" placeholder="Medium (default)"></ds-input>
+<ds-input size="lg" placeholder="Large"></ds-input>
+```
+
+## States
+
+### Error
+
+Show validation errors with the error attribute:
+
+```html
+<ds-input error placeholder="Invalid input"></ds-input>
+```
+
+### Disabled
+
+```html
+<ds-input disabled value="Cannot edit"></ds-input>
+```
+
+### Read-only
+
+```html
+<ds-input readonly value="Read only value"></ds-input>
+```
+
+### Required
+
+```html
+<ds-input required placeholder="Required field"></ds-input>
+```
+
+## Validation
+
+Use native validation attributes:
+
+```html
+<!-- Minimum length -->
+<ds-input minlength="3" placeholder="At least 3 characters"></ds-input>
+
+<!-- Maximum length -->
+<ds-input maxlength="20" placeholder="Max 20 characters"></ds-input>
+
+<!-- Pattern matching -->
+<ds-input pattern="[A-Za-z]+" placeholder="Letters only"></ds-input>
+```
+
+## Events
+
+### Input Event
+
+Fires on every keystroke:
+
+```html
+<ds-input id="myInput"></ds-input>
+<script>
+  document.getElementById('myInput').addEventListener('input', (e) => {
+    console.log('Value:', e.detail.value);
+  });
+</script>
+```
+
+### Change Event
+
+Fires when the input loses focus with a changed value:
+
+```html
+<ds-input id="myInput"></ds-input>
+<script>
+  document.getElementById('myInput').addEventListener('change', (e) => {
+    console.log('Final value:', e.detail.value);
+  });
+</script>
+```
+
+## Accessibility
+
+- Uses native `<input>` element for full browser support
+- Focus ring is clearly visible
+- Error state is communicated via `aria-invalid`
+- Required state is communicated via `aria-required`
+- Always pair with a visible label or `aria-label`
+
+### With a Label
+
+```html
+<label for="email-input">Email Address</label>
+<ds-input id="email-input" type="email" name="email"></ds-input>
+```
+
+### With aria-label
+
+```html
+<ds-input type="search" aria-label="Search products" placeholder="Search..."></ds-input>
+```
+
+## Best Practices
+
+### Do
+
+- Use the appropriate `type` for the data being collected
+- Provide helpful placeholder text
+- Always include a visible label or aria-label
+- Show clear error messages with the error state
+- Use appropriate `minlength` and `maxlength` constraints
+
+### Don't
+
+- Don't use inputs for multi-line text (use `<textarea>` instead)
+- Don't disable inputs without explaining why
+- Don't rely solely on placeholder text for labeling
+- Don't use the password type for non-sensitive data

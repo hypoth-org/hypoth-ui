@@ -1,0 +1,127 @@
+{
+  "$schema": "../../../specs/001-design-system/contracts/component-manifest.schema.json",
+  "id": "button",
+  "name": "Button",
+  "description": "An interactive button element for triggering actions",
+  "status": "stable",
+  "since": "0.1.0",
+  "availabilityTags": ["public"],
+  "platforms": ["web", "react", "next"],
+  "a11y": {
+    "role": "button",
+    "keyboardInteractions": [
+      { "key": "Enter", "action": "Activates the button" },
+      { "key": "Space", "action": "Activates the button" }
+    ],
+    "ariaAttributes": ["aria-disabled", "aria-busy"],
+    "focusManagement": "Native button focus"
+  },
+  "tokensUsed": [
+    "color.primary.default",
+    "color.primary.hover",
+    "color.primary.foreground",
+    "color.destructive.default",
+    "color.destructive.hover",
+    "color.background.default",
+    "color.background.subtle",
+    "color.border.default",
+    "color.focus.ring",
+    "spacing.component.padding.xs",
+    "spacing.component.padding.sm",
+    "spacing.component.padding.md",
+    "spacing.component.padding.lg",
+    "spacing.component.padding.xl",
+    "spacing.component.gap.sm",
+    "radius.md",
+    "font.weight.medium",
+    "font.size.sm",
+    "font.size.base",
+    "font.size.lg"
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": "Button content (text, icons)"
+    }
+  ],
+  "cssCustomProperties": [
+    {
+      "name": "--ds-button-padding-x",
+      "description": "Horizontal padding override"
+    },
+    {
+      "name": "--ds-button-border-radius",
+      "description": "Border radius override"
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'primary' | 'secondary' | 'ghost' | 'destructive'",
+      "default": "'primary'",
+      "description": "Visual style variant"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "'md'",
+      "description": "Button size"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the button is disabled"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the button shows loading state"
+    },
+    {
+      "name": "type",
+      "type": "'button' | 'submit' | 'reset'",
+      "default": "'button'",
+      "description": "HTML button type"
+    }
+  ],
+  "events": [
+    {
+      "name": "click",
+      "description": "Fired when button is clicked",
+      "detail": "{ originalEvent: MouseEvent }"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Primary Button",
+      "code": "<ds-button variant=\"primary\">Click me</ds-button>"
+    },
+    {
+      "title": "Secondary Button",
+      "code": "<ds-button variant=\"secondary\">Cancel</ds-button>"
+    },
+    {
+      "title": "Destructive Button",
+      "code": "<ds-button variant=\"destructive\">Delete</ds-button>"
+    },
+    {
+      "title": "Loading State",
+      "code": "<ds-button loading>Saving...</ds-button>"
+    }
+  ],
+  "recommendedUsage": [
+    "Use for primary actions in forms and dialogs",
+    "Use secondary variant for secondary actions",
+    "Use ghost variant for tertiary or inline actions",
+    "Use destructive variant for delete/remove actions"
+  ],
+  "antiPatterns": [
+    "Don't use for navigation - use links instead",
+    "Don't disable buttons without explanation",
+    "Don't use too many primary buttons together"
+  ],
+  "relatedComponents": ["link", "icon-button"],
+  "category": "actions"
+}

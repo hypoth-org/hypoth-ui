@@ -1,0 +1,117 @@
+---
+title: Button
+description: An interactive button element for triggering actions and submitting forms.
+componentId: button
+category: actions
+order: 1
+---
+
+# Button
+
+Buttons allow users to trigger actions or events with a single tap or click.
+
+## Usage
+
+Import the button component and use it in your templates:
+
+```html
+<ds-button variant="primary">Click me</ds-button>
+```
+
+### React
+
+```tsx
+import { Button } from "@ds/react";
+
+function MyComponent() {
+  return <Button variant="primary" onClick={() => console.log("clicked")}>Click me</Button>;
+}
+```
+
+## Variants
+
+The button supports several visual variants to communicate different levels of emphasis:
+
+### Primary
+
+Use primary buttons for the main action on a page or in a form.
+
+```html
+<ds-button variant="primary">Save changes</ds-button>
+```
+
+### Secondary
+
+Use secondary buttons for supporting actions.
+
+```html
+<ds-button variant="secondary">Cancel</ds-button>
+```
+
+### Ghost
+
+Use ghost buttons for tertiary actions or within dense interfaces.
+
+```html
+<ds-button variant="ghost">Learn more</ds-button>
+```
+
+### Destructive
+
+Use destructive buttons for actions that delete or remove data.
+
+```html
+<ds-button variant="destructive">Delete</ds-button>
+```
+
+## Sizes
+
+Buttons come in three sizes:
+
+```html
+<ds-button size="sm">Small</ds-button>
+<ds-button size="md">Medium</ds-button>
+<ds-button size="lg">Large</ds-button>
+```
+
+## States
+
+### Loading
+
+Show a loading state while an action is being processed:
+
+```html
+<ds-button loading>Saving...</ds-button>
+```
+
+### Disabled
+
+Disable the button when the action is not available:
+
+```html
+<ds-button disabled>Not available</ds-button>
+```
+
+## Accessibility
+
+- Buttons use native `<button>` semantics via Light DOM rendering
+- Keyboard support: `Enter` and `Space` activate the button
+- Focus is clearly visible with a focus ring
+- Loading state announces via `aria-busy`
+- Disabled state is communicated via native `disabled` attribute
+
+## Best Practices
+
+### Do
+
+- Use clear, action-oriented labels ("Save", "Delete", "Submit")
+- Provide only one primary button per section
+- Consider loading states for async actions
+- Place the primary action on the right in button groups
+
+### Don't
+
+- Don't use buttons for navigation (use links instead)
+- Don't disable buttons without providing context
+- Don't use too many primary buttons together
+- Don't use vague labels like "Click here" or "Submit"

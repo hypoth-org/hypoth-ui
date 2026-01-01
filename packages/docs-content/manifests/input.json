@@ -1,0 +1,151 @@
+{
+  "$schema": "../../../specs/001-design-system/contracts/component-manifest.schema.json",
+  "id": "input",
+  "name": "Input",
+  "description": "A text input field for collecting user data",
+  "status": "stable",
+  "since": "0.1.0",
+  "availabilityTags": ["public"],
+  "platforms": ["wc", "react"],
+  "a11y": {
+    "role": "textbox",
+    "keyboardInteractions": [{ "key": "Tab", "action": "Move focus to/from the input" }],
+    "ariaAttributes": ["aria-invalid", "aria-required", "aria-disabled"],
+    "focusManagement": "Native input focus with visible focus ring"
+  },
+  "tokensUsed": [
+    "color.background.default",
+    "color.background.subtle",
+    "color.border.default",
+    "color.text.default",
+    "color.text.muted",
+    "color.primary.default",
+    "color.destructive.default",
+    "color.focus.ring",
+    "spacing.component.padding.xs",
+    "spacing.component.padding.sm",
+    "spacing.component.padding.md",
+    "spacing.component.padding.lg",
+    "radius.md",
+    "font.family.sans",
+    "font.size.sm",
+    "font.size.base",
+    "font.size.lg"
+  ],
+  "props": [
+    {
+      "name": "type",
+      "type": "'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'",
+      "default": "'text'",
+      "description": "Input type"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "'md'",
+      "description": "Input size"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Input name attribute"
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "default": "''",
+      "description": "Input value"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "Placeholder text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input is disabled"
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input is read-only"
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether the input is required"
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "default": "false",
+      "description": "Whether to show error state"
+    },
+    {
+      "name": "minlength",
+      "type": "number",
+      "description": "Minimum character length"
+    },
+    {
+      "name": "maxlength",
+      "type": "number",
+      "description": "Maximum character length"
+    },
+    {
+      "name": "pattern",
+      "type": "string",
+      "description": "Regex pattern for validation"
+    }
+  ],
+  "events": [
+    {
+      "name": "input",
+      "description": "Fired when the input value changes",
+      "detail": "{ value: string }"
+    },
+    {
+      "name": "change",
+      "description": "Fired when the input value is committed",
+      "detail": "{ value: string }"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Basic Input",
+      "code": "<ds-input placeholder=\"Enter text...\"></ds-input>"
+    },
+    {
+      "title": "Email Input",
+      "code": "<ds-input type=\"email\" placeholder=\"email@example.com\"></ds-input>"
+    },
+    {
+      "title": "Password Input",
+      "code": "<ds-input type=\"password\" placeholder=\"Enter password\"></ds-input>"
+    },
+    {
+      "title": "Error State",
+      "code": "<ds-input error placeholder=\"Invalid input\"></ds-input>"
+    },
+    {
+      "title": "Disabled",
+      "code": "<ds-input disabled value=\"Disabled input\"></ds-input>"
+    }
+  ],
+  "recommendedUsage": [
+    "Use for single-line text input",
+    "Use appropriate type for the data being collected",
+    "Always include a label (via form or aria-label)",
+    "Provide helpful placeholder text"
+  ],
+  "antiPatterns": [
+    "Don't use for multi-line text (use textarea)",
+    "Don't disable without explanation",
+    "Don't rely solely on placeholder for labeling"
+  ],
+  "relatedComponents": ["textarea", "select", "form-field"],
+  "category": "forms"
+}

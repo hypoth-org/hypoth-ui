@@ -1,0 +1,46 @@
+{
+  "name": "hypoth-ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "White-label design system monorepo",
+  "scripts": {
+    "build": "pnpm -r --filter '@ds/*' run build",
+    "build:tokens": "pnpm --filter @ds/tokens run build",
+    "build:css": "pnpm --filter @ds/css run build",
+    "build:wc": "pnpm --filter @ds/wc run build",
+    "dev": "pnpm -r --parallel run dev",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "test:unit": "pnpm -r run test:unit",
+    "test:integration": "pnpm -r run test:integration",
+    "test:e2e": "playwright test",
+    "test:a11y": "pnpm -r run test:a11y",
+    "validate:manifests": "pnpm --filter @ds/docs-core run validate:manifests",
+    "new-component": "tsx tooling/scripts/new-component.ts",
+    "clean": "pnpm -r run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@playwright/test": "^1.40.0",
+    "@testing-library/react": "^14.1.0",
+    "@types/node": "^20.10.0",
+    "happy-dom": "^13.10.0",
+    "jest-axe": "^8.0.0",
+    "playwright": "^1.40.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

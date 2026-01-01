@@ -1,0 +1,181 @@
+---
+title: Theming
+description: Customize the design system appearance with design tokens and CSS custom properties.
+category: customization
+order: 1
+---
+
+# Theming
+
+The design system is built on a token-based theming architecture that makes it easy to customize the appearance for your brand.
+
+## Token Architecture
+
+Tokens are organized in three layers:
+
+1. **Primitive tokens** - Raw values (colors, sizes, fonts)
+2. **Semantic tokens** - Purpose-based aliases (primary, background, text)
+3. **Component tokens** - Component-specific overrides
+
+```
+Primitives → Semantics → Components
+  blue-500     primary      button-bg
+```
+
+## CSS Custom Properties
+
+All tokens are exposed as CSS custom properties with the `--ds-` prefix:
+
+```css
+:root {
+  /* Primitive tokens */
+  --ds-primitives-color-blue-500: #0066cc;
+
+  /* Semantic tokens */
+  --ds-color-primary-default: var(--ds-primitives-color-blue-500);
+  --ds-color-background-default: #ffffff;
+  --ds-color-text-default: #1a1a1a;
+
+  /* Spacing */
+  --ds-spacing-xs: 0.25rem;
+  --ds-spacing-sm: 0.5rem;
+  --ds-spacing-md: 1rem;
+  --ds-spacing-lg: 1.5rem;
+  --ds-spacing-xl: 2rem;
+}
+```
+
+## Customizing Tokens
+
+### Method 1: CSS Override
+
+Override tokens in your CSS after importing the design system:
+
+```css
+@import "@ds/css";
+
+:root {
+  /* Override primary color */
+  --ds-color-primary-default: #ff6600;
+  --ds-color-primary-hover: #cc5200;
+  --ds-color-primary-foreground: #ffffff;
+}
+```
+
+### Method 2: Custom Token File
+
+Create a custom DTCG token file and compile it:
+
+```json
+{
+  "color": {
+    "primary": {
+      "default": {
+        "$value": "#ff6600",
+        "$type": "color"
+      }
+    }
+  }
+}
+```
+
+## Dark Mode
+
+The design system supports dark mode via the `data-theme="dark"` attribute:
+
+```html
+<html data-theme="dark">
+  <!-- Dark mode active -->
+</html>
+```
+
+Dark mode tokens are automatically applied:
+
+```css
+[data-theme="dark"] {
+  --ds-color-background-default: #1a1a1a;
+  --ds-color-text-default: #f5f5f5;
+  --ds-color-primary-default: #66aaff;
+}
+```
+
+### System Preference Detection
+
+Detect and apply the user's system preference:
+
+```js
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+```
+
+## High Contrast Mode
+
+For users who need higher contrast, enable high-contrast mode:
+
+```html
+<html data-theme="high-contrast">
+  <!-- High contrast mode active -->
+</html>
+```
+
+High contrast mode increases color contrast ratios to meet WCAG AAA requirements.
+
+## Component-Level Customization
+
+Override component-specific tokens for fine-grained control:
+
+```css
+/* Customize button padding */
+ds-button {
+  --ds-button-padding-x: 2rem;
+  --ds-button-border-radius: 9999px;
+}
+```
+
+## Token Reference
+
+### Colors
+
+| Token | Description |
+|-------|-------------|
+| `--ds-color-primary-default` | Primary brand color |
+| `--ds-color-primary-hover` | Primary hover state |
+| `--ds-color-primary-foreground` | Text on primary background |
+| `--ds-color-secondary-default` | Secondary color |
+| `--ds-color-background-default` | Page background |
+| `--ds-color-background-subtle` | Subtle background |
+| `--ds-color-text-default` | Primary text |
+| `--ds-color-text-muted` | Muted text |
+| `--ds-color-border-default` | Default borders |
+| `--ds-color-focus-ring` | Focus indicator |
+
+### Spacing
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--ds-spacing-xs` | 0.25rem | Extra small spacing |
+| `--ds-spacing-sm` | 0.5rem | Small spacing |
+| `--ds-spacing-md` | 1rem | Medium spacing |
+| `--ds-spacing-lg` | 1.5rem | Large spacing |
+| `--ds-spacing-xl` | 2rem | Extra large spacing |
+| `--ds-spacing-2xl` | 3rem | 2x large spacing |
+
+### Typography
+
+| Token | Description |
+|-------|-------------|
+| `--ds-font-family-sans` | Sans-serif font stack |
+| `--ds-font-family-mono` | Monospace font stack |
+| `--ds-font-size-sm` | Small text (0.875rem) |
+| `--ds-font-size-base` | Base text (1rem) |
+| `--ds-font-size-lg` | Large text (1.125rem) |
+| `--ds-font-weight-normal` | Normal weight (400) |
+| `--ds-font-weight-medium` | Medium weight (500) |
+| `--ds-font-weight-bold` | Bold weight (700) |
+
+## Best Practices
+
+1. **Override semantic tokens** - Modify semantic tokens rather than primitives for consistent theming
+2. **Use CSS layers** - The design system uses CSS layers; ensure your overrides are in the correct layer
+3. **Test contrast** - Verify color contrast meets WCAG requirements after customization
+4. **Test all modes** - Verify your customizations work in light, dark, and high-contrast modes

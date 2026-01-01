@@ -1,0 +1,146 @@
+---
+title: Getting Started
+description: Learn how to install and configure the design system in your project.
+category: introduction
+order: 1
+---
+
+# Getting Started
+
+This guide will help you set up the design system in your project.
+
+## Installation
+
+Install the required packages using your preferred package manager:
+
+```bash
+# Using pnpm (recommended)
+pnpm add @ds/wc @ds/css @ds/tokens
+
+# Using npm
+npm install @ds/wc @ds/css @ds/tokens
+
+# Using yarn
+yarn add @ds/wc @ds/css @ds/tokens
+```
+
+### React Projects
+
+For React projects, also install the React adapters:
+
+```bash
+pnpm add @ds/react
+```
+
+### Next.js Projects
+
+For Next.js projects, add the Next.js integration:
+
+```bash
+pnpm add @ds/next
+```
+
+## Setup
+
+### 1. Import CSS
+
+Import the design system CSS in your application's entry point:
+
+```css
+/* In your global CSS file */
+@import "@ds/css";
+```
+
+Or in JavaScript:
+
+```js
+import "@ds/css";
+```
+
+### 2. Register Components
+
+#### Vanilla JavaScript / HTML
+
+Components are automatically registered when imported:
+
+```js
+import "@ds/wc";
+```
+
+#### React
+
+Use the React wrapper components directly:
+
+```tsx
+import { Button } from "@ds/react";
+
+function App() {
+  return <Button variant="primary">Hello</Button>;
+}
+```
+
+#### Next.js (App Router)
+
+Add the loader to your root layout:
+
+```tsx
+// app/layout.tsx
+import { DsLoader } from "@ds/next";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <DsLoader />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+## Your First Component
+
+Once set up, you can use components in your templates:
+
+```html
+<ds-button variant="primary">Click me</ds-button>
+<ds-button variant="secondary">Cancel</ds-button>
+```
+
+Or with React:
+
+```tsx
+import { Button } from "@ds/react";
+
+function MyComponent() {
+  return (
+    <div>
+      <Button variant="primary" onClick={() => alert("Clicked!")}>
+        Click me
+      </Button>
+      <Button variant="secondary">Cancel</Button>
+    </div>
+  );
+}
+```
+
+## Theming
+
+The design system uses CSS custom properties for theming. Override tokens in your CSS to customize the appearance:
+
+```css
+:root {
+  --ds-color-primary-default: #0066cc;
+  --ds-color-primary-hover: #0052a3;
+  --ds-spacing-md: 1rem;
+}
+```
+
+See the [Theming Guide](/guides/theming) for more details.
+
+## Next Steps
+
+- Browse available [Components](/components)
+- Learn about [Theming](/guides/theming)
+- Read the [Accessibility Guidelines](/guides/accessibility)
