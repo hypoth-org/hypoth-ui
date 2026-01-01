@@ -1,9 +1,7 @@
-import "@ds/tokens/css";
-import "@ds/css";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { NavSidebar } from "@ds/docs-renderer-next/components/nav-sidebar";
-import "@ds/docs-renderer-next/styles/globals.css";
+import { NavSidebar } from "../components/nav-sidebar";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: {

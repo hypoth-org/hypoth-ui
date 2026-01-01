@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../specs/001-design-system/contracts/edition-config.schema.json",
+  "id": "default",
+  "name": "Default Edition",
+  "availabilityFilter": ["public"],
+  "excludeComponents": [],
+  "contentOverlays": {},
+  "branding": {
+    "logoUrl": "/logo.svg",
+    "primaryColor": "#0066cc",
+    "siteTitle": "Design System",
+    "faviconUrl": "/favicon.ico"
+  },
+  "features": {
+    "showSourceLinks": true,
+    "enableSearch": true,
+    "showVersions": true
+  }
+}

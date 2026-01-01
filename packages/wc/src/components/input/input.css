@@ -1,0 +1,85 @@
+/**
+ * Input Component Styles
+ */
+
+@layer components {
+  ds-input {
+    display: block;
+  }
+
+  .ds-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ds-input__field {
+    width: 100%;
+    font-family: var(--ds-font-family-sans);
+    font-size: var(--ds-font-size-base);
+    line-height: 1.5;
+    color: var(--ds-color-text-default);
+    background-color: var(--ds-color-background-default);
+    border: 1px solid var(--ds-color-border-default);
+    border-radius: var(--ds-radius-md);
+    transition:
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+
+  /* Size variants */
+  .ds-input[data-size="sm"] .ds-input__field {
+    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
+    font-size: var(--ds-font-size-sm);
+  }
+
+  .ds-input[data-size="md"] .ds-input__field {
+    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md);
+    font-size: var(--ds-font-size-base);
+  }
+
+  .ds-input[data-size="lg"] .ds-input__field {
+    padding: var(--ds-spacing-component-padding-md) var(--ds-spacing-component-padding-lg);
+    font-size: var(--ds-font-size-lg);
+  }
+
+  /* Placeholder */
+  .ds-input__field::placeholder {
+    color: var(--ds-color-text-muted);
+    opacity: 1;
+  }
+
+  /* Focus state */
+  .ds-input__field:focus {
+    outline: none;
+    border-color: var(--ds-color-primary-default);
+    box-shadow: 0 0 0 3px var(--ds-color-focus-ring);
+  }
+
+  /* Hover state */
+  .ds-input__field:hover:not(:focus):not(:disabled) {
+    border-color: var(--ds-color-border-hover, #999);
+  }
+
+  /* Error state */
+  ds-input[error] .ds-input__field {
+    border-color: var(--ds-color-destructive-default);
+  }
+
+  ds-input[error] .ds-input__field:focus {
+    border-color: var(--ds-color-destructive-default);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+  }
+
+  /* Disabled state */
+  .ds-input__field:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--ds-color-background-subtle);
+  }
+
+  /* Read-only state */
+  .ds-input__field:read-only {
+    background-color: var(--ds-color-background-subtle);
+  }
+}

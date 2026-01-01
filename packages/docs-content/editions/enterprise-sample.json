@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../specs/001-design-system/contracts/edition-config.schema.json",
+  "id": "enterprise",
+  "name": "Enterprise Edition",
+  "availabilityFilter": ["public", "enterprise"],
+  "excludeComponents": [],
+  "contentOverlays": {
+    "guides/getting-started.mdx": "overlays/enterprise/getting-started.mdx"
+  },
+  "branding": {
+    "logoUrl": "/enterprise-logo.svg",
+    "primaryColor": "#1a365d",
+    "siteTitle": "Design System - Enterprise",
+    "faviconUrl": "/enterprise-favicon.ico"
+  },
+  "features": {
+    "showSourceLinks": true,
+    "enableSearch": true,
+    "showVersions": true
+  }
+}

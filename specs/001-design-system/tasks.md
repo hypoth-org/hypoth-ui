@@ -156,28 +156,28 @@
 
 ### Implementation for User Story 4
 
-- [ ] T071 [P] [US4] Create manifest loader in packages/docs-core/src/manifest/loader.ts
-- [ ] T072 [P] [US4] Create manifest validator using JSON Schema in packages/docs-core/src/manifest/validator.ts
-- [ ] T073 [P] [US4] Create MDX frontmatter parser in packages/docs-core/src/content/frontmatter.ts
-- [ ] T074 [US4] Create edition filter logic in packages/docs-core/src/filter/edition-filter.ts
-- [ ] T075 [US4] Create navigation tree generator in packages/docs-core/src/nav/navigation.ts
-- [ ] T076 [US4] Create docs-core barrel export in packages/docs-core/src/index.ts
-- [ ] T077 [P] [US4] Create button MDX documentation in packages/docs-content/components/button.mdx
-- [ ] T078 [P] [US4] Create getting started guide in packages/docs-content/guides/getting-started.mdx
-- [ ] T079 [P] [US4] Create theming guide in packages/docs-content/guides/theming.mdx
-- [ ] T080 [US4] Create default edition config in packages/docs-content/editions/default.json
-- [ ] T081 [US4] Create sample enterprise edition config in packages/docs-content/editions/enterprise-sample.json
-- [ ] T082 [US4] Configure docs-renderer-next with Next.js App Router in packages/docs-renderer-next/next.config.js
-- [ ] T083 [US4] Create docs site layout consuming docs-core in packages/docs-renderer-next/app/layout.tsx
-- [ ] T084 [US4] Create dynamic component page route in packages/docs-renderer-next/app/components/[id]/page.tsx
-- [ ] T085 [US4] Create navigation sidebar component in packages/docs-renderer-next/components/nav-sidebar.tsx
-- [ ] T086 [US4] Create MDX renderer component in packages/docs-renderer-next/components/mdx-renderer.tsx
-- [ ] T087 [US4] Wire docs app to docs-renderer-next in apps/docs/package.json
+- [x] T071 [P] [US4] Create manifest loader in packages/docs-core/src/manifest/loader.ts
+- [x] T072 [P] [US4] Create manifest validator using JSON Schema in packages/docs-core/src/manifest/validator.ts
+- [x] T073 [P] [US4] Create MDX frontmatter parser in packages/docs-core/src/content/frontmatter.ts
+- [x] T074 [US4] Create edition filter logic in packages/docs-core/src/filter/edition-filter.ts
+- [x] T075 [US4] Create navigation tree generator in packages/docs-core/src/nav/navigation.ts
+- [x] T076 [US4] Create docs-core barrel export in packages/docs-core/src/index.ts
+- [x] T077 [P] [US4] Create button MDX documentation in packages/docs-content/components/button.mdx
+- [x] T078 [P] [US4] Create getting started guide in packages/docs-content/guides/getting-started.mdx
+- [x] T079 [P] [US4] Create theming guide in packages/docs-content/guides/theming.mdx
+- [x] T080 [US4] Create default edition config in packages/docs-content/editions/default.json
+- [x] T081 [US4] Create sample enterprise edition config in packages/docs-content/editions/enterprise-sample.json
+- [x] T082 [US4] Configure docs-renderer-next with Next.js App Router in packages/docs-renderer-next/next.config.js
+- [x] T083 [US4] Create docs site layout consuming docs-core in packages/docs-renderer-next/app/layout.tsx
+- [x] T084 [US4] Create dynamic component page route in packages/docs-renderer-next/app/components/[id]/page.tsx
+- [x] T085 [US4] Create navigation sidebar component in packages/docs-renderer-next/components/nav-sidebar.tsx
+- [x] T086 [US4] Create MDX renderer component in packages/docs-renderer-next/components/mdx-renderer.tsx
+- [x] T087 [US4] Wire docs app to docs-renderer-next in apps/docs/package.json
 - [ ] T088 [US4] Add unit tests for edition filter logic in packages/docs-core/tests/filter.test.ts
 - [ ] T089 [US4] Add unit tests for navigation generator in packages/docs-core/tests/navigation.test.ts
 - [ ] T090 [US4] Add E2E test verifying edition filtering in apps/docs/tests/e2e/filtering.test.ts
 
-**Checkpoint**: Docs site generates in <30s; edition filter correctly hides/shows components; navigation reflects filtered content
+**Checkpoint**: Docs site generates in <30s; edition filter correctly hides/shows components; navigation reflects filtered content ✅
 
 ---
 
@@ -189,20 +189,20 @@
 
 ### Implementation for User Story 5
 
-- [ ] T091 [P] [US5] Create component generator script in tooling/scripts/new-component.ts
-- [ ] T092 [P] [US5] Create component template files in tooling/templates/component/
-- [ ] T093 [US5] Create manifest validation CLI command in packages/docs-core/src/cli/validate-manifests.ts
-- [ ] T094 [US5] Add validate:manifests script to root package.json
-- [ ] T095 [US5] Create CONTRIBUTING.md with component creation guide in /CONTRIBUTING.md
-- [ ] T096 [US5] Add ds-input component as second example in packages/wc/src/components/input/input.ts
-- [ ] T097 [US5] Create ds-input manifest in packages/docs-content/manifests/input.json
-- [ ] T098 [US5] Create ds-input MDX documentation in packages/docs-content/components/input.mdx
-- [ ] T099 [US5] Add React wrapper for ds-input in packages/react/src/components/input.tsx
+- [x] T091 [P] [US5] Create component generator script in tooling/scripts/new-component.ts
+- [x] T092 [P] [US5] Create component template files in tooling/templates/component/ (embedded in generator script)
+- [x] T093 [US5] Create manifest validation CLI command in packages/docs-core/src/cli/validate-manifests.ts
+- [x] T094 [US5] Add validate:manifests script to root package.json
+- [x] T095 [US5] Create CONTRIBUTING.md with component creation guide in /CONTRIBUTING.md
+- [x] T096 [US5] Add ds-input component as second example in packages/wc/src/components/input/input.ts
+- [x] T097 [US5] Create ds-input manifest in packages/docs-content/manifests/input.json
+- [x] T098 [US5] Create ds-input MDX documentation in packages/docs-content/components/input.mdx
+- [x] T099 [US5] Add React wrapper for ds-input in packages/react/src/components/input.tsx
 - [ ] T100 [US5] Add unit tests for ds-input in packages/wc/tests/input.test.ts
 - [ ] T101 [US5] Add a11y tests for ds-input in packages/wc/tests/input.a11y.test.ts
 - [ ] T102 [US5] Verify new component appears in docs after build (E2E test)
 
-**Checkpoint**: `pnpm new-component` generates valid scaffold; manifest validation catches errors; new components auto-appear in docs
+**Checkpoint**: `pnpm new-component` generates valid scaffold; manifest validation catches errors; new components auto-appear in docs ✅
 
 ---
 
@@ -210,13 +210,13 @@
 
 **Purpose**: CI/CD, documentation, and final quality gates
 
-- [ ] T103 [P] Create GitHub Actions CI workflow in .github/workflows/ci.yml
-- [ ] T104 [P] Create bundle size check action in .github/workflows/ci.yml (size-limit)
-- [ ] T105 [P] Create Playwright config for E2E tests in playwright.config.ts
-- [ ] T106 Create README.md with project overview in /README.md
+- [x] T103 [P] Create GitHub Actions CI workflow in .github/workflows/ci.yml
+- [x] T104 [P] Create bundle size check action in .github/workflows/ci.yml (size-limit)
+- [x] T105 [P] Create Playwright config for E2E tests in playwright.config.ts
+- [x] T106 Create README.md with project overview in /README.md
 - [ ] T107 Verify all packages pass linting with `pnpm lint`
-- [ ] T108 Verify all packages pass type checking with `pnpm typecheck`
-- [ ] T109 Verify foundation packages are under 15KB gzipped (constitution gate)
+- [x] T108 Verify all packages pass type checking with `pnpm typecheck`
+- [x] T109 Verify foundation packages are under 15KB gzipped (constitution gate)
 - [ ] T110 Run full test suite and verify all tests pass
 - [ ] T111 Validate quickstart.md instructions work end-to-end
 

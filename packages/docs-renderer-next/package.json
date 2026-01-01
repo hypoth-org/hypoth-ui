@@ -8,9 +8,18 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./components/nav-sidebar": {
+      "types": "./components/nav-sidebar.tsx",
+      "import": "./components/nav-sidebar.tsx"
+    },
+    "./components/mdx-renderer": {
+      "types": "./components/mdx-renderer.tsx",
+      "import": "./components/mdx-renderer.tsx"
+    },
+    "./styles/globals.css": "./styles/globals.css",
     "./package.json": "./package.json"
   },
-  "files": ["dist", "app", "components"],
+  "files": ["dist", "app", "components", "styles"],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "clean": "rm -rf dist",
