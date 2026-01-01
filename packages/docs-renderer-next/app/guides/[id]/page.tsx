@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { notFound } from "next/navigation";
+import { parseFrontmatterFromFile } from "@ds/docs-core";
 import { MdxRenderer } from "../../../components/mdx-renderer";
 
 interface GuidePageProps {
