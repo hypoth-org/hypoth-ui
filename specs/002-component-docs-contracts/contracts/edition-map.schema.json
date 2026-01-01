@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/edition-map.json",
+  "title": "Edition Map (Generated)",
+  "description": "Build-time generated mapping of components to editions for SSR filtering",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema version for compatibility checks"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp of generation"
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "editions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["core", "pro", "enterprise"]
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["experimental", "alpha", "beta", "stable", "deprecated"]
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["editions", "status", "name"]
+      },
+      "description": "Map of component id to metadata"
+    },
+    "editionHierarchy": {
+      "type": "object",
+      "properties": {
+        "core": {
+          "type": "array",
+          "items": { "type": "string" },
+          "const": []
+        },
+        "pro": {
+          "type": "array",
+          "items": { "type": "string" },
+          "const": ["core"]
+        },
+        "enterprise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "const": ["core", "pro"]
+        }
+      },
+      "description": "Edition inheritance hierarchy"
+    }
+  },
+  "required": ["version", "generatedAt", "components", "editionHierarchy"],
+  "additionalProperties": false
+}

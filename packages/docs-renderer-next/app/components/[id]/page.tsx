@@ -1,8 +1,18 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { loadManifestById } from "@ds/docs-core";
-import { notFound } from "next/navigation";
+import {
+  type ContractManifest,
+  type Edition,
+  getMinimumEdition,
+  isComponentAvailable,
+  loadEditionConfig,
+  loadManifestById,
+  loadValidManifests,
+} from "@ds/docs-core";
+import { notFound, redirect } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
+import { EditionProvider } from "../../../components/mdx/edition";
 
 interface ComponentPageProps {
   params: Promise<{
@@ -10,16 +20,85 @@ interface ComponentPageProps {
   }>;
 }
 
-// Generate static params for all components
+/**
+ * Get the current edition from environment or config
+ */
+async function getCurrentEdition(): Promise<Edition> {
+  // Check environment variable first
+  const envEdition = process.env.DS_EDITION;
+  if (envEdition && ["core", "pro", "enterprise"].includes(envEdition)) {
+    return envEdition as Edition;
+  }
+
+  // Fall back to edition config
+  try {
+    const { config } = await loadEditionConfig({
+      configDir: process.cwd(),
+    });
+    return config.edition;
+  } catch {
+    return "enterprise"; // Default to enterprise (shows all)
+  }
+}
+
+/**
+ * Load contract manifests from the WC package
+ */
+async function loadContractManifests(): Promise<ContractManifest[]> {
+  const wcPath = join(process.cwd(), "..", "wc");
+
+  if (!existsSync(wcPath)) {
+    // Try node_modules path for deployed apps
+    const nodeModulesPath = join(process.cwd(), "node_modules/@ds/wc");
+    if (existsSync(nodeModulesPath)) {
+      const { manifests } = await loadValidManifests({
+        rootDir: nodeModulesPath,
+        pattern: "**/components/**/manifest.json",
+      });
+      return manifests;
+    }
+    return [];
+  }
+
+  const { manifests } = await loadValidManifests({
+    rootDir: wcPath,
+    pattern: "**/components/**/manifest.json",
+  });
+  return manifests;
+}
+
+/**
+ * Generate static params for all components available in the current edition
+ */
 export async function generateStaticParams() {
-  // In a real implementation, this would scan the manifests directory
-  return [{ id: "button" }];
+  const edition = await getCurrentEdition();
+  const manifests = await loadContractManifests();
+
+  // Filter by edition
+  const availableComponents = manifests.filter((manifest) =>
+    isComponentAvailable(manifest.editions, edition)
+  );
+
+  return availableComponents.map((manifest) => ({
+    id: manifest.id,
+  }));
 }
 
 export async function generateMetadata({ params }: ComponentPageProps) {
   const { id } = await params;
 
-  // Load manifest for metadata
+  // Try to load from contract manifests first
+  const manifests = await loadContractManifests();
+  const contractManifest = manifests.find((m) => m.id === id);
+
+  if (contractManifest) {
+    return {
+      title: contractManifest.name,
+      description: contractManifest.description,
+    };
+  }
+
+  // Fall back to legacy manifest loader
   const manifestsDir = join(process.cwd(), "node_modules/@ds/docs-content/manifests");
   const manifest = await loadManifestById(manifestsDir, id);
 
@@ -35,10 +114,26 @@ export async function generateMetadata({ params }: ComponentPageProps) {
 
 export default async function ComponentPage({ params }: ComponentPageProps) {
   const { id } = await params;
+  const edition = await getCurrentEdition();
 
-  // Load manifest
+  // Try to load from contract manifests
+  const manifests = await loadContractManifests();
+  const contractManifest = manifests.find((m) => m.id === id);
+
+  // Check edition access
+  if (contractManifest) {
+    const isAvailable = isComponentAvailable(contractManifest.editions, edition);
+
+    if (!isAvailable) {
+      // Redirect to upgrade page
+      const requiredEdition = getMinimumEdition(contractManifest.editions);
+      redirect(`/edition-upgrade?component=${id}&from=${edition}&to=${requiredEdition}`);
+    }
+  }
+
+  // Fall back to legacy manifest loader
   const manifestsDir = join(process.cwd(), "node_modules/@ds/docs-content/manifests");
-  const manifest = await loadManifestById(manifestsDir, id);
+  const manifest = contractManifest || (await loadManifestById(manifestsDir, id));
 
   if (!manifest) {
     notFound();
@@ -53,97 +148,113 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     // No MDX file, use auto-generated content from manifest
   }
 
+  // For contract manifests, use the new format
+  const displayManifest = contractManifest
+    ? {
+        name: contractManifest.name,
+        description: contractManifest.description,
+        status: contractManifest.status,
+        props: [],
+        events: [],
+        examples: [],
+      }
+    : manifest;
+
   return (
-    <article className="component-page">
-      <header className="component-header">
-        <div className="component-status" data-status={manifest.status}>
-          {manifest.status}
-        </div>
-        <h1>{manifest.name}</h1>
-        {manifest.description && <p className="component-description">{manifest.description}</p>}
-      </header>
+    <EditionProvider edition={edition}>
+      <article className="component-page">
+        <header className="component-header">
+          <div className="component-status" data-status={displayManifest.status}>
+            {displayManifest.status}
+          </div>
+          <h1>{displayManifest.name}</h1>
+          {displayManifest.description && (
+            <p className="component-description">{displayManifest.description}</p>
+          )}
+        </header>
 
-      {mdxContent ? (
-        <MdxRenderer source={mdxContent} />
-      ) : (
-        <div className="component-auto-docs">
-          {/* Auto-generated documentation from manifest */}
-          <section>
-            <h2>Usage</h2>
-            <pre>
-              <code>{`<ds-${id}></ds-${id}>`}</code>
-            </pre>
-          </section>
-
-          {manifest.props && manifest.props.length > 0 && (
+        {mdxContent ? (
+          <MdxRenderer source={mdxContent} />
+        ) : (
+          <div className="component-auto-docs">
+            {/* Auto-generated documentation from manifest */}
             <section>
-              <h2>Properties</h2>
-              <table className="props-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {manifest.props.map((prop) => (
-                    <tr key={prop.name}>
-                      <td>
-                        <code>{prop.name}</code>
-                      </td>
-                      <td>
-                        <code>{prop.type}</code>
-                      </td>
-                      <td>{prop.default ? <code>{prop.default}</code> : "—"}</td>
-                      <td>{prop.description}</td>
+              <h2>Usage</h2>
+              <pre>
+                <code>{`<ds-${id}></ds-${id}>`}</code>
+              </pre>
+            </section>
+
+            {displayManifest.props && displayManifest.props.length > 0 && (
+              <section>
+                <h2>Properties</h2>
+                <table className="props-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Default</th>
+                      <th>Description</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          )}
+                  </thead>
+                  <tbody>
+                    {displayManifest.props.map((prop: any) => (
+                      <tr key={prop.name}>
+                        <td>
+                          <code>{prop.name}</code>
+                        </td>
+                        <td>
+                          <code>{prop.type}</code>
+                        </td>
+                        <td>{prop.default ? <code>{prop.default}</code> : "—"}</td>
+                        <td>{prop.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            )}
 
-          {manifest.events && manifest.events.length > 0 && (
-            <section>
-              <h2>Events</h2>
-              <table className="events-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {manifest.events.map((event) => (
-                    <tr key={event.name}>
-                      <td>
-                        <code>{event.name}</code>
-                      </td>
-                      <td>{event.description}</td>
+            {displayManifest.events && displayManifest.events.length > 0 && (
+              <section>
+                <h2>Events</h2>
+                <table className="events-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          )}
+                  </thead>
+                  <tbody>
+                    {displayManifest.events.map((event: any) => (
+                      <tr key={event.name}>
+                        <td>
+                          <code>{event.name}</code>
+                        </td>
+                        <td>{event.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            )}
 
-          {manifest.examples && manifest.examples.length > 0 && (
-            <section>
-              <h2>Examples</h2>
-              {manifest.examples.map((example) => (
-                <div key={example.title} className="example">
-                  <h3>{example.title}</h3>
-                  <pre>
-                    <code>{example.code}</code>
-                  </pre>
-                </div>
-              ))}
-            </section>
-          )}
-        </div>
-      )}
-    </article>
+            {displayManifest.examples && displayManifest.examples.length > 0 && (
+              <section>
+                <h2>Examples</h2>
+                {displayManifest.examples.map((example: any) => (
+                  <div key={example.title} className="example">
+                    <h3>{example.title}</h3>
+                    <pre>
+                      <code>{example.code}</code>
+                    </pre>
+                  </div>
+                ))}
+              </section>
+            )}
+          </div>
+        )}
+      </article>
+    </EditionProvider>
   );
 }

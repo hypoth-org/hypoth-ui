@@ -128,8 +128,8 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-  validate-manifests:
-    name: Validate Manifests
+  validate-contracts:
+    name: Validate Contracts
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -155,8 +155,11 @@ jobs:
         with:
           name: dist
 
-      - name: Validate component manifests
-        run: pnpm validate:manifests
+      - name: Validate manifests and docs (strict mode)
+        run: pnpm --filter @ds/docs-core validate --strict
+
+      - name: Build edition map
+        run: pnpm --filter @ds/docs-app build:edition-map
 
   bundle-size:
     name: Bundle Size Check
