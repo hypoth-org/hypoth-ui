@@ -2,7 +2,6 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
-  type ComponentManifest,
   type ComponentStatus,
   type ContractManifest,
   type Edition,
