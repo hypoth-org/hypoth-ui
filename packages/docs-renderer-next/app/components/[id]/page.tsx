@@ -2,6 +2,8 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
+  type ComponentManifest,
+  type ComponentStatus,
   type ContractManifest,
   type Edition,
   getMinimumEdition,
@@ -10,6 +12,19 @@ import {
   loadManifestById,
   loadValidManifests,
 } from "@ds/docs-core";
+
+/**
+ * Display manifest shape used for rendering component pages
+ * Normalizes both ContractManifest and legacy ComponentManifest formats
+ */
+interface DisplayManifest {
+  name: string;
+  description: string;
+  status: ComponentStatus;
+  props: Array<{ name: string; type: string; default?: string; description: string }>;
+  events: Array<{ name: string; description: string }>;
+  examples: Array<{ title: string; code: string }>;
+}
 import { notFound, redirect } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
 import { EditionProvider } from "../../../components/mdx/edition";
@@ -148,8 +163,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     // No MDX file, use auto-generated content from manifest
   }
 
-  // For contract manifests, use the new format
-  const displayManifest = contractManifest
+  // Normalize to DisplayManifest format for rendering
+  // Contract manifests don't have props/events/examples, legacy manifests do
+  // When contractManifest is falsy, manifest must be ComponentManifest from loadManifestById
+  const displayManifest: DisplayManifest = contractManifest
     ? {
         name: contractManifest.name,
         description: contractManifest.description,
@@ -158,7 +175,14 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         events: [],
         examples: [],
       }
-    : manifest;
+    : {
+        name: manifest.name,
+        description: manifest.description ?? "",
+        status: manifest.status,
+        props: "props" in manifest ? (manifest.props ?? []) : [],
+        events: "events" in manifest ? (manifest.events ?? []) : [],
+        examples: "examples" in manifest ? (manifest.examples ?? []) : [],
+      };
 
   return (
     <EditionProvider edition={edition}>
@@ -198,7 +222,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayManifest.props.map((prop: any) => (
+                    {displayManifest.props.map((prop) => (
                       <tr key={prop.name}>
                         <td>
                           <code>{prop.name}</code>
@@ -226,7 +250,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayManifest.events.map((event: any) => (
+                    {displayManifest.events.map((event) => (
                       <tr key={event.name}>
                         <td>
                           <code>{event.name}</code>
@@ -242,7 +266,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             {displayManifest.examples && displayManifest.examples.length > 0 && (
               <section>
                 <h2>Examples</h2>
-                {displayManifest.examples.map((example: any) => (
+                {displayManifest.examples.map((example) => (
                   <div key={example.title} className="example">
                     <h3>{example.title}</h3>
                     <pre>
