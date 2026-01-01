@@ -22,9 +22,7 @@
     background-color: var(--ds-color-background-default);
     border: 1px solid var(--ds-color-border-default);
     border-radius: var(--ds-radius-md);
-    transition:
-      border-color 0.15s ease-in-out,
-      box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
   /* Size variants */

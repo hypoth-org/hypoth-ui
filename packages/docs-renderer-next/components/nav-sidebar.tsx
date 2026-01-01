@@ -1,8 +1,8 @@
 "use client";
 
+import type { NavItem } from "@ds/docs-core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { NavItem } from "@ds/docs-core";
 
 interface NavSidebarProps {
   /** Custom navigation items (optional, uses defaults if not provided) */
@@ -98,9 +98,7 @@ function NavLink({ item }: { item: NavItem }) {
     >
       <span className="nav-link-label">{item.label}</span>
       {item.status && (
-        <span className={`nav-link-status nav-link-status--${item.status}`}>
-          {item.status}
-        </span>
+        <span className={`nav-link-status nav-link-status--${item.status}`}>{item.status}</span>
       )}
     </Link>
   );

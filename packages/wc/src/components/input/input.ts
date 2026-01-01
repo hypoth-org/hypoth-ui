@@ -99,7 +99,7 @@ export class DsInput extends LightElement {
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
-          ?aria-invalid=${this.error}
+          aria-invalid=${this.error ? "true" : "false"}
           minlength=${this.minlength ?? ""}
           maxlength=${this.maxlength ?? ""}
           pattern=${this.pattern ?? ""}

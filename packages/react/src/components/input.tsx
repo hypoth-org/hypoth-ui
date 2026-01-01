@@ -1,15 +1,11 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useRef,
-  createElement,
-  type InputHTMLAttributes,
-} from "react";
+import type React from "react";
+import { type InputHTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
 
 export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
 export type InputSize = "sm" | "md" | "lg";
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "onInput"> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "onInput"> {
   /** Input type */
   type?: InputType;
   /** Input size */

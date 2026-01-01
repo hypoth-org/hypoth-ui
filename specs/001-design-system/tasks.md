@@ -86,9 +86,9 @@
 - [x] T037 [US1] Create CSS utilities layer (spacing, typography helpers) in packages/css/src/layers/utilities.css
 - [x] T038 [US1] Create PostCSS config for CSS processing in packages/css/postcss.config.js
 - [x] T039 [US1] Create CSS build script that bundles all layers in packages/css/package.json scripts
-- [ ] T040 [US1] Add unit tests for token compilation in packages/tokens/tests/build.test.ts
-- [ ] T041 [US1] Add unit tests for CSS layer output in packages/css/tests/layers.test.ts
-- [ ] T042 [US1] Verify token CSS variables are present in compiled output (integration test)
+- [x] T040 [US1] Add unit tests for token compilation in packages/tokens/tests/build.test.ts
+- [x] T041 [US1] Add unit tests for CSS layer output in packages/css/tests/layers.test.ts
+- [x] T042 [US1] Verify token CSS variables are present in compiled output (integration test)
 
 **Checkpoint**: `pnpm build` produces @ds/tokens CSS + TS outputs and @ds/css layered stylesheet; custom tokens override defaults ✅
 
@@ -113,10 +113,10 @@
 - [x] T051 [US2] Create component manifest for button in packages/docs-content/manifests/button.json
 - [x] T052 [US2] Create WC barrel export with all components in packages/wc/src/index.ts
 - [x] T053 [US2] Configure tsup for Lit external bundling in packages/wc/tsup.config.ts
-- [ ] T054 [US2] Add unit tests for primitives-dom utilities in packages/primitives-dom/tests/
-- [ ] T055 [US2] Add unit tests for ds-button component in packages/wc/tests/button.test.ts
-- [ ] T056 [US2] Add a11y tests for ds-button with axe-core in packages/wc/tests/button.a11y.test.ts
-- [ ] T057 [US2] Create vanilla HTML test page for WC verification in packages/wc/tests/fixtures/test.html
+- [x] T054 [US2] Add unit tests for primitives-dom utilities in packages/primitives-dom/tests/
+- [x] T055 [US2] Add unit tests for ds-button component in packages/wc/tests/button.test.ts
+- [x] T056 [US2] Add a11y tests for ds-button with axe-core in packages/wc/tests/button.a11y.test.ts
+- [x] T057 [US2] Create vanilla HTML test page for WC verification in packages/wc/tests/fixtures/test.html
 
 **Checkpoint**: `<ds-button>` renders in vanilla HTML with correct styling, Light DOM, and keyboard accessibility ✅
 
@@ -140,9 +140,9 @@
 - [x] T065 [US3] Configure demo app Next.js setup in apps/demo/next.config.js
 - [x] T066 [US3] Create demo app root layout with loader in apps/demo/app/layout.tsx
 - [x] T067 [US3] Create demo app home page using ds-button in apps/demo/app/page.tsx
-- [ ] T068 [US3] Add integration tests for React wrappers in packages/react/tests/button.test.tsx
-- [ ] T069 [US3] Add E2E test for Next.js demo app in apps/demo/tests/e2e/home.test.ts
-- [ ] T070 [US3] Verify Server Component rendering streams correctly (E2E assertion)
+- [x] T068 [US3] Add integration tests for React wrappers in packages/react/tests/button.test.tsx
+- [x] T069 [US3] Add E2E test for Next.js demo app in apps/demo/tests/e2e/home.test.ts
+- [x] T070 [US3] Verify Server Component rendering streams correctly (E2E assertion)
 
 **Checkpoint**: Demo app loads with Lighthouse 90+; custom elements hydrate correctly; no double-registration errors ✅
 
@@ -173,9 +173,9 @@
 - [x] T085 [US4] Create navigation sidebar component in packages/docs-renderer-next/components/nav-sidebar.tsx
 - [x] T086 [US4] Create MDX renderer component in packages/docs-renderer-next/components/mdx-renderer.tsx
 - [x] T087 [US4] Wire docs app to docs-renderer-next in apps/docs/package.json
-- [ ] T088 [US4] Add unit tests for edition filter logic in packages/docs-core/tests/filter.test.ts
-- [ ] T089 [US4] Add unit tests for navigation generator in packages/docs-core/tests/navigation.test.ts
-- [ ] T090 [US4] Add E2E test verifying edition filtering in apps/docs/tests/e2e/filtering.test.ts
+- [x] T088 [US4] Add unit tests for edition filter logic in packages/docs-core/tests/filter.test.ts
+- [x] T089 [US4] Add unit tests for navigation generator in packages/docs-core/tests/navigation.test.ts
+- [x] T090 [US4] Add E2E test verifying edition filtering in apps/docs/tests/e2e/filtering.test.ts
 
 **Checkpoint**: Docs site generates in <30s; edition filter correctly hides/shows components; navigation reflects filtered content ✅
 
@@ -198,9 +198,9 @@
 - [x] T097 [US5] Create ds-input manifest in packages/docs-content/manifests/input.json
 - [x] T098 [US5] Create ds-input MDX documentation in packages/docs-content/components/input.mdx
 - [x] T099 [US5] Add React wrapper for ds-input in packages/react/src/components/input.tsx
-- [ ] T100 [US5] Add unit tests for ds-input in packages/wc/tests/input.test.ts
-- [ ] T101 [US5] Add a11y tests for ds-input in packages/wc/tests/input.a11y.test.ts
-- [ ] T102 [US5] Verify new component appears in docs after build (E2E test)
+- [x] T100 [US5] Add unit tests for ds-input in packages/wc/tests/input.test.ts
+- [x] T101 [US5] Add a11y tests for ds-input in packages/wc/tests/input.a11y.test.ts
+- [x] T102 [US5] Verify new component appears in docs after build (E2E test)
 
 **Checkpoint**: `pnpm new-component` generates valid scaffold; manifest validation catches errors; new components auto-appear in docs ✅
 
@@ -214,11 +214,11 @@
 - [x] T104 [P] Create bundle size check action in .github/workflows/ci.yml (size-limit)
 - [x] T105 [P] Create Playwright config for E2E tests in playwright.config.ts
 - [x] T106 Create README.md with project overview in /README.md
-- [ ] T107 Verify all packages pass linting with `pnpm lint`
+- [x] T107 Verify all packages pass linting with `pnpm lint`
 - [x] T108 Verify all packages pass type checking with `pnpm typecheck`
 - [x] T109 Verify foundation packages are under 15KB gzipped (constitution gate)
-- [ ] T110 Run full test suite and verify all tests pass
-- [ ] T111 Validate quickstart.md instructions work end-to-end
+- [x] T110 Run full test suite and verify all tests pass
+- [x] T111 Validate quickstart.md instructions work end-to-end
 
 ---
 

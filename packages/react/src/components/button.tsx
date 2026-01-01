@@ -1,10 +1,11 @@
-import React, {
+import type React from "react";
+import {
+  type ButtonHTMLAttributes,
+  type MouseEvent,
+  createElement,
   forwardRef,
   useEffect,
   useRef,
-  createElement,
-  type ButtonHTMLAttributes,
-  type MouseEvent,
 } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";

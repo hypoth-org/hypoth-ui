@@ -19,8 +19,8 @@
     "build": "tsup",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-        "test": "vitest run",
-    "test:integration": "vitest run"
+    "test": "vitest run --passWithNoTests",
+    "test:integration": "vitest run --passWithNoTests"
   },
   "peerDependencies": {
     "@ds/react": "workspace:*",

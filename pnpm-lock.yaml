@@ -14,9 +14,18 @@ importers:
       '@playwright/test':
         specifier: ^1.40.0
         version: 1.57.0
+      '@testing-library/react':
+        specifier: ^14.1.0
+        version: 14.3.1(@types/react@18.3.27)(react-dom@18.3.1)(react@18.3.1)
       '@types/node':
         specifier: ^20.10.0
         version: 20.19.27
+      happy-dom:
+        specifier: ^13.10.0
+        version: 13.10.1
+      jest-axe:
+        specifier: ^8.0.0
+        version: 8.0.0
       playwright:
         specifier: ^1.40.0
         version: 1.57.0
@@ -31,7 +40,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   apps/demo:
     dependencies:
@@ -129,7 +138,7 @@ importers:
         version: 16.1.1(postcss@8.5.6)
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/docs-content:
     dependencies:
@@ -163,7 +172,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/docs-renderer-next:
     dependencies:
@@ -207,6 +216,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.3.7(@types/react@18.3.27)
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.1(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.3.0
         version: 5.9.3
@@ -239,10 +251,13 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/primitives-dom:
     devDependencies:
+      happy-dom:
+        specifier: ^13.10.0
+        version: 13.10.1
       tsup:
         specifier: ^8.0.0
         version: 8.5.1(tsx@4.21.0)(typescript@5.9.3)
@@ -251,10 +266,13 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/react:
     devDependencies:
+      '@ds/wc':
+        specifier: workspace:*
+        version: link:../wc
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.27)(react-dom@18.3.1)(react@18.3.1)
@@ -264,6 +282,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.3.7(@types/react@18.3.27)
+      happy-dom:
+        specifier: ^13.10.0
+        version: 13.10.1
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -278,7 +299,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/tokens:
     devDependencies:
@@ -293,7 +314,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
   packages/wc:
     dependencies:
@@ -307,6 +328,12 @@ importers:
       '@ds/primitives-dom':
         specifier: workspace:*
         version: link:../primitives-dom
+      happy-dom:
+        specifier: ^13.10.0
+        version: 13.10.1
+      jest-axe:
+        specifier: ^8.0.0
+        version: 8.0.0
       playwright-core:
         specifier: ^1.40.0
         version: 1.57.0
@@ -318,7 +345,13 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^1.0.0
-        version: 1.6.1(@types/node@20.19.27)
+        version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
+
+  tooling/scripts:
+    devDependencies:
+      tsx:
+        specifier: ^4.7.0
+        version: 4.21.0
 
   tooling/tsconfig: {}
 
@@ -1638,6 +1671,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axe-core@4.7.2:
+    resolution: {integrity: sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==}
+    engines: {node: '>=4'}
+    dev: true
+
   /bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
     dev: false
@@ -2579,7 +2617,6 @@ packages:
       entities: 4.5.0
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
-    dev: false
 
   /has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
@@ -2936,6 +2973,41 @@ packages:
       '@pkgjs/parseargs': 0.11.0
     dev: true
 
+  /jest-axe@8.0.0:
+    resolution: {integrity: sha512-4kNcNn7J0jPO4jANEYZOHeQ/tSBvkXS+MxTbX1CKbXGd0+ZbRGDn/v/8IYWI/MmYX15iLVyYRnRev9X3ksePWA==}
+    engines: {node: '>= 14.0.0'}
+    dependencies:
+      axe-core: 4.7.2
+      chalk: 4.1.2
+      jest-matcher-utils: 29.2.2
+      lodash.merge: 4.6.2
+    dev: true
+
+  /jest-diff@29.7.0:
+    resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    dependencies:
+      chalk: 4.1.2
+      diff-sequences: 29.6.3
+      jest-get-type: 29.6.3
+      pretty-format: 29.7.0
+    dev: true
+
+  /jest-get-type@29.6.3:
+    resolution: {integrity: sha512-zrteXnqYxfQh7l5FHyL38jL39di8H8rHoecLH3JNxH3BwOrBsNeabdap5e0I23lD4HHI8W5VFBZqG4Eaq5LNcw==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    dev: true
+
+  /jest-matcher-utils@29.2.2:
+    resolution: {integrity: sha512-4DkJ1sDPT+UX2MR7Y3od6KtvRi9Im1ZGLGgdLFLm4lPexbTaCgJW5NN3IOXlQHF7NSHY/VHhflQ+WoKtD/vyCw==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    dependencies:
+      chalk: 4.1.2
+      jest-diff: 29.7.0
+      jest-get-type: 29.6.3
+      pretty-format: 29.7.0
+    dev: true
+
   /joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
     engines: {node: '>=10'}
@@ -3046,6 +3118,10 @@ packages:
 
   /lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
+    dev: true
+
+  /lodash.merge@4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /lodash.uniq@4.5.0:
@@ -5114,7 +5190,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.6.1(@types/node@20.19.27):
+  /vitest@1.6.1(@types/node@20.19.27)(happy-dom@13.10.1):
     resolution: {integrity: sha512-Ljb1cnSJSivGN0LqXd/zmDbWEM0RNNg2t1QW/XUhYl/qPqyu7CsqeWtqQXHVaJsecLPuDoak2oJcZN2QoRIOag==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -5149,6 +5225,7 @@ packages:
       chai: 4.5.0
       debug: 4.4.3
       execa: 8.0.1
+      happy-dom: 13.10.1
       local-pkg: 0.5.1
       magic-string: 0.30.21
       pathe: 1.1.2
@@ -5174,12 +5251,10 @@ packages:
   /webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
-    dev: false
 
   /whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
     engines: {node: '>=12'}
-    dev: false
 
   /which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}

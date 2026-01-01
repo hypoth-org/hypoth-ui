@@ -3,7 +3,7 @@
  * Implements WAI-ARIA roving tabindex pattern.
  */
 
-export type Direction = 'horizontal' | 'vertical' | 'both';
+export type Direction = "horizontal" | "vertical" | "both";
 
 export interface RovingFocusOptions {
   container: HTMLElement;
@@ -20,7 +20,7 @@ export interface RovingFocus {
 }
 
 export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
-  const { container, selector, direction = 'horizontal', loop = true, onFocus } = options;
+  const { container, selector, direction = "horizontal", loop = true, onFocus } = options;
   let currentIndex = 0;
 
   function getElements(): HTMLElement[] {
@@ -33,18 +33,19 @@ export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
     });
   }
 
-  function focusElement(index: number): void {
+  function focusElement(targetIndex: number): void {
     const elements = getElements();
     if (elements.length === 0) return;
 
     // Clamp or loop index
+    let newIndex: number;
     if (loop) {
-      index = ((index % elements.length) + elements.length) % elements.length;
+      newIndex = ((targetIndex % elements.length) + elements.length) % elements.length;
     } else {
-      index = Math.max(0, Math.min(index, elements.length - 1));
+      newIndex = Math.max(0, Math.min(targetIndex, elements.length - 1));
     }
 
-    currentIndex = index;
+    currentIndex = newIndex;
     updateTabIndex(elements, currentIndex);
     elements[currentIndex]?.focus();
     onFocus?.(elements[currentIndex]!, currentIndex);
@@ -58,35 +59,35 @@ export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
     let handled = false;
 
     switch (event.key) {
-      case 'ArrowRight':
-        if (direction === 'horizontal' || direction === 'both') {
+      case "ArrowRight":
+        if (direction === "horizontal" || direction === "both") {
           nextIndex = currentIndex + 1;
           handled = true;
         }
         break;
-      case 'ArrowLeft':
-        if (direction === 'horizontal' || direction === 'both') {
+      case "ArrowLeft":
+        if (direction === "horizontal" || direction === "both") {
           nextIndex = currentIndex - 1;
           handled = true;
         }
         break;
-      case 'ArrowDown':
-        if (direction === 'vertical' || direction === 'both') {
+      case "ArrowDown":
+        if (direction === "vertical" || direction === "both") {
           nextIndex = currentIndex + 1;
           handled = true;
         }
         break;
-      case 'ArrowUp':
-        if (direction === 'vertical' || direction === 'both') {
+      case "ArrowUp":
+        if (direction === "vertical" || direction === "both") {
           nextIndex = currentIndex - 1;
           handled = true;
         }
         break;
-      case 'Home':
+      case "Home":
         nextIndex = 0;
         handled = true;
         break;
-      case 'End':
+      case "End":
         nextIndex = elements.length - 1;
         handled = true;
         break;
@@ -111,15 +112,15 @@ export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
   // Initialize
   const elements = getElements();
   updateTabIndex(elements, currentIndex);
-  container.addEventListener('keydown', handleKeyDown);
-  container.addEventListener('focusin', handleFocus);
+  container.addEventListener("keydown", handleKeyDown);
+  container.addEventListener("focusin", handleFocus);
 
   return {
     setFocusedIndex: focusElement,
     getFocusedIndex: () => currentIndex,
     destroy: () => {
-      container.removeEventListener('keydown', handleKeyDown);
-      container.removeEventListener('focusin', handleFocus);
+      container.removeEventListener("keydown", handleKeyDown);
+      container.removeEventListener("focusin", handleFocus);
     },
   };
 }

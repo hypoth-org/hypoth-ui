@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import { loadManifestById, parseFrontmatter } from "@ds/docs-core";
-import { MdxRenderer } from "@ds/docs-renderer-next/components/mdx-renderer";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { loadManifestById } from "@ds/docs-core";
+import { MdxRenderer } from "@ds/docs-renderer-next/components/mdx-renderer";
+import { notFound } from "next/navigation";
 
 interface ComponentPageProps {
   params: Promise<{
@@ -86,8 +86,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 <tbody>
                   {manifest.props.map((prop) => (
                     <tr key={prop.name}>
-                      <td><code>{prop.name}</code></td>
-                      <td><code>{prop.type}</code></td>
+                      <td>
+                        <code>{prop.name}</code>
+                      </td>
+                      <td>
+                        <code>{prop.type}</code>
+                      </td>
                       <td>{prop.default ? <code>{prop.default}</code> : "—"}</td>
                       <td>{prop.description}</td>
                     </tr>
@@ -100,10 +104,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {manifest.examples && manifest.examples.length > 0 && (
             <section>
               <h2>Examples</h2>
-              {manifest.examples.map((example, index) => (
-                <div key={index} className="example">
+              {manifest.examples.map((example) => (
+                <div key={example.title} className="example">
                   <h3>{example.title}</h3>
-                  <pre><code>{example.code}</code></pre>
+                  <pre>
+                    <code>{example.code}</code>
+                  </pre>
                 </div>
               ))}
             </section>

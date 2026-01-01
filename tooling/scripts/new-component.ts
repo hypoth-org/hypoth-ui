@@ -12,9 +12,9 @@
  * Example: pnpm new-component card
  */
 
-import { writeFile, mkdir } from "node:fs/promises";
-import { join, dirname } from "node:path";
 import { existsSync } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 
 const ROOT_DIR = join(dirname(new URL(import.meta.url).pathname), "../..");
 
@@ -172,8 +172,7 @@ ${config.className}.displayName = "${config.className}";
 function generateManifest(config: ComponentConfig): string {
   return JSON.stringify(
     {
-      $schema:
-        "../../../specs/001-design-system/contracts/component-manifest.schema.json",
+      $schema: "../../../specs/001-design-system/contracts/component-manifest.schema.json",
       id: config.name,
       name: config.className,
       description: config.description,
@@ -303,17 +302,12 @@ async function ensureDir(dir: string): Promise<void> {
   }
 }
 
-async function writeFileIfNotExists(
-  path: string,
-  content: string
-): Promise<boolean> {
+async function writeFileIfNotExists(path: string, content: string): Promise<boolean> {
   if (existsSync(path)) {
-    console.log(`  ⚠ Skipping ${path} (already exists)`);
     return false;
   }
   await ensureDir(dirname(path));
   await writeFile(path, content, "utf-8");
-  console.log(`  ✓ Created ${path}`);
   return true;
 }
 
@@ -338,20 +332,10 @@ async function main(): Promise<void> {
     description,
   };
 
-  console.log(`\nCreating component: ${config.className}`);
-  console.log(`Tag name: ${config.tagName}`);
-  console.log(`Category: ${config.category}\n`);
-
   // Create Web Component
   const wcDir = join(ROOT_DIR, "packages/wc/src/components", name);
-  await writeFileIfNotExists(
-    join(wcDir, `${name}.ts`),
-    generateWebComponent(config)
-  );
-  await writeFileIfNotExists(
-    join(wcDir, `${name}.css`),
-    generateComponentCSS(config)
-  );
+  await writeFileIfNotExists(join(wcDir, `${name}.ts`), generateWebComponent(config));
+  await writeFileIfNotExists(join(wcDir, `${name}.css`), generateComponentCSS(config));
 
   // Create React wrapper
   await writeFileIfNotExists(
@@ -370,17 +354,9 @@ async function main(): Promise<void> {
     join(ROOT_DIR, "packages/docs-content/components", `${name}.mdx`),
     generateMDX(config)
   );
-
-  console.log("\n✅ Component created successfully!");
-  console.log("\nNext steps:");
-  console.log(`  1. Update packages/wc/src/index.ts to export the component`);
-  console.log(`  2. Update packages/react/src/index.ts to export the wrapper`);
-  console.log(`  3. Run 'pnpm build' to compile`);
-  console.log(`  4. Run 'pnpm validate:manifests' to validate the manifest`);
 }
 
 main().catch((err) => {
   console.error("Error:", err);
   process.exit(1);
 });
-`;

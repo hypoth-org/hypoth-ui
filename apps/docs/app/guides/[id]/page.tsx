@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import { parseFrontmatterFromFile } from "@ds/docs-core";
-import { MdxRenderer } from "@ds/docs-renderer-next/components/mdx-renderer";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { parseFrontmatterFromFile } from "@ds/docs-core";
+import { MdxRenderer } from "@ds/docs-renderer-next/components/mdx-renderer";
+import { notFound } from "next/navigation";
 
 interface GuidePageProps {
   params: Promise<{
@@ -15,9 +15,7 @@ export async function generateStaticParams() {
   try {
     const guidesDir = join(process.cwd(), "../../packages/docs-content/guides");
     const files = await readdir(guidesDir);
-    return files
-      .filter((f) => f.endsWith(".mdx"))
-      .map((f) => ({ id: f.replace(".mdx", "") }));
+    return files.filter((f) => f.endsWith(".mdx")).map((f) => ({ id: f.replace(".mdx", "") }));
   } catch {
     return [{ id: "getting-started" }, { id: "theming" }];
   }

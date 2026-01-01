@@ -7,20 +7,17 @@
  * Usage: pnpm validate:manifests [manifests-dir]
  */
 
-import { readdir, readFile } from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { readFile, readdir } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { validateManifest } from "../manifest/validator.js";
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const manifestsDir =
     args[0] ||
-    join(
-      dirname(new URL(import.meta.url).pathname),
-      "../../../../packages/docs-content/manifests"
-    );
+    join(dirname(new URL(import.meta.url).pathname), "../../../../packages/docs-content/manifests");
 
-  console.log(`\nValidating manifests in: ${manifestsDir}\n`);
+  console.info(`\nValidating manifests in: ${manifestsDir}\n`);
 
   let files: string[];
   try {
@@ -33,7 +30,7 @@ async function main(): Promise<void> {
   const jsonFiles = files.filter((f) => f.endsWith(".json"));
 
   if (jsonFiles.length === 0) {
-    console.log("No manifest files found.");
+    console.info("No manifest files found.");
     process.exit(0);
   }
 
@@ -50,25 +47,25 @@ async function main(): Promise<void> {
       const result = validateManifest(manifest);
 
       if (result.valid) {
-        console.log(`  ✓ ${file}`);
+        console.info(`  ✓ ${file}`);
         validCount++;
       } else {
-        console.log(`  ✗ ${file}`);
+        console.info(`  ✗ ${file}`);
         for (const error of result.errors) {
-          console.log(`      ${error}`);
+          console.info(`      ${error}`);
         }
         invalidCount++;
         hasErrors = true;
       }
     } catch (err) {
-      console.log(`  ✗ ${file}`);
-      console.log(`      Parse error: ${err}`);
+      console.info(`  ✗ ${file}`);
+      console.info(`      Parse error: ${err}`);
       invalidCount++;
       hasErrors = true;
     }
   }
 
-  console.log(`\nResults: ${validCount} valid, ${invalidCount} invalid\n`);
+  console.info(`\nResults: ${validCount} valid, ${invalidCount} invalid\n`);
 
   if (hasErrors) {
     process.exit(1);

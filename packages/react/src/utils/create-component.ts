@@ -1,4 +1,10 @@
-import { forwardRef, useEffect, useRef, type ComponentPropsWithoutRef, type ElementType, type ForwardedRef } from "react";
+import {
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
 
 /**
  * Factory for creating React wrapper components around Web Components.
@@ -20,7 +26,7 @@ export interface WrapperConfig<P extends Record<string, unknown>> {
  */
 export function createComponent<
   E extends HTMLElement,
-  P extends Record<string, unknown> = Record<string, unknown>
+  P extends Record<string, unknown> = Record<string, unknown>,
 >(config: WrapperConfig<P>) {
   const { tagName, properties = [], events = {} } = config;
 
@@ -86,8 +92,6 @@ export function createComponent<
 
     for (const [key, value] of Object.entries(props)) {
       if (properties.includes(key as keyof P) || key in events) {
-        // Skip properties and events - handled by effects
-        continue;
       } else if (key === "children" || key === "className" || key === "style") {
         elementProps[key] = value;
       } else {

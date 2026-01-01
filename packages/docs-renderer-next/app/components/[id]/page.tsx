@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import { loadManifestById } from "@ds/docs-core";
-import { MdxRenderer } from "../../../components/mdx-renderer";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { loadManifestById } from "@ds/docs-core";
+import { notFound } from "next/navigation";
+import { MdxRenderer } from "../../../components/mdx-renderer";
 
 interface ComponentPageProps {
   params: Promise<{
@@ -47,11 +47,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   // Try to load MDX content
   let mdxContent: string | null = null;
   try {
-    const mdxPath = join(
-      process.cwd(),
-      "node_modules/@ds/docs-content/components",
-      `${id}.mdx`
-    );
+    const mdxPath = join(process.cwd(), "node_modules/@ds/docs-content/components", `${id}.mdx`);
     mdxContent = await readFile(mdxPath, "utf-8");
   } catch {
     // No MDX file, use auto-generated content from manifest
@@ -136,8 +132,8 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {manifest.examples && manifest.examples.length > 0 && (
             <section>
               <h2>Examples</h2>
-              {manifest.examples.map((example, index) => (
-                <div key={index} className="example">
+              {manifest.examples.map((example) => (
+                <div key={example.title} className="example">
                   <h3>{example.title}</h3>
                   <pre>
                     <code>{example.code}</code>

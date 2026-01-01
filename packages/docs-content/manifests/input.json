@@ -9,9 +9,7 @@
   "platforms": ["wc", "react"],
   "a11y": {
     "role": "textbox",
-    "keyboardInteractions": [
-      { "key": "Tab", "action": "Move focus to/from the input" }
-    ],
+    "keyboardInteractions": [{ "key": "Tab", "action": "Move focus to/from the input" }],
     "ariaAttributes": ["aria-invalid", "aria-required", "aria-disabled"],
     "focusManagement": "Native input focus with visible focus ring"
   },

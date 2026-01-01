@@ -1,7 +1,10 @@
-import type { ComponentManifest } from "../manifest/loader.js";
-import type { ContentFrontmatter, ParsedContent } from "../content/frontmatter.js";
+import type { ParsedContent } from "../content/frontmatter.js";
 import type { EditionConfig } from "../filter/edition-filter.js";
-import { isComponentVisibleForEdition, isContentVisibleForEdition } from "../filter/edition-filter.js";
+import {
+  isComponentVisibleForEdition,
+  isContentVisibleForEdition,
+} from "../filter/edition-filter.js";
+import type { ComponentManifest } from "../manifest/loader.js";
 
 /**
  * Navigation item in the tree
@@ -47,52 +50,6 @@ export interface GenerateNavigationOptions {
   componentBasePath?: string;
   /** Base path for guide URLs */
   guideBasePath?: string;
-}
-
-/**
- * Group items by category
- */
-function groupByCategory(items: NavItem[]): NavItem[] {
-  const categoryMap = new Map<string, NavItem[]>();
-  const uncategorized: NavItem[] = [];
-
-  for (const item of items) {
-    if (item.type === "category") {
-      // This is already a category, add it directly
-      const existing = categoryMap.get(item.id) ?? [];
-      existing.push(...(item.children ?? []));
-      categoryMap.set(item.id, existing);
-    } else {
-      uncategorized.push(item);
-    }
-  }
-
-  // Convert map to array of category items
-  const categories: NavItem[] = [];
-  for (const [categoryId, children] of categoryMap) {
-    categories.push({
-      id: categoryId,
-      label: formatCategoryLabel(categoryId),
-      href: "",
-      type: "category",
-      order: 0,
-      children: children.sort((a, b) => a.order - b.order || a.label.localeCompare(b.label)),
-    });
-  }
-
-  // Add uncategorized items
-  if (uncategorized.length > 0) {
-    categories.push({
-      id: "other",
-      label: "Other",
-      href: "",
-      type: "category",
-      order: 999,
-      children: uncategorized.sort((a, b) => a.order - b.order || a.label.localeCompare(b.label)),
-    });
-  }
-
-  return categories.sort((a, b) => a.order - b.order || a.label.localeCompare(b.label));
 }
 
 /**
@@ -176,7 +133,6 @@ export function generateNavigation(options: GenerateNavigationOptions): Navigati
   }
 
   // Filter and map guides
-  const guideItems: NavItem[] = [];
   const guidesByCategory = new Map<string, NavItem[]>();
 
   for (const { path, parsed } of contents) {
@@ -193,7 +149,11 @@ export function generateNavigation(options: GenerateNavigationOptions): Navigati
     }
 
     const category = frontmatter.category ?? "general";
-    const id = path.replace(/\.mdx?$/, "").split("/").pop() ?? path;
+    const id =
+      path
+        .replace(/\.mdx?$/, "")
+        .split("/")
+        .pop() ?? path;
 
     const item: NavItem = {
       id,

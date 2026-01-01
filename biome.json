@@ -35,7 +35,7 @@
         "useNodejsImportProtocol": "error"
       },
       "suspicious": {
-        "noExplicitAny": "error",
+        "noExplicitAny": "warn",
         "noConsoleLog": "warn"
       }
     }

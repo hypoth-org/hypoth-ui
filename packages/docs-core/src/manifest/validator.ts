@@ -181,9 +181,7 @@ export function validateManifest(manifest: unknown): ValidationResult {
 /**
  * Validate multiple manifests and return all results
  */
-export function validateManifests(
-  manifests: unknown[]
-): Map<number, ValidationResult> {
+export function validateManifests(manifests: unknown[]): Map<number, ValidationResult> {
   const results = new Map<number, ValidationResult>();
 
   for (let i = 0; i < manifests.length; i++) {

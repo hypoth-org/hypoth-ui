@@ -1,5 +1,5 @@
-import matter from "gray-matter";
 import { readFile } from "node:fs/promises";
+import matter from "gray-matter";
 
 /**
  * Frontmatter data extracted from MDX files
@@ -41,12 +41,10 @@ export function parseFrontmatter(source: string): ParsedContent {
 
   const frontmatter: ContentFrontmatter = {
     title: typeof data.title === "string" ? data.title : "Untitled",
-    description:
-      typeof data.description === "string" ? data.description : undefined,
+    description: typeof data.description === "string" ? data.description : undefined,
     category: typeof data.category === "string" ? data.category : undefined,
     order: typeof data.order === "number" ? data.order : undefined,
-    componentId:
-      typeof data.componentId === "string" ? data.componentId : undefined,
+    componentId: typeof data.componentId === "string" ? data.componentId : undefined,
     hidden: typeof data.hidden === "boolean" ? data.hidden : false,
     editions: Array.isArray(data.editions)
       ? data.editions.filter((e): e is string => typeof e === "string")
@@ -63,9 +61,7 @@ export function parseFrontmatter(source: string): ParsedContent {
 /**
  * Parse MDX frontmatter from a file
  */
-export async function parseFrontmatterFromFile(
-  filePath: string
-): Promise<ParsedContent> {
+export async function parseFrontmatterFromFile(filePath: string): Promise<ParsedContent> {
   const source = await readFile(filePath, "utf-8");
   return parseFrontmatter(source);
 }
@@ -73,10 +69,7 @@ export async function parseFrontmatterFromFile(
 /**
  * Check if content should be visible for a given edition
  */
-export function isVisibleForEdition(
-  frontmatter: ContentFrontmatter,
-  editionId: string
-): boolean {
+export function isVisibleForEdition(frontmatter: ContentFrontmatter, editionId: string): boolean {
   // If no editions specified, visible to all
   if (!frontmatter.editions || frontmatter.editions.length === 0) {
     return true;

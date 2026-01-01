@@ -1,5 +1,5 @@
 import { readFile, readdir } from "node:fs/promises";
-import { join, basename } from "node:path";
+import { join } from "node:path";
 
 /**
  * Component manifest as loaded from JSON files
@@ -67,9 +67,7 @@ export interface LoadManifestsResult {
 /**
  * Load all component manifests from a directory
  */
-export async function loadManifests(
-  options: LoadManifestsOptions
-): Promise<LoadManifestsResult> {
+export async function loadManifests(options: LoadManifestsOptions): Promise<LoadManifestsResult> {
   const { manifestsDir } = options;
   const manifests: ComponentManifest[] = [];
   const errors: Array<{ file: string; error: string }> = [];

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Web Components Test</title>
+  <link rel="stylesheet" href="../../../css/dist/index.css">
+  <link rel="stylesheet" href="../../../tokens/dist/css/tokens.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .test-section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border: 1px solid var(--ds-color-border-default);
+      border-radius: var(--ds-radius-md);
+    }
+
+    .test-section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .test-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .test-result {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-color-background-muted);
+    }
+
+    .test-result.pass {
+      background: var(--ds-color-success-subtle, #dcfce7);
+      color: var(--ds-color-success-default, #16a34a);
+    }
+
+    .test-result.fail {
+      background: var(--ds-color-error-subtle, #fee2e2);
+      color: var(--ds-color-error-default, #dc2626);
+    }
+  </style>
+</head>
+<body>
+  <h1>Design System Web Components Test</h1>
+
+  <section class="test-section" id="button-test">
+    <h2>Button Component</h2>
+
+    <h3>Variants</h3>
+    <div class="test-grid">
+      <ds-button variant="primary">Primary</ds-button>
+      <ds-button variant="secondary">Secondary</ds-button>
+      <ds-button variant="ghost">Ghost</ds-button>
+      <ds-button variant="destructive">Destructive</ds-button>
+    </div>
+
+    <h3>Sizes</h3>
+    <div class="test-grid">
+      <ds-button size="sm">Small</ds-button>
+      <ds-button size="md">Medium</ds-button>
+      <ds-button size="lg">Large</ds-button>
+    </div>
+
+    <h3>States</h3>
+    <div class="test-grid">
+      <ds-button>Normal</ds-button>
+      <ds-button disabled>Disabled</ds-button>
+      <ds-button loading>Loading</ds-button>
+    </div>
+
+    <h3>Click Event Test</h3>
+    <div class="test-grid">
+      <ds-button id="click-test-btn">Click Me</ds-button>
+      <span id="click-count">Clicks: 0</span>
+    </div>
+
+    <div class="test-result" id="button-result"></div>
+  </section>
+
+  <section class="test-section" id="input-test">
+    <h2>Input Component</h2>
+
+    <h3>Sizes</h3>
+    <div class="test-grid">
+      <ds-input size="sm" placeholder="Small input"></ds-input>
+      <ds-input size="md" placeholder="Medium input"></ds-input>
+      <ds-input size="lg" placeholder="Large input"></ds-input>
+    </div>
+
+    <h3>States</h3>
+    <div class="test-grid">
+      <ds-input placeholder="Normal"></ds-input>
+      <ds-input disabled placeholder="Disabled"></ds-input>
+      <ds-input error placeholder="Error state"></ds-input>
+    </div>
+
+    <h3>Types</h3>
+    <div class="test-grid">
+      <ds-input type="text" placeholder="Text"></ds-input>
+      <ds-input type="email" placeholder="Email"></ds-input>
+      <ds-input type="password" placeholder="Password"></ds-input>
+    </div>
+
+    <h3>Value Change Event Test</h3>
+    <div class="test-grid">
+      <ds-input id="value-test-input" placeholder="Type here"></ds-input>
+      <span id="value-display">Value: </span>
+    </div>
+
+    <div class="test-result" id="input-result"></div>
+  </section>
+
+  <section class="test-section" id="theme-test">
+    <h2>Theme Test</h2>
+
+    <div class="test-grid">
+      <ds-button onclick="setTheme('light')">Light Theme</ds-button>
+      <ds-button onclick="setTheme('dark')">Dark Theme</ds-button>
+      <ds-button onclick="setTheme('high-contrast')">High Contrast</ds-button>
+    </div>
+
+    <div class="test-result" id="theme-result">Current theme: light</div>
+  </section>
+
+  <section class="test-section" id="light-dom-test">
+    <h2>Light DOM Test</h2>
+
+    <ds-button id="light-dom-btn">Check Light DOM</ds-button>
+
+    <div class="test-result" id="light-dom-result"></div>
+  </section>
+
+  <!-- Load Web Components -->
+  <script type="module">
+    import '../../dist/index.js';
+
+    // Run tests after components are registered
+    customElements.whenDefined('ds-button').then(() => {
+      runTests();
+    });
+
+    function runTests() {
+      // Test button click
+      let clickCount = 0;
+      const clickBtn = document.getElementById('click-test-btn');
+      const clickCountEl = document.getElementById('click-count');
+
+      clickBtn.addEventListener('click', () => {
+        clickCount++;
+        clickCountEl.textContent = `Clicks: ${clickCount}`;
+      });
+
+      // Test input value change
+      const valueInput = document.getElementById('value-test-input');
+      const valueDisplay = document.getElementById('value-display');
+
+      valueInput.addEventListener('ds-input', (e) => {
+        valueDisplay.textContent = `Value: ${e.detail.value}`;
+      });
+
+      // Test Light DOM
+      const lightDomBtn = document.getElementById('light-dom-btn');
+      const lightDomResult = document.getElementById('light-dom-result');
+
+      // Check if button uses Light DOM (no shadow root)
+      const hasShadowRoot = lightDomBtn.shadowRoot !== null;
+      const hasInnerButton = lightDomBtn.querySelector('button') !== null;
+
+      if (!hasShadowRoot && hasInnerButton) {
+        lightDomResult.textContent = '✓ Light DOM confirmed: No shadow root, inner elements accessible';
+        lightDomResult.classList.add('pass');
+      } else if (hasShadowRoot) {
+        lightDomResult.textContent = '✗ Shadow DOM detected';
+        lightDomResult.classList.add('fail');
+      } else {
+        lightDomResult.textContent = '✗ Inner button not found';
+        lightDomResult.classList.add('fail');
+      }
+
+      // Test button registration
+      const buttonResult = document.getElementById('button-result');
+      const isButtonDefined = customElements.get('ds-button') !== undefined;
+
+      if (isButtonDefined) {
+        buttonResult.textContent = '✓ ds-button is registered as a custom element';
+        buttonResult.classList.add('pass');
+      } else {
+        buttonResult.textContent = '✗ ds-button is not registered';
+        buttonResult.classList.add('fail');
+      }
+
+      // Test input registration
+      const inputResult = document.getElementById('input-result');
+      const isInputDefined = customElements.get('ds-input') !== undefined;
+
+      if (isInputDefined) {
+        inputResult.textContent = '✓ ds-input is registered as a custom element';
+        inputResult.classList.add('pass');
+      } else {
+        inputResult.textContent = '✗ ds-input is not registered';
+        inputResult.classList.add('fail');
+      }
+    }
+
+    // Theme switching
+    window.setTheme = function(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.getElementById('theme-result').textContent = `Current theme: ${theme}`;
+    };
+  </script>
+</body>
+</html>

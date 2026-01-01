@@ -29,7 +29,7 @@ StyleDictionary.registerFormat({
       })
       .join("\n");
 
-    return `@media (prefers-color-scheme: dark) {\n  :root {\n${tokens}\n  }\n}\n\n[data-theme="dark"] {\n${tokens.replace(/    /g, "  ")}\n}\n`;
+    return `@media (prefers-color-scheme: dark) {\n  :root {\n${tokens}\n  }\n}\n\n[data-theme="dark"] {\n${tokens.replace(/ {4}/g, "  ")}\n}\n`;
   },
 });
 
@@ -44,7 +44,7 @@ StyleDictionary.registerFormat({
       })
       .join("\n");
 
-    return `@media (prefers-contrast: more) {\n  :root {\n${tokens}\n  }\n}\n\n[data-theme="high-contrast"] {\n${tokens.replace(/    /g, "  ")}\n}\n`;
+    return `@media (prefers-contrast: more) {\n  :root {\n${tokens}\n  }\n}\n\n[data-theme="high-contrast"] {\n${tokens.replace(/ {4}/g, "  ")}\n}\n`;
   },
 });
 

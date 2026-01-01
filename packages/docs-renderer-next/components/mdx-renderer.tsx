@@ -1,10 +1,7 @@
 import { compile, run } from "@mdx-js/mdx";
-import * as jsxRuntime from "react/jsx-runtime";
-import * as jsxDevRuntime from "react/jsx-dev-runtime";
 import type { ComponentType, ReactNode } from "react";
-
-// Use the appropriate runtime based on environment
-const runtime = process.env.NODE_ENV === "development" ? jsxDevRuntime : jsxRuntime;
+import * as jsxDevRuntime from "react/jsx-dev-runtime";
+import * as jsxRuntime from "react/jsx-runtime";
 
 interface MdxRendererProps {
   /** MDX source string */
@@ -36,14 +33,10 @@ const defaultComponents: Record<string, ComponentType<any>> = {
     </div>
   ),
   // Heading anchors
-  h1: ({ children, ...props }: { children: ReactNode }) => (
-    <h1 {...props}>{children}</h1>
-  ),
+  h1: ({ children, ...props }: { children: ReactNode }) => <h1 {...props}>{children}</h1>,
   h2: ({ children, ...props }: { children: ReactNode }) => {
     const id =
-      typeof children === "string"
-        ? children.toLowerCase().replace(/\s+/g, "-")
-        : undefined;
+      typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : undefined;
     return (
       <h2 id={id} {...props}>
         {children}
@@ -52,9 +45,7 @@ const defaultComponents: Record<string, ComponentType<any>> = {
   },
   h3: ({ children, ...props }: { children: ReactNode }) => {
     const id =
-      typeof children === "string"
-        ? children.toLowerCase().replace(/\s+/g, "-")
-        : undefined;
+      typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : undefined;
     return (
       <h3 id={id} {...props}>
         {children}

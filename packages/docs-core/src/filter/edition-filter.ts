@@ -1,5 +1,5 @@
-import type { ComponentManifest } from "../manifest/loader.js";
 import type { ContentFrontmatter } from "../content/frontmatter.js";
+import type { ComponentManifest } from "../manifest/loader.js";
 
 /**
  * Edition configuration for white-label documentation filtering
@@ -65,9 +65,7 @@ export function filterComponentsForEdition(
   manifests: ComponentManifest[],
   edition: EditionConfig
 ): ComponentManifest[] {
-  return manifests.filter((manifest) =>
-    isComponentVisibleForEdition(manifest, edition)
-  );
+  return manifests.filter((manifest) => isComponentVisibleForEdition(manifest, edition));
 }
 
 /**
@@ -97,10 +95,7 @@ export function isContentVisibleForEdition(
 /**
  * Get the effective content path, applying overlays if configured
  */
-export function getEffectiveContentPath(
-  basePath: string,
-  edition: EditionConfig
-): string {
+export function getEffectiveContentPath(basePath: string, edition: EditionConfig): string {
   // Check if there's an overlay for this path
   const overlay = edition.contentOverlays[basePath];
   return overlay ?? basePath;

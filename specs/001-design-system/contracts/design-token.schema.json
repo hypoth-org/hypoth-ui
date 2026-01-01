@@ -46,20 +46,13 @@
     "tokenGroup": {
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          { "$ref": "#/definitions/token" },
-          { "$ref": "#/definitions/tokenGroup" }
-        ]
+        "oneOf": [{ "$ref": "#/definitions/token" }, { "$ref": "#/definitions/tokenGroup" }]
       },
       "description": "Nested token group"
     }
   },
   "type": "object",
   "additionalProperties": {
-    "oneOf": [
-      { "$ref": "#/definitions/token" },
-      { "$ref": "#/definitions/tokenGroup" }
-    ]
-  },
-  "description": "Token file containing nested token groups and tokens"
+    "oneOf": [{ "$ref": "#/definitions/token" }, { "$ref": "#/definitions/tokenGroup" }]
+  }
 }

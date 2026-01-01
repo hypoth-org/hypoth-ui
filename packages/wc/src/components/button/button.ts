@@ -1,4 +1,4 @@
-import { html, type TemplateResult } from "lit";
+import { type TemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { LightElement } from "../../base/light-element.js";
@@ -96,9 +96,7 @@ export class DsButton extends LightElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
       >
-        ${this.loading
-          ? html`<span class="ds-button__spinner" aria-hidden="true"></span>`
-          : null}
+        ${this.loading ? html`<span class="ds-button__spinner" aria-hidden="true"></span>` : null}
         <span class="ds-button__content">
           <slot></slot>
         </span>
