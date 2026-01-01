@@ -1,0 +1,15 @@
+{
+  "$schema": "../../packages/docs-core/src/schemas/edition-config.schema.json",
+  "edition": "enterprise",
+  "branding": {
+    "name": "Hypoth UI",
+    "primaryColor": "#6366f1"
+  },
+  "features": {
+    "search": true,
+    "darkMode": true,
+    "versionSwitcher": true,
+    "feedback": true
+  },
+  "upgradeUrl": "https://hypoth-ui.dev/pricing"
+}

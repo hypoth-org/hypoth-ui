@@ -5,12 +5,18 @@
   "type": "module",
   "description": "Documentation site deployment",
   "scripts": {
+    "prebuild": "pnpm build:edition-map",
     "build": "next build",
+    "build:edition-map": "tsx ../../packages/docs-core/src/cli/build-edition-map.ts --root-dir ../.. --output src/generated/edition-map.json",
     "dev": "next dev --port 3002",
+    "dev:core": "DS_EDITION=core next dev --port 3002",
+    "dev:pro": "DS_EDITION=pro next dev --port 3002",
+    "dev:enterprise": "DS_EDITION=enterprise next dev --port 3002",
     "start": "next start",
     "clean": "rm -rf .next",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "validate": "tsx ../../packages/docs-core/src/cli/validate.ts --root-dir ../.."
   },
   "dependencies": {
     "@ds/docs-renderer-next": "workspace:*",

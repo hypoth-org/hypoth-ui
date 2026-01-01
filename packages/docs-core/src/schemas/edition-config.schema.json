@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/edition-config.json",
+  "title": "Edition Configuration",
+  "description": "Tenant-level configuration for edition filtering",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this JSON Schema for IDE support"
+    },
+    "edition": {
+      "type": "string",
+      "enum": ["core", "pro", "enterprise"],
+      "description": "Active edition tier for this tenant"
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Brand name to display"
+        },
+        "logo": {
+          "type": "string",
+          "description": "Path to logo file"
+        },
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Primary brand color (hex)"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Brand customization overrides"
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable search functionality"
+        },
+        "darkMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable dark mode toggle"
+        },
+        "versionSwitcher": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable version switching"
+        },
+        "feedback": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable feedback widget"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Feature toggles"
+    },
+    "upgradeUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for upgrade prompts (shown for filtered components)"
+    }
+  },
+  "required": ["edition"],
+  "additionalProperties": false,
+  "errorMessage": {
+    "required": {
+      "edition": "Configuration must specify an 'edition' (core, pro, or enterprise)"
+    }
+  },
+  "defaultSnippets": [
+    {
+      "label": "Core Edition Config",
+      "body": {
+        "$schema": "./schemas/edition-config.schema.json",
+        "edition": "core"
+      }
+    },
+    {
+      "label": "Pro Edition Config",
+      "body": {
+        "$schema": "./schemas/edition-config.schema.json",
+        "edition": "pro",
+        "features": {
+          "search": true,
+          "darkMode": true
+        }
+      }
+    },
+    {
+      "label": "Enterprise Edition Config",
+      "body": {
+        "$schema": "./schemas/edition-config.schema.json",
+        "edition": "enterprise",
+        "branding": {
+          "name": "${1:Company Name}",
+          "logo": "${2:/assets/logo.svg}",
+          "primaryColor": "${3:#0066cc}"
+        },
+        "features": {
+          "search": true,
+          "darkMode": true,
+          "versionSwitcher": true,
+          "feedback": true
+        }
+      }
+    }
+  ]
+}

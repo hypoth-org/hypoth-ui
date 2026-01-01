@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/docs-frontmatter.json",
+  "title": "Documentation Frontmatter",
+  "description": "YAML frontmatter schema for MDX documentation files",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Page title (used in navigation and browser tab)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Meta description for SEO"
+    },
+    "component": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Reference to component id (must match a manifest)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["experimental", "alpha", "beta", "stable", "deprecated"],
+      "description": "Component status (should match manifest status)"
+    },
+    "editions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["core", "pro", "enterprise"]
+      },
+      "uniqueItems": true,
+      "description": "Override editions (defaults to manifest editions if not specified)"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last content update date (YYYY-MM-DD)"
+    },
+    "draft": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, page is excluded from production build"
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Sort order in navigation (lower = earlier)"
+    },
+    "category": {
+      "type": "string",
+      "description": "Navigation category grouping"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Searchable tags for discovery"
+    }
+  },
+  "required": ["title", "component", "status"],
+  "additionalProperties": false,
+  "errorMessage": {
+    "required": {
+      "title": "Documentation must have a 'title' field",
+      "component": "Documentation must reference a 'component' id",
+      "status": "Documentation must have a 'status' field matching the component"
+    },
+    "properties": {
+      "component": "Component reference must be lowercase letters, numbers, and hyphens",
+      "status": "Status must be one of: experimental, alpha, beta, stable, deprecated",
+      "editions": "Editions must be array of: core, pro, enterprise"
+    }
+  }
+}

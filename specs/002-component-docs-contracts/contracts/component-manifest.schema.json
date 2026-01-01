@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/component-manifest.json",
+  "title": "Component Manifest",
+  "description": "Structured metadata for a design system component",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this JSON Schema for IDE support"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique identifier (kebab-case)",
+      "examples": ["button", "text-input", "date-picker"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name",
+      "examples": ["Button", "Text Input", "Date Picker"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+      "description": "Semantic version",
+      "examples": ["1.0.0", "2.1.0-beta.1"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["experimental", "alpha", "beta", "stable", "deprecated"],
+      "description": "Component maturity status"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Short description (1-2 sentences)"
+    },
+    "editions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["core", "pro", "enterprise"]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Edition tiers where this component is available"
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "apgPattern": {
+          "type": "string",
+          "description": "ARIA Authoring Practices Guide pattern name",
+          "examples": ["button", "dialog", "combobox", "custom"]
+        },
+        "keyboard": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Supported keyboard interactions",
+          "examples": [["Enter", "Space"], ["ArrowUp", "ArrowDown", "Enter", "Escape"]]
+        },
+        "screenReader": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Screen reader behavior notes"
+        },
+        "ariaPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "ARIA roles, states, and properties used",
+          "examples": [
+            ["role=button", "aria-pressed"],
+            ["role=dialog", "aria-modal", "aria-labelledby"]
+          ]
+        },
+        "knownLimitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Documented accessibility gaps or workarounds needed"
+        }
+      },
+      "required": ["apgPattern", "keyboard", "screenReader"],
+      "additionalProperties": false
+    },
+    "tokensUsed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Semantic token groups consumed by this component",
+      "examples": [["color.action", "spacing.component", "typography.label"]]
+    },
+    "recommendedUsage": {
+      "type": "string",
+      "description": "Short guidance on when to use this component"
+    },
+    "antiPatterns": {
+      "type": "string",
+      "description": "What NOT to do with this component"
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["wc", "react", "html-recipe"]
+      },
+      "description": "Platforms where this component is available"
+    }
+  },
+  "required": ["id", "name", "version", "status", "description", "editions", "accessibility"],
+  "additionalProperties": false,
+  "errorMessage": {
+    "required": {
+      "id": "Component must have an 'id' field (kebab-case identifier)",
+      "name": "Component must have a 'name' field (display name)",
+      "version": "Component must have a 'version' field (semver format)",
+      "status": "Component must have a 'status' field (experimental|alpha|beta|stable|deprecated)",
+      "description": "Component must have a 'description' field",
+      "editions": "Component must have an 'editions' array with at least one edition",
+      "accessibility": "Component must have an 'accessibility' object with a11y metadata"
+    },
+    "properties": {
+      "id": "ID must be lowercase letters, numbers, and hyphens only",
+      "version": "Version must be valid semver (e.g., 1.0.0)",
+      "status": "Status must be one of: experimental, alpha, beta, stable, deprecated",
+      "editions": "Editions must be array of: core, pro, enterprise"
+    }
+  },
+  "defaultSnippets": [
+    {
+      "label": "New Component Manifest",
+      "description": "Create a new component manifest",
+      "body": {
+        "$schema": "../../../docs-core/src/schemas/component-manifest.schema.json",
+        "id": "${1:component-id}",
+        "name": "${2:Component Name}",
+        "version": "0.1.0",
+        "status": "${3|experimental,alpha,beta,stable|}",
+        "description": "${4:Brief description of the component}",
+        "editions": ["${5|core,pro,enterprise|}"],
+        "accessibility": {
+          "apgPattern": "${6:button}",
+          "keyboard": ["${7:Enter}", "${8:Space}"],
+          "screenReader": "${9:Announces as a button}"
+        }
+      }
+    }
+  ]
+}

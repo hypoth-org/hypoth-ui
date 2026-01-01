@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "input",
+  "name": "Input",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A text input field component for user data entry with support for validation states",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "textbox",
+    "keyboard": ["Tab", "Shift+Tab"],
+    "screenReader": "Announces as a text input with label. Error messages are announced via aria-describedby. Required state is announced when applicable.",
+    "ariaPatterns": ["role=textbox", "aria-invalid", "aria-describedby", "aria-required"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.input.background",
+    "color.input.border",
+    "color.input.text",
+    "color.error",
+    "spacing.input",
+    "typography.body",
+    "border.radius"
+  ],
+  "recommendedUsage": "Use for single-line text entry in forms. Pair with labels and helper text for accessibility.",
+  "antiPatterns": "Do not use for multi-line text - use Textarea component instead. Always provide a visible or accessible label.",
+  "platforms": ["wc", "react"]
+}

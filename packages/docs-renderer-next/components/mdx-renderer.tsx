@@ -2,6 +2,7 @@ import { compile, run } from "@mdx-js/mdx";
 import type { ComponentType, ReactNode } from "react";
 import * as jsxDevRuntime from "react/jsx-dev-runtime";
 import * as jsxRuntime from "react/jsx-runtime";
+import { Edition, EditionBadge } from "./mdx/edition";
 
 interface MdxRendererProps {
   /** MDX source string */
@@ -12,6 +13,9 @@ interface MdxRendererProps {
 
 // Default MDX components
 const defaultComponents: Record<string, ComponentType<any>> = {
+  // Edition-specific content components
+  Edition,
+  EditionBadge,
   // Code blocks with syntax highlighting placeholder
   pre: ({ children, ...props }: { children: ReactNode }) => (
     <pre className="code-block" {...props}>
