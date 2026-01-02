@@ -149,7 +149,7 @@ export function generateWarnings(tokens: ParsedToken[]): ValidationWarning[] {
       warnings.push({
         type: 'missing-type',
         path: token.path,
-        message: `Token is missing $type declaration`,
+        message: 'Token is missing $type declaration',
       });
     }
   }

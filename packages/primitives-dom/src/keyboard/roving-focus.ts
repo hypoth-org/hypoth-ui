@@ -47,8 +47,11 @@ export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
 
     currentIndex = newIndex;
     updateTabIndex(elements, currentIndex);
-    elements[currentIndex]?.focus();
-    onFocus?.(elements[currentIndex]!, currentIndex);
+    const currentElement = elements[currentIndex];
+    currentElement?.focus();
+    if (currentElement) {
+      onFocus?.(currentElement, currentIndex);
+    }
   }
 
   function handleKeyDown(event: KeyboardEvent): void {

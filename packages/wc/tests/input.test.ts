@@ -130,7 +130,7 @@ describe("ds-input", () => {
 
       // The component dispatches a CustomEvent after handling the native event
       expect(eventDetail).toBeDefined();
-      expect(eventDetail!.value).toBe("test");
+      expect(eventDetail?.value).toBe("test");
     });
   });
 

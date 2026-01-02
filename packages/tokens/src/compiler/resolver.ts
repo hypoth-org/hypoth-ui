@@ -3,7 +3,7 @@
  * Resolves token references and implements cascade resolution
  */
 
-import type { TokenValue, ShadowValue, BorderValue, TypographyValue, TransitionValue } from '../types/dtcg.js';
+import type { TokenValue } from '../types/dtcg.js';
 import type { ParsedToken } from './parser.js';
 import { isReference, parseReference, containsReferences, replaceReferences } from './utils/references.js';
 

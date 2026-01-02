@@ -4,7 +4,6 @@
  */
 
 import { readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
 
 /** Token change */
 export interface TokenChange {
@@ -179,10 +178,10 @@ function formatValue(value: unknown): string {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   if (args.length < 2 || !args[0] || !args[1]) {
-    console.log('Usage: diff-reporter.ts <old-tokens.json> <new-tokens.json>');
+    console.info('Usage: diff-reporter.ts <old-tokens.json> <new-tokens.json>');
     process.exit(1);
   }
 
   const report = compareTokens(args[0], args[1]);
-  console.log(formatDiffAsMarkdown(report));
+  console.info(formatDiffAsMarkdown(report));
 }

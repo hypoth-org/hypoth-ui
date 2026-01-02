@@ -4,7 +4,6 @@
  */
 
 import type { ResolvedValue } from '../resolver.js';
-import type { TokenCategory } from '../../types/categories.js';
 import { getCategoryFromPath } from '../../types/categories.js';
 
 /** JSON output structure */
@@ -52,7 +51,8 @@ export function generateJSONBundle(
   const sortedPaths = [...resolved.keys()].sort();
 
   for (const path of sortedPaths) {
-    const value = resolved.get(path)!;
+    const value = resolved.get(path);
+    if (!value) continue;
     const category = getCategoryFromPath(path);
 
     if (!category) continue;

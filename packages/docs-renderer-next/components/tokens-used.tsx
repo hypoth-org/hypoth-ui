@@ -25,7 +25,7 @@ export function TokensUsed({ tokens }: TokensUsedProps) {
     if (!tokensByCategory.has(category)) {
       tokensByCategory.set(category, []);
     }
-    tokensByCategory.get(category)!.push(token);
+    tokensByCategory.get(category)?.push(token);
   }
 
   const categories = Array.from(tokensByCategory.keys()).sort();
@@ -44,7 +44,7 @@ export function TokensUsed({ tokens }: TokensUsedProps) {
               <Link href={`/tokens/${category}`}>{formatCategoryName(category)}</Link>
             </h3>
             <ul className="tokens-used-list">
-              {tokensByCategory.get(category)!.map((token) => (
+              {(tokensByCategory.get(category) ?? []).map((token) => (
                 <li key={token}>
                   <code className="token-path">{token}</code>
                   <code className="token-css-var">var(--{token.replace(/\./g, "-")})</code>

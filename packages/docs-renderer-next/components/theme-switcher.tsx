@@ -56,8 +56,8 @@ export function ThemeSwitcher({ brands = ["default", "acme"] }: ThemeSwitcherPro
 
   return (
     <div className="theme-switcher">
-      <div className="theme-switcher-section">
-        <label>Mode</label>
+      <fieldset className="theme-switcher-section">
+        <legend className="theme-switcher-label">Mode</legend>
         <div className="theme-switcher-buttons">
           <button
             type="button"
@@ -84,15 +84,15 @@ export function ThemeSwitcher({ brands = ["default", "acme"] }: ThemeSwitcherPro
             ◐ High Contrast
           </button>
         </div>
-      </div>
+      </fieldset>
 
       {brands.length > 1 && (
         <div className="theme-switcher-section">
-          <label>Brand</label>
+          <label htmlFor="brand-select">Brand</label>
           <select
+            id="brand-select"
             value={brand}
             onChange={(e) => handleBrandChange(e.target.value)}
-            aria-label="Select brand"
           >
             {brands.map((b) => (
               <option key={b} value={b}>

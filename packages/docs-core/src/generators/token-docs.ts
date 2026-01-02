@@ -113,12 +113,12 @@ export function generateTokenCategoryMDX(categoryDoc: TokenCategoryDoc): string 
   lines.push('## Usage');
   lines.push('');
   lines.push('```css');
-  lines.push(`.example {`);
+  lines.push('.example {');
   const firstToken = categoryDoc.tokens[0];
   if (firstToken) {
     lines.push(`  ${getCSSPropertyForCategory(categoryDoc.category)}: var(${firstToken.cssVariable});`);
   }
-  lines.push(`}`);
+  lines.push('}');
   lines.push('```');
   lines.push('');
 
@@ -147,7 +147,7 @@ export function generateAllTokenDocs(
 
     // Add usage info
     const usedBy = usageMap.get(token.path) || [];
-    tokensByCategory.get(category)!.push({ ...token, usedBy });
+    tokensByCategory.get(category)?.push({ ...token, usedBy });
   }
 
   // Generate MDX for each category

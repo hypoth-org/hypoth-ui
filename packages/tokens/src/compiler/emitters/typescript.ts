@@ -39,7 +39,7 @@ export function generateTypeScript(
     if (!tokensByCategory.has(category)) {
       tokensByCategory.set(category, []);
     }
-    tokensByCategory.get(category)!.push(token);
+    tokensByCategory.get(category)?.push(token);
   }
 
   // Generate category-specific types

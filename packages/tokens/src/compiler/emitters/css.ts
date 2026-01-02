@@ -104,6 +104,25 @@ function typographyToCSS(typography: TypographyValue): string {
 }
 
 /**
+ * Generate CSS lines for a set of resolved tokens
+ */
+function generateTokenLines(
+  resolved: Map<string, ResolvedValue>,
+  sortedPaths: string[],
+  indent = '  '
+): string[] {
+  const lines: string[] = [];
+  for (const path of sortedPaths) {
+    const value = resolved.get(path);
+    if (!value) continue;
+    const cssVar = tokenPathToCSS(path);
+    const cssValue = tokenValueToCSS(value.resolvedValue);
+    lines.push(`${indent}${cssVar}: ${cssValue};`);
+  }
+  return lines;
+}
+
+/**
  * Generate CSS custom properties from resolved tokens
  */
 export function generateCSS(
@@ -122,13 +141,7 @@ export function generateCSS(
 
   // Sort keys for deterministic output
   const sortedPaths = [...resolved.keys()].sort();
-
-  for (const path of sortedPaths) {
-    const value = resolved.get(path)!;
-    const cssVar = tokenPathToCSS(path);
-    const cssValue = tokenValueToCSS(value.resolvedValue);
-    lines.push(`  ${cssVar}: ${cssValue};`);
-  }
+  lines.push(...generateTokenLines(resolved, sortedPaths));
 
   lines.push('}');
 
@@ -158,13 +171,7 @@ export function generateBrandCSS(
   lines.push(`:root[data-brand="${brand}"] {`);
 
   const sortedPaths = [...resolved.keys()].sort();
-
-  for (const path of sortedPaths) {
-    const value = resolved.get(path)!;
-    const cssVar = tokenPathToCSS(path);
-    const cssValue = tokenValueToCSS(value.resolvedValue);
-    lines.push(`  ${cssVar}: ${cssValue};`);
-  }
+  lines.push(...generateTokenLines(resolved, sortedPaths));
 
   lines.push('}');
 
@@ -194,13 +201,7 @@ export function generateModeCSS(
   lines.push(`:root[data-mode="${mode}"] {`);
 
   const sortedPaths = [...resolved.keys()].sort();
-
-  for (const path of sortedPaths) {
-    const value = resolved.get(path)!;
-    const cssVar = tokenPathToCSS(path);
-    const cssValue = tokenValueToCSS(value.resolvedValue);
-    lines.push(`  ${cssVar}: ${cssValue};`);
-  }
+  lines.push(...generateTokenLines(resolved, sortedPaths));
 
   lines.push('}');
 
@@ -209,12 +210,7 @@ export function generateModeCSS(
     lines.push('');
     lines.push('@media (prefers-color-scheme: dark) {');
     lines.push('  :root:not([data-mode]) {');
-    for (const path of sortedPaths) {
-      const value = resolved.get(path)!;
-      const cssVar = tokenPathToCSS(path);
-      const cssValue = tokenValueToCSS(value.resolvedValue);
-      lines.push(`    ${cssVar}: ${cssValue};`);
-    }
+    lines.push(...generateTokenLines(resolved, sortedPaths, '    '));
     lines.push('  }');
     lines.push('}');
   }
@@ -224,12 +220,7 @@ export function generateModeCSS(
     lines.push('');
     lines.push('@media (prefers-contrast: more) {');
     lines.push('  :root:not([data-mode]) {');
-    for (const path of sortedPaths) {
-      const value = resolved.get(path)!;
-      const cssVar = tokenPathToCSS(path);
-      const cssValue = tokenValueToCSS(value.resolvedValue);
-      lines.push(`    ${cssVar}: ${cssValue};`);
-    }
+    lines.push(...generateTokenLines(resolved, sortedPaths, '    '));
     lines.push('  }');
     lines.push('}');
   }
@@ -239,12 +230,7 @@ export function generateModeCSS(
     lines.push('');
     lines.push('@media (prefers-reduced-motion: reduce) {');
     lines.push('  :root {');
-    for (const path of sortedPaths) {
-      const value = resolved.get(path)!;
-      const cssVar = tokenPathToCSS(path);
-      const cssValue = tokenValueToCSS(value.resolvedValue);
-      lines.push(`    ${cssVar}: ${cssValue};`);
-    }
+    lines.push(...generateTokenLines(resolved, sortedPaths, '    '));
     lines.push('  }');
     lines.push('}');
   }
@@ -276,13 +262,7 @@ export function generateBrandModeCSS(
   lines.push(`:root[data-brand="${brand}"][data-mode="${mode}"] {`);
 
   const sortedPaths = [...resolved.keys()].sort();
-
-  for (const path of sortedPaths) {
-    const value = resolved.get(path)!;
-    const cssVar = tokenPathToCSS(path);
-    const cssValue = tokenValueToCSS(value.resolvedValue);
-    lines.push(`  ${cssVar}: ${cssValue};`);
-  }
+  lines.push(...generateTokenLines(resolved, sortedPaths));
 
   lines.push('}');
 
