@@ -1,0 +1,651 @@
+---
+title: Behavior Utilities
+description: Framework-agnostic utilities for accessible component behaviors including focus management, keyboard navigation, and dismissable layers.
+category: development
+order: 10
+---
+
+# Behavior Utilities
+
+The `@ds/primitives-dom` package provides framework-agnostic behavior utilities for building accessible interactive components. These utilities implement common accessibility patterns from the WAI-ARIA Authoring Practices Guide.
+
+## Installation
+
+```bash
+pnpm add @ds/primitives-dom
+```
+
+## Overview
+
+| Utility | Purpose |
+|---------|---------|
+| `createFocusTrap` | Trap focus within a container (modals, dialogs) |
+| `createRovingFocus` | Arrow key navigation with roving tabindex |
+| `createDismissableLayer` | Escape key and outside click dismissal |
+| `createActivationHandler` | Enter/Space key activation |
+| `createArrowKeyHandler` | Arrow key navigation with RTL support |
+| `createTypeAhead` | Type-ahead search for lists and menus |
+
+---
+
+## Focus Trap
+
+Keeps focus within a container element, essential for modal dialogs and similar overlay components.
+
+### API Reference
+
+```typescript
+import { createFocusTrap } from "@ds/primitives-dom";
+
+interface FocusTrapOptions {
+  container: HTMLElement;
+  initialFocus?: HTMLElement | null;
+  returnFocus?: boolean | HTMLElement;
+  fallbackFocus?: HTMLElement;
+}
+
+interface FocusTrap {
+  activate: () => void;
+  deactivate: () => void;
+}
+
+function createFocusTrap(options: FocusTrapOptions): FocusTrap;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `container` | `HTMLElement` | required | The element that traps focus |
+| `initialFocus` | `HTMLElement \| null` | `null` | Element to focus when activated. If null, focuses first focusable element |
+| `returnFocus` | `boolean \| HTMLElement` | `true` | Where to return focus on deactivate. `true` returns to previously focused element |
+| `fallbackFocus` | `HTMLElement` | `undefined` | Element to focus if container has no focusable elements |
+
+### Usage Example
+
+```typescript
+import { createFocusTrap } from "@ds/primitives-dom";
+
+const modal = document.getElementById("modal");
+const closeButton = modal.querySelector(".close-button");
+
+const trap = createFocusTrap({
+  container: modal,
+  initialFocus: closeButton,
+  returnFocus: true,
+});
+
+// When opening modal
+function openModal() {
+  modal.hidden = false;
+  trap.activate();
+}
+
+// When closing modal
+function closeModal() {
+  trap.deactivate();
+  modal.hidden = true;
+}
+```
+
+### Return Focus to Specific Element
+
+```typescript
+const triggerButton = document.getElementById("trigger");
+
+const trap = createFocusTrap({
+  container: modal,
+  returnFocus: triggerButton, // Always return focus here
+});
+```
+
+### Fallback Focus for Empty Containers
+
+```typescript
+const emptyModal = document.getElementById("empty-modal");
+emptyModal.tabIndex = -1; // Make container focusable
+
+const trap = createFocusTrap({
+  container: emptyModal,
+  fallbackFocus: emptyModal,
+});
+```
+
+---
+
+## Roving Focus
+
+Implements the roving tabindex pattern for keyboard navigation in composite widgets like toolbars, tab lists, and menus.
+
+### API Reference
+
+```typescript
+import { createRovingFocus } from "@ds/primitives-dom";
+
+type Direction = "horizontal" | "vertical" | "both";
+
+interface RovingFocusOptions {
+  container: HTMLElement;
+  selector: string;
+  direction?: Direction;
+  loop?: boolean;
+  skipDisabled?: boolean;
+  onFocus?: (element: HTMLElement, index: number) => void;
+}
+
+interface RovingFocus {
+  setFocusedIndex: (index: number) => void;
+  getFocusedIndex: () => number;
+  destroy: () => void;
+}
+
+function createRovingFocus(options: RovingFocusOptions): RovingFocus;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `container` | `HTMLElement` | required | Container element for the focus group |
+| `selector` | `string` | required | CSS selector for focusable items |
+| `direction` | `Direction` | `"horizontal"` | Arrow key direction: horizontal, vertical, or both |
+| `loop` | `boolean` | `true` | Whether navigation wraps at boundaries |
+| `skipDisabled` | `boolean` | `true` | Skip items with `disabled` or `aria-disabled="true"` |
+| `onFocus` | `function` | `undefined` | Callback when focus moves to a new item |
+
+### Usage Example
+
+```typescript
+import { createRovingFocus } from "@ds/primitives-dom";
+
+const toolbar = document.getElementById("toolbar");
+
+const roving = createRovingFocus({
+  container: toolbar,
+  selector: '[role="button"]',
+  direction: "horizontal",
+  loop: true,
+  skipDisabled: true,
+  onFocus: (element, index) => {
+    console.log(`Focused item ${index}: ${element.textContent}`);
+  },
+});
+
+// Clean up when component unmounts
+roving.destroy();
+```
+
+### Vertical Navigation (Menu)
+
+```typescript
+const menu = document.getElementById("menu");
+
+const roving = createRovingFocus({
+  container: menu,
+  selector: '[role="menuitem"]',
+  direction: "vertical",
+});
+```
+
+### Grid Navigation (Both Directions)
+
+```typescript
+const grid = document.getElementById("grid");
+
+const roving = createRovingFocus({
+  container: grid,
+  selector: '[role="gridcell"]',
+  direction: "both",
+});
+```
+
+---
+
+## Dismissable Layer
+
+Handles Escape key and outside click dismissal with support for nested layer stacking (LIFO order).
+
+### API Reference
+
+```typescript
+import { createDismissableLayer } from "@ds/primitives-dom";
+
+type DismissReason = "escape" | "outside-click";
+
+interface DismissableLayerOptions {
+  container: HTMLElement;
+  excludeElements?: HTMLElement[];
+  onDismiss: (reason: DismissReason) => void;
+  closeOnEscape?: boolean;
+  closeOnOutsideClick?: boolean;
+}
+
+interface DismissableLayer {
+  activate: () => void;
+  deactivate: () => void;
+}
+
+function createDismissableLayer(options: DismissableLayerOptions): DismissableLayer;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `container` | `HTMLElement` | required | The layer container element |
+| `excludeElements` | `HTMLElement[]` | `[]` | Elements that should not trigger outside-click |
+| `onDismiss` | `function` | required | Callback when layer should be dismissed |
+| `closeOnEscape` | `boolean` | `true` | Whether Escape key dismisses the layer |
+| `closeOnOutsideClick` | `boolean` | `true` | Whether clicking outside dismisses the layer |
+
+### Usage Example
+
+```typescript
+import { createDismissableLayer } from "@ds/primitives-dom";
+
+const dropdown = document.getElementById("dropdown");
+const trigger = document.getElementById("dropdown-trigger");
+
+const layer = createDismissableLayer({
+  container: dropdown,
+  excludeElements: [trigger], // Don't dismiss when clicking trigger
+  onDismiss: (reason) => {
+    console.log(`Dismissed via: ${reason}`);
+    dropdown.hidden = true;
+    layer.deactivate();
+  },
+});
+
+// When opening dropdown
+function openDropdown() {
+  dropdown.hidden = false;
+  layer.activate();
+}
+```
+
+### Nested Layers (LIFO Dismissal)
+
+```typescript
+// Parent popover
+const parentLayer = createDismissableLayer({
+  container: parentPopover,
+  onDismiss: () => closeParent(),
+});
+
+// Nested submenu
+const childLayer = createDismissableLayer({
+  container: childMenu,
+  onDismiss: () => closeChild(),
+});
+
+parentLayer.activate();
+childLayer.activate();
+
+// Pressing Escape closes childLayer first, then parentLayer
+```
+
+---
+
+## Keyboard Activation Handler
+
+Creates handlers for Enter and Space key activation on custom interactive elements.
+
+### API Reference
+
+```typescript
+import { createActivationHandler } from "@ds/primitives-dom";
+
+interface ActivationOptions {
+  onActivate: (event: KeyboardEvent) => void;
+  keys?: ("Enter" | "Space")[];
+  preventDefault?: boolean | "Space";
+}
+
+function createActivationHandler(
+  options: ActivationOptions
+): (event: KeyboardEvent) => void;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `onActivate` | `function` | required | Callback when activation key is pressed |
+| `keys` | `array` | `["Enter", "Space"]` | Which keys trigger activation |
+| `preventDefault` | `boolean \| "Space"` | `"Space"` | When to prevent default. "Space" prevents scroll on Space only |
+
+### Usage Example
+
+```typescript
+import { createActivationHandler } from "@ds/primitives-dom";
+
+const customButton = document.getElementById("custom-button");
+
+const handler = createActivationHandler({
+  onActivate: (event) => {
+    console.log("Activated!");
+    customButton.click();
+  },
+  keys: ["Enter", "Space"],
+  preventDefault: "Space", // Prevent page scroll on Space
+});
+
+customButton.addEventListener("keydown", handler);
+```
+
+---
+
+## Arrow Key Handler
+
+Creates handlers for arrow key navigation with RTL support and logical direction mapping.
+
+### API Reference
+
+```typescript
+import { createArrowKeyHandler } from "@ds/primitives-dom";
+
+type Direction = "horizontal" | "vertical" | "both";
+type LogicalDirection = "next" | "previous" | "first" | "last";
+
+interface ArrowKeyOptions {
+  orientation: Direction;
+  rtl?: boolean;
+  onNavigate: (direction: LogicalDirection, event: KeyboardEvent) => void;
+}
+
+function createArrowKeyHandler(
+  options: ArrowKeyOptions
+): (event: KeyboardEvent) => void;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `orientation` | `Direction` | required | Which arrow keys to respond to |
+| `rtl` | `boolean` | `false` | Right-to-left mode (swaps Left/Right) |
+| `onNavigate` | `function` | required | Callback with logical direction |
+
+### Key Mapping
+
+| Physical Key | Horizontal (LTR) | Horizontal (RTL) | Vertical |
+|--------------|------------------|------------------|----------|
+| ArrowLeft | `previous` | `next` | - |
+| ArrowRight | `next` | `previous` | - |
+| ArrowUp | - | - | `previous` |
+| ArrowDown | - | - | `next` |
+| Home | `first` | `first` | `first` |
+| End | `last` | `last` | `last` |
+
+### Usage Example
+
+```typescript
+import { createArrowKeyHandler } from "@ds/primitives-dom";
+
+const handler = createArrowKeyHandler({
+  orientation: "horizontal",
+  rtl: document.dir === "rtl",
+  onNavigate: (direction, event) => {
+    switch (direction) {
+      case "next":
+        focusNextItem();
+        break;
+      case "previous":
+        focusPreviousItem();
+        break;
+      case "first":
+        focusFirstItem();
+        break;
+      case "last":
+        focusLastItem();
+        break;
+    }
+  },
+});
+
+container.addEventListener("keydown", handler);
+```
+
+---
+
+## Type-Ahead Search
+
+Provides type-ahead functionality for lists and menus, accumulating typed characters to find matching items.
+
+### API Reference
+
+```typescript
+import { createTypeAhead } from "@ds/primitives-dom";
+
+interface TypeAheadOptions {
+  items: () => HTMLElement[];
+  getText: (item: HTMLElement) => string;
+  onMatch: (item: HTMLElement, index: number) => void;
+  timeout?: number;
+}
+
+interface TypeAhead {
+  handleKeyDown: (event: KeyboardEvent) => void;
+  reset: () => void;
+}
+
+function createTypeAhead(options: TypeAheadOptions): TypeAhead;
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `items` | `function` | required | Function returning current list of items |
+| `getText` | `function` | required | Extract text content from an item |
+| `onMatch` | `function` | required | Callback when a matching item is found |
+| `timeout` | `number` | `500` | Milliseconds before buffer clears |
+
+### Usage Example
+
+```typescript
+import { createTypeAhead } from "@ds/primitives-dom";
+
+const listbox = document.getElementById("listbox");
+
+const typeAhead = createTypeAhead({
+  items: () => Array.from(listbox.querySelectorAll('[role="option"]')),
+  getText: (item) => item.textContent?.trim() ?? "",
+  onMatch: (item, index) => {
+    item.focus();
+    console.log(`Matched: ${item.textContent}`);
+  },
+  timeout: 500,
+});
+
+listbox.addEventListener("keydown", typeAhead.handleKeyDown);
+
+// Reset buffer when listbox closes
+function closeListbox() {
+  typeAhead.reset();
+  listbox.hidden = true;
+}
+```
+
+---
+
+## Lit Component Integration
+
+These utilities work seamlessly with Lit components. Here's how to integrate them:
+
+### Focus Trap in Lit
+
+```typescript
+import { LitElement, html } from "lit";
+import { createFocusTrap } from "@ds/primitives-dom";
+
+class MyModal extends LitElement {
+  private trap?: ReturnType<typeof createFocusTrap>;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.trap = createFocusTrap({
+      container: this,
+      returnFocus: true,
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.trap?.deactivate();
+  }
+
+  open() {
+    this.hidden = false;
+    this.trap?.activate();
+  }
+
+  close() {
+    this.trap?.deactivate();
+    this.hidden = true;
+  }
+}
+```
+
+### Roving Focus in Lit
+
+```typescript
+import { LitElement, html } from "lit";
+import { createRovingFocus } from "@ds/primitives-dom";
+
+class MyToolbar extends LitElement {
+  private roving?: ReturnType<typeof createRovingFocus>;
+
+  firstUpdated() {
+    this.roving = createRovingFocus({
+      container: this,
+      selector: "button",
+      direction: "horizontal",
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.roving?.destroy();
+  }
+
+  render() {
+    return html`
+      <button>Cut</button>
+      <button>Copy</button>
+      <button>Paste</button>
+    `;
+  }
+}
+```
+
+### Dismissable Layer in Lit
+
+```typescript
+import { LitElement, html } from "lit";
+import { createDismissableLayer } from "@ds/primitives-dom";
+
+class MyDropdown extends LitElement {
+  private layer?: ReturnType<typeof createDismissableLayer>;
+  private trigger?: HTMLElement;
+
+  firstUpdated() {
+    this.trigger = this.renderRoot.querySelector(".trigger") as HTMLElement;
+
+    this.layer = createDismissableLayer({
+      container: this,
+      excludeElements: this.trigger ? [this.trigger] : [],
+      onDismiss: () => this.close(),
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.layer?.deactivate();
+  }
+
+  open() {
+    this.setAttribute("open", "");
+    this.layer?.activate();
+  }
+
+  close() {
+    this.removeAttribute("open");
+    this.layer?.deactivate();
+  }
+}
+```
+
+---
+
+## Light DOM Considerations
+
+The design system uses Light DOM web components for better CSS integration and accessibility. When using behavior utilities with Light DOM components:
+
+### Focus Management
+
+Light DOM components render their children directly in the document, so focus management works naturally:
+
+```typescript
+// Light DOM - focus works as expected
+const trap = createFocusTrap({
+  container: myLightDomComponent, // Direct children are focusable
+});
+```
+
+### Event Handling
+
+Events bubble through Light DOM without retargeting:
+
+```typescript
+// Events bubble normally in Light DOM
+container.addEventListener("keydown", handler);
+// Child events are received with original target
+```
+
+### CSS Selectors
+
+Light DOM allows standard CSS selectors:
+
+```typescript
+const roving = createRovingFocus({
+  container: toolbar,
+  selector: "button, [role='button']", // Standard selectors work
+});
+```
+
+### Comparison with Shadow DOM
+
+| Aspect | Light DOM | Shadow DOM |
+|--------|-----------|------------|
+| Focus traversal | Natural | Requires delegation |
+| CSS selectors | Standard | Scoped, may need `::slotted` |
+| Event bubbling | Normal | Retargeted at shadow root |
+| ARIA relationships | Direct ID references | Requires workarounds |
+
+---
+
+## Constants
+
+The package exports useful constants:
+
+```typescript
+import { FOCUSABLE_SELECTOR, DEFAULT_TYPEAHEAD_TIMEOUT } from "@ds/primitives-dom";
+
+// Standard focusable elements selector
+console.log(FOCUSABLE_SELECTOR);
+// 'a[href], button:not([disabled]), input:not([disabled]), ...'
+
+// Default type-ahead timeout (500ms)
+console.log(DEFAULT_TYPEAHEAD_TIMEOUT); // 500
+```
+
+---
+
+## Best Practices
+
+1. **Always clean up**: Call `destroy()` or `deactivate()` when components unmount
+2. **Use semantic HTML**: These utilities enhance, not replace, proper HTML structure
+3. **Test with screen readers**: Verify announcements and focus behavior
+4. **Consider RTL**: Use the `rtl` option for arrow key handlers in internationalized apps
+5. **Combine utilities**: Use focus trap + dismissable layer for modals

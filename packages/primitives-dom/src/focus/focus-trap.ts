@@ -3,19 +3,23 @@
  * Keeps focus within a container element.
  */
 
-const FOCUSABLE_SELECTOR = [
-  "a[href]",
-  "button:not([disabled])",
-  "input:not([disabled])",
-  "select:not([disabled])",
-  "textarea:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])',
-].join(",");
+import { FOCUSABLE_SELECTOR } from "../constants.js";
 
 export interface FocusTrapOptions {
   container: HTMLElement;
   initialFocus?: HTMLElement | null;
-  returnFocus?: boolean;
+  /**
+   * Where to return focus when trap deactivates.
+   * - `true`: Return to previously focused element
+   * - `false`: Don't manage return focus
+   * - `HTMLElement`: Focus specific element
+   */
+  returnFocus?: boolean | HTMLElement;
+  /**
+   * Element to focus if container has no focusable elements.
+   * Container should be focusable (tabindex="-1") for this to work.
+   */
+  fallbackFocus?: HTMLElement;
 }
 
 export interface FocusTrap {
@@ -24,7 +28,7 @@ export interface FocusTrap {
 }
 
 export function createFocusTrap(options: FocusTrapOptions): FocusTrap {
-  const { container, initialFocus, returnFocus = true } = options;
+  const { container, initialFocus, returnFocus = true, fallbackFocus } = options;
   let previouslyFocused: Element | null = null;
   let isActive = false;
 
@@ -64,8 +68,9 @@ export function createFocusTrap(options: FocusTrapOptions): FocusTrap {
 
     document.addEventListener("keydown", handleKeyDown);
 
-    // Focus initial element or first focusable
-    const target = initialFocus ?? getFocusableElements()[0];
+    // Focus initial element, first focusable, or fallback
+    const focusables = getFocusableElements();
+    const target = initialFocus ?? focusables[0] ?? fallbackFocus;
     target?.focus();
   }
 
@@ -75,8 +80,12 @@ export function createFocusTrap(options: FocusTrapOptions): FocusTrap {
     isActive = false;
     document.removeEventListener("keydown", handleKeyDown);
 
-    // Return focus to previously focused element
-    if (returnFocus && previouslyFocused instanceof HTMLElement) {
+    // Return focus based on returnFocus option
+    if (returnFocus instanceof HTMLElement) {
+      // Focus specific element
+      returnFocus.focus();
+    } else if (returnFocus && previouslyFocused instanceof HTMLElement) {
+      // Return to previously focused element
       previouslyFocused.focus();
     }
     previouslyFocused = null;

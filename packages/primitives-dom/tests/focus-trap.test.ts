@@ -129,6 +129,59 @@ describe("createFocusTrap", () => {
     document.body.removeChild(outsideButton);
   });
 
+  it("should return focus to specific HTMLElement when returnFocus is an element", () => {
+    const targetButton = document.createElement("button");
+    targetButton.textContent = "Target";
+    document.body.appendChild(targetButton);
+
+    const otherButton = document.createElement("button");
+    otherButton.textContent = "Other";
+    document.body.appendChild(otherButton);
+    otherButton.focus();
+
+    const trap = createFocusTrap({ container, returnFocus: targetButton });
+    trap.activate();
+
+    expect(document.activeElement).toBe(button1);
+
+    trap.deactivate();
+
+    expect(document.activeElement).toBe(targetButton);
+
+    document.body.removeChild(targetButton);
+    document.body.removeChild(otherButton);
+  });
+
+  it("should use fallbackFocus when container has no focusable elements", () => {
+    const emptyContainer = document.createElement("div");
+    emptyContainer.tabIndex = -1;
+    document.body.appendChild(emptyContainer);
+
+    const trap = createFocusTrap({
+      container: emptyContainer,
+      fallbackFocus: emptyContainer,
+    });
+
+    trap.activate();
+
+    expect(document.activeElement).toBe(emptyContainer);
+
+    trap.deactivate();
+    document.body.removeChild(emptyContainer);
+  });
+
+  it("should not throw when container has no focusables and no fallbackFocus", () => {
+    const emptyContainer = document.createElement("div");
+    document.body.appendChild(emptyContainer);
+
+    const trap = createFocusTrap({ container: emptyContainer });
+
+    expect(() => trap.activate()).not.toThrow();
+
+    trap.deactivate();
+    document.body.removeChild(emptyContainer);
+  });
+
   it("should skip disabled elements", () => {
     button1.disabled = true;
 
