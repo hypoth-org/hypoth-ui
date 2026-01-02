@@ -123,6 +123,13 @@ importers:
         version: 5.9.3
 
   packages/css:
+    dependencies:
+      '@ds/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      '@ds/wc':
+        specifier: workspace:*
+        version: link:../wc
     devDependencies:
       cssnano:
         specifier: ^6.0.0

@@ -5,9 +5,19 @@
   "description": "CSS layers and base styles for the design system",
   "exports": {
     ".": "./dist/index.css",
+    "./layers/reset": "./src/layers/reset.css",
+    "./layers/tokens": "./src/layers/tokens.css",
+    "./layers/base": "./src/layers/base.css",
+    "./layers/components": "./src/layers/components.css",
+    "./layers/utilities": "./src/layers/utilities.css",
+    "./layers/overrides": "./src/layers/overrides.css",
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": ["dist", "src/layers"],
+  "dependencies": {
+    "@ds/tokens": "workspace:*",
+    "@ds/wc": "workspace:*"
+  },
   "scripts": {
     "build": "postcss src/index.css -o dist/index.css",
     "clean": "rm -rf dist",

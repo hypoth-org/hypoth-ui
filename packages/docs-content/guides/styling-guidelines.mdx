@@ -1,0 +1,371 @@
+---
+title: Styling Guidelines
+description: Understanding CSS layers, customization patterns, and override strategies for the design system.
+category: customization
+order: 2
+---
+
+# Styling Guidelines
+
+The design system uses native CSS Cascade Layers (`@layer`) to provide predictable style precedence without relying on specificity hacks or `!important` declarations.
+
+## CSS Layer Architecture
+
+Styles are organized into six layers with increasing precedence:
+
+```
+@layer reset, tokens, base, components, utilities, overrides;
+
+↓ Lower precedence
+  reset        → CSS reset (normalize browser defaults)
+  tokens       → Design token CSS custom properties
+  base         → Semantic HTML element styles
+  components   → Component-specific styles (.ds-button, etc.)
+  utilities    → Utility classes (.ds-flex, .ds-m-4, etc.)
+  overrides    → Consumer and tenant customizations
+↑ Higher precedence
+```
+
+### Layer Purpose
+
+| Layer | Purpose | Examples |
+|-------|---------|----------|
+| `reset` | Normalize browser defaults | Box-sizing, margin removal |
+| `tokens` | Design token CSS variables | `--ds-color-primary-default` |
+| `base` | Semantic HTML styling | `h1`, `p`, `a`, `code` |
+| `components` | Component styles | `.ds-button`, `.ds-input` |
+| `utilities` | Utility classes | `.ds-flex`, `.ds-m-4` |
+| `overrides` | Customizations | Tenant themes, app overrides |
+
+## Using the CSS Package
+
+### Basic Import
+
+Import the complete design system CSS:
+
+```css
+/* Your app's main CSS file */
+@import "@ds/css";
+```
+
+This single import includes all layers in the correct order with reset, tokens, base styles, components, and utilities ready to use.
+
+### Individual Layer Imports
+
+For advanced use cases, import specific layers:
+
+```css
+/* Import only what you need */
+@import "@ds/css/layers/reset" layer(reset);
+@import "@ds/css/layers/tokens" layer(tokens);
+@import "@ds/css/layers/base" layer(base);
+/* Skip components if using Web Components directly */
+@import "@ds/css/layers/utilities" layer(utilities);
+```
+
+## Override Patterns
+
+### Pattern 1: Simple Token Override
+
+Override design tokens to change colors, spacing, or typography globally:
+
+```css
+@import "@ds/css";
+
+@layer overrides {
+  :root {
+    /* Change the primary brand color */
+    --ds-color-primary-default: #7c3aed;
+    --ds-color-primary-hover: #6d28d9;
+    --ds-color-primary-active: #5b21b6;
+
+    /* Adjust border radius */
+    --ds-radius-md: 8px;
+    --ds-radius-lg: 12px;
+  }
+}
+```
+
+### Pattern 2: Component Override
+
+Override specific component styles without affecting other components:
+
+```css
+@import "@ds/css";
+
+@layer overrides {
+  /* Make all buttons uppercase */
+  .ds-button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Only affect primary variant */
+  .ds-button--primary {
+    border-radius: 0;
+  }
+}
+```
+
+### Pattern 3: Conditional Override
+
+Apply overrides based on data attributes or context:
+
+```css
+@import "@ds/css";
+
+@layer overrides {
+  /* Apply only in a specific context */
+  .marketing-page .ds-button {
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+  }
+
+  /* Apply based on data attribute */
+  [data-brand="enterprise"] .ds-button {
+    border-width: 2px;
+  }
+}
+```
+
+## Tenant Theming
+
+Create white-label variations by providing tenant-specific override stylesheets.
+
+### Tenant Stylesheet Structure
+
+```css
+/* tenant-acme.css */
+@layer overrides {
+  :root {
+    /* Acme brand colors */
+    --ds-color-primary-default: #ff5500;
+    --ds-color-primary-hover: #e64d00;
+    --ds-color-primary-active: #cc4400;
+    --ds-color-primary-foreground: #ffffff;
+
+    /* Acme secondary color */
+    --ds-color-interactive: #7c3aed;
+
+    /* Acme prefers sharp corners */
+    --ds-radius-sm: 0;
+    --ds-radius-md: 2px;
+    --ds-radius-lg: 4px;
+  }
+
+  /* Component-specific overrides */
+  .ds-button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--ds-font-weight-bold);
+  }
+
+  .ds-button--primary {
+    border-radius: 0;
+  }
+}
+```
+
+### Loading Tenant Styles
+
+#### Static Loading
+
+Load tenant styles after the base CSS:
+
+```html
+<link rel="stylesheet" href="@ds/css">
+<link rel="stylesheet" href="/themes/tenant-acme.css">
+```
+
+#### Dynamic Loading
+
+Switch themes at runtime:
+
+```js
+function loadTenantTheme(tenantId) {
+  // Remove existing tenant stylesheet
+  const existing = document.getElementById("tenant-stylesheet");
+  if (existing) existing.remove();
+
+  if (tenantId !== "default") {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `/themes/tenant-${tenantId}.css`;
+    link.id = "tenant-stylesheet";
+    document.head.appendChild(link);
+  }
+}
+```
+
+## Dark Mode Customization
+
+### Default Dark Mode
+
+The design system automatically supports dark mode via the `data-mode` attribute:
+
+```html
+<html data-mode="dark">
+  <!-- Dark mode active -->
+</html>
+```
+
+### System Preference Detection
+
+Detect and respect user preference:
+
+```js
+function initTheme() {
+  const stored = localStorage.getItem("ds-mode");
+
+  if (stored) {
+    document.documentElement.dataset.mode = stored;
+    return;
+  }
+
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.dataset.mode = "dark";
+  }
+}
+
+// Run before first paint
+initTheme();
+
+// Listen for system preference changes
+window.matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", (e) => {
+    if (!localStorage.getItem("ds-mode")) {
+      document.documentElement.dataset.mode = e.matches ? "dark" : "light";
+    }
+  });
+```
+
+### Tenant Dark Mode Overrides
+
+Customize dark mode colors for your tenant:
+
+```css
+/* tenant-acme.css */
+@layer overrides {
+  /* Light mode overrides */
+  :root {
+    --ds-color-primary-default: #ff5500;
+  }
+
+  /* Dark mode overrides */
+  :root[data-mode="dark"] {
+    --ds-color-primary-default: #ff7733;
+    --ds-color-primary-hover: #ff8844;
+    --ds-color-background-subtle: #1a1a1a;
+  }
+
+  /* High contrast overrides */
+  :root[data-mode="high-contrast"] {
+    --ds-color-primary-default: #ff3300;
+    --ds-color-border-default: #000000;
+  }
+}
+```
+
+## Layer Cascade Explained
+
+Understanding how CSS layers resolve conflicts:
+
+```
+                    Layer Order (increasing precedence)
+┌─────────────────────────────────────────────────────────────┐
+│  reset → tokens → base → components → utilities → overrides │
+└─────────────────────────────────────────────────────────────┘
+                                                           ↑
+                                            Your overrides win
+
+Example: Button background color resolution
+
+1. reset:      (no button styles)
+2. tokens:     --ds-color-primary-default: #0066cc
+3. base:       (no button styles)
+4. components: .ds-button { background: var(--ds-color-primary-default) }
+5. utilities:  (no button background utilities)
+6. overrides:  .ds-button { background: #ff5500 } ← WINS!
+```
+
+### Important Rules
+
+1. **Later layers always win** - A rule in `overrides` beats any rule in `components` regardless of selector specificity
+2. **No `!important` needed** - Layers handle precedence naturally
+3. **Specificity still matters within a layer** - `.parent .ds-button` beats `.ds-button` in the same layer
+4. **Unlayered styles beat all layers** - Styles not in any layer have highest precedence (avoid this)
+
+## Utility Classes Reference
+
+The design system includes minimal, token-based utility classes:
+
+### Spacing
+
+```css
+/* Margin */
+.ds-m-0   { margin: 0; }
+.ds-m-1   { margin: var(--ds-spacing-xs); }
+.ds-m-2   { margin: var(--ds-spacing-sm); }
+.ds-m-4   { margin: var(--ds-spacing-md); }
+.ds-m-6   { margin: var(--ds-spacing-lg); }
+.ds-m-8   { margin: var(--ds-spacing-xl); }
+
+/* Directional: t=top, r=right, b=bottom, l=left, x=horizontal, y=vertical */
+.ds-mt-4  { margin-top: var(--ds-spacing-md); }
+.ds-mx-4  { margin-left: var(--ds-spacing-md); margin-right: var(--ds-spacing-md); }
+.ds-py-2  { padding-top: var(--ds-spacing-sm); padding-bottom: var(--ds-spacing-sm); }
+```
+
+### Display
+
+```css
+.ds-block   { display: block; }
+.ds-flex    { display: flex; }
+.ds-grid    { display: grid; }
+.ds-hidden  { display: none; }
+```
+
+### Text
+
+```css
+.ds-text-left    { text-align: left; }
+.ds-text-center  { text-align: center; }
+.ds-text-right   { text-align: right; }
+```
+
+### Colors
+
+```css
+.ds-text-primary { color: var(--ds-color-foreground-default); }
+.ds-text-muted   { color: var(--ds-color-foreground-muted); }
+.ds-bg-subtle    { background: var(--ds-color-background-subtle); }
+.ds-bg-muted     { background: var(--ds-color-background-muted); }
+```
+
+## Best Practices
+
+1. **Always use `@layer overrides`** - Place your customizations in the overrides layer
+2. **Override tokens first** - Change token values before adding component overrides
+3. **Keep specificity low** - Use simple selectors like `.ds-button` over `.wrapper .container .ds-button`
+4. **Test all modes** - Verify overrides work in light, dark, and high-contrast modes
+5. **Avoid unlayered styles** - Don't write CSS outside of layers when working with the design system
+6. **Use tenant stylesheets** - For multi-tenant apps, keep tenant customizations in separate files
+
+## Troubleshooting
+
+### My overrides aren't applying
+
+1. **Check layer wrapper** - Ensure your CSS is inside `@layer overrides { }`
+2. **Check import order** - Your stylesheet must load after `@ds/css`
+3. **Check selector** - Verify you're targeting the correct class name
+
+### Styles are inconsistent between environments
+
+1. **Check CSS bundler** - Ensure PostCSS is configured with `postcss-import`
+2. **Check layer support** - CSS layers require Chrome 99+, Firefox 97+, Safari 15.4+
+
+### Components look different in docs vs production
+
+1. **Check layer imports** - Docs site wraps its styles in `@layer overrides`
+2. **Check specificity** - Docs styles only target docs-specific classes
+3. **Check token resolution** - Verify tokens are loading correctly

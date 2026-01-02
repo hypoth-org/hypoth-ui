@@ -1,7 +1,7 @@
-import "@ds/tokens/css";
 import "@ds/css";
 import type { ReactNode } from "react";
 import { DsLoader } from "../components/ds-loader";
+import { BrandSwitcher } from "../components/brand-switcher";
 
 export const metadata = {
   title: "DS Demo",
@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <DsLoader />
         {children}
+        <BrandSwitcher />
       </body>
     </html>
   );
