@@ -53,6 +53,11 @@ let editionConfigValidator: ValidateFunction<EditionConfig> | null = null;
 export function getManifestValidator(): ValidateFunction<ContractManifest> {
   if (!manifestValidator) {
     const ajv = getAjv();
+    // Add referenced schema first
+    const tokensUsedSchema = loadSchema("tokens-used.schema.json");
+    if (!ajv.getSchema("https://hypoth-ui.dev/schemas/tokens-used.schema.json")) {
+      ajv.addSchema(tokensUsedSchema);
+    }
     const schema = loadSchema("component-manifest.schema.json");
     manifestValidator = ajv.compile<ContractManifest>(schema);
   }

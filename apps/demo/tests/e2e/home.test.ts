@@ -52,7 +52,8 @@ test.describe("Demo App Home Page", () => {
     // Check that token CSS variables are defined
     const hasTokens = await page.evaluate(() => {
       const style = getComputedStyle(document.documentElement);
-      const primaryColor = style.getPropertyValue("--ds-color-primary-default");
+      // Check for DTCG token format (no prefix, semantic names)
+      const primaryColor = style.getPropertyValue("--color-primary");
       return primaryColor !== "";
     });
 

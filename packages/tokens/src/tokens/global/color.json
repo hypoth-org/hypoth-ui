@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "color": {
+    "$type": "color",
+    "$description": "Global color tokens",
+    "primary": {
+      "$value": "#0066cc",
+      "$description": "Primary brand color"
+    },
+    "secondary": {
+      "$value": "#6b7280",
+      "$description": "Secondary color for less emphasis"
+    },
+    "background": {
+      "surface": {
+        "$value": "#ffffff",
+        "$description": "Main surface background"
+      },
+      "elevated": {
+        "$value": "#f9fafb",
+        "$description": "Elevated surface background"
+      },
+      "subtle": {
+        "$value": "#f3f4f6",
+        "$description": "Subtle background for sections"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "#111827",
+        "$description": "Primary text color"
+      },
+      "secondary": {
+        "$value": "#6b7280",
+        "$description": "Secondary text color"
+      },
+      "inverse": {
+        "$value": "#ffffff",
+        "$description": "Text on dark backgrounds"
+      },
+      "disabled": {
+        "$value": "#9ca3af",
+        "$description": "Disabled text color"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "#e5e7eb",
+        "$description": "Default border color"
+      },
+      "strong": {
+        "$value": "#d1d5db",
+        "$description": "Strong border color"
+      },
+      "focus": {
+        "$value": "{color.primary}",
+        "$description": "Focus ring color"
+      }
+    },
+    "interactive": {
+      "$value": "{color.primary}",
+      "$description": "Interactive elements color"
+    },
+    "success": {
+      "$value": "#10b981",
+      "$description": "Success state color"
+    },
+    "warning": {
+      "$value": "#f59e0b",
+      "$description": "Warning state color"
+    },
+    "error": {
+      "$value": "#ef4444",
+      "$description": "Error state color"
+    }
+  }
+}

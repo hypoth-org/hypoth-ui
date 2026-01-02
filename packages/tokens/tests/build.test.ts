@@ -12,105 +12,196 @@ describe("Token Build", () => {
       expect(existsSync(cssPath)).toBe(true);
     });
 
+    it("should contain @layer tokens declaration", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain("@layer tokens");
+    });
+
     it("should contain :root selector with CSS variables", () => {
       const css = readFileSync(cssPath, "utf-8");
       expect(css).toContain(":root {");
-      expect(css).toContain("--ds-");
+      expect(css).toContain("--color-primary");
     });
 
-    it("should contain primitive color tokens", () => {
+    it("should contain color tokens", () => {
       const css = readFileSync(cssPath, "utf-8");
-      expect(css).toContain("--ds-color-primitives-gray-500");
-      expect(css).toContain("--ds-color-primitives-blue-500");
-      expect(css).toContain("--ds-color-primitives-red-500");
-      expect(css).toContain("--ds-color-primitives-green-500");
+      expect(css).toContain("--color-primary");
+      expect(css).toContain("--color-secondary");
+      expect(css).toContain("--color-background-surface");
+      expect(css).toContain("--color-text-primary");
+      expect(css).toContain("--color-error");
+      expect(css).toContain("--color-success");
     });
 
     it("should contain spacing tokens", () => {
       const css = readFileSync(cssPath, "utf-8");
-      expect(css).toContain("--ds-spacing-primitives-1");
-      expect(css).toContain("--ds-spacing-primitives-2");
-      expect(css).toContain("--ds-spacing-primitives-4");
-      expect(css).toContain("--ds-spacing-primitives-8");
-      expect(css).toContain("--ds-spacing-primitives-16");
+      expect(css).toContain("--spacing-xs");
+      expect(css).toContain("--spacing-sm");
+      expect(css).toContain("--spacing-md");
+      expect(css).toContain("--spacing-lg");
+      expect(css).toContain("--spacing-xl");
     });
 
     it("should contain typography tokens", () => {
       const css = readFileSync(cssPath, "utf-8");
-      expect(css).toContain("--ds-font-family");
-      expect(css).toContain("--ds-font-size");
-      expect(css).toContain("--ds-font-weight");
-      expect(css).toContain("--ds-font-lineHeight");
+      expect(css).toContain("--typography-body");
+      expect(css).toContain("--typography-heading-h1");
+      expect(css).toContain("--typography-label");
     });
 
-    it("should contain semantic color tokens", () => {
+    it("should contain border tokens", () => {
       const css = readFileSync(cssPath, "utf-8");
-      expect(css).toContain("--ds-color-background");
-      expect(css).toContain("--ds-color-foreground");
-      expect(css).toContain("--ds-color-primary");
-      expect(css).toContain("--ds-color-border");
+      expect(css).toContain("--border-default");
+      expect(css).toContain("--border-focus");
+    });
+
+    it("should contain shadow tokens", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain("--shadow-sm");
+      expect(css).toContain("--shadow-md");
+      expect(css).toContain("--shadow-lg");
+    });
+
+    it("should contain motion tokens", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain("--motion-duration-fast");
+      expect(css).toContain("--motion-duration-normal");
+      expect(css).toContain("--motion-easing-ease");
+    });
+
+    it("should contain radius tokens", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain("--radius-sm");
+      expect(css).toContain("--radius-md");
+      expect(css).toContain("--radius-full");
     });
   });
 
   describe("Dark Mode Output", () => {
-    const darkCssPath = join(distPath, "css/dark.css");
+    const cssPath = join(distPath, "css/tokens.css");
 
-    it("should generate dark.css file", () => {
-      expect(existsSync(darkCssPath)).toBe(true);
+    it("should contain dark mode selector in combined tokens.css", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain('[data-mode="dark"]');
     });
 
     it("should contain prefers-color-scheme media query", () => {
-      const css = readFileSync(darkCssPath, "utf-8");
+      const css = readFileSync(cssPath, "utf-8");
       expect(css).toContain("@media (prefers-color-scheme: dark)");
-    });
-
-    it("should contain data-theme attribute selector", () => {
-      const css = readFileSync(darkCssPath, "utf-8");
-      expect(css).toContain('[data-theme="dark"]');
     });
   });
 
   describe("High Contrast Mode Output", () => {
-    const highContrastPath = join(distPath, "css/high-contrast.css");
+    const cssPath = join(distPath, "css/tokens.css");
 
-    it("should generate high-contrast.css file", () => {
-      expect(existsSync(highContrastPath)).toBe(true);
+    it("should contain high-contrast mode selector", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain('[data-mode="high-contrast"]');
     });
 
     it("should contain prefers-contrast media query", () => {
-      const css = readFileSync(highContrastPath, "utf-8");
+      const css = readFileSync(cssPath, "utf-8");
       expect(css).toContain("@media (prefers-contrast: more)");
     });
+  });
 
-    it("should contain data-theme attribute selector", () => {
-      const css = readFileSync(highContrastPath, "utf-8");
-      expect(css).toContain('[data-theme="high-contrast"]');
+  describe("Reduced Motion Mode Output", () => {
+    const cssPath = join(distPath, "css/tokens.css");
+
+    it("should contain reduced-motion mode selector", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain('[data-mode="reduced-motion"]');
+    });
+
+    it("should contain prefers-reduced-motion media query", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain("@media (prefers-reduced-motion: reduce)");
+    });
+  });
+
+  describe("Brand Output", () => {
+    const cssPath = join(distPath, "css/tokens.css");
+
+    it("should contain brand selectors", () => {
+      const css = readFileSync(cssPath, "utf-8");
+      expect(css).toContain('[data-brand="default"]');
+      expect(css).toContain('[data-brand="acme"]');
     });
   });
 
   describe("TypeScript Output", () => {
-    const tsPath = join(distPath, "ts/tokens.ts");
+    const tsPath = join(distPath, "ts/index.ts");
 
-    it("should generate tokens.ts file", () => {
+    it("should generate index.ts file", () => {
       expect(existsSync(tsPath)).toBe(true);
     });
 
-    it("should export tokens constant", () => {
+    it("should export token path types", () => {
       const ts = readFileSync(tsPath, "utf-8");
-      expect(ts).toContain("export const tokens =");
-      expect(ts).toContain("as const");
+      expect(ts).toContain("export type ColorTokenPath");
+      expect(ts).toContain("export type SpacingTokenPath");
+      expect(ts).toContain("export type TypographyTokenPath");
     });
 
-    it("should export Tokens type", () => {
+    it("should export combined TokenPath type", () => {
       const ts = readFileSync(tsPath, "utf-8");
-      expect(ts).toContain("export type Tokens = typeof tokens");
+      expect(ts).toContain("export type TokenPath");
     });
 
-    it("should contain token structure", () => {
+    it("should export TokenCategory type", () => {
       const ts = readFileSync(tsPath, "utf-8");
-      expect(ts).toContain('"color"');
-      expect(ts).toContain('"spacing"');
-      expect(ts).toContain('"font"');
+      expect(ts).toContain("export type TokenCategory");
+    });
+
+    it("should export tokenVar helper function", () => {
+      const ts = readFileSync(tsPath, "utf-8");
+      expect(ts).toContain("export function tokenVar");
+    });
+
+    it("should export tokenVarWithFallback helper function", () => {
+      const ts = readFileSync(tsPath, "utf-8");
+      expect(ts).toContain("export function tokenVarWithFallback");
+    });
+
+    it("should contain token paths as union members", () => {
+      const ts = readFileSync(tsPath, "utf-8");
+      expect(ts).toContain("'color.primary'");
+      expect(ts).toContain("'color.background.surface'");
+      expect(ts).toContain("'spacing.md'");
+      expect(ts).toContain("'typography.body'");
+    });
+  });
+
+  describe("JSON Output", () => {
+    const jsonPath = join(distPath, "json/tokens.json");
+
+    it("should generate tokens.json file", () => {
+      expect(existsSync(jsonPath)).toBe(true);
+    });
+
+    it("should contain valid JSON structure", () => {
+      const json = readFileSync(jsonPath, "utf-8");
+      const parsed = JSON.parse(json);
+      expect(parsed).toHaveProperty("$schema");
+      expect(parsed).toHaveProperty("version");
+      expect(parsed).toHaveProperty("generatedAt");
+      expect(parsed).toHaveProperty("categories");
+    });
+
+    it("should contain token categories", () => {
+      const json = readFileSync(jsonPath, "utf-8");
+      const parsed = JSON.parse(json);
+      expect(parsed.categories).toHaveProperty("color");
+      expect(parsed.categories).toHaveProperty("spacing");
+      expect(parsed.categories).toHaveProperty("typography");
+    });
+  });
+
+  describe("Runtime Output", () => {
+    const runtimePath = join(distPath, "ts/runtime/index.ts");
+
+    it("should generate runtime/index.ts file", () => {
+      expect(existsSync(runtimePath)).toBe(true);
     });
   });
 });
@@ -131,15 +222,31 @@ describe("Token Values", () => {
     const cssPath = join(distPath, "css/tokens.css");
     const css = readFileSync(cssPath, "utf-8");
 
-    // Spacing should use rem units (primitives use numeric scale)
-    expect(css).toMatch(/--ds-spacing-primitives-\d+:\s*[\d.]+rem/);
+    // Spacing should use rem units
+    expect(css).toMatch(/--spacing-\w+:\s*[\d.]+rem/);
   });
 
-  it("should have valid font-size values with units", () => {
+  it("should have valid radius values", () => {
     const cssPath = join(distPath, "css/tokens.css");
     const css = readFileSync(cssPath, "utf-8");
 
-    // Font sizes should use rem units
-    expect(css).toMatch(/--ds-font-size-\w+:\s*[\d.]+rem/);
+    // Radius tokens should have values
+    expect(css).toMatch(/--radius-\w+:\s*[\d.]+/);
+  });
+
+  it("should have valid shadow values", () => {
+    const cssPath = join(distPath, "css/tokens.css");
+    const css = readFileSync(cssPath, "utf-8");
+
+    // Shadow tokens should have rgba or offset values
+    expect(css).toMatch(/--shadow-\w+:\s*0/);
+  });
+
+  it("should have valid motion duration values", () => {
+    const cssPath = join(distPath, "css/tokens.css");
+    const css = readFileSync(cssPath, "utf-8");
+
+    // Motion durations should use ms units
+    expect(css).toMatch(/--motion-duration-\w+:\s*\d+ms/);
   });
 });

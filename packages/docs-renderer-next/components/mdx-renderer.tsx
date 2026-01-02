@@ -4,15 +4,18 @@ import * as jsxDevRuntime from "react/jsx-dev-runtime";
 import * as jsxRuntime from "react/jsx-runtime";
 import { Edition, EditionBadge } from "./mdx/edition";
 
+// biome-ignore lint/suspicious/noExplicitAny: MDX components have varying prop signatures
+type MdxComponent = ComponentType<any>;
+
 interface MdxRendererProps {
   /** MDX source string */
   source: string;
   /** Custom components to use in MDX */
-  components?: Record<string, ComponentType<any>>;
+  components?: Record<string, MdxComponent>;
 }
 
 // Default MDX components
-const defaultComponents: Record<string, ComponentType<any>> = {
+const defaultComponents: Record<string, MdxComponent> = {
   // Edition-specific content components
   Edition,
   EditionBadge,

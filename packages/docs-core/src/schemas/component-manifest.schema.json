@@ -93,12 +93,8 @@
       "additionalProperties": false
     },
     "tokensUsed": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Semantic token groups consumed by this component",
-      "examples": [["color.action", "spacing.component", "typography.label"]]
+      "$ref": "./tokens-used.schema.json",
+      "description": "Design tokens consumed by this component (token paths starting with valid category)"
     },
     "recommendedUsage": {
       "type": "string",

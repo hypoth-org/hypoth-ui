@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "spacing": {
+    "$type": "dimension",
+    "$description": "Spacing tokens for margins and padding",
+    "none": {
+      "$value": "0",
+      "$description": "No spacing"
+    },
+    "xs": {
+      "$value": "0.25rem",
+      "$description": "Extra small spacing (4px)"
+    },
+    "sm": {
+      "$value": "0.5rem",
+      "$description": "Small spacing (8px)"
+    },
+    "md": {
+      "$value": "1rem",
+      "$description": "Medium spacing (16px)"
+    },
+    "lg": {
+      "$value": "1.5rem",
+      "$description": "Large spacing (24px)"
+    },
+    "xl": {
+      "$value": "2rem",
+      "$description": "Extra large spacing (32px)"
+    },
+    "2xl": {
+      "$value": "3rem",
+      "$description": "2x extra large spacing (48px)"
+    },
+    "3xl": {
+      "$value": "4rem",
+      "$description": "3x extra large spacing (64px)"
+    }
+  }
+}

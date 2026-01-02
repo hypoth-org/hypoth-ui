@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "z-index": {
+    "$type": "number",
+    "$description": "Z-index tokens for stacking order",
+    "hide": {
+      "$value": -1,
+      "$description": "Hidden below base layer"
+    },
+    "base": {
+      "$value": 0,
+      "$description": "Base stacking level"
+    },
+    "raised": {
+      "$value": 1,
+      "$description": "Slightly raised elements"
+    },
+    "dropdown": {
+      "$value": 1000,
+      "$description": "Dropdown menus"
+    },
+    "sticky": {
+      "$value": 1100,
+      "$description": "Sticky positioned elements"
+    },
+    "banner": {
+      "$value": 1200,
+      "$description": "Banner notifications"
+    },
+    "overlay": {
+      "$value": 1300,
+      "$description": "Overlay backdrops"
+    },
+    "modal": {
+      "$value": 1400,
+      "$description": "Modal dialogs"
+    },
+    "popover": {
+      "$value": 1500,
+      "$description": "Popovers and tooltips"
+    },
+    "toast": {
+      "$value": 1600,
+      "$description": "Toast notifications"
+    },
+    "tooltip": {
+      "$value": 1700,
+      "$description": "Tooltips (highest priority)"
+    },
+    "max": {
+      "$value": 9999,
+      "$description": "Maximum z-index for critical overlays"
+    }
+  }
+}

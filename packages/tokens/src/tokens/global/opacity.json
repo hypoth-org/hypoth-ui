@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "opacity": {
+    "$type": "number",
+    "$description": "Opacity tokens for transparency",
+    "0": {
+      "$value": 0,
+      "$description": "Fully transparent"
+    },
+    "5": {
+      "$value": 0.05,
+      "$description": "5% opacity"
+    },
+    "10": {
+      "$value": 0.1,
+      "$description": "10% opacity"
+    },
+    "20": {
+      "$value": 0.2,
+      "$description": "20% opacity"
+    },
+    "25": {
+      "$value": 0.25,
+      "$description": "25% opacity"
+    },
+    "30": {
+      "$value": 0.3,
+      "$description": "30% opacity"
+    },
+    "40": {
+      "$value": 0.4,
+      "$description": "40% opacity"
+    },
+    "50": {
+      "$value": 0.5,
+      "$description": "50% opacity"
+    },
+    "60": {
+      "$value": 0.6,
+      "$description": "60% opacity"
+    },
+    "70": {
+      "$value": 0.7,
+      "$description": "70% opacity"
+    },
+    "75": {
+      "$value": 0.75,
+      "$description": "75% opacity"
+    },
+    "80": {
+      "$value": 0.8,
+      "$description": "80% opacity"
+    },
+    "90": {
+      "$value": 0.9,
+      "$description": "90% opacity"
+    },
+    "95": {
+      "$value": 0.95,
+      "$description": "95% opacity"
+    },
+    "100": {
+      "$value": 1,
+      "$description": "Fully opaque"
+    },
+    "disabled": {
+      "$value": 0.5,
+      "$description": "Disabled state opacity"
+    },
+    "overlay": {
+      "$value": 0.75,
+      "$description": "Overlay backdrop opacity"
+    },
+    "hover": {
+      "$value": 0.08,
+      "$description": "Hover state overlay opacity"
+    },
+    "focus": {
+      "$value": 0.12,
+      "$description": "Focus state overlay opacity"
+    },
+    "pressed": {
+      "$value": 0.16,
+      "$description": "Pressed state overlay opacity"
+    }
+  }
+}

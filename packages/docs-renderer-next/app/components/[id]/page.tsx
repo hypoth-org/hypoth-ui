@@ -23,10 +23,12 @@ interface DisplayManifest {
   props: Array<{ name: string; type: string; default?: string; description: string }>;
   events: Array<{ name: string; description: string }>;
   examples: Array<{ title: string; code: string }>;
+  tokensUsed: string[];
 }
 import { notFound, redirect } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
 import { EditionProvider } from "../../../components/mdx/edition";
+import { TokensUsed } from "../../../components/tokens-used";
 
 interface ComponentPageProps {
   params: Promise<{
@@ -173,6 +175,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         props: [],
         events: [],
         examples: [],
+        tokensUsed: contractManifest.tokensUsed ?? [],
       }
     : {
         name: manifest.name,
@@ -181,6 +184,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         props: "props" in manifest ? (manifest.props ?? []) : [],
         events: "events" in manifest ? (manifest.events ?? []) : [],
         examples: "examples" in manifest ? (manifest.examples ?? []) : [],
+        tokensUsed: "tokensUsed" in manifest ? (manifest.tokensUsed ?? []) : [],
       };
 
   return (
@@ -195,6 +199,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             <p className="component-description">{displayManifest.description}</p>
           )}
         </header>
+
+        {displayManifest.tokensUsed.length > 0 && (
+          <TokensUsed tokens={displayManifest.tokensUsed} />
+        )}
 
         {mdxContent ? (
           <MdxRenderer source={mdxContent} />

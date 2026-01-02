@@ -40,6 +40,18 @@
       }
     }
   },
+  "overrides": [
+    {
+      "include": ["**/theme-init-script.tsx"],
+      "linter": {
+        "rules": {
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "quoteStyle": "double",

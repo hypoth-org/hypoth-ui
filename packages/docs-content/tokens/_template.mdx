@@ -1,0 +1,39 @@
+---
+title: "{category} Tokens"
+description: "Design tokens for {category}"
+category: "{category}"
+---
+
+# {Category} Tokens
+
+{description}
+
+## Tokens
+
+| Token | CSS Variable | Value | Used By |
+|-------|--------------|-------|---------|
+{tokens}
+
+## Usage
+
+```css
+.example {
+  {property}: var({cssVariable});
+}
+```
+
+## Brand Variations
+
+Tokens may have different values per brand:
+
+| Token | Default | Acme |
+|-------|---------|------|
+{brandVariations}
+
+## Mode Variations
+
+Tokens may have different values per mode:
+
+| Token | Light | Dark | High Contrast |
+|-------|-------|------|---------------|
+{modeVariations}

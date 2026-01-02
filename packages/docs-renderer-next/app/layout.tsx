@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { NavSidebar } from "../components/nav-sidebar";
+import { ThemeSwitcher } from "../components/theme-switcher";
+import { ThemeInitScript } from "../components/theme-init-script";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
@@ -17,9 +19,18 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" data-mode="light">
+      <head>
+        <ThemeInitScript />
+      </head>
       <body>
         <div className="docs-layout">
+          <header className="docs-header">
+            <div className="docs-header-content">
+              <span className="docs-logo">Design System</span>
+              <ThemeSwitcher />
+            </div>
+          </header>
           <aside className="docs-sidebar">
             <NavSidebar />
           </aside>
