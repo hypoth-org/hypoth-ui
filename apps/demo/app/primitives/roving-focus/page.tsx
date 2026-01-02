@@ -20,7 +20,7 @@ export default function RovingFocusDemoPage() {
 
     rovingRef.current = createRovingFocus({
       container: containerRef.current,
-      selector: '[role="button"]',
+      selector: "button",
       direction,
       loop,
       skipDisabled,
@@ -124,8 +124,8 @@ export default function RovingFocusDemoPage() {
         >
           {items.map((item, index) => (
             <button
-              key={index}
-              role="button"
+              type="button"
+              key={item.label}
               data-testid={`roving-item-${index}`}
               disabled={item.disabled}
               aria-disabled={item.disabled}

@@ -1,5 +1,5 @@
 // Shared types
-export { type Direction, type LogicalDirection } from "./types.js";
+export type { Direction, LogicalDirection } from "./types.js";
 
 // Constants
 export { FOCUSABLE_SELECTOR, DEFAULT_TYPEAHEAD_TIMEOUT } from "./constants.js";

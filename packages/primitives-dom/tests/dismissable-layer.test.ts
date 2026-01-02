@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createDismissableLayer, type DismissReason } from "../src/layer/dismissable-layer";
+import { createDismissableLayer } from "../src/layer/dismissable-layer";
 
 describe("createDismissableLayer", () => {
   let container: HTMLDivElement;
@@ -67,12 +67,12 @@ describe("createDismissableLayer", () => {
     });
 
     it("should not call onDismiss when layer is not active", () => {
-      const layer = createDismissableLayer({
+      const _layer = createDismissableLayer({
         container,
         onDismiss,
       });
 
-      // Don't activate
+      // Don't activate - layer is intentionally unused
 
       const event = new KeyboardEvent("keydown", {
         key: "Escape",

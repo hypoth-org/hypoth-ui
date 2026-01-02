@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { createDismissableLayer, type DismissReason } from "@ds/primitives-dom";
 import Link from "next/link";
 
 export default function DismissableLayerDemoPage() {
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const layerRef = useRef<HTMLDivElement>(null);
   const nestedTriggerRef = useRef<HTMLButtonElement>(null);
-  const nestedLayerRef = useRef<HTMLDivElement>(null);
 
   const [isLayerOpen, setIsLayerOpen] = useState(false);
   const [isNestedOpen, setIsNestedOpen] = useState(false);
@@ -17,54 +15,59 @@ export default function DismissableLayerDemoPage() {
   const layerInstance = useRef<ReturnType<typeof createDismissableLayer> | null>(null);
   const nestedLayerInstance = useRef<ReturnType<typeof createDismissableLayer> | null>(null);
 
-  useEffect(() => {
-    if (!layerRef.current || !triggerRef.current) return;
-
-    layerInstance.current = createDismissableLayer({
-      container: layerRef.current,
-      excludeElements: [triggerRef.current],
-      onDismiss: (reason) => {
-        setDismissReason(reason);
-        setIsLayerOpen(false);
-        setIsNestedOpen(false);
-      },
-    });
-
-    return () => {
-      layerInstance.current?.deactivate();
-    };
+  const handleLayerDismiss = useCallback((reason: DismissReason) => {
+    setDismissReason(reason);
+    setIsLayerOpen(false);
+    setIsNestedOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (!nestedLayerRef.current || !nestedTriggerRef.current) return;
+  const handleNestedDismiss = useCallback((reason: DismissReason) => {
+    setDismissReason(reason);
+    setIsNestedOpen(false);
+  }, []);
 
-    nestedLayerInstance.current = createDismissableLayer({
-      container: nestedLayerRef.current,
-      excludeElements: [nestedTriggerRef.current],
-      onDismiss: (reason) => {
-        setDismissReason(reason);
-        setIsNestedOpen(false);
-      },
-    });
+  const layerRefCallback = useCallback((node: HTMLDivElement | null) => {
+    if (node && triggerRef.current) {
+      layerInstance.current = createDismissableLayer({
+        container: node,
+        excludeElements: [triggerRef.current],
+        onDismiss: handleLayerDismiss,
+      });
+      layerInstance.current.activate();
+    }
+    return () => {
+      layerInstance.current?.deactivate();
+      layerInstance.current = null;
+    };
+  }, [handleLayerDismiss]);
 
+  const nestedLayerRefCallback = useCallback((node: HTMLDivElement | null) => {
+    if (node && nestedTriggerRef.current) {
+      nestedLayerInstance.current = createDismissableLayer({
+        container: node,
+        excludeElements: [nestedTriggerRef.current],
+        onDismiss: handleNestedDismiss,
+      });
+      nestedLayerInstance.current.activate();
+    }
     return () => {
       nestedLayerInstance.current?.deactivate();
+      nestedLayerInstance.current = null;
     };
-  }, []);
+  }, [handleNestedDismiss]);
 
+  // Cleanup on unmount or when layers close
   useEffect(() => {
-    if (isLayerOpen) {
-      layerInstance.current?.activate();
-    } else {
+    if (!isLayerOpen) {
       layerInstance.current?.deactivate();
+      layerInstance.current = null;
     }
   }, [isLayerOpen]);
 
   useEffect(() => {
-    if (isNestedOpen) {
-      nestedLayerInstance.current?.activate();
-    } else {
+    if (!isNestedOpen) {
       nestedLayerInstance.current?.deactivate();
+      nestedLayerInstance.current = null;
     }
   }, [isNestedOpen]);
 
@@ -126,6 +129,7 @@ export default function DismissableLayerDemoPage() {
 
         <div style={{ position: "relative" }}>
           <button
+            type="button"
             ref={triggerRef}
             data-testid="trigger-btn"
             onClick={handleTriggerClick}
@@ -135,7 +139,7 @@ export default function DismissableLayerDemoPage() {
 
           {isLayerOpen && (
             <div
-              ref={layerRef}
+              ref={layerRefCallback}
               data-testid="layer-container"
               style={{
                 position: "absolute",
@@ -160,6 +164,7 @@ export default function DismissableLayerDemoPage() {
 
               <div style={{ position: "relative" }}>
                 <button
+                  type="button"
                   ref={nestedTriggerRef}
                   data-testid="nested-trigger"
                   onClick={handleNestedTriggerClick}
@@ -169,7 +174,7 @@ export default function DismissableLayerDemoPage() {
 
                 {isNestedOpen && (
                   <div
-                    ref={nestedLayerRef}
+                    ref={nestedLayerRefCallback}
                     data-testid="nested-layer"
                     style={{
                       position: "absolute",

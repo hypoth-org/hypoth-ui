@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { createActivationHandler, createArrowKeyHandler, type LogicalDirection } from "@ds/primitives-dom";
 import Link from "next/link";
 
+const navItems = ["Home", "Products", "About", "Contact"];
+
 export default function KeyboardHelpersDemoPage() {
   const customButtonRef = useRef<HTMLDivElement>(null);
-  const navContainerRef = useRef<HTMLDivElement>(null);
+  const navContainerRef = useRef<HTMLElement>(null);
 
   const [activationLog, setActivationLog] = useState<string[]>([]);
   const [navigationLog, setNavigationLog] = useState<string[]>([]);
   const [rtl, setRtl] = useState(false);
   const [navIndex, setNavIndex] = useState(0);
-
-  const navItems = ["Home", "Products", "About", "Contact"];
 
   // Activation handler
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function KeyboardHelpersDemoPage() {
 
     container.addEventListener("keydown", handler);
     return () => container.removeEventListener("keydown", handler);
-  }, [rtl, navItems.length]);
+  }, [rtl]);
 
   // Focus the nav item when index changes
   useEffect(() => {
@@ -108,6 +108,7 @@ export default function KeyboardHelpersDemoPage() {
           <div
             ref={customButtonRef}
             data-testid="custom-button"
+            // biome-ignore lint/a11y/useSemanticElements: Demo of custom button with activation handler
             role="button"
             tabIndex={0}
             style={{
@@ -138,7 +139,7 @@ export default function KeyboardHelpersDemoPage() {
             {activationLog.length === 0 ? (
               <span className="text-muted">No activations yet</span>
             ) : (
-              activationLog.map((log, i) => <div key={i}>{log}</div>)
+              activationLog.map((log) => <div key={log}>{log}</div>)
             )}
           </div>
         </section>
@@ -160,10 +161,9 @@ export default function KeyboardHelpersDemoPage() {
             RTL Mode (swaps Left/Right)
           </label>
 
-          <div
+          <nav
             ref={navContainerRef}
             data-testid="nav-container"
-            role="navigation"
             style={{
               display: "flex",
               gap: "0.5rem",
@@ -175,7 +175,8 @@ export default function KeyboardHelpersDemoPage() {
           >
             {navItems.map((item, index) => (
               <button
-                key={index}
+                type="button"
+                key={item}
                 data-testid={`nav-item-${index}`}
                 tabIndex={index === navIndex ? 0 : -1}
                 style={{
@@ -187,7 +188,7 @@ export default function KeyboardHelpersDemoPage() {
                 {item}
               </button>
             ))}
-          </div>
+          </nav>
 
           <div
             data-testid="navigation-log"
@@ -204,7 +205,7 @@ export default function KeyboardHelpersDemoPage() {
             {navigationLog.length === 0 ? (
               <span className="text-muted">No navigation events yet</span>
             ) : (
-              navigationLog.map((log, i) => <div key={i}>{log}</div>)
+              navigationLog.map((log) => <div key={log}>{log}</div>)
             )}
           </div>
         </section>

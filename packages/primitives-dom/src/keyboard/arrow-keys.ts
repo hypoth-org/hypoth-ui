@@ -3,7 +3,7 @@
  * Maps physical arrow keys to logical navigation directions.
  */
 
-import { type Direction, type LogicalDirection } from "../types.js";
+import type { Direction, LogicalDirection } from "../types.js";
 
 /**
  * Options for creating an arrow key handler.

@@ -117,7 +117,7 @@ describe("Memory Leak Verification", () => {
 
       const toolbar = container.querySelector("#toolbar") as HTMLElement;
       const btn0 = container.querySelector("#btn0") as HTMLElement;
-      const btn1 = container.querySelector("#btn1") as HTMLElement;
+      const _btn1 = container.querySelector("#btn1") as HTMLElement;
 
       const roving = createRovingFocus({
         container: toolbar,

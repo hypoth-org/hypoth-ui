@@ -3,7 +3,7 @@
  * Implements WAI-ARIA roving tabindex pattern.
  */
 
-import { type Direction } from "../types.js";
+import type { Direction } from "../types.js";
 
 export type { Direction };
 

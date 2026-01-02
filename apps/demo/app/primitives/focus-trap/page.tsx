@@ -61,6 +61,7 @@ export default function FocusTrapDemoPage() {
 
         <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
           <button
+            type="button"
             data-testid="activate-btn"
             onClick={handleActivate}
             disabled={isActive}
@@ -68,6 +69,7 @@ export default function FocusTrapDemoPage() {
             Activate Trap
           </button>
           <button
+            type="button"
             data-testid="deactivate-btn"
             onClick={handleDeactivate}
             disabled={!isActive}
@@ -90,17 +92,18 @@ export default function FocusTrapDemoPage() {
             Focus is trapped within this container when active.
           </p>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            <button data-testid="first-focusable">First Button</button>
+            <button type="button" data-testid="first-focusable">First Button</button>
             <input type="text" placeholder="Text input" style={{ padding: "0.5rem" }} />
             <select style={{ padding: "0.5rem" }}>
               <option>Option 1</option>
               <option>Option 2</option>
             </select>
-            <button data-testid="last-focusable">Last Button</button>
+            <button type="button" data-testid="last-focusable">Last Button</button>
           </div>
         </div>
 
         <button
+          type="button"
           data-testid="outside-element"
           style={{ marginTop: "1rem" }}
         >

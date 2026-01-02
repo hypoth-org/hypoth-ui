@@ -108,7 +108,7 @@ export default function TypeAheadDemoPage() {
             Active
           </span>
 
-          <button data-testid="reset-buffer" onClick={handleReset}>
+          <button type="button" data-testid="reset-buffer" onClick={handleReset}>
             Reset Buffer
           </button>
         </div>
@@ -146,6 +146,7 @@ export default function TypeAheadDemoPage() {
         <div
           ref={listRef}
           data-testid="list-container"
+          // biome-ignore lint/a11y/useSemanticElements: Custom listbox with type-ahead behavior
           role="listbox"
           aria-label="Fruit selection"
           tabIndex={0}
@@ -158,8 +159,10 @@ export default function TypeAheadDemoPage() {
           }}
         >
           {fruits.map((fruit, index) => (
+            // biome-ignore lint/a11y/useKeyWithClickEvents: Keyboard handled by type-ahead at container level
             <div
               key={fruit}
+              // biome-ignore lint/a11y/useSemanticElements: Custom option with type-ahead behavior
               role="option"
               data-testid={`list-item-${index}`}
               tabIndex={-1}
