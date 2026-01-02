@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://hypoth-ui.dev/schemas/tokens-used.schema.json",
   "title": "Component Tokens Used",
   "description": "Schema for tokensUsed field in component manifests",
