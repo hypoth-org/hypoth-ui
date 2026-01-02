@@ -1,0 +1,36 @@
+/**
+ * Tenant Override Stylesheet
+ * Tenant: Acme Corporation
+ * Version: 1.0.0
+ * Based on: @ds/css
+ */
+
+@layer overrides {
+  /* Token Overrides */
+  :root {
+    /* Acme brand orange */
+    --ds-color-primary-default: #ff5500;
+    --ds-color-primary-hover: #e64d00;
+    --ds-color-primary-active: #cc4400;
+    --ds-color-primary-foreground: #ffffff;
+
+    /* Acme secondary - deep purple */
+    --ds-color-interactive: #7c3aed;
+
+    /* Acme prefers sharp corners */
+    --ds-radius-sm: 0;
+    --ds-radius-md: 2px;
+    --ds-radius-lg: 4px;
+  }
+
+  /* Component Overrides */
+  .ds-button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--ds-font-weight-bold);
+  }
+
+  .ds-button--primary {
+    border-radius: 0;
+  }
+}

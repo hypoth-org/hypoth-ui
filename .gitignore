@@ -41,6 +41,12 @@ coverage/
 .parcel-cache/
 .eslintcache
 
+# TypeScript build info
+*.tsbuildinfo
+
+# Generated files
+**/generated/
+
 # Playwright
 /test-results/
 /playwright-report/

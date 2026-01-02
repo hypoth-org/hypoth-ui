@@ -1,0 +1,8 @@
+/* Components Layer - Design system component styles */
+/* These styles are wrapped in @layer components by their source files */
+
+/* Import component styles from @ds/wc */
+/* Note: Component CSS files already declare @layer components internally */
+/* postcss-import resolves these through node_modules */
+@import "@ds/wc/src/components/button/button.css";
+@import "@ds/wc/src/components/input/input.css";

@@ -7,6 +7,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-01
 - File-based (manifest.json per component, edition-map.json generated) (002-component-docs-contracts)
 - TypeScript 5.x (strict mode) + None for runtime (build-time only: tsx for compilation, Ajv for schema validation) (003-dtcg-token-theming)
 - File-based (DTCG JSON tokens → compiled CSS/JSON/TS outputs) (003-dtcg-token-theming)
+- CSS (native `@layer`), TypeScript 5.x (build tooling only) + PostCSS 8.x (build-time import flattening), postcss-import, cssnano (minification) (004-css-layers)
+- N/A (static CSS files) (004-css-layers)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -56,10 +58,10 @@ pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 004-css-layers: Added CSS (native `@layer`), TypeScript 5.x (build tooling only) + PostCSS 8.x (build-time import flattening), postcss-import, cssnano (minification)
 - 003-dtcg-token-theming: Added TypeScript 5.x (strict mode) + None for runtime (build-time only: tsx for compilation, Ajv for schema validation)
 - 002-component-docs-contracts: Added TypeScript 5.x (strict mode) + Ajv 8.x (JSON Schema validation), gray-matter (frontmatter parsing), glob (file discovery)
 
-- 001-design-system: Added TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer)
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

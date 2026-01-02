@@ -1,0 +1,3 @@
+/* Overrides Layer - Reserved for consumer and tenant customizations */
+/* This file intentionally left empty in the base package */
+/* Consumers add their overrides in their own stylesheets using: @layer overrides { ... } */
