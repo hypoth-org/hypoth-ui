@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypoth-ui.dev/schemas/dtcg-token.schema.json",
+  "title": "DTCG Design Token",
+  "description": "Schema for DTCG format design tokens",
+  "type": "object",
+  "additionalProperties": {
+    "oneOf": [
+      { "$ref": "#/$defs/token" },
+      { "$ref": "#/$defs/group" }
+    ]
+  },
+  "$defs": {
+    "token": {
+      "type": "object",
+      "required": ["$value"],
+      "properties": {
+        "$value": {
+          "$ref": "#/$defs/tokenValue"
+        },
+        "$type": {
+          "$ref": "#/$defs/tokenType"
+        },
+        "$description": {
+          "type": "string",
+          "description": "Human-readable description of the token"
+        },
+        "$extensions": {
+          "type": "object",
+          "description": "Vendor-specific metadata",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "$type": {
+          "$ref": "#/$defs/tokenType"
+        },
+        "$description": {
+          "type": "string"
+        },
+        "$extensions": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/$defs/token" },
+          { "$ref": "#/$defs/group" }
+        ]
+      }
+    },
+    "tokenType": {
+      "type": "string",
+      "enum": [
+        "color",
+        "dimension",
+        "fontFamily",
+        "fontWeight",
+        "duration",
+        "cubicBezier",
+        "number",
+        "shadow",
+        "border",
+        "strokeStyle",
+        "typography",
+        "gradient",
+        "transition"
+      ]
+    },
+    "tokenValue": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "$ref": "#/$defs/fontFamilyValue" },
+        { "$ref": "#/$defs/cubicBezierValue" },
+        { "$ref": "#/$defs/shadowValue" },
+        { "$ref": "#/$defs/shadowArrayValue" },
+        { "$ref": "#/$defs/borderValue" },
+        { "$ref": "#/$defs/typographyValue" },
+        { "$ref": "#/$defs/gradientValue" },
+        { "$ref": "#/$defs/transitionValue" },
+        { "$ref": "#/$defs/strokeStyleValue" }
+      ]
+    },
+    "fontFamilyValue": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "cubicBezierValue": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "shadowValue": {
+      "type": "object",
+      "required": ["color", "offsetX", "offsetY", "blur", "spread"],
+      "properties": {
+        "color": { "type": "string" },
+        "offsetX": { "type": "string" },
+        "offsetY": { "type": "string" },
+        "blur": { "type": "string" },
+        "spread": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "shadowArrayValue": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/shadowValue" },
+      "minItems": 1
+    },
+    "borderValue": {
+      "type": "object",
+      "required": ["color", "width", "style"],
+      "properties": {
+        "color": { "type": "string" },
+        "width": { "type": "string" },
+        "style": {
+          "type": "string",
+          "enum": ["solid", "dashed", "dotted", "double", "groove", "ridge", "outset", "inset"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "typographyValue": {
+      "type": "object",
+      "required": ["fontFamily", "fontSize", "fontWeight", "letterSpacing", "lineHeight"],
+      "properties": {
+        "fontFamily": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "fontSize": { "type": "string" },
+        "fontWeight": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" }
+          ]
+        },
+        "letterSpacing": { "type": "string" },
+        "lineHeight": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "gradientValue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["color", "position"],
+        "properties": {
+          "color": { "type": "string" },
+          "position": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 2
+    },
+    "transitionValue": {
+      "type": "object",
+      "required": ["duration", "delay", "timingFunction"],
+      "properties": {
+        "duration": { "type": "string" },
+        "delay": { "type": "string" },
+        "timingFunction": { "$ref": "#/$defs/cubicBezierValue" }
+      },
+      "additionalProperties": false
+    },
+    "strokeStyleValue": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["solid", "dashed", "dotted", "double", "groove", "ridge", "outset", "inset"]
+        },
+        {
+          "type": "object",
+          "required": ["dashArray", "lineCap"],
+          "properties": {
+            "dashArray": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "lineCap": {
+              "type": "string",
+              "enum": ["butt", "round", "square"]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

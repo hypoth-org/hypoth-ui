@@ -1,0 +1,58 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "icon": {
+    "$description": "Icon tokens for sizing and spacing",
+    "size": {
+      "$type": "dimension",
+      "$description": "Icon size tokens",
+      "xs": {
+        "$value": "0.75rem",
+        "$description": "Extra small icons (12px)"
+      },
+      "sm": {
+        "$value": "1rem",
+        "$description": "Small icons (16px)"
+      },
+      "md": {
+        "$value": "1.25rem",
+        "$description": "Medium icons (20px)"
+      },
+      "lg": {
+        "$value": "1.5rem",
+        "$description": "Large icons (24px)"
+      },
+      "xl": {
+        "$value": "2rem",
+        "$description": "Extra large icons (32px)"
+      },
+      "2xl": {
+        "$value": "2.5rem",
+        "$description": "2x extra large icons (40px)"
+      },
+      "3xl": {
+        "$value": "3rem",
+        "$description": "3x extra large icons (48px)"
+      }
+    },
+    "stroke": {
+      "$type": "dimension",
+      "$description": "Icon stroke width tokens",
+      "thin": {
+        "$value": "1px",
+        "$description": "Thin stroke width"
+      },
+      "regular": {
+        "$value": "1.5px",
+        "$description": "Regular stroke width"
+      },
+      "medium": {
+        "$value": "2px",
+        "$description": "Medium stroke width"
+      },
+      "bold": {
+        "$value": "2.5px",
+        "$description": "Bold stroke width"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Box shadow tokens for elevation",
+    "none": {
+      "$value": {
+        "color": "transparent",
+        "offsetX": "0",
+        "offsetY": "0",
+        "blur": "0",
+        "spread": "0"
+      },
+      "$description": "No shadow"
+    },
+    "sm": {
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.05)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0"
+      },
+      "$description": "Small shadow for subtle elevation"
+    },
+    "md": {
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.1)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "6px",
+        "spread": "-1px"
+      },
+      "$description": "Medium shadow for cards and dropdowns"
+    },
+    "lg": {
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.1)",
+        "offsetX": "0",
+        "offsetY": "10px",
+        "blur": "15px",
+        "spread": "-3px"
+      },
+      "$description": "Large shadow for modals and popovers"
+    },
+    "xl": {
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.1)",
+        "offsetX": "0",
+        "offsetY": "20px",
+        "blur": "25px",
+        "spread": "-5px"
+      },
+      "$description": "Extra large shadow for floating elements"
+    },
+    "inner": {
+      "$value": {
+        "color": "rgba(0, 0, 0, 0.05)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "4px",
+        "spread": "0"
+      },
+      "$description": "Inner shadow for inset effects"
+    }
+  }
+}

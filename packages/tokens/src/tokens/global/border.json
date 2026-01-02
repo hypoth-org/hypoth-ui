@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "border": {
+    "$type": "border",
+    "$description": "Border composite tokens",
+    "none": {
+      "$value": {
+        "color": "transparent",
+        "width": "0",
+        "style": "solid"
+      },
+      "$description": "No border"
+    },
+    "default": {
+      "$value": {
+        "color": "{color.border.default}",
+        "width": "1px",
+        "style": "solid"
+      },
+      "$description": "Default border style"
+    },
+    "strong": {
+      "$value": {
+        "color": "{color.border.strong}",
+        "width": "1px",
+        "style": "solid"
+      },
+      "$description": "Strong border for emphasis"
+    },
+    "focus": {
+      "$value": {
+        "color": "{color.border.focus}",
+        "width": "2px",
+        "style": "solid"
+      },
+      "$description": "Focus ring border"
+    },
+    "error": {
+      "$value": {
+        "color": "{color.error}",
+        "width": "1px",
+        "style": "solid"
+      },
+      "$description": "Error state border"
+    }
+  }
+}

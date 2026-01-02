@@ -14,11 +14,13 @@
     "knownLimitations": []
   },
   "tokensUsed": [
-    "color.action.primary",
-    "color.action.secondary",
-    "spacing.component",
-    "typography.label",
-    "border.radius"
+    "color.primary",
+    "color.text.inverse",
+    "color.background.surface",
+    "color.border.focus",
+    "spacing.sm",
+    "spacing.md",
+    "radius.md"
   ],
   "recommendedUsage": "Use for primary actions, form submissions, and interactive triggers. Choose variant based on visual hierarchy.",
   "antiPatterns": "Do not use for navigation - use Link component instead. Avoid using buttons for purely decorative purposes.",

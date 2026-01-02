@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-01
 ## Active Technologies
 - TypeScript 5.x (strict mode) + Ajv 8.x (JSON Schema validation), gray-matter (frontmatter parsing), glob (file discovery) (002-component-docs-contracts)
 - File-based (manifest.json per component, edition-map.json generated) (002-component-docs-contracts)
+- TypeScript 5.x (strict mode) + None for runtime (build-time only: tsx for compilation, Ajv for schema validation) (003-dtcg-token-theming)
+- File-based (DTCG JSON tokens → compiled CSS/JSON/TS outputs) (003-dtcg-token-theming)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -41,6 +43,12 @@ pnpm --filter @ds/docs-app dev:core        # Run docs with core edition
 pnpm --filter @ds/docs-app dev:pro         # Run docs with pro edition
 pnpm --filter @ds/docs-app dev:enterprise  # Run docs with enterprise edition
 pnpm --filter @ds/docs-app build:edition-map  # Generate edition map
+
+# Token Commands
+pnpm --filter @ds/tokens build              # Build token outputs (CSS, JSON, TS)
+pnpm --filter @ds/tokens clean              # Clean dist directory
+pnpm --filter @ds/docs-core validate:tokens # Validate tokensUsed references
+pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
 ```
 
 ## Code Style
@@ -48,6 +56,7 @@ pnpm --filter @ds/docs-app build:edition-map  # Generate edition map
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 003-dtcg-token-theming: Added TypeScript 5.x (strict mode) + None for runtime (build-time only: tsx for compilation, Ajv for schema validation)
 - 002-component-docs-contracts: Added TypeScript 5.x (strict mode) + Ajv 8.x (JSON Schema validation), gray-matter (frontmatter parsing), glob (file discovery)
 
 - 001-design-system: Added TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer)

@@ -9,6 +9,11 @@
       "import": "./dist/ts/index.js"
     },
     "./css": "./dist/css/tokens.css",
+    "./json": "./dist/json/tokens.json",
+    "./runtime": {
+      "types": "./dist/ts/runtime/index.d.ts",
+      "import": "./dist/ts/runtime/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": ["dist"],

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypoth-ui.dev/schemas/token-reference-doc.schema.json",
+  "title": "Token Reference Documentation",
+  "description": "Schema for generated token reference documentation",
+  "type": "object",
+  "required": ["$schema", "version", "generatedAt", "categories"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://hypoth-ui.dev/schemas/token-reference-doc.schema.json"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Token package version"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp of generation"
+    },
+    "categories": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "color",
+          "typography",
+          "spacing",
+          "sizing",
+          "border",
+          "shadow",
+          "motion",
+          "opacity",
+          "z-index",
+          "breakpoint",
+          "icon",
+          "radius"
+        ]
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/category"
+      }
+    }
+  },
+  "$defs": {
+    "category": {
+      "type": "object",
+      "required": ["tokens"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tokenDoc"
+          }
+        }
+      }
+    },
+    "tokenDoc": {
+      "type": "object",
+      "required": ["path", "type", "values"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Full token path (e.g., color.background.primary)"
+        },
+        "type": {
+          "type": "string",
+          "description": "DTCG token type"
+        },
+        "description": {
+          "type": "string"
+        },
+        "values": {
+          "type": "object",
+          "description": "Resolved values per brand/mode combination",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "description": "Resolved value for this brand+mode"
+            }
+          }
+        },
+        "usedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Component IDs that use this token"
+        },
+        "cssVariable": {
+          "type": "string",
+          "pattern": "^--[a-z][a-z0-9-]*$",
+          "description": "Generated CSS custom property name"
+        }
+      }
+    }
+  }
+}

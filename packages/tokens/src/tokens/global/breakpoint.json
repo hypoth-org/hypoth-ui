@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Responsive design breakpoint tokens",
+    "xs": {
+      "$value": "320px",
+      "$description": "Extra small screens (small phones)"
+    },
+    "sm": {
+      "$value": "640px",
+      "$description": "Small screens (large phones)"
+    },
+    "md": {
+      "$value": "768px",
+      "$description": "Medium screens (tablets)"
+    },
+    "lg": {
+      "$value": "1024px",
+      "$description": "Large screens (laptops)"
+    },
+    "xl": {
+      "$value": "1280px",
+      "$description": "Extra large screens (desktops)"
+    },
+    "2xl": {
+      "$value": "1536px",
+      "$description": "2x extra large screens (large desktops)"
+    },
+    "3xl": {
+      "$value": "1920px",
+      "$description": "3x extra large screens (wide monitors)"
+    },
+    "max": {
+      "$value": "2560px",
+      "$description": "Maximum content width"
+    }
+  }
+}

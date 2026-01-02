@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "motion": {
+    "$description": "Motion tokens for animations and transitions",
+    "duration": {
+      "$type": "duration",
+      "$description": "Animation and transition durations",
+      "instant": {
+        "$value": "0ms",
+        "$description": "Instant, no animation"
+      },
+      "fast": {
+        "$value": "100ms",
+        "$description": "Fast transitions for micro-interactions"
+      },
+      "normal": {
+        "$value": "200ms",
+        "$description": "Normal transition speed"
+      },
+      "slow": {
+        "$value": "300ms",
+        "$description": "Slow transitions for emphasis"
+      },
+      "slower": {
+        "$value": "500ms",
+        "$description": "Slower transitions for large elements"
+      },
+      "slowest": {
+        "$value": "1000ms",
+        "$description": "Slowest transitions for dramatic effect"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "$description": "Easing functions for animations",
+      "linear": {
+        "$value": [0, 0, 1, 1],
+        "$description": "Linear easing, constant speed"
+      },
+      "ease": {
+        "$value": [0.25, 0.1, 0.25, 1],
+        "$description": "Standard ease curve"
+      },
+      "ease-in": {
+        "$value": [0.42, 0, 1, 1],
+        "$description": "Ease in, slow start"
+      },
+      "ease-out": {
+        "$value": [0, 0, 0.58, 1],
+        "$description": "Ease out, slow end"
+      },
+      "ease-in-out": {
+        "$value": [0.42, 0, 0.58, 1],
+        "$description": "Ease in and out"
+      },
+      "spring": {
+        "$value": [0.175, 0.885, 0.32, 1.275],
+        "$description": "Spring-like bounce effect"
+      },
+      "bounce": {
+        "$value": [0.68, -0.55, 0.265, 1.55],
+        "$description": "Bouncy overshoot effect"
+      }
+    }
+  }
+}

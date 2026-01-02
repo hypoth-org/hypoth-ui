@@ -1,0 +1,25 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "$description": "Reduced motion mode - disables animations for accessibility",
+  "motion": {
+    "$type": "duration",
+    "duration": {
+      "instant": {
+        "$value": "0ms",
+        "$description": "No animation"
+      },
+      "fast": {
+        "$value": "0ms",
+        "$description": "No animation"
+      },
+      "normal": {
+        "$value": "0ms",
+        "$description": "No animation"
+      },
+      "slow": {
+        "$value": "0ms",
+        "$description": "No animation"
+      }
+    }
+  }
+}

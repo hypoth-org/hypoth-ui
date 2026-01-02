@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hypoth-ui.dev/schemas/tokens-used.schema.json",
+  "title": "Component Tokens Used",
+  "description": "Schema for tokensUsed field in component manifests",
+  "type": "array",
+  "items": {
+    "type": "string",
+    "pattern": "^(color|typography|spacing|sizing|border|shadow|motion|opacity|z-index|breakpoint|icon|radius)\\.[a-zA-Z][a-zA-Z0-9._-]*$",
+    "description": "Token path starting with valid category"
+  },
+  "uniqueItems": true,
+  "examples": [
+    ["color.background.primary", "color.text.primary", "spacing.md"],
+    ["border.default", "shadow.sm", "radius.md"],
+    ["typography.body", "color.interactive"]
+  ]
+}

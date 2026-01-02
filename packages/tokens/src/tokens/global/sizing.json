@@ -1,0 +1,107 @@
+{
+  "$schema": "../../schemas/dtcg-token.schema.json",
+  "sizing": {
+    "$type": "dimension",
+    "$description": "Sizing tokens for widths and heights",
+    "0": {
+      "$value": "0",
+      "$description": "Zero size"
+    },
+    "px": {
+      "$value": "1px",
+      "$description": "1 pixel"
+    },
+    "0.5": {
+      "$value": "0.125rem",
+      "$description": "2px"
+    },
+    "1": {
+      "$value": "0.25rem",
+      "$description": "4px"
+    },
+    "2": {
+      "$value": "0.5rem",
+      "$description": "8px"
+    },
+    "3": {
+      "$value": "0.75rem",
+      "$description": "12px"
+    },
+    "4": {
+      "$value": "1rem",
+      "$description": "16px"
+    },
+    "5": {
+      "$value": "1.25rem",
+      "$description": "20px"
+    },
+    "6": {
+      "$value": "1.5rem",
+      "$description": "24px"
+    },
+    "8": {
+      "$value": "2rem",
+      "$description": "32px"
+    },
+    "10": {
+      "$value": "2.5rem",
+      "$description": "40px"
+    },
+    "12": {
+      "$value": "3rem",
+      "$description": "48px"
+    },
+    "16": {
+      "$value": "4rem",
+      "$description": "64px"
+    },
+    "20": {
+      "$value": "5rem",
+      "$description": "80px"
+    },
+    "24": {
+      "$value": "6rem",
+      "$description": "96px"
+    },
+    "32": {
+      "$value": "8rem",
+      "$description": "128px"
+    },
+    "40": {
+      "$value": "10rem",
+      "$description": "160px"
+    },
+    "48": {
+      "$value": "12rem",
+      "$description": "192px"
+    },
+    "56": {
+      "$value": "14rem",
+      "$description": "224px"
+    },
+    "64": {
+      "$value": "16rem",
+      "$description": "256px"
+    },
+    "full": {
+      "$value": "100%",
+      "$description": "Full width/height"
+    },
+    "screen": {
+      "$value": "100vw",
+      "$description": "Full viewport width"
+    },
+    "min": {
+      "$value": "min-content",
+      "$description": "Minimum content size"
+    },
+    "max": {
+      "$value": "max-content",
+      "$description": "Maximum content size"
+    },
+    "fit": {
+      "$value": "fit-content",
+      "$description": "Fit content size"
+    }
+  }
+}

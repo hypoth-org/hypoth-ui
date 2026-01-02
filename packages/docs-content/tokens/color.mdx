@@ -1,0 +1,65 @@
+---
+title: Color Tokens
+description: Color values for backgrounds, text, borders, and decorative elements.
+category: color
+---
+
+# Color Tokens
+
+Color values for backgrounds, text, borders, and decorative elements.
+
+## Tokens
+
+| Token | CSS Variable | Description |
+|-------|--------------|-------------|
+| `color.primary` | `--color-primary` | Primary brand color |
+| `color.secondary` | `--color-secondary` | Secondary color for less emphasis |
+| `color.background.surface` | `--color-background-surface` | Main surface background |
+| `color.background.elevated` | `--color-background-elevated` | Elevated surface background |
+| `color.background.subtle` | `--color-background-subtle` | Subtle background for sections |
+| `color.text.primary` | `--color-text-primary` | Primary text color |
+| `color.text.secondary` | `--color-text-secondary` | Secondary text color |
+| `color.text.inverse` | `--color-text-inverse` | Text on dark backgrounds |
+| `color.text.disabled` | `--color-text-disabled` | Disabled text color |
+| `color.border.default` | `--color-border-default` | Default border color |
+| `color.border.strong` | `--color-border-strong` | Strong border color |
+| `color.border.focus` | `--color-border-focus` | Focus ring color |
+| `color.interactive` | `--color-interactive` | Interactive elements color |
+| `color.success` | `--color-success` | Success state color |
+| `color.warning` | `--color-warning` | Warning state color |
+| `color.error` | `--color-error` | Error state color |
+
+## Usage
+
+```css
+.button {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.card {
+  background-color: var(--color-background-surface);
+  border: 1px solid var(--color-border-default);
+}
+
+.input:focus {
+  border-color: var(--color-border-focus);
+}
+```
+
+## Mode Variations
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `color.background.surface` | `#ffffff` | `#111827` |
+| `color.background.elevated` | `#f9fafb` | `#1f2937` |
+| `color.text.primary` | `#111827` | `#f9fafb` |
+| `color.text.secondary` | `#6b7280` | `#9ca3af` |
+| `color.border.default` | `#e5e7eb` | `#374151` |
+
+## Brand Variations
+
+| Token | Default | Acme |
+|-------|---------|------|
+| `color.primary` | `#0066cc` | `#7c3aed` |
+| `color.success` | `#10b981` | `#059669` |

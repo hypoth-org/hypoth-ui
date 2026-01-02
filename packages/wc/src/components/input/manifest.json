@@ -14,13 +14,14 @@
     "knownLimitations": []
   },
   "tokensUsed": [
-    "color.input.background",
-    "color.input.border",
-    "color.input.text",
+    "color.background.surface",
+    "color.border.default",
+    "color.border.focus",
+    "color.text.primary",
     "color.error",
-    "spacing.input",
-    "typography.body",
-    "border.radius"
+    "spacing.sm",
+    "spacing.md",
+    "radius.md"
   ],
   "recommendedUsage": "Use for single-line text entry in forms. Pair with labels and helper text for accessibility.",
   "antiPatterns": "Do not use for multi-line text - use Textarea component instead. Always provide a visible or accessible label.",
