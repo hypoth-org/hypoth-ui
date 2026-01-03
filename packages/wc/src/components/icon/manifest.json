@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "none",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Decorative icons (no label) are hidden from screen readers. Meaningful icons (with label) are announced as images with the provided label.",
     "ariaPatterns": [
       "aria-hidden (decorative)",

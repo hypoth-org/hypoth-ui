@@ -8,12 +8,12 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "status",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Announced as a status with the provided label. Uses role=status to announce loading state without interrupting user.",
     "ariaPatterns": ["role=status", "aria-label"],
     "knownLimitations": []
   },
-  "tokensUsed": ["icon.size.sm", "icon.size.md", "icon.size.lg"],
+  "tokensUsed": ["sizing.icon.sm", "sizing.icon.md", "sizing.icon.lg"],
   "recommendedUsage": "Use to indicate loading state during data fetching, form submissions, or other async operations. Combine with aria-busy on parent containers.",
   "antiPatterns": "Do not use without a meaningful label. Do not show indefinitely without context or timeout. Do not use multiple spinners in close proximity.",
   "platforms": ["wc"]
