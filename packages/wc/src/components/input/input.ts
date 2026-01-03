@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
-import { LightElement } from "../../base/light-element.js";
+import { DSElement } from "../../base/ds-element.js";
+import { emitEvent, StandardEvents } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
@@ -13,7 +14,7 @@ export type InputSize = "sm" | "md" | "lg";
  * @fires input - Fired when the input value changes
  * @fires change - Fired when the input value is committed
  */
-export class DsInput extends LightElement {
+export class DsInput extends DSElement {
   /** Input type */
   @property({ type: String, reflect: true })
   type: InputType = "text";
@@ -65,6 +66,7 @@ export class DsInput extends LightElement {
   private handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
+    // Also emit native input event for compatibility
     this.dispatchEvent(
       new CustomEvent("input", {
         detail: { value: this.value },
@@ -77,13 +79,10 @@ export class DsInput extends LightElement {
   private handleChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
-    this.dispatchEvent(
-      new CustomEvent("change", {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      })
-    );
+    // Emit ds:change event using standard convention
+    emitEvent(this, StandardEvents.CHANGE, {
+      detail: { value: this.value },
+    });
   }
 
   override render() {

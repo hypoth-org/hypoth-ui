@@ -11,6 +11,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-01
 - N/A (static CSS files) (004-css-layers)
 - TypeScript 5.x (strict mode, ES2022 target) + None (zero runtime deps per constitution) (005-behavior-utilities)
 - N/A (stateless utilities with closure-captured state) (005-behavior-utilities)
+- TypeScript 5.3+ + Lit 3.1+ (Web Components), React 18+ (Next.js adapter), Next.js 14+ (App Router) (006-wc-platform)
+- N/A (no persistence layer) (006-wc-platform)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -60,9 +62,9 @@ pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 006-wc-platform: Added TypeScript 5.3+ + Lit 3.1+ (Web Components), React 18+ (Next.js adapter), Next.js 14+ (App Router)
 - 005-behavior-utilities: Added TypeScript 5.x (strict mode, ES2022 target) + None (zero runtime deps per constitution)
 - 004-css-layers: Added CSS (native `@layer`), TypeScript 5.x (build tooling only) + PostCSS 8.x (build-time import flattening), postcss-import, cssnano (minification)
-- 003-dtcg-token-theming: Added TypeScript 5.x (strict mode) + None for runtime (build-time only: tsx for compilation, Ajv for schema validation)
 
 
 <!-- MANUAL ADDITIONS START -->

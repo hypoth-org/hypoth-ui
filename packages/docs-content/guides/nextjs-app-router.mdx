@@ -1,0 +1,360 @@
+---
+title: Next.js App Router Integration
+description: How to use design system Web Components with Next.js 14+ App Router, including SSR and hydration best practices.
+category: frameworks
+order: 5
+---
+
+# Next.js App Router Integration
+
+This guide covers using the design system Web Components with Next.js 14+ App Router, including proper SSR handling and hydration.
+
+## Quick Start
+
+Get up and running in 3 steps:
+
+### 1. Install Dependencies
+
+```bash
+pnpm add @ds/wc @ds/next @ds/css
+```
+
+### 2. Add DsLoader to Root Layout
+
+```tsx
+// app/layout.tsx
+import "@ds/css";
+import { DsLoader } from "@ds/next";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <DsLoader />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+### 3. Use Components
+
+```tsx
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <main>
+      <ds-button variant="primary">Click me</ds-button>
+    </main>
+  );
+}
+```
+
+## How It Works
+
+### SSR and Hydration
+
+The `DsLoader` component handles Web Component registration on the client side:
+
+1. **Server Render**: Next.js renders `<ds-button>` as unknown HTML elements
+2. **Initial Paint**: The browser displays the content immediately (no FOUC)
+3. **Hydration**: `DsLoader` dynamically imports and registers components
+4. **Upgrade**: Web Components upgrade in place, becoming interactive
+
+This approach ensures:
+- No flash of unstyled content (FOUC)
+- Fast initial page load (no blocking JavaScript)
+- Proper SEO (content is in the initial HTML)
+
+### Light DOM Rendering
+
+All design system components render in Light DOM (no Shadow DOM). This means:
+
+- Internal elements are directly queryable with `document.querySelector`
+- External CSS can style internal elements
+- No encapsulation boundaries to work around
+
+```tsx
+// Query internal elements from outside the component
+const innerButton = document.querySelector("ds-button button.ds-button");
+```
+
+## Server Components
+
+Server Components can render design system elements directly:
+
+```tsx
+// app/page.tsx (Server Component)
+export default function Page() {
+  return (
+    <div>
+      <h1>Welcome</h1>
+      <ds-button variant="primary">Get Started</ds-button>
+      <ds-button variant="secondary">Learn More</ds-button>
+    </div>
+  );
+}
+```
+
+The components will be rendered as custom elements in the HTML and upgraded when the client-side JavaScript runs.
+
+## Client Components
+
+For interactive features, use Client Components:
+
+```tsx
+"use client";
+
+import { useState } from "react";
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <ds-button
+        variant="primary"
+        onDs:click={() => setCount((c) => c + 1)}
+      >
+        Increment
+      </ds-button>
+    </div>
+  );
+}
+```
+
+## Event Handling
+
+Design system components emit custom events with the `ds:` prefix:
+
+### Button Events
+
+```tsx
+"use client";
+
+export function ButtonExample() {
+  const handleClick = (event: CustomEvent<{ originalEvent: MouseEvent }>) => {
+    console.log("Button clicked!", event.detail.originalEvent);
+  };
+
+  return (
+    <ds-button variant="primary" onDs:click={handleClick}>
+      Click me
+    </ds-button>
+  );
+}
+```
+
+### Input Events
+
+```tsx
+"use client";
+
+import { useState } from "react";
+
+export function InputExample() {
+  const [value, setValue] = useState("");
+
+  return (
+    <div>
+      <ds-input
+        placeholder="Enter text..."
+        onDs:change={(e: CustomEvent<{ value: string }>) =>
+          setValue(e.detail.value)
+        }
+      />
+      <p>Value: {value}</p>
+    </div>
+  );
+}
+```
+
+## TypeScript Support
+
+Add type declarations for JSX support:
+
+```tsx
+// types/ds-elements.d.ts
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "ds-button": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          variant?: "primary" | "secondary" | "ghost" | "destructive";
+          size?: "sm" | "md" | "lg";
+          disabled?: boolean;
+          loading?: boolean;
+          type?: "button" | "submit" | "reset";
+          "onDs:click"?: (
+            event: CustomEvent<{ originalEvent: MouseEvent }>
+          ) => void;
+        },
+        HTMLElement
+      >;
+      "ds-input": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
+          size?: "sm" | "md" | "lg";
+          name?: string;
+          value?: string;
+          placeholder?: string;
+          disabled?: boolean;
+          readonly?: boolean;
+          required?: boolean;
+          error?: boolean;
+          "onDs:change"?: (event: CustomEvent<{ value: string }>) => void;
+        },
+        HTMLElement
+      >;
+    }
+  }
+}
+
+export {};
+```
+
+## Selective Loading
+
+Load only the components you need for better performance:
+
+```tsx
+// app/layout.tsx
+import { DsLoader } from "@ds/next";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {/* Only load button and input */}
+        <DsLoader include={["ds-button", "ds-input"]} />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Or exclude specific components:
+
+```tsx
+<DsLoader exclude={["ds-dialog"]} />
+```
+
+### Debug Mode
+
+Enable debug logging to see registration activity:
+
+```tsx
+<DsLoader debug />
+```
+
+This will log component registration to the console:
+```
+[DsLoader] Registering 2 components: ds-button, ds-input
+[DsLoader] Registered ds-button
+[DsLoader] Registered ds-input
+[DsLoader] All components registered
+```
+
+## Troubleshooting
+
+### Components not rendering
+
+**Symptoms**: You see empty `<ds-button></ds-button>` tags in the DOM.
+
+**Causes**:
+1. `DsLoader` not included in layout
+2. JavaScript not loading
+
+**Solutions**:
+1. Ensure `<DsLoader />` is in your root layout
+2. Check browser console for JavaScript errors
+3. Enable debug mode: `<DsLoader debug />`
+
+### Hydration mismatch warnings
+
+**Symptoms**: React warns about hydration mismatches.
+
+**Causes**: Server and client render different content.
+
+**Solutions**:
+1. Ensure component attributes are consistent between server and client
+2. Don't conditionally render components based on client-only state
+3. Use `suppressHydrationWarning` if the mismatch is intentional
+
+### Double registration errors
+
+**Symptoms**: Console shows "has already been defined" errors.
+
+**Causes**: Components being registered multiple times.
+
+**Solutions**:
+1. Only include one `<DsLoader />` in your app
+2. Don't import `@ds/wc` directly if using `DsLoader`
+3. The registry automatically skips already-registered components
+
+### Events not firing
+
+**Symptoms**: `onDs:click` handlers aren't called.
+
+**Causes**: Event handler syntax or component not hydrated.
+
+**Solutions**:
+1. Ensure you're using `onDs:click` (with colon), not `onClick`
+2. Events only work after hydration - wait for components to upgrade
+3. Verify the component isn't `disabled`
+
+### Styles not applying
+
+**Symptoms**: Components render without styles.
+
+**Causes**: CSS not imported or layer order issues.
+
+**Solutions**:
+1. Import `@ds/css` in your layout
+2. Check CSS layer order - overrides should come last
+3. Light DOM means external CSS applies directly to internal elements
+
+## API Reference
+
+### DsLoader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `include` | `ComponentTag[]` | - | Only register these components |
+| `exclude` | `ComponentTag[]` | - | Don't register these components |
+| `debug` | `boolean` | `false` | Enable console logging |
+| `onLoad` | `() => void` | - | Callback when registration completes |
+
+### registerAllElements
+
+Programmatic component registration:
+
+```tsx
+import { registerAllElements } from "@ds/next";
+
+// Register all components
+await registerAllElements();
+
+// Register specific components
+await registerAllElements({ include: ["ds-button"] });
+
+// With debug logging
+await registerAllElements({ debug: true });
+```
+
+### registerElements
+
+Convenience function for selective registration:
+
+```tsx
+import { registerElements } from "@ds/next";
+
+await registerElements(["ds-button", "ds-input"]);
+```

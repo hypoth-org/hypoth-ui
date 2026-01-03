@@ -1,7 +1,8 @@
 import { type TemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { LightElement } from "../../base/light-element.js";
+import { DSElement } from "../../base/ds-element.js";
+import { emitEvent, StandardEvents } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
@@ -17,7 +18,7 @@ export type ButtonSize = "sm" | "md" | "lg";
  *
  * @fires click - When the button is clicked
  */
-export class DsButton extends LightElement {
+export class DsButton extends DSElement {
   static override styles = [];
 
   /**
@@ -57,14 +58,10 @@ export class DsButton extends LightElement {
       return;
     }
 
-    // Dispatch a custom click event
-    this.dispatchEvent(
-      new CustomEvent("click", {
-        bubbles: true,
-        composed: true,
-        detail: { originalEvent: event },
-      })
-    );
+    // Dispatch ds:click event using standard convention
+    emitEvent(this, StandardEvents.CLICK, {
+      detail: { originalEvent: event },
+    });
   }
 
   private handleKeyDown(event: KeyboardEvent): void {

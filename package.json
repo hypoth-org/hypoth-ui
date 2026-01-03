@@ -23,6 +23,7 @@
     "test:a11y": "pnpm -r run test:a11y",
     "validate:manifests": "pnpm --filter @ds/docs-core run validate:manifests",
     "new-component": "tsx tooling/scripts/new-component.ts",
+    "check:auto-define": "tsx tooling/scripts/check-auto-define.ts",
     "clean": "pnpm -r run clean && rm -rf node_modules"
   },
   "devDependencies": {
@@ -30,9 +31,11 @@
     "@playwright/test": "^1.40.0",
     "@testing-library/react": "^14.1.0",
     "@types/node": "^20.10.0",
+    "glob": "^10.5.0",
     "happy-dom": "^13.10.0",
     "jest-axe": "^8.0.0",
     "playwright": "^1.40.0",
+    "ts-morph": "27.0.2",
     "tsup": "^8.0.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.0",

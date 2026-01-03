@@ -1,2 +1,11 @@
 // Next.js integration barrel export
-export { DsLoader, registerAllElements } from "./loader/index.js";
+export {
+  DsLoader,
+  registerAllElements,
+  registerElements,
+} from "./loader/index.js";
+
+export type {
+  DsLoaderProps,
+  RegisterOptions,
+} from "./loader/index.js";
