@@ -1,4 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+// Import components to register them
+import "../../src/components/button/button.js";
+import "../../src/components/input/input.js";
 import type { DsButton } from "../../src/components/button/button.js";
 import type { DsInput } from "../../src/components/input/input.js";
 
