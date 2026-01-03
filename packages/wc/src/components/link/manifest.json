@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "link",
+  "name": "Link",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "An accessible link component for navigation within the application or to external resources",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "link",
+    "keyboard": ["Enter"],
+    "screenReader": "Announces as a link with the link's text content. External links are announced with additional context indicating they open in a new tab.",
+    "ariaPatterns": ["role=link (implicit via <a>)"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.link.default",
+    "color.link.hover",
+    "color.link.visited",
+    "color.link.active",
+    "color.foreground.muted",
+    "color.foreground.default",
+    "color.border.focus"
+  ],
+  "recommendedUsage": "Use for navigation to other pages or sections. Choose external=true for links that leave the current site.",
+  "antiPatterns": "Do not use links for actions that don't navigate (use Button instead). Avoid links styled as buttons or buttons styled as links. Avoid icon-only links without accessible text.",
+  "platforms": ["wc", "react"]
+}

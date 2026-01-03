@@ -6,3 +6,8 @@
 /* postcss-import resolves these through node_modules */
 @import "@ds/wc/src/components/button/button.css";
 @import "@ds/wc/src/components/input/input.css";
+@import "@ds/wc/src/components/link/link.css";
+@import "@ds/wc/src/components/text/text.css";
+@import "@ds/wc/src/components/icon/icon.css";
+@import "@ds/wc/src/components/spinner/spinner.css";
+@import "@ds/wc/src/components/visually-hidden/visually-hidden.css";

@@ -1,0 +1,140 @@
+---
+title: Text
+description: A typography component for consistent text styling with size, weight, and semantic element support.
+component: text
+status: stable
+category: typography
+order: 3
+---
+
+# Text
+
+The Text component provides consistent typography across your application using design tokens.
+
+## Usage
+
+Import the text component and use it in your templates:
+
+```html
+<ds-text>Default text content</ds-text>
+```
+
+### React
+
+```tsx
+import { Text } from "@ds/react";
+
+function MyComponent() {
+  return <Text size="lg" weight="bold">Large bold text</Text>;
+}
+```
+
+## Sizes
+
+The Text component supports a range of sizes from extra small to 2xl:
+
+```html
+<ds-text size="xs">Extra small text</ds-text>
+<ds-text size="sm">Small text</ds-text>
+<ds-text size="md">Medium text (default)</ds-text>
+<ds-text size="lg">Large text</ds-text>
+<ds-text size="xl">Extra large text</ds-text>
+<ds-text size="2xl">2XL text</ds-text>
+```
+
+## Weights
+
+Control the font weight with the `weight` prop:
+
+```html
+<ds-text weight="normal">Normal weight</ds-text>
+<ds-text weight="medium">Medium weight</ds-text>
+<ds-text weight="semibold">Semibold weight</ds-text>
+<ds-text weight="bold">Bold weight</ds-text>
+```
+
+## Variants
+
+Color variants communicate meaning and establish visual hierarchy:
+
+```html
+<ds-text variant="default">Default text color</ds-text>
+<ds-text variant="muted">Muted text for secondary content</ds-text>
+<ds-text variant="success">Success message text</ds-text>
+<ds-text variant="warning">Warning message text</ds-text>
+<ds-text variant="error">Error message text</ds-text>
+```
+
+## Semantic Elements
+
+Use the `as` prop to render the appropriate HTML element for semantic meaning:
+
+### Headings
+
+```html
+<ds-text as="h1" size="2xl" weight="bold">Page Title</ds-text>
+<ds-text as="h2" size="xl" weight="semibold">Section Title</ds-text>
+<ds-text as="h3" size="lg" weight="medium">Subsection Title</ds-text>
+```
+
+### Paragraphs
+
+```html
+<ds-text as="p">
+  This is a paragraph of text that provides detailed information about the topic.
+  Paragraphs are rendered as block elements with proper spacing.
+</ds-text>
+```
+
+## Truncation
+
+Truncate long text with an ellipsis:
+
+```html
+<div style="width: 200px;">
+  <ds-text truncate>
+    This is a very long piece of text that will be truncated with an ellipsis
+  </ds-text>
+</div>
+```
+
+Note: Truncation requires a width constraint on the parent container.
+
+## Combining Props
+
+Combine multiple props for complete typographic control:
+
+```html
+<ds-text as="h2" size="xl" weight="bold" variant="default">
+  Featured Article
+</ds-text>
+
+<ds-text as="p" size="sm" variant="muted">
+  Published 2 days ago
+</ds-text>
+```
+
+## Accessibility
+
+- Use semantic elements (`as="h1"` through `as="h6"`) for headings
+- Screen readers announce headings with their level
+- Maintain proper heading hierarchy (don't skip levels)
+- Color variants should not be the only way to convey meaning
+
+## Best Practices
+
+### Do
+
+- Use semantic heading elements for document structure
+- Maintain proper heading hierarchy (h1 > h2 > h3)
+- Use muted variant for secondary or supporting text
+- Combine size and weight for visual hierarchy
+- Use truncation with a tooltip for full content access
+
+### Don't
+
+- Don't skip heading levels (e.g., h1 directly to h3)
+- Don't use color alone to convey meaning (add text or icons)
+- Don't use Text for interactive elements (use Button or Link)
+- Don't override colors outside the variant system
+- Don't use overly small text sizes for important content

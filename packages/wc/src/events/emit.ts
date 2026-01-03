@@ -86,6 +86,8 @@ export const StandardEvents = {
   FOCUS_CHANGE: "focus-change",
   /** Click event (buttons) */
   CLICK: "click",
+  /** Navigate event (links) */
+  NAVIGATE: "navigate",
 } as const;
 
 export type StandardEventName = (typeof StandardEvents)[keyof typeof StandardEvents];

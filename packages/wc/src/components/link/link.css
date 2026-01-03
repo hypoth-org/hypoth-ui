@@ -1,0 +1,84 @@
+/* Link Component Styles */
+@layer components {
+  .ds-link {
+    /* Base styles */
+    color: var(--ds-color-link-default);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 150ms ease;
+    display: inline;
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .ds-link:hover {
+    color: var(--ds-color-link-hover);
+    text-decoration: underline;
+  }
+
+  .ds-link:active {
+    color: var(--ds-color-link-active);
+  }
+
+  .ds-link:visited {
+    color: var(--ds-color-link-visited);
+  }
+
+  /* Focus state */
+  .ds-link:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Variant: default - blue link color */
+  .ds-link--default {
+    color: var(--ds-color-link-default);
+  }
+
+  /* Variant: muted - subdued color for secondary links */
+  .ds-link--muted {
+    color: var(--ds-color-foreground-muted);
+  }
+
+  .ds-link--muted:hover {
+    color: var(--ds-color-foreground-default);
+  }
+
+  .ds-link--muted:visited {
+    color: var(--ds-color-foreground-muted);
+  }
+
+  /* Variant: underline - always underlined */
+  .ds-link--underline {
+    text-decoration: underline;
+  }
+
+  .ds-link--underline:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* External link styling */
+  .ds-link--external {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .ds-link__external-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 0.875em;
+    height: 0.875em;
+  }
+
+  .ds-link__external-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Content wrapper */
+  .ds-link__content {
+    display: inline;
+  }
+}

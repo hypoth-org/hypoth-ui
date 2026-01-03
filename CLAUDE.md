@@ -13,6 +13,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-01
 - N/A (stateless utilities with closure-captured state) (005-behavior-utilities)
 - TypeScript 5.3+ + Lit 3.1+ (Web Components), React 18+ (Next.js adapter), Next.js 14+ (App Router) (006-wc-platform)
 - N/A (no persistence layer) (006-wc-platform)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), External icon library (Lucide or Heroicons) with adapter (007-baseline-components)
+- N/A (stateless UI components) (007-baseline-components)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -62,9 +64,9 @@ pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 007-baseline-components: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), External icon library (Lucide or Heroicons) with adapter
 - 006-wc-platform: Added TypeScript 5.3+ + Lit 3.1+ (Web Components), React 18+ (Next.js adapter), Next.js 14+ (App Router)
 - 005-behavior-utilities: Added TypeScript 5.x (strict mode, ES2022 target) + None (zero runtime deps per constitution)
-- 004-css-layers: Added CSS (native `@layer`), TypeScript 5.x (build tooling only) + PostCSS 8.x (build-time import flattening), postcss-import, cssnano (minification)
 
 
 <!-- MANUAL ADDITIONS START -->

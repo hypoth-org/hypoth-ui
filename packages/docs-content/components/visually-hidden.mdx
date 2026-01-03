@@ -1,0 +1,175 @@
+---
+title: VisuallyHidden
+description: A utility component that hides content visually while keeping it accessible to screen readers.
+component: visually-hidden
+status: stable
+category: utilities
+order: 6
+---
+
+# VisuallyHidden
+
+The VisuallyHidden component hides content from sighted users while keeping it accessible to screen readers.
+
+## Usage
+
+Import the component and wrap content that should only be announced to screen readers:
+
+```html
+<ds-visually-hidden>Additional context for screen readers</ds-visually-hidden>
+```
+
+### React
+
+```tsx
+import { VisuallyHidden } from "@ds/react";
+
+function IconButton() {
+  return (
+    <button>
+      <Icon name="trash" aria-hidden="true" />
+      <VisuallyHidden>Delete item</VisuallyHidden>
+    </button>
+  );
+}
+```
+
+## Icon-Only Buttons
+
+Provide accessible names for buttons that only show icons:
+
+```html
+<button>
+  <ds-icon name="trash" aria-hidden="true"></ds-icon>
+  <ds-visually-hidden>Delete item</ds-visually-hidden>
+</button>
+
+<button>
+  <ds-icon name="edit" aria-hidden="true"></ds-icon>
+  <ds-visually-hidden>Edit profile</ds-visually-hidden>
+</button>
+```
+
+Screen readers will announce: "Delete item, button" and "Edit profile, button"
+
+## Skip Links
+
+Create skip links that become visible when focused:
+
+```html
+<ds-visually-hidden focusable>
+  <a href="#main-content">Skip to main content</a>
+</ds-visually-hidden>
+
+<nav>...</nav>
+
+<main id="main-content">
+  ...
+</main>
+```
+
+The `focusable` attribute makes the content visible when it receives focus, allowing keyboard users to see and use the skip link.
+
+## Expanding Link Context
+
+Add context to "Read more" links without cluttering the visual design:
+
+```html
+<article>
+  <h2>JavaScript Best Practices</h2>
+  <p>Learn the fundamentals of writing clean, maintainable code...</p>
+  <a href="/article/js-best-practices">
+    Read more
+    <ds-visually-hidden> about JavaScript Best Practices</ds-visually-hidden>
+  </a>
+</article>
+```
+
+Screen readers announce: "Read more about JavaScript Best Practices, link"
+
+## Table Headers
+
+Expand abbreviated table headers:
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th scope="col">
+        Qty<ds-visually-hidden>uantity</ds-visually-hidden>
+      </th>
+      <th scope="col">
+        Desc<ds-visually-hidden>ription</ds-visually-hidden>
+      </th>
+      <th scope="col">
+        $<ds-visually-hidden>Price</ds-visually-hidden>
+      </th>
+    </tr>
+  </thead>
+  <tbody>...</tbody>
+</table>
+```
+
+## External Link Indicators
+
+Provide context for external links (the Link component does this automatically):
+
+```html
+<a href="https://example.com" target="_blank">
+  Visit Example
+  <ds-icon name="external-link" aria-hidden="true"></ds-icon>
+  <ds-visually-hidden>(opens in new tab)</ds-visually-hidden>
+</a>
+```
+
+## How It Works
+
+The component uses CSS to visually hide content without removing it from the accessibility tree:
+
+```css
+.ds-visually-hidden {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+```
+
+When `focusable` is true, focus styles override the hiding:
+
+```css
+.ds-visually-hidden--focusable:focus-within {
+  clip-path: none;
+  height: auto;
+  overflow: visible;
+  position: static;
+  white-space: normal;
+  width: auto;
+}
+```
+
+## Accessibility
+
+- Content is announced by screen readers
+- Does not use `display: none` or `visibility: hidden` (which hide from AT)
+- Does not use `aria-hidden` (content is accessible)
+- Focusable content becomes visible on focus
+
+## Best Practices
+
+### Do
+
+- Provide accessible names for icon-only interactive elements
+- Add context to abbreviated or ambiguous text
+- Use for skip links with the `focusable` attribute
+- Keep hidden text concise and meaningful
+
+### Don't
+
+- Don't use to hide content from ALL users (use CSS `display: none` instead)
+- Don't duplicate information that's already accessible
+- Don't use excessively - visible content is always better
+- Don't hide critical information that sighted users need
+- Don't use as a substitute for proper accessible labels

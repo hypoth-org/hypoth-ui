@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/dtcg-token.schema.json",
   "icon": {
-    "$description": "Icon tokens for sizing and spacing",
+    "$description": "Icon and spinner tokens for sizing and spacing",
     "size": {
       "$type": "dimension",
       "$description": "Icon size tokens",
