@@ -1,0 +1,86 @@
+/* Text Component Styles */
+@layer components {
+  .ds-text {
+    /* Base styles */
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    line-height: var(--ds-line-height-normal);
+  }
+
+  /* Size variants */
+  .ds-text--xs {
+    font-size: var(--ds-font-size-xs);
+    line-height: var(--ds-line-height-tight);
+  }
+
+  .ds-text--sm {
+    font-size: var(--ds-font-size-sm);
+    line-height: var(--ds-line-height-tight);
+  }
+
+  .ds-text--md {
+    font-size: var(--ds-font-size-base);
+    line-height: var(--ds-line-height-normal);
+  }
+
+  .ds-text--lg {
+    font-size: var(--ds-font-size-lg);
+    line-height: var(--ds-line-height-normal);
+  }
+
+  .ds-text--xl {
+    font-size: var(--ds-font-size-xl);
+    line-height: var(--ds-line-height-relaxed);
+  }
+
+  .ds-text--2xl {
+    font-size: var(--ds-font-size-2xl);
+    line-height: var(--ds-line-height-relaxed);
+  }
+
+  /* Weight variants */
+  .ds-text--normal {
+    font-weight: var(--ds-font-weight-normal);
+  }
+
+  .ds-text--medium {
+    font-weight: var(--ds-font-weight-medium);
+  }
+
+  .ds-text--semibold {
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  .ds-text--bold {
+    font-weight: var(--ds-font-weight-bold);
+  }
+
+  /* Color variants */
+  .ds-text--default {
+    color: var(--ds-color-foreground-default);
+  }
+
+  .ds-text--muted {
+    color: var(--ds-color-foreground-muted);
+  }
+
+  .ds-text--success {
+    color: var(--ds-color-success-default);
+  }
+
+  .ds-text--warning {
+    color: var(--ds-color-warning-default);
+  }
+
+  .ds-text--error {
+    color: var(--ds-color-destructive-default);
+  }
+
+  /* Truncate modifier */
+  .ds-text--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

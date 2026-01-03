@@ -1,0 +1,34 @@
+/* VisuallyHidden Component Styles */
+@layer components {
+  .ds-visually-hidden {
+    /* Accessible hiding technique using clip-path */
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  /* Focusable variant - becomes visible on focus */
+  .ds-visually-hidden--focusable:not(:focus):not(:active):not(:focus-within) {
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  /* When focusable element receives focus, show it */
+  .ds-visually-hidden--focusable:focus,
+  .ds-visually-hidden--focusable:active,
+  .ds-visually-hidden--focusable:focus-within {
+    clip-path: none;
+    height: auto;
+    overflow: visible;
+    position: static;
+    white-space: normal;
+    width: auto;
+  }
+}

@@ -1,0 +1,57 @@
+/* Spinner Component Styles */
+@layer components {
+  .ds-spinner {
+    display: inline-block;
+    border-style: solid;
+    border-color: currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: ds-spin 1s linear infinite;
+  }
+
+  /* Size variants */
+  .ds-spinner--sm {
+    width: var(--ds-icon-size-sm);
+    height: var(--ds-icon-size-sm);
+    border-width: 2px;
+  }
+
+  .ds-spinner--md {
+    width: var(--ds-icon-size-md);
+    height: var(--ds-icon-size-md);
+    border-width: 2px;
+  }
+
+  .ds-spinner--lg {
+    width: var(--ds-icon-size-lg);
+    height: var(--ds-icon-size-lg);
+    border-width: 3px;
+  }
+
+  /* Spin animation */
+  @keyframes ds-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Reduced motion: replace spin with pulse */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-spinner {
+      animation: ds-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes ds-pulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.4;
+      }
+    }
+  }
+}

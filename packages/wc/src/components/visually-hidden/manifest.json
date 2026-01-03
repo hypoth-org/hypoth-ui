@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "visually-hidden",
+  "name": "VisuallyHidden",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A utility component that hides content visually while keeping it accessible to screen readers. Essential for providing additional context to assistive technology users.",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "custom",
+    "keyboard": ["Tab"],
+    "screenReader": "Content is announced by screen readers despite being visually hidden. When focusable is enabled, content becomes visible on focus.",
+    "ariaPatterns": [],
+    "knownLimitations": []
+  },
+  "tokensUsed": [],
+  "recommendedUsage": "Use to provide descriptive text for icon-only buttons, add context for complex UI patterns, or create skip links for keyboard navigation.",
+  "antiPatterns": "Do not use to hide content from all users - use CSS display:none instead. Do not overuse; provide the same information visually when possible.",
+  "platforms": ["wc"]
+}

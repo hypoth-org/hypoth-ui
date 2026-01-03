@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "text",
+  "name": "Text",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A typography component for consistent text styling with size, weight, and semantic element support",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "none",
+    "keyboard": [],
+    "screenReader": "Content is read as standard text. Semantic elements (headings, paragraphs) are announced appropriately.",
+    "ariaPatterns": [],
+    "knownLimitations": [
+      "Heading hierarchy is not enforced - developers must ensure proper nesting"
+    ]
+  },
+  "tokensUsed": [
+    "font.size.xs",
+    "font.size.sm",
+    "font.size.base",
+    "font.size.lg",
+    "font.size.xl",
+    "font.size.2xl",
+    "font.weight.normal",
+    "font.weight.medium",
+    "font.weight.semibold",
+    "font.weight.bold",
+    "line-height.tight",
+    "line-height.normal",
+    "line-height.relaxed",
+    "color.foreground.default",
+    "color.foreground.muted",
+    "color.success.default",
+    "color.warning.default",
+    "color.destructive.default"
+  ],
+  "recommendedUsage": "Use for all text content to ensure consistent typography. Use the `as` prop to render semantic elements like headings.",
+  "antiPatterns": "Do not skip heading levels (e.g., h1 to h3). Avoid using color alone to convey meaning. Do not use Text for interactive elements.",
+  "platforms": ["wc", "react"]
+}

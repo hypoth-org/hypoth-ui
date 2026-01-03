@@ -1,0 +1,143 @@
+---
+title: Link
+description: An accessible link component for navigation within the application or to external resources.
+component: link
+status: stable
+category: navigation
+order: 2
+---
+
+# Link
+
+Links allow users to navigate to other pages, sections, or external resources.
+
+## Usage
+
+Import the link component and use it in your templates:
+
+```html
+<ds-link href="/about">About us</ds-link>
+```
+
+### React
+
+```tsx
+import { Link } from "@ds/react";
+
+function MyComponent() {
+  return <Link href="/about">About us</Link>;
+}
+```
+
+## Variants
+
+The link supports several visual variants:
+
+### Default
+
+Standard link with the primary link color.
+
+```html
+<ds-link href="/features">Explore features</ds-link>
+```
+
+### Muted
+
+Use for secondary or less prominent links.
+
+```html
+<ds-link href="/terms" variant="muted">Terms of service</ds-link>
+```
+
+### Underline
+
+Always underlined, useful within body text.
+
+```html
+<p>
+  Read our <ds-link href="/privacy" variant="underline">privacy policy</ds-link> for more details.
+</p>
+```
+
+## External Links
+
+For links that navigate to external websites, use the `external` attribute:
+
+```html
+<ds-link href="https://github.com/example/repo" external>
+  View on GitHub
+</ds-link>
+```
+
+External links automatically:
+- Open in a new tab (`target="_blank"`)
+- Include security attributes (`rel="noopener noreferrer"`)
+- Show an external link icon
+- Announce "(opens in new tab)" to screen readers
+
+## SPA Navigation
+
+The link component emits a cancelable `ds:navigate` event before navigation occurs. This enables SPA frameworks to intercept and handle navigation:
+
+```html
+<ds-link href="/dashboard" id="dashboard-link">Dashboard</ds-link>
+
+<script>
+  document.getElementById('dashboard-link').addEventListener('ds:navigate', (e) => {
+    e.preventDefault(); // Prevent default navigation
+    router.push(e.detail.href); // Use your SPA router
+  });
+</script>
+```
+
+### React Example
+
+```tsx
+import { Link } from "@ds/react";
+import { useRouter } from "next/navigation";
+
+function NavLink({ href, children }) {
+  const router = useRouter();
+
+  const handleNavigate = (e) => {
+    e.preventDefault();
+    router.push(e.detail.href);
+  };
+
+  return (
+    <Link href={href} onDsNavigate={handleNavigate}>
+      {children}
+    </Link>
+  );
+}
+```
+
+## Accessibility
+
+- Links use native `<a>` element semantics
+- Keyboard support: `Tab` to focus, `Enter` to activate
+- Focus is clearly visible with a focus ring
+- External links announce "(opens in new tab)" to screen readers
+- External link icon is decorative (`aria-hidden="true"`)
+
+### Screen Reader Behavior
+
+- Internal links announce as "link, [link text]"
+- External links announce as "link, [link text], opens in new tab"
+
+## Best Practices
+
+### Do
+
+- Use descriptive link text that makes sense out of context
+- Use links for navigation to pages or resources
+- Indicate external links with the `external` attribute
+- Keep link text concise but meaningful
+
+### Don't
+
+- Don't use generic text like "click here" or "read more" without context
+- Don't use links for actions that don't navigate (use Button instead)
+- Don't style buttons as links or links as buttons
+- Don't use icon-only links without accessible text
+- Don't remove the underline on hover for links in body text

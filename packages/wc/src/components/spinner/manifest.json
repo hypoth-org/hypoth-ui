@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "spinner",
+  "name": "Spinner",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A loading indicator that provides visual feedback during asynchronous operations. Automatically respects reduced motion preferences.",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "status",
+    "keyboard": [],
+    "screenReader": "Announced as a status with the provided label. Uses role=status to announce loading state without interrupting user.",
+    "ariaPatterns": ["role=status", "aria-label"],
+    "knownLimitations": []
+  },
+  "tokensUsed": ["icon.size.sm", "icon.size.md", "icon.size.lg"],
+  "recommendedUsage": "Use to indicate loading state during data fetching, form submissions, or other async operations. Combine with aria-busy on parent containers.",
+  "antiPatterns": "Do not use without a meaningful label. Do not show indefinitely without context or timeout. Do not use multiple spinners in close proximity.",
+  "platforms": ["wc"]
+}

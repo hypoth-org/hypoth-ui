@@ -9,8 +9,8 @@
   "accessibility": {
     "apgPattern": "button",
     "keyboard": ["Enter", "Space"],
-    "screenReader": "Announces as a button with the button's text content. Disabled state is announced when applicable.",
-    "ariaPatterns": ["role=button", "aria-disabled"],
+    "screenReader": "Announces as a button with the button's text content. Disabled and loading states are announced when applicable.",
+    "ariaPatterns": ["role=button", "aria-disabled", "aria-busy"],
     "knownLimitations": []
   },
   "tokensUsed": [

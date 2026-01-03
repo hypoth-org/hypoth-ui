@@ -1,0 +1,136 @@
+---
+title: Spinner
+description: An accessible loading indicator with reduced motion support.
+component: spinner
+status: stable
+category: feedback
+order: 5
+---
+
+# Spinner
+
+The Spinner component indicates loading or processing states with proper accessibility support.
+
+## Usage
+
+Import the spinner component and use it in your templates:
+
+```html
+<ds-spinner></ds-spinner>
+```
+
+### React
+
+```tsx
+import { Spinner } from "@ds/react";
+
+function LoadingState() {
+  return <Spinner label="Loading content" />;
+}
+```
+
+## Sizes
+
+Spinners come in three sizes:
+
+```html
+<ds-spinner size="sm"></ds-spinner>  <!-- 16px -->
+<ds-spinner size="md"></ds-spinner>  <!-- 24px (default) -->
+<ds-spinner size="lg"></ds-spinner>  <!-- 32px -->
+```
+
+## Custom Labels
+
+Provide a descriptive label for screen reader announcements:
+
+```html
+<ds-spinner label="Loading your dashboard"></ds-spinner>
+<ds-spinner label="Saving changes"></ds-spinner>
+<ds-spinner label="Fetching search results"></ds-spinner>
+```
+
+The label is announced to screen readers via `role="status"` and `aria-label`.
+
+## Loading Regions
+
+Use spinners within `aria-busy` regions to indicate that content is loading:
+
+```html
+<section aria-busy="true" aria-label="Search results">
+  <ds-spinner label="Searching"></ds-spinner>
+</section>
+```
+
+When loading completes, update the region:
+
+```html
+<section aria-busy="false" aria-label="Search results">
+  <!-- Loaded content -->
+</section>
+```
+
+## Button Loading State
+
+Show spinners in buttons during async operations:
+
+```html
+<button disabled aria-busy="true">
+  <ds-spinner size="sm" label="Saving"></ds-spinner>
+  Saving...
+</button>
+```
+
+Or use the Button component's built-in loading state:
+
+```html
+<ds-button loading>Saving...</ds-button>
+```
+
+## Reduced Motion Support
+
+The spinner automatically respects `prefers-reduced-motion`:
+
+- **Normal motion**: Rotating animation
+- **Reduced motion**: Opacity pulse animation
+
+This ensures users who prefer reduced motion still see a clear loading indicator without potentially triggering discomfort.
+
+```css
+/* CSS handles this automatically */
+@media (prefers-reduced-motion: reduce) {
+  .ds-spinner {
+    animation: ds-pulse 2s ease-in-out infinite;
+  }
+}
+```
+
+## Accessibility
+
+- Spinner has `role="status"` for ARIA live region behavior
+- `aria-label` provides the loading message to screen readers
+- Default label is "Loading" if not specified
+- Works with `aria-busy` regions for section-level loading
+
+### Screen Reader Announcements
+
+When a spinner appears, screen readers announce the label:
+- "Loading" (default)
+- Or your custom label: "Fetching search results"
+
+## Best Practices
+
+### Do
+
+- Provide descriptive labels that explain what is loading
+- Use spinners for operations that take 1-20 seconds
+- Remove spinners promptly when loading completes
+- Use with `aria-busy` regions for content areas
+- Match spinner size to context (small in buttons, larger for page sections)
+
+### Don't
+
+- Don't use infinite spinners without timeout or error handling
+- Don't omit labels (use meaningful descriptions, not just "Loading")
+- Don't show spinners for very quick operations (< 300ms)
+- Don't use spinners without indicating progress for very long operations (use progress bars instead)
+- Don't use spinners for operations that don't actually load content

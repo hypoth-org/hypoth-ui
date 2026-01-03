@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "happy-dom",
-    include: ["tests/**/*.test.ts"],
+    include: ["tests/**/*.test.ts", "src/components/**/*.test.ts"],
     deps: {
       inline: [/lit/],
     },

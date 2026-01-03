@@ -45,6 +45,12 @@
     },
     "focus": {
       "ring": { "$value": "{color.primitives.blue.500}", "$type": "color" }
+    },
+    "link": {
+      "default": { "$value": "{color.primitives.blue.600}", "$type": "color" },
+      "hover": { "$value": "{color.primitives.blue.700}", "$type": "color" },
+      "visited": { "$value": "{color.primitives.purple.600}", "$type": "color" },
+      "active": { "$value": "{color.primitives.blue.800}", "$type": "color" }
     }
   }
 }

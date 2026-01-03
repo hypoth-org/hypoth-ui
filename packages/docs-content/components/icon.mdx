@@ -1,0 +1,161 @@
+---
+title: Icon
+description: An accessible icon component with Lucide integration supporting decorative and meaningful icon usage.
+component: icon
+status: stable
+category: display
+order: 4
+---
+
+# Icon
+
+The Icon component displays icons from the Lucide icon library with proper accessibility handling.
+
+## Usage
+
+Import the icon component and use it in your templates:
+
+```html
+<ds-icon name="search"></ds-icon>
+```
+
+### React
+
+```tsx
+import { Icon } from "@ds/react";
+
+function MyComponent() {
+  return <Icon name="search" label="Search" />;
+}
+```
+
+## Icon Names
+
+Icons are referenced by their Lucide name in kebab-case:
+
+```html
+<ds-icon name="arrow-right"></ds-icon>
+<ds-icon name="external-link"></ds-icon>
+<ds-icon name="alert-triangle"></ds-icon>
+<ds-icon name="check-circle"></ds-icon>
+```
+
+Browse all available icons at [lucide.dev/icons](https://lucide.dev/icons).
+
+## Sizes
+
+Icons come in five sizes:
+
+```html
+<ds-icon name="star" size="xs"></ds-icon>  <!-- 12px -->
+<ds-icon name="star" size="sm"></ds-icon>  <!-- 16px -->
+<ds-icon name="star" size="md"></ds-icon>  <!-- 20px (default) -->
+<ds-icon name="star" size="lg"></ds-icon>  <!-- 24px -->
+<ds-icon name="star" size="xl"></ds-icon>  <!-- 32px -->
+```
+
+## Decorative vs Meaningful Icons
+
+### Decorative Icons
+
+Icons that are purely visual and don't convey additional information should be hidden from screen readers:
+
+```html
+<!-- Decorative: icon accompanies text -->
+<button>
+  <ds-icon name="download"></ds-icon>
+  Download
+</button>
+
+<!-- Decorative: icon is purely visual -->
+<span>
+  <ds-icon name="sparkles"></ds-icon>
+  New feature
+</span>
+```
+
+### Meaningful Icons
+
+Icons that convey information not available elsewhere need a `label`:
+
+```html
+<!-- Meaningful: icon conveys status -->
+<ds-icon name="check-circle" label="Completed"></ds-icon>
+
+<!-- Meaningful: icon conveys warning -->
+<ds-icon name="alert-triangle" label="Warning: action required"></ds-icon>
+```
+
+## Colors
+
+Icons inherit their color from the text color (`currentColor`) by default. Override with the `color` prop:
+
+```html
+<!-- Inherits text color -->
+<p style="color: blue;">
+  <ds-icon name="info"></ds-icon>
+  Information
+</p>
+
+<!-- Custom color -->
+<ds-icon name="heart" color="red"></ds-icon>
+<ds-icon name="check" color="var(--ds-color-success-default)"></ds-icon>
+```
+
+## Invalid Icon Handling
+
+When an invalid icon name is provided, a fallback placeholder is shown and a warning is logged in development:
+
+```html
+<!-- Shows fallback placeholder with "?" -->
+<ds-icon name="invalid-icon-name"></ds-icon>
+```
+
+## Accessibility
+
+### Decorative Icons (No Label)
+
+- Hidden from screen readers via `aria-hidden="true"`
+- No role or aria-label attributes
+- Does not affect accessible name of parent elements
+
+### Meaningful Icons (With Label)
+
+- Announced as an image: "Search, image"
+- Has `role="img"` and `aria-label`
+- Label should be descriptive and contextual
+
+### Icons in Interactive Elements
+
+When using icons in buttons or links:
+
+```html
+<!-- Button with icon and text (icon is decorative) -->
+<button>
+  <ds-icon name="edit"></ds-icon>
+  Edit profile
+</button>
+
+<!-- Icon-only button needs accessible name -->
+<button aria-label="Close dialog">
+  <ds-icon name="x"></ds-icon>
+</button>
+```
+
+## Best Practices
+
+### Do
+
+- Provide labels for icons that convey meaning
+- Use decorative icons alongside descriptive text
+- Choose icons that are universally recognizable
+- Use consistent icon sizes within a context
+- Use semantic colors from design tokens
+
+### Don't
+
+- Don't rely on icons alone to convey critical information
+- Don't use icon-only buttons without accessible labels
+- Don't use obscure icons without text explanation
+- Don't mix icon sizes randomly in the same context
+- Don't use icons when text would be clearer

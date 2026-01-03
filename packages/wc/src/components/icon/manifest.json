@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "icon",
+  "name": "Icon",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "An accessible icon component with Lucide integration supporting decorative and meaningful icon usage",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "none",
+    "keyboard": [],
+    "screenReader": "Decorative icons (no label) are hidden from screen readers. Meaningful icons (with label) are announced as images with the provided label.",
+    "ariaPatterns": [
+      "aria-hidden (decorative)",
+      "role=img (meaningful)",
+      "aria-label (meaningful)"
+    ],
+    "knownLimitations": ["Icon-only interactive elements require additional accessible labeling"]
+  },
+  "tokensUsed": ["color.foreground.default", "color.foreground.muted", "color.background.subtle"],
+  "recommendedUsage": "Use icons to enhance visual communication. Always provide a label for meaningful icons. Use without label for purely decorative icons.",
+  "antiPatterns": "Do not use icons as the only means of conveying information. Avoid icon-only buttons without accessible labels. Do not use icons when text would be clearer.",
+  "platforms": ["wc", "react"]
+}

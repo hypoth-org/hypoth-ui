@@ -7,7 +7,12 @@
  */
 
 import type { DsButton } from "../components/button/button.js";
+import type { DsIcon } from "../components/icon/icon.js";
 import type { DsInput } from "../components/input/input.js";
+import type { DsLink } from "../components/link/link.js";
+import type { DsSpinner } from "../components/spinner/spinner.js";
+import type { DsText } from "../components/text/text.js";
+import type { DsVisuallyHidden } from "../components/visually-hidden/visually-hidden.js";
 
 /**
  * Custom element constructor type
@@ -22,7 +27,14 @@ export type ComponentRegistryType = Record<string, CustomElementConstructor>;
 /**
  * Valid component tag names in the design system
  */
-export type ComponentTag = "ds-button" | "ds-input";
+export type ComponentTag =
+  | "ds-button"
+  | "ds-input"
+  | "ds-link"
+  | "ds-text"
+  | "ds-icon"
+  | "ds-spinner"
+  | "ds-visually-hidden";
 
 /**
  * Lazy loader type for dynamic imports
@@ -63,6 +75,41 @@ function initializeRegistry(): void {
     loader: async () => {
       const mod = await import("../components/input/input.js");
       return mod.DsInput;
+    },
+  });
+
+  registry.set("ds-link", {
+    loader: async () => {
+      const mod = await import("../components/link/link.js");
+      return mod.DsLink;
+    },
+  });
+
+  registry.set("ds-text", {
+    loader: async () => {
+      const mod = await import("../components/text/text.js");
+      return mod.DsText;
+    },
+  });
+
+  registry.set("ds-icon", {
+    loader: async () => {
+      const mod = await import("../components/icon/icon.js");
+      return mod.DsIcon;
+    },
+  });
+
+  registry.set("ds-spinner", {
+    loader: async () => {
+      const mod = await import("../components/spinner/spinner.js");
+      return mod.DsSpinner;
+    },
+  });
+
+  registry.set("ds-visually-hidden", {
+    loader: async () => {
+      const mod = await import("../components/visually-hidden/visually-hidden.js");
+      return mod.DsVisuallyHidden;
     },
   });
 }
@@ -153,5 +200,10 @@ declare global {
   interface HTMLElementTagNameMap {
     "ds-button": DsButton;
     "ds-input": DsInput;
+    "ds-link": DsLink;
+    "ds-text": DsText;
+    "ds-icon": DsIcon;
+    "ds-spinner": DsSpinner;
+    "ds-visually-hidden": DsVisuallyHidden;
   }
 }
