@@ -53,12 +53,7 @@ export interface TypeAhead {
  * Creates a type-ahead search handler.
  */
 export function createTypeAhead(options: TypeAheadOptions): TypeAhead {
-  const {
-    items,
-    getText,
-    onMatch,
-    timeout = DEFAULT_TYPEAHEAD_TIMEOUT,
-  } = options;
+  const { items, getText, onMatch, timeout = DEFAULT_TYPEAHEAD_TIMEOUT } = options;
 
   let buffer = "";
   let timeoutId: ReturnType<typeof setTimeout> | undefined;

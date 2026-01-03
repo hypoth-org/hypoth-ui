@@ -310,7 +310,7 @@ describe("createRovingFocus", () => {
       buttons[1].disabled = false;
     });
 
-    it("should skip aria-disabled=\"true\" elements when skipDisabled is true", () => {
+    it('should skip aria-disabled="true" elements when skipDisabled is true', () => {
       buttons[1].setAttribute("aria-disabled", "true");
 
       const roving = createRovingFocus({

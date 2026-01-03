@@ -25,7 +25,7 @@ export interface ShadowValue {
 export interface BorderValue {
   color: string;
   width: string;
-  style: 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'outset' | 'inset';
+  style: "solid" | "dashed" | "dotted" | "double" | "groove" | "ridge" | "outset" | "inset";
 }
 
 /** Typography composite value */
@@ -55,15 +55,15 @@ export interface TransitionValue {
 
 /** Stroke style value */
 export type StrokeStyleValue =
-  | 'solid'
-  | 'dashed'
-  | 'dotted'
-  | 'double'
-  | 'groove'
-  | 'ridge'
-  | 'outset'
-  | 'inset'
-  | { dashArray: string[]; lineCap: 'butt' | 'round' | 'square' };
+  | "solid"
+  | "dashed"
+  | "dotted"
+  | "double"
+  | "groove"
+  | "ridge"
+  | "outset"
+  | "inset"
+  | { dashArray: string[]; lineCap: "butt" | "round" | "square" };
 
 /** All possible token value types */
 export type TokenValue =
@@ -81,19 +81,19 @@ export type TokenValue =
 
 /** DTCG token types */
 export type TokenType =
-  | 'color'
-  | 'dimension'
-  | 'fontFamily'
-  | 'fontWeight'
-  | 'duration'
-  | 'cubicBezier'
-  | 'number'
-  | 'shadow'
-  | 'border'
-  | 'strokeStyle'
-  | 'typography'
-  | 'gradient'
-  | 'transition';
+  | "color"
+  | "dimension"
+  | "fontFamily"
+  | "fontWeight"
+  | "duration"
+  | "cubicBezier"
+  | "number"
+  | "shadow"
+  | "border"
+  | "strokeStyle"
+  | "typography"
+  | "gradient"
+  | "transition";
 
 /** A single DTCG token */
 export interface Token {
@@ -161,7 +161,7 @@ export interface CompilationResult {
 
 /** Compilation warning */
 export interface CompilationWarning {
-  type: 'circular-reference' | 'undefined-reference' | 'invalid-value' | 'unknown-type';
+  type: "circular-reference" | "undefined-reference" | "invalid-value" | "unknown-type";
   message: string;
   path: string;
   source?: TokenSource;

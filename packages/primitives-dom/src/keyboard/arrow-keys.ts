@@ -33,9 +33,7 @@ export interface ArrowKeyOptions {
 /**
  * Creates an arrow key handler for keyboard navigation.
  */
-export function createArrowKeyHandler(
-  options: ArrowKeyOptions
-): (event: KeyboardEvent) => void {
+export function createArrowKeyHandler(options: ArrowKeyOptions): (event: KeyboardEvent) => void {
   const { orientation, rtl = false, onNavigate } = options;
 
   return function handleKeyDown(event: KeyboardEvent): void {

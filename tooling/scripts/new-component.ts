@@ -320,7 +320,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const name = args[0].toLowerCase().replace(/[^a-z0-9-]/g, "-");
+  const name = args[0]?.toLowerCase().replace(/[^a-z0-9-]/g, "-") ?? "";
   const category = args[1] || "layout";
   const description = args[2] || `A ${toPascalCase(name)} component`;
 

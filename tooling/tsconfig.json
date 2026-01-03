@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "types": ["node"],
+    "skipLibCheck": true
+  },
+  "include": ["scripts/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["tests/fixtures/**/*.ts"]
+}

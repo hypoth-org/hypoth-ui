@@ -30,7 +30,7 @@ export type {
   GradientValue,
   TransitionValue,
   StrokeStyleValue,
-} from './dtcg.js';
+} from "./dtcg.js";
 
 // Categories
 export {
@@ -38,5 +38,5 @@ export {
   CATEGORY_DESCRIPTIONS,
   isTokenCategory,
   getCategoryFromPath,
-} from './categories.js';
-export type { TokenCategory } from './categories.js';
+} from "./categories.js";
+export type { TokenCategory } from "./categories.js";

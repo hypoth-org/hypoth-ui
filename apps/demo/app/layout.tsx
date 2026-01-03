@@ -1,6 +1,6 @@
 import "@ds/css";
+import { DsLoader } from "@ds/next";
 import type { ReactNode } from "react";
-import { DsLoader } from "../components/ds-loader";
 import { BrandSwitcher } from "../components/brand-switcher";
 
 export const metadata = {

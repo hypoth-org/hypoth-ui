@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { createRovingFocus, type Direction } from "@ds/primitives-dom";
+import { type Direction, createRovingFocus } from "@ds/primitives-dom";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function RovingFocusDemoPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,9 +50,7 @@ export default function RovingFocusDemoPage() {
       <Link href="/primitives">← Back to Primitives</Link>
 
       <h1>Roving Focus</h1>
-      <p className="text-muted">
-        Use arrow keys to navigate. Home/End jump to first/last item.
-      </p>
+      <p className="text-muted">Use arrow keys to navigate. Home/End jump to first/last item.</p>
 
       <div data-testid="roving-focus-demo" style={{ marginTop: "2rem" }}>
         <div style={{ marginBottom: "1rem" }}>
@@ -63,7 +61,9 @@ export default function RovingFocusDemoPage() {
               display: "inline-block",
               padding: "0.25rem 0.75rem",
               borderRadius: "9999px",
-              backgroundColor: isActive ? "var(--ds-color-success-default, green)" : "var(--ds-color-neutral-default, gray)",
+              backgroundColor: isActive
+                ? "var(--ds-color-success-default, green)"
+                : "var(--ds-color-neutral-default, gray)",
               color: "white",
               fontSize: "0.875rem",
             }}
@@ -132,7 +132,10 @@ export default function RovingFocusDemoPage() {
               style={{
                 padding: "0.5rem 1rem",
                 opacity: item.disabled ? 0.5 : 1,
-                outline: focusedIndex === index ? "2px solid var(--ds-color-primary-default, blue)" : "none",
+                outline:
+                  focusedIndex === index
+                    ? "2px solid var(--ds-color-primary-default, blue)"
+                    : "none",
                 outlineOffset: "2px",
               }}
             >

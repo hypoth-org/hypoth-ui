@@ -4,17 +4,17 @@
  */
 
 /** Theme mode values */
-export type ThemeMode = 'light' | 'dark' | 'high-contrast' | 'reduced-motion';
+export type ThemeMode = "light" | "dark" | "high-contrast" | "reduced-motion";
 
 /** localStorage keys */
-const MODE_STORAGE_KEY = 'ds-mode';
-const BRAND_STORAGE_KEY = 'ds-brand';
+const MODE_STORAGE_KEY = "ds-mode";
+const BRAND_STORAGE_KEY = "ds-brand";
 
 /**
  * Get the current theme mode
  */
 export function getMode(): ThemeMode | undefined {
-  if (typeof document === 'undefined') return undefined;
+  if (typeof document === "undefined") return undefined;
   return document.documentElement.dataset.mode as ThemeMode | undefined;
 }
 
@@ -23,7 +23,7 @@ export function getMode(): ThemeMode | undefined {
  * Updates DOM and persists to localStorage
  */
 export function setMode(mode: ThemeMode): void {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   document.documentElement.dataset.mode = mode;
 
@@ -39,7 +39,7 @@ export function setMode(mode: ThemeMode): void {
  */
 export function toggleMode(): ThemeMode {
   const current = getMode();
-  const next: ThemeMode = current === 'dark' ? 'light' : 'dark';
+  const next: ThemeMode = current === "dark" ? "light" : "dark";
   setMode(next);
   return next;
 }
@@ -48,7 +48,7 @@ export function toggleMode(): ThemeMode {
  * Clear mode preference (use system default)
  */
 export function clearMode(): void {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   delete document.documentElement.dataset.mode;
 
@@ -63,7 +63,7 @@ export function clearMode(): void {
  * Get the current brand
  */
 export function getBrand(): string | undefined {
-  if (typeof document === 'undefined') return undefined;
+  if (typeof document === "undefined") return undefined;
   return document.documentElement.dataset.brand;
 }
 
@@ -72,7 +72,7 @@ export function getBrand(): string | undefined {
  * Updates DOM and persists to localStorage
  */
 export function setBrand(brand: string): void {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   document.documentElement.dataset.brand = brand;
 
@@ -87,7 +87,7 @@ export function setBrand(brand: string): void {
  * Clear brand preference (use default brand)
  */
 export function clearBrand(): void {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   delete document.documentElement.dataset.brand;
 
@@ -102,48 +102,48 @@ export function clearBrand(): void {
  * Check if system prefers dark mode
  */
 export function prefersDarkMode(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
 /**
  * Check if system prefers reduced motion
  */
 export function prefersReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 /**
  * Check if system prefers high contrast
  */
 export function prefersHighContrast(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-contrast: more)').matches;
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-contrast: more)").matches;
 }
 
 /**
  * Subscribe to system color scheme changes
  */
 export function onColorSchemeChange(callback: (isDark: boolean) => void): () => void {
-  if (typeof window === 'undefined') return () => {};
+  if (typeof window === "undefined") return () => {};
 
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
   const handler = (e: MediaQueryListEvent) => callback(e.matches);
 
-  mediaQuery.addEventListener('change', handler);
-  return () => mediaQuery.removeEventListener('change', handler);
+  mediaQuery.addEventListener("change", handler);
+  return () => mediaQuery.removeEventListener("change", handler);
 }
 
 /**
  * Subscribe to mode changes
  */
 export function onModeChange(callback: (mode: ThemeMode | undefined) => void): () => void {
-  if (typeof window === 'undefined') return () => {};
+  if (typeof window === "undefined") return () => {};
 
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.attributeName === 'data-mode') {
+      if (mutation.attributeName === "data-mode") {
         callback(getMode());
       }
     }
@@ -151,7 +151,7 @@ export function onModeChange(callback: (mode: ThemeMode | undefined) => void): (
 
   observer.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ['data-mode'],
+    attributeFilter: ["data-mode"],
   });
 
   return () => observer.disconnect();
@@ -161,11 +161,11 @@ export function onModeChange(callback: (mode: ThemeMode | undefined) => void): (
  * Subscribe to brand changes
  */
 export function onBrandChange(callback: (brand: string | undefined) => void): () => void {
-  if (typeof window === 'undefined') return () => {};
+  if (typeof window === "undefined") return () => {};
 
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.attributeName === 'data-brand') {
+      if (mutation.attributeName === "data-brand") {
         callback(getBrand());
       }
     }
@@ -173,7 +173,7 @@ export function onBrandChange(callback: (brand: string | undefined) => void): ()
 
   observer.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ['data-brand'],
+    attributeFilter: ["data-brand"],
   });
 
   return () => observer.disconnect();

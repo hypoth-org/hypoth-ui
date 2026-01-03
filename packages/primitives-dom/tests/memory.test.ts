@@ -2,11 +2,11 @@
  * Memory leak verification tests for behavior primitives.
  * Tests that cleanup methods properly remove event listeners and references.
  */
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  createDismissableLayer,
   createFocusTrap,
   createRovingFocus,
-  createDismissableLayer,
   createTypeAhead,
 } from "../src/index.js";
 

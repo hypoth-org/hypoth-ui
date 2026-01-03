@@ -133,9 +133,7 @@ function detachGlobalListeners(): void {
 /**
  * Creates a dismissable layer with Escape key and outside click support.
  */
-export function createDismissableLayer(
-  options: DismissableLayerOptions
-): DismissableLayer {
+export function createDismissableLayer(options: DismissableLayerOptions): DismissableLayer {
   const {
     container,
     excludeElements = [],

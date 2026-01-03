@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { NavSidebar } from "../components/nav-sidebar";
-import { ThemeSwitcher } from "../components/theme-switcher";
 import { ThemeInitScript } from "../components/theme-init-script";
+import { ThemeSwitcher } from "../components/theme-switcher";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {

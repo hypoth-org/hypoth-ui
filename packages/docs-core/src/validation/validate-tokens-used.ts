@@ -3,7 +3,7 @@
  * Validates tokensUsed fields in component manifests
  */
 
-import { TOKEN_CATEGORIES, type TokenCategory } from './token-categories.js';
+import { TOKEN_CATEGORIES, type TokenCategory } from "./token-categories.js";
 
 /** Validation result */
 export interface TokensUsedValidationResult {
@@ -16,7 +16,7 @@ export interface TokensUsedValidationResult {
 export interface TokensUsedError {
   componentId: string;
   tokenPath: string;
-  type: 'invalid-category' | 'undefined-token' | 'invalid-format';
+  type: "invalid-category" | "undefined-token" | "invalid-format";
   message: string;
 }
 
@@ -24,7 +24,7 @@ export interface TokensUsedError {
 export interface TokensUsedWarning {
   componentId: string;
   tokenPath: string;
-  type: 'orphaned-token' | 'deprecated-token';
+  type: "orphaned-token" | "deprecated-token";
   message: string;
 }
 
@@ -48,21 +48,21 @@ export function validateTokensUsed(
       errors.push({
         componentId,
         tokenPath,
-        type: 'invalid-format',
+        type: "invalid-format",
         message: `Invalid token path format: "${tokenPath}". Must be category.path.to.token`,
       });
       continue;
     }
 
     // Check category
-    const parts = tokenPath.split('.');
+    const parts = tokenPath.split(".");
     const category = parts[0];
     if (!category || !isValidCategory(category)) {
       errors.push({
         componentId,
         tokenPath,
-        type: 'invalid-category',
-        message: `Invalid token category: "${category}". Valid categories: ${TOKEN_CATEGORIES.join(', ')}`,
+        type: "invalid-category",
+        message: `Invalid token category: "${category}". Valid categories: ${TOKEN_CATEGORIES.join(", ")}`,
       });
       continue;
     }
@@ -72,7 +72,7 @@ export function validateTokensUsed(
       errors.push({
         componentId,
         tokenPath,
-        type: 'undefined-token',
+        type: "undefined-token",
         message: `Token not found in token set: "${tokenPath}"`,
       });
     }
@@ -100,11 +100,7 @@ export function validateAllTokensUsed(
       continue;
     }
 
-    const result = validateTokensUsed(
-      manifest.id,
-      manifest.tokensUsed,
-      availableTokens
-    );
+    const result = validateTokensUsed(manifest.id, manifest.tokensUsed, availableTokens);
 
     allErrors.push(...result.errors);
     allWarnings.push(...result.warnings);

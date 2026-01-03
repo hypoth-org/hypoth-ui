@@ -3,9 +3,9 @@
  * Validates token references and detects issues
  */
 
-import type { ParsedToken } from './parser.js';
-import { isReference, parseReference, findReferences } from './utils/references.js';
-import { isTokenCategory } from '../types/categories.js';
+import { isTokenCategory } from "../types/categories.js";
+import type { ParsedToken } from "./parser.js";
+import { findReferences, isReference, parseReference } from "./utils/references.js";
 
 /** Validation result */
 export interface ValidationResult {
@@ -16,7 +16,7 @@ export interface ValidationResult {
 
 /** Validation error (blocks compilation) */
 export interface ValidationError {
-  type: 'circular-reference' | 'undefined-reference' | 'invalid-category';
+  type: "circular-reference" | "undefined-reference" | "invalid-category";
   path: string;
   message: string;
   referencePath?: string;
@@ -24,7 +24,7 @@ export interface ValidationError {
 
 /** Validation warning (allows compilation but reported) */
 export interface ValidationWarning {
-  type: 'missing-type' | 'missing-description' | 'unused-token';
+  type: "missing-type" | "missing-description" | "unused-token";
   path: string;
   message: string;
 }
@@ -77,11 +77,11 @@ export function detectCircularReferences(tokens: ParsedToken[]): ValidationError
 
     const cycle = findCycle(token.path, visited, new Set());
     if (cycle) {
-      const cyclePath = cycle.join(' -> ');
-      const firstPath = cycle[0] ?? 'unknown';
+      const cyclePath = cycle.join(" -> ");
+      const firstPath = cycle[0] ?? "unknown";
       const lastPath = cycle[cycle.length - 1];
       errors.push({
-        type: 'circular-reference',
+        type: "circular-reference",
         path: firstPath,
         message: `Circular reference detected: ${cyclePath}`,
         referencePath: lastPath,
@@ -105,7 +105,7 @@ export function detectUndefinedReferences(tokens: ParsedToken[]): ValidationErro
     for (const ref of refs) {
       if (!definedPaths.has(ref)) {
         errors.push({
-          type: 'undefined-reference',
+          type: "undefined-reference",
           path: token.path,
           message: `Reference to undefined token: ${ref}`,
           referencePath: ref,
@@ -124,13 +124,13 @@ export function validateCategories(tokens: ParsedToken[]): ValidationError[] {
   const errors: ValidationError[] = [];
 
   for (const token of tokens) {
-    const parts = token.path.split('.');
+    const parts = token.path.split(".");
     const category = parts[0];
     if (!category || !isTokenCategory(category)) {
       errors.push({
-        type: 'invalid-category',
+        type: "invalid-category",
         path: token.path,
-        message: `Invalid token category: ${category ?? 'empty'}. Must be one of: color, typography, spacing, sizing, border, shadow, motion, opacity, z-index, breakpoint, icon, radius`,
+        message: `Invalid token category: ${category ?? "empty"}. Must be one of: color, typography, spacing, sizing, border, shadow, motion, opacity, z-index, breakpoint, icon, radius`,
       });
     }
   }
@@ -147,9 +147,9 @@ export function generateWarnings(tokens: ParsedToken[]): ValidationWarning[] {
   for (const token of tokens) {
     if (!token.type) {
       warnings.push({
-        type: 'missing-type',
+        type: "missing-type",
         path: token.path,
-        message: 'Token is missing $type declaration',
+        message: "Token is missing $type declaration",
       });
     }
   }
@@ -179,7 +179,7 @@ export function validateTokens(tokens: ParsedToken[]): ValidationResult {
  * Extract all reference paths from a token value
  */
 function extractReferences(value: unknown): string[] {
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     if (isReference(value)) {
       const ref = parseReference(value);
       return ref ? [ref] : [];
@@ -191,7 +191,7 @@ function extractReferences(value: unknown): string[] {
     return value.flatMap((item) => extractReferences(item));
   }
 
-  if (typeof value === 'object' && value !== null) {
+  if (typeof value === "object" && value !== null) {
     return Object.values(value).flatMap((v) => extractReferences(v));
   }
 
@@ -210,13 +210,13 @@ export function validateTokensUsed(
 
   for (const path of tokensUsed) {
     // First validate category
-    const parts = path.split('.');
+    const parts = path.split(".");
     const category = parts[0];
     if (!category || !isTokenCategory(category)) {
       errors.push({
-        type: 'invalid-category',
+        type: "invalid-category",
         path,
-        message: `Invalid token category in tokensUsed: ${category ?? 'empty'}`,
+        message: `Invalid token category in tokensUsed: ${category ?? "empty"}`,
       });
       continue;
     }
@@ -224,7 +224,7 @@ export function validateTokensUsed(
     // Then check if token exists
     if (!definedPaths.has(path)) {
       errors.push({
-        type: 'undefined-reference',
+        type: "undefined-reference",
         path,
         message: `Token not found: ${path}`,
         referencePath: path,

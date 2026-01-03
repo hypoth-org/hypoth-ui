@@ -1,3 +1,5 @@
-// Loader exports - will be implemented in Phase 5
+// Loader exports
 export { DsLoader } from "./element-loader.js";
-export { registerAllElements } from "./register.js";
+export type { DsLoaderProps } from "./element-loader.js";
+export { registerAllElements, registerElements } from "./register.js";
+export type { RegisterOptions } from "./register.js";

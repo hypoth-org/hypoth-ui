@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { createActivationHandler, createArrowKeyHandler, type LogicalDirection } from "@ds/primitives-dom";
+import {
+  type LogicalDirection,
+  createActivationHandler,
+  createArrowKeyHandler,
+} from "@ds/primitives-dom";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = ["Home", "Products", "About", "Contact"];
 
@@ -67,7 +71,9 @@ export default function KeyboardHelpersDemoPage() {
 
   // Focus the nav item when index changes
   useEffect(() => {
-    const item = navContainerRef.current?.querySelector(`[data-testid="nav-item-${navIndex}"]`) as HTMLElement;
+    const item = navContainerRef.current?.querySelector(
+      `[data-testid="nav-item-${navIndex}"]`
+    ) as HTMLElement;
     item?.focus();
   }, [navIndex]);
 
@@ -151,7 +157,9 @@ export default function KeyboardHelpersDemoPage() {
             Use Left/Right arrow keys to navigate. Home/End jump to first/last.
           </p>
 
-          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+          <label
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}
+          >
             <input
               type="checkbox"
               data-testid="rtl-toggle"
@@ -181,7 +189,8 @@ export default function KeyboardHelpersDemoPage() {
                 tabIndex={index === navIndex ? 0 : -1}
                 style={{
                   padding: "0.5rem 1rem",
-                  outline: index === navIndex ? "2px solid var(--ds-color-primary-default, blue)" : "none",
+                  outline:
+                    index === navIndex ? "2px solid var(--ds-color-primary-default, blue)" : "none",
                   outlineOffset: "2px",
                 }}
               >

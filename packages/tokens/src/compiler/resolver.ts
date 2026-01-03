@@ -3,9 +3,14 @@
  * Resolves token references and implements cascade resolution
  */
 
-import type { TokenValue } from '../types/dtcg.js';
-import type { ParsedToken } from './parser.js';
-import { isReference, parseReference, containsReferences, replaceReferences } from './utils/references.js';
+import type { TokenValue } from "../types/dtcg.js";
+import type { ParsedToken } from "./parser.js";
+import {
+  containsReferences,
+  isReference,
+  parseReference,
+  replaceReferences,
+} from "./utils/references.js";
 
 /** Resolution context for cascade */
 export interface ResolutionContext {
@@ -37,7 +42,7 @@ export interface ResolvedValue {
   originalValue: TokenValue;
   resolvedValue: TokenValue;
   source: {
-    level: 'brand-mode' | 'brand-base' | 'global-mode' | 'global-base';
+    level: "brand-mode" | "brand-base" | "global-mode" | "global-base";
     brand?: string;
     mode?: string;
   };
@@ -47,7 +52,7 @@ export interface ResolvedValue {
 export interface ResolutionError {
   path: string;
   message: string;
-  type: 'undefined-reference' | 'circular-reference' | 'resolution-failed';
+  type: "undefined-reference" | "circular-reference" | "resolution-failed";
 }
 
 /**
@@ -103,23 +108,19 @@ export function resolveTokens(
   const errors: ResolutionError[] = [];
   const resolving = new Set<string>(); // Track tokens being resolved for cycle detection
 
-  function resolveValue(
-    value: TokenValue,
-    path: string,
-    depth = 0
-  ): TokenValue {
+  function resolveValue(value: TokenValue, path: string, depth = 0): TokenValue {
     // Prevent infinite recursion
     if (depth > 100) {
       errors.push({
         path,
-        message: 'Maximum resolution depth exceeded',
-        type: 'resolution-failed',
+        message: "Maximum resolution depth exceeded",
+        type: "resolution-failed",
       });
       return value;
     }
 
     // Handle string references
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       if (isReference(value)) {
         const refPath = parseReference(value);
         if (!refPath) return value;
@@ -129,7 +130,7 @@ export function resolveTokens(
           errors.push({
             path,
             message: `Circular reference detected: ${path} -> ${refPath}`,
-            type: 'circular-reference',
+            type: "circular-reference",
           });
           return value;
         }
@@ -142,7 +143,7 @@ export function resolveTokens(
           errors.push({
             path,
             message: `Undefined reference: ${refPath}`,
-            type: 'undefined-reference',
+            type: "undefined-reference",
           });
           resolving.delete(refPath);
           return value;
@@ -165,7 +166,7 @@ export function resolveTokens(
             errors.push({
               path,
               message: `Circular reference detected: ${path} -> ${refPath}`,
-              type: 'circular-reference',
+              type: "circular-reference",
             });
             continue;
           }
@@ -186,16 +187,24 @@ export function resolveTokens(
     }
 
     // Handle composite types
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       if (Array.isArray(value)) {
         return value.map((item, i) =>
-          typeof item === 'object' && item !== null
-            ? resolveCompositeValue(item as unknown as Record<string, unknown>, `${path}[${i}]`, depth)
+          typeof item === "object" && item !== null
+            ? resolveCompositeValue(
+                item as unknown as Record<string, unknown>,
+                `${path}[${i}]`,
+                depth
+              )
             : item
         ) as TokenValue;
       }
 
-      return resolveCompositeValue(value as unknown as Record<string, unknown>, path, depth) as TokenValue;
+      return resolveCompositeValue(
+        value as unknown as Record<string, unknown>,
+        path,
+        depth
+      ) as TokenValue;
     }
 
     return value;
@@ -208,9 +217,7 @@ export function resolveTokens(
   ): Record<string, unknown> {
     const result: Record<string, unknown> = {};
     for (const [key, val] of Object.entries(obj)) {
-      result[key] = typeof val === 'string'
-        ? resolveValue(val, `${path}.${key}`, depth + 1)
-        : val;
+      result[key] = typeof val === "string" ? resolveValue(val, `${path}.${key}`, depth + 1) : val;
     }
     return result;
   }
@@ -221,20 +228,20 @@ export function resolveTokens(
     const resolvedValue = resolveValue(token.value, token.path);
 
     // Determine source level
-    let level: ResolvedValue['source']['level'] = 'global-base';
+    let level: ResolvedValue["source"]["level"] = "global-base";
     const { brand, mode } = context;
 
     if (brand && mode) {
       const brandModes = sources.brandModes.get(brand);
       if (brandModes?.get(mode)?.has(token.path)) {
-        level = 'brand-mode';
+        level = "brand-mode";
       }
     }
-    if (level === 'global-base' && brand && sources.brands.get(brand)?.has(token.path)) {
-      level = 'brand-base';
+    if (level === "global-base" && brand && sources.brands.get(brand)?.has(token.path)) {
+      level = "brand-base";
     }
-    if (level === 'global-base' && mode && sources.globalModes.get(mode)?.has(token.path)) {
-      level = 'global-mode';
+    if (level === "global-base" && mode && sources.globalModes.get(mode)?.has(token.path)) {
+      level = "global-mode";
     }
 
     resolved.set(token.path, {

@@ -5,13 +5,13 @@
  */
 
 /** Default mode when no preference is set */
-const DEFAULT_MODE = 'light';
+const DEFAULT_MODE = "light";
 
 /** localStorage key for persisted mode */
-const MODE_STORAGE_KEY = 'ds-mode';
+const MODE_STORAGE_KEY = "ds-mode";
 
 /** localStorage key for persisted brand */
-const BRAND_STORAGE_KEY = 'ds-brand';
+const BRAND_STORAGE_KEY = "ds-brand";
 
 /**
  * Initialize theme on page load
@@ -19,7 +19,7 @@ const BRAND_STORAGE_KEY = 'ds-brand';
  */
 export function initTheme(): void {
   // Skip if not in browser
-  if (typeof document === 'undefined' || typeof window === 'undefined') {
+  if (typeof document === "undefined" || typeof window === "undefined") {
     return;
   }
 
@@ -48,13 +48,13 @@ function getInitialMode(): string {
   }
 
   // Check system preference
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return "dark";
   }
 
   // Check high contrast preference
-  if (window.matchMedia('(prefers-contrast: more)').matches) {
-    return 'high-contrast';
+  if (window.matchMedia("(prefers-contrast: more)").matches) {
+    return "high-contrast";
   }
 
   return DEFAULT_MODE;

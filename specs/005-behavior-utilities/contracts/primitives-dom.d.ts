@@ -80,9 +80,7 @@ export interface DismissableLayer {
   deactivate: () => void;
 }
 
-export function createDismissableLayer(
-  options: DismissableLayerOptions
-): DismissableLayer;
+export function createDismissableLayer(options: DismissableLayerOptions): DismissableLayer;
 
 // =============================================================================
 // KEYBOARD ACTIVATION
@@ -94,9 +92,7 @@ export interface ActivationOptions {
   preventDefault?: boolean | "Space";
 }
 
-export function createActivationHandler(
-  options: ActivationOptions
-): (event: KeyboardEvent) => void;
+export function createActivationHandler(options: ActivationOptions): (event: KeyboardEvent) => void;
 
 // =============================================================================
 // ARROW KEY NAVIGATION
@@ -108,9 +104,7 @@ export interface ArrowKeyOptions {
   onNavigate: (direction: LogicalDirection, event: KeyboardEvent) => void;
 }
 
-export function createArrowKeyHandler(
-  options: ArrowKeyOptions
-): (event: KeyboardEvent) => void;
+export function createArrowKeyHandler(options: ArrowKeyOptions): (event: KeyboardEvent) => void;
 
 // =============================================================================
 // TYPE-AHEAD SEARCH

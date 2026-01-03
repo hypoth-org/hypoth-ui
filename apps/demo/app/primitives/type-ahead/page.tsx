@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { createTypeAhead } from "@ds/primitives-dom";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const fruits = [
   "Apple",
@@ -78,7 +78,9 @@ export default function TypeAheadDemoPage() {
 
   const handleItemClick = (index: number) => {
     setFocusedIndex(index);
-    const item = listRef.current?.querySelector(`[data-testid="list-item-${index}"]`) as HTMLElement;
+    const item = listRef.current?.querySelector(
+      `[data-testid="list-item-${index}"]`
+    ) as HTMLElement;
     item?.focus();
   };
 
@@ -118,7 +120,9 @@ export default function TypeAheadDemoPage() {
             data-testid="buffer-display"
             style={{
               padding: "0.5rem 1rem",
-              backgroundColor: buffer ? "var(--ds-color-primary-default, blue)" : "var(--ds-color-surface-default, #f0f0f0)",
+              backgroundColor: buffer
+                ? "var(--ds-color-primary-default, blue)"
+                : "var(--ds-color-surface-default, #f0f0f0)",
               color: buffer ? "white" : "inherit",
               borderRadius: "0.25rem",
               fontFamily: "monospace",
@@ -171,9 +175,13 @@ export default function TypeAheadDemoPage() {
               style={{
                 padding: "0.75rem 1rem",
                 cursor: "pointer",
-                backgroundColor: focusedIndex === index ? "var(--ds-color-primary-default, blue)" : "transparent",
+                backgroundColor:
+                  focusedIndex === index ? "var(--ds-color-primary-default, blue)" : "transparent",
                 color: focusedIndex === index ? "white" : "inherit",
-                borderBottom: index < fruits.length - 1 ? "1px solid var(--ds-color-border-default, #eee)" : "none",
+                borderBottom:
+                  index < fruits.length - 1
+                    ? "1px solid var(--ds-color-border-default, #eee)"
+                    : "none",
               }}
             >
               {fruit}
@@ -182,7 +190,8 @@ export default function TypeAheadDemoPage() {
         </div>
 
         <p className="text-muted" style={{ marginTop: "1rem", fontSize: "0.875rem" }}>
-          Tip: Type &quot;bl&quot; to find &quot;Blueberry&quot;, or &quot;ch&quot; for &quot;Cherry&quot;
+          Tip: Type &quot;bl&quot; to find &quot;Blueberry&quot;, or &quot;ch&quot; for
+          &quot;Cherry&quot;
         </p>
       </div>
     </main>

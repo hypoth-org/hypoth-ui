@@ -92,7 +92,7 @@ export function createRovingFocus(options: RovingFocusOptions): RovingFocus {
 
       // Move to next/previous element
       if (loop) {
-        index = ((index + searchDirection) % len + len) % len;
+        index = (((index + searchDirection) % len) + len) % len;
       } else {
         const nextIndex = index + searchDirection;
         if (nextIndex < 0 || nextIndex >= len) {
