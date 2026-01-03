@@ -71,14 +71,14 @@ test.describe("Web Components Loader (DsLoader)", () => {
   test("should emit ds:click events from button", async ({ page }) => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
 
-    // Find the "Click me" button
-    const button = page.locator('ds-button:has-text("Click me")');
+    // Find the "Click me" button - click the inner button element to trigger ds:click
+    const button = page.locator('ds-button:has-text("Click me") button');
     await expect(button).toBeVisible();
 
     // Click count should start at 0
     await expect(page.locator('text="Click count: 0"')).toBeVisible();
 
-    // Click the button
+    // Click the inner button element
     await button.click();
 
     // Click count should increment
