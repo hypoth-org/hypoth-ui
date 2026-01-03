@@ -34,11 +34,7 @@ export interface ActivationOptions {
 export function createActivationHandler(
   options: ActivationOptions
 ): (event: KeyboardEvent) => void {
-  const {
-    onActivate,
-    keys = ["Enter", "Space"],
-    preventDefault = "Space",
-  } = options;
+  const { onActivate, keys = ["Enter", "Space"], preventDefault = "Space" } = options;
 
   return function handleKeyDown(event: KeyboardEvent): void {
     // Map Space key to " " for comparison

@@ -3,12 +3,12 @@
  * Reports changes between token builds for PR reviews
  */
 
-import { readFileSync, existsSync } from 'node:fs';
+import { existsSync, readFileSync } from "node:fs";
 
 /** Token change */
 export interface TokenChange {
   path: string;
-  type: 'added' | 'removed' | 'modified';
+  type: "added" | "removed" | "modified";
   oldValue?: unknown;
   newValue?: unknown;
 }
@@ -36,11 +36,11 @@ export function compareTokens(oldPath: string, newPath: string): DiffReport {
   // Find added and modified tokens
   for (const [path, newValue] of Object.entries(newTokens)) {
     if (!(path in oldTokens)) {
-      added.push({ path, type: 'added', newValue });
+      added.push({ path, type: "added", newValue });
     } else if (JSON.stringify(oldTokens[path]) !== JSON.stringify(newValue)) {
       modified.push({
         path,
-        type: 'modified',
+        type: "modified",
         oldValue: oldTokens[path],
         newValue,
       });
@@ -50,7 +50,7 @@ export function compareTokens(oldPath: string, newPath: string): DiffReport {
   // Find removed tokens
   for (const path of Object.keys(oldTokens)) {
     if (!(path in newTokens)) {
-      removed.push({ path, type: 'removed', oldValue: oldTokens[path] });
+      removed.push({ path, type: "removed", oldValue: oldTokens[path] });
     }
   }
 
@@ -69,7 +69,7 @@ function loadTokens(path: string): Record<string, unknown> {
     return {};
   }
 
-  const content = readFileSync(path, 'utf-8');
+  const content = readFileSync(path, "utf-8");
   const data = JSON.parse(content);
 
   // Flatten tokens to path -> value map
@@ -105,10 +105,10 @@ function generateSummary(
   }
 
   if (parts.length === 0) {
-    return 'No token changes';
+    return "No token changes";
   }
 
-  return parts.join(', ');
+  return parts.join(", ");
 }
 
 /**
@@ -116,59 +116,54 @@ function generateSummary(
  */
 export function formatDiffAsMarkdown(report: DiffReport): string {
   if (!report.hasChanges) {
-    return '### Token Changes\n\nNo token changes detected.';
+    return "### Token Changes\n\nNo token changes detected.";
   }
 
-  const lines: string[] = [
-    '### Token Changes',
-    '',
-    report.summary,
-    '',
-  ];
+  const lines: string[] = ["### Token Changes", "", report.summary, ""];
 
   if (report.added.length > 0) {
-    lines.push('#### Added Tokens');
-    lines.push('');
-    lines.push('| Token | Value |');
-    lines.push('|-------|-------|');
+    lines.push("#### Added Tokens");
+    lines.push("");
+    lines.push("| Token | Value |");
+    lines.push("|-------|-------|");
     for (const change of report.added) {
       lines.push(`| \`${change.path}\` | \`${formatValue(change.newValue)}\` |`);
     }
-    lines.push('');
+    lines.push("");
   }
 
   if (report.removed.length > 0) {
-    lines.push('#### Removed Tokens');
-    lines.push('');
-    lines.push('| Token | Previous Value |');
-    lines.push('|-------|----------------|');
+    lines.push("#### Removed Tokens");
+    lines.push("");
+    lines.push("| Token | Previous Value |");
+    lines.push("|-------|----------------|");
     for (const change of report.removed) {
       lines.push(`| \`${change.path}\` | \`${formatValue(change.oldValue)}\` |`);
     }
-    lines.push('');
+    lines.push("");
   }
 
   if (report.modified.length > 0) {
-    lines.push('#### Modified Tokens');
-    lines.push('');
-    lines.push('| Token | Before | After |');
-    lines.push('|-------|--------|-------|');
+    lines.push("#### Modified Tokens");
+    lines.push("");
+    lines.push("| Token | Before | After |");
+    lines.push("|-------|--------|-------|");
     for (const change of report.modified) {
       lines.push(
         `| \`${change.path}\` | \`${formatValue(change.oldValue)}\` | \`${formatValue(change.newValue)}\` |`
       );
     }
-    lines.push('');
+    lines.push("");
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**
  * Format a value for display
  */
 function formatValue(value: unknown): string {
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     return JSON.stringify(value);
   }
   return String(value);
@@ -178,7 +173,7 @@ function formatValue(value: unknown): string {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   if (args.length < 2 || !args[0] || !args[1]) {
-    console.info('Usage: diff-reporter.ts <old-tokens.json> <new-tokens.json>');
+    console.info("Usage: diff-reporter.ts <old-tokens.json> <new-tokens.json>");
     process.exit(1);
   }
 

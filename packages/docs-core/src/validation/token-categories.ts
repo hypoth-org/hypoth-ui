@@ -5,18 +5,18 @@
 
 /** All valid token categories */
 export const TOKEN_CATEGORIES = [
-  'color',
-  'typography',
-  'spacing',
-  'sizing',
-  'border',
-  'shadow',
-  'motion',
-  'opacity',
-  'z-index',
-  'breakpoint',
-  'icon',
-  'radius',
+  "color",
+  "typography",
+  "spacing",
+  "sizing",
+  "border",
+  "shadow",
+  "motion",
+  "opacity",
+  "z-index",
+  "breakpoint",
+  "icon",
+  "radius",
 ] as const;
 
 /** Token category type */

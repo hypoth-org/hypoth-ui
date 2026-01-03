@@ -1,10 +1,10 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  getRegisteredTags,
   getComponentClass,
   getComponentClassSync,
-  registerComponent,
+  getRegisteredTags,
   hasComponent,
+  registerComponent,
 } from "../../src/registry/registry.js";
 
 describe("Component Registry", () => {

@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
-import { resolve, dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { describe, expect, it } from "vitest";
 import { checkFile, scanForAutoDefine } from "../scripts/check-auto-define.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -58,19 +58,13 @@ describe("check-auto-define", () => {
 
   describe("scanForAutoDefine", () => {
     it("should scan multiple files", () => {
-      const result = scanForAutoDefine(
-        [`${fixturesDir}/*.ts`],
-        []
-      );
+      const result = scanForAutoDefine([`${fixturesDir}/*.ts`], []);
 
       expect(result.filesScanned).toBe(2);
     });
 
     it("should find violations across files", () => {
-      const result = scanForAutoDefine(
-        [`${fixturesDir}/*.ts`],
-        []
-      );
+      const result = scanForAutoDefine([`${fixturesDir}/*.ts`], []);
 
       // Only non-compliant.ts has violations
       expect(result.violations.length).toBeGreaterThanOrEqual(3);
@@ -88,10 +82,7 @@ describe("check-auto-define", () => {
     });
 
     it("should handle empty patterns gracefully", () => {
-      const result = scanForAutoDefine(
-        [`${fixturesDir}/non-existent-pattern-*.ts`],
-        []
-      );
+      const result = scanForAutoDefine([`${fixturesDir}/non-existent-pattern-*.ts`], []);
 
       expect(result.filesScanned).toBe(0);
       expect(result.violations).toHaveLength(0);
@@ -131,9 +122,7 @@ describe("check-auto-define", () => {
       const violations = checkFile(filePath);
 
       // The guarded-element define is still top-level
-      const guardedViolation = violations.find((v) =>
-        v.code.includes("guarded-element")
-      );
+      const guardedViolation = violations.find((v) => v.code.includes("guarded-element"));
 
       expect(guardedViolation).toBeDefined();
     });

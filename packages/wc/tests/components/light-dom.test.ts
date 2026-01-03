@@ -1,6 +1,6 @@
-import { describe, expect, it, beforeEach, afterEach } from "vitest";
-import { DsButton } from "../../src/components/button/button.js";
-import { DsInput } from "../../src/components/input/input.js";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import type { DsButton } from "../../src/components/button/button.js";
+import type { DsInput } from "../../src/components/input/input.js";
 
 describe("Light DOM Rendering", () => {
   let container: HTMLDivElement;
@@ -72,7 +72,8 @@ describe("Light DOM Rendering", () => {
       await input.updateComplete;
 
       const innerInput = input.querySelector("input");
-      const computedStyle = getComputedStyle(innerInput!);
+      expect(innerInput).not.toBeNull();
+      const computedStyle = getComputedStyle(innerInput as HTMLInputElement);
 
       // In Light DOM, external styles apply directly
       expect(computedStyle.borderColor).toBe("red");

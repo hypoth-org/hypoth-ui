@@ -48,7 +48,7 @@ export interface EmitEventOptions<T = unknown> {
 export function emitEvent<T = unknown>(
   element: HTMLElement,
   name: string,
-  options: EmitEventOptions<T> = {},
+  options: EmitEventOptions<T> = {}
 ): CustomEvent<T> {
   const { detail, bubbles = true, composed = true, cancelable = false } = options;
 

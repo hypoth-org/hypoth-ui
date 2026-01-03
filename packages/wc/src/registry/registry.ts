@@ -27,7 +27,9 @@ export type ComponentTag = "ds-button" | "ds-input";
 /**
  * Lazy loader type for dynamic imports
  */
-type ComponentLoader = () => Promise<{ default: CustomElementConstructor } | CustomElementConstructor>;
+type ComponentLoader = () => Promise<
+  { default: CustomElementConstructor } | CustomElementConstructor
+>;
 
 /**
  * Registry entry that supports lazy loading
@@ -85,7 +87,7 @@ export function getRegisteredTags(): ComponentTag[] {
  * @returns Promise resolving to the component class or undefined if not found
  */
 export async function getComponentClass(
-  tagName: string,
+  tagName: string
 ): Promise<CustomElementConstructor | undefined> {
   const entry = registry.get(tagName);
   if (!entry) return undefined;
@@ -121,10 +123,7 @@ export function getComponentClassSync(tagName: string): CustomElementConstructor
  * @param tagName - The custom element tag name
  * @param componentClass - The component class constructor
  */
-export function registerComponent(
-  tagName: string,
-  componentClass: CustomElementConstructor,
-): void {
+export function registerComponent(tagName: string, componentClass: CustomElementConstructor): void {
   registry.set(tagName, { class: componentClass });
 }
 

@@ -5,10 +5,7 @@
   "description": "Schema for DTCG format design tokens",
   "type": "object",
   "additionalProperties": {
-    "oneOf": [
-      { "$ref": "#/$defs/token" },
-      { "$ref": "#/$defs/group" }
-    ]
+    "oneOf": [{ "$ref": "#/$defs/token" }, { "$ref": "#/$defs/group" }]
   },
   "$defs": {
     "token": {
@@ -48,10 +45,7 @@
         }
       },
       "additionalProperties": {
-        "oneOf": [
-          { "$ref": "#/$defs/token" },
-          { "$ref": "#/$defs/group" }
-        ]
+        "oneOf": [{ "$ref": "#/$defs/token" }, { "$ref": "#/$defs/group" }]
       }
     },
     "tokenType": {
@@ -133,24 +127,15 @@
       "required": ["fontFamily", "fontSize", "fontWeight", "letterSpacing", "lineHeight"],
       "properties": {
         "fontFamily": {
-          "oneOf": [
-            { "type": "string" },
-            { "type": "array", "items": { "type": "string" } }
-          ]
+          "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
         },
         "fontSize": { "type": "string" },
         "fontWeight": {
-          "oneOf": [
-            { "type": "number" },
-            { "type": "string" }
-          ]
+          "oneOf": [{ "type": "number" }, { "type": "string" }]
         },
         "letterSpacing": { "type": "string" },
         "lineHeight": {
-          "oneOf": [
-            { "type": "number" },
-            { "type": "string" }
-          ]
+          "oneOf": [{ "type": "number" }, { "type": "string" }]
         }
       },
       "additionalProperties": false

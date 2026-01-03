@@ -1,6 +1,6 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { DsButton } from "../../src/components/button/button.js";
-import { DsInput } from "../../src/components/input/input.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { DsButton } from "../../src/components/button/button.js";
+import type { DsInput } from "../../src/components/input/input.js";
 
 describe("Component Events", () => {
   let container: HTMLDivElement;

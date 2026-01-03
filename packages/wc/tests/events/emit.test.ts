@@ -1,5 +1,5 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { emitEvent, StandardEvents } from "../../src/events/emit.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { StandardEvents, emitEvent } from "../../src/events/emit.js";
 
 describe("emitEvent", () => {
   let element: HTMLDivElement;

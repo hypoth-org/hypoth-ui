@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { registerAllElements, type RegisterOptions } from "./register.js";
+import { type RegisterOptions, registerAllElements } from "./register.js";
 
 export interface DsLoaderProps extends RegisterOptions {
   /** Callback when elements are registered */

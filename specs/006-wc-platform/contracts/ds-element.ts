@@ -6,6 +6,7 @@
  * @path packages/wc/src/base/ds-element.ts
  */
 
+// biome-ignore lint/correctness/noUnusedImports: Used in extends clause below
 import type { LitElement } from "lit";
 
 /**

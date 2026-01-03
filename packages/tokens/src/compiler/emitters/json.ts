@@ -3,8 +3,8 @@
  * Generates resolved token tree in JSON format
  */
 
-import type { ResolvedValue } from '../resolver.js';
-import { getCategoryFromPath } from '../../types/categories.js';
+import { getCategoryFromPath } from "../../types/categories.js";
+import type { ResolvedValue } from "../resolver.js";
 
 /** JSON output structure */
 export interface JSONBundleOutput {
@@ -43,7 +43,7 @@ export function generateJSONBundle(
   resolved: Map<string, ResolvedValue>,
   options: JSONBundleOptions = {}
 ): JSONBundleOutput {
-  const { version = '0.0.0' } = options;
+  const { version = "0.0.0" } = options;
 
   const categories: Record<string, CategoryOutput> = {};
 
@@ -61,7 +61,7 @@ export function generateJSONBundle(
       categories[category] = { tokens: [] };
     }
 
-    const cssVariable = `--${path.replace(/\./g, '-')}`;
+    const cssVariable = `--${path.replace(/\./g, "-")}`;
 
     const tokenOutput: TokenOutput = {
       path,
@@ -78,7 +78,7 @@ export function generateJSONBundle(
   }
 
   return {
-    $schema: 'https://hypoth-ui.dev/schemas/token-reference-doc.schema.json',
+    $schema: "https://hypoth-ui.dev/schemas/token-reference-doc.schema.json",
     version,
     generatedAt: new Date().toISOString(),
     categories,
@@ -94,7 +94,7 @@ export function generateFullJSONBundle(
   brandTokens: Map<string, Map<string, ResolvedValue>>,
   options: JSONBundleOptions = {}
 ): JSONBundleOutput {
-  const { version = '0.0.0' } = options;
+  const { version = "0.0.0" } = options;
 
   const categories: Record<string, CategoryOutput> = {};
   const allPaths = new Set<string>();
@@ -117,7 +117,7 @@ export function generateFullJSONBundle(
       categories[category] = { tokens: [] };
     }
 
-    const cssVariable = `--${path.replace(/\./g, '-')}`;
+    const cssVariable = `--${path.replace(/\./g, "-")}`;
 
     // Build values for each brand/mode combination
     const values: Record<string, Record<string, unknown>> = {
@@ -155,7 +155,7 @@ export function generateFullJSONBundle(
   }
 
   return {
-    $schema: 'https://hypoth-ui.dev/schemas/token-reference-doc.schema.json',
+    $schema: "https://hypoth-ui.dev/schemas/token-reference-doc.schema.json",
     version,
     generatedAt: new Date().toISOString(),
     categories,
@@ -166,39 +166,39 @@ export function generateFullJSONBundle(
  * Infer DTCG type from value
  */
 function inferType(value: unknown): string {
-  if (typeof value === 'string') {
-    if (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl')) {
-      return 'color';
+  if (typeof value === "string") {
+    if (value.startsWith("#") || value.startsWith("rgb") || value.startsWith("hsl")) {
+      return "color";
     }
     if (value.match(/^\d+(\.\d+)?(px|rem|em|%|vh|vw)$/)) {
-      return 'dimension';
+      return "dimension";
     }
     if (value.match(/^\d+(\.\d+)?(ms|s)$/)) {
-      return 'duration';
+      return "duration";
     }
-    return 'string';
+    return "string";
   }
-  if (typeof value === 'number') {
-    return 'number';
+  if (typeof value === "number") {
+    return "number";
   }
   if (Array.isArray(value)) {
-    if (value.length === 4 && value.every((v) => typeof v === 'number')) {
-      return 'cubicBezier';
+    if (value.length === 4 && value.every((v) => typeof v === "number")) {
+      return "cubicBezier";
     }
-    if (value.every((v) => typeof v === 'string')) {
-      return 'fontFamily';
+    if (value.every((v) => typeof v === "string")) {
+      return "fontFamily";
     }
-    if (value.every((v) => typeof v === 'object' && v !== null && 'offsetX' in v)) {
-      return 'shadow';
+    if (value.every((v) => typeof v === "object" && v !== null && "offsetX" in v)) {
+      return "shadow";
     }
   }
-  if (typeof value === 'object' && value !== null) {
-    if ('offsetX' in value) return 'shadow';
-    if ('width' in value && 'style' in value) return 'border';
-    if ('fontFamily' in value && 'fontSize' in value) return 'typography';
-    if ('duration' in value && 'timingFunction' in value) return 'transition';
+  if (typeof value === "object" && value !== null) {
+    if ("offsetX" in value) return "shadow";
+    if ("width" in value && "style" in value) return "border";
+    if ("fontFamily" in value && "fontSize" in value) return "typography";
+    if ("duration" in value && "timingFunction" in value) return "transition";
   }
-  return 'unknown';
+  return "unknown";
 }
 
 /**

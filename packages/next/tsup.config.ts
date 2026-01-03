@@ -7,4 +7,8 @@ export default defineConfig({
   clean: true,
   external: ["react", "react-dom", "next", "@ds/wc", "@ds/react"],
   sourcemap: true,
+  banner: {
+    // Preserve "use client" directive for Next.js App Router
+    js: '"use client";',
+  },
 });

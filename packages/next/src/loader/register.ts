@@ -75,6 +75,7 @@ export async function registerAllElements(options: RegisterOptions = {}): Promis
   }
 
   if (debug) {
+    // biome-ignore lint/suspicious/noConsoleLog: Intentional debug output
     console.log(`[DsLoader] Registering ${tagsToRegister.length} components:`, tagsToRegister);
   }
 
@@ -84,6 +85,7 @@ export async function registerAllElements(options: RegisterOptions = {}): Promis
       // Skip if already defined
       if (customElements.get(tag)) {
         if (debug) {
+          // biome-ignore lint/suspicious/noConsoleLog: Intentional debug output
           console.log(`[DsLoader] ${tag} already registered, skipping`);
         }
         return;
@@ -93,6 +95,7 @@ export async function registerAllElements(options: RegisterOptions = {}): Promis
       await getComponentClass(tag);
 
       if (debug) {
+        // biome-ignore lint/suspicious/noConsoleLog: Intentional debug output
         console.log(`[DsLoader] Registered ${tag}`);
       }
     } catch (error) {
@@ -103,6 +106,7 @@ export async function registerAllElements(options: RegisterOptions = {}): Promis
   await Promise.all(registrationPromises);
 
   if (debug) {
+    // biome-ignore lint/suspicious/noConsoleLog: Intentional debug output
     console.log("[DsLoader] All components registered");
   }
 }

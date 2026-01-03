@@ -15,7 +15,11 @@ export {
   hasComponent,
   loadAllComponents,
 } from "./registry/registry.js";
-export type { CustomElementConstructor, ComponentRegistryType, ComponentTag } from "./registry/registry.js";
+export type {
+  CustomElementConstructor,
+  ComponentRegistryType,
+  ComponentTag,
+} from "./registry/registry.js";
 
 // Components
 export { DsButton } from "./components/button/button.js";

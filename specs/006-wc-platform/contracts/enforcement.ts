@@ -104,9 +104,7 @@ export interface ScanOptions {
  * }
  * ```
  */
-export declare function scanForAutoDefine(
-  options?: ScanOptions
-): Promise<ScanResult>;
+export declare function scanForAutoDefine(options?: ScanOptions): Promise<ScanResult>;
 
 /**
  * Check a single file for violations

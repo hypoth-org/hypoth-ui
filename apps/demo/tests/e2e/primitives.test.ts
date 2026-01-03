@@ -88,7 +88,10 @@ test.describe("Focus Trap", () => {
 
     // Deactivate trap
     await page.click(byTestId("deactivate-btn"));
-    await expect(page.locator(byTestId("status-indicator"))).toHaveAttribute("data-active", "false");
+    await expect(page.locator(byTestId("status-indicator"))).toHaveAttribute(
+      "data-active",
+      "false"
+    );
   });
 });
 

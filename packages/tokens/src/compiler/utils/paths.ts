@@ -8,7 +8,7 @@
  * @example tokenPathToCSS('color.background.primary') => '--color-background-primary'
  */
 export function tokenPathToCSS(path: string): string {
-  return `--${path.replace(/\./g, '-')}`;
+  return `--${path.replace(/\./g, "-")}`;
 }
 
 /**
@@ -16,8 +16,8 @@ export function tokenPathToCSS(path: string): string {
  * @example cssToTokenPath('--color-background-primary') => 'color.background.primary'
  */
 export function cssToTokenPath(cssVar: string): string {
-  const withoutPrefix = cssVar.startsWith('--') ? cssVar.slice(2) : cssVar;
-  return withoutPrefix.replace(/-/g, '.');
+  const withoutPrefix = cssVar.startsWith("--") ? cssVar.slice(2) : cssVar;
+  return withoutPrefix.replace(/-/g, ".");
 }
 
 /**
@@ -25,7 +25,7 @@ export function cssToTokenPath(cssVar: string): string {
  * @example parseTokenPath('color.background.primary') => ['color', 'background', 'primary']
  */
 export function parseTokenPath(path: string): string[] {
-  return path.split('.');
+  return path.split(".");
 }
 
 /**
@@ -33,7 +33,7 @@ export function parseTokenPath(path: string): string[] {
  * @example joinTokenPath(['color', 'background', 'primary']) => 'color.background.primary'
  */
 export function joinTokenPath(parts: string[]): string {
-  return parts.join('.');
+  return parts.join(".");
 }
 
 /**
@@ -52,7 +52,7 @@ export function getParentPath(path: string): string | null {
  */
 export function getLeafName(path: string): string {
   const parts = parseTokenPath(path);
-  return parts[parts.length - 1] || '';
+  return parts[parts.length - 1] || "";
 }
 
 /**

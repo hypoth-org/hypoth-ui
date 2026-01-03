@@ -2,7 +2,7 @@ import { type TemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
-import { emitEvent, StandardEvents } from "../../events/emit.js";
+import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";

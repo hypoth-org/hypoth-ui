@@ -2,15 +2,15 @@
  * Accessibility tests for behavior primitives.
  * Tests that utilities produce accessible DOM structures and behaviors.
  */
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  createFocusTrap,
-  createRovingFocus,
-  createDismissableLayer,
+  FOCUSABLE_SELECTOR,
   createActivationHandler,
   createArrowKeyHandler,
+  createDismissableLayer,
+  createFocusTrap,
+  createRovingFocus,
   createTypeAhead,
-  FOCUSABLE_SELECTOR,
 } from "../src/index.js";
 
 describe("Accessibility Tests", () => {

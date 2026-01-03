@@ -1,5 +1,5 @@
-import { describe, expect, it, beforeEach, afterEach } from "vitest";
 import { html } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { DSElement, LightElement } from "../../src/base/ds-element.js";
 
 // Test component that extends DSElement
@@ -72,7 +72,9 @@ describe("DSElement", () => {
   it("createRenderRoot should return the element itself", () => {
     const element = new TestElement();
     // Access protected method via type assertion
-    const renderRoot = (element as unknown as { createRenderRoot: () => HTMLElement }).createRenderRoot();
+    const renderRoot = (
+      element as unknown as { createRenderRoot: () => HTMLElement }
+    ).createRenderRoot();
     expect(renderRoot).toBe(element);
   });
 });

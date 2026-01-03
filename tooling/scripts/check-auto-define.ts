@@ -20,9 +20,9 @@
  * npx tsx tooling/scripts/check-auto-define.ts --format github
  */
 
-import { Project, SyntaxKind, type SourceFile, type CallExpression } from "ts-morph";
+import { relative } from "node:path";
 import { glob } from "glob";
-import { resolve, relative } from "path";
+import { type CallExpression, Project, type SourceFile, SyntaxKind } from "ts-morph";
 
 // Types
 interface Violation {
@@ -89,7 +89,7 @@ function parseArgs(): CliArgs {
 
 // Print help message
 function printHelp(): void {
-  console.log(`
+  console.info(`
 check-auto-define.ts - Detect side-effect customElements.define() calls
 
 USAGE:
@@ -194,7 +194,8 @@ export function scanFile(sourceFile: SourceFile): Violation[] {
         file: filePath,
         line,
         column,
-        message: "Top-level customElements.define() call detected. Use the registry pattern instead.",
+        message:
+          "Top-level customElements.define() call detected. Use the registry pattern instead.",
         code,
       });
     }
@@ -259,10 +260,7 @@ function formatText(result: ScanResult, rootDir: string): string {
     return `✓ No auto-define violations found (${result.filesScanned} files scanned)`;
   }
 
-  const lines: string[] = [
-    `✗ Found ${result.violations.length} auto-define violation(s):`,
-    "",
-  ];
+  const lines: string[] = [`✗ Found ${result.violations.length} auto-define violation(s):`, ""];
 
   for (const v of result.violations) {
     const relPath = relative(rootDir, v.file);
@@ -328,7 +326,7 @@ async function main(): Promise<void> {
       output = formatText(result, rootDir);
   }
 
-  console.log(output);
+  console.info(output);
 
   // Exit with error code if violations found
   if (result.violations.length > 0) {

@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
-import { emitEvent, StandardEvents } from "../../events/emit.js";
+import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";

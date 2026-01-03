@@ -32,9 +32,7 @@ export default function PrimitivesIndexPage() {
   return (
     <main className="container" style={{ paddingTop: "2rem" }}>
       <h1>Behavior Primitives</h1>
-      <p className="text-muted">
-        Framework-agnostic utilities for accessible component behaviors.
-      </p>
+      <p className="text-muted">Framework-agnostic utilities for accessible component behaviors.</p>
 
       <nav style={{ marginTop: "2rem" }}>
         <ul className="stack-md" style={{ listStyle: "none", padding: 0 }}>

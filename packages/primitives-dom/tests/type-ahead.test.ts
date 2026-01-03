@@ -132,15 +132,9 @@ describe("createTypeAhead", () => {
       onMatch,
     });
 
-    typeAhead.handleKeyDown(
-      new KeyboardEvent("keydown", { key: "a", ctrlKey: true })
-    );
-    typeAhead.handleKeyDown(
-      new KeyboardEvent("keydown", { key: "a", metaKey: true })
-    );
-    typeAhead.handleKeyDown(
-      new KeyboardEvent("keydown", { key: "a", altKey: true })
-    );
+    typeAhead.handleKeyDown(new KeyboardEvent("keydown", { key: "a", ctrlKey: true }));
+    typeAhead.handleKeyDown(new KeyboardEvent("keydown", { key: "a", metaKey: true }));
+    typeAhead.handleKeyDown(new KeyboardEvent("keydown", { key: "a", altKey: true }));
 
     expect(onMatch).not.toHaveBeenCalled();
   });

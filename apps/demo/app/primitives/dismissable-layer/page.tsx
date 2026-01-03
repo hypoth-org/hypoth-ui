@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { createDismissableLayer, type DismissReason } from "@ds/primitives-dom";
+import { type DismissReason, createDismissableLayer } from "@ds/primitives-dom";
 import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function DismissableLayerDemoPage() {
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -26,35 +26,41 @@ export default function DismissableLayerDemoPage() {
     setIsNestedOpen(false);
   }, []);
 
-  const layerRefCallback = useCallback((node: HTMLDivElement | null) => {
-    if (node && triggerRef.current) {
-      layerInstance.current = createDismissableLayer({
-        container: node,
-        excludeElements: [triggerRef.current],
-        onDismiss: handleLayerDismiss,
-      });
-      layerInstance.current.activate();
-    }
-    return () => {
-      layerInstance.current?.deactivate();
-      layerInstance.current = null;
-    };
-  }, [handleLayerDismiss]);
+  const layerRefCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && triggerRef.current) {
+        layerInstance.current = createDismissableLayer({
+          container: node,
+          excludeElements: [triggerRef.current],
+          onDismiss: handleLayerDismiss,
+        });
+        layerInstance.current.activate();
+      }
+      return () => {
+        layerInstance.current?.deactivate();
+        layerInstance.current = null;
+      };
+    },
+    [handleLayerDismiss]
+  );
 
-  const nestedLayerRefCallback = useCallback((node: HTMLDivElement | null) => {
-    if (node && nestedTriggerRef.current) {
-      nestedLayerInstance.current = createDismissableLayer({
-        container: node,
-        excludeElements: [nestedTriggerRef.current],
-        onDismiss: handleNestedDismiss,
-      });
-      nestedLayerInstance.current.activate();
-    }
-    return () => {
-      nestedLayerInstance.current?.deactivate();
-      nestedLayerInstance.current = null;
-    };
-  }, [handleNestedDismiss]);
+  const nestedLayerRefCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && nestedTriggerRef.current) {
+        nestedLayerInstance.current = createDismissableLayer({
+          container: node,
+          excludeElements: [nestedTriggerRef.current],
+          onDismiss: handleNestedDismiss,
+        });
+        nestedLayerInstance.current.activate();
+      }
+      return () => {
+        nestedLayerInstance.current?.deactivate();
+        nestedLayerInstance.current = null;
+      };
+    },
+    [handleNestedDismiss]
+  );
 
   // Cleanup on unmount or when layers close
   useEffect(() => {
@@ -102,7 +108,9 @@ export default function DismissableLayerDemoPage() {
               display: "inline-block",
               padding: "0.25rem 0.75rem",
               borderRadius: "9999px",
-              backgroundColor: isLayerOpen ? "var(--ds-color-success-default, green)" : "var(--ds-color-neutral-default, gray)",
+              backgroundColor: isLayerOpen
+                ? "var(--ds-color-success-default, green)"
+                : "var(--ds-color-neutral-default, gray)",
               color: "white",
               fontSize: "0.875rem",
             }}
@@ -155,9 +163,7 @@ export default function DismissableLayerDemoPage() {
                 zIndex: 10,
               }}
             >
-              <p style={{ margin: "0 0 1rem" }}>
-                This is a dismissable layer.
-              </p>
+              <p style={{ margin: "0 0 1rem" }}>This is a dismissable layer.</p>
               <p className="text-muted" style={{ fontSize: "0.875rem", margin: "0 0 1rem" }}>
                 Press Escape or click outside to close.
               </p>

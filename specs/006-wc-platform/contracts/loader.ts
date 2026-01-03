@@ -100,6 +100,4 @@ export interface RegisterOptions {
  * await registerElements({ exclude: ['ds-complex-table'] });
  * ```
  */
-export declare function registerElements(
-  options?: RegisterOptions
-): Promise<void>;
+export declare function registerElements(options?: RegisterOptions): Promise<void>;

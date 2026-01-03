@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Demo page for Web Components integration in Next.js.
@@ -9,6 +9,28 @@ import { useState } from "react";
 export default function WcDemoPage() {
   const [clickCount, setClickCount] = useState(0);
   const [inputValue, setInputValue] = useState("");
+  const buttonRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLElement>(null);
+
+  // Add event listeners for ds:* custom events
+  useEffect(() => {
+    const button = buttonRef.current;
+    const input = inputRef.current;
+
+    const handleClick = () => setClickCount((c) => c + 1);
+    const handleChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ value: string }>;
+      setInputValue(customEvent.detail.value);
+    };
+
+    button?.addEventListener("ds:click", handleClick);
+    input?.addEventListener("ds:change", handleChange);
+
+    return () => {
+      button?.removeEventListener("ds:click", handleClick);
+      input?.removeEventListener("ds:change", handleChange);
+    };
+  }, []);
 
   return (
     <main style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
@@ -22,10 +44,7 @@ export default function WcDemoPage() {
         <h2>Button Component</h2>
         <p>Click the button to test ds:click events:</p>
         <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          <ds-button
-            variant="primary"
-            onDs:click={() => setClickCount((c) => c + 1)}
-          >
+          <ds-button ref={buttonRef} variant="primary">
             Click me
           </ds-button>
           <span>Click count: {clickCount}</span>
@@ -49,10 +68,7 @@ export default function WcDemoPage() {
         <h2>Input Component</h2>
         <p>Type in the input to test ds:change events:</p>
         <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          <ds-input
-            placeholder="Type something..."
-            onDs:change={(e: CustomEvent<{ value: string }>) => setInputValue(e.detail.value)}
-          />
+          <ds-input ref={inputRef} placeholder="Type something..." />
           <span>Value: {inputValue}</span>
         </div>
 
@@ -96,7 +112,6 @@ document.querySelector("ds-input input.ds-input__field")`}
 
 // TypeScript declarations for JSX
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       "ds-button": React.DetailedHTMLProps<
@@ -106,7 +121,7 @@ declare global {
           disabled?: boolean;
           loading?: boolean;
           type?: "button" | "submit" | "reset";
-          "onDs:click"?: (event: CustomEvent<{ originalEvent: MouseEvent }>) => void;
+          ref?: React.Ref<HTMLElement>;
         },
         HTMLElement
       >;
@@ -121,7 +136,7 @@ declare global {
           readonly?: boolean;
           required?: boolean;
           error?: boolean;
-          "onDs:change"?: (event: CustomEvent<{ value: string }>) => void;
+          ref?: React.Ref<HTMLElement>;
         },
         HTMLElement
       >;

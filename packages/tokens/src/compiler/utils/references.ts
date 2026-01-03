@@ -15,7 +15,7 @@ const REFERENCE_GLOBAL_PATTERN = /\{([^}]+)\}/g;
  * @example isReference('#ff0000') => false
  */
 export function isReference(value: unknown): boolean {
-  if (typeof value !== 'string') return false;
+  if (typeof value !== "string") return false;
   return REFERENCE_PATTERN.test(value);
 }
 
@@ -46,7 +46,7 @@ export function findReferences(value: string): string[] {
  * @example containsReferences('#ff0000') => false
  */
 export function containsReferences(value: unknown): boolean {
-  if (typeof value !== 'string') return false;
+  if (typeof value !== "string") return false;
   return REFERENCE_GLOBAL_PATTERN.test(value);
 }
 
@@ -54,10 +54,7 @@ export function containsReferences(value: unknown): boolean {
  * Replace references in a string with resolved values
  * @example replaceReferences('{color.primary}', { 'color.primary': '#ff0000' }) => '#ff0000'
  */
-export function replaceReferences(
-  value: string,
-  resolvedTokens: Record<string, string>
-): string {
+export function replaceReferences(value: string, resolvedTokens: Record<string, string>): string {
   return value.replace(REFERENCE_GLOBAL_PATTERN, (_, path: string) => {
     return resolvedTokens[path] ?? `{${path}}`;
   });

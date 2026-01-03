@@ -2,9 +2,7 @@ export default function HomePage() {
   return (
     <main className="container" style={{ paddingTop: "2rem" }}>
       <h1>Design System Demo</h1>
-      <p className="text-muted">
-        Demonstrating the design system components and CSS layers.
-      </p>
+      <p className="text-muted">Demonstrating the design system components and CSS layers.</p>
 
       {/* Typography Demo Section */}
       <section className="stack-lg" style={{ marginTop: "2rem" }}>
@@ -17,10 +15,9 @@ export default function HomePage() {
           <h5>Heading 5</h5>
           <h6>Heading 6</h6>
           <p>
-            This is a paragraph with <strong>bold text</strong>,{" "}
-            <em>italic text</em>, and <a href="https://example.com">a link</a>.
-            The design system provides consistent typography across all
-            platforms.
+            This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, and{" "}
+            <a href="https://example.com">a link</a>. The design system provides consistent
+            typography across all platforms.
           </p>
           <blockquote>
             This is a blockquote. It should have a left border and muted color.
@@ -94,8 +91,7 @@ export default function HomePage() {
 
       <footer style={{ paddingBottom: "2rem" }}>
         <p className="text-muted text-center">
-          CSS Layers: reset → tokens → base → components → utilities →
-          overrides
+          CSS Layers: reset → tokens → base → components → utilities → overrides
         </p>
       </footer>
     </main>

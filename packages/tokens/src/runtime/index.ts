@@ -3,7 +3,7 @@
  * Re-exports all runtime APIs
  */
 
-export { initTheme, getInitScript } from './init.js';
+export { initTheme, getInitScript } from "./init.js";
 export {
   getMode,
   setMode,
@@ -19,4 +19,4 @@ export {
   onModeChange,
   onBrandChange,
   type ThemeMode,
-} from './theme-controller.js';
+} from "./theme-controller.js";

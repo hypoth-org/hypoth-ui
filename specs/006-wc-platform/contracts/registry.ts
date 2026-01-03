@@ -47,6 +47,4 @@ export declare function getRegisteredTags(): string[];
  * @param tagName - The custom element tag name
  * @returns The component class or undefined if not found
  */
-export declare function getComponentClass(
-  tagName: string
-): CustomElementConstructor | undefined;
+export declare function getComponentClass(tagName: string): CustomElementConstructor | undefined;
