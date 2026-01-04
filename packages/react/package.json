@@ -3,16 +3,23 @@
   "version": "0.0.0",
   "type": "module",
   "description": "React adapters for design system Web Components",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
+    },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --external react",
+    "build": "tsup src/index.ts src/client.ts --format esm --dts --external react",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -27,6 +34,7 @@
   "devDependencies": {
     "@ds/wc": "workspace:*",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "14.6.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "happy-dom": "^13.10.0",

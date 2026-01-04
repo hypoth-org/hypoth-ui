@@ -52,18 +52,24 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, forwardedRef)
     }
   }, [forwardedRef]);
 
-  // Handle click events
+  // Handle click events - prevent clicks when loading
   useEffect(() => {
     const element = internalRef.current;
     if (!element || !onClick) return;
 
     const handler = (event: Event) => {
+      // Prevent click when loading
+      if (loading) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
       onClick(event as unknown as MouseEvent<HTMLElement>);
     };
 
     element.addEventListener("click", handler);
     return () => element.removeEventListener("click", handler);
-  }, [onClick]);
+  }, [onClick, loading]);
 
   // Use createElement to avoid JSX intrinsic element issues
   return createElement(
