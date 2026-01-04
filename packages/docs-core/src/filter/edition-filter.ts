@@ -1,5 +1,6 @@
 import type { ContentFrontmatter } from "../content/frontmatter.js";
 import type { ComponentManifest } from "../manifest/loader.js";
+import type { Edition as EditionTier } from "../types/manifest.js";
 
 /**
  * Edition configuration for white-label documentation filtering
@@ -168,4 +169,84 @@ export function mergeEditionConfigs(
       ...overrides.features,
     },
   };
+}
+
+/**
+ * Edition tier hierarchy for content filtering
+ */
+const EDITION_TIER_HIERARCHY: Record<EditionTier, EditionTier[]> = {
+  core: ["core"],
+  pro: ["core", "pro"],
+  enterprise: ["core", "pro", "enterprise"],
+};
+
+/**
+ * Check if content is available for an edition tier
+ * Content with higher edition tiers is hidden for lower tiers
+ */
+export function isContentAvailableForEditionTier(
+  contentEditions: EditionTier[] | undefined,
+  currentEdition: EditionTier
+): boolean {
+  // If no editions specified, content is available for all
+  if (!contentEditions || contentEditions.length === 0) {
+    return true;
+  }
+
+  // Get what editions the current tier includes
+  const includedEditions = EDITION_TIER_HIERARCHY[currentEdition];
+
+  // Check if any of the content's required editions are included
+  return contentEditions.some((edition) => includedEditions.includes(edition));
+}
+
+/**
+ * Content section that can be filtered by edition
+ */
+export interface FilterableContentSection {
+  /** The raw content/markdown */
+  content: string;
+  /** Edition tiers this section is visible for */
+  editions?: EditionTier[];
+}
+
+/**
+ * Filter content sections based on edition tier
+ * Sections with higher edition requirements are removed for lower tiers
+ */
+export function filterContentForEdition(
+  sections: FilterableContentSection[],
+  currentEdition: EditionTier
+): FilterableContentSection[] {
+  return sections.filter((section) =>
+    isContentAvailableForEditionTier(section.editions, currentEdition)
+  );
+}
+
+/**
+ * Parse MDX content and filter sections by edition
+ * Sections are marked with frontmatter-like metadata: <!-- editions: pro, enterprise -->
+ */
+export function filterMdxContentForEdition(
+  mdxContent: string,
+  currentEdition: EditionTier
+): string {
+  // Pattern to match edition-gated sections:
+  // <!-- editions: pro, enterprise -->
+  // ... content ...
+  // <!-- /editions -->
+  const editionBlockPattern =
+    /<!--\s*editions:\s*([\w,\s]+)\s*-->([\s\S]*?)<!--\s*\/editions\s*-->/g;
+
+  return mdxContent.replace(editionBlockPattern, (_match, editionsStr, content) => {
+    const editions = editionsStr
+      .split(",")
+      .map((e: string) => e.trim().toLowerCase()) as EditionTier[];
+
+    if (isContentAvailableForEditionTier(editions, currentEdition)) {
+      return content; // Keep the content, remove the markers
+    }
+
+    return ""; // Remove the entire block
+  });
 }

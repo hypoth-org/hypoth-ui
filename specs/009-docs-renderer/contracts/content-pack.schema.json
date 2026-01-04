@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/content-pack.json",
+  "title": "Content Pack Configuration",
+  "description": "Package.json extension for documentation content packs",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^@[a-z0-9-]+/docs-content(-[a-z0-9-]+)?$",
+      "description": "Package name following @scope/docs-content convention"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+",
+      "description": "Semantic version"
+    },
+    "docsContent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["base", "overlay"],
+          "default": "overlay",
+          "description": "Pack type: base is primary source, overlay extends/overrides base"
+        },
+        "extends": {
+          "type": "string",
+          "description": "Base pack this overlay extends (required for overlay type)"
+        },
+        "directories": {
+          "type": "object",
+          "properties": {
+            "manifests": {
+              "type": "string",
+              "default": "manifests",
+              "description": "Directory containing component manifests"
+            },
+            "components": {
+              "type": "string",
+              "default": "components",
+              "description": "Directory containing component MDX docs"
+            },
+            "guides": {
+              "type": "string",
+              "default": "guides",
+              "description": "Directory containing guide MDX docs"
+            },
+            "assets": {
+              "type": "string",
+              "default": "assets",
+              "description": "Directory containing static assets"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Content directory locations"
+        },
+        "defaultEditionConfig": {
+          "type": "string",
+          "description": "Path to default edition-config.json"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Docs content pack configuration"
+    },
+    "exports": {
+      "type": "object",
+      "properties": {
+        ".": {
+          "type": "object",
+          "description": "Main entry point"
+        },
+        "./manifests/*": {
+          "type": "string",
+          "description": "Manifest files export pattern"
+        },
+        "./components/*": {
+          "type": "string",
+          "description": "Component docs export pattern"
+        },
+        "./guides/*": {
+          "type": "string",
+          "description": "Guide docs export pattern"
+        },
+        "./editions/*": {
+          "type": "string",
+          "description": "Edition config export pattern"
+        }
+      },
+      "description": "Package exports for content access"
+    }
+  },
+  "required": ["name", "version"],
+  "defaultSnippets": [
+    {
+      "label": "Base Content Pack",
+      "body": {
+        "name": "@ds/docs-content",
+        "version": "0.0.0",
+        "type": "module",
+        "description": "Base documentation content pack",
+        "docsContent": {
+          "type": "base",
+          "directories": {
+            "manifests": "manifests",
+            "components": "components",
+            "guides": "guides"
+          }
+        },
+        "exports": {
+          ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+          },
+          "./manifests/*": "./manifests/*.json",
+          "./components/*": "./components/*.mdx",
+          "./guides/*": "./guides/*.mdx",
+          "./editions/*": "./editions/*.json"
+        }
+      }
+    },
+    {
+      "label": "Overlay Content Pack",
+      "body": {
+        "name": "@${1:tenant}/docs-content",
+        "version": "0.0.0",
+        "type": "module",
+        "description": "Tenant documentation content overlay",
+        "docsContent": {
+          "type": "overlay",
+          "extends": "@ds/docs-content",
+          "directories": {
+            "manifests": "manifests",
+            "components": "components",
+            "guides": "guides"
+          },
+          "defaultEditionConfig": "edition-config.json"
+        },
+        "exports": {
+          "./manifests/*": "./manifests/*.json",
+          "./components/*": "./components/*.mdx",
+          "./guides/*": "./guides/*.mdx",
+          "./edition-config.json": "./edition-config.json"
+        },
+        "peerDependencies": {
+          "@ds/docs-content": "workspace:*"
+        }
+      }
+    }
+  ]
+}

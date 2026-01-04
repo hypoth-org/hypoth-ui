@@ -5,7 +5,7 @@
  * Works with the generated edition map for efficient SSR filtering.
  */
 
-import type { Edition, EditionMap } from "../types/manifest.js";
+import type { Edition, EditionMap, VisibilityConfig } from "../types/manifest.js";
 import { getMinimumEditionForComponent, isComponentInEdition } from "./generate-edition-map.js";
 
 /**
@@ -38,6 +38,8 @@ export interface NavigationFilterOptions {
   includeDisabled?: boolean;
   /** URL pattern for upgrade prompts */
   upgradeUrl?: string;
+  /** Visibility configuration from extended edition config */
+  visibility?: VisibilityConfig;
 }
 
 /**
@@ -62,11 +64,21 @@ export function filterNavigationForEdition(
  * Filter a single navigation item
  */
 function filterNavItem(item: NavItem, options: NavigationFilterOptions): NavItem | null {
-  const { editionMap, edition, includeDisabled = false } = options;
+  const { editionMap, edition, includeDisabled = false, visibility } = options;
 
-  // If this is a component item, check edition availability
+  // If this is a component item, check visibility and edition availability
   if (item.componentId) {
-    const isAvailable = isComponentInEdition(editionMap, item.componentId, edition);
+    // Check visibility.hiddenComponents first
+    if (visibility?.hiddenComponents?.includes(item.componentId)) {
+      return null; // Hidden components are completely hidden, not disabled
+    }
+
+    // Check visibility.shownComponents - if specified, component must be in list
+    const isExplicitlyShown = visibility?.shownComponents?.includes(item.componentId);
+
+    // Check edition availability (unless explicitly shown)
+    const isAvailable =
+      isExplicitlyShown || isComponentInEdition(editionMap, item.componentId, edition);
 
     if (!isAvailable) {
       if (includeDisabled) {
