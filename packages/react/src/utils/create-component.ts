@@ -18,6 +18,8 @@ export interface WrapperConfig<P extends Record<string, unknown>> {
   properties?: (keyof P)[];
   /** Event name mappings: React prop name → DOM event name */
   events?: Record<string, string>;
+  /** Default prop values */
+  defaults?: Partial<P>;
 }
 
 /**
@@ -28,14 +30,16 @@ export function createComponent<
   E extends HTMLElement,
   P extends Record<string, unknown> = Record<string, unknown>,
 >(config: WrapperConfig<P>) {
-  const { tagName, properties = [], events = {} } = config;
+  const { tagName, properties = [], events = {}, defaults = {} } = config;
 
   type WrapperProps = P &
     ComponentPropsWithoutRef<ElementType> & {
       children?: React.ReactNode;
     };
 
-  const Component = forwardRef<E, WrapperProps>((props, forwardedRef) => {
+  const Component = forwardRef<E, WrapperProps>((incomingProps, forwardedRef) => {
+    // Merge defaults with incoming props
+    const props = { ...defaults, ...incomingProps } as WrapperProps;
     const internalRef = useRef<E>(null);
 
     // Merge refs

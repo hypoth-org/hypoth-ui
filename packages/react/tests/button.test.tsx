@@ -128,6 +128,44 @@ describe("Button React Component", () => {
       // Should not throw
       button?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+
+    it("should not call onClick when loading is true", () => {
+      const handleClick = vi.fn();
+      const { container } = render(
+        createElement(Button, { onClick: handleClick, loading: true }, "Loading...")
+      );
+
+      const button = container.querySelector("ds-button");
+      button?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+      expect(handleClick).not.toHaveBeenCalled();
+    });
+
+    it("should call onClick after loading becomes false", () => {
+      const handleClick = vi.fn();
+      const { container, rerender } = render(
+        createElement(Button, { onClick: handleClick, loading: true }, "Loading...")
+      );
+
+      const button = container.querySelector("ds-button");
+      button?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      expect(handleClick).not.toHaveBeenCalled();
+
+      rerender(createElement(Button, { onClick: handleClick, loading: false }, "Click me"));
+      button?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not prevent default event when not loading", () => {
+      const handleClick = vi.fn();
+      const { container } = render(createElement(Button, { onClick: handleClick }, "Test"));
+
+      const button = container.querySelector("ds-button");
+      const event = new MouseEvent("click", { bubbles: true, cancelable: true });
+      button?.dispatchEvent(event);
+
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("ref forwarding", () => {
