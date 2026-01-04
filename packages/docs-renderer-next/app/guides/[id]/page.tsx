@@ -1,8 +1,11 @@
-import { readFile, readdir } from "node:fs/promises";
-import { join } from "node:path";
-import { parseFrontmatterFromFile } from "@ds/docs-core";
+import { readFile } from "node:fs/promises";
+import { parseFrontmatter } from "@ds/docs-core";
 import { notFound } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
+import {
+  discoverGuides,
+  resolveContentFile,
+} from "../../../lib/content-resolver";
 
 interface GuidePageProps {
   params: Promise<{
@@ -10,12 +13,11 @@ interface GuidePageProps {
   }>;
 }
 
-// Generate static params for all guides
+// Generate static params for all guides from content packs
 export async function generateStaticParams() {
   try {
-    const guidesDir = join(process.cwd(), "node_modules/@ds/docs-content/guides");
-    const files = await readdir(guidesDir);
-    return files.filter((f) => f.endsWith(".mdx")).map((f) => ({ id: f.replace(".mdx", "") }));
+    const guides = await discoverGuides();
+    return guides.map(({ id }) => ({ id }));
   } catch {
     return [{ id: "getting-started" }, { id: "theming" }];
   }
@@ -25,8 +27,13 @@ export async function generateMetadata({ params }: GuidePageProps) {
   const { id } = await params;
 
   try {
-    const guidePath = join(process.cwd(), "node_modules/@ds/docs-content/guides", `${id}.mdx`);
-    const { frontmatter } = await parseFrontmatterFromFile(guidePath);
+    const resolved = await resolveContentFile(`guides/${id}.mdx`);
+    if (!resolved) {
+      return { title: "Guide Not Found" };
+    }
+
+    const content = await readFile(resolved.resolvedPath, "utf-8");
+    const { frontmatter } = parseFrontmatter(content);
 
     return {
       title: frontmatter.title,
@@ -40,12 +47,17 @@ export async function generateMetadata({ params }: GuidePageProps) {
 export default async function GuidePage({ params }: GuidePageProps) {
   const { id } = await params;
 
+  // Resolve guide content through overlay chain
+  const resolved = await resolveContentFile(`guides/${id}.mdx`);
+
+  if (!resolved) {
+    notFound();
+  }
+
   let mdxContent: string;
 
   try {
-    const guidePath = join(process.cwd(), "node_modules/@ds/docs-content/guides", `${id}.mdx`);
-    const content = await readFile(guidePath, "utf-8");
-    mdxContent = content;
+    mdxContent = await readFile(resolved.resolvedPath, "utf-8");
   } catch {
     notFound();
   }

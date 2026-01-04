@@ -5,7 +5,8 @@
 import { readFile } from "node:fs/promises";
 import { glob } from "glob";
 
-import type { ContractManifest } from "../types/manifest.js";
+import type { ContentPack, ContractManifest } from "../types/manifest.js";
+import { mergeManifests } from "../content/overlay.js";
 import type {
   FileValidationResult,
   ValidationError,
@@ -183,4 +184,64 @@ export async function loadValidManifests(
   }
 
   return { manifests, result };
+}
+
+/**
+ * Options for loading manifests from content packs
+ */
+export interface LoadManifestsFromPacksOptions {
+  /** Content packs to load from (in priority order) */
+  packs: ContentPack[];
+  /** Whether to merge overlays with base manifests */
+  mergeOverlays?: boolean;
+}
+
+/**
+ * Load valid manifests from content packs with overlay resolution
+ *
+ * Loads manifests from all packs and merges overlays with base manifests.
+ * The result respects overlay precedence - tenant overrides base.
+ */
+export async function loadValidManifestsFromPacks(
+  options: LoadManifestsFromPacksOptions
+): Promise<{ manifests: ContractManifest[]; result: ValidationResult }> {
+  const { packs, mergeOverlays = true } = options;
+  const manifestMap = new Map<string, ContractManifest>();
+  const result = createEmptyResult();
+
+  // Process packs in reverse order (base first) so overlays override
+  const reversedPacks = [...packs].reverse();
+
+  for (const pack of reversedPacks) {
+    const packResult = await validateAllManifests({
+      rootDir: pack.root,
+      pattern: "**/components/**/manifest.json",
+    });
+
+    result.files.push(...packResult.files);
+    result.errors.push(...packResult.errors);
+    result.warnings.push(...packResult.warnings);
+
+    for (const fileResult of packResult.files) {
+      if (fileResult.valid) {
+        const content = await readFile(fileResult.file, "utf-8");
+        const manifest = JSON.parse(content) as ContractManifest;
+        const existing = manifestMap.get(manifest.id);
+
+        if (existing && pack.type === "overlay" && mergeOverlays) {
+          // Merge overlay on top of base
+          manifestMap.set(manifest.id, mergeManifests(existing, manifest));
+        } else if (!existing || pack.type === "overlay") {
+          // New manifest or overlay replacement
+          manifestMap.set(manifest.id, manifest);
+        }
+      }
+    }
+  }
+
+  result.valid = result.errors.length === 0;
+  result.errorCount = result.errors.length;
+  result.warningCount = result.warnings.length;
+
+  return { manifests: Array.from(manifestMap.values()), result };
 }

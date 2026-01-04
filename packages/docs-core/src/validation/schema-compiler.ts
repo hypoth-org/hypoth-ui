@@ -9,7 +9,12 @@ import Ajv from "ajv";
 import type { ValidateFunction } from "ajv";
 import ajvErrors from "ajv-errors";
 
-import type { ContractManifest, DocsFrontmatter, EditionConfig } from "../types/manifest.js";
+import type {
+  ContractManifest,
+  DocsFrontmatter,
+  EditionConfig,
+  EditionConfigExtended,
+} from "../types/manifest.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SCHEMAS_DIR = join(__dirname, "..", "schemas");
@@ -46,6 +51,7 @@ function loadSchema(schemaName: string): object {
 let manifestValidator: ValidateFunction<ContractManifest> | null = null;
 let frontmatterValidator: ValidateFunction<DocsFrontmatter> | null = null;
 let editionConfigValidator: ValidateFunction<EditionConfig> | null = null;
+let extendedEditionConfigValidator: ValidateFunction<EditionConfigExtended> | null = null;
 
 /**
  * Get the compiled manifest validator
@@ -89,12 +95,25 @@ export function getEditionConfigValidator(): ValidateFunction<EditionConfig> {
 }
 
 /**
+ * Get the compiled extended edition config validator
+ */
+export function getExtendedEditionConfigValidator(): ValidateFunction<EditionConfigExtended> {
+  if (!extendedEditionConfigValidator) {
+    const ajv = getAjv();
+    const schema = loadSchema("edition-config-extended.schema.json");
+    extendedEditionConfigValidator = ajv.compile<EditionConfigExtended>(schema);
+  }
+  return extendedEditionConfigValidator;
+}
+
+/**
  * Reset cached validators (useful for testing)
  */
 export function resetValidators(): void {
   manifestValidator = null;
   frontmatterValidator = null;
   editionConfigValidator = null;
+  extendedEditionConfigValidator = null;
   ajvInstance = null;
 }
 

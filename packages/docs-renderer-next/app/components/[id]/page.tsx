@@ -1,16 +1,18 @@
-import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import {
+  type ComponentAccessibility,
   type ComponentStatus,
   type ContractManifest,
   type Edition,
   getMinimumEdition,
   isComponentAvailable,
-  loadEditionConfig,
-  loadManifestById,
-  loadValidManifests,
 } from "@ds/docs-core";
+import {
+  getEditionConfig,
+  loadManifestsFromPacks,
+  loadManifestByIdFromPacks,
+  resolveContentFile,
+} from "../../../lib/content-resolver";
 
 /**
  * Display manifest shape used for rendering component pages
@@ -24,6 +26,7 @@ interface DisplayManifest {
   events: Array<{ name: string; description: string }>;
   examples: Array<{ title: string; code: string }>;
   tokensUsed: string[];
+  accessibility?: ComponentAccessibility;
 }
 import { notFound, redirect } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
@@ -46,11 +49,9 @@ async function getCurrentEdition(): Promise<Edition> {
     return envEdition as Edition;
   }
 
-  // Fall back to edition config
+  // Fall back to edition config from content resolver
   try {
-    const { config } = await loadEditionConfig({
-      configDir: process.cwd(),
-    });
+    const config = await getEditionConfig();
     return config.edition;
   } catch {
     return "enterprise"; // Default to enterprise (shows all)
@@ -58,29 +59,10 @@ async function getCurrentEdition(): Promise<Edition> {
 }
 
 /**
- * Load contract manifests from the WC package
+ * Load contract manifests from content packs with overlay resolution
  */
 async function loadContractManifests(): Promise<ContractManifest[]> {
-  const wcPath = join(process.cwd(), "..", "wc");
-
-  if (!existsSync(wcPath)) {
-    // Try node_modules path for deployed apps
-    const nodeModulesPath = join(process.cwd(), "node_modules/@ds/wc");
-    if (existsSync(nodeModulesPath)) {
-      const { manifests } = await loadValidManifests({
-        rootDir: nodeModulesPath,
-        pattern: "**/components/**/manifest.json",
-      });
-      return manifests;
-    }
-    return [];
-  }
-
-  const { manifests } = await loadValidManifests({
-    rootDir: wcPath,
-    pattern: "**/components/**/manifest.json",
-  });
-  return manifests;
+  return loadManifestsFromPacks();
 }
 
 /**
@@ -103,20 +85,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ComponentPageProps) {
   const { id } = await params;
 
-  // Try to load from contract manifests first
-  const manifests = await loadContractManifests();
-  const contractManifest = manifests.find((m) => m.id === id);
-
-  if (contractManifest) {
-    return {
-      title: contractManifest.name,
-      description: contractManifest.description,
-    };
-  }
-
-  // Fall back to legacy manifest loader
-  const manifestsDir = join(process.cwd(), "node_modules/@ds/docs-content/manifests");
-  const manifest = await loadManifestById(manifestsDir, id);
+  // Load manifest with overlay resolution
+  const manifest = await loadManifestByIdFromPacks(id);
 
   if (!manifest) {
     return { title: "Component Not Found" };
@@ -147,45 +117,36 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     }
   }
 
-  // Fall back to legacy manifest loader
-  const manifestsDir = join(process.cwd(), "node_modules/@ds/docs-content/manifests");
-  const manifest = contractManifest || (await loadManifestById(manifestsDir, id));
+  // Use overlay-resolved manifest or fall back to direct lookup
+  const manifest = contractManifest ?? (await loadManifestByIdFromPacks(id));
 
   if (!manifest) {
     notFound();
   }
 
-  // Try to load MDX content
+  // Load MDX content with overlay resolution
   let mdxContent: string | null = null;
   try {
-    const mdxPath = join(process.cwd(), "node_modules/@ds/docs-content/components", `${id}.mdx`);
-    mdxContent = await readFile(mdxPath, "utf-8");
+    const resolved = await resolveContentFile(`components/${id}.mdx`);
+    if (resolved) {
+      mdxContent = await readFile(resolved.resolvedPath, "utf-8");
+    }
   } catch {
     // No MDX file, use auto-generated content from manifest
   }
 
   // Normalize to DisplayManifest format for rendering
-  // Contract manifests don't have props/events/examples, legacy manifests do
-  // When contractManifest is falsy, manifest must be ComponentManifest from loadManifestById
-  const displayManifest: DisplayManifest = contractManifest
-    ? {
-        name: contractManifest.name,
-        description: contractManifest.description,
-        status: contractManifest.status,
-        props: [],
-        events: [],
-        examples: [],
-        tokensUsed: contractManifest.tokensUsed ?? [],
-      }
-    : {
-        name: manifest.name,
-        description: manifest.description ?? "",
-        status: manifest.status,
-        props: "props" in manifest ? (manifest.props ?? []) : [],
-        events: "events" in manifest ? (manifest.events ?? []) : [],
-        examples: "examples" in manifest ? (manifest.examples ?? []) : [],
-        tokensUsed: "tokensUsed" in manifest ? (manifest.tokensUsed ?? []) : [],
-      };
+  // Contract manifests don't have props/events/examples (those come from MDX)
+  const displayManifest: DisplayManifest = {
+    name: manifest.name,
+    description: manifest.description,
+    status: manifest.status,
+    props: [],
+    events: [],
+    examples: [],
+    tokensUsed: manifest.tokensUsed ?? [],
+    accessibility: manifest.accessibility,
+  };
 
   return (
     <EditionProvider edition={edition}>
@@ -202,6 +163,70 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
         {displayManifest.tokensUsed.length > 0 && (
           <TokensUsed tokens={displayManifest.tokensUsed} />
+        )}
+
+        {displayManifest.accessibility && (
+          <section className="component-accessibility">
+            <h2>Accessibility</h2>
+            <dl className="accessibility-details">
+              <div className="accessibility-item">
+                <dt>APG Pattern</dt>
+                <dd>
+                  <a
+                    href={`https://www.w3.org/WAI/ARIA/apg/patterns/${displayManifest.accessibility.apgPattern.toLowerCase().replace(/\s+/g, "-")}/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {displayManifest.accessibility.apgPattern}
+                  </a>
+                </dd>
+              </div>
+              {displayManifest.accessibility.keyboard.length > 0 && (
+                <div className="accessibility-item">
+                  <dt>Keyboard Interactions</dt>
+                  <dd>
+                    <ul className="keyboard-list">
+                      {displayManifest.accessibility.keyboard.map((interaction) => (
+                        <li key={interaction}>{interaction}</li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              )}
+              <div className="accessibility-item">
+                <dt>Screen Reader</dt>
+                <dd>{displayManifest.accessibility.screenReader}</dd>
+              </div>
+              {displayManifest.accessibility.ariaPatterns &&
+                displayManifest.accessibility.ariaPatterns.length > 0 && (
+                  <div className="accessibility-item">
+                    <dt>ARIA Patterns</dt>
+                    <dd>
+                      <ul className="aria-list">
+                        {displayManifest.accessibility.ariaPatterns.map((pattern) => (
+                          <li key={pattern}>
+                            <code>{pattern}</code>
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                )}
+              {displayManifest.accessibility.knownLimitations &&
+                displayManifest.accessibility.knownLimitations.length > 0 && (
+                  <div className="accessibility-item accessibility-item--warning">
+                    <dt>Known Limitations</dt>
+                    <dd>
+                      <ul className="limitations-list">
+                        {displayManifest.accessibility.knownLimitations.map((limitation) => (
+                          <li key={limitation}>{limitation}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                )}
+            </dl>
+          </section>
         )}
 
         {mdxContent ? (

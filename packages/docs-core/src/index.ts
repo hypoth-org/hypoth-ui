@@ -25,6 +25,19 @@ export type {
   EditionConfig,
   EditionMap,
   DocsFrontmatter,
+  // Extended types for white-label docs
+  ContentPackConfig,
+  VisibilityConfig,
+  BrandingConfig,
+  FeatureConfig,
+  UpgradeConfig,
+  EditionConfigExtended,
+  ContentPack,
+  ResolvedContent,
+  SearchEntry,
+  SearchIndex,
+  RequiredFeatureConfig,
+  BrandingContextValue,
 } from "./types/manifest.js";
 
 export type {
@@ -63,6 +76,7 @@ export {
   getManifestValidator,
   getFrontmatterValidator,
   getEditionConfigValidator,
+  getExtendedEditionConfigValidator,
   resetValidators,
   formatAjvErrors,
 } from "./validation/schema-compiler.js";
@@ -73,9 +87,11 @@ export {
   validateAllManifests,
   discoverManifests,
   loadValidManifests,
+  loadValidManifestsFromPacks,
   loadAndValidateManifest,
   DEFAULT_MANIFEST_PATTERN,
   type ValidateManifestsOptions,
+  type LoadManifestsFromPacksOptions,
 } from "./validation/validate-manifests.js";
 
 // Docs frontmatter validation
@@ -131,18 +147,24 @@ export {
   createDefaultEdition,
   createEnterpriseEdition,
   mergeEditionConfigs,
+  isContentAvailableForEditionTier,
+  filterContentForEdition,
+  filterMdxContentForEdition,
   type FilterOptions,
+  type FilterableContentSection,
 } from "./filter/edition-filter.js";
 
 // Navigation generation
 export {
   generateNavigation,
+  generateNavigationFromPacks,
   flattenNavigation,
   findNavItemByHref,
   getBreadcrumbs,
   type NavItem,
   type NavigationTree,
   type GenerateNavigationOptions,
+  type GenerateNavigationFromPacksOptions,
 } from "./nav/navigation.js";
 
 // Edition map generation
@@ -158,12 +180,20 @@ export {
 // Edition config loading
 export {
   loadEditionConfig,
+  loadEditionConfigExtended,
   getCurrentEdition,
   mergeEditionConfigs as mergeEditionConfigsNew,
+  mergeExtendedEditionConfigs,
+  applyDefaultFeatures,
   DEFAULT_EDITION_CONFIG,
+  DEFAULT_EXTENDED_EDITION_CONFIG,
+  DEFAULT_FEATURES,
   EDITION_CONFIG_FILE_NAMES,
+  EXTENDED_EDITION_CONFIG_FILE_NAMES,
   type LoadEditionConfigOptions,
   type LoadEditionConfigResult,
+  type LoadExtendedEditionConfigOptions,
+  type LoadExtendedEditionConfigResult,
 } from "./validation/load-edition-config.js";
 
 // Navigation filtering
@@ -175,3 +205,27 @@ export {
   type NavigationFilterOptions,
   type UpgradePromptData,
 } from "./validation/navigation-filter.js";
+
+// Content overlay resolution
+export {
+  initContentPacks,
+  resolveContent,
+  resolveAllContent,
+  mergeManifests,
+  contentExists,
+  getAllContentPaths,
+  validateOverlayReferences,
+  detectContentPackCycles,
+  validateContentPacks,
+  type InitContentPacksOptions,
+  type ResolveContentOptions,
+  type CycleDetectionResult,
+} from "./content/overlay.js";
+
+// Search index generation
+export {
+  generateSearchIndex,
+  serializeSearchIndex,
+  createMinimalSearchIndex,
+  type GenerateSearchIndexOptions,
+} from "./search/indexer.js";

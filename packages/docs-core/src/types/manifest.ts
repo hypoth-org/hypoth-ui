@@ -66,6 +66,70 @@ export interface ContractManifest {
 }
 
 /**
+ * Content pack configuration for overlay resolution
+ */
+export interface ContentPackConfig {
+  /** Package name (e.g., "@tenant/docs-content") */
+  package: string;
+  /** Priority (higher = checked first for overlays) */
+  priority?: number;
+}
+
+/**
+ * Component visibility configuration
+ */
+export interface VisibilityConfig {
+  /** Explicitly hidden component IDs */
+  hiddenComponents?: string[];
+  /** Explicitly shown component IDs (overrides edition filtering) */
+  shownComponents?: string[];
+}
+
+/**
+ * Branding configuration for white-label customization
+ */
+export interface BrandingConfig {
+  /** Display name for header and titles */
+  name?: string;
+  /** Logo URL (absolute or relative to public/) */
+  logo?: string;
+  /** Primary brand color (CSS hex) */
+  primaryColor?: string;
+  /** Favicon URL */
+  favicon?: string;
+  /** Custom CSS file URL */
+  customCss?: string;
+}
+
+/**
+ * Feature toggles for optional UI elements
+ */
+export interface FeatureConfig {
+  /** Show search input */
+  search?: boolean;
+  /** Show dark mode toggle */
+  darkMode?: boolean;
+  /** Show version switcher */
+  versionSwitcher?: boolean;
+  /** Show feedback widget */
+  feedback?: boolean;
+  /** Show source code links */
+  sourceLinks?: boolean;
+}
+
+/**
+ * Upgrade prompt configuration
+ */
+export interface UpgradeConfig {
+  /** URL for upgrade CTA */
+  url: string;
+  /** CTA button text */
+  ctaText?: string;
+  /** Message shown on filtered content */
+  message?: string;
+}
+
+/**
  * Edition configuration for tenant filtering
  */
 export interface EditionConfig {
@@ -88,6 +152,31 @@ export interface EditionConfig {
   };
   /** URL for upgrade prompts */
   upgradeUrl?: string;
+}
+
+/**
+ * Extended edition configuration for white-label docs
+ * Includes content packs, visibility overrides, and upgrade prompts
+ */
+export interface EditionConfigExtended {
+  /** JSON Schema reference for IDE support */
+  $schema?: string;
+  /** Configuration identifier */
+  id: string;
+  /** Human-readable name */
+  name: string;
+  /** Active edition tier */
+  edition: Edition;
+  /** Content pack configuration */
+  contentPacks?: ContentPackConfig[];
+  /** Component visibility rules */
+  visibility?: VisibilityConfig;
+  /** Branding customization */
+  branding?: BrandingConfig;
+  /** Feature toggles */
+  features?: FeatureConfig;
+  /** Upgrade prompt configuration */
+  upgrade?: UpgradeConfig;
 }
 
 /**
@@ -141,4 +230,125 @@ export interface DocsFrontmatter {
   category?: string;
   /** Searchable tags for discovery */
   tags?: string[];
+}
+
+/**
+ * Metadata for a documentation content pack
+ */
+export interface ContentPack {
+  /** Package identifier (e.g., "@ds/docs-content") */
+  id: string;
+  /** Absolute path to package root */
+  root: string;
+  /** Pack type: base provides foundation, overlay extends/overrides */
+  type: "base" | "overlay";
+  /** Priority for overlay resolution (higher = checked first) */
+  priority: number;
+  /** Package version from package.json */
+  version: string;
+}
+
+/**
+ * Result of resolving content through overlay chain
+ */
+export interface ResolvedContent {
+  /** Content type */
+  type: "manifest" | "mdx" | "asset";
+  /** Original requested path (e.g., "components/button.mdx") */
+  requestedPath: string;
+  /** Resolved absolute file path */
+  resolvedPath: string;
+  /** Source pack that provided this content */
+  source: {
+    packId: string;
+    packType: "base" | "overlay";
+  };
+  /** Whether content was overridden from base */
+  isOverridden: boolean;
+  /** Parsed content (if applicable) */
+  content?: {
+    frontmatter?: DocsFrontmatter;
+    body?: string;
+    manifest?: ContractManifest;
+  };
+}
+
+/**
+ * Search entry in the index
+ */
+export interface SearchEntry {
+  /** Unique entry ID */
+  id: string;
+  /** Content type */
+  type: "component" | "guide";
+  /** Page title */
+  title: string;
+  /** Short description */
+  description: string;
+  /** URL path */
+  url: string;
+  /** Navigation category */
+  category: string;
+  /** Searchable tags */
+  tags: string[];
+  /** Indexed body content (first N characters) */
+  excerpt: string;
+  /** Component status (if applicable) */
+  status?: ComponentStatus;
+  /** Search ranking boost */
+  boost?: number;
+}
+
+/**
+ * Search index generated at build time
+ */
+export interface SearchIndex {
+  /** Schema version for compatibility */
+  version: "1.0.0";
+  /** ISO timestamp of generation */
+  generatedAt: string;
+  /** Edition this index was generated for */
+  edition: Edition;
+  /** Indexed content entries */
+  entries: SearchEntry[];
+  /** Category facets for filtering */
+  facets: {
+    categories: string[];
+    types: Array<"component" | "guide">;
+    tags: string[];
+  };
+}
+
+/**
+ * Required feature configuration with all defaults applied
+ */
+export interface RequiredFeatureConfig {
+  /** Show search input */
+  search: boolean;
+  /** Show dark mode toggle */
+  darkMode: boolean;
+  /** Show version switcher */
+  versionSwitcher: boolean;
+  /** Show feedback widget */
+  feedback: boolean;
+  /** Show source code links */
+  sourceLinks: boolean;
+}
+
+/**
+ * Branding values exposed via React context
+ */
+export interface BrandingContextValue {
+  /** Site name */
+  name: string;
+  /** Logo URL (resolved) */
+  logo: string | null;
+  /** Primary color CSS value */
+  primaryColor: string;
+  /** Feature flags */
+  features: RequiredFeatureConfig;
+  /** Current edition */
+  edition: Edition;
+  /** Upgrade prompt data (if applicable) */
+  upgrade: UpgradeConfig | null;
 }

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://hypoth-ui.dev/schemas/edition-config-extended.schema.json",
+  "id": "tenant-example",
+  "name": "Acme Corp",
+  "edition": "pro",
+  "branding": {
+    "name": "Acme Design System",
+    "primaryColor": "#7c3aed",
+    "logo": "/acme-logo.svg"
+  },
+  "features": {
+    "search": true,
+    "darkMode": true,
+    "versionSwitcher": false,
+    "feedback": true,
+    "sourceLinks": false
+  },
+  "contentPacks": [
+    {
+      "package": "@ds/docs-content-tenant-example",
+      "priority": 10
+    }
+  ],
+  "visibility": {
+    "hiddenComponents": ["internal-tool"]
+  },
+  "upgrade": {
+    "url": "https://acme.example.com/upgrade",
+    "ctaText": "Upgrade to Enterprise",
+    "message": "Get access to all components and premium support"
+  }
+}

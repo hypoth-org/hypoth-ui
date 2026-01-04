@@ -21,7 +21,8 @@
     "validate:manifests": "tsx src/cli/validate-manifests.ts",
     "validate:docs": "tsx src/cli/validate.ts --manifests-only=false --docs-only=true",
     "build:edition-map": "tsx src/cli/build-edition-map.ts",
-    "audit:components": "tsx src/cli/audit.ts"
+    "audit:components": "tsx src/cli/audit.ts",
+    "build:search-index": "tsx src/cli/build-search-index.ts"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

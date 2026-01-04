@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/search-index.json",
+  "title": "Search Index",
+  "description": "Build-time generated search index for documentation",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema version for compatibility checks"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp of index generation"
+    },
+    "edition": {
+      "type": "string",
+      "enum": ["core", "pro", "enterprise"],
+      "description": "Edition this index was generated for"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SearchEntry"
+      },
+      "description": "Indexed content entries"
+    },
+    "facets": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Available category filters"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["component", "guide"]
+          },
+          "description": "Available type filters"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Available tag filters"
+        }
+      },
+      "required": ["categories", "types", "tags"],
+      "additionalProperties": false,
+      "description": "Facets for filtering search results"
+    }
+  },
+  "required": ["version", "generatedAt", "edition", "entries", "facets"],
+  "additionalProperties": false,
+  "definitions": {
+    "SearchEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique entry identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["component", "guide"],
+          "description": "Content type"
+        },
+        "title": {
+          "type": "string",
+          "description": "Page title"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Short description for search results"
+        },
+        "url": {
+          "type": "string",
+          "description": "Page URL path"
+        },
+        "category": {
+          "type": "string",
+          "description": "Navigation category"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Searchable tags"
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Indexed body content excerpt"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["experimental", "alpha", "beta", "stable", "deprecated"],
+          "description": "Component status (for component entries)"
+        },
+        "boost": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 1,
+          "description": "Search ranking boost factor"
+        }
+      },
+      "required": ["id", "type", "title", "description", "url", "category", "tags", "excerpt"],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schemas/edition-config-extended.json",
+  "title": "Extended Edition Configuration",
+  "description": "Tenant-level configuration for edition filtering, branding, and content overlay",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this JSON Schema for IDE support"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique configuration identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable configuration name"
+    },
+    "edition": {
+      "type": "string",
+      "enum": ["core", "pro", "enterprise"],
+      "description": "Active edition tier for this tenant"
+    },
+    "contentPacks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string",
+            "description": "npm package name for content pack"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "default": 0,
+            "description": "Priority for overlay resolution (higher = checked first)"
+          }
+        },
+        "required": ["package"],
+        "additionalProperties": false
+      },
+      "description": "Content packs to load (overlays checked in priority order)"
+    },
+    "visibility": {
+      "type": "object",
+      "properties": {
+        "hiddenComponents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Component IDs to hide regardless of edition"
+        },
+        "shownComponents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Component IDs to show regardless of edition filtering"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Override component visibility"
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Brand name for header and page titles"
+        },
+        "logo": {
+          "type": "string",
+          "description": "Logo URL (absolute or relative to public/)"
+        },
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Primary brand color in hex format"
+        },
+        "favicon": {
+          "type": "string",
+          "description": "Favicon URL"
+        },
+        "customCss": {
+          "type": "string",
+          "description": "URL to custom CSS file for additional styling"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Brand customization"
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable search functionality"
+        },
+        "darkMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable dark mode toggle"
+        },
+        "versionSwitcher": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable version switching"
+        },
+        "feedback": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable feedback widget"
+        },
+        "sourceLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show links to source code"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Feature toggles"
+    },
+    "upgrade": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for upgrade CTA"
+        },
+        "ctaText": {
+          "type": "string",
+          "default": "Upgrade",
+          "description": "Button text for upgrade CTA"
+        },
+        "message": {
+          "type": "string",
+          "default": "This component requires a higher edition tier.",
+          "description": "Message shown on filtered content"
+        }
+      },
+      "required": ["url"],
+      "additionalProperties": false,
+      "description": "Upgrade prompt configuration"
+    }
+  },
+  "required": ["id", "name", "edition"],
+  "additionalProperties": false,
+  "defaultSnippets": [
+    {
+      "label": "Minimal Config",
+      "body": {
+        "$schema": "./edition-config-extended.schema.json",
+        "id": "${1:tenant-id}",
+        "name": "${2:Tenant Name}",
+        "edition": "${3|core,pro,enterprise|}"
+      }
+    },
+    {
+      "label": "Full White-Label Config",
+      "body": {
+        "$schema": "./edition-config-extended.schema.json",
+        "id": "${1:tenant-id}",
+        "name": "${2:Tenant Name}",
+        "edition": "enterprise",
+        "contentPacks": [
+          {
+            "package": "@${1:tenant}/docs-content",
+            "priority": 10
+          }
+        ],
+        "branding": {
+          "name": "${2:Tenant Name}",
+          "logo": "/assets/${1:tenant}/logo.svg",
+          "primaryColor": "${3:#0066cc}"
+        },
+        "features": {
+          "search": true,
+          "darkMode": true,
+          "feedback": true
+        }
+      }
+    }
+  ]
+}

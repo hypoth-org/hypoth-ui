@@ -1,10 +1,12 @@
 import type { ParsedContent } from "../content/frontmatter.js";
+import type { ContentPack } from "../types/manifest.js";
 import type { EditionConfig } from "../filter/edition-filter.js";
 import {
   isComponentVisibleForEdition,
   isContentVisibleForEdition,
 } from "../filter/edition-filter.js";
 import type { ComponentManifest } from "../manifest/loader.js";
+import { resolveAllContent } from "../content/overlay.js";
 
 /**
  * Navigation item in the tree
@@ -50,6 +52,8 @@ export interface GenerateNavigationOptions {
   componentBasePath?: string;
   /** Base path for guide URLs */
   guideBasePath?: string;
+  /** Content packs for overlay resolution (optional) */
+  contentPacks?: ContentPack[];
 }
 
 /**
@@ -246,4 +250,67 @@ export function getBreadcrumbs(tree: NavigationTree, href: string): NavItem[] {
 
   findPath([...tree.components, ...tree.guides]);
   return breadcrumbs;
+}
+
+/**
+ * Options for generating navigation from content packs
+ */
+export interface GenerateNavigationFromPacksOptions {
+  /** Content packs to use for resolution */
+  packs: ContentPack[];
+  /** Edition config for filtering */
+  edition: EditionConfig;
+  /** Component manifests (pre-loaded with overlay resolution) */
+  manifests: ComponentManifest[];
+  /** Base path for component URLs */
+  componentBasePath?: string;
+  /** Base path for guide URLs */
+  guideBasePath?: string;
+}
+
+/**
+ * Generate navigation from content packs with overlay resolution
+ *
+ * This discovers all MDX content from content packs and generates
+ * a navigation tree that respects the overlay precedence.
+ */
+export async function generateNavigationFromPacks(
+  options: GenerateNavigationFromPacksOptions
+): Promise<NavigationTree> {
+  const {
+    packs,
+    manifests,
+    edition,
+    componentBasePath = "/components",
+    guideBasePath = "/guides",
+  } = options;
+
+  // Discover all guide content from packs
+  const guideContents = await resolveAllContent("guides", /\.mdx?$/, { packs });
+
+  // Parse frontmatter for guides
+  const { parseFrontmatter } = await import("../content/frontmatter.js");
+  const { readFile } = await import("node:fs/promises");
+
+  const contents: Array<{ path: string; parsed: ParsedContent }> = [];
+
+  for (const resolved of guideContents) {
+    try {
+      const fileContent = await readFile(resolved.resolvedPath, "utf-8");
+      const parsed = parseFrontmatter(fileContent);
+      contents.push({ path: resolved.requestedPath, parsed });
+    } catch {
+      // Skip files that can't be parsed
+    }
+  }
+
+  // Use existing generateNavigation with the resolved contents
+  return generateNavigation({
+    manifests,
+    contents,
+    edition,
+    componentBasePath,
+    guideBasePath,
+    contentPacks: packs,
+  });
 }
