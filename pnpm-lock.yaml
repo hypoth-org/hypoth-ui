@@ -172,6 +172,8 @@ importers:
         specifier: ^5.3.0
         version: 5.9.3
 
+  packages/docs-content-tenant-example: {}
+
   packages/docs-core:
     devDependencies:
       '@types/glob':
@@ -349,6 +351,9 @@ importers:
 
   packages/wc:
     dependencies:
+      '@ds/primitives-dom':
+        specifier: workspace:*
+        version: link:../primitives-dom
       lit:
         specifier: ^3.1.0
         version: 3.3.2
@@ -359,9 +364,6 @@ importers:
       '@axe-core/playwright':
         specifier: ^4.8.0
         version: 4.11.0(playwright-core@1.57.0)
-      '@ds/primitives-dom':
-        specifier: workspace:*
-        version: link:../primitives-dom
       happy-dom:
         specifier: ^13.10.0
         version: 13.10.1
