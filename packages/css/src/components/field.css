@@ -1,0 +1,82 @@
+/**
+ * Field component styles
+ *
+ * The Field pattern provides consistent layout and styling for form fields
+ * including labels, descriptions, and error messages.
+ */
+
+@layer components {
+  /* Field container */
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-field-gap, var(--ds-spacing-2, 0.5rem));
+  }
+
+  /* Label styling */
+  .ds-label {
+    display: block;
+    font-family: var(--ds-font-family-base, inherit);
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    font-weight: var(--ds-font-weight-medium, 500);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-color-text-primary, #1a1a1a);
+  }
+
+  /* Required indicator */
+  .ds-label[data-required]::after {
+    content: " *";
+    color: var(--ds-color-text-error, #dc2626);
+  }
+
+  /* Description text */
+  .ds-field-description {
+    display: block;
+    font-family: var(--ds-font-family-base, inherit);
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-color-text-secondary, #6b7280);
+  }
+
+  /* Error message */
+  .ds-field-error {
+    display: block;
+    font-family: var(--ds-font-family-base, inherit);
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-field-error-color, var(--ds-color-text-error, #dc2626));
+  }
+
+  /* Error icon (optional, shown when error present) */
+  .ds-field-error::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.25em;
+    vertical-align: -0.125em;
+    background-color: currentColor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  /* Field with error state */
+  .ds-field[data-error] .ds-label {
+    color: var(--ds-color-text-error, #dc2626);
+  }
+
+  /* Hide error when not present */
+  .ds-field-error:empty {
+    display: none;
+  }
+
+  /* Disabled field state */
+  .ds-field[data-disabled] .ds-label {
+    color: var(--ds-color-text-disabled, #9ca3af);
+  }
+
+  .ds-field[data-disabled] .ds-field-description {
+    color: var(--ds-color-text-disabled, #9ca3af);
+  }
+}

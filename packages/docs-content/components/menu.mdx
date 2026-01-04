@@ -1,0 +1,212 @@
+---
+title: Menu
+description: A dropdown menu with roving focus, type-ahead search, and accessible keyboard navigation.
+component: menu
+status: stable
+category: overlays
+order: 23
+---
+
+# Menu
+
+Menu provides a dropdown list of actions with keyboard navigation, type-ahead search, and accessible interaction patterns.
+
+## Usage
+
+Basic dropdown menu:
+
+```html
+<ds-menu>
+  <button slot="trigger">Actions</button>
+  <ds-menu-content>
+    <ds-menu-item value="edit">Edit</ds-menu-item>
+    <ds-menu-item value="duplicate">Duplicate</ds-menu-item>
+    <ds-menu-item value="delete">Delete</ds-menu-item>
+  </ds-menu-content>
+</ds-menu>
+```
+
+### React
+
+```tsx
+import { Menu, MenuContent, MenuItem } from "@ds/react";
+
+function ActionsMenu() {
+  return (
+    <Menu onSelect={(value) => console.log(value)}>
+      <button slot="trigger">Actions</button>
+      <MenuContent>
+        <MenuItem value="edit">Edit</MenuItem>
+        <MenuItem value="duplicate">Duplicate</MenuItem>
+        <MenuItem value="delete">Delete</MenuItem>
+      </MenuContent>
+    </Menu>
+  );
+}
+```
+
+## Handling Selection
+
+Listen for item selection:
+
+```html
+<ds-menu id="myMenu">
+  <button slot="trigger">Options</button>
+  <ds-menu-content>
+    <ds-menu-item value="option1">Option 1</ds-menu-item>
+    <ds-menu-item value="option2">Option 2</ds-menu-item>
+  </ds-menu-content>
+</ds-menu>
+
+<script>
+  document.getElementById('myMenu').addEventListener('ds:select', (e) => {
+    console.log('Selected:', e.detail.value);
+  });
+</script>
+```
+
+### React
+
+```tsx
+import { Menu, MenuContent, MenuItem } from "@ds/react";
+
+function SelectableMenu() {
+  const handleSelect = (value: string) => {
+    switch (value) {
+      case "edit":
+        // Handle edit
+        break;
+      case "delete":
+        // Handle delete
+        break;
+    }
+  };
+
+  return (
+    <Menu onSelect={handleSelect}>
+      <button slot="trigger">Actions</button>
+      <MenuContent>
+        <MenuItem value="edit">Edit item</MenuItem>
+        <MenuItem value="delete">Delete item</MenuItem>
+      </MenuContent>
+    </Menu>
+  );
+}
+```
+
+## Disabled Items
+
+Disable specific menu items:
+
+```html
+<ds-menu>
+  <button slot="trigger">File</button>
+  <ds-menu-content>
+    <ds-menu-item value="new">New</ds-menu-item>
+    <ds-menu-item value="open">Open</ds-menu-item>
+    <ds-menu-item value="save" disabled>Save (no changes)</ds-menu-item>
+  </ds-menu-content>
+</ds-menu>
+```
+
+## Placement
+
+Position the menu relative to the trigger:
+
+```html
+<ds-menu placement="bottom-start">...</ds-menu>
+<ds-menu placement="bottom-end">...</ds-menu>
+<ds-menu placement="top-start">...</ds-menu>
+<ds-menu placement="right-start">...</ds-menu>
+```
+
+## Components
+
+### ds-menu
+
+Container that manages open state, positioning, and keyboard navigation.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `open` | boolean | false | Whether the menu is open |
+| `placement` | Placement | "bottom-start" | Position relative to trigger |
+
+### ds-menu-content
+
+The dropdown panel containing menu items.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `role` | string | "menu" | ARIA role |
+
+### ds-menu-item
+
+Individual actionable item within the menu.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | - | Value emitted on selection |
+| `disabled` | boolean | false | Disable this item |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:select` | `{ value: string }` | Fired when an item is selected |
+| `ds:open` | - | Fired when menu opens |
+| `ds:close` | - | Fired when menu closes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Enter/Space` | Open menu (on trigger) / Select item |
+| `Arrow Down` | Move to next item |
+| `Arrow Up` | Move to previous item |
+| `Home` | Move to first item |
+| `End` | Move to last item |
+| `Escape` | Close menu |
+| `A-Z` | Type-ahead: jump to matching item |
+
+## Type-ahead Search
+
+Users can type to quickly navigate to items:
+
+```html
+<ds-menu>
+  <button slot="trigger">Fruits</button>
+  <ds-menu-content>
+    <ds-menu-item value="apple">Apple</ds-menu-item>
+    <ds-menu-item value="banana">Banana</ds-menu-item>
+    <ds-menu-item value="blueberry">Blueberry</ds-menu-item>
+    <ds-menu-item value="cherry">Cherry</ds-menu-item>
+  </ds-menu-content>
+</ds-menu>
+```
+
+Typing "bl" will jump to "Blueberry".
+
+## Accessibility
+
+- Trigger uses `aria-haspopup="menu"` and `aria-expanded`
+- Menu uses `role="menu"`
+- Items use `role="menuitem"`
+- Disabled items have `aria-disabled="true"`
+- Roving focus ensures only one item is in tab order
+- Screen readers announce item position
+
+## Best Practices
+
+### Do
+
+- Use clear, action-oriented labels
+- Group related actions together
+- Disable unavailable actions rather than hiding them
+- Keep menus focused (5-10 items max)
+
+### Don't
+
+- Don't use for navigation (use Nav component)
+- Don't include form elements within menus
+- Don't nest menus more than one level
+- Don't use for selection (use Select component)

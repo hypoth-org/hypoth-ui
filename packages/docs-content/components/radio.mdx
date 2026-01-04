@@ -1,0 +1,186 @@
+---
+title: Radio Group
+description: A radio button group with roving focus and single selection behavior.
+component: radio
+status: stable
+category: forms
+order: 14
+---
+
+# Radio Group
+
+Radio groups allow users to select one option from a set of mutually exclusive choices.
+
+## Usage
+
+Create a radio group with options:
+
+```html
+<ds-radio-group name="color" value="red">
+  <ds-field>
+    <ds-radio value="red"></ds-radio>
+    <ds-label>Red</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-radio value="green"></ds-radio>
+    <ds-label>Green</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-radio value="blue"></ds-radio>
+    <ds-label>Blue</ds-label>
+  </ds-field>
+</ds-radio-group>
+```
+
+### React
+
+```tsx
+import { RadioGroup, Radio, Field, Label } from "@ds/react";
+
+function ColorPicker() {
+  return (
+    <RadioGroup name="color" defaultValue="red">
+      <Field>
+        <Radio value="red" />
+        <Label>Red</Label>
+      </Field>
+      <Field>
+        <Radio value="green" />
+        <Label>Green</Label>
+      </Field>
+      <Field>
+        <Radio value="blue" />
+        <Label>Blue</Label>
+      </Field>
+    </RadioGroup>
+  );
+}
+```
+
+## Controlled Mode
+
+Control the selected value programmatically:
+
+```tsx
+import { RadioGroup, Radio, Field, Label } from "@ds/react";
+import { useState } from "react";
+
+function ControlledRadioGroup() {
+  const [value, setValue] = useState("option1");
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue}>
+      <Field>
+        <Radio value="option1" />
+        <Label>Option 1</Label>
+      </Field>
+      <Field>
+        <Radio value="option2" />
+        <Label>Option 2</Label>
+      </Field>
+    </RadioGroup>
+  );
+}
+```
+
+## Horizontal Layout
+
+Arrange radio buttons horizontally:
+
+```html
+<ds-radio-group orientation="horizontal">
+  <ds-field>
+    <ds-radio value="yes"></ds-radio>
+    <ds-label>Yes</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-radio value="no"></ds-radio>
+    <ds-label>No</ds-label>
+  </ds-field>
+</ds-radio-group>
+```
+
+## Disabled Options
+
+Disable individual options or the entire group:
+
+```html
+<!-- Disable entire group -->
+<ds-radio-group disabled>
+  ...
+</ds-radio-group>
+
+<!-- Disable individual option -->
+<ds-radio-group>
+  <ds-field>
+    <ds-radio value="available"></ds-radio>
+    <ds-label>Available</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-radio value="unavailable" disabled></ds-radio>
+    <ds-label>Unavailable (sold out)</ds-label>
+  </ds-field>
+</ds-radio-group>
+```
+
+## Components
+
+### ds-radio-group
+
+Container that manages selection state and keyboard navigation.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `name` | string | - | Name for form submission |
+| `value` | string | - | Currently selected value |
+| `disabled` | boolean | false | Disable all radio buttons |
+| `orientation` | "vertical" \| "horizontal" | "vertical" | Layout direction |
+| `required` | boolean | false | Whether selection is required |
+
+### ds-radio
+
+Individual radio button within a group.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | - | Value when selected |
+| `disabled` | boolean | false | Disable this option |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: string }` | Fired when selection changes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Down/Right` | Move to next option and select |
+| `Arrow Up/Left` | Move to previous option and select |
+| `Tab` | Move focus out of the group |
+| `Space` | Select focused option (if not already selected) |
+
+## Accessibility
+
+- Uses `role="radiogroup"` on the container
+- Uses `role="radio"` on individual buttons
+- Roving focus with arrow keys (selection follows focus)
+- Only selected or first radio receives tab focus
+- `aria-checked` reflects selection state
+
+## Best Practices
+
+### Do
+
+- Always provide visible labels for each option
+- Use for mutually exclusive choices (select one)
+- Pre-select a default option when appropriate
+- Group related options with a visible group label
+
+### Don't
+
+- Don't use for multiple selections (use Checkbox instead)
+- Don't use for binary toggles (use Switch instead)
+- Don't use more than 5-7 options (consider Select instead)
+- Don't hide radio buttons without accessible alternatives

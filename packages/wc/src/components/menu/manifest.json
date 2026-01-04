@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "menu",
+  "name": "Menu",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A dropdown menu component with roving focus, type-ahead, and accessible keyboard navigation",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "menu-button",
+    "keyboard": ["Arrow keys", "Enter", "Space", "Escape", "Home", "End", "Type-ahead"],
+    "screenReader": "Trigger announces menu expanded state. Items announced with position in list.",
+    "ariaPatterns": ["role=menu", "role=menuitem", "aria-haspopup=menu", "aria-expanded", "aria-disabled"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.hover",
+    "color.border.default",
+    "color.text.primary",
+    "color.text.disabled",
+    "spacing.sm",
+    "spacing.md",
+    "radius.md",
+    "shadow.md"
+  ],
+  "recommendedUsage": "Use for action menus with multiple options. Items should be actions, not navigation.",
+  "antiPatterns": "Do not use for navigation - use a Nav component. Do not include form elements within menus.",
+  "platforms": ["wc", "react"]
+}

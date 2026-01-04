@@ -1,0 +1,145 @@
+---
+title: Tooltip
+description: An informational tooltip shown on hover or focus with configurable delays.
+component: tooltip
+status: stable
+category: overlays
+order: 22
+---
+
+# Tooltip
+
+Tooltip provides brief, supplementary information about an element when the user hovers over or focuses on it.
+
+## Usage
+
+Basic tooltip:
+
+```html
+<ds-tooltip>
+  <button slot="trigger">
+    <ds-icon name="info"></ds-icon>
+  </button>
+  <ds-tooltip-content>Additional information</ds-tooltip-content>
+</ds-tooltip>
+```
+
+### React
+
+```tsx
+import { Tooltip, TooltipContent } from "@ds/react";
+
+function InfoTooltip() {
+  return (
+    <Tooltip>
+      <button slot="trigger">
+        <Icon name="info" />
+      </button>
+      <TooltipContent>Additional information</TooltipContent>
+    </Tooltip>
+  );
+}
+```
+
+## Placement
+
+Position the tooltip relative to the trigger:
+
+```html
+<ds-tooltip placement="top">...</ds-tooltip>
+<ds-tooltip placement="bottom">...</ds-tooltip>
+<ds-tooltip placement="left">...</ds-tooltip>
+<ds-tooltip placement="right">...</ds-tooltip>
+```
+
+## Custom Delays
+
+Adjust show and hide delays:
+
+```html
+<ds-tooltip show-delay="200" hide-delay="0">
+  <button slot="trigger">Quick tooltip</button>
+  <ds-tooltip-content>Appears faster</ds-tooltip-content>
+</ds-tooltip>
+```
+
+Default delays:
+- Show delay: 400ms
+- Hide delay: 100ms
+
+## Hover Persistence
+
+Tooltips stay open when moving from trigger to tooltip content, allowing users to interact with linked content:
+
+```html
+<ds-tooltip>
+  <button slot="trigger">Learn more</button>
+  <ds-tooltip-content>
+    See our <a href="/docs">documentation</a> for details.
+  </ds-tooltip-content>
+</ds-tooltip>
+```
+
+## Components
+
+### ds-tooltip
+
+Container that manages show/hide timing and positioning.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `placement` | Placement | "top" | Position relative to trigger |
+| `show-delay` | number | 400 | Delay before showing (ms) |
+| `hide-delay` | number | 100 | Delay before hiding (ms) |
+
+**Placement values**: `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end`
+
+### ds-tooltip-content
+
+The tooltip content that appears on hover/focus.
+
+## Keyboard Interaction
+
+| Key | Action |
+|-----|--------|
+| `Focus` | Show tooltip (after delay) |
+| `Escape` | Hide tooltip immediately |
+| `Blur` | Hide tooltip (after delay) |
+
+## Accessibility
+
+- Tooltip content is connected via `aria-describedby`
+- Content is announced when trigger receives focus
+- Escape key dismisses the tooltip
+- Content must be text-only for proper screen reader support
+
+## Tooltip vs Popover
+
+Use **Tooltip** when:
+- Providing brief, supplementary descriptions
+- Content is text-only
+- Content appears on hover/focus
+- No interaction is required
+
+Use **Popover** when:
+- Content is interactive
+- Content should persist until dismissed
+- User needs to click to reveal
+- Rich content (forms, buttons) is needed
+
+## Best Practices
+
+### Do
+
+- Keep content brief and text-only
+- Use for supplementary, non-essential information
+- Ensure trigger element is focusable
+- Provide tooltips for icon-only buttons
+
+### Don't
+
+- Don't use for essential information
+- Don't include interactive elements (use Popover)
+- Don't use for form validation (use FieldError)
+- Don't make tooltips too long or complex
+- Don't rely on tooltips for mobile users

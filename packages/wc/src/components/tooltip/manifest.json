@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "tooltip",
+  "name": "Tooltip",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "An informational tooltip component shown on hover or focus with configurable delays",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "tooltip",
+    "keyboard": ["Escape", "Focus"],
+    "screenReader": "Tooltip content is connected via aria-describedby. Announced when trigger receives focus.",
+    "ariaPatterns": ["role=tooltip", "aria-describedby"],
+    "knownLimitations": ["Content must be text-only for proper screen reader support"]
+  },
+  "tokensUsed": [
+    "color.background.inverse",
+    "color.text.inverse",
+    "spacing.sm",
+    "spacing.md",
+    "radius.sm",
+    "shadow.sm"
+  ],
+  "recommendedUsage": "Use for brief, supplementary descriptions. Keep content concise and text-only.",
+  "antiPatterns": "Do not use for essential information. Do not include interactive elements. Do not use for form validation.",
+  "platforms": ["wc", "react"]
+}

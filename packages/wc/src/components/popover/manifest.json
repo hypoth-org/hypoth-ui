@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "popover",
+  "name": "Popover",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A non-modal popover component with anchor positioning and dismissable behavior",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "disclosure",
+    "keyboard": ["Escape", "Tab", "Enter", "Space"],
+    "screenReader": "Trigger announces expanded state. Content is accessible when open.",
+    "ariaPatterns": ["aria-haspopup", "aria-expanded", "aria-controls"],
+    "knownLimitations": ["No focus trap - Tab exits popover"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.text.primary",
+    "spacing.md",
+    "radius.md",
+    "shadow.md"
+  ],
+  "recommendedUsage": "Use for supplementary content or actions triggered by a button. Content should be non-essential.",
+  "antiPatterns": "Do not use for critical actions - use Dialog instead. Do not nest popovers.",
+  "platforms": ["wc", "react"]
+}

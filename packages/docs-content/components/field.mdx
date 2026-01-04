@@ -1,0 +1,146 @@
+---
+title: Field
+description: Form field container with automatic ARIA attribute composition for labels, descriptions, and error messages.
+component: field
+status: stable
+category: forms
+order: 10
+---
+
+# Field
+
+Field is a container component that automatically composes ARIA attributes for form controls, connecting labels, descriptions, and error messages for accessibility.
+
+## Usage
+
+Wrap form controls with Field to provide accessible labels and validation messages:
+
+```html
+<ds-field>
+  <ds-label>Email address</ds-label>
+  <ds-input type="email"></ds-input>
+  <ds-field-description>We'll never share your email.</ds-field-description>
+</ds-field>
+```
+
+### React
+
+```tsx
+import { Field, Label, Input, FieldDescription } from "@ds/react";
+
+function MyForm() {
+  return (
+    <Field>
+      <Label>Email address</Label>
+      <Input type="email" />
+      <FieldDescription>We'll never share your email.</FieldDescription>
+    </Field>
+  );
+}
+```
+
+## With Validation Errors
+
+Display error messages when validation fails:
+
+```html
+<ds-field error>
+  <ds-label>Password</ds-label>
+  <ds-input type="password"></ds-input>
+  <ds-field-error>Password must be at least 8 characters.</ds-field-error>
+</ds-field>
+```
+
+### React
+
+```tsx
+import { Field, Label, Input, FieldError } from "@ds/react";
+
+function PasswordField({ error }) {
+  return (
+    <Field error={!!error}>
+      <Label>Password</Label>
+      <Input type="password" />
+      {error && <FieldError>{error}</FieldError>}
+    </Field>
+  );
+}
+```
+
+## Required Fields
+
+Mark fields as required:
+
+```html
+<ds-field required>
+  <ds-label>Username</ds-label>
+  <ds-input></ds-input>
+</ds-field>
+```
+
+## Components
+
+### ds-field
+
+The container that manages ID generation and ARIA attribute composition.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `error` | boolean | false | Whether the field has a validation error |
+| `required` | boolean | false | Whether the field is required |
+
+### ds-label
+
+The label for the form control.
+
+```html
+<ds-label>Field label</ds-label>
+```
+
+### ds-field-description
+
+Helper text that provides additional context.
+
+```html
+<ds-field-description>Helpful description text</ds-field-description>
+```
+
+### ds-field-error
+
+Error message displayed when validation fails.
+
+```html
+<ds-field-error>Error message</ds-field-error>
+```
+
+## ARIA Attribute Composition
+
+Field automatically connects elements via ARIA attributes:
+
+- The input receives `aria-labelledby` pointing to the label
+- The input receives `aria-describedby` pointing to description and/or error
+- When `error` is set, the input receives `aria-invalid="true"`
+- When `required` is set, the input receives `aria-required="true"`
+
+## Accessibility
+
+- Labels, descriptions, and errors are linked via `aria-labelledby` and `aria-describedby`
+- Error state is communicated via `aria-invalid`
+- Required state is communicated via `aria-required`
+- All content uses Light DOM for native accessibility
+
+## Best Practices
+
+### Do
+
+- Always provide a visible label for form controls
+- Use descriptions for helpful context, not critical information
+- Display error messages close to the invalid field
+- Use clear, actionable error messages
+
+### Don't
+
+- Don't nest Field components
+- Don't use Field for non-form content like headings
+- Don't hide labels visually without providing accessible alternatives
+- Don't use placeholder text as a substitute for labels

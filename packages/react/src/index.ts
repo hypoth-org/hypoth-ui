@@ -27,6 +27,34 @@ export type { SpinnerProps, SpinnerSize } from "./components/spinner.js";
 export type { VisuallyHiddenProps } from "./components/visually-hidden.js";
 export type { TextProps, TextSize, TextWeight, TextVariant } from "./components/text.js";
 
+// Field component types
+export type { FieldProps } from "./components/field/field.js";
+export type { LabelProps } from "./components/field/label.js";
+export type { FieldDescriptionProps } from "./components/field/field-description.js";
+export type { FieldErrorProps } from "./components/field/field-error.js";
+
+// Dialog component types
+export type { DialogProps, DialogRole } from "./components/dialog/dialog.js";
+export type { DialogContentProps, DialogContentSize } from "./components/dialog/dialog-content.js";
+export type { DialogTitleProps } from "./components/dialog/dialog-title.js";
+export type { DialogDescriptionProps } from "./components/dialog/dialog-description.js";
+
+// Form control types
+export type { TextareaProps, TextareaSize } from "./components/textarea.js";
+export type { CheckboxProps } from "./components/checkbox.js";
+export type { RadioGroupProps, RadioOrientation } from "./components/radio-group.js";
+export type { RadioProps } from "./components/radio.js";
+export type { SwitchProps } from "./components/switch.js";
+
+// Overlay component types
+export type { PopoverProps, Placement } from "./components/popover.js";
+export type { PopoverContentProps } from "./components/popover-content.js";
+export type { TooltipProps } from "./components/tooltip.js";
+export type { TooltipContentProps } from "./components/tooltip-content.js";
+export type { MenuProps } from "./components/menu.js";
+export type { MenuContentProps } from "./components/menu-content.js";
+export type { MenuItemProps } from "./components/menu-item.js";
+
 // Primitive types (server-safe, no runtime code)
 export type { BoxProps } from "./primitives/box.js";
 export type { SlotProps } from "./primitives/slot.js";
@@ -63,6 +91,34 @@ export { VisuallyHidden } from "./components/visually-hidden.js";
 export { Text } from "./components/text.js";
 export { Box } from "./primitives/box.js";
 export { Slot } from "./primitives/slot.js";
+
+// Field components
+export { Field } from "./components/field/field.js";
+export { Label } from "./components/field/label.js";
+export { FieldDescription } from "./components/field/field-description.js";
+export { FieldError } from "./components/field/field-error.js";
+
+// Dialog components
+export { Dialog } from "./components/dialog/dialog.js";
+export { DialogContent } from "./components/dialog/dialog-content.js";
+export { DialogTitle } from "./components/dialog/dialog-title.js";
+export { DialogDescription } from "./components/dialog/dialog-description.js";
+
+// Form controls
+export { Textarea } from "./components/textarea.js";
+export { Checkbox } from "./components/checkbox.js";
+export { RadioGroup } from "./components/radio-group.js";
+export { Radio } from "./components/radio.js";
+export { Switch } from "./components/switch.js";
+
+// Overlay components
+export { Popover } from "./components/popover.js";
+export { PopoverContent } from "./components/popover-content.js";
+export { Tooltip } from "./components/tooltip.js";
+export { TooltipContent } from "./components/tooltip-content.js";
+export { Menu } from "./components/menu.js";
+export { MenuContent } from "./components/menu-content.js";
+export { MenuItem } from "./components/menu-item.js";
 
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";

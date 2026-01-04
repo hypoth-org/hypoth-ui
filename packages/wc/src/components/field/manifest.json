@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "field",
+  "name": "Field",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Form field container with automatic ARIA attribute composition for labels, descriptions, and error messages",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "form-field",
+    "keyboard": ["Tab"],
+    "screenReader": "Composes ARIA attributes for form controls. Labels, descriptions, and errors are linked via aria-labelledby and aria-describedby.",
+    "ariaPatterns": ["aria-labelledby", "aria-describedby", "aria-invalid", "aria-required"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "spacing.sm",
+    "spacing.md",
+    "color.text.primary",
+    "color.text.secondary",
+    "color.error"
+  ],
+  "recommendedUsage": "Wrap form controls (input, textarea, checkbox, etc.) with ds-field to provide accessible labels and validation messages.",
+  "antiPatterns": "Do not nest ds-field components. Do not use ds-field for non-form content like headings.",
+  "platforms": ["wc", "react"]
+}

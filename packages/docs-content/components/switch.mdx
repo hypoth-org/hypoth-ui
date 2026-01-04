@@ -1,0 +1,143 @@
+---
+title: Switch
+description: A toggle switch for boolean settings with proper role="switch" semantics.
+component: switch
+status: stable
+category: forms
+order: 15
+---
+
+# Switch
+
+Switch is a toggle control for turning settings on or off, distinct from checkboxes in its use for immediate actions.
+
+## Usage
+
+Basic switch with label:
+
+```html
+<ds-field>
+  <ds-switch></ds-switch>
+  <ds-label>Enable notifications</ds-label>
+</ds-field>
+```
+
+### React
+
+```tsx
+import { Field, Switch, Label } from "@ds/react";
+
+function NotificationSetting() {
+  return (
+    <Field>
+      <Switch />
+      <Label>Enable notifications</Label>
+    </Field>
+  );
+}
+```
+
+## Controlled Mode
+
+Control the switch state programmatically:
+
+```tsx
+import { Switch, Label } from "@ds/react";
+import { useState } from "react";
+
+function ControlledSwitch() {
+  const [enabled, setEnabled] = useState(false);
+
+  return (
+    <div>
+      <Switch checked={enabled} onCheckedChange={setEnabled} />
+      <Label>Dark mode is {enabled ? "on" : "off"}</Label>
+    </div>
+  );
+}
+```
+
+## Default Checked
+
+Set the initial checked state:
+
+```html
+<ds-switch checked></ds-switch>
+```
+
+## Disabled State
+
+```html
+<ds-switch disabled></ds-switch>
+<ds-switch checked disabled></ds-switch>
+```
+
+## With Description
+
+Provide additional context:
+
+```html
+<ds-field>
+  <ds-switch></ds-switch>
+  <ds-label>Marketing emails</ds-label>
+  <ds-field-description>Receive updates about new features and promotions.</ds-field-description>
+</ds-field>
+```
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `checked` | boolean | false | Whether the switch is on |
+| `disabled` | boolean | false | Whether the switch is disabled |
+| `name` | string | - | Name for form submission |
+| `value` | string | "on" | Value when checked |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ checked: boolean }` | Fired when state changes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Space` | Toggle switch state |
+| `Enter` | Toggle switch state |
+| `Tab` | Move focus to next element |
+
+## Accessibility
+
+- Uses `role="switch"` for proper semantics
+- `aria-checked` reflects on/off state
+- Both Space and Enter keys toggle the switch
+- Integrates with Field for label association
+
+## Switch vs Checkbox
+
+Use **Switch** when:
+- The setting takes effect immediately
+- It's a boolean on/off setting
+- The label describes a state ("Dark mode", "Notifications")
+
+Use **Checkbox** when:
+- Changes are applied after form submission
+- Multiple options can be selected
+- The label describes an action ("Subscribe to newsletter")
+
+## Best Practices
+
+### Do
+
+- Use for settings that take immediate effect
+- Provide clear labels that describe the setting
+- Consider adding descriptions for complex settings
+- Use consistent placement across your application
+
+### Don't
+
+- Don't use for form fields that require submission
+- Don't use when multiple selections are possible
+- Don't use negative labels ("Disable notifications")
+- Don't use for critical destructive actions

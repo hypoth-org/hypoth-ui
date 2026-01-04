@@ -46,3 +46,12 @@ export {
   type LivePoliteness,
   type LiveRegionOptions,
 } from "./aria/live-region.js";
+
+// Positioning utilities
+export {
+  createAnchorPosition,
+  type AnchorPosition,
+  type AnchorPositionOptions,
+  type ComputedPosition,
+  type Placement,
+} from "./positioning/anchor-position.js";

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "textarea",
+  "name": "Textarea",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A multi-line text input component with auto-resize support for longer text entry",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "textbox",
+    "keyboard": ["Tab", "Shift+Tab"],
+    "screenReader": "Announces as a multi-line text input with label. Error messages are announced via aria-describedby.",
+    "ariaPatterns": ["role=textbox", "aria-invalid", "aria-describedby", "aria-required"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.border.focus",
+    "color.text.primary",
+    "color.error",
+    "spacing.sm",
+    "spacing.md",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for multi-line text entry such as comments, descriptions, or messages. Pair with labels and helper text.",
+  "antiPatterns": "Do not use for single-line text - use Input component instead. Always provide a visible or accessible label.",
+  "platforms": ["wc", "react"]
+}

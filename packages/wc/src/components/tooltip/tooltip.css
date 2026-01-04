@@ -1,0 +1,144 @@
+/**
+ * Tooltip component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-tooltip-bg: Background color (default: #1e293b)
+ * --ds-tooltip-color: Text color (default: #ffffff)
+ * --ds-tooltip-border-radius: Border radius (default: 0.25rem)
+ * --ds-tooltip-padding: Content padding (default: 0.5rem 0.75rem)
+ * --ds-tooltip-font-size: Font size (default: 0.875rem)
+ * --ds-tooltip-max-width: Maximum width (default: 16rem)
+ * --ds-tooltip-z-index: Z-index (default: 1100)
+ */
+
+ds-tooltip {
+  display: contents;
+}
+
+ds-tooltip-content {
+  display: block;
+  position: fixed;
+  z-index: var(--ds-tooltip-z-index, 1100);
+  background-color: var(--ds-tooltip-bg, #1e293b);
+  color: var(--ds-tooltip-color, #ffffff);
+  border-radius: var(--ds-tooltip-border-radius, 0.25rem);
+  font-size: var(--ds-tooltip-font-size, 0.875rem);
+  max-width: var(--ds-tooltip-max-width, 16rem);
+  pointer-events: auto;
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+ds-tooltip-content[hidden] {
+  display: none !important;
+}
+
+.ds-tooltip-content {
+  padding: var(--ds-tooltip-padding, 0.5rem 0.75rem);
+  line-height: 1.4;
+}
+
+/* Animation support */
+ds-tooltip-content:not([hidden]) {
+  animation: ds-tooltip-fade-in 0.15s ease-out;
+}
+
+@keyframes ds-tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Arrow indicators based on placement */
+ds-tooltip-content::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--ds-tooltip-bg, #1e293b);
+  transform: rotate(45deg);
+}
+
+/* Top placement - arrow points down */
+ds-tooltip-content[data-placement="top"]::before,
+ds-tooltip-content[data-placement="top-start"]::before,
+ds-tooltip-content[data-placement="top-end"]::before {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+ds-tooltip-content[data-placement="top-start"]::before {
+  left: 12px;
+  margin-left: 0;
+}
+
+ds-tooltip-content[data-placement="top-end"]::before {
+  left: auto;
+  right: 12px;
+  margin-left: 0;
+}
+
+/* Bottom placement - arrow points up */
+ds-tooltip-content[data-placement="bottom"]::before,
+ds-tooltip-content[data-placement="bottom-start"]::before,
+ds-tooltip-content[data-placement="bottom-end"]::before {
+  top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+ds-tooltip-content[data-placement="bottom-start"]::before {
+  left: 12px;
+  margin-left: 0;
+}
+
+ds-tooltip-content[data-placement="bottom-end"]::before {
+  left: auto;
+  right: 12px;
+  margin-left: 0;
+}
+
+/* Left placement - arrow points right */
+ds-tooltip-content[data-placement="left"]::before,
+ds-tooltip-content[data-placement="left-start"]::before,
+ds-tooltip-content[data-placement="left-end"]::before {
+  right: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+ds-tooltip-content[data-placement="left-start"]::before {
+  top: 12px;
+  margin-top: 0;
+}
+
+ds-tooltip-content[data-placement="left-end"]::before {
+  top: auto;
+  bottom: 12px;
+  margin-top: 0;
+}
+
+/* Right placement - arrow points left */
+ds-tooltip-content[data-placement="right"]::before,
+ds-tooltip-content[data-placement="right-start"]::before,
+ds-tooltip-content[data-placement="right-end"]::before {
+  left: -4px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+ds-tooltip-content[data-placement="right-start"]::before {
+  top: 12px;
+  margin-top: 0;
+}
+
+ds-tooltip-content[data-placement="right-end"]::before {
+  top: auto;
+  bottom: 12px;
+  margin-top: 0;
+}

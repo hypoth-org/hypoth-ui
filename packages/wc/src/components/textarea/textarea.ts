@@ -5,38 +5,33 @@ import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
-export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
-export type InputSize = "sm" | "md" | "lg";
+export type TextareaSize = "sm" | "md" | "lg";
 
 /**
- * A text input field component.
+ * A textarea component with optional auto-resize.
  *
- * @element ds-input
- * @fires input - Fired when the input value changes
- * @fires change - Fired when the input value is committed
+ * @element ds-textarea
+ * @fires input - Fired when the textarea value changes
+ * @fires ds:change - Fired when the textarea value is committed
  *
  * @example
  * ```html
  * <ds-field>
- *   <ds-label>Email</ds-label>
- *   <ds-input type="email" name="email"></ds-input>
+ *   <ds-label>Description</ds-label>
+ *   <ds-textarea placeholder="Enter description..."></ds-textarea>
  * </ds-field>
  * ```
  */
-export class DsInput extends DSElement {
-  /** Input type */
+export class DsTextarea extends DSElement {
+  /** Textarea size */
   @property({ type: String, reflect: true })
-  type: InputType = "text";
+  size: TextareaSize = "md";
 
-  /** Input size */
-  @property({ type: String, reflect: true })
-  size: InputSize = "md";
-
-  /** Input name */
+  /** Textarea name */
   @property({ type: String, reflect: true })
   name = "";
 
-  /** Input value */
+  /** Textarea value */
   @property({ type: String })
   value = "";
 
@@ -68,19 +63,32 @@ export class DsInput extends DSElement {
   @property({ type: Number })
   maxlength?: number;
 
-  /** Pattern for validation */
-  @property({ type: String })
-  pattern?: string;
+  /** Number of visible text rows */
+  @property({ type: Number })
+  rows = 3;
 
-  /** ARIA labelledby - ID of element that labels this input */
+  /** Minimum number of rows (for auto-resize) */
+  @property({ type: Number })
+  minRows = 3;
+
+  /** Maximum number of rows (for auto-resize) */
+  @property({ type: Number })
+  maxRows?: number;
+
+  /** Enable auto-resize behavior */
+  @property({ type: Boolean })
+  autoResize = true;
+
+  /** ARIA labelledby - ID of element that labels this textarea */
   @state()
   private ariaLabelledBy?: string;
 
-  /** ARIA describedby - IDs of elements that describe this input */
+  /** ARIA describedby - IDs of elements that describe this textarea */
   @state()
   private ariaDescribedBy?: string;
 
   private attributeObserver: MutationObserver | null = null;
+  private nativeTextarea: HTMLTextAreaElement | null = null;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -111,7 +119,7 @@ export class DsInput extends DSElement {
 
   /**
    * Syncs ARIA attributes from the host element to internal state.
-   * The render method will apply these to the native input.
+   * The render method will apply these to the native textarea.
    */
   private syncAriaAttributes(): void {
     this.ariaLabelledBy = this.getAttribute("aria-labelledby") ?? undefined;
@@ -139,8 +147,14 @@ export class DsInput extends DSElement {
   }
 
   private handleInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
+    const textarea = event.target as HTMLTextAreaElement;
+    this.value = textarea.value;
+
+    // Auto-resize if enabled
+    if (this.autoResize) {
+      this.adjustHeight(textarea);
+    }
+
     // Also emit native input event for compatibility
     this.dispatchEvent(
       new CustomEvent("input", {
@@ -152,24 +166,75 @@ export class DsInput extends DSElement {
   }
 
   private handleChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
+    const textarea = event.target as HTMLTextAreaElement;
+    this.value = textarea.value;
     // Emit ds:change event using standard convention
     emitEvent(this, StandardEvents.CHANGE, {
       detail: { value: this.value },
     });
   }
 
+  /**
+   * Adjusts the textarea height based on content.
+   */
+  private adjustHeight(textarea: HTMLTextAreaElement): void {
+    // Reset height to calculate scrollHeight
+    textarea.style.height = "auto";
+
+    // Calculate line height from computed styles
+    const computedStyle = getComputedStyle(textarea);
+    const lineHeight = parseFloat(computedStyle.lineHeight) || 20;
+    const paddingTop = parseFloat(computedStyle.paddingTop) || 0;
+    const paddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
+    const borderTop = parseFloat(computedStyle.borderTopWidth) || 0;
+    const borderBottom = parseFloat(computedStyle.borderBottomWidth) || 0;
+
+    // Calculate min and max heights based on rows
+    const minHeight = this.minRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom;
+    const maxHeight = this.maxRows
+      ? this.maxRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom
+      : Number.POSITIVE_INFINITY;
+
+    // Set height within bounds
+    const scrollHeight = textarea.scrollHeight;
+    const newHeight = Math.min(Math.max(scrollHeight, minHeight), maxHeight);
+    textarea.style.height = `${newHeight}px`;
+
+    // Enable scrolling if maxRows is set and content exceeds it
+    textarea.style.overflowY = scrollHeight > maxHeight ? "auto" : "hidden";
+  }
+
+  override updated(changedProperties: Map<string, unknown>): void {
+    super.updated(changedProperties);
+
+    // Get reference to native textarea
+    if (!this.nativeTextarea) {
+      this.nativeTextarea = this.querySelector("textarea");
+    }
+
+    // Adjust height when value changes and auto-resize is enabled
+    if (changedProperties.has("value") && this.autoResize && this.nativeTextarea) {
+      this.adjustHeight(this.nativeTextarea);
+    }
+  }
+
+  /**
+   * Returns the effective number of rows.
+   */
+  private getEffectiveRows(): number {
+    return Math.max(this.rows, this.minRows);
+  }
+
   override render() {
     return html`
-      <div class="ds-input" part="container" data-size=${this.size}>
-        <input
-          part="input"
-          class="ds-input__field"
-          type=${this.type}
+      <div class="ds-textarea" part="container" data-size=${this.size}>
+        <textarea
+          part="textarea"
+          class="ds-textarea__field"
           name=${this.name}
           .value=${this.value}
           placeholder=${this.placeholder}
+          .rows=${this.getEffectiveRows()}
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
@@ -177,21 +242,20 @@ export class DsInput extends DSElement {
           aria-labelledby=${ifDefined(this.ariaLabelledBy)}
           aria-describedby=${ifDefined(this.ariaDescribedBy)}
           aria-required=${this.required ? "true" : "false"}
-          minlength=${this.minlength ?? ""}
-          maxlength=${this.maxlength ?? ""}
-          pattern=${this.pattern ?? ""}
+          minlength=${ifDefined(this.minlength)}
+          maxlength=${ifDefined(this.maxlength)}
           @input=${this.handleInput}
           @change=${this.handleChange}
-        />
+        ></textarea>
       </div>
     `;
   }
 }
 
-define("ds-input", DsInput);
+define("ds-textarea", DsTextarea);
 
 declare global {
   interface HTMLElementTagNameMap {
-    "ds-input": DsInput;
+    "ds-textarea": DsTextarea;
   }
 }

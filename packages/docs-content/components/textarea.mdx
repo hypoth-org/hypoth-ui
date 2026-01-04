@@ -1,0 +1,134 @@
+---
+title: Textarea
+description: A multi-line text input with auto-resize capability and Field pattern integration.
+component: textarea
+status: stable
+category: forms
+order: 12
+---
+
+# Textarea
+
+Textarea provides a multi-line text input that can automatically resize based on content.
+
+## Usage
+
+Basic textarea with Field integration:
+
+```html
+<ds-field>
+  <ds-label>Description</ds-label>
+  <ds-textarea placeholder="Enter a description..."></ds-textarea>
+</ds-field>
+```
+
+### React
+
+```tsx
+import { Field, Label, Textarea } from "@ds/react";
+
+function DescriptionField() {
+  return (
+    <Field>
+      <Label>Description</Label>
+      <Textarea placeholder="Enter a description..." />
+    </Field>
+  );
+}
+```
+
+## Auto-resize
+
+Enable auto-resize to grow the textarea as content is added:
+
+```html
+<ds-textarea auto-resize></ds-textarea>
+```
+
+### With Row Constraints
+
+Set minimum and maximum row limits:
+
+```html
+<ds-textarea auto-resize min-rows="3" max-rows="10"></ds-textarea>
+```
+
+### React
+
+```tsx
+import { Textarea } from "@ds/react";
+
+function AutoResizeTextarea() {
+  return <Textarea autoResize minRows={3} maxRows={10} />;
+}
+```
+
+## Fixed Rows
+
+Set a fixed number of visible rows:
+
+```html
+<ds-textarea rows="5"></ds-textarea>
+```
+
+## With Validation
+
+Display error state with Field:
+
+```html
+<ds-field error>
+  <ds-label>Bio</ds-label>
+  <ds-textarea></ds-textarea>
+  <ds-field-error>Bio cannot exceed 500 characters.</ds-field-error>
+</ds-field>
+```
+
+## Disabled State
+
+```html
+<ds-textarea disabled>This content cannot be edited.</ds-textarea>
+```
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `placeholder` | string | - | Placeholder text |
+| `value` | string | - | Current value |
+| `rows` | number | 3 | Number of visible rows |
+| `auto-resize` | boolean | false | Enable auto-resize |
+| `min-rows` | number | 1 | Minimum rows when auto-resizing |
+| `max-rows` | number | - | Maximum rows when auto-resizing |
+| `disabled` | boolean | false | Disable the textarea |
+| `readonly` | boolean | false | Make the textarea read-only |
+| `required` | boolean | false | Mark as required |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:input` | `{ value: string }` | Fired on input |
+| `ds:change` | `{ value: string }` | Fired on change |
+
+## Accessibility
+
+- Uses native `<textarea>` element for full accessibility
+- Integrates with Field pattern for label and error association
+- Supports `aria-labelledby` and `aria-describedby`
+- Error state communicated via `aria-invalid`
+
+## Best Practices
+
+### Do
+
+- Use auto-resize for better user experience with variable content
+- Set reasonable min/max rows to prevent extreme resizing
+- Provide placeholder text as a hint, not a label
+- Use with Field for proper accessibility
+
+### Don't
+
+- Don't use for single-line input (use Input instead)
+- Don't set very small min-rows that hide content
+- Don't disable resize without auto-resize enabled
+- Don't use placeholder as a substitute for labels

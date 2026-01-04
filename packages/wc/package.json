@@ -20,6 +20,7 @@
     "test:a11y": "vitest run --config vitest.a11y.config.ts"
   },
   "dependencies": {
+    "@ds/primitives-dom": "workspace:*",
     "lit": "^3.1.0",
     "lucide": "^0.468.0"
   },
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
-    "@ds/primitives-dom": "workspace:*",
     "happy-dom": "^13.10.0",
     "jest-axe": "^8.0.0",
     "playwright-core": "^1.40.0",

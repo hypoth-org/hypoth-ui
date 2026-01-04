@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "radio",
+  "name": "RadioGroup",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Radio button group for single-selection from multiple options with roving focus",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "radiogroup",
+    "keyboard": ["Arrow keys", "Space", "Tab", "Shift+Tab"],
+    "screenReader": "Announces as a radio group with option count. Arrow keys announce selected option.",
+    "ariaPatterns": ["role=radiogroup", "role=radio", "aria-checked", "aria-disabled"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.border.focus",
+    "color.primary",
+    "color.text.primary",
+    "spacing.sm",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use for single-choice selections from 2-7 options. Use Select for more options.",
+  "antiPatterns": "Do not use for multiple selections - use Checkbox instead. Always group radios in a RadioGroup.",
+  "platforms": ["wc", "react"]
+}

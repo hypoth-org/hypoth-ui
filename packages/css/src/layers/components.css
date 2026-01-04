@@ -11,3 +11,10 @@
 @import "@ds/wc/src/components/icon/icon.css";
 @import "@ds/wc/src/components/spinner/spinner.css";
 @import "@ds/wc/src/components/visually-hidden/visually-hidden.css";
+@import "@ds/wc/src/components/textarea/textarea.css";
+@import "@ds/wc/src/components/checkbox/checkbox.css";
+@import "@ds/wc/src/components/radio/radio.css";
+@import "@ds/wc/src/components/switch/switch.css";
+@import "@ds/wc/src/components/popover/popover.css";
+@import "@ds/wc/src/components/tooltip/tooltip.css";
+@import "@ds/wc/src/components/menu/menu.css";
