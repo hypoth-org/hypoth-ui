@@ -173,7 +173,7 @@ export class DsMenu extends DSElement {
     }
   };
 
-  private handleItemSelect = (event: Event): void => {
+  private handleItemSelect = (_event: Event): void => {
     // Item was selected, close the menu
     // Don't stop propagation - let the event bubble to consumers
     this.close();

@@ -144,7 +144,6 @@ function calculatePosition(
         case "end":
           posX = anchorRect.right - floatingRect.width;
           break;
-        case "center":
         default:
           posX = anchorRect.left + (anchorRect.width - floatingRect.width) / 2;
           break;
@@ -160,7 +159,6 @@ function calculatePosition(
         case "end":
           posY = anchorRect.bottom - floatingRect.height;
           break;
-        case "center":
         default:
           posY = anchorRect.top + (anchorRect.height - floatingRect.height) / 2;
           break;
@@ -170,7 +168,7 @@ function calculatePosition(
     return { x: posX, y: posY };
   };
 
-  let pos = calculateForSide(side);
+  const pos = calculateForSide(side);
   x = pos.x;
   y = pos.y;
 

@@ -278,7 +278,6 @@ describe("DsSwitch with Field", () => {
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    const switchEl = container.querySelector("ds-switch") as HTMLElement & { disabled: boolean };
     const control = container.querySelector("[role='switch']");
     expect(control?.getAttribute("aria-disabled")).toBe("true");
   });

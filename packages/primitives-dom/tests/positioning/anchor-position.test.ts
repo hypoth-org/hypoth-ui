@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   createAnchorPosition,
   type Placement,
-  type AnchorPositionOptions,
 } from "../../src/positioning/anchor-position.js";
 
 describe("createAnchorPosition", () => {

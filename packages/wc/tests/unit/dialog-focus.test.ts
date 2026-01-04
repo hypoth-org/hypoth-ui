@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, } from "vitest";
 import { html, render } from "lit";
 import "../../src/components/dialog/dialog.js";
 
