@@ -20,6 +20,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (010-forms-overlays)
 - TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration) (011-a11y-audit)
 - File-based (JSON artifacts in repository, 5-year retention) (011-a11y-audit)
+- TypeScript 5.3+ (strict mode) + @changesets/cli (versioning), conventional-commits (commit format), @ds/docs-core (docs integration) (012-governance-adoption)
+- File-based (JSON deprecation registry, markdown templates, changelog files) (012-governance-adoption)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -76,9 +78,9 @@ pnpm a11y:validate                          # Validate audit records
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 012-governance-adoption: Added TypeScript 5.3+ (strict mode) + @changesets/cli (versioning), conventional-commits (commit format), @ds/docs-core (docs integration)
 - 011-a11y-audit: Added TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration)
 - 010-forms-overlays: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
-- 009-docs-renderer: Added TypeScript 5.3+ (strict mode) + Next.js 14+ (App Router), @ds/docs-core, @ds/docs-content, @mdx-js/mdx 3.x for docs renderer with white-label overlay workflow
 
 
 <!-- MANUAL ADDITIONS START -->
