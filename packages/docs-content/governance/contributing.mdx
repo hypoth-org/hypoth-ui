@@ -1,0 +1,206 @@
+---
+title: Contributing to the Design System
+description: Contribution requirements and quality gates for design system contributions
+edition: core
+---
+
+# Contributing to the Design System
+
+This guide covers the requirements and quality gates for contributing to the design system.
+
+## Contribution Gates
+
+All contributions must pass our quality gates before merging. These gates ensure consistency, accessibility, and maintainability.
+
+### Automated Gates (Required)
+
+These gates run automatically on every PR:
+
+| Gate | Description | Threshold |
+|------|-------------|-----------|
+| **Test Coverage** | Unit test coverage | 80% minimum |
+| **Accessibility** | Automated a11y tests | All tests pass |
+| **TypeScript** | Type checking | No errors |
+| **Lint** | Code style | No errors |
+| **Manifest Validation** | Component manifests | All valid |
+| **Docs Presence** | Documentation exists | Required for new components |
+| **Changeset** | Version tracking | Required for source changes |
+
+### Manual Gates (When Applicable)
+
+These gates require human review:
+
+| Gate | Description | When Required |
+|------|-------------|---------------|
+| **Design Review** | Design team approval | New components, visual changes |
+| **A11y Audit** | Full accessibility review | New interactive components |
+
+## Running Gates Locally
+
+Before submitting a PR, run gates locally:
+
+```bash
+# Run all gates
+pnpm ds-check-gates
+
+# Run specific gates
+pnpm ds-check-gates --gate typecheck --gate lint
+
+# Run in parallel
+pnpm ds-check-gates --parallel
+```
+
+### Gate Status
+
+```bash
+# Check gate status
+pnpm ds-check-gates status
+
+# List available gates
+pnpm ds-check-gates list
+```
+
+## Test Coverage Requirements
+
+All new code must have at least 80% test coverage:
+
+```bash
+# Run tests with coverage
+pnpm test:coverage
+
+# Check coverage for specific package
+pnpm --filter @ds/wc test:coverage
+```
+
+### What Counts Toward Coverage
+
+- Unit tests (`*.test.ts`)
+- Component tests
+- Integration tests
+
+### What Doesn't Count
+
+- Type definitions
+- Re-exports
+- Configuration files
+
+## Changeset Requirements
+
+Every PR that modifies source code must include a changeset:
+
+```bash
+# Create a changeset
+pnpm changeset
+```
+
+### Extended Metadata
+
+Include additional metadata for edition filtering:
+
+```markdown
+---
+"@ds/wc": minor
+editions: [pro, enterprise]
+security: false
+---
+
+Added new DataGrid component for advanced data display
+```
+
+### When Changesets Are Not Required
+
+- Documentation-only changes
+- Test-only changes
+- CI/tooling changes
+- Non-published packages
+
+## Component Requirements
+
+New components must include:
+
+### 1. Implementation
+
+```
+packages/wc/src/components/my-component/
+├── my-component.ts      # Component implementation
+├── my-component.css     # Component styles
+├── my-component.test.ts # Unit tests
+└── index.ts             # Exports
+```
+
+### 2. Manifest
+
+```
+packages/docs-content/manifests/my-component.json
+```
+
+### 3. Documentation
+
+```
+packages/docs-content/components/my-component.mdx
+```
+
+### 4. Accessibility
+
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+- Focus management
+
+## Pull Request Process
+
+1. **Create Branch**
+   ```bash
+   git checkout -b feature/my-feature
+   ```
+
+2. **Make Changes**
+   - Follow code style guidelines
+   - Add tests
+   - Update documentation
+
+3. **Run Gates**
+   ```bash
+   pnpm ds-check-gates
+   ```
+
+4. **Create Changeset**
+   ```bash
+   pnpm changeset
+   ```
+
+5. **Submit PR**
+   - Fill out PR template
+   - Link related issues
+   - Request reviews
+
+6. **Address Feedback**
+   - Respond to review comments
+   - Push updates
+   - Gates will re-run automatically
+
+## Edition Considerations
+
+When contributing features that are edition-specific:
+
+- **Core Edition**: Available to all users
+- **Pro Edition**: Advanced features
+- **Enterprise Edition**: Full feature set
+
+Specify editions in your changeset:
+
+```markdown
+editions: [pro, enterprise]
+```
+
+## Getting Help
+
+- **Questions**: Open a discussion
+- **Bug Reports**: Create an issue
+- **Feature Requests**: Create an RFC
+
+## Related Documentation
+
+- [Versioning Policy](/governance/versioning) - Version numbering
+- [Deprecation Policy](/governance/deprecations) - How we deprecate features
+- [Accessibility Guidelines](/governance/accessibility) - A11y requirements

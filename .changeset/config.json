@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.2/schema.json",
+  "changelog": ["./.changeset/edition-changelog.js", { "repo": "hypoth-ui/hypoth-ui" }],
+  "commit": false,
+  "fixed": [["@ds/*"]],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@ds/governance"]
+}

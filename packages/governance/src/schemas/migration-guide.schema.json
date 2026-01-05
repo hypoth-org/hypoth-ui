@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/migration-guide.json",
+  "title": "Migration Guide Frontmatter",
+  "description": "Schema for migration guide MDX frontmatter",
+  "type": "object",
+  "required": ["title", "from_version", "to_version", "breaking_changes"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Guide title (e.g., 'Migrating from v1 to v2')"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief summary of the migration"
+    },
+    "from_version": {
+      "type": "string",
+      "description": "Starting major version",
+      "pattern": "^\\d+$"
+    },
+    "to_version": {
+      "type": "string",
+      "description": "Target major version",
+      "pattern": "^\\d+$"
+    },
+    "estimated_effort": {
+      "type": "string",
+      "description": "Time estimate for migration",
+      "examples": ["30 minutes", "1-2 hours", "half day"]
+    },
+    "editions": {
+      "type": "array",
+      "description": "Editions affected by this migration",
+      "items": {
+        "type": "string",
+        "enum": ["core", "pro", "enterprise"]
+      },
+      "default": ["core", "pro", "enterprise"]
+    },
+    "breaking_changes": {
+      "type": "array",
+      "description": "List of breaking changes covered",
+      "items": {
+        "$ref": "#/definitions/BreakingChange"
+      },
+      "minItems": 1
+    },
+    "codemods": {
+      "type": "array",
+      "description": "Available automated migration scripts",
+      "items": {
+        "$ref": "#/definitions/Codemod"
+      }
+    },
+    "order": {
+      "type": "number",
+      "description": "Display order in navigation"
+    }
+  },
+  "definitions": {
+    "BreakingChange": {
+      "type": "object",
+      "required": ["id", "title", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Change identifier for linking"
+        },
+        "title": {
+          "type": "string",
+          "description": "Brief title of the change"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of breaking change",
+          "enum": ["api-change", "component-removal", "token-rename", "behavior-change", "dependency-update"]
+        },
+        "severity": {
+          "type": "string",
+          "description": "Impact severity",
+          "enum": ["low", "medium", "high"],
+          "default": "medium"
+        },
+        "affected_components": {
+          "type": "array",
+          "description": "Components affected by this change",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Codemod": {
+      "type": "object",
+      "required": ["name", "command", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Codemod name"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command to run the codemod"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the codemod does"
+        },
+        "breaking_changes": {
+          "type": "array",
+          "description": "Which breaking changes this codemod addresses",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

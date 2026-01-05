@@ -1,0 +1,146 @@
+---
+title: Versioning Policy
+description: Semantic versioning practices and changelog conventions for the design system
+edition: core
+---
+
+# Versioning Policy
+
+This document describes the semantic versioning practices used across all `@ds/*` packages.
+
+## Semantic Versioning
+
+We follow [Semantic Versioning 2.0.0](https://semver.org/) with these conventions:
+
+| Version Bump | When to Use | Example Changes |
+|--------------|-------------|-----------------|
+| **Major** (X.0.0) | Breaking changes | Removed props, renamed components, API changes |
+| **Minor** (0.X.0) | New features (backwards compatible) | New components, new props, new utilities |
+| **Patch** (0.0.X) | Bug fixes (backwards compatible) | Bug fixes, performance improvements, docs |
+
+## Fixed Versioning
+
+All `@ds/*` packages share the same version number. When any package has a change, all packages are released together with the same version. This simplifies:
+
+- Dependency management for consumers
+- Compatibility guarantees between packages
+- Release communication
+
+## Changeset Format
+
+We use [Changesets](https://github.com/changesets/changesets) for version management. Each PR that affects published packages should include a changeset.
+
+### Creating a Changeset
+
+```bash
+pnpm changeset
+```
+
+This creates a markdown file in `.changeset/` describing your change.
+
+### Extended Metadata
+
+Our changesets support additional metadata for edition filtering and security tracking:
+
+```markdown
+---
+"@ds/wc": minor
+editions: [core, pro, enterprise]
+security: false
+---
+
+Added new Button variant for icon-only buttons
+```
+
+#### Metadata Fields
+
+| Field | Description | Default |
+|-------|-------------|---------|
+| `editions` | Which editions include this change | All editions |
+| `security` | Whether this is a security fix | `false` |
+| `breaking_type` | Type of breaking change (for majors) | - |
+| `migration_required` | Whether migration steps are needed | `false` |
+
+### Edition Values
+
+- `core` - Core edition (basic components)
+- `pro` - Pro edition (core + advanced features)
+- `enterprise` - Enterprise edition (all features)
+
+## Breaking Changes
+
+When making breaking changes:
+
+1. **Document the change** - Clearly explain what changed and why
+2. **Provide migration path** - Include before/after code examples
+3. **Use deprecation first** - When possible, deprecate before removing
+
+### Breaking Change Types
+
+| Type | Description |
+|------|-------------|
+| `api-change` | Component props or API signature changed |
+| `removal` | Component, prop, or feature removed |
+| `behavior-change` | Existing behavior changed significantly |
+| `dependency` | Major dependency update affecting consumers |
+
+## Changelog Format
+
+We follow [Keep a Changelog](https://keepachangelog.com/) format:
+
+- **Security** - Vulnerability fixes (apply immediately)
+- **Breaking Changes** - Changes requiring migration
+- **Added** - New features
+- **Fixed** - Bug fixes
+- **Deprecated** - Features marked for removal
+
+### Priority Indicators
+
+Changelog entries include priority markers:
+
+- `**[SECURITY]**` - Security fix, update immediately
+- `**[BREAKING]**` - Breaking change, review before updating
+
+## Edition-Specific Changelogs
+
+Tenants can view changelogs filtered by their edition. If a change only affects Pro and Enterprise editions, Core tenants won't see it in their changelog view.
+
+Example changelog entry for Pro-only feature:
+
+```markdown
+- Added advanced data grid sorting _(Pro, Enterprise only)_
+```
+
+## Release Cadence
+
+| Release Type | Frequency | Contents |
+|--------------|-----------|----------|
+| Patch | As needed | Bug fixes, security patches |
+| Minor | Bi-weekly | New features, improvements |
+| Major | Quarterly (max) | Breaking changes |
+
+## Version Support
+
+We support the current major version and one previous major version with security fixes.
+
+| Version | Status | Security Fixes |
+|---------|--------|----------------|
+| 2.x | Current | Yes |
+| 1.x | Previous | Security only |
+| 0.x | End of life | No |
+
+## Checking Your Version
+
+```bash
+# Check installed version
+pnpm list @ds/wc
+
+# Check for updates
+pnpm outdated @ds/wc
+```
+
+## Related Documentation
+
+- [Migration Guides](/governance/migrations) - Step-by-step upgrade instructions
+- [Deprecation Policy](/governance/deprecations) - How we handle deprecations
+- [Contributing](/governance/contributing) - How to submit changes

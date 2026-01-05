@@ -1,0 +1,147 @@
+---
+title: Deprecation Policy
+description: How we handle deprecations with a 2-major-version support window
+edition: core
+---
+
+# Deprecation Policy
+
+We follow a structured deprecation process to give consumers time to migrate away from deprecated features.
+
+## Two Major Version Window
+
+When we deprecate a feature, it remains available for **2 major versions** before removal:
+
+```
+Version 1.0 → Feature deprecated (warning)
+Version 2.0 → Feature still works (removal warning)
+Version 3.0 → Feature removed
+```
+
+This gives teams approximately 6+ months to migrate, based on our quarterly major release cadence.
+
+## Deprecation Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| `component` | Entire component deprecated | `OldButton` → `Button` |
+| `prop` | Component prop deprecated | `isDisabled` → `disabled` |
+| `css-variable` | Design token deprecated | `--ds-primary` → `--ds-color-brand` |
+| `utility` | Utility function deprecated | `formatDate` → `dateFormatter` |
+| `pattern` | Usage pattern deprecated | Class-based → Hook-based |
+
+## Deprecation Notices
+
+### Console Warnings
+
+Deprecated features log warnings in development:
+
+```
+[WARN] Component "OldButton" is deprecated since version 1.0.0.
+       Will be removed in version 3.0.0 (2 major versions remaining).
+       Action: Use "Button" instead.
+       Docs: /governance/migrations/1-to-3
+```
+
+### TypeScript
+
+Deprecated items include JSDoc `@deprecated` tags:
+
+```typescript
+/**
+ * @deprecated Since 1.0.0. Will be removed in 3.0.0. Use `Button` instead.
+ */
+export const OldButton = ...
+```
+
+### Build Warnings
+
+Our build tools can be configured to warn on deprecated feature usage.
+
+## Finding Deprecations
+
+### List All Deprecations
+
+```bash
+# Using the CLI
+pnpm ds-deprecate list
+
+# Filter by status
+pnpm ds-deprecate list --status removal-imminent
+
+# Filter by type
+pnpm ds-deprecate list --type component
+```
+
+### Check Upcoming Removals
+
+```bash
+# Check what will be removed in next major version
+pnpm ds-deprecate check 2.0.0
+```
+
+### Generate Report
+
+```bash
+pnpm ds-deprecate report --current-version 1.5.0
+```
+
+## Migration Guides
+
+Each deprecation includes a migration guide explaining:
+
+1. **What changed** - The deprecated feature and its replacement
+2. **Why it changed** - Reason for the deprecation
+3. **How to migrate** - Step-by-step migration instructions
+4. **Code examples** - Before/after code samples
+
+### Generate Migration Guide
+
+```bash
+# Generate migration guide between versions
+pnpm ds-deprecate migrate 1.0.0 3.0.0
+```
+
+## Edition-Specific Deprecations
+
+Some deprecations only affect certain editions:
+
+```json
+{
+  "item": "AdvancedGrid",
+  "type": "component",
+  "editions": ["pro", "enterprise"],
+  "deprecated_in": "1.0.0",
+  "removal_version": "3.0.0"
+}
+```
+
+Core edition users won't see warnings for Pro/Enterprise-only deprecations.
+
+## Timeline Example
+
+| Date | Version | Status | Action Required |
+|------|---------|--------|-----------------|
+| Jan 2025 | 1.0.0 | Deprecated | Plan migration |
+| Apr 2025 | 2.0.0 | Warning | Begin migration |
+| Jul 2025 | 3.0.0 | Removed | Migration complete |
+
+## Best Practices
+
+### For Consumers
+
+1. **Address warnings promptly** - Don't wait until removal
+2. **Test migrations early** - Use pre-release versions
+3. **Subscribe to releases** - Stay informed of deprecations
+
+### For Contributors
+
+1. **Always provide replacement** - When possible, offer an alternative
+2. **Document the reason** - Explain why the deprecation is necessary
+3. **Include migration steps** - Make migration as easy as possible
+
+## Related Documentation
+
+- [Versioning Policy](/governance/versioning) - Our semantic versioning practices
+- [Migration Guides](/governance/migrations) - Step-by-step upgrade instructions
+- [Changelog](/changelog) - All changes by version

@@ -1,0 +1,186 @@
+---
+title: Adoption Checklist
+description: Step-by-step checklist for adopting the design system
+edition: core
+---
+
+# Adoption Checklist
+
+Use this checklist to ensure a smooth adoption of the design system.
+
+## Phase 1: Assessment
+
+Before starting, assess your current state:
+
+- [ ] **Inventory existing components** - Document current UI components
+- [ ] **Identify overlap** - Map existing components to design system equivalents
+- [ ] **Choose edition** - Determine which edition fits your needs (Core/Pro/Enterprise)
+- [ ] **Plan timeline** - Create adoption timeline with milestones
+
+## Phase 2: Setup
+
+Initial configuration:
+
+- [ ] **Install packages** - Add design system packages to your project
+- [ ] **Configure build** - Update bundler config for optimal loading
+- [ ] **Import styles** - Add CSS tokens and component styles
+- [ ] **Verify installation** - Test that components render correctly
+
+### Installation Verification
+
+```bash
+# Create a test file
+echo '<ds-button>Test</ds-button>' > test.html
+
+# Verify the button renders
+```
+
+## Phase 3: Foundation
+
+Set up the foundation:
+
+- [ ] **Theme configuration** - Configure brand colors and tokens
+- [ ] **Typography setup** - Apply design system typography
+- [ ] **Spacing system** - Adopt spacing tokens
+- [ ] **Icon integration** - Set up icon library
+
+### Theme Checklist
+
+| Token Category | Status | Notes |
+|---------------|--------|-------|
+| Colors | [ ] | Brand colors configured |
+| Typography | [ ] | Fonts loaded |
+| Spacing | [ ] | Spacing scale applied |
+| Borders | [ ] | Radius and widths set |
+| Shadows | [ ] | Elevation tokens set |
+
+## Phase 4: Component Migration
+
+Migrate components incrementally:
+
+### Priority 1: Layout Components
+
+- [ ] **Container** - Page container component
+- [ ] **Grid** - Layout grid system
+- [ ] **Stack** - Vertical/horizontal stacking
+
+### Priority 2: Basic Components
+
+- [ ] **Button** - All button variants
+- [ ] **Link** - Text links
+- [ ] **Text** - Typography component
+- [ ] **Icon** - Icon component
+
+### Priority 3: Form Components
+
+- [ ] **Input** - Text input
+- [ ] **Textarea** - Multi-line input
+- [ ] **Checkbox** - Checkbox input
+- [ ] **Radio** - Radio buttons
+- [ ] **Switch** - Toggle switch
+- [ ] **Select** - Dropdown select (Pro)
+- [ ] **Field** - Form field wrapper
+
+### Priority 4: Feedback Components
+
+- [ ] **Spinner** - Loading indicator
+- [ ] **Tooltip** - Hover tooltip
+- [ ] **Dialog** - Modal dialog
+- [ ] **Popover** - Popover content
+
+### Priority 5: Navigation (Pro/Enterprise)
+
+- [ ] **Menu** - Dropdown menu
+- [ ] **Tabs** - Tab navigation
+- [ ] **Breadcrumb** - Breadcrumb navigation
+
+## Phase 5: Integration
+
+Ensure proper integration:
+
+- [ ] **Accessibility audit** - Run automated a11y tests
+- [ ] **Keyboard navigation** - Verify keyboard support
+- [ ] **Screen reader testing** - Test with assistive technology
+- [ ] **Responsive testing** - Verify mobile layouts
+
+### Accessibility Checklist
+
+| Requirement | Status |
+|-------------|--------|
+| Color contrast | [ ] |
+| Focus indicators | [ ] |
+| Keyboard navigation | [ ] |
+| Screen reader labels | [ ] |
+| Motion preferences | [ ] |
+
+## Phase 6: Documentation
+
+Update team documentation:
+
+- [ ] **Usage guidelines** - Document component usage
+- [ ] **Code examples** - Add code snippets
+- [ ] **Migration notes** - Document migration decisions
+- [ ] **Training materials** - Create onboarding docs
+
+## Phase 7: Maintenance
+
+Set up ongoing maintenance:
+
+- [ ] **Version tracking** - Track current version
+- [ ] **Update process** - Define update workflow
+- [ ] **Changelog monitoring** - Subscribe to updates
+- [ ] **Security alerts** - Enable security notifications
+
+### Maintenance Schedule
+
+| Task | Frequency |
+|------|-----------|
+| Check for updates | Weekly |
+| Review changelog | Per release |
+| Update dependencies | Bi-weekly |
+| Full audit | Quarterly |
+
+## Quick Start Commands
+
+```bash
+# Install
+pnpm add @ds/wc @ds/tokens @ds/react
+
+# Check version
+pnpm list @ds/*
+
+# Check for updates
+pnpm outdated @ds/*
+
+# Update
+pnpm update @ds/*
+
+# Run accessibility tests
+pnpm test:a11y
+```
+
+## Success Criteria
+
+Consider adoption successful when:
+
+- [ ] All core components migrated
+- [ ] Theme fully configured
+- [ ] Accessibility tests passing
+- [ ] Team trained on usage
+- [ ] Update process documented
+- [ ] Monitoring in place
+
+## Getting Help
+
+If you get stuck:
+
+1. Check the [documentation](/docs)
+2. Search [GitHub Issues](https://github.com/hypoth-ui/hypoth-ui/issues)
+3. Ask in [GitHub Discussions](https://github.com/hypoth-ui/hypoth-ui/discussions)
+4. Review [example projects](https://github.com/hypoth-ui/examples)
+
+## Related Documentation
+
+- [Quick Start Guide](/governance/quickstart)
+- [Theming Guide](/guides/theming)
+- [Accessibility Guidelines](/governance/accessibility)
