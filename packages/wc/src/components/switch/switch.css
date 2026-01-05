@@ -1,0 +1,96 @@
+/**
+ * Switch component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-switch-track-width: Track width (default: 44px)
+ * --ds-switch-track-height: Track height (default: 24px)
+ * --ds-switch-thumb-size: Thumb diameter (default: 20px)
+ * --ds-switch-track-bg: Track background color (default: #cbd5e1)
+ * --ds-switch-track-bg-checked: Track background when checked (default: #2563eb)
+ * --ds-switch-thumb-bg: Thumb background color (default: #ffffff)
+ * --ds-switch-gap: Gap between control and label (default: 0.5rem)
+ */
+
+.ds-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-switch-gap, 0.5rem);
+  cursor: pointer;
+}
+
+.ds-switch__control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.ds-switch__control:focus-visible .ds-switch__track {
+  outline: 2px solid var(--ds-focus-ring-color, #2563eb);
+  outline-offset: 2px;
+}
+
+.ds-switch__track {
+  position: relative;
+  width: var(--ds-switch-track-width, 44px);
+  height: var(--ds-switch-track-height, 24px);
+  background-color: var(--ds-switch-track-bg, #cbd5e1);
+  border-radius: 9999px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.ds-switch__thumb {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: var(--ds-switch-thumb-size, 20px);
+  height: var(--ds-switch-thumb-size, 20px);
+  background-color: var(--ds-switch-thumb-bg, #ffffff);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.15s ease-in-out, left 0.15s ease-in-out;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.ds-switch__label {
+  user-select: none;
+}
+
+/* Checked state */
+.ds-switch__control[aria-checked="true"] .ds-switch__track {
+  background-color: var(--ds-switch-track-bg-checked, #2563eb);
+}
+
+.ds-switch__control[aria-checked="true"] .ds-switch__thumb {
+  left: calc(100% - var(--ds-switch-thumb-size, 20px) - 2px);
+}
+
+/* Disabled state */
+.ds-switch__control[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.ds-switch__control[aria-disabled="true"] .ds-switch__track {
+  opacity: 0.5;
+}
+
+.ds-switch__control[aria-disabled="true"] + .ds-switch__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hover state (enabled only) */
+.ds-switch:hover .ds-switch__control:not([aria-disabled="true"]) .ds-switch__track {
+  filter: brightness(0.95);
+}
+
+/* Active/pressed state */
+.ds-switch__control:active:not([aria-disabled="true"]) .ds-switch__thumb {
+  width: calc(var(--ds-switch-thumb-size, 20px) + 2px);
+}
+
+/* Error state */
+ds-switch[aria-invalid="true"] .ds-switch__track {
+  border: 2px solid var(--ds-error-color, #dc2626);
+}

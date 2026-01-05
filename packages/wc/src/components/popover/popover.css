@@ -1,0 +1,84 @@
+/**
+ * Popover component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-popover-bg: Background color (default: white)
+ * --ds-popover-border-color: Border color (default: #e2e8f0)
+ * --ds-popover-border-radius: Border radius (default: 0.5rem)
+ * --ds-popover-shadow: Box shadow (default: 0 4px 6px -1px rgb(0 0 0 / 0.1))
+ * --ds-popover-padding: Content padding (default: 1rem)
+ * --ds-popover-max-width: Maximum width (default: 20rem)
+ * --ds-popover-z-index: Z-index (default: 1000)
+ */
+
+ds-popover {
+  display: contents;
+}
+
+ds-popover-content {
+  display: block;
+  position: fixed;
+  z-index: var(--ds-popover-z-index, 1000);
+  background-color: var(--ds-popover-bg, #ffffff);
+  border: 1px solid var(--ds-popover-border-color, #e2e8f0);
+  border-radius: var(--ds-popover-border-radius, 0.5rem);
+  box-shadow: var(--ds-popover-shadow, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  max-width: var(--ds-popover-max-width, 20rem);
+  outline: none;
+}
+
+ds-popover-content[hidden] {
+  display: none !important;
+}
+
+.ds-popover-content {
+  padding: var(--ds-popover-padding, 1rem);
+}
+
+/* Animation support (optional) */
+ds-popover-content[data-state="open"] {
+  animation: ds-popover-fade-in 0.15s ease-out;
+}
+
+ds-popover-content[data-state="closing"] {
+  animation: ds-popover-fade-out 0.1s ease-in;
+}
+
+@keyframes ds-popover-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ds-popover-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Arrow indicator (optional - can be added via pseudo-elements) */
+ds-popover-content[data-placement^="top"]::after {
+  /* Arrow pointing down */
+}
+
+ds-popover-content[data-placement^="bottom"]::after {
+  /* Arrow pointing up */
+}
+
+ds-popover-content[data-placement^="left"]::after {
+  /* Arrow pointing right */
+}
+
+ds-popover-content[data-placement^="right"]::after {
+  /* Arrow pointing left */
+}

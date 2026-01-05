@@ -1,0 +1,166 @@
+---
+title: Checkbox
+description: A checkbox control with tri-state support and accessible keyboard interaction.
+component: checkbox
+status: stable
+category: forms
+order: 13
+---
+
+# Checkbox
+
+Checkbox allows users to select one or more options from a set, with support for indeterminate (mixed) state.
+
+## Usage
+
+Basic checkbox with label:
+
+```html
+<ds-field>
+  <ds-checkbox></ds-checkbox>
+  <ds-label>Accept terms and conditions</ds-label>
+</ds-field>
+```
+
+### React
+
+```tsx
+import { Field, Checkbox, Label } from "@ds/react";
+
+function TermsCheckbox() {
+  return (
+    <Field>
+      <Checkbox />
+      <Label>Accept terms and conditions</Label>
+    </Field>
+  );
+}
+```
+
+## Checked State
+
+Set the initial checked state:
+
+```html
+<ds-checkbox checked></ds-checkbox>
+```
+
+### React
+
+```tsx
+import { Checkbox } from "@ds/react";
+import { useState } from "react";
+
+function ControlledCheckbox() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox
+      checked={checked}
+      onCheckedChange={setChecked}
+    />
+  );
+}
+```
+
+## Indeterminate State
+
+Use the indeterminate state for "select all" scenarios:
+
+```html
+<ds-checkbox indeterminate></ds-checkbox>
+```
+
+### React
+
+```tsx
+import { Checkbox } from "@ds/react";
+
+function SelectAllCheckbox({ items, selectedItems }) {
+  const allSelected = selectedItems.length === items.length;
+  const someSelected = selectedItems.length > 0 && !allSelected;
+
+  return (
+    <Checkbox
+      checked={allSelected}
+      indeterminate={someSelected}
+    />
+  );
+}
+```
+
+## Disabled State
+
+```html
+<ds-checkbox disabled></ds-checkbox>
+<ds-checkbox checked disabled></ds-checkbox>
+```
+
+## Checkbox Group
+
+Group related checkboxes together:
+
+```html
+<fieldset>
+  <legend>Select your interests</legend>
+  <ds-field>
+    <ds-checkbox value="sports"></ds-checkbox>
+    <ds-label>Sports</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-checkbox value="music"></ds-checkbox>
+    <ds-label>Music</ds-label>
+  </ds-field>
+  <ds-field>
+    <ds-checkbox value="movies"></ds-checkbox>
+    <ds-label>Movies</ds-label>
+  </ds-field>
+</fieldset>
+```
+
+## Attributes
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `checked` | boolean | false | Whether the checkbox is checked |
+| `indeterminate` | boolean | false | Whether the checkbox is in indeterminate state |
+| `disabled` | boolean | false | Whether the checkbox is disabled |
+| `value` | string | - | Value submitted with forms |
+| `name` | string | - | Name for form submission |
+| `required` | boolean | false | Whether the checkbox is required |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ checked: boolean }` | Fired when checked state changes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Space` | Toggle checked state |
+| `Tab` | Move focus to next element |
+
+## Accessibility
+
+- Uses `role="checkbox"` with proper ARIA attributes
+- `aria-checked` reflects current state (`true`, `false`, or `mixed`)
+- Keyboard accessible via Space key
+- Integrates with Field for label association
+
+## Best Practices
+
+### Do
+
+- Always provide a visible label
+- Use indeterminate state for "select all" with partial selection
+- Group related checkboxes with fieldset and legend
+- Use clear, concise labels
+
+### Don't
+
+- Don't use checkboxes for mutually exclusive options (use Radio instead)
+- Don't use checkboxes for actions (use Button or Switch instead)
+- Don't hide the checkbox visually without accessible alternatives
+- Don't use negative labels ("Don't send emails")

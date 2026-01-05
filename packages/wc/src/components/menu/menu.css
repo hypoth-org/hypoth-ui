@@ -1,0 +1,107 @@
+/**
+ * Menu component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-menu-bg: Background color (default: white)
+ * --ds-menu-border-color: Border color (default: #e2e8f0)
+ * --ds-menu-border-radius: Border radius (default: 0.5rem)
+ * --ds-menu-shadow: Box shadow (default: 0 4px 6px -1px rgb(0 0 0 / 0.1))
+ * --ds-menu-padding: Content padding (default: 0.25rem)
+ * --ds-menu-min-width: Minimum width (default: 10rem)
+ * --ds-menu-z-index: Z-index (default: 1000)
+ *
+ * Menu item properties:
+ * --ds-menu-item-padding: Item padding (default: 0.5rem 0.75rem)
+ * --ds-menu-item-color: Text color (default: #1e293b)
+ * --ds-menu-item-hover-bg: Hover background (default: #f1f5f9)
+ * --ds-menu-item-focus-bg: Focus background (default: #e2e8f0)
+ * --ds-menu-item-disabled-color: Disabled text color (default: #94a3b8)
+ */
+
+ds-menu {
+  display: contents;
+}
+
+ds-menu-content {
+  display: block;
+  position: fixed;
+  z-index: var(--ds-menu-z-index, 1000);
+  background-color: var(--ds-menu-bg, #ffffff);
+  border: 1px solid var(--ds-menu-border-color, #e2e8f0);
+  border-radius: var(--ds-menu-border-radius, 0.5rem);
+  box-shadow: var(--ds-menu-shadow, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  min-width: var(--ds-menu-min-width, 10rem);
+  outline: none;
+}
+
+ds-menu-content[hidden] {
+  display: none !important;
+}
+
+.ds-menu-content {
+  padding: var(--ds-menu-padding, 0.25rem);
+}
+
+/* Animation support */
+ds-menu-content:not([hidden]) {
+  animation: ds-menu-fade-in 0.15s ease-out;
+}
+
+@keyframes ds-menu-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Menu item styles */
+ds-menu-item {
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+ds-menu-item[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ds-menu-item {
+  padding: var(--ds-menu-item-padding, 0.5rem 0.75rem);
+  color: var(--ds-menu-item-color, #1e293b);
+  border-radius: calc(var(--ds-menu-border-radius, 0.5rem) - 0.125rem);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Hover state */
+ds-menu-item:not([disabled]):hover .ds-menu-item {
+  background-color: var(--ds-menu-item-hover-bg, #f1f5f9);
+}
+
+/* Focus state (roving focus) */
+ds-menu-item:not([disabled]):focus .ds-menu-item {
+  background-color: var(--ds-menu-item-focus-bg, #e2e8f0);
+}
+
+/* Focus visible for keyboard navigation */
+ds-menu-item:not([disabled]):focus-visible .ds-menu-item {
+  background-color: var(--ds-menu-item-focus-bg, #e2e8f0);
+  outline: 2px solid var(--ds-menu-item-focus-ring, #3b82f6);
+  outline-offset: -2px;
+}
+
+/* Disabled state */
+ds-menu-item[disabled] .ds-menu-item {
+  color: var(--ds-menu-item-disabled-color, #94a3b8);
+}
+
+/* Active/pressed state */
+ds-menu-item:not([disabled]):active .ds-menu-item {
+  background-color: var(--ds-menu-item-active-bg, #e2e8f0);
+}

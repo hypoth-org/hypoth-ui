@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "switch",
+  "name": "Switch",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A toggle switch component for on/off boolean states",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "switch",
+    "keyboard": ["Space", "Enter", "Tab", "Shift+Tab"],
+    "screenReader": "Announces as a switch with on/off state. State changes are announced immediately.",
+    "ariaPatterns": ["role=switch", "aria-checked", "aria-disabled", "aria-required"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.muted",
+    "color.primary",
+    "color.text.primary",
+    "spacing.sm",
+    "radius.full"
+  ],
+  "recommendedUsage": "Use for immediate on/off toggles like settings. Changes should take effect immediately.",
+  "antiPatterns": "Do not use when a form submission is required - use Checkbox instead. Always provide a label.",
+  "platforms": ["wc", "react"]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "checkbox",
+  "name": "Checkbox",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A checkbox component for boolean selection with tri-state support",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "checkbox",
+    "keyboard": ["Space", "Tab", "Shift+Tab"],
+    "screenReader": "Announces as a checkbox with label and checked state. Supports indeterminate state announcement.",
+    "ariaPatterns": ["role=checkbox", "aria-checked", "aria-disabled", "aria-required"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.border.focus",
+    "color.primary",
+    "color.text.primary",
+    "spacing.sm",
+    "radius.sm"
+  ],
+  "recommendedUsage": "Use for boolean selections or multiple selections from a list. Always provide a visible label.",
+  "antiPatterns": "Do not use for single-choice selections - use RadioGroup instead. Do not hide the label.",
+  "platforms": ["wc", "react"]
+}

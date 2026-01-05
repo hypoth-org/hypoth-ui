@@ -1,0 +1,158 @@
+---
+title: Dialog
+description: A modal dialog component with focus trap, backdrop, and accessible keyboard navigation.
+component: dialog
+status: stable
+category: overlays
+order: 20
+---
+
+# Dialog
+
+Dialog displays content that requires user attention or interaction, blocking interaction with the rest of the page.
+
+## Usage
+
+Create a modal dialog with a trigger button:
+
+```html
+<ds-dialog>
+  <button slot="trigger">Open dialog</button>
+  <ds-dialog-content>
+    <ds-dialog-title>Confirm action</ds-dialog-title>
+    <ds-dialog-description>Are you sure you want to proceed?</ds-dialog-description>
+    <button>Cancel</button>
+    <button>Confirm</button>
+  </ds-dialog-content>
+</ds-dialog>
+```
+
+### React
+
+```tsx
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@ds/react";
+
+function ConfirmDialog() {
+  return (
+    <Dialog>
+      <button slot="trigger">Open dialog</button>
+      <DialogContent>
+        <DialogTitle>Confirm action</DialogTitle>
+        <DialogDescription>Are you sure you want to proceed?</DialogDescription>
+        <button>Cancel</button>
+        <button>Confirm</button>
+      </DialogContent>
+    </Dialog>
+  );
+}
+```
+
+## Controlled Mode
+
+Control the dialog open state programmatically:
+
+```html
+<ds-dialog id="myDialog" open>
+  <ds-dialog-content>
+    <ds-dialog-title>Controlled dialog</ds-dialog-title>
+    <p>This dialog is controlled programmatically.</p>
+  </ds-dialog-content>
+</ds-dialog>
+
+<script>
+  const dialog = document.getElementById('myDialog');
+  dialog.open = false; // Close the dialog
+</script>
+```
+
+### React
+
+```tsx
+import { Dialog, DialogContent, DialogTitle } from "@ds/react";
+import { useState } from "react";
+
+function ControlledDialog() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogTitle>Controlled dialog</DialogTitle>
+          <button onClick={() => setOpen(false)}>Close</button>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+```
+
+## Close on Backdrop Click
+
+Allow closing the dialog by clicking the backdrop:
+
+```html
+<ds-dialog close-on-backdrop-click>
+  <button slot="trigger">Open dialog</button>
+  <ds-dialog-content>
+    <ds-dialog-title>Click outside to close</ds-dialog-title>
+  </ds-dialog-content>
+</ds-dialog>
+```
+
+## Components
+
+### ds-dialog
+
+The container that manages open state and provides context.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `open` | boolean | false | Whether the dialog is open |
+| `close-on-backdrop-click` | boolean | false | Close when clicking the backdrop |
+
+### ds-dialog-content
+
+The dialog panel that contains the content.
+
+### ds-dialog-title
+
+The title of the dialog, connected via `aria-labelledby`.
+
+### ds-dialog-description
+
+Optional description, connected via `aria-describedby`.
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Escape` | Close the dialog |
+| `Tab` | Move focus to next focusable element (trapped within dialog) |
+| `Shift+Tab` | Move focus to previous focusable element |
+
+## Accessibility
+
+- Uses `role="dialog"` and `aria-modal="true"`
+- Title connected via `aria-labelledby`
+- Description connected via `aria-describedby`
+- Focus is trapped within the dialog while open
+- Focus returns to the trigger element when closed
+- Escape key dismisses the dialog
+
+## Best Practices
+
+### Do
+
+- Always include a dialog title for screen readers
+- Provide a clear way to close the dialog
+- Use dialogs for content requiring immediate attention
+- Keep dialog content focused and concise
+
+### Don't
+
+- Don't use dialogs for simple notifications (use Toast instead)
+- Don't nest dialogs within other dialogs
+- Don't use dialogs for long-form content
+- Don't remove focus trap functionality

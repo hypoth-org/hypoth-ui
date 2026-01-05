@@ -1,0 +1,169 @@
+---
+title: Popover
+description: A non-modal popover component with anchor positioning and dismissable behavior.
+component: popover
+status: stable
+category: overlays
+order: 21
+---
+
+# Popover
+
+Popover displays supplementary content anchored to a trigger element, without blocking page interaction.
+
+## Usage
+
+Basic popover with trigger:
+
+```html
+<ds-popover>
+  <button slot="trigger">Show details</button>
+  <ds-popover-content>
+    <p>Additional information goes here.</p>
+  </ds-popover-content>
+</ds-popover>
+```
+
+### React
+
+```tsx
+import { Popover, PopoverContent } from "@ds/react";
+
+function InfoPopover() {
+  return (
+    <Popover>
+      <button slot="trigger">Show details</button>
+      <PopoverContent>
+        <p>Additional information goes here.</p>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## Placement
+
+Position the popover relative to the trigger:
+
+```html
+<ds-popover placement="top">...</ds-popover>
+<ds-popover placement="bottom">...</ds-popover>
+<ds-popover placement="left">...</ds-popover>
+<ds-popover placement="right">...</ds-popover>
+<ds-popover placement="top-start">...</ds-popover>
+<ds-popover placement="bottom-end">...</ds-popover>
+```
+
+## Controlled Mode
+
+Control the popover programmatically:
+
+```tsx
+import { Popover, PopoverContent } from "@ds/react";
+import { useState } from "react";
+
+function ControlledPopover() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <button slot="trigger">Toggle popover</button>
+      <PopoverContent>
+        <p>Controlled content</p>
+        <button onClick={() => setOpen(false)}>Close</button>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## With Rich Content
+
+Popovers can contain interactive elements:
+
+```html
+<ds-popover>
+  <button slot="trigger">User settings</button>
+  <ds-popover-content>
+    <h3>Preferences</h3>
+    <ds-field>
+      <ds-switch></ds-switch>
+      <ds-label>Dark mode</ds-label>
+    </ds-field>
+    <ds-field>
+      <ds-switch></ds-switch>
+      <ds-label>Notifications</ds-label>
+    </ds-field>
+  </ds-popover-content>
+</ds-popover>
+```
+
+## Components
+
+### ds-popover
+
+Container that manages open state and positioning.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `open` | boolean | false | Whether the popover is open |
+| `placement` | Placement | "bottom" | Position relative to trigger |
+
+**Placement values**: `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end`
+
+### ds-popover-content
+
+The content panel that appears when open.
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:open` | - | Fired when popover opens |
+| `ds:close` | - | Fired when popover closes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Escape` | Close the popover |
+| `Tab` | Move focus (can exit popover) |
+| `Enter/Space` | Toggle popover (on trigger) |
+
+## Accessibility
+
+- Uses `aria-haspopup` on trigger
+- Uses `aria-expanded` to indicate state
+- Uses `aria-controls` to link trigger to content
+- Escape key dismisses the popover
+- Focus can move in and out (not trapped like Dialog)
+
+## Popover vs Dialog
+
+Use **Popover** when:
+- Content is supplementary, not critical
+- User should be able to interact with the page
+- Content is anchored to a specific element
+- No confirmation is required
+
+Use **Dialog** when:
+- Content requires user attention
+- Background interaction should be blocked
+- Focus should be trapped
+- A decision or confirmation is needed
+
+## Best Practices
+
+### Do
+
+- Keep popover content concise
+- Use appropriate placement to avoid viewport edges
+- Provide a clear way to dismiss (Escape, click outside)
+- Consider mobile viewport constraints
+
+### Don't
+
+- Don't use for critical information or actions
+- Don't nest popovers within other popovers
+- Don't use for navigation (use Menu instead)
+- Don't put forms requiring submission in popovers
