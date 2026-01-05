@@ -27,10 +27,18 @@
     "validate:manifests": "pnpm --filter @ds/docs-core run validate:manifests",
     "new-component": "tsx tooling/scripts/new-component.ts",
     "check:auto-define": "tsx tooling/scripts/check-auto-define.ts",
-    "clean": "pnpm -r run clean && rm -rf node_modules"
+    "clean": "pnpm -r run clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "ds-deprecate": "pnpm --filter @ds/governance deprecate",
+    "ds-check-gates": "pnpm --filter @ds/governance check-gates",
+    "ds-tenant-diff": "pnpm --filter @ds/governance tenant-diff"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@changesets/changelog-github": "0.5.2",
+    "@changesets/cli": "2.29.8",
     "@playwright/test": "^1.40.0",
     "@testing-library/react": "^14.1.0",
     "@types/node": "^20.10.0",
@@ -50,6 +58,10 @@
     "pnpm": ">=10.0.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "style-dictionary"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild",
+      "style-dictionary"
+    ]
   }
 }

@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/deprecation-registry.json",
+  "title": "Deprecation Registry",
+  "description": "Schema for tracking deprecated features in the design system",
+  "type": "object",
+  "required": ["version", "deprecations"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "deprecations": {
+      "type": "array",
+      "description": "List of deprecated items",
+      "items": {
+        "$ref": "#/definitions/DeprecationRecord"
+      }
+    }
+  },
+  "definitions": {
+    "DeprecationRecord": {
+      "type": "object",
+      "required": ["id", "type", "name", "deprecated_in", "removal_target", "reason", "editions"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique deprecation ID (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of deprecated item",
+          "enum": ["component", "api", "token", "prop", "event", "slot", "css-var"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Identifier of the deprecated item"
+        },
+        "deprecated_in": {
+          "type": "string",
+          "description": "Version when deprecation was announced",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "removal_target": {
+          "type": "string",
+          "description": "Target version for removal (must be >= deprecated_in + 2 major)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "replacement": {
+          "type": "string",
+          "description": "Replacement item identifier (if applicable)"
+        },
+        "migration_guide": {
+          "type": "string",
+          "description": "URL path to migration guide",
+          "pattern": "^/.*$"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Brief explanation for deprecation",
+          "maxLength": 500
+        },
+        "editions": {
+          "type": "array",
+          "description": "Affected editions",
+          "items": {
+            "type": "string",
+            "enum": ["core", "pro", "enterprise"]
+          },
+          "minItems": 1
+        },
+        "status": {
+          "type": "string",
+          "description": "Current deprecation status",
+          "enum": ["announced", "active", "removable", "removed"],
+          "default": "active"
+        }
+      }
+    }
+  }
+}

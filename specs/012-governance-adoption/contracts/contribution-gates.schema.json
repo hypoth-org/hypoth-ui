@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/contribution-gates.json",
+  "title": "Contribution Gates Configuration",
+  "description": "Schema for defining contribution quality gates",
+  "type": "object",
+  "required": ["version", "gates"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "gates": {
+      "type": "array",
+      "description": "List of contribution gates",
+      "items": {
+        "$ref": "#/definitions/ContributionGate"
+      }
+    }
+  },
+  "definitions": {
+    "ContributionGate": {
+      "type": "object",
+      "required": ["id", "name", "type", "required", "description", "remediation"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique gate ID (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable gate name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Whether gate is automated or requires manual review",
+          "enum": ["automated", "manual"]
+        },
+        "threshold": {
+          "type": "number",
+          "description": "Numeric threshold for pass/fail (e.g., 80 for 80% coverage)",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether gate blocks merge"
+        },
+        "applies_to": {
+          "type": "array",
+          "description": "File patterns this gate applies to",
+          "items": {
+            "type": "string"
+          },
+          "default": ["**/*"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Explanation of what the gate checks"
+        },
+        "remediation": {
+          "type": "string",
+          "description": "Instructions for fixing gate failures"
+        },
+        "ci_command": {
+          "type": "string",
+          "description": "Command to run in CI (for automated gates)"
+        },
+        "checklist_url": {
+          "type": "string",
+          "description": "URL to manual checklist (for manual gates)",
+          "format": "uri"
+        }
+      },
+      "if": {
+        "properties": {
+          "type": { "const": "automated" }
+        }
+      },
+      "then": {
+        "required": ["ci_command"]
+      }
+    }
+  }
+}

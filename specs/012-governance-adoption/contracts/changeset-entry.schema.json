@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ds.example.com/schemas/changeset-entry.json",
+  "title": "Changeset Entry",
+  "description": "Schema for changeset file frontmatter (extended from @changesets/cli)",
+  "type": "object",
+  "required": ["editions"],
+  "properties": {
+    "editions": {
+      "type": "array",
+      "description": "Affected editions for tenant filtering",
+      "items": {
+        "type": "string",
+        "enum": ["core", "pro", "enterprise"]
+      },
+      "minItems": 1
+    },
+    "security": {
+      "type": "boolean",
+      "description": "Whether this is a security-related change",
+      "default": false
+    },
+    "breaking_type": {
+      "type": "string",
+      "description": "Type of breaking change (for major version bumps)",
+      "enum": ["api-change", "component-removal", "token-rename", "behavior-change"]
+    },
+    "migration_required": {
+      "type": "boolean",
+      "description": "Whether migration guide is required for this change",
+      "default": false
+    }
+  },
+  "if": {
+    "properties": {
+      "migration_required": { "const": true }
+    }
+  },
+  "then": {
+    "required": ["breaking_type"]
+  }
+}

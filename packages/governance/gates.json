@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "gates": [
+    {
+      "id": "test-coverage",
+      "name": "Test Coverage",
+      "type": "automated",
+      "threshold": 80,
+      "required": true,
+      "applies_to": ["packages/*/src/**/*.ts"],
+      "description": "Minimum 80% test coverage for new code",
+      "remediation": "Add unit tests to cover uncovered code paths. Run `pnpm test:coverage` to see coverage report.",
+      "command": "pnpm test:coverage"
+    },
+    {
+      "id": "accessibility",
+      "name": "Accessibility Tests",
+      "type": "automated",
+      "required": true,
+      "applies_to": ["packages/wc/src/components/**/*", "packages/react/src/**/*"],
+      "description": "All components must pass axe-core accessibility tests",
+      "remediation": "Fix accessibility violations reported by axe-core. Run `pnpm test:a11y` to see violations.",
+      "command": "pnpm test:a11y"
+    },
+    {
+      "id": "manifest-validation",
+      "name": "Manifest Schema Validation",
+      "type": "automated",
+      "required": true,
+      "applies_to": ["packages/docs-content/components/*/manifest.json"],
+      "description": "Component manifest must be valid JSON matching the schema",
+      "remediation": "Fix manifest errors reported by validation. Run `pnpm validate:manifests` to see errors.",
+      "command": "pnpm validate:manifests"
+    },
+    {
+      "id": "docs-presence",
+      "name": "Documentation Presence",
+      "type": "automated",
+      "required": true,
+      "applies_to": ["packages/wc/src/components/**/*"],
+      "description": "Component must have MDX documentation file in docs-content",
+      "remediation": "Add component documentation to packages/docs-content/components/{component-name}/",
+      "command": "pnpm validate:docs"
+    },
+    {
+      "id": "typecheck",
+      "name": "TypeScript Type Check",
+      "type": "automated",
+      "required": true,
+      "applies_to": ["**/*.ts", "**/*.tsx"],
+      "description": "All TypeScript code must pass type checking",
+      "remediation": "Fix type errors reported by TypeScript. Run `pnpm typecheck` to see errors.",
+      "command": "pnpm typecheck"
+    },
+    {
+      "id": "lint",
+      "name": "Linting",
+      "type": "automated",
+      "required": true,
+      "applies_to": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+      "description": "All code must pass linting rules",
+      "remediation": "Fix linting errors. Run `pnpm lint:fix` to auto-fix where possible.",
+      "command": "pnpm lint"
+    },
+    {
+      "id": "design-review",
+      "name": "Design Review",
+      "type": "manual",
+      "required": true,
+      "applies_to": ["packages/wc/src/components/**/*"],
+      "description": "New components require design team approval",
+      "remediation": "Request design review by adding the 'needs-design-review' label to your PR",
+      "checklist_url": "https://github.com/hypoth-ui/hypoth-ui/wiki/Design-Review-Checklist"
+    },
+    {
+      "id": "a11y-audit",
+      "name": "Accessibility Audit",
+      "type": "manual",
+      "required": true,
+      "applies_to": ["packages/wc/src/components/**/*"],
+      "description": "New components require manual accessibility audit",
+      "remediation": "Complete the accessibility audit checklist and attach results to the PR",
+      "checklist_url": "https://github.com/hypoth-ui/hypoth-ui/wiki/A11y-Audit-Checklist"
+    }
+  ]
+}

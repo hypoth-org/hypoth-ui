@@ -1,0 +1,201 @@
+---
+title: Edition Comparison
+description: Compare Core, Pro, and Enterprise editions to find the right fit
+edition: core
+---
+
+# Edition Comparison
+
+The design system is available in three editions to match your needs and scale.
+
+## Overview
+
+| Feature | Core | Pro | Enterprise |
+|---------|:----:|:---:|:----------:|
+| Basic Components | Yes | Yes | Yes |
+| Design Tokens | Yes | Yes | Yes |
+| Accessibility | WCAG 2.1 AA | WCAG 2.1 AA | WCAG 2.1 AAA |
+| React Wrappers | Yes | Yes | Yes |
+| Advanced Components | - | Yes | Yes |
+| Data Components | - | Yes | Yes |
+| White-label Support | - | - | Yes |
+| Priority Support | - | - | Yes |
+
+## Core Edition
+
+The Core edition includes essential components for building user interfaces.
+
+### Included Components
+
+- **Button** - Primary, secondary, and ghost variants
+- **Link** - Text links with accessibility
+- **Text** - Typography component
+- **Icon** - Icon rendering
+- **Spinner** - Loading indicator
+- **VisuallyHidden** - Screen reader text
+- **Input** - Text input
+- **Textarea** - Multi-line input
+- **Checkbox** - Checkbox input
+- **Radio** - Radio buttons
+- **Switch** - Toggle switch
+- **Field** - Form field wrapper
+- **Dialog** - Modal dialogs
+- **Tooltip** - Hover tooltips
+- **Popover** - Popover content
+
+### Best For
+
+- Small to medium projects
+- Teams starting with design systems
+- Projects with basic UI requirements
+
+## Pro Edition
+
+The Pro edition adds advanced components for growing applications.
+
+### Additional Components
+
+Everything in Core, plus:
+
+- **Select** - Dropdown select with search
+- **Combobox** - Autocomplete input
+- **Menu** - Dropdown menus
+- **Tabs** - Tab navigation
+- **Accordion** - Collapsible sections
+- **DataTable** - Basic data tables
+- **DatePicker** - Date selection
+- **Slider** - Range slider
+- **Progress** - Progress indicators
+
+### Additional Features
+
+- Enhanced keyboard navigation
+- Advanced form validation
+- Extended theming options
+- Component composition patterns
+
+### Best For
+
+- Growing applications
+- Teams needing advanced interactions
+- Projects with complex forms
+
+## Enterprise Edition
+
+The Enterprise edition provides the full feature set for large organizations.
+
+### Additional Components
+
+Everything in Pro, plus:
+
+- **DataGrid** - Advanced data grids with virtualization
+- **TreeView** - Hierarchical navigation
+- **Calendar** - Full calendar component
+- **RichTextEditor** - Text editing
+- **FileUpload** - File upload with preview
+- **Stepper** - Multi-step workflows
+- **CommandPalette** - Keyboard command interface
+
+### Enterprise Features
+
+- **White-label Support** - Full customization for multi-tenant
+- **WCAG 2.1 AAA** - Enhanced accessibility
+- **Priority Support** - Dedicated support channel
+- **Custom Components** - Request custom components
+- **Audit Reports** - Accessibility audit reports
+- **Training** - Team training sessions
+
+### Best For
+
+- Large organizations
+- Multi-tenant applications
+- Projects requiring maximum accessibility
+- Teams needing dedicated support
+
+## Feature Comparison
+
+### Components by Category
+
+| Category | Core | Pro | Enterprise |
+|----------|:----:|:---:|:----------:|
+| **Buttons & Links** | 2 | 2 | 2 |
+| **Typography** | 2 | 2 | 2 |
+| **Form Inputs** | 6 | 10 | 12 |
+| **Overlays** | 3 | 4 | 4 |
+| **Navigation** | - | 3 | 5 |
+| **Data Display** | - | 2 | 4 |
+| **Utilities** | 3 | 5 | 7 |
+
+### Accessibility
+
+| Feature | Core | Pro | Enterprise |
+|---------|:----:|:---:|:----------:|
+| WCAG 2.1 Level | AA | AA | AAA |
+| Keyboard Navigation | Yes | Enhanced | Full |
+| Screen Reader | Yes | Yes | Enhanced |
+| High Contrast | Yes | Yes | Themes |
+| Reduced Motion | Yes | Yes | Yes |
+| Focus Management | Basic | Advanced | Full |
+
+### Theming
+
+| Feature | Core | Pro | Enterprise |
+|---------|:----:|:---:|:----------:|
+| Color Tokens | Yes | Yes | Yes |
+| Typography Tokens | Yes | Yes | Yes |
+| Spacing Tokens | Yes | Yes | Yes |
+| Custom Themes | Basic | Advanced | Full |
+| Theme Switching | - | Yes | Yes |
+| White-label | - | - | Yes |
+
+### Support
+
+| Feature | Core | Pro | Enterprise |
+|---------|:----:|:---:|:----------:|
+| Documentation | Yes | Yes | Yes |
+| GitHub Issues | Yes | Yes | Yes |
+| Community Support | Yes | Yes | Yes |
+| Email Support | - | Yes | Yes |
+| Priority Support | - | - | Yes |
+| Dedicated Channel | - | - | Yes |
+| Training | - | - | Yes |
+
+## Choosing an Edition
+
+### Questions to Consider
+
+1. **Team size** - How many developers will use the system?
+2. **Project complexity** - What level of UI complexity do you need?
+3. **Accessibility requirements** - Do you need AAA compliance?
+4. **Support needs** - How important is dedicated support?
+5. **Customization** - Do you need white-label capabilities?
+
+### Recommendation Guide
+
+```
+Small team + Basic UI → Core
+Growing team + Complex forms → Pro
+Large org + Multi-tenant → Enterprise
+```
+
+## Upgrading Editions
+
+Upgrading is seamless as higher editions include all lower edition features:
+
+```bash
+# Update your package.json
+{
+  "ds": {
+    "edition": "pro"  # or "enterprise"
+  }
+}
+
+# Install additional components
+pnpm update @ds/*
+```
+
+## Related Documentation
+
+- [Quick Start Guide](/governance/quickstart)
+- [Adoption Checklist](/governance/adoption-checklist)
+- [Pricing](https://hypoth-ui.com/pricing)

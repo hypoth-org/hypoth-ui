@@ -1,0 +1,252 @@
+---
+title: Quick Start Adoption Guide
+description: Get started with the design system in under 30 minutes
+edition: core
+---
+
+# Quick Start Adoption Guide
+
+Get your team up and running with the design system quickly. This guide covers installation, basic usage, and next steps.
+
+## Prerequisites
+
+- Node.js 18+
+- pnpm 8+
+- React 18+ or framework of choice
+
+## Installation
+
+### Step 1: Install Packages
+
+```bash
+# Install core packages
+pnpm add @ds/wc @ds/tokens
+
+# For React projects
+pnpm add @ds/react
+```
+
+### Step 2: Configure CSS Layers
+
+Add the design system layers to your main CSS file:
+
+```css
+/* Import design system styles */
+@import '@ds/tokens/dist/tokens.css';
+@import '@ds/wc/dist/components.css';
+```
+
+### Step 3: Register Web Components
+
+In your app entry point:
+
+```typescript
+// Import and register components
+import '@ds/wc/dist/register';
+
+// Or import specific components
+import '@ds/wc/button';
+import '@ds/wc/input';
+```
+
+## Basic Usage
+
+### Using Web Components
+
+```html
+<ds-button variant="primary">Click me</ds-button>
+<ds-input label="Email" type="email"></ds-input>
+```
+
+### Using React Wrappers
+
+```tsx
+import { Button, Input } from '@ds/react';
+
+function MyComponent() {
+  return (
+    <>
+      <Button variant="primary">Click me</Button>
+      <Input label="Email" type="email" />
+    </>
+  );
+}
+```
+
+## Edition Configuration
+
+The design system supports three editions:
+
+| Edition | Features | Use Case |
+|---------|----------|----------|
+| Core | Basic components | Small projects |
+| Pro | Core + advanced | Growing teams |
+| Enterprise | All features | Large organizations |
+
+Configure your edition in `package.json`:
+
+```json
+{
+  "ds": {
+    "edition": "pro"
+  }
+}
+```
+
+## Theming
+
+### Using Design Tokens
+
+```css
+.my-component {
+  color: var(--ds-color-text-primary);
+  background: var(--ds-color-background);
+  padding: var(--ds-spacing-md);
+  border-radius: var(--ds-radius-md);
+}
+```
+
+### Custom Theme
+
+Create a custom theme by overriding tokens:
+
+```css
+:root {
+  /* Override brand colors */
+  --ds-color-brand: #0066cc;
+  --ds-color-brand-hover: #0052a3;
+}
+```
+
+## Common Patterns
+
+### Forms
+
+```tsx
+import { Field, Input, Button } from '@ds/react';
+
+function LoginForm() {
+  return (
+    <form>
+      <Field label="Email" required>
+        <Input type="email" name="email" />
+      </Field>
+      <Field label="Password" required>
+        <Input type="password" name="password" />
+      </Field>
+      <Button type="submit" variant="primary">
+        Sign In
+      </Button>
+    </form>
+  );
+}
+```
+
+### Dialogs
+
+```tsx
+import { Dialog, Button } from '@ds/react';
+import { useState } from 'react';
+
+function ConfirmDialog() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog.Title>Confirm Action</Dialog.Title>
+        <Dialog.Content>
+          Are you sure you want to proceed?
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleConfirm}>
+            Confirm
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+    </>
+  );
+}
+```
+
+## Framework Integration
+
+### Next.js (App Router)
+
+```tsx
+// app/layout.tsx
+import '@ds/tokens/dist/tokens.css';
+import '@ds/wc/dist/components.css';
+import { DSProvider } from '@ds/react/next';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <DSProvider>{children}</DSProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### Vite
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  optimizeDeps: {
+    include: ['@ds/wc', '@ds/react'],
+  },
+});
+```
+
+## Staying Updated
+
+### Subscribe to Releases
+
+Watch the repository or subscribe to the changelog feed.
+
+### Check for Updates
+
+```bash
+# Check for outdated packages
+pnpm outdated @ds/*
+
+# Update to latest
+pnpm update @ds/wc @ds/tokens @ds/react
+```
+
+### Version Diffs
+
+Generate a report of changes since your version:
+
+```bash
+pnpm ds-tenant-diff diff --version 1.0.0 --edition core --latest 1.5.0
+```
+
+## Next Steps
+
+1. **Explore Components** - Browse the [component documentation](/components)
+2. **Learn Theming** - Read the [theming guide](/guides/theming)
+3. **Check Accessibility** - Review [accessibility guidelines](/governance/accessibility)
+4. **Contribute** - Read the [contribution guide](/governance/contributing)
+
+## Getting Help
+
+- **Documentation**: You're here!
+- **Examples**: Check the [examples repository](https://github.com/hypoth-ui/examples)
+- **Issues**: Report bugs on [GitHub](https://github.com/hypoth-ui/hypoth-ui/issues)
+- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/hypoth-ui/hypoth-ui/discussions)
+
+## Related Documentation
+
+- [Versioning Policy](/governance/versioning)
+- [Deprecation Policy](/governance/deprecations)
+- [Contributing](/governance/contributing)

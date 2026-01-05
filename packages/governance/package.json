@@ -1,0 +1,45 @@
+{
+  "name": "@ds/governance",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Governance tooling for the Hypoth UI design system",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "ds-deprecate": "./dist/cli/deprecate.js",
+    "ds-check-gates": "./dist/cli/check-gates.js",
+    "ds-tenant-diff": "./dist/cli/tenant-diff.js"
+  },
+  "files": ["dist", "templates", "deprecations.json", "gates.json"],
+  "scripts": {
+    "build": "tsup src/index.ts src/cli/deprecate.ts src/cli/check-gates.ts src/cli/tenant-diff.ts --format esm --dts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "deprecate": "tsx src/cli/deprecate.ts",
+    "check-gates": "tsx src/cli/check-gates.ts",
+    "tenant-diff": "tsx src/cli/tenant-diff.ts"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "commander": "^12.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@ds/docs-core": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@ds/docs-core": {
+      "optional": true
+    }
+  }
+}

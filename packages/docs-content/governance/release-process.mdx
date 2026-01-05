@@ -1,0 +1,212 @@
+---
+title: Release Process
+description: How we release new versions of the design system
+edition: core
+---
+
+# Release Process
+
+This document describes our automated release process and how to participate in it.
+
+## Overview
+
+We use [Changesets](https://github.com/changesets/changesets) for version management and automated releases. The process is:
+
+1. Contributors create changesets for their PRs
+2. PRs are merged to main
+3. A "Version Packages" PR is automatically created/updated
+4. When the Version PR is merged, packages are published
+
+## Creating a Changeset
+
+When you make changes that affect published packages:
+
+```bash
+# Create a changeset
+pnpm changeset
+```
+
+You'll be prompted to:
+1. Select packages affected
+2. Choose bump type (major/minor/patch)
+3. Write a summary
+
+### Changeset Format
+
+```markdown
+---
+"@ds/wc": minor
+editions: [core, pro, enterprise]
+---
+
+Added new IconButton component for icon-only actions
+```
+
+### Extended Metadata
+
+| Field | Description | Default |
+|-------|-------------|---------|
+| `editions` | Which editions include this | All |
+| `security` | Security fix flag | false |
+| `breaking_type` | Type of breaking change | - |
+| `migration_required` | Needs migration | false |
+
+## Version Types
+
+| Type | When to Use | Example |
+|------|-------------|---------|
+| **patch** | Bug fixes, docs | `1.0.0` → `1.0.1` |
+| **minor** | New features | `1.0.0` → `1.1.0` |
+| **major** | Breaking changes | `1.0.0` → `2.0.0` |
+
+## Fixed Versioning
+
+All `@ds/*` packages share the same version. When any package changes, all are released together with the same version number.
+
+## Automated Release Flow
+
+```
+PR Merged → Changesets Bot → Version PR → Merge → NPM Publish
+```
+
+### Step 1: PR with Changeset
+
+When your PR with a changeset is merged to main:
+- CI validates the changeset
+- Changesets action processes it
+
+### Step 2: Version PR
+
+The changesets action:
+- Creates/updates "Version Packages" PR
+- Updates all package versions
+- Updates CHANGELOG.md
+
+### Step 3: Publish
+
+When the Version PR is merged:
+- Packages are published to npm
+- Git tags are created
+- GitHub release is created
+- Edition-specific changelogs are generated
+
+## Manual Release (Rare)
+
+In rare cases, maintainers may need to release manually:
+
+```bash
+# 1. Run changeset version
+pnpm changeset version
+
+# 2. Review changes
+git diff
+
+# 3. Commit version changes
+git add .
+git commit -m "chore: version packages"
+
+# 4. Publish (maintainers only)
+pnpm release
+```
+
+## Pre-releases
+
+For testing before a stable release:
+
+```bash
+# Enter pre-release mode
+pnpm changeset pre enter beta
+
+# Make changes and add changesets
+pnpm changeset
+
+# Version (creates beta versions)
+pnpm changeset version
+
+# Exit pre-release mode when ready
+pnpm changeset pre exit
+```
+
+### Pre-release Tags
+
+| Tag | Purpose | Example |
+|-----|---------|---------|
+| `beta` | Feature testing | `2.0.0-beta.1` |
+| `alpha` | Early access | `2.0.0-alpha.1` |
+| `rc` | Release candidate | `2.0.0-rc.1` |
+
+## Release Cadence
+
+| Type | Frequency | Day |
+|------|-----------|-----|
+| Patch | As needed | Any |
+| Minor | Bi-weekly | Tuesday |
+| Major | Quarterly | First Tuesday of quarter |
+
+## CI Checks Before Release
+
+All releases must pass:
+
+- [ ] Build succeeds
+- [ ] All tests pass (80% coverage)
+- [ ] Accessibility tests pass
+- [ ] Type checking passes
+- [ ] Lint passes
+- [ ] Manifest validation passes
+- [ ] Bundle size limits
+
+## Post-Release
+
+After a release:
+
+1. **Changelog Generated** - CHANGELOG.md updated
+2. **Tags Created** - Git tags for each version
+3. **GitHub Release** - Release notes published
+4. **NPM Published** - Packages available on npm
+5. **Docs Updated** - Documentation site updated
+
+## Notifications
+
+Stay informed about releases:
+
+- **GitHub Releases** - Watch the repository
+- **npm** - Subscribe to package updates
+- **Changelog** - Check [/changelog](/changelog)
+
+## Troubleshooting
+
+### Missing Changeset Warning
+
+If CI warns about missing changeset:
+
+```bash
+# Create the changeset
+pnpm changeset
+
+# Push it
+git add .changeset/*.md
+git commit -m "chore: add changeset"
+git push
+```
+
+### Version PR Conflicts
+
+If the Version PR has conflicts:
+
+1. Close the Version PR
+2. Re-run the changesets action
+3. New Version PR will be created
+
+### Failed Publish
+
+If publish fails:
+
+1. Check npm authentication
+2. Verify package contents
+3. Re-run the release action
+
+## Related Documentation
+
+- [Versioning Policy](/governance/versioning)
+- [Contributing](/governance/contributing)
+- [Deprecation Policy](/governance/deprecations)
