@@ -1,9 +1,9 @@
+import { type RovingFocus, createRovingFocus } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
-import { createRovingFocus, type RovingFocus } from "@ds/primitives-dom";
 import type { DsRadio } from "./radio.js";
 
 // Import radio component

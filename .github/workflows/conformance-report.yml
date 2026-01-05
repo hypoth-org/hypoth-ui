@@ -1,0 +1,90 @@
+name: Conformance Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.0.0)'
+        required: true
+        type: string
+      fail_on_pending:
+        description: 'Fail if any components are pending audit'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  generate-report:
+    name: Generate Conformance Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build @ds/a11y-audit
+        run: pnpm --filter @ds/a11y-audit build
+
+      - name: Generate conformance report
+        id: report
+        run: |
+          pnpm --filter @ds/a11y-audit report --version ${{ inputs.version }}
+
+          # Parse summary for gate check
+          REPORT_PATH="a11y-audits/reports/${{ inputs.version }}/report.json"
+
+          if [ -f "$REPORT_PATH" ]; then
+            NON_CONFORMANT=$(jq '.summary.nonConformant' "$REPORT_PATH")
+            PENDING=$(jq '.summary.pending' "$REPORT_PATH")
+            CONFORMANCE_PCT=$(jq '.summary.conformancePercentage' "$REPORT_PATH")
+
+            echo "non_conformant=$NON_CONFORMANT" >> $GITHUB_OUTPUT
+            echo "pending=$PENDING" >> $GITHUB_OUTPUT
+            echo "conformance_pct=$CONFORMANCE_PCT" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload report artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: conformance-report-${{ inputs.version }}
+          path: a11y-audits/reports/${{ inputs.version }}/
+          retention-days: 1825  # 5 years
+
+      - name: Generate summary
+        run: |
+          echo "## Conformance Report - v${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Conformance | ${{ steps.report.outputs.conformance_pct }}% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Non-Conformant | ${{ steps.report.outputs.non_conformant }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Pending Audit | ${{ steps.report.outputs.pending }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Release gate check
+        if: inputs.fail_on_pending
+        run: |
+          NON_CONFORMANT=${{ steps.report.outputs.non_conformant }}
+          PENDING=${{ steps.report.outputs.pending }}
+
+          if [ "$NON_CONFORMANT" != "0" ]; then
+            echo "❌ Release gate failed: $NON_CONFORMANT component(s) are non-conformant"
+            exit 1
+          fi
+
+          if [ "$PENDING" != "0" ]; then
+            echo "❌ Release gate failed: $PENDING component(s) pending manual audit"
+            exit 1
+          fi
+
+          echo "✅ Release gate passed: All components are conformant"

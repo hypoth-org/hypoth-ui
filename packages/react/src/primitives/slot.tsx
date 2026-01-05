@@ -16,9 +16,7 @@ export interface SlotProps extends HTMLAttributes<HTMLElement> {
 /**
  * Merges two refs into a single ref callback.
  */
-function mergeRefs<T>(
-  ...refs: (Ref<T> | undefined)[]
-): (instance: T | null) => void {
+function mergeRefs<T>(...refs: (Ref<T> | undefined)[]): (instance: T | null) => void {
   return (instance: T | null) => {
     for (const ref of refs) {
       if (typeof ref === "function") {
@@ -44,10 +42,7 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(
 
     // Filter out null/undefined/boolean children
     const validChildren = childrenArray.filter(
-      (child) =>
-        child !== null &&
-        child !== undefined &&
-        typeof child !== "boolean"
+      (child) => child !== null && child !== undefined && typeof child !== "boolean"
     );
 
     if (validChildren.length === 0) {
@@ -55,17 +50,13 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(
     }
 
     if (validChildren.length > 1) {
-      throw new Error(
-        "Slot expects a single React element child, received multiple children"
-      );
+      throw new Error("Slot expects a single React element child, received multiple children");
     }
 
     const child = validChildren[0];
 
     if (!isValidElement(child)) {
-      throw new Error(
-        `Slot expects a single React element child, received ${typeof child}`
-      );
+      throw new Error(`Slot expects a single React element child, received ${typeof child}`);
     }
 
     // Get child's ref if it exists

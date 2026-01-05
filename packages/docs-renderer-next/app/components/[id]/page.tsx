@@ -9,8 +9,8 @@ import {
 } from "@ds/docs-core";
 import {
   getEditionConfig,
-  loadManifestsFromPacks,
   loadManifestByIdFromPacks,
+  loadManifestsFromPacks,
   resolveContentFile,
 } from "../../../lib/content-resolver";
 

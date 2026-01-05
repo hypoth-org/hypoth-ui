@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { html, render } from "lit";
 import { axe, toHaveNoViolations } from "jest-axe";
+import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/switch/switch.js";
 import "../../src/components/field/field.js";
 
@@ -113,10 +113,7 @@ describe("Switch Accessibility", () => {
 
   describe("switch ARIA attributes", () => {
     it("should have proper role='switch'", async () => {
-      render(
-        html`<ds-switch aria-label="Enable">Enable</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch aria-label="Enable">Enable</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -167,10 +164,7 @@ describe("Switch Accessibility", () => {
 
   describe("keyboard accessibility", () => {
     it("should be focusable when enabled", async () => {
-      render(
-        html`<ds-switch aria-label="Enable">Enable</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch aria-label="Enable">Enable</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -179,10 +173,7 @@ describe("Switch Accessibility", () => {
     });
 
     it("should not be focusable when disabled", async () => {
-      render(
-        html`<ds-switch disabled aria-label="Disabled">Disabled</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch disabled aria-label="Disabled">Disabled</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 

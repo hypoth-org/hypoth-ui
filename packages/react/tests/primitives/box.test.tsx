@@ -29,18 +29,14 @@ describe("Box React Component", () => {
     });
 
     it("should apply directional padding classes", () => {
-      const { container } = render(
-        createElement(Box, { px: 2, py: 4 }, "Content")
-      );
+      const { container } = render(createElement(Box, { px: 2, py: 4 }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-px-2");
       expect(div?.className).toContain("ds-py-4");
     });
 
     it("should apply specific padding classes", () => {
-      const { container } = render(
-        createElement(Box, { pt: 1, pr: 2, pb: 3, pl: 4 }, "Content")
-      );
+      const { container } = render(createElement(Box, { pt: 1, pr: 2, pb: 3, pl: 4 }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-pt-1");
       expect(div?.className).toContain("ds-pr-2");
@@ -63,57 +59,43 @@ describe("Box React Component", () => {
 
   describe("layout props", () => {
     it("should apply display class", () => {
-      const { container } = render(
-        createElement(Box, { display: "flex" }, "Content")
-      );
+      const { container } = render(createElement(Box, { display: "flex" }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-d-flex");
     });
 
     it("should apply flex direction class", () => {
-      const { container } = render(
-        createElement(Box, { flexDirection: "column" }, "Content")
-      );
+      const { container } = render(createElement(Box, { flexDirection: "column" }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-flex-col");
     });
 
     it("should apply align items class", () => {
-      const { container } = render(
-        createElement(Box, { alignItems: "center" }, "Content")
-      );
+      const { container } = render(createElement(Box, { alignItems: "center" }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-items-center");
     });
 
     it("should apply justify content class", () => {
-      const { container } = render(
-        createElement(Box, { justifyContent: "between" }, "Content")
-      );
+      const { container } = render(createElement(Box, { justifyContent: "between" }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-justify-between");
     });
 
     it("should apply flex wrap class", () => {
-      const { container } = render(
-        createElement(Box, { flexWrap: "wrap" }, "Content")
-      );
+      const { container } = render(createElement(Box, { flexWrap: "wrap" }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-flex-wrap");
     });
 
     it("should apply flex grow class", () => {
-      const { container } = render(
-        createElement(Box, { flexGrow: 1 }, "Content")
-      );
+      const { container } = render(createElement(Box, { flexGrow: 1 }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-grow");
     });
 
     it("should apply flex shrink class", () => {
-      const { container } = render(
-        createElement(Box, { flexShrink: 0 }, "Content")
-      );
+      const { container } = render(createElement(Box, { flexShrink: 0 }, "Content"));
       const div = container.querySelector("div");
       expect(div?.className).toContain("ds-shrink-0");
     });
@@ -133,11 +115,7 @@ describe("Box React Component", () => {
   describe("asChild pattern", () => {
     it("should render child element with asChild", () => {
       const { container } = render(
-        createElement(
-          Box,
-          { asChild: true, p: 4 },
-          createElement("main", null, "Content")
-        )
+        createElement(Box, { asChild: true, p: 4 }, createElement("main", null, "Content"))
       );
       const main = container.querySelector("main");
       expect(main).not.toBeNull();
@@ -182,13 +160,7 @@ describe("Box React Component", () => {
 
     it("should forward ref to child element with asChild", () => {
       const ref = createRef<HTMLElement>();
-      render(
-        createElement(
-          Box,
-          { ref, asChild: true },
-          createElement("main", null, "Content")
-        )
-      );
+      render(createElement(Box, { ref, asChild: true }, createElement("main", null, "Content")));
       expect(ref.current?.tagName).toBe("MAIN");
     });
   });

@@ -268,12 +268,7 @@ export interface LoadExtendedEditionConfigResult {
 export async function loadEditionConfigExtended(
   options: LoadExtendedEditionConfigOptions = {}
 ): Promise<LoadExtendedEditionConfigResult> {
-  const {
-    configDir = process.cwd(),
-    configPath,
-    required = false,
-    logWarnings = true,
-  } = options;
+  const { configDir = process.cwd(), configPath, required = false, logWarnings = true } = options;
   const warnings: string[] = [];
 
   // If specific path provided, try to load it
@@ -340,9 +335,7 @@ export async function loadEditionConfigExtended(
 /**
  * Load and validate an extended config file
  */
-async function loadAndValidateExtendedConfig(
-  filePath: string
-): Promise<EditionConfigExtended> {
+async function loadAndValidateExtendedConfig(filePath: string): Promise<EditionConfigExtended> {
   const content = await readFile(filePath, "utf-8");
   let parsed: unknown;
 
@@ -378,9 +371,7 @@ async function loadAndValidateExtendedConfig(
 /**
  * Apply default feature values to partial config
  */
-export function applyDefaultFeatures(
-  features?: FeatureConfig
-): RequiredFeatureConfig {
+export function applyDefaultFeatures(features?: FeatureConfig): RequiredFeatureConfig {
   return {
     ...DEFAULT_FEATURES,
     ...features,

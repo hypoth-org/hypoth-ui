@@ -25,14 +25,9 @@ export interface DsInputEventDetail {
 /**
  * Typed event handler for ds:navigate.
  */
-export type NavigateEventHandler = (
-  event: CustomEvent<DsNavigateEventDetail>
-) => void;
+export type NavigateEventHandler = (event: CustomEvent<DsNavigateEventDetail>) => void;
 
 /**
  * Typed event handler for input events.
  */
-export type InputValueHandler = (
-  value: string,
-  event: CustomEvent<DsInputEventDetail>
-) => void;
+export type InputValueHandler = (value: string, event: CustomEvent<DsInputEventDetail>) => void;

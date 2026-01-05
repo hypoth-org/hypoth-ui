@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { html, render } from "lit";
 import { axe, toHaveNoViolations } from "jest-axe";
+import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/tooltip/tooltip.js";
 
 expect.extend(toHaveNoViolations);

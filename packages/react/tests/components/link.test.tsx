@@ -28,17 +28,13 @@ describe("Link React Component", () => {
 
   describe("rendering", () => {
     it("should render ds-link element", () => {
-      const { container } = render(
-        createElement(Link, { href: "/about" }, "About")
-      );
+      const { container } = render(createElement(Link, { href: "/about" }, "About"));
       const link = container.querySelector("ds-link");
       expect(link).not.toBeNull();
     });
 
     it("should render children content", () => {
-      const { container } = render(
-        createElement(Link, { href: "/about" }, "About Us")
-      );
+      const { container } = render(createElement(Link, { href: "/about" }, "About Us"));
       expect(container.textContent).toContain("About Us");
     });
 
@@ -49,9 +45,7 @@ describe("Link React Component", () => {
 
   describe("props", () => {
     it("should pass href prop", () => {
-      const { container } = render(
-        createElement(Link, { href: "/products" }, "Products")
-      );
+      const { container } = render(createElement(Link, { href: "/products" }, "Products"));
       const link = container.querySelector("ds-link");
       expect(link?.getAttribute("href")).toBe("/products");
     });
@@ -65,9 +59,7 @@ describe("Link React Component", () => {
     });
 
     it("should not pass external attribute when false", () => {
-      const { container } = render(
-        createElement(Link, { href: "/about" }, "About")
-      );
+      const { container } = render(createElement(Link, { href: "/about" }, "About"));
       const link = container.querySelector("ds-link");
       expect(link?.hasAttribute("external")).toBe(false);
     });

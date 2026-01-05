@@ -1,8 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import {
-  createAnchorPosition,
-  type Placement,
-} from "../../src/positioning/anchor-position.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { type Placement, createAnchorPosition } from "../../src/positioning/anchor-position.js";
 
 describe("createAnchorPosition", () => {
   let anchor: HTMLElement;
@@ -69,7 +66,8 @@ describe("createAnchorPosition", () => {
     floating.remove();
     vi.restoreAllMocks();
     // Restore CSS.supports
-    const original = (globalThis as Record<string, unknown>).__originalCSSSupports as typeof CSS.supports;
+    const original = (globalThis as Record<string, unknown>)
+      .__originalCSSSupports as typeof CSS.supports;
     if (original) {
       Object.defineProperty(CSS, "supports", {
         value: original,

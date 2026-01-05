@@ -123,4 +123,9 @@ export { MenuItem } from "./components/menu-item.js";
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";
 export { createComponent } from "./utils/create-component.js";
-export { composeEventHandlers, mergeClassNames, mergeStyles, mergeProps } from "./utils/merge-props.js";
+export {
+  composeEventHandlers,
+  mergeClassNames,
+  mergeStyles,
+  mergeProps,
+} from "./utils/merge-props.js";

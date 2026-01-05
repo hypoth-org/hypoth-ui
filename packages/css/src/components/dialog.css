@@ -11,7 +11,10 @@
     --_dialog-backdrop-color: var(--ds-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
     --_dialog-content-bg: var(--ds-dialog-content-bg, var(--ds-color-surface, #ffffff));
     --_dialog-content-border-radius: var(--ds-dialog-border-radius, var(--ds-radius-lg, 0.5rem));
-    --_dialog-content-shadow: var(--ds-dialog-shadow, var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)));
+    --_dialog-content-shadow: var(
+      --ds-dialog-shadow,
+      var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04))
+    );
     --_dialog-content-padding: var(--ds-dialog-padding, var(--ds-space-6, 1.5rem));
     --_dialog-max-width: var(--ds-dialog-max-width, 28rem);
     --_dialog-max-height: var(--ds-dialog-max-height, 85vh);

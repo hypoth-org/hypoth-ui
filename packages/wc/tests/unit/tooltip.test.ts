@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/tooltip/tooltip.js";
 
 describe("DsTooltip", () => {
@@ -362,7 +362,10 @@ describe("DsTooltip", () => {
 
       await vi.runAllTimersAsync();
 
-      const tooltip = container.querySelector("ds-tooltip") as HTMLElement & { show: () => void; open: boolean };
+      const tooltip = container.querySelector("ds-tooltip") as HTMLElement & {
+        show: () => void;
+        open: boolean;
+      };
       tooltip.show();
 
       await vi.runAllTimersAsync();
@@ -383,7 +386,10 @@ describe("DsTooltip", () => {
 
       await vi.runAllTimersAsync();
 
-      const tooltip = container.querySelector("ds-tooltip") as HTMLElement & { hide: () => void; open: boolean };
+      const tooltip = container.querySelector("ds-tooltip") as HTMLElement & {
+        hide: () => void;
+        open: boolean;
+      };
       tooltip.hide();
 
       await vi.runAllTimersAsync();

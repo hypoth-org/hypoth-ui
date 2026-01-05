@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/textarea/textarea.js";
 import "../../src/components/field/field.js";
 
@@ -17,10 +17,7 @@ describe("DsTextarea", () => {
 
   describe("rendering", () => {
     it("should render textarea element", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -30,10 +27,7 @@ describe("DsTextarea", () => {
     });
 
     it("should render with placeholder", async () => {
-      render(
-        html`<ds-textarea placeholder="Enter text..."></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea placeholder="Enter text..."></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -42,10 +36,7 @@ describe("DsTextarea", () => {
     });
 
     it("should render with initial value", async () => {
-      render(
-        html`<ds-textarea value="Hello World"></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea value="Hello World"></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -54,10 +45,7 @@ describe("DsTextarea", () => {
     });
 
     it("should reflect disabled state", async () => {
-      render(
-        html`<ds-textarea disabled></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea disabled></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -66,10 +54,7 @@ describe("DsTextarea", () => {
     });
 
     it("should reflect readonly state", async () => {
-      render(
-        html`<ds-textarea readonly></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea readonly></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -78,10 +63,7 @@ describe("DsTextarea", () => {
     });
 
     it("should reflect required state", async () => {
-      render(
-        html`<ds-textarea required></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea required></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -92,10 +74,7 @@ describe("DsTextarea", () => {
 
   describe("size variants", () => {
     it("should have default size of md", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -104,10 +83,7 @@ describe("DsTextarea", () => {
     });
 
     it("should apply sm size", async () => {
-      render(
-        html`<ds-textarea size="sm"></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea size="sm"></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -116,10 +92,7 @@ describe("DsTextarea", () => {
     });
 
     it("should apply lg size", async () => {
-      render(
-        html`<ds-textarea size="lg"></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea size="lg"></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -130,10 +103,7 @@ describe("DsTextarea", () => {
 
   describe("value handling", () => {
     it("should update value on input", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -151,10 +121,7 @@ describe("DsTextarea", () => {
     it("should emit input event on input", async () => {
       const inputHandler = vi.fn();
 
-      render(
-        html`<ds-textarea @input=${inputHandler}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea @input=${inputHandler}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -170,10 +137,7 @@ describe("DsTextarea", () => {
     it("should emit ds:change event on change", async () => {
       const changeHandler = vi.fn();
 
-      render(
-        html`<ds-textarea @ds:change=${changeHandler}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea @ds:change=${changeHandler}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -189,10 +153,7 @@ describe("DsTextarea", () => {
 
   describe("rows configuration", () => {
     it("should have default rows of 3", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -202,10 +163,7 @@ describe("DsTextarea", () => {
     });
 
     it("should respect minRows property", async () => {
-      render(
-        html`<ds-textarea .minRows=${5}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea .minRows=${5}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -215,10 +173,7 @@ describe("DsTextarea", () => {
     });
 
     it("should respect rows attribute", async () => {
-      render(
-        html`<ds-textarea rows="6"></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea rows="6"></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -230,34 +185,29 @@ describe("DsTextarea", () => {
 
   describe("auto-resize", () => {
     it("should have auto-resize enabled by default", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const textarea = container.querySelector("ds-textarea") as HTMLElement & { autoResize: boolean };
+      const textarea = container.querySelector("ds-textarea") as HTMLElement & {
+        autoResize: boolean;
+      };
       expect(textarea?.autoResize).toBe(true);
     });
 
     it("should allow disabling auto-resize", async () => {
-      render(
-        html`<ds-textarea .autoResize=${false}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea .autoResize=${false}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const textarea = container.querySelector("ds-textarea") as HTMLElement & { autoResize: boolean };
+      const textarea = container.querySelector("ds-textarea") as HTMLElement & {
+        autoResize: boolean;
+      };
       expect(textarea?.autoResize).toBe(false);
     });
 
     it("should respect maxRows when auto-resizing", async () => {
-      render(
-        html`<ds-textarea .maxRows=${5}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea .maxRows=${5}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -268,10 +218,7 @@ describe("DsTextarea", () => {
 
   describe("maxlength and minlength", () => {
     it("should set maxlength attribute", async () => {
-      render(
-        html`<ds-textarea .maxlength=${100}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea .maxlength=${100}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -280,10 +227,7 @@ describe("DsTextarea", () => {
     });
 
     it("should set minlength attribute", async () => {
-      render(
-        html`<ds-textarea .minlength=${10}></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea .minlength=${10}></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -294,10 +238,7 @@ describe("DsTextarea", () => {
 
   describe("error state", () => {
     it("should reflect error state to native textarea", async () => {
-      render(
-        html`<ds-textarea error></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea error></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -306,10 +247,7 @@ describe("DsTextarea", () => {
     });
 
     it("should not have aria-invalid when no error", async () => {
-      render(
-        html`<ds-textarea></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 

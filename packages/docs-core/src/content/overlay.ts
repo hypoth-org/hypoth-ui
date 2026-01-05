@@ -64,9 +64,7 @@ async function getPackageVersion(root: string): Promise<string> {
  * Initialize content packs from configuration
  * Returns sorted array with overlays first (highest priority first), then base
  */
-export async function initContentPacks(
-  options: InitContentPacksOptions
-): Promise<ContentPack[]> {
+export async function initContentPacks(options: InitContentPacksOptions): Promise<ContentPack[]> {
   const {
     basePackRoot,
     overlayPacks = [],
@@ -86,9 +84,7 @@ export async function initContentPacks(
   });
 
   // Add overlay packs sorted by priority (descending)
-  const sortedOverlays = [...overlayPacks].sort(
-    (a, b) => (b.priority ?? 0) - (a.priority ?? 0)
-  );
+  const sortedOverlays = [...overlayPacks].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
 
   for (const overlay of sortedOverlays) {
     const root = resolvePackageRoot(overlay.package);
@@ -102,9 +98,7 @@ export async function initContentPacks(
         version,
       });
     } else {
-      console.warn(
-        `[docs-core] Overlay pack not found: ${overlay.package} at ${root}`
-      );
+      console.warn(`[docs-core] Overlay pack not found: ${overlay.package} at ${root}`);
     }
   }
 
@@ -252,9 +246,7 @@ export async function resolveAllContent(
 /**
  * Get content type from file path
  */
-function getContentType(
-  path: string
-): "manifest" | "mdx" | "asset" {
+function getContentType(path: string): "manifest" | "mdx" | "asset" {
   if (path.endsWith(".json") && path.includes("manifest")) {
     return "manifest";
   }
@@ -320,10 +312,7 @@ export function mergeManifests(
 /**
  * Check if content path exists in any pack
  */
-export function contentExists(
-  contentPath: string,
-  packs: ContentPack[]
-): boolean {
+export function contentExists(contentPath: string, packs: ContentPack[]): boolean {
   for (const pack of packs) {
     const fullPath = join(pack.root, contentPath);
     if (existsSync(fullPath)) {
@@ -348,9 +337,7 @@ export interface CycleDetectionResult {
  * Content packs are ordered by priority - cycles can occur if
  * pack A depends on pack B which depends on pack A
  */
-export function detectContentPackCycles(
-  packs: ContentPack[]
-): CycleDetectionResult {
+export function detectContentPackCycles(packs: ContentPack[]): CycleDetectionResult {
   // For overlay-based systems, cycles manifest as:
   // 1. Duplicate pack IDs at different priorities
   // 2. Self-referencing packs

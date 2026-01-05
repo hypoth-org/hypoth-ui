@@ -5,8 +5,8 @@
 import { readFile } from "node:fs/promises";
 import { glob } from "glob";
 
-import type { ContentPack, ContractManifest } from "../types/manifest.js";
 import { mergeManifests } from "../content/overlay.js";
+import type { ContentPack, ContractManifest } from "../types/manifest.js";
 import type {
   FileValidationResult,
   ValidationError,

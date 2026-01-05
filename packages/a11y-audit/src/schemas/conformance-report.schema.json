@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ds.hypoth.dev/schemas/conformance-report.schema.json",
+  "title": "ConformanceReport",
+  "description": "Release-level accessibility conformance summary",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "generatedAt",
+    "generatedBy",
+    "wcagVersion",
+    "conformanceLevel",
+    "components",
+    "summary",
+    "metadata"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Report identifier"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Release version"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Report generation timestamp (ISO8601)"
+    },
+    "generatedBy": {
+      "type": "string",
+      "description": "Generator (CI job ID or user)"
+    },
+    "wcagVersion": {
+      "type": "string",
+      "enum": ["2.0", "2.1", "2.2"],
+      "description": "Target WCAG version"
+    },
+    "conformanceLevel": {
+      "type": "string",
+      "enum": ["A", "AA", "AAA"],
+      "description": "Target conformance level"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ComponentStatus"
+      },
+      "description": "Per-component conformance status"
+    },
+    "summary": {
+      "$ref": "#/$defs/ConformanceSummary",
+      "description": "Aggregate statistics"
+    },
+    "metadata": {
+      "$ref": "#/$defs/ReportMetadata",
+      "description": "Report metadata"
+    }
+  },
+  "$defs": {
+    "ComponentStatus": {
+      "type": "object",
+      "required": ["component", "version", "status", "automatedResult", "lastUpdated"],
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Component ID"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Component version"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["conformant", "partial", "non-conformant", "pending"],
+          "description": "Overall conformance status"
+        },
+        "automatedResult": {
+          "$ref": "#/$defs/AutomatedSummary",
+          "description": "CI test summary"
+        },
+        "manualAudit": {
+          "$ref": "#/$defs/ManualAuditSummary",
+          "description": "Manual audit summary (optional if pending)"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent audit date"
+        }
+      }
+    },
+    "AutomatedSummary": {
+      "type": "object",
+      "required": ["passed", "violationCount", "runId"],
+      "properties": {
+        "passed": {
+          "type": "boolean",
+          "description": "Whether automated tests passed"
+        },
+        "violationCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of violations detected"
+        },
+        "criticalCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Critical severity violations"
+        },
+        "seriousCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Serious severity violations"
+        },
+        "runId": {
+          "type": "string",
+          "description": "CI run identifier"
+        },
+        "runDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "CI run timestamp"
+        }
+      }
+    },
+    "ManualAuditSummary": {
+      "type": "object",
+      "required": ["status", "auditId", "auditor", "auditDate"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["conformant", "partial", "non-conformant"],
+          "description": "Manual audit status"
+        },
+        "auditId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Reference to full audit record"
+        },
+        "auditor": {
+          "type": "string",
+          "description": "Auditor identifier"
+        },
+        "auditDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Audit completion date"
+        },
+        "passCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Passing items"
+        },
+        "failCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Failing items"
+        },
+        "exceptionCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Documented exceptions"
+        }
+      }
+    },
+    "ConformanceSummary": {
+      "type": "object",
+      "required": [
+        "totalComponents",
+        "conformant",
+        "partial",
+        "nonConformant",
+        "pending",
+        "conformancePercentage"
+      ],
+      "properties": {
+        "totalComponents": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total component count"
+        },
+        "conformant": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Fully conformant count"
+        },
+        "partial": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Partially conformant count"
+        },
+        "nonConformant": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Non-conformant count"
+        },
+        "pending": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Awaiting audit count"
+        },
+        "conformancePercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of conformant components"
+        }
+      }
+    },
+    "ReportMetadata": {
+      "type": "object",
+      "required": ["schemaVersion", "toolVersion"],
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Schema version used"
+        },
+        "toolVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "@ds/a11y-audit version"
+        },
+        "axeCoreVersion": {
+          "type": "string",
+          "description": "axe-core version used"
+        },
+        "gitCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "description": "Git SHA at report generation"
+        },
+        "ciRunUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to CI run"
+        }
+      }
+    }
+  }
+}

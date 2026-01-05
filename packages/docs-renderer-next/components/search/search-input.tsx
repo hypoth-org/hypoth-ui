@@ -71,9 +71,7 @@ export function SearchInput({
 
       {isOpen && query.length > 0 && (
         <div className="search-input__dropdown">
-          <div className="search-input__placeholder">
-            Search functionality coming soon...
-          </div>
+          <div className="search-input__placeholder">Search functionality coming soon...</div>
         </div>
       )}
 

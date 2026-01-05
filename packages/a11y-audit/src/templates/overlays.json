@@ -1,0 +1,109 @@
+{
+  "id": "overlays",
+  "name": "Overlays",
+  "description": "Manual accessibility checklist for overlay components (dialogs, modals, popovers, tooltips, menus)",
+  "wcagVersion": "2.1",
+  "conformanceLevel": "AA",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "ov-001",
+      "criterion": "4.1.2",
+      "description": "Overlay has correct role (dialog, alertdialog, menu, tooltip)",
+      "procedure": "Inspect the overlay element and verify appropriate ARIA role is applied",
+      "expectedOutcome": "Screen reader announces the overlay type correctly when opened",
+      "tools": ["axe DevTools", "Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver", "JAWS"]
+    },
+    {
+      "id": "ov-002",
+      "criterion": "4.1.2",
+      "description": "Overlay has accessible name via aria-labelledby or aria-label",
+      "procedure": "Verify dialog has aria-labelledby pointing to title, or aria-label for unnamed overlays",
+      "expectedOutcome": "Screen reader announces the overlay title/purpose when opened",
+      "tools": ["Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "ov-003",
+      "criterion": "2.4.3",
+      "description": "Focus moves to overlay when opened",
+      "procedure": "Open the overlay and verify focus moves to the first focusable element or the overlay container",
+      "expectedOutcome": "Focus is placed inside the overlay, not on the trigger or behind it",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "ov-004",
+      "criterion": "2.1.2",
+      "description": "Focus is trapped within modal overlays",
+      "procedure": "With modal open, Tab through all elements and verify focus wraps within the modal",
+      "expectedOutcome": "Focus cannot escape the modal via keyboard until dismissed",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "ov-005",
+      "criterion": "2.1.1",
+      "description": "Overlay can be closed with Escape key",
+      "procedure": "Open the overlay and press Escape",
+      "expectedOutcome": "Overlay closes and focus returns to the trigger element",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "ov-006",
+      "criterion": "2.4.3",
+      "description": "Focus returns to trigger when overlay closes",
+      "procedure": "Close the overlay using any method and verify focus position",
+      "expectedOutcome": "Focus returns to the element that opened the overlay",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "ov-007",
+      "criterion": "4.1.2",
+      "description": "Modal overlays mark background content as inert",
+      "procedure": "With modal open, verify background content has aria-hidden='true' or inert attribute",
+      "expectedOutcome": "Screen readers cannot navigate to background content while modal is open",
+      "tools": ["Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "ov-008",
+      "criterion": "1.3.2",
+      "description": "Content reading order is logical within overlay",
+      "procedure": "Navigate through overlay content with screen reader and verify order makes sense",
+      "expectedOutcome": "Content is announced in a logical, meaningful sequence",
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "ov-009",
+      "criterion": "4.1.2",
+      "description": "Tooltips are accessible via hover and focus",
+      "procedure": "Hover over trigger and Tab to trigger to verify tooltip appears in both cases",
+      "expectedOutcome": "Tooltip content is accessible via mouse hover AND keyboard focus",
+      "tools": ["Manual testing"]
+    },
+    {
+      "id": "ov-010",
+      "criterion": "1.4.13",
+      "description": "Tooltip content is dismissable without moving pointer",
+      "procedure": "Trigger tooltip and press Escape to dismiss",
+      "expectedOutcome": "Tooltip can be dismissed via Escape without moving mouse",
+      "tools": ["Manual testing"]
+    },
+    {
+      "id": "ov-011",
+      "criterion": "2.1.1",
+      "description": "Menu items are keyboard navigable",
+      "procedure": "Open menu and navigate using arrow keys",
+      "expectedOutcome": "Arrow keys move through menu items, Enter/Space activates selection",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "ov-012",
+      "criterion": "4.1.2",
+      "description": "Menu trigger has aria-haspopup and aria-expanded",
+      "procedure": "Inspect menu trigger element for ARIA attributes",
+      "expectedOutcome": "Trigger has aria-haspopup='menu' and aria-expanded updates on open/close",
+      "tools": ["Chrome Accessibility Inspector"]
+    }
+  ]
+}

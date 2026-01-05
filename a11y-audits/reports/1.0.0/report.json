@@ -1,0 +1,75 @@
+{
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "version": "1.0.0",
+  "generatedAt": "2026-01-04T12:00:00Z",
+  "generatedBy": "manual",
+  "wcagVersion": "2.1",
+  "conformanceLevel": "AA",
+  "components": [
+    {
+      "component": "ds-button",
+      "version": "1.0.0",
+      "status": "conformant",
+      "automatedResult": {
+        "passed": true,
+        "violationCount": 0,
+        "runId": "sample-run-001"
+      },
+      "manualAudit": {
+        "status": "conformant",
+        "auditId": "550e8400-e29b-41d4-a716-446655440000",
+        "auditor": "example@example.com",
+        "auditDate": "2026-01-04T10:00:00Z",
+        "passCount": 8,
+        "failCount": 0,
+        "exceptionCount": 0
+      },
+      "lastUpdated": "2026-01-04T10:00:00Z"
+    },
+    {
+      "component": "ds-input",
+      "version": "1.0.0",
+      "status": "pending",
+      "automatedResult": {
+        "passed": true,
+        "violationCount": 0,
+        "runId": "sample-run-001"
+      },
+      "lastUpdated": "2026-01-04T10:00:00Z"
+    },
+    {
+      "component": "ds-checkbox",
+      "version": "1.0.0",
+      "status": "pending",
+      "automatedResult": {
+        "passed": true,
+        "violationCount": 0,
+        "runId": "sample-run-001"
+      },
+      "lastUpdated": "2026-01-04T10:00:00Z"
+    },
+    {
+      "component": "ds-dialog",
+      "version": "1.0.0",
+      "status": "pending",
+      "automatedResult": {
+        "passed": true,
+        "violationCount": 0,
+        "runId": "sample-run-001"
+      },
+      "lastUpdated": "2026-01-04T10:00:00Z"
+    }
+  ],
+  "summary": {
+    "totalComponents": 4,
+    "conformant": 1,
+    "partial": 0,
+    "nonConformant": 0,
+    "pending": 3,
+    "conformancePercentage": 25
+  },
+  "metadata": {
+    "schemaVersion": "1.0.0",
+    "toolVersion": "0.0.0"
+  }
+}

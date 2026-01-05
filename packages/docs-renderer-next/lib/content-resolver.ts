@@ -167,9 +167,7 @@ export async function loadManifestsFromPacks(): Promise<ContractManifest[]> {
 /**
  * Load a single manifest by ID with overlay resolution
  */
-export async function loadManifestByIdFromPacks(
-  id: string
-): Promise<ContractManifest | null> {
+export async function loadManifestByIdFromPacks(id: string): Promise<ContractManifest | null> {
   const manifests = await loadManifestsFromPacks();
   return manifests.find((m) => m.id === id) ?? null;
 }
@@ -184,11 +182,12 @@ export async function discoverGuides(): Promise<
 
   return paths.map(({ path, source }) => {
     // Extract ID from path: guides/some-guide.mdx -> some-guide
-    const id = path
-      .replace(/^guides\//, "")
-      .replace(/\.mdx$/, "")
-      .split("/")
-      .pop() ?? path;
+    const id =
+      path
+        .replace(/^guides\//, "")
+        .replace(/\.mdx$/, "")
+        .split("/")
+        .pop() ?? path;
 
     return { id, path, source };
   });
@@ -204,11 +203,12 @@ export async function discoverComponentDocs(): Promise<
 
   return paths.map(({ path, source }) => {
     // Extract ID from path: components/button.mdx -> button
-    const id = path
-      .replace(/^components\//, "")
-      .replace(/\.mdx$/, "")
-      .split("/")
-      .pop() ?? path;
+    const id =
+      path
+        .replace(/^components\//, "")
+        .replace(/\.mdx$/, "")
+        .split("/")
+        .pop() ?? path;
 
     return { id, path, source };
   });

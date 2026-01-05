@@ -1,12 +1,12 @@
 import type { ParsedContent } from "../content/frontmatter.js";
-import type { ContentPack } from "../types/manifest.js";
+import { resolveAllContent } from "../content/overlay.js";
 import type { EditionConfig } from "../filter/edition-filter.js";
 import {
   isComponentVisibleForEdition,
   isContentVisibleForEdition,
 } from "../filter/edition-filter.js";
 import type { ComponentManifest } from "../manifest/loader.js";
-import { resolveAllContent } from "../content/overlay.js";
+import type { ContentPack } from "../types/manifest.js";
 
 /**
  * Navigation item in the tree

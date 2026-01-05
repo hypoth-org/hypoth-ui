@@ -1,15 +1,15 @@
+import {
+  type AnchorPosition,
+  type DismissableLayer,
+  type Placement,
+  createAnchorPosition,
+  createDismissableLayer,
+} from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
-import {
-  createAnchorPosition,
-  createDismissableLayer,
-  type AnchorPosition,
-  type DismissableLayer,
-  type Placement,
-} from "@ds/primitives-dom";
 
 // Import child component to ensure it's registered
 import "./popover-content.js";

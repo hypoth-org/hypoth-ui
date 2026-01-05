@@ -131,9 +131,7 @@ export function UpgradePrompt({
         <p className="upgrade-prompt__message">{message}</p>
       </div>
       <div className="upgrade-prompt__footer">
-        <span className="upgrade-prompt__current">
-          Your plan: {EDITION_NAMES[currentEdition]}
-        </span>
+        <span className="upgrade-prompt__current">Your plan: {EDITION_NAMES[currentEdition]}</span>
         <a href={upgradeUrl} className="upgrade-prompt__cta">
           {config.ctaText}
         </a>

@@ -7,9 +7,9 @@
  */
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { useBranding } from "../../lib/branding-context";
 import { Logo } from "./logo";
-import type { ReactNode } from "react";
 
 export interface BrandedHeaderProps {
   /** Additional content in the header (e.g., search, theme toggle) */

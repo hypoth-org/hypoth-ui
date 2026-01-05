@@ -251,7 +251,13 @@ describe("Input React Component", () => {
 
     it("should forward callback ref to ds-input element", () => {
       let ref: HTMLElement | null = null;
-      render(createElement(Input, { ref: (el) => { ref = el; } }));
+      render(
+        createElement(Input, {
+          ref: (el) => {
+            ref = el;
+          },
+        })
+      );
       expect(ref).not.toBeNull();
       expect(ref?.tagName.toLowerCase()).toBe("ds-input");
     });

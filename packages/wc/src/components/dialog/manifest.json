@@ -10,7 +10,13 @@
     "apgPattern": "dialog",
     "keyboard": ["Escape", "Tab", "Shift+Tab"],
     "screenReader": "Announces dialog title and description. Focus is trapped within dialog. Screen readers announce when dialog opens.",
-    "ariaPatterns": ["role=dialog", "role=alertdialog", "aria-modal", "aria-labelledby", "aria-describedby"],
+    "ariaPatterns": [
+      "role=dialog",
+      "role=alertdialog",
+      "aria-modal",
+      "aria-labelledby",
+      "aria-describedby"
+    ],
     "knownLimitations": []
   },
   "tokensUsed": [

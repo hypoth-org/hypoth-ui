@@ -6,6 +6,9 @@
  */
 
 import { readFile } from "node:fs/promises";
+import { parseFrontmatter } from "../content/frontmatter.js";
+import { resolveAllContent } from "../content/overlay.js";
+import { isContentAvailableForEditionTier } from "../filter/edition-filter.js";
 import type {
   ContentPack,
   ContractManifest,
@@ -13,9 +16,6 @@ import type {
   SearchEntry,
   SearchIndex,
 } from "../types/manifest.js";
-import { resolveAllContent } from "../content/overlay.js";
-import { parseFrontmatter } from "../content/frontmatter.js";
-import { isContentAvailableForEditionTier } from "../filter/edition-filter.js";
 
 /**
  * Options for generating search index
@@ -188,9 +188,7 @@ export async function generateSearchIndex(
           }
         }
 
-        const id = resolved.requestedPath
-          .replace(/^components\//, "")
-          .replace(/\.mdx?$/, "");
+        const id = resolved.requestedPath.replace(/^components\//, "").replace(/\.mdx?$/, "");
 
         const textContent = extractTextFromMdx(content);
         const manifest = manifestMap.get(id);
@@ -199,8 +197,7 @@ export async function generateSearchIndex(
           id: `component-${id}`,
           type: "component",
           title: (frontmatter.title as string) ?? manifest?.name ?? id,
-          description:
-            (frontmatter.description as string) ?? manifest?.description ?? "",
+          description: (frontmatter.description as string) ?? manifest?.description ?? "",
           excerpt: generateExcerpt(textContent),
           url: `${baseUrl}/components/${id}`,
           tags: extractKeywords(textContent),
@@ -231,9 +228,7 @@ export async function generateSearchIndex(
           }
         }
 
-        const id = resolved.requestedPath
-          .replace(/^guides\//, "")
-          .replace(/\.mdx?$/, "");
+        const id = resolved.requestedPath.replace(/^guides\//, "").replace(/\.mdx?$/, "");
 
         const textContent = extractTextFromMdx(content);
 

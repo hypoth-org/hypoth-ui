@@ -6,8 +6,8 @@
  * Displays the branding logo or falls back to text-based name.
  */
 
-import { useBranding } from "../../lib/branding-context";
 import { useState } from "react";
+import { useBranding } from "../../lib/branding-context";
 
 export interface LogoProps {
   /** Custom class name */
@@ -36,12 +36,7 @@ export function Logo({ className = "", size = "medium", showText = false }: Logo
   if (logo && !imageError) {
     return (
       <span className={`logo ${sizeClasses[size]} ${className}`}>
-        <img
-          src={logo}
-          alt={name}
-          className="logo__image"
-          onError={handleImageError}
-        />
+        <img src={logo} alt={name} className="logo__image" onError={handleImageError} />
         {showText && <span className="logo__text">{name}</span>}
       </span>
     );
@@ -50,10 +45,7 @@ export function Logo({ className = "", size = "medium", showText = false }: Logo
   // Fallback to text-based logo
   return (
     <span className={`logo logo--text ${sizeClasses[size]} ${className}`}>
-      <span
-        className="logo__initial"
-        style={{ backgroundColor: primaryColor }}
-      >
+      <span className="logo__initial" style={{ backgroundColor: primaryColor }}>
         {name.charAt(0).toUpperCase()}
       </span>
       <span className="logo__text">{name}</span>

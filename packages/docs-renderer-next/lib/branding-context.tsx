@@ -14,7 +14,7 @@ import type {
   RequiredFeatureConfig,
   UpgradeConfig,
 } from "@ds/docs-core";
-import { createContext, useContext, type ReactNode } from "react";
+import { type ReactNode, createContext, useContext } from "react";
 
 /**
  * Default feature values (all required)

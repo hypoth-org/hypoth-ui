@@ -29,17 +29,13 @@ describe("Text React Component", () => {
     });
 
     it("should apply custom size class", () => {
-      const { container } = render(
-        createElement(Text, { size: "xl" }, "Content")
-      );
+      const { container } = render(createElement(Text, { size: "xl" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-text-xl");
     });
 
     it("should apply 2xl size class", () => {
-      const { container } = render(
-        createElement(Text, { size: "2xl" }, "Content")
-      );
+      const { container } = render(createElement(Text, { size: "2xl" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-text-2xl");
     });
@@ -53,17 +49,13 @@ describe("Text React Component", () => {
     });
 
     it("should apply bold weight class", () => {
-      const { container } = render(
-        createElement(Text, { weight: "bold" }, "Content")
-      );
+      const { container } = render(createElement(Text, { weight: "bold" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-font-bold");
     });
 
     it("should apply semibold weight class", () => {
-      const { container } = render(
-        createElement(Text, { weight: "semibold" }, "Content")
-      );
+      const { container } = render(createElement(Text, { weight: "semibold" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-font-semibold");
     });
@@ -77,17 +69,13 @@ describe("Text React Component", () => {
     });
 
     it("should apply muted variant class", () => {
-      const { container } = render(
-        createElement(Text, { variant: "muted" }, "Content")
-      );
+      const { container } = render(createElement(Text, { variant: "muted" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-text-muted");
     });
 
     it("should apply error variant class", () => {
-      const { container } = render(
-        createElement(Text, { variant: "error" }, "Content")
-      );
+      const { container } = render(createElement(Text, { variant: "error" }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-text-error");
     });
@@ -101,9 +89,7 @@ describe("Text React Component", () => {
     });
 
     it("should apply truncate class when true", () => {
-      const { container } = render(
-        createElement(Text, { truncate: true }, "Content")
-      );
+      const { container } = render(createElement(Text, { truncate: true }, "Content"));
       const span = container.querySelector("span");
       expect(span?.className).toContain("ds-truncate");
     });
@@ -138,11 +124,7 @@ describe("Text React Component", () => {
 
     it("should render paragraph with asChild", () => {
       const { container } = render(
-        createElement(
-          Text,
-          { asChild: true },
-          createElement("p", null, "Paragraph text")
-        )
+        createElement(Text, { asChild: true }, createElement("p", null, "Paragraph text"))
       );
       const p = container.querySelector("p");
       expect(p).not.toBeNull();
@@ -188,13 +170,7 @@ describe("Text React Component", () => {
 
     it("should forward ref to heading with asChild", () => {
       const ref = createRef<HTMLElement>();
-      render(
-        createElement(
-          Text,
-          { ref, asChild: true },
-          createElement("h1", null, "Title")
-        )
-      );
+      render(createElement(Text, { ref, asChild: true }, createElement("h1", null, "Title")));
       expect(ref.current?.tagName).toBe("H1");
     });
   });

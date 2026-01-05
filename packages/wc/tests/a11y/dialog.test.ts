@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { html, render } from "lit";
 import { axe, toHaveNoViolations } from "jest-axe";
+import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/dialog/dialog.js";
 
 expect.extend(toHaveNoViolations);
@@ -297,8 +297,7 @@ describe("Dialog accessibility", () => {
 
       // Either the button is focused or focus is within dialog content
       expect(
-        document.activeElement === insideBtn ||
-        dialogContent?.contains(document.activeElement)
+        document.activeElement === insideBtn || dialogContent?.contains(document.activeElement)
       ).toBe(true);
     });
 

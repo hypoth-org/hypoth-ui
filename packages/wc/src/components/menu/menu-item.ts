@@ -1,8 +1,8 @@
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 
 /**
  * Menu item with role="menuitem".
