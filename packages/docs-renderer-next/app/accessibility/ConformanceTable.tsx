@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentConformance } from "@ds/docs-core/conformance";
+import type { ComponentConformance } from "@ds/docs-core";
 import Link from "next/link";
 import { StatusBadge } from "./StatusBadge";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { CategoryInfo, ConformanceStatus } from "@ds/docs-core/conformance";
+import type { CategoryInfo, ConformanceStatus } from "@ds/docs-core";
 import { useState } from "react";
 
 interface CategoryFilterProps {

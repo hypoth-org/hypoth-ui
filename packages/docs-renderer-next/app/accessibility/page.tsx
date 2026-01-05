@@ -1,6 +1,6 @@
 "use client";
 
-import type { CategoryInfo, ConformanceData, ConformanceStatus } from "@ds/docs-core/conformance";
+import type { CategoryInfo, ConformanceData, ConformanceStatus } from "@ds/docs-core";
 import { useMemo, useState } from "react";
 import { CategoryFilter } from "./CategoryFilter";
 import { ConformanceTable } from "./ConformanceTable";

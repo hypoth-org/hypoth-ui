@@ -1,6 +1,6 @@
 "use client";
 
-import type { ConformanceStatus } from "@ds/docs-core/conformance";
+import type { ConformanceStatus } from "@ds/docs-core";
 
 interface StatusBadgeProps {
   status: ConformanceStatus;
@@ -32,7 +32,7 @@ const STATUS_CONFIG: Record<ConformanceStatus, { icon: string; label: string; cl
   };
 
 export function StatusBadge({ status, size = "md" }: StatusBadgeProps) {
-  const config = STATUS_CONFIG[status];
+  const config = STATUS_CONFIG[status] ?? STATUS_CONFIG.pending;
 
   const sizeClasses = size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm";
 
