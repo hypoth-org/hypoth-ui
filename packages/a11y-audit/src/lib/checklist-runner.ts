@@ -143,9 +143,7 @@ export async function runInteractiveSession(session: ChecklistSession): Promise<
 
   const results: AuditItem[] = [];
 
-  for (let i = 0; i < session.checklist.items.length; i++) {
-    const item = session.checklist.items[i];
-
+  for (const item of session.checklist.items) {
     let status: AuditItemStatus | null = null;
 
     while (!status) {
