@@ -117,8 +117,8 @@ program
           process.exit(1);
         }
       }
-    } catch (error: any) {
-      console.error(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
       process.exit(1);
     }
   });
@@ -161,8 +161,8 @@ program
           console.log(`    ${gate.description}`);
         }
       }
-    } catch (error: any) {
-      console.error(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
       process.exit(1);
     }
   });
@@ -198,8 +198,8 @@ program
       }
 
       process.exit(report.passed ? 0 : 1);
-    } catch (error: any) {
-      console.error(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
       process.exit(1);
     }
   });

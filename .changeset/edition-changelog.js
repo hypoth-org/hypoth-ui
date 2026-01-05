@@ -15,7 +15,7 @@ const REPO = "hypoth-ui/hypoth-ui";
  */
 function extractEditions(content) {
   const match = content.match(/editions\s*:\s*\[([^\]]+)\]/);
-  if (match && match[1]) {
+  if (match?.[1]) {
     return match[1]
       .split(",")
       .map((e) => e.trim().replace(/["']/g, ""))
@@ -99,7 +99,7 @@ async function getReleaseLine(changeset, type, options) {
       });
       pr = info.pull;
       author = info.user;
-    } catch (e) {
+    } catch (_e) {
       // GitHub info not available, continue without it
     }
   }
@@ -134,7 +134,7 @@ async function getReleaseLine(changeset, type, options) {
 /**
  * Get dependencies release line (for internal package updates)
  */
-async function getDependencyReleaseLine(changesets, dependenciesUpdated) {
+async function getDependencyReleaseLine(_changesets, dependenciesUpdated) {
   if (dependenciesUpdated.length === 0) {
     return "";
   }

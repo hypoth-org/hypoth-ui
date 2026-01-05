@@ -8,7 +8,7 @@ import { exec } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { promisify } from "node:util";
-import type { GateCheckResult, GateContext, GateRunner } from "./types.js";
+import type { GateRunner } from "./types.js";
 
 const execAsync = promisify(exec);
 
@@ -22,11 +22,12 @@ async function runCommand(
   try {
     const { stdout, stderr } = await execAsync(command, { cwd });
     return { success: true, stdout, stderr };
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const execError = error as { stdout?: string; stderr?: string; message?: string };
     return {
       success: false,
-      stdout: error.stdout ?? "",
-      stderr: error.stderr ?? error.message,
+      stdout: execError.stdout ?? "",
+      stderr: execError.stderr ?? execError.message ?? String(error),
     };
   }
 }
@@ -56,7 +57,7 @@ export const testCoverageRunner: GateRunner = async (context) => {
 
     // Parse coverage from output (simplified - real impl would read coverage file)
     const coverageMatch = result.stdout.match(/All files\s*\|\s*(\d+\.?\d*)/);
-    const coverage = coverageMatch ? parseFloat(coverageMatch[1] ?? "0") : 0;
+    const coverage = coverageMatch ? Number.parseFloat(coverageMatch[1] ?? "0") : 0;
 
     const passed = coverage >= threshold;
 
@@ -68,12 +69,12 @@ export const testCoverageRunner: GateRunner = async (context) => {
       details: `Coverage: ${coverage}%`,
       durationMs: Date.now() - start,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       gate: "test-coverage",
       type: "automated",
       passed: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       durationMs: Date.now() - start,
     };
   }
@@ -97,12 +98,12 @@ export const accessibilityRunner: GateRunner = async (context) => {
       details: result.success ? "All a11y tests passed" : result.stderr,
       durationMs: Date.now() - start,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       gate: "accessibility",
       type: "automated",
       passed: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       durationMs: Date.now() - start,
     };
   }
@@ -129,12 +130,12 @@ export const manifestValidationRunner: GateRunner = async (context) => {
       details: result.success ? "All manifests valid" : result.stderr,
       durationMs: Date.now() - start,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       gate: "manifest-validation",
       type: "automated",
       passed: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       durationMs: Date.now() - start,
     };
   }
@@ -218,12 +219,12 @@ export const typecheckRunner: GateRunner = async (context) => {
       details: result.success ? "No type errors" : result.stderr,
       durationMs: Date.now() - start,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       gate: "typecheck",
       type: "automated",
       passed: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       durationMs: Date.now() - start,
     };
   }
@@ -246,12 +247,12 @@ export const lintRunner: GateRunner = async (context) => {
       details: result.success ? "No lint errors" : result.stderr,
       durationMs: Date.now() - start,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       gate: "lint",
       type: "automated",
       passed: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       durationMs: Date.now() - start,
     };
   }

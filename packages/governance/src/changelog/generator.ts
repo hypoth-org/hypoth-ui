@@ -13,7 +13,7 @@ import type { ChangelogOptions, GroupedChanges } from "./types.js";
  */
 export function generateChangelogEntry(
   entry: ChangesetEntry,
-  options: ChangelogOptions = {}
+  _options: ChangelogOptions = {}
 ): string {
   const parts: string[] = [];
 
@@ -170,7 +170,7 @@ export function prependToChangelog(
   }
 
   // If no existing versions, append to end
-  return existingContent + "\n" + newSection;
+  return `${existingContent}\n${newSection}`;
 }
 
 /**

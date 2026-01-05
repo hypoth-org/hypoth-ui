@@ -98,7 +98,7 @@ export async function runGates(
   // Filter gates if specific ones requested
   let gates = config.gates;
   if (options.gates && options.gates.length > 0) {
-    gates = gates.filter((g) => options.gates!.includes(g.id));
+    gates = gates.filter((g) => options.gates?.includes(g.id));
   }
 
   const definitions = gates.map(gateToDefinition);

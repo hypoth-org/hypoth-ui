@@ -14,6 +14,20 @@ import type {
   TenantConformanceConfig,
 } from "./types.js";
 
+/** Raw component data from JSON report */
+interface RawReportComponent {
+  component: string;
+  status: string;
+  lastUpdated?: string;
+  automatedResult?: { passed: boolean };
+  manualAudit?: {
+    auditor?: string;
+    passCount?: number;
+    failCount?: number;
+    exceptionCount?: number;
+  };
+}
+
 /**
  * Category mapping for components
  */
@@ -61,7 +75,7 @@ export function loadConformanceData(reportPath: string): ConformanceData | null 
     const report = JSON.parse(content);
 
     // Transform report format to docs format
-    const components: ComponentConformance[] = report.components.map((c: any) => ({
+    const components: ComponentConformance[] = report.components.map((c: RawReportComponent) => ({
       id: c.component,
       name: formatComponentName(c.component),
       category: CATEGORY_MAP[c.component] ?? "uncategorized",

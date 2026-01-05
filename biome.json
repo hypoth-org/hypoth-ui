@@ -50,6 +50,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["**/src/cli/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
     }
   ],
   "javascript": {

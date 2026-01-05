@@ -11,7 +11,6 @@
 
 import { Command } from "commander";
 import * as fs from "node:fs";
-import * as path from "node:path";
 import type { Edition } from "../types/index.js";
 import type { ReleaseWithEntries } from "../changelog/types.js";
 import type { TenantInfo } from "../tenant/types.js";

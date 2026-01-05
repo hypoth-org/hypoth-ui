@@ -93,7 +93,6 @@ export function generateWarning(deprecation: DeprecationWithStatus): Deprecation
       }
       break;
 
-    case "active":
     default:
       message = `${type} "${deprecation.item}" is deprecated since version ${deprecation.deprecated_in}.`;
       if (deprecation.versionsUntilRemoval) {
@@ -165,7 +164,7 @@ export function logDeprecationWarning(deprecation: DeprecationWithStatus): void 
  * Can be called from component code
  */
 export function createDeprecationWarner(
-  currentVersion: string
+  _currentVersion: string
 ): (item: string, type: DeprecationType, deprecatedIn: string, replacement?: string) => void {
   const warned = new Set<string>();
 

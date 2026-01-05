@@ -19,7 +19,7 @@ function parseFrontmatter(content: string): {
   const packages: Record<string, ChangeType> = {};
   const frontmatter: ParsedChangeset["frontmatter"] = {};
   let inFrontmatter = false;
-  let summaryLines: string[] = [];
+  const summaryLines: string[] = [];
   let pastFrontmatter = false;
 
   for (const line of lines) {
@@ -36,14 +36,14 @@ function parseFrontmatter(content: string): {
     if (inFrontmatter) {
       // Parse package bumps like '"@ds/wc": minor'
       const packageMatch = line.match(/^["']?(@[^"']+)["']?\s*:\s*(major|minor|patch)/);
-      if (packageMatch && packageMatch[1] && packageMatch[2]) {
+      if (packageMatch?.[1] && packageMatch[2]) {
         packages[packageMatch[1]] = packageMatch[2] as ChangeType;
         continue;
       }
 
       // Parse extended frontmatter
       const editionsMatch = line.match(/^editions\s*:\s*\[([^\]]+)\]/);
-      if (editionsMatch && editionsMatch[1]) {
+      if (editionsMatch?.[1]) {
         frontmatter.editions = editionsMatch[1]
           .split(",")
           .map((e) => e.trim().replace(/["']/g, "") as Edition);
@@ -57,7 +57,7 @@ function parseFrontmatter(content: string): {
       }
 
       const breakingTypeMatch = line.match(/^breaking_type\s*:\s*["']?([^"'\n]+)["']?/);
-      if (breakingTypeMatch && breakingTypeMatch[1]) {
+      if (breakingTypeMatch?.[1]) {
         frontmatter.breaking_type = breakingTypeMatch[1].trim();
         continue;
       }

@@ -5,7 +5,6 @@
  */
 
 import * as fs from "node:fs";
-import * as path from "node:path";
 import type { DeprecationRecord, DeprecationType, Edition } from "../types/index.js";
 import type {
   DeprecationQueryOptions,
@@ -33,7 +32,7 @@ export function calculateDeprecationStatus(
   currentVersion: string
 ): DeprecationWithStatus {
   const current = parseVersion(currentVersion);
-  const deprecated = parseVersion(record.deprecated_in);
+  const _deprecated = parseVersion(record.deprecated_in);
   const removal = parseVersion(record.removal_version);
 
   // Already removed
