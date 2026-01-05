@@ -223,16 +223,23 @@ export function getLatestReportPath(reportsDir: string): string | null {
     .map((d) => d.name)
     .sort((a, b) => {
       // Sort by semver
-      const [aMaj, aMin, aPatch] = a.split(".").map(Number);
-      const [bMaj, bMin, bPatch] = b.split(".").map(Number);
+      const aParts = a.split(".").map(Number);
+      const bParts = b.split(".").map(Number);
+      const aMaj = aParts[0] ?? 0;
+      const aMin = aParts[1] ?? 0;
+      const aPatch = aParts[2] ?? 0;
+      const bMaj = bParts[0] ?? 0;
+      const bMin = bParts[1] ?? 0;
+      const bPatch = bParts[2] ?? 0;
       if (aMaj !== bMaj) return bMaj - aMaj;
       if (aMin !== bMin) return bMin - aMin;
       return bPatch - aPatch;
     });
 
-  if (versions.length === 0) {
+  const latestVersion = versions[0];
+  if (!latestVersion) {
     return null;
   }
 
-  return path.join(reportsDir, versions[0], "report.json");
+  return path.join(reportsDir, latestVersion, "report.json");
 }
