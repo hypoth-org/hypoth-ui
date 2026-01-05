@@ -229,3 +229,22 @@ export {
   createMinimalSearchIndex,
   type GenerateSearchIndexOptions,
 } from "./search/indexer.js";
+
+// Accessibility conformance
+export {
+  loadConformanceData,
+  getCategories,
+  filterConformanceData,
+  loadTenantConformance,
+  getLatestReportPath,
+  createTenantConformanceLoader,
+  createTenantConfig,
+  DEFAULT_TENANT_CONFIG,
+  type ConformanceStatus,
+  type ComponentConformance,
+  type ConformanceData,
+  type CategoryInfo,
+  type ConformanceFilterOptions,
+  type TenantConformanceConfig,
+  type TenantConformanceOptions,
+} from "./conformance/index.js";

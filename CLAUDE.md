@@ -18,6 +18,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (strict mode) + Next.js 14+ (App Router), @ds/docs-core, @ds/docs-content, @mdx-js/mdx 3.x, gray-matter 4.x (009-docs-renderer)
 - File-based (content packs as npm packages, edition-config.json per deployment) (009-docs-renderer)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (010-forms-overlays)
+- TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration) (011-a11y-audit)
+- File-based (JSON artifacts in repository, 5-year retention) (011-a11y-audit)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -60,6 +62,13 @@ pnpm --filter @ds/tokens build              # Build token outputs (CSS, JSON, TS
 pnpm --filter @ds/tokens clean              # Clean dist directory
 pnpm --filter @ds/docs-core validate:tokens # Validate tokensUsed references
 pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
+
+# Accessibility Commands
+pnpm test:a11y                              # Run all accessibility tests
+pnpm --filter @ds/wc test:a11y              # Run WC accessibility tests only
+pnpm a11y:audit -- -c ds-button --category form-controls  # Start manual audit
+pnpm a11y:report -- -v 1.0.0                # Generate conformance report
+pnpm a11y:validate                          # Validate audit records
 ```
 
 ## Code Style
@@ -67,9 +76,9 @@ pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 011-a11y-audit: Added TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration)
 - 010-forms-overlays: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
 - 009-docs-renderer: Added TypeScript 5.3+ (strict mode) + Next.js 14+ (App Router), @ds/docs-core, @ds/docs-content, @mdx-js/mdx 3.x for docs renderer with white-label overlay workflow
-- 008-react-wrappers: Added React 18+ wrappers for Web Components with Slot primitive
 
 
 <!-- MANUAL ADDITIONS START -->

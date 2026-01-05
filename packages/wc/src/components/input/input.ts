@@ -96,7 +96,13 @@ export class DsInput extends DSElement {
 
     this.attributeObserver.observe(this, {
       attributes: true,
-      attributeFilter: ["aria-labelledby", "aria-describedby", "aria-invalid", "aria-required", "aria-disabled"],
+      attributeFilter: [
+        "aria-labelledby",
+        "aria-describedby",
+        "aria-invalid",
+        "aria-required",
+        "aria-disabled",
+      ],
     });
 
     // Initial sync

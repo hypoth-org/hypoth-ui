@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/switch/switch.js";
 import "../../src/components/field/field.js";
 
@@ -115,10 +115,7 @@ describe("DsSwitch", () => {
     it("should emit ds:change event on toggle", async () => {
       const changeHandler = vi.fn();
 
-      render(
-        html`<ds-switch @ds:change=${changeHandler}>Toggle me</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch @ds:change=${changeHandler}>Toggle me</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -193,10 +190,7 @@ describe("DsSwitch", () => {
 
   describe("form integration", () => {
     it("should have name attribute", async () => {
-      render(
-        html`<ds-switch name="notifications">Enable</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch name="notifications">Enable</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -205,10 +199,7 @@ describe("DsSwitch", () => {
     });
 
     it("should have value attribute", async () => {
-      render(
-        html`<ds-switch name="notifications" value="on">Enable</ds-switch>`,
-        container
-      );
+      render(html`<ds-switch name="notifications" value="on">Enable</ds-switch>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 

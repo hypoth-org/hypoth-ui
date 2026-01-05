@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/checkbox/checkbox.js";
 import "../../src/components/field/field.js";
 
@@ -17,10 +17,7 @@ describe("DsCheckbox", () => {
 
   describe("rendering", () => {
     it("should render checkbox element with role", async () => {
-      render(
-        html`<ds-checkbox>Accept terms</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Accept terms</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -30,10 +27,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should render label content", async () => {
-      render(
-        html`<ds-checkbox>Accept terms</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Accept terms</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -42,10 +36,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should be unchecked by default", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -56,10 +47,7 @@ describe("DsCheckbox", () => {
 
   describe("checked state", () => {
     it("should reflect checked attribute", async () => {
-      render(
-        html`<ds-checkbox checked>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox checked>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -68,10 +56,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should update aria-checked when checked", async () => {
-      render(
-        html`<ds-checkbox checked>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox checked>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -80,10 +65,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should update aria-checked when unchecked", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -92,10 +74,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should toggle checked on click", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -109,10 +88,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should toggle checked on Space key", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -128,22 +104,18 @@ describe("DsCheckbox", () => {
 
   describe("indeterminate state", () => {
     it("should support indeterminate state", async () => {
-      render(
-        html`<ds-checkbox indeterminate>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox indeterminate>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & { indeterminate: boolean };
+      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & {
+        indeterminate: boolean;
+      };
       expect(checkbox?.indeterminate).toBe(true);
     });
 
     it("should have aria-checked=mixed when indeterminate", async () => {
-      render(
-        html`<ds-checkbox indeterminate>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox indeterminate>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -152,14 +124,14 @@ describe("DsCheckbox", () => {
     });
 
     it("should clear indeterminate when clicked", async () => {
-      render(
-        html`<ds-checkbox indeterminate>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox indeterminate>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & { indeterminate: boolean; checked: boolean };
+      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & {
+        indeterminate: boolean;
+        checked: boolean;
+      };
       const control = checkbox?.querySelector("[role='checkbox']") as HTMLElement;
 
       control?.click();
@@ -172,22 +144,18 @@ describe("DsCheckbox", () => {
 
   describe("disabled state", () => {
     it("should reflect disabled state", async () => {
-      render(
-        html`<ds-checkbox disabled>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox disabled>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & { disabled: boolean };
+      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & {
+        disabled: boolean;
+      };
       expect(checkbox?.disabled).toBe(true);
     });
 
     it("should have aria-disabled when disabled", async () => {
-      render(
-        html`<ds-checkbox disabled>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox disabled>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -196,10 +164,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should not toggle when disabled", async () => {
-      render(
-        html`<ds-checkbox disabled>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox disabled>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -217,10 +182,7 @@ describe("DsCheckbox", () => {
     it("should emit ds:change event on toggle", async () => {
       const changeHandler = vi.fn();
 
-      render(
-        html`<ds-checkbox @ds:change=${changeHandler}>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox @ds:change=${changeHandler}>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -260,10 +222,7 @@ describe("DsCheckbox", () => {
 
   describe("value", () => {
     it("should have default value of 'on'", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -272,10 +231,7 @@ describe("DsCheckbox", () => {
     });
 
     it("should accept custom value", async () => {
-      render(
-        html`<ds-checkbox value="custom">Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox value="custom">Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -286,22 +242,18 @@ describe("DsCheckbox", () => {
 
   describe("required state", () => {
     it("should reflect required state", async () => {
-      render(
-        html`<ds-checkbox required>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox required>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & { required: boolean };
+      const checkbox = container.querySelector("ds-checkbox") as HTMLElement & {
+        required: boolean;
+      };
       expect(checkbox?.required).toBe(true);
     });
 
     it("should have aria-required when required", async () => {
-      render(
-        html`<ds-checkbox required>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox required>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 

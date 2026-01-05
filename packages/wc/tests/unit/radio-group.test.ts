@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/radio/radio-group.js";
 import "../../src/components/radio/radio.js";
 import "../../src/components/field/field.js";
@@ -104,7 +104,7 @@ describe("DsRadioGroup", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       const radios = container.querySelectorAll("ds-radio");
-      const mdRadio = Array.from(radios).find(r => r.getAttribute("value") === "md");
+      const mdRadio = Array.from(radios).find((r) => r.getAttribute("value") === "md");
       expect(mdRadio?.querySelector("[role='radio']")?.getAttribute("aria-checked")).toBe("true");
     });
 
@@ -122,7 +122,9 @@ describe("DsRadioGroup", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       const group = container.querySelector("ds-radio-group") as HTMLElement & { value: string };
-      const smRadio = container.querySelector("ds-radio[value='sm']")?.querySelector("[role='radio']") as HTMLElement;
+      const smRadio = container
+        .querySelector("ds-radio[value='sm']")
+        ?.querySelector("[role='radio']") as HTMLElement;
 
       smRadio?.click();
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -143,12 +145,18 @@ describe("DsRadioGroup", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const mdRadio = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']") as HTMLElement;
+      const mdRadio = container
+        .querySelector("ds-radio[value='md']")
+        ?.querySelector("[role='radio']") as HTMLElement;
       mdRadio?.click();
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const smControl = container.querySelector("ds-radio[value='sm']")?.querySelector("[role='radio']");
-      const mdControl = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']");
+      const smControl = container
+        .querySelector("ds-radio[value='sm']")
+        ?.querySelector("[role='radio']");
+      const mdControl = container
+        .querySelector("ds-radio[value='md']")
+        ?.querySelector("[role='radio']");
 
       expect(smControl?.getAttribute("aria-checked")).toBe("false");
       expect(mdControl?.getAttribute("aria-checked")).toBe("true");
@@ -242,7 +250,9 @@ describe("DsRadioGroup", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       const group = container.querySelector("ds-radio-group") as HTMLElement & { value: string };
-      const lgRadio = container.querySelector("ds-radio[value='lg']")?.querySelector("[role='radio']") as HTMLElement;
+      const lgRadio = container
+        .querySelector("ds-radio[value='lg']")
+        ?.querySelector("[role='radio']") as HTMLElement;
       lgRadio?.focus();
 
       group?.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
@@ -265,7 +275,9 @@ describe("DsRadioGroup", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const group = container.querySelector("ds-radio-group") as HTMLElement & { orientation: string };
+      const group = container.querySelector("ds-radio-group") as HTMLElement & {
+        orientation: string;
+      };
       expect(group?.orientation).toBe("vertical");
     });
 
@@ -281,7 +293,9 @@ describe("DsRadioGroup", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const group = container.querySelector("ds-radio-group") as HTMLElement & { orientation: string };
+      const group = container.querySelector("ds-radio-group") as HTMLElement & {
+        orientation: string;
+      };
       expect(group?.orientation).toBe("horizontal");
     });
 
@@ -343,7 +357,9 @@ describe("DsRadioGroup", () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       const group = container.querySelector("ds-radio-group") as HTMLElement & { value: string };
-      const mdRadio = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']") as HTMLElement;
+      const mdRadio = container
+        .querySelector("ds-radio[value='md']")
+        ?.querySelector("[role='radio']") as HTMLElement;
 
       mdRadio?.click();
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -365,7 +381,9 @@ describe("DsRadioGroup", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const mdControl = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']");
+      const mdControl = container
+        .querySelector("ds-radio[value='md']")
+        ?.querySelector("[role='radio']");
       expect(mdControl?.getAttribute("aria-disabled")).toBe("true");
     });
 
@@ -411,7 +429,9 @@ describe("DsRadioGroup", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const smRadio = container.querySelector("ds-radio[value='sm']")?.querySelector("[role='radio']") as HTMLElement;
+      const smRadio = container
+        .querySelector("ds-radio[value='sm']")
+        ?.querySelector("[role='radio']") as HTMLElement;
       smRadio?.click();
 
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -463,8 +483,12 @@ describe("DsRadio", () => {
 
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    const smControl = container.querySelector("ds-radio[value='sm']")?.querySelector("[role='radio']");
-    const mdControl = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']");
+    const smControl = container
+      .querySelector("ds-radio[value='sm']")
+      ?.querySelector("[role='radio']");
+    const mdControl = container
+      .querySelector("ds-radio[value='md']")
+      ?.querySelector("[role='radio']");
 
     expect(smControl?.getAttribute("aria-checked")).toBe("true");
     expect(mdControl?.getAttribute("aria-checked")).toBe("false");

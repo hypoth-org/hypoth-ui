@@ -1,0 +1,94 @@
+{
+  "id": "data-display",
+  "name": "Data Display",
+  "description": "Manual accessibility checklist for data display components (tables, lists, cards, badges)",
+  "wcagVersion": "2.1",
+  "conformanceLevel": "AA",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "dd-001",
+      "criterion": "1.3.1",
+      "description": "Data table has proper structure with th elements",
+      "procedure": "Verify table uses <th> for headers with scope attribute (col/row)",
+      "expectedOutcome": "Screen reader announces column/row headers when navigating cells",
+      "tools": ["axe DevTools", "Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver", "JAWS"]
+    },
+    {
+      "id": "dd-002",
+      "criterion": "1.3.1",
+      "description": "Complex tables use headers attribute for cell association",
+      "procedure": "For multi-level headers, verify cells use headers attribute to reference relevant th IDs",
+      "expectedOutcome": "Screen reader correctly associates data cells with all relevant headers",
+      "tools": ["Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "dd-003",
+      "criterion": "4.1.2",
+      "description": "Table has accessible caption or aria-label",
+      "procedure": "Verify table has <caption> element or aria-label describing its purpose",
+      "expectedOutcome": "Screen reader announces table purpose before navigating content",
+      "tools": ["axe DevTools"]
+    },
+    {
+      "id": "dd-004",
+      "criterion": "1.3.1",
+      "description": "Lists use proper semantic elements",
+      "procedure": "Verify unordered lists use <ul><li>, ordered lists use <ol><li>, descriptions use <dl><dt><dd>",
+      "expectedOutcome": "Screen reader announces list type and item count",
+      "tools": ["axe DevTools"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "dd-005",
+      "criterion": "4.1.2",
+      "description": "Cards have accessible name when interactive",
+      "procedure": "If card is a link/button, verify it has accessible name describing the content",
+      "expectedOutcome": "Screen reader announces card purpose when focused",
+      "tools": ["Chrome Accessibility Inspector"]
+    },
+    {
+      "id": "dd-006",
+      "criterion": "1.3.1",
+      "description": "Card heading structure is appropriate",
+      "procedure": "Verify card headings use proper heading levels (h2, h3, etc.) in page hierarchy",
+      "expectedOutcome": "Heading levels follow logical order without skipping levels",
+      "tools": ["HeadingsMap extension"]
+    },
+    {
+      "id": "dd-007",
+      "criterion": "2.4.6",
+      "description": "Headings and labels describe content",
+      "procedure": "Review headings and labels for descriptiveness and clarity",
+      "expectedOutcome": "Headings uniquely identify content sections",
+      "tools": ["Manual inspection"]
+    },
+    {
+      "id": "dd-008",
+      "criterion": "1.1.1",
+      "description": "Decorative images have empty alt text",
+      "procedure": "Verify purely decorative images have alt=''",
+      "expectedOutcome": "Screen reader skips decorative images",
+      "tools": ["axe DevTools"]
+    },
+    {
+      "id": "dd-009",
+      "criterion": "4.1.2",
+      "description": "Status badges convey meaning to screen readers",
+      "procedure": "Verify status badges have visually hidden text or aria-label explaining status",
+      "expectedOutcome": "Screen reader announces badge meaning, not just visual appearance",
+      "tools": ["Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "dd-010",
+      "criterion": "1.4.1",
+      "description": "Status is not conveyed by color alone",
+      "procedure": "Verify status indicators use icons, text, or patterns in addition to color",
+      "expectedOutcome": "Status is perceivable in grayscale/to users with color blindness",
+      "tools": ["Grayscale mode", "Colorblindness simulators"]
+    }
+  ]
+}

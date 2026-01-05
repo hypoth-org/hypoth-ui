@@ -1,0 +1,303 @@
+/**
+ * HTML report generation
+ *
+ * Creates human-readable HTML conformance reports
+ */
+
+import Handlebars from "handlebars";
+import type { ConformanceReport } from "./types.js";
+
+// Register Handlebars helpers
+Handlebars.registerHelper("statusIcon", (status: string) => {
+  switch (status) {
+    case "conformant":
+      return "✅";
+    case "partial":
+      return "⚠️";
+    case "non-conformant":
+      return "❌";
+    case "pending":
+      return "⏳";
+    default:
+      return "❓";
+  }
+});
+
+Handlebars.registerHelper("statusClass", (status: string) => {
+  switch (status) {
+    case "conformant":
+      return "status-conformant";
+    case "partial":
+      return "status-partial";
+    case "non-conformant":
+      return "status-non-conformant";
+    case "pending":
+      return "status-pending";
+    default:
+      return "";
+  }
+});
+
+Handlebars.registerHelper("formatDate", (dateString: string) =>
+  new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+);
+
+const HTML_TEMPLATE = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Conformance Report - v{{version}}</title>
+  <style>
+    :root {
+      --color-conformant: #22c55e;
+      --color-partial: #f59e0b;
+      --color-non-conformant: #ef4444;
+      --color-pending: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .summary-card .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .summary-card .label {
+      color: #6b7280;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-conformant .number { color: var(--color-conformant); }
+    .status-partial .number { color: var(--color-partial); }
+    .status-non-conformant .number { color: var(--color-non-conformant); }
+    .status-pending .number { color: var(--color-pending); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: #f9fafb;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .status-badge.status-conformant {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-badge.status-partial {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-badge.status-non-conformant {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status-badge.status-pending {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--color-conformant);
+      transition: width 0.3s ease;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1rem;
+      margin-top: 2rem;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Accessibility Conformance Report</h1>
+    <p class="meta">
+      Version {{version}} • Generated {{formatDate generatedAt}} • WCAG {{wcagVersion}} Level {{conformanceLevel}}
+    </p>
+  </header>
+
+  <section class="summary">
+    <div class="summary-card">
+      <div class="number">{{summary.totalComponents}}</div>
+      <div class="label">Total Components</div>
+    </div>
+    <div class="summary-card status-conformant">
+      <div class="number">{{summary.conformant}}</div>
+      <div class="label">Conformant</div>
+    </div>
+    <div class="summary-card status-partial">
+      <div class="number">{{summary.partial}}</div>
+      <div class="label">Partial</div>
+    </div>
+    <div class="summary-card status-non-conformant">
+      <div class="number">{{summary.nonConformant}}</div>
+      <div class="label">Non-Conformant</div>
+    </div>
+    <div class="summary-card status-pending">
+      <div class="number">{{summary.pending}}</div>
+      <div class="label">Pending Audit</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Conformance Progress</h2>
+    <p>{{summary.conformancePercentage}}% of components are fully conformant</p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: {{summary.conformancePercentage}}%"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2>Component Status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Version</th>
+          <th>Status</th>
+          <th>Automated</th>
+          <th>Manual Audit</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each components}}
+        <tr>
+          <td><strong>{{component}}</strong></td>
+          <td>{{version}}</td>
+          <td>
+            <span class="status-badge {{statusClass status}}">
+              {{statusIcon status}} {{status}}
+            </span>
+          </td>
+          <td>
+            {{#if automatedResult.passed}}
+              ✅ Passed
+            {{else}}
+              ❌ {{automatedResult.violationCount}} violations
+            {{/if}}
+          </td>
+          <td>
+            {{#if manualAudit}}
+              {{manualAudit.passCount}}/{{manualAudit.passCount}} passed
+            {{else}}
+              <em>Not audited</em>
+            {{/if}}
+          </td>
+          <td>{{formatDate lastUpdated}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p>Generated by @ds/a11y-audit v{{metadata.toolVersion}}</p>
+    {{#if metadata.gitCommit}}
+    <p>Git commit: {{metadata.gitCommit}}</p>
+    {{/if}}
+    {{#if metadata.ciRunUrl}}
+    <p>CI Run: <a href="{{metadata.ciRunUrl}}">View details</a></p>
+    {{/if}}
+  </footer>
+</body>
+</html>`;
+
+const template = Handlebars.compile(HTML_TEMPLATE);
+
+/**
+ * Generate HTML report from conformance data
+ */
+export function generateHTMLReport(report: ConformanceReport): string {
+  return template(report);
+}

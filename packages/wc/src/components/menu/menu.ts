@@ -1,19 +1,19 @@
+import {
+  type AnchorPosition,
+  type DismissableLayer,
+  type Placement,
+  type RovingFocus,
+  type TypeAhead,
+  createAnchorPosition,
+  createDismissableLayer,
+  createRovingFocus,
+  createTypeAhead,
+} from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
-import {
-  createAnchorPosition,
-  createDismissableLayer,
-  createRovingFocus,
-  createTypeAhead,
-  type AnchorPosition,
-  type DismissableLayer,
-  type RovingFocus,
-  type TypeAhead,
-  type Placement,
-} from "@ds/primitives-dom";
 
 // Import child components to ensure they're registered
 import "./menu-content.js";

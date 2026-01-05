@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { html, render } from "lit";
 import { axe, toHaveNoViolations } from "jest-axe";
+import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/checkbox/checkbox.js";
 import "../../src/components/radio/radio-group.js";
 import "../../src/components/radio/radio.js";
@@ -21,10 +21,7 @@ describe("Checkbox accessibility", () => {
   });
 
   it("should have no accessibility violations for basic checkbox", async () => {
-    render(
-      html`<ds-checkbox>Accept terms and conditions</ds-checkbox>`,
-      container
-    );
+    render(html`<ds-checkbox>Accept terms and conditions</ds-checkbox>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -33,10 +30,7 @@ describe("Checkbox accessibility", () => {
   });
 
   it("should have no accessibility violations when checked", async () => {
-    render(
-      html`<ds-checkbox checked>Enable notifications</ds-checkbox>`,
-      container
-    );
+    render(html`<ds-checkbox checked>Enable notifications</ds-checkbox>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -45,10 +39,7 @@ describe("Checkbox accessibility", () => {
   });
 
   it("should have no accessibility violations when indeterminate", async () => {
-    render(
-      html`<ds-checkbox indeterminate>Select all</ds-checkbox>`,
-      container
-    );
+    render(html`<ds-checkbox indeterminate>Select all</ds-checkbox>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -57,10 +48,7 @@ describe("Checkbox accessibility", () => {
   });
 
   it("should have no accessibility violations when disabled", async () => {
-    render(
-      html`<ds-checkbox disabled>Unavailable option</ds-checkbox>`,
-      container
-    );
+    render(html`<ds-checkbox disabled>Unavailable option</ds-checkbox>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -104,10 +92,7 @@ describe("Checkbox accessibility", () => {
 
   describe("ARIA attributes", () => {
     it("should have correct role", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -116,10 +101,7 @@ describe("Checkbox accessibility", () => {
     });
 
     it("should have aria-checked=false when unchecked", async () => {
-      render(
-        html`<ds-checkbox>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -128,10 +110,7 @@ describe("Checkbox accessibility", () => {
     });
 
     it("should have aria-checked=true when checked", async () => {
-      render(
-        html`<ds-checkbox checked>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox checked>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -140,10 +119,7 @@ describe("Checkbox accessibility", () => {
     });
 
     it("should have aria-checked=mixed when indeterminate", async () => {
-      render(
-        html`<ds-checkbox indeterminate>Option</ds-checkbox>`,
-        container
-      );
+      render(html`<ds-checkbox indeterminate>Option</ds-checkbox>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -305,8 +281,12 @@ describe("RadioGroup accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const smRadio = container.querySelector("ds-radio[value='sm']")?.querySelector("[role='radio']");
-      const mdRadio = container.querySelector("ds-radio[value='md']")?.querySelector("[role='radio']");
+      const smRadio = container
+        .querySelector("ds-radio[value='sm']")
+        ?.querySelector("[role='radio']");
+      const mdRadio = container
+        .querySelector("ds-radio[value='md']")
+        ?.querySelector("[role='radio']");
 
       expect(smRadio?.getAttribute("aria-checked")).toBe("true");
       expect(mdRadio?.getAttribute("aria-checked")).toBe("false");

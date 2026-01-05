@@ -1,11 +1,8 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { createElement, forwardRef, useEffect, useRef } from "react";
-import type {
-  DsNavigateEventDetail,
-  NavigateEventHandler,
-} from "../types/events.js";
-import type { AsChildProps } from "../types/polymorphic.js";
 import { Slot } from "../primitives/slot.js";
+import type { DsNavigateEventDetail, NavigateEventHandler } from "../types/events.js";
+import type { AsChildProps } from "../types/polymorphic.js";
 import { mergeClassNames } from "../utils/merge-props.js";
 
 export type LinkVariant = "default" | "muted" | "underline";
@@ -49,8 +46,7 @@ export const Link = forwardRef<HTMLElement, LinkProps>((props, forwardedRef) => 
     if (typeof forwardedRef === "function") {
       forwardedRef(internalRef.current);
     } else if (forwardedRef) {
-      (forwardedRef as React.MutableRefObject<HTMLElement | null>).current =
-        internalRef.current;
+      (forwardedRef as React.MutableRefObject<HTMLElement | null>).current = internalRef.current;
     }
   }, [forwardedRef]);
 

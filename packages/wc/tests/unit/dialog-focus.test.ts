@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/dialog/dialog.js";
 
 describe("Dialog Focus Management", () => {
@@ -47,8 +47,8 @@ describe("Dialog Focus Management", () => {
       // Focus should be on first focusable element or within dialog
       expect(
         document.activeElement === firstInput ||
-        document.activeElement === closeBtn ||
-        dialogContent?.contains(document.activeElement)
+          document.activeElement === closeBtn ||
+          dialogContent?.contains(document.activeElement)
       ).toBe(true);
     });
 
@@ -86,8 +86,7 @@ describe("Dialog Focus Management", () => {
       // Focus should still be within dialog (either wrapped or stayed)
       const dialogContent = container.querySelector("ds-dialog-content");
       expect(
-        dialogContent?.contains(document.activeElement) ||
-        document.activeElement === firstBtn
+        dialogContent?.contains(document.activeElement) || document.activeElement === firstBtn
       ).toBe(true);
     });
 
@@ -127,8 +126,7 @@ describe("Dialog Focus Management", () => {
       // Focus should still be within dialog
       const dialogContent = container.querySelector("ds-dialog-content");
       expect(
-        dialogContent?.contains(document.activeElement) ||
-        document.activeElement === lastBtn
+        dialogContent?.contains(document.activeElement) || document.activeElement === lastBtn
       ).toBe(true);
     });
   });

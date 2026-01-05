@@ -12,9 +12,7 @@ describe("mergeClassNames", () => {
   });
 
   it("filters out falsy values", () => {
-    expect(mergeClassNames("foo", undefined, null, false, "bar")).toBe(
-      "foo bar"
-    );
+    expect(mergeClassNames("foo", undefined, null, false, "bar")).toBe("foo bar");
   });
 
   it("returns empty string for no valid classes", () => {
@@ -90,10 +88,7 @@ describe("composeEventHandlers", () => {
 
 describe("mergeProps", () => {
   it("merges className by concatenation", () => {
-    const result = mergeProps(
-      { className: "slot-class" },
-      { className: "child-class" }
-    );
+    const result = mergeProps({ className: "slot-class" }, { className: "child-class" });
     expect(result.className).toBe("slot-class child-class");
   });
 
@@ -110,10 +105,7 @@ describe("mergeProps", () => {
     const slotHandler = () => calls.push("slot");
     const childHandler = () => calls.push("child");
 
-    const result = mergeProps(
-      { onClick: slotHandler },
-      { onClick: childHandler }
-    );
+    const result = mergeProps({ onClick: slotHandler }, { onClick: childHandler });
 
     (result.onClick as (e: Event) => void)({ defaultPrevented: false } as Event);
     expect(calls).toEqual(["child", "slot"]);

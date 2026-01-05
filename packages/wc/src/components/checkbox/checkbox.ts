@@ -171,11 +171,13 @@ export class DsCheckbox extends DSElement {
           @keydown=${this.handleKeyDown}
         >
           <span class="ds-checkbox__indicator" part="indicator">
-            ${this.indeterminate
-              ? html`<span class="ds-checkbox__indeterminate-icon">−</span>`
-              : this.checked
-                ? html`<span class="ds-checkbox__check-icon">✓</span>`
-                : null}
+            ${
+              this.indeterminate
+                ? html`<span class="ds-checkbox__indeterminate-icon">−</span>`
+                : this.checked
+                  ? html`<span class="ds-checkbox__check-icon">✓</span>`
+                  : null
+            }
           </span>
         </div>
         <span id=${this.labelId} class="ds-checkbox__label" part="label">

@@ -1,0 +1,94 @@
+{
+  "id": "form-controls",
+  "name": "Form Controls",
+  "description": "Manual accessibility checklist for form control components (buttons, inputs, checkboxes, radios, selects, etc.)",
+  "wcagVersion": "2.1",
+  "conformanceLevel": "AA",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "fc-001",
+      "criterion": "1.3.1",
+      "description": "Form control has a programmatically associated label",
+      "procedure": "Inspect the form control and verify it has a visible label element with matching 'for' attribute, or aria-label/aria-labelledby",
+      "expectedOutcome": "Screen reader announces the label when the control receives focus",
+      "tools": ["axe DevTools", "WAVE"],
+      "screenReaders": ["NVDA", "VoiceOver", "JAWS"]
+    },
+    {
+      "id": "fc-002",
+      "criterion": "1.3.1",
+      "description": "Required fields are programmatically indicated",
+      "procedure": "Check required fields have aria-required='true' or the required attribute, and visual indicator",
+      "expectedOutcome": "Screen reader announces 'required' when field receives focus",
+      "tools": ["axe DevTools"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "fc-003",
+      "criterion": "3.3.1",
+      "description": "Error messages are programmatically associated with inputs",
+      "procedure": "Trigger a validation error and verify error message is linked via aria-describedby or aria-errormessage",
+      "expectedOutcome": "Screen reader announces error message when invalid field receives focus",
+      "tools": ["axe DevTools"],
+      "screenReaders": ["NVDA", "VoiceOver", "JAWS"]
+    },
+    {
+      "id": "fc-004",
+      "criterion": "3.3.2",
+      "description": "Instructions and hints are provided for user input",
+      "procedure": "Verify fields with specific format requirements have visible instructions or placeholder hints",
+      "expectedOutcome": "Users understand the expected input format before entering data",
+      "tools": ["Manual inspection"]
+    },
+    {
+      "id": "fc-005",
+      "criterion": "4.1.2",
+      "description": "Form control has correct role and state",
+      "procedure": "Inspect ARIA role and states (checked, selected, disabled, expanded)",
+      "expectedOutcome": "Role and state are accurately reflected and updated dynamically",
+      "tools": ["axe DevTools", "Chrome Accessibility Inspector"],
+      "screenReaders": ["NVDA", "VoiceOver"]
+    },
+    {
+      "id": "fc-006",
+      "criterion": "2.1.1",
+      "description": "Form control is fully keyboard operable",
+      "procedure": "Tab to the control, operate it using only keyboard (Space, Enter, arrows as appropriate)",
+      "expectedOutcome": "All functionality is available via keyboard without requiring mouse",
+      "tools": ["Manual keyboard testing"]
+    },
+    {
+      "id": "fc-007",
+      "criterion": "2.4.7",
+      "description": "Focus indicator is visible",
+      "procedure": "Tab to the control and verify a visible focus indicator appears",
+      "expectedOutcome": "Focus indicator has sufficient contrast (3:1) and is clearly visible",
+      "tools": ["Manual inspection", "Contrast checker"]
+    },
+    {
+      "id": "fc-008",
+      "criterion": "1.4.11",
+      "description": "Focus and hover states have sufficient contrast",
+      "procedure": "Check focus/hover border or outline has 3:1 contrast against adjacent colors",
+      "expectedOutcome": "Focus and hover states meet non-text contrast requirements",
+      "tools": ["Colour Contrast Analyser"]
+    },
+    {
+      "id": "fc-009",
+      "criterion": "2.5.3",
+      "description": "Accessible name matches visible label",
+      "procedure": "Compare the visible label text with the accessible name (aria-label or computed name)",
+      "expectedOutcome": "Accessible name includes the visible label text",
+      "tools": ["Chrome Accessibility Inspector"]
+    },
+    {
+      "id": "fc-010",
+      "criterion": "1.4.1",
+      "description": "Information is not conveyed by color alone",
+      "procedure": "Verify error/success/warning states use icons or text in addition to color",
+      "expectedOutcome": "State changes are perceivable without relying on color perception",
+      "tools": ["Manual inspection", "Grayscale mode"]
+    }
+  ]
+}

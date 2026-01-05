@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/field/field.js";
 import "../../src/components/input/input.js";
 
@@ -285,10 +285,7 @@ describe("DsFieldDescription", () => {
   });
 
   it("should render description with slot content", () => {
-    render(
-      html`<ds-field-description>Help text here</ds-field-description>`,
-      container
-    );
+    render(html`<ds-field-description>Help text here</ds-field-description>`, container);
 
     const description = container.querySelector("ds-field-description");
     expect(description?.textContent).toContain("Help text here");
@@ -308,20 +305,14 @@ describe("DsFieldError", () => {
   });
 
   it("should render error with slot content", () => {
-    render(
-      html`<ds-field-error>Error message</ds-field-error>`,
-      container
-    );
+    render(html`<ds-field-error>Error message</ds-field-error>`, container);
 
     const error = container.querySelector("ds-field-error");
     expect(error?.textContent).toContain("Error message");
   });
 
   it("should have role=alert for screen reader announcement", async () => {
-    render(
-      html`<ds-field-error>Error message</ds-field-error>`,
-      container
-    );
+    render(html`<ds-field-error>Error message</ds-field-error>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -330,10 +321,7 @@ describe("DsFieldError", () => {
   });
 
   it("should have aria-live=polite for dynamic updates", async () => {
-    render(
-      html`<ds-field-error>Error message</ds-field-error>`,
-      container
-    );
+    render(html`<ds-field-error>Error message</ds-field-error>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 0));
 

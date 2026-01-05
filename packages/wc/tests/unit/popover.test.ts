@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/popover/popover.js";
 
 describe("DsPopover", () => {
@@ -361,7 +361,10 @@ describe("DsPopover", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const popover = container.querySelector("ds-popover") as HTMLElement & { show: () => void; open: boolean };
+      const popover = container.querySelector("ds-popover") as HTMLElement & {
+        show: () => void;
+        open: boolean;
+      };
       popover.show();
 
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -382,7 +385,10 @@ describe("DsPopover", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const popover = container.querySelector("ds-popover") as HTMLElement & { close: () => void; open: boolean };
+      const popover = container.querySelector("ds-popover") as HTMLElement & {
+        close: () => void;
+        open: boolean;
+      };
       popover.close();
 
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -403,7 +409,10 @@ describe("DsPopover", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const popover = container.querySelector("ds-popover") as HTMLElement & { toggle: () => void; open: boolean };
+      const popover = container.querySelector("ds-popover") as HTMLElement & {
+        toggle: () => void;
+        open: boolean;
+      };
 
       popover.toggle();
       await new Promise((resolve) => setTimeout(resolve, 50));

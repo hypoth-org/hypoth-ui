@@ -2,10 +2,7 @@ import { readFile } from "node:fs/promises";
 import { parseFrontmatter } from "@ds/docs-core";
 import { notFound } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
-import {
-  discoverGuides,
-  resolveContentFile,
-} from "../../../lib/content-resolver";
+import { discoverGuides, resolveContentFile } from "../../../lib/content-resolver";
 
 interface GuidePageProps {
   params: Promise<{

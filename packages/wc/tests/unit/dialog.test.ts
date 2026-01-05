@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/dialog/dialog.js";
 
 describe("DsDialog", () => {

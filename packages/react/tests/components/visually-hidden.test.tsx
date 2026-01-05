@@ -19,17 +19,13 @@ describe("VisuallyHidden React Component", () => {
 
   describe("rendering", () => {
     it("should render ds-visually-hidden element", () => {
-      const { container } = render(
-        createElement(VisuallyHidden, null, "Hidden content")
-      );
+      const { container } = render(createElement(VisuallyHidden, null, "Hidden content"));
       const vh = container.querySelector("ds-visually-hidden");
       expect(vh).not.toBeNull();
     });
 
     it("should render children content", () => {
-      const { container } = render(
-        createElement(VisuallyHidden, null, "Hidden content")
-      );
+      const { container } = render(createElement(VisuallyHidden, null, "Hidden content"));
       expect(container.textContent).toContain("Hidden content");
     });
 
@@ -40,28 +36,20 @@ describe("VisuallyHidden React Component", () => {
 
   describe("props", () => {
     it("should not pass focusable attribute by default", () => {
-      const { container } = render(
-        createElement(VisuallyHidden, null, "Content")
-      );
+      const { container } = render(createElement(VisuallyHidden, null, "Content"));
       const vh = container.querySelector("ds-visually-hidden");
       expect(vh?.hasAttribute("focusable")).toBe(false);
     });
 
     it("should pass focusable attribute when true", () => {
-      const { container } = render(
-        createElement(VisuallyHidden, { focusable: true }, "Content")
-      );
+      const { container } = render(createElement(VisuallyHidden, { focusable: true }, "Content"));
       const vh = container.querySelector("ds-visually-hidden");
       expect(vh?.hasAttribute("focusable")).toBe(true);
     });
 
     it("should pass className as class", () => {
       const { container } = render(
-        createElement(
-          VisuallyHidden,
-          { className: "custom-vh" },
-          "Content"
-        )
+        createElement(VisuallyHidden, { className: "custom-vh" }, "Content")
       );
       const vh = container.querySelector("ds-visually-hidden");
       expect(vh?.getAttribute("class")).toBe("custom-vh");

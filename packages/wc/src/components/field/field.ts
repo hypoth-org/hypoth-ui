@@ -1,4 +1,4 @@
-import { html, } from "lit";
+import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";

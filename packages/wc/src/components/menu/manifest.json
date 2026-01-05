@@ -10,7 +10,13 @@
     "apgPattern": "menu-button",
     "keyboard": ["Arrow keys", "Enter", "Space", "Escape", "Home", "End", "Type-ahead"],
     "screenReader": "Trigger announces menu expanded state. Items announced with position in list.",
-    "ariaPatterns": ["role=menu", "role=menuitem", "aria-haspopup=menu", "aria-expanded", "aria-disabled"],
+    "ariaPatterns": [
+      "role=menu",
+      "role=menuitem",
+      "aria-haspopup=menu",
+      "aria-expanded",
+      "aria-disabled"
+    ],
     "knownLimitations": []
   },
   "tokensUsed": [

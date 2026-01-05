@@ -104,7 +104,13 @@ export class DsTextarea extends DSElement {
 
     this.attributeObserver.observe(this, {
       attributes: true,
-      attributeFilter: ["aria-labelledby", "aria-describedby", "aria-invalid", "aria-required", "aria-disabled"],
+      attributeFilter: [
+        "aria-labelledby",
+        "aria-describedby",
+        "aria-invalid",
+        "aria-required",
+        "aria-disabled",
+      ],
     });
 
     // Initial sync
@@ -190,7 +196,8 @@ export class DsTextarea extends DSElement {
     const borderBottom = Number.parseFloat(computedStyle.borderBottomWidth) || 0;
 
     // Calculate min and max heights based on rows
-    const minHeight = this.minRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom;
+    const minHeight =
+      this.minRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom;
     const maxHeight = this.maxRows
       ? this.maxRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom
       : Number.POSITIVE_INFINITY;

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import { createElement, forwardRef } from "react";
+import { Slot } from "../primitives/slot.js";
 import type { AsChildProps } from "../types/polymorphic.js";
 import { mergeClassNames } from "../utils/merge-props.js";
-import { Slot } from "../primitives/slot.js";
 
 export type TextSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type TextWeight = "normal" | "medium" | "semibold" | "bold";

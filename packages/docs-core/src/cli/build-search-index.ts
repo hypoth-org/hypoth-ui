@@ -7,11 +7,11 @@
  * Usage: pnpm build:search-index [--output <path>] [--edition <edition>]
  */
 
-import { writeFile, mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import type { Edition, ContentPack } from "../types/manifest.js";
-import { generateSearchIndex, serializeSearchIndex } from "../search/indexer.js";
 import { initContentPacks } from "../content/overlay.js";
+import { generateSearchIndex, serializeSearchIndex } from "../search/indexer.js";
+import type { ContentPack, Edition } from "../types/manifest.js";
 import { loadValidManifests } from "../validation/validate-manifests.js";
 
 interface CliOptions {
@@ -148,10 +148,7 @@ async function main(): Promise<void> {
     // Report results
     const componentCount = index.entries.filter((e) => e.type === "component").length;
     const guideCount = index.entries.filter((e) => e.type === "guide").length;
-    const totalTags = index.entries.reduce(
-      (sum, e) => sum + (e.tags?.length ?? 0),
-      0
-    );
+    const totalTags = index.entries.reduce((sum, e) => sum + (e.tags?.length ?? 0), 0);
 
     console.info("\n\x1b[32m✓\x1b[0m Generated search index");
     console.info(`  Output: ${options.outputPath}`);
@@ -163,9 +160,7 @@ async function main(): Promise<void> {
     console.info(`  Guides: ${guideCount}`);
     console.info(`  Total entries: ${index.entries.length}`);
     console.info(`  Total tags: ${totalTags}`);
-    console.info(
-      `  File size: ${(Buffer.byteLength(serialized) / 1024).toFixed(1)} KB`
-    );
+    console.info(`  File size: ${(Buffer.byteLength(serialized) / 1024).toFixed(1)} KB`);
     console.info("");
   } catch (error) {
     console.error("\n\x1b[31m✗\x1b[0m Failed to generate search index");

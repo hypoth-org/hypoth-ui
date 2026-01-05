@@ -46,17 +46,13 @@ describe("Icon React Component", () => {
     });
 
     it("should pass custom size prop", () => {
-      const { container } = render(
-        createElement(Icon, { name: "star", size: "lg" })
-      );
+      const { container } = render(createElement(Icon, { name: "star", size: "lg" }));
       const icon = container.querySelector("ds-icon");
       expect(icon?.getAttribute("size")).toBe("lg");
     });
 
     it("should pass label prop when provided", () => {
-      const { container } = render(
-        createElement(Icon, { name: "alert", label: "Warning" })
-      );
+      const { container } = render(createElement(Icon, { name: "alert", label: "Warning" }));
       const icon = container.querySelector("ds-icon");
       expect(icon?.getAttribute("label")).toBe("Warning");
     });
@@ -68,17 +64,13 @@ describe("Icon React Component", () => {
     });
 
     it("should pass color prop when provided", () => {
-      const { container } = render(
-        createElement(Icon, { name: "heart", color: "red" })
-      );
+      const { container } = render(createElement(Icon, { name: "heart", color: "red" }));
       const icon = container.querySelector("ds-icon");
       expect(icon?.getAttribute("color")).toBe("red");
     });
 
     it("should pass className as class", () => {
-      const { container } = render(
-        createElement(Icon, { name: "star", className: "custom-icon" })
-      );
+      const { container } = render(createElement(Icon, { name: "star", className: "custom-icon" }));
       const icon = container.querySelector("ds-icon");
       expect(icon?.getAttribute("class")).toBe("custom-icon");
     });

@@ -1,10 +1,10 @@
-import { html, } from "lit";
+import { type FocusTrap, createFocusTrap } from "@ds/primitives-dom";
+import { type DismissableLayer, createDismissableLayer } from "@ds/primitives-dom";
+import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
-import { createFocusTrap, type FocusTrap } from "@ds/primitives-dom";
-import { createDismissableLayer, type DismissableLayer } from "@ds/primitives-dom";
 
 // Import child components to ensure they're registered
 import "./dialog-content.js";
@@ -114,7 +114,8 @@ export class DsDialog extends DSElement {
 
     // Store trigger element for focus return
     const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    this.triggerElement = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    this.triggerElement =
+      trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
 
     this.open = true;
     emitEvent(this, StandardEvents.OPEN);

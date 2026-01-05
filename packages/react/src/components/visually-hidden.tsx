@@ -25,8 +25,7 @@ export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
       if (typeof forwardedRef === "function") {
         forwardedRef(internalRef.current);
       } else if (forwardedRef) {
-        (forwardedRef as React.MutableRefObject<HTMLElement | null>).current =
-          internalRef.current;
+        (forwardedRef as React.MutableRefObject<HTMLElement | null>).current = internalRef.current;
       }
     }, [forwardedRef]);
 

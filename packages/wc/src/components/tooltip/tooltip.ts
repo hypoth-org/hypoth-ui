@@ -1,12 +1,8 @@
+import { type AnchorPosition, type Placement, createAnchorPosition } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
-import {
-  createAnchorPosition,
-  type AnchorPosition,
-  type Placement,
-} from "@ds/primitives-dom";
 
 // Import child component to ensure it's registered
 import "./tooltip-content.js";

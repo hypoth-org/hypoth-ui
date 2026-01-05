@@ -1,0 +1,63 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "component": "ds-button",
+  "version": "1.0.0",
+  "checklistId": "form-controls",
+  "checklistVersion": "1.0.0",
+  "auditor": "example@example.com",
+  "auditDate": "2026-01-04T10:00:00Z",
+  "items": [
+    {
+      "itemId": "fc-001",
+      "status": "pass",
+      "notes": "Button has visible text label and aria-label when icon-only"
+    },
+    {
+      "itemId": "fc-002",
+      "status": "na",
+      "notes": "Button is not a form input, N/A for required field indication"
+    },
+    {
+      "itemId": "fc-003",
+      "status": "na",
+      "notes": "Button does not have validation errors"
+    },
+    {
+      "itemId": "fc-004",
+      "status": "pass",
+      "notes": "Clear button labels provide sufficient instruction"
+    },
+    {
+      "itemId": "fc-005",
+      "status": "pass",
+      "notes": "Button has implicit role='button', disabled/loading states correctly indicated"
+    },
+    {
+      "itemId": "fc-006",
+      "status": "pass",
+      "notes": "Button operable with Enter and Space keys"
+    },
+    {
+      "itemId": "fc-007",
+      "status": "pass",
+      "notes": "Focus ring visible with 3:1+ contrast"
+    },
+    {
+      "itemId": "fc-008",
+      "status": "pass",
+      "notes": "Focus and hover states meet non-text contrast requirements"
+    },
+    {
+      "itemId": "fc-009",
+      "status": "pass",
+      "notes": "Accessible name matches visible label"
+    },
+    {
+      "itemId": "fc-010",
+      "status": "pass",
+      "notes": "Disabled state uses dimmed opacity and disabled attribute, not color alone"
+    }
+  ],
+  "overallStatus": "conformant",
+  "notes": "Button component fully passes WCAG 2.1 AA requirements for form controls."
+}

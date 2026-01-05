@@ -22,9 +22,7 @@ export function composeEventHandlers<E extends SyntheticEvent | Event>(
 /**
  * Merges two className strings, filtering out falsy values.
  */
-export function mergeClassNames(
-  ...classNames: (string | undefined | null | false)[]
-): string {
+export function mergeClassNames(...classNames: (string | undefined | null | false)[]): string {
   return classNames.filter(Boolean).join(" ");
 }
 
@@ -55,10 +53,7 @@ function isEventHandler(propName: string): boolean {
  * - event handlers: composed (both called, child first)
  * - other props: child wins
  */
-export function mergeProps<T extends Record<string, unknown>>(
-  slotProps: T,
-  childProps: T
-): T {
+export function mergeProps<T extends Record<string, unknown>>(slotProps: T, childProps: T): T {
   const result = { ...slotProps } as T;
 
   for (const key in childProps) {

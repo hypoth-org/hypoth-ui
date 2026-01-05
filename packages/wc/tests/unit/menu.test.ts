@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/menu/menu.js";
 
 describe("DsMenu", () => {
@@ -781,7 +781,10 @@ describe("DsMenu", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const menu = container.querySelector("ds-menu") as HTMLElement & { show: () => void; open: boolean };
+      const menu = container.querySelector("ds-menu") as HTMLElement & {
+        show: () => void;
+        open: boolean;
+      };
       menu.show();
 
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -804,7 +807,10 @@ describe("DsMenu", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const menu = container.querySelector("ds-menu") as HTMLElement & { close: () => void; open: boolean };
+      const menu = container.querySelector("ds-menu") as HTMLElement & {
+        close: () => void;
+        open: boolean;
+      };
       menu.close();
 
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -827,7 +833,10 @@ describe("DsMenu", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const menu = container.querySelector("ds-menu") as HTMLElement & { toggle: () => void; open: boolean };
+      const menu = container.querySelector("ds-menu") as HTMLElement & {
+        toggle: () => void;
+        open: boolean;
+      };
 
       menu.toggle();
       await new Promise((resolve) => setTimeout(resolve, 50));

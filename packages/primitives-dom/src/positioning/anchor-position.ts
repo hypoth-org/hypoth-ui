@@ -76,7 +76,10 @@ function parsePlacement(placement: Placement): {
 function getOppositeSide(
   side: "top" | "bottom" | "left" | "right"
 ): "top" | "bottom" | "left" | "right" {
-  const opposites: Record<"top" | "bottom" | "left" | "right", "top" | "bottom" | "left" | "right"> = {
+  const opposites: Record<
+    "top" | "bottom" | "left" | "right",
+    "top" | "bottom" | "left" | "right"
+  > = {
     top: "bottom",
     bottom: "top",
     left: "right",
@@ -199,9 +202,7 @@ function calculatePosition(
       let flippedIsBetter = false;
       switch (oppositeSide) {
         case "top":
-          flippedIsBetter =
-            oppositePos.y >= 0 ||
-            oppositePos.y > y;
+          flippedIsBetter = oppositePos.y >= 0 || oppositePos.y > y;
           break;
         case "bottom":
           flippedIsBetter =
@@ -209,9 +210,7 @@ function calculatePosition(
             viewportHeight - (oppositePos.y + floatingRect.height) > -y;
           break;
         case "left":
-          flippedIsBetter =
-            oppositePos.x >= 0 ||
-            oppositePos.x > x;
+          flippedIsBetter = oppositePos.x >= 0 || oppositePos.x > x;
           break;
         case "right":
           flippedIsBetter =
@@ -257,8 +256,7 @@ function applyCSSAnchorPositioning(
   floating.style.setProperty("position-anchor", anchorName);
 
   // Set position based on side
-  const alignValue =
-    align === "center" ? "center" : align === "start" ? "start" : "end";
+  const alignValue = align === "center" ? "center" : align === "start" ? "start" : "end";
 
   switch (side) {
     case "top":
@@ -281,10 +279,7 @@ function applyCSSAnchorPositioning(
 }
 
 /** Apply JavaScript fallback positioning */
-function applyJSPositioning(
-  floating: HTMLElement,
-  position: ComputedPosition
-): void {
+function applyJSPositioning(floating: HTMLElement, position: ComputedPosition): void {
   floating.style.position = "fixed";
   floating.style.left = `${position.x}px`;
   floating.style.top = `${position.y}px`;
@@ -317,9 +312,7 @@ function applyJSPositioning(
  * position.destroy();
  * ```
  */
-export function createAnchorPosition(
-  options: AnchorPositionOptions
-): AnchorPosition {
+export function createAnchorPosition(options: AnchorPositionOptions): AnchorPosition {
   const {
     anchor,
     floating,
@@ -340,13 +333,7 @@ export function createAnchorPosition(
       currentPosition = { x: 0, y: 0, placement };
     } else {
       // JavaScript fallback
-      currentPosition = calculatePosition(
-        anchor,
-        floating,
-        placement,
-        offset,
-        flip
-      );
+      currentPosition = calculatePosition(anchor, floating, placement, offset, flip);
       applyJSPositioning(floating, currentPosition);
     }
 

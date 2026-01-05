@@ -50,17 +50,13 @@ describe("Spinner React Component", () => {
     });
 
     it("should pass custom label prop", () => {
-      const { container } = render(
-        createElement(Spinner, { label: "Fetching data..." })
-      );
+      const { container } = render(createElement(Spinner, { label: "Fetching data..." }));
       const spinner = container.querySelector("ds-spinner");
       expect(spinner?.getAttribute("label")).toBe("Fetching data...");
     });
 
     it("should pass className as class", () => {
-      const { container } = render(
-        createElement(Spinner, { className: "custom-spinner" })
-      );
+      const { container } = render(createElement(Spinner, { className: "custom-spinner" }));
       const spinner = container.querySelector("ds-spinner");
       expect(spinner?.getAttribute("class")).toBe("custom-spinner");
     });

@@ -85,11 +85,7 @@ describe("Slot", () => {
 
     it("preserves slot props not in child", () => {
       const { container } = render(
-        createElement(
-          Slot,
-          { "data-slot": "true" },
-          createElement("div", null, "Content")
-        )
+        createElement(Slot, { "data-slot": "true" }, createElement("div", null, "Content"))
       );
       const element = container.querySelector("div");
       expect(element?.getAttribute("data-slot")).toBe("true");
@@ -145,13 +141,7 @@ describe("Slot", () => {
     it("forwards ref to child element", () => {
       const ref = createRef<HTMLButtonElement>();
 
-      render(
-        createElement(
-          Slot,
-          { ref },
-          createElement("button", { type: "button" }, "Click")
-        )
-      );
+      render(createElement(Slot, { ref }, createElement("button", { type: "button" }, "Click")));
 
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);
       expect(ref.current?.tagName).toBe("BUTTON");
@@ -188,11 +178,7 @@ describe("Slot", () => {
         createElement(
           Slot,
           { ref: slotRefCallback },
-          createElement(
-            "button",
-            { type: "button", ref: childRefCallback },
-            "Click"
-          )
+          createElement("button", { type: "button", ref: childRefCallback }, "Click")
         )
       );
 

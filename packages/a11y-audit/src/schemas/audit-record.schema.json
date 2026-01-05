@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ds.hypoth.dev/schemas/audit-record.schema.json",
+  "title": "AuditRecord",
+  "description": "Completed manual accessibility audit for a specific component version",
+  "type": "object",
+  "required": [
+    "id",
+    "component",
+    "version",
+    "checklistId",
+    "checklistVersion",
+    "auditor",
+    "auditDate",
+    "items",
+    "overallStatus"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Auto-generated UUID"
+    },
+    "component": {
+      "type": "string",
+      "pattern": "^ds-[a-z][a-z0-9-]*$",
+      "description": "Component ID (e.g., 'ds-button')"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Component version audited"
+    },
+    "checklistId": {
+      "type": "string",
+      "description": "Reference to checklist template"
+    },
+    "checklistVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version of checklist used"
+    },
+    "auditor": {
+      "type": "string",
+      "format": "email",
+      "description": "Auditor email/identifier"
+    },
+    "auditDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of audit completion (ISO8601)"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/AuditItem"
+      },
+      "description": "Completed audit items"
+    },
+    "overallStatus": {
+      "type": "string",
+      "enum": ["conformant", "partial", "non-conformant"],
+      "description": "Overall conformance status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "General audit notes"
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Exception"
+      },
+      "description": "Documented accessibility exceptions"
+    }
+  },
+  "$defs": {
+    "AuditItem": {
+      "type": "object",
+      "required": ["itemId", "status"],
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Reference to ChecklistItem.id"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pass", "fail", "na", "blocked"],
+          "description": "Test result status"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Auditor notes"
+        },
+        "evidence": {
+          "type": "string",
+          "description": "Screenshot/recording reference"
+        }
+      }
+    },
+    "Exception": {
+      "type": "object",
+      "required": ["criterion", "rationale"],
+      "properties": {
+        "criterion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "WCAG criterion with exception"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Why exception is acceptable"
+        },
+        "workaround": {
+          "type": "string",
+          "description": "Alternative approach for users"
+        },
+        "plannedFix": {
+          "type": "string",
+          "description": "Roadmap reference if temporary"
+        }
+      }
+    }
+  }
+}

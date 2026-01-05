@@ -6,8 +6,8 @@ import { Icon } from "../src/components/icon.js";
 import { Input } from "../src/components/input.js";
 import { Link } from "../src/components/link.js";
 import { Spinner } from "../src/components/spinner.js";
-import { VisuallyHidden } from "../src/components/visually-hidden.js";
 import { Text } from "../src/components/text.js";
+import { VisuallyHidden } from "../src/components/visually-hidden.js";
 import { Box } from "../src/primitives/box.js";
 import { Slot } from "../src/primitives/slot.js";
 
@@ -171,13 +171,7 @@ describe("Ref Forwarding", () => {
   describe("asChild ref forwarding", () => {
     it("Text with asChild should forward ref to child element", () => {
       const ref = createRef<HTMLElement>();
-      render(
-        createElement(
-          Text,
-          { ref, asChild: true },
-          createElement("h1", null, "Title")
-        )
-      );
+      render(createElement(Text, { ref, asChild: true }, createElement("h1", null, "Title")));
 
       expect(ref.current).not.toBeNull();
       expect(ref.current?.tagName).toBe("H1");
@@ -186,11 +180,7 @@ describe("Ref Forwarding", () => {
     it("Box with asChild should forward ref to child element", () => {
       const ref = createRef<HTMLElement>();
       render(
-        createElement(
-          Box,
-          { ref, asChild: true, p: 4 },
-          createElement("main", null, "Content")
-        )
+        createElement(Box, { ref, asChild: true, p: 4 }, createElement("main", null, "Content"))
       );
 
       expect(ref.current).not.toBeNull();
@@ -213,13 +203,7 @@ describe("Ref Forwarding", () => {
 
     it("Slot should forward ref to child element", () => {
       const ref = createRef<HTMLElement>();
-      render(
-        createElement(
-          Slot,
-          { ref },
-          createElement("article", null, "Content")
-        )
-      );
+      render(createElement(Slot, { ref }, createElement("article", null, "Content")));
 
       expect(ref.current).not.toBeNull();
       expect(ref.current?.tagName).toBe("ARTICLE");
@@ -232,11 +216,7 @@ describe("Ref Forwarding", () => {
       const childRef = createRef<HTMLDivElement>();
 
       render(
-        createElement(
-          Slot,
-          { ref: parentRef },
-          createElement("div", { ref: childRef }, "Content")
-        )
+        createElement(Slot, { ref: parentRef }, createElement("div", { ref: childRef }, "Content"))
       );
 
       // Both refs should point to the same element
@@ -279,5 +259,4 @@ describe("Ref Forwarding", () => {
       expect(parentCallback.mock.calls[0][0]).toBe(childCallback.mock.calls[0][0]);
     });
   });
-
 });

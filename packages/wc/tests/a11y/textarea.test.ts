@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { html, render } from "lit";
 import { axe, toHaveNoViolations } from "jest-axe";
+import { html, render } from "lit";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/textarea/textarea.js";
 import "../../src/components/field/field.js";
 
@@ -19,10 +19,7 @@ describe("Textarea accessibility", () => {
   });
 
   it("should have no accessibility violations for standalone textarea with aria-label", async () => {
-    render(
-      html`<ds-textarea id="my-textarea"></ds-textarea>`,
-      container
-    );
+    render(html`<ds-textarea id="my-textarea"></ds-textarea>`, container);
 
     await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -123,10 +120,7 @@ describe("Textarea accessibility", () => {
 
   describe("ARIA attributes", () => {
     it("should have aria-invalid when error is true", async () => {
-      render(
-        html`<ds-textarea error></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea error></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -135,10 +129,7 @@ describe("Textarea accessibility", () => {
     });
 
     it("should have aria-required when required", async () => {
-      render(
-        html`<ds-textarea required></ds-textarea>`,
-        container
-      );
+      render(html`<ds-textarea required></ds-textarea>`, container);
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 

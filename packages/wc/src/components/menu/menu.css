@@ -29,7 +29,11 @@ ds-menu-content {
   background-color: var(--ds-menu-bg, #ffffff);
   border: 1px solid var(--ds-menu-border-color, #e2e8f0);
   border-radius: var(--ds-menu-border-radius, 0.5rem);
-  box-shadow: var(--ds-menu-shadow, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  box-shadow: var(
+    --ds-menu-shadow,
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1)
+  );
   min-width: var(--ds-menu-min-width, 10rem);
   outline: none;
 }
