@@ -30,10 +30,7 @@
     "clean": "pnpm -r run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish",
-    "ds-deprecate": "pnpm --filter @ds/governance deprecate",
-    "ds-check-gates": "pnpm --filter @ds/governance check-gates",
-    "ds-tenant-diff": "pnpm --filter @ds/governance tenant-diff"
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
