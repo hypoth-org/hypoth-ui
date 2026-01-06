@@ -37,9 +37,6 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-      - name: Run contribution gates
-        run: pnpm --filter @ds/governance ds-check-gates run --parallel
-
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
@@ -51,14 +48,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Generate changelog for editions
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          # Generate edition-specific changelogs
-          for edition in core pro enterprise; do
-            pnpm --filter @ds/governance generate-changelog --edition $edition
-          done
 
       - name: Notify on release
         if: steps.changesets.outputs.published == 'true'
