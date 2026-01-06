@@ -6,6 +6,8 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  useEffect,
+  useRef,
 } from "react";
 import { mergeProps } from "../utils/merge-props.js";
 
@@ -39,6 +41,7 @@ function mergeRefs<T>(...refs: (Ref<T> | undefined)[]): (instance: T | null) => 
 export const Slot = forwardRef<HTMLElement, SlotProps>(
   ({ children, ...slotProps }, forwardedRef) => {
     const childrenArray = Children.toArray(children);
+    const internalRef = useRef<HTMLElement | null>(null);
 
     // Filter out null/undefined/boolean children
     const validChildren = childrenArray.filter(
@@ -59,6 +62,24 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(
       throw new Error(`Slot expects a single React element child, received ${typeof child}`);
     }
 
+    // Check if child is a custom component (not an intrinsic element)
+    const isCustomComponent = typeof child.type === "function" || typeof child.type === "object";
+
+    // Warn in development if the child component doesn't forward refs
+    useEffect(() => {
+      if (process.env.NODE_ENV !== "production" && isCustomComponent && internalRef.current === null) {
+        const componentName =
+          typeof child.type === "function"
+            ? (child.type as { displayName?: string; name?: string }).displayName ||
+              (child.type as { name?: string }).name ||
+              "Component"
+            : "Component";
+        console.warn(
+          `[Slot] The child component "${componentName}" doesn't forward refs. When using asChild, ensure the child component is wrapped with React.forwardRef() and forwards the ref to its underlying DOM element. This is required for proper focus management and accessibility.`
+        );
+      }
+    }, [isCustomComponent, child.type]);
+
     // Get child's ref if it exists
     const childRef = (child as { ref?: Ref<HTMLElement> }).ref;
 
@@ -70,7 +91,7 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(
 
     return cloneElement(child, {
       ...mergedProps,
-      ref: mergeRefs(forwardedRef, childRef),
+      ref: mergeRefs(forwardedRef, childRef, internalRef),
     } as Record<string, unknown>);
   }
 );

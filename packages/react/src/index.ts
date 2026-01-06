@@ -19,7 +19,8 @@
  */
 
 // Component types (server-safe, no runtime code)
-export type { ButtonProps, ButtonVariant, ButtonSize } from "./components/button.js";
+export type { ButtonProps } from "./components/button/index.js";
+export type { ButtonProps as LegacyButtonProps, ButtonVariant, ButtonSize } from "./components/button.js";
 export type { InputProps, InputType, InputSize } from "./components/input.js";
 export type { LinkProps, LinkVariant } from "./components/link.js";
 export type { IconProps, IconName, IconSize } from "./components/icon.js";
@@ -34,10 +35,16 @@ export type { FieldDescriptionProps } from "./components/field/field-description
 export type { FieldErrorProps } from "./components/field/field-error.js";
 
 // Dialog component types
-export type { DialogProps, DialogRole } from "./components/dialog/dialog.js";
-export type { DialogContentProps, DialogContentSize } from "./components/dialog/dialog-content.js";
-export type { DialogTitleProps } from "./components/dialog/dialog-title.js";
-export type { DialogDescriptionProps } from "./components/dialog/dialog-description.js";
+export type {
+  DialogRole,
+  DialogRootProps,
+  DialogTriggerProps,
+  DialogContentProps,
+  DialogContentSize,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogCloseProps,
+} from "./components/dialog/index.js";
 
 // Form control types
 export type { TextareaProps, TextareaSize } from "./components/textarea.js";
@@ -51,9 +58,16 @@ export type { PopoverProps, Placement } from "./components/popover.js";
 export type { PopoverContentProps } from "./components/popover-content.js";
 export type { TooltipProps } from "./components/tooltip.js";
 export type { TooltipContentProps } from "./components/tooltip-content.js";
-export type { MenuProps } from "./components/menu.js";
-export type { MenuContentProps } from "./components/menu-content.js";
-export type { MenuItemProps } from "./components/menu-item.js";
+
+// Menu compound component types
+export type {
+  MenuRootProps,
+  MenuTriggerProps,
+  MenuContentProps,
+  MenuItemProps,
+  MenuSeparatorProps,
+  MenuLabelProps,
+} from "./components/menu/index.js";
 
 // Primitive types (server-safe, no runtime code)
 export type { BoxProps } from "./primitives/box.js";
@@ -82,7 +96,8 @@ export type {
 
 // Re-export components from client entry for backwards compatibility
 // These will include the 'use client' directive when bundled
-export { Button } from "./components/button.js";
+export { Button } from "./components/button/index.js";
+export { Button as LegacyButton } from "./components/button.js";
 export { Input } from "./components/input.js";
 export { Link } from "./components/link.js";
 export { Icon } from "./components/icon.js";
@@ -98,11 +113,8 @@ export { Label } from "./components/field/label.js";
 export { FieldDescription } from "./components/field/field-description.js";
 export { FieldError } from "./components/field/field-error.js";
 
-// Dialog components
-export { Dialog } from "./components/dialog/dialog.js";
-export { DialogContent } from "./components/dialog/dialog-content.js";
-export { DialogTitle } from "./components/dialog/dialog-title.js";
-export { DialogDescription } from "./components/dialog/dialog-description.js";
+// Dialog compound component
+export { Dialog } from "./components/dialog/index.js";
 
 // Form controls
 export { Textarea } from "./components/textarea.js";
@@ -116,9 +128,9 @@ export { Popover } from "./components/popover.js";
 export { PopoverContent } from "./components/popover-content.js";
 export { Tooltip } from "./components/tooltip.js";
 export { TooltipContent } from "./components/tooltip-content.js";
-export { Menu } from "./components/menu.js";
-export { MenuContent } from "./components/menu-content.js";
-export { MenuItem } from "./components/menu-item.js";
+
+// Menu compound component
+export { Menu } from "./components/menu/index.js";
 
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";

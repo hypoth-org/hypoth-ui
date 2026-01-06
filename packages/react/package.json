@@ -17,12 +17,15 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup src/index.ts src/client.ts --format esm --dts --external react",
+    "build": "tsup src/index.ts src/client.ts --format esm --dts --external react --external @ds/primitives-dom",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:a11y": "vitest run --config vitest.a11y.config.ts"
+  },
+  "dependencies": {
+    "@ds/primitives-dom": "workspace:*"
   },
   "peerDependencies": {
     "@ds/wc": "workspace:*",
@@ -31,11 +34,13 @@
   },
   "devDependencies": {
     "@ds/wc": "workspace:*",
+    "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "14.6.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "happy-dom": "^13.10.0",
+    "jest-axe": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^8.0.0",

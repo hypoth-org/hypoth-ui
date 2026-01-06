@@ -1,4 +1,5 @@
-import { type TemplateResult, html } from "lit";
+import { createButtonBehavior, type ButtonBehavior } from "@ds/primitives-dom";
+import { type TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
@@ -51,6 +52,41 @@ export class DsButton extends DSElement {
   @property({ type: String })
   type: "button" | "submit" | "reset" = "button";
 
+  /** Button behavior instance */
+  private behavior!: ButtonBehavior;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    // Create behavior with current property values
+    this.behavior = createButtonBehavior({
+      disabled: this.disabled,
+      loading: this.loading,
+      type: this.type,
+      onActivate: () => this.handleActivate(),
+    });
+  }
+
+  override updated(changedProperties: Map<string, unknown>): void {
+    super.updated(changedProperties);
+    // Sync behavior state with component properties
+    if (
+      changedProperties.has("disabled") ||
+      changedProperties.has("loading") ||
+      changedProperties.has("type")
+    ) {
+      this.behavior.setState({
+        disabled: this.disabled,
+        loading: this.loading,
+        type: this.type,
+      });
+    }
+  }
+
+  private handleActivate(): void {
+    // Trigger native click for keyboard activation
+    this.click();
+  }
+
   private handleClick(event: MouseEvent): void {
     if (this.disabled || this.loading) {
       event.preventDefault();
@@ -65,6 +101,8 @@ export class DsButton extends DSElement {
   }
 
   private handleKeyDown(event: KeyboardEvent): void {
+    // For WC compatibility, handle both Enter and Space on keydown
+    // The behavior only handles Enter on keydown (Space is typically keyup)
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       if (!this.disabled && !this.loading) {
@@ -82,14 +120,18 @@ export class DsButton extends DSElement {
       "ds-button--loading": this.loading,
     };
 
+    // Compute ARIA props based on current component state
+    const isDisabled = this.disabled || this.loading;
+
     return html`
       <button
         part="button"
         class=${classMap(classes)}
         type=${this.type}
         ?disabled=${this.disabled}
-        aria-disabled=${this.disabled || this.loading}
-        aria-busy=${this.loading}
+        aria-disabled=${isDisabled ? "true" : nothing}
+        aria-busy=${this.loading ? "true" : nothing}
+        tabindex=${isDisabled ? -1 : 0}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
       >

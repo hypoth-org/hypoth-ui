@@ -1,5 +1,5 @@
 /**
- * Dialog Content component - the dialog panel with focus trap and portal.
+ * Menu Content component - the menu panel with items.
  */
 
 import {
@@ -11,15 +11,11 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { useDialogContext } from "./dialog-context.js";
+import { useMenuContext } from "./menu-context.js";
 
-export type DialogContentSize = "sm" | "md" | "lg" | "xl" | "full";
-
-export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
-  /** Dialog content */
+export interface MenuContentProps extends HTMLAttributes<HTMLDivElement> {
+  /** Menu content */
   children?: ReactNode;
-  /** Content size */
-  size?: DialogContentSize;
   /** Container element for portal (defaults to document.body) */
   container?: HTMLElement | null;
   /** Force mount even when closed (for animations) */
@@ -27,24 +23,23 @@ export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Dialog content panel with focus trap and ARIA attributes.
+ * Menu content panel with roving focus and type-ahead.
  * Renders in a portal by default.
  *
  * @example
  * ```tsx
- * <Dialog.Content>
- *   <Dialog.Title>Dialog Title</Dialog.Title>
- *   <p>Dialog body content</p>
- *   <Dialog.Close>Close</Dialog.Close>
- * </Dialog.Content>
+ * <Menu.Content>
+ *   <Menu.Item value="edit">Edit</Menu.Item>
+ *   <Menu.Item value="delete">Delete</Menu.Item>
+ * </Menu.Content>
  * ```
  */
-export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
-  ({ children, size = "md", container, forceMount = false, ...restProps }, ref) => {
-    const { behavior, open, modal, descriptionId } = useDialogContext("Dialog.Content");
+export const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(
+  ({ children, container, forceMount = false, onKeyDown, ...restProps }, ref) => {
+    const { behavior, open } = useMenuContext("Menu.Content");
     const internalRef = useRef<HTMLDivElement>(null);
 
-    // Register content element with behavior for focus trap and dismissable layer
+    // Register content element with behavior
     useEffect(() => {
       if (open) {
         const element = internalRef.current;
@@ -54,6 +49,15 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
         };
       }
     }, [behavior, open]);
+
+    // Handle keyboard events
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        behavior.handleContentKeyDown(event.nativeEvent);
+        onKeyDown?.(event);
+      },
+      [behavior, onKeyDown]
+    );
 
     // Get content props from behavior
     const contentProps = behavior.getContentProps();
@@ -81,12 +85,11 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
         ref={mergedRef}
         id={contentProps.id}
         role={contentProps.role}
-        aria-modal={modal ? contentProps["aria-modal"] : undefined}
         aria-labelledby={contentProps["aria-labelledby"]}
-        aria-describedby={descriptionId ?? undefined}
+        aria-orientation={contentProps["aria-orientation"]}
         tabIndex={contentProps.tabIndex}
         data-state={open ? "open" : "closed"}
-        data-size={size}
+        onKeyDown={handleKeyDown}
         {...restProps}
       >
         {children}
@@ -103,4 +106,4 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
   }
 );
 
-DialogContent.displayName = "Dialog.Content";
+MenuContent.displayName = "Menu.Content";

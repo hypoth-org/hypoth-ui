@@ -55,3 +55,38 @@ export {
   type ComputedPosition,
   type Placement,
 } from "./positioning/anchor-position.js";
+
+// Behavior primitives
+export {
+  createButtonBehavior,
+  type ButtonBehavior,
+  type ButtonBehaviorOptions,
+  type ButtonBehaviorState,
+  type ButtonAriaProps,
+} from "./behavior/button.js";
+
+export {
+  createDialogBehavior,
+  type DialogBehavior,
+  type DialogBehaviorOptions,
+  type DialogBehaviorState,
+  type DialogBehaviorContext,
+  type DialogRole,
+  type DialogEvent,
+  type DialogTriggerProps,
+  type DialogContentProps,
+  type DialogTitleProps,
+  type DialogDescriptionProps,
+} from "./behavior/dialog.js";
+
+export {
+  createMenuBehavior,
+  type MenuBehavior,
+  type MenuBehaviorOptions,
+  type MenuBehaviorState,
+  type MenuBehaviorContext,
+  type MenuEvent,
+  type MenuTriggerProps,
+  type MenuContentProps,
+  type MenuItemProps,
+} from "./behavior/menu.js";
