@@ -1,39 +1,51 @@
-import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+/**
+ * Dialog Description component - accessible description for the dialog.
+ */
 
-export interface DialogDescriptionProps extends HTMLAttributes<HTMLElement> {
+import { forwardRef, useEffect, type HTMLAttributes, type ReactNode } from "react";
+import { useDialogContext } from "./dialog-context.js";
+
+export interface DialogDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {
   /** Description content */
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 /**
- * React wrapper for ds-dialog-description Web Component.
- * Accessible description for dialog.
+ * Accessible description for the dialog.
+ * Automatically linked to dialog via aria-describedby.
+ *
+ * @example
+ * ```tsx
+ * <Dialog.Content>
+ *   <Dialog.Title>Confirm Delete</Dialog.Title>
+ *   <Dialog.Description>
+ *     This action cannot be undone. Are you sure?
+ *   </Dialog.Description>
+ *   ...
+ * </Dialog.Content>
+ * ```
  */
-export const DialogDescription = forwardRef<HTMLElement, DialogDescriptionProps>(
-  (props, forwardedRef) => {
-    const { children, className, ...rest } = props;
+export const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
+  ({ children, ...restProps }, ref) => {
+    const { behavior, setDescriptionId } = useDialogContext("Dialog.Description");
+    const descriptionProps = behavior.getDescriptionProps();
 
-    const internalRef = useRef<HTMLElement>(null);
-
+    // Register description presence with both behavior and React context
     useEffect(() => {
-      if (typeof forwardedRef === "function") {
-        forwardedRef(internalRef.current);
-      } else if (forwardedRef) {
-        (forwardedRef as React.MutableRefObject<HTMLElement | null>).current = internalRef.current;
-      }
-    }, [forwardedRef]);
+      behavior.setHasDescription(true);
+      setDescriptionId(descriptionProps.id);
+      return () => {
+        behavior.setHasDescription(false);
+        setDescriptionId(null);
+      };
+    }, [behavior, descriptionProps.id, setDescriptionId]);
 
-    return createElement(
-      "ds-dialog-description",
-      {
-        ref: internalRef,
-        class: className,
-        ...rest,
-      },
-      children
+    return (
+      <p ref={ref} id={descriptionProps.id} {...restProps}>
+        {children}
+      </p>
     );
   }
 );
 
-DialogDescription.displayName = "DialogDescription";
+DialogDescription.displayName = "Dialog.Description";

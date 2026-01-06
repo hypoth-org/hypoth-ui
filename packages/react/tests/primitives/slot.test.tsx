@@ -1,7 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createElement, createRef } from "react";
-import { afterEach, describe, expect, it } from "vitest";
+import { createElement, createRef, forwardRef } from "react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Slot } from "../../src/primitives/slot.js";
 
 afterEach(() => {
@@ -184,6 +184,50 @@ describe("Slot", () => {
 
       expect(slotElement).toBe(childElement);
       expect(slotElement).toBeInstanceOf(HTMLButtonElement);
+    });
+  });
+
+  describe("non-forwardRef component warnings", () => {
+    it("warns when custom component doesn't forward ref", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+      // Component that doesn't forward ref
+      function NonForwardingButton({ children }: { children: React.ReactNode }) {
+        return createElement("button", { type: "button" }, children);
+      }
+
+      render(createElement(Slot, null, createElement(NonForwardingButton, null, "Click")));
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('The child component "NonForwardingButton" doesn\'t forward refs')
+      );
+
+      warnSpy.mockRestore();
+    });
+
+    it("does not warn when forwardRef component properly forwards ref", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+      // Component that properly forwards ref
+      const ForwardingButton = forwardRef<HTMLButtonElement, { children: React.ReactNode }>(
+        ({ children }, ref) => createElement("button", { type: "button", ref }, children)
+      );
+
+      render(createElement(Slot, null, createElement(ForwardingButton, null, "Click")));
+
+      expect(warnSpy).not.toHaveBeenCalled();
+
+      warnSpy.mockRestore();
+    });
+
+    it("does not warn for intrinsic elements", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+      render(createElement(Slot, null, createElement("button", { type: "button" }, "Click")));
+
+      expect(warnSpy).not.toHaveBeenCalled();
+
+      warnSpy.mockRestore();
     });
   });
 });

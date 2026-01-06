@@ -1,37 +1,38 @@
-import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+/**
+ * Dialog Title component - accessible title for the dialog.
+ */
 
-export interface DialogTitleProps extends HTMLAttributes<HTMLElement> {
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { useDialogContext } from "./dialog-context.js";
+
+export interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
   /** Title content */
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 /**
- * React wrapper for ds-dialog-title Web Component.
- * Accessible title for dialog.
+ * Accessible title for the dialog.
+ * Automatically linked to dialog via aria-labelledby.
+ *
+ * @example
+ * ```tsx
+ * <Dialog.Content>
+ *   <Dialog.Title>Confirm Action</Dialog.Title>
+ *   ...
+ * </Dialog.Content>
+ * ```
  */
-export const DialogTitle = forwardRef<HTMLElement, DialogTitleProps>((props, forwardedRef) => {
-  const { children, className, ...rest } = props;
+export const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
+  ({ children, ...restProps }, ref) => {
+    const { behavior } = useDialogContext("Dialog.Title");
+    const titleProps = behavior.getTitleProps();
 
-  const internalRef = useRef<HTMLElement>(null);
+    return (
+      <h2 ref={ref} id={titleProps.id} {...restProps}>
+        {children}
+      </h2>
+    );
+  }
+);
 
-  useEffect(() => {
-    if (typeof forwardedRef === "function") {
-      forwardedRef(internalRef.current);
-    } else if (forwardedRef) {
-      (forwardedRef as React.MutableRefObject<HTMLElement | null>).current = internalRef.current;
-    }
-  }, [forwardedRef]);
-
-  return createElement(
-    "ds-dialog-title",
-    {
-      ref: internalRef,
-      class: className,
-      ...rest,
-    },
-    children
-  );
-});
-
-DialogTitle.displayName = "DialogTitle";
+DialogTitle.displayName = "Dialog.Title";
