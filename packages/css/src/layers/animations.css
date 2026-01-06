@@ -1,0 +1,223 @@
+/**
+ * Animation Layer
+ *
+ * CSS keyframes and utility classes for component enter/exit transitions.
+ * All animations reference motion tokens for consistent timing across the system.
+ */
+
+/* =============================================================================
+   Keyframes
+   ============================================================================= */
+
+/* Fade animations */
+@keyframes ds-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ds-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Scale animations (dialog) */
+@keyframes ds-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ds-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Slide animations (popover, menu, tooltip) */
+@keyframes ds-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* =============================================================================
+   Animation Utility Classes
+   ============================================================================= */
+
+/* Entry animations */
+.ds-animate-fade-in {
+  animation: ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out) forwards;
+}
+
+.ds-animate-scale-in {
+  animation: ds-scale-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out) forwards;
+}
+
+.ds-animate-slide-up {
+  animation: ds-slide-up var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out) forwards;
+}
+
+/* Exit animations */
+.ds-animate-fade-out {
+  animation: ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in) forwards;
+}
+
+.ds-animate-scale-out {
+  animation: ds-scale-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in) forwards;
+}
+
+.ds-animate-slide-down {
+  animation: ds-slide-down var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in) forwards;
+}
+
+/* =============================================================================
+   Data Attribute Animations (Component Integration)
+   ============================================================================= */
+
+/* Dialog animations */
+ds-dialog-content[data-state="open"] {
+  animation:
+    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+    ds-scale-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
+}
+
+ds-dialog-content[data-state="closed"] {
+  animation:
+    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+    ds-scale-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
+}
+
+/* Popover animations */
+ds-popover-content[data-state="open"] {
+  animation:
+    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+    ds-slide-up var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
+}
+
+ds-popover-content[data-state="closed"] {
+  animation:
+    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+    ds-slide-down var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
+}
+
+/* Tooltip animations */
+ds-tooltip-content[data-state="open"] {
+  animation: ds-fade-in var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-out);
+}
+
+ds-tooltip-content[data-state="closed"] {
+  animation: ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
+}
+
+/* Menu animations */
+ds-menu-content[data-state="open"] {
+  animation:
+    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+    ds-slide-up var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
+}
+
+ds-menu-content[data-state="closed"] {
+  animation:
+    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+    ds-slide-down var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
+}
+
+/* =============================================================================
+   Reduced Motion Support
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all DS animations */
+  .ds-animate-fade-in,
+  .ds-animate-fade-out,
+  .ds-animate-scale-in,
+  .ds-animate-scale-out,
+  .ds-animate-slide-up,
+  .ds-animate-slide-down,
+  ds-dialog-content,
+  ds-popover-content,
+  ds-tooltip-content,
+  ds-menu-content {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure elements are visible in their final state */
+  ds-dialog-content[data-state="open"],
+  ds-popover-content[data-state="open"],
+  ds-tooltip-content[data-state="open"],
+  ds-menu-content[data-state="open"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   Custom Animation Overrides (via data attributes)
+   ============================================================================= */
+
+/* Allow components to specify custom enter animations */
+[data-animate-in~="fade-in"][data-state="open"] {
+  animation-name: ds-fade-in;
+}
+
+[data-animate-in~="scale-in"][data-state="open"] {
+  animation-name: ds-scale-in;
+}
+
+[data-animate-in~="slide-up"][data-state="open"] {
+  animation-name: ds-slide-up;
+}
+
+/* Allow components to specify custom exit animations */
+[data-animate-out~="fade-out"][data-state="closed"] {
+  animation-name: ds-fade-out;
+}
+
+[data-animate-out~="scale-out"][data-state="closed"] {
+  animation-name: ds-scale-out;
+}
+
+[data-animate-out~="slide-down"][data-state="closed"] {
+  animation-name: ds-slide-down;
+}
+
+/* Disable animations per-component */
+[data-no-animation] {
+  animation: none !important;
+  transition: none !important;
+}

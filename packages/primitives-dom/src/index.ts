@@ -90,3 +90,13 @@ export {
   type MenuContentProps,
   type MenuItemProps,
 } from "./behavior/menu.js";
+
+// Animation utilities
+export {
+  createPresence,
+  prefersReducedMotion,
+  onMotionPreferenceChange,
+  type AnimationState,
+  type Presence,
+  type PresenceOptions,
+} from "./animation/index.js";

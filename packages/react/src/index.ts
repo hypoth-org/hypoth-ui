@@ -72,6 +72,8 @@ export type {
 // Primitive types (server-safe, no runtime code)
 export type { BoxProps } from "./primitives/box.js";
 export type { SlotProps } from "./primitives/slot.js";
+export type { PresenceProps } from "./primitives/Presence.js";
+export type { UsePresenceOptions, UsePresenceReturn } from "./primitives/use-presence.js";
 
 // Utility types
 export type { WrapperConfig } from "./utils/create-component.js";
@@ -106,6 +108,8 @@ export { VisuallyHidden } from "./components/visually-hidden.js";
 export { Text } from "./components/text.js";
 export { Box } from "./primitives/box.js";
 export { Slot } from "./primitives/slot.js";
+export { Presence } from "./primitives/Presence.js";
+export { usePresence } from "./primitives/use-presence.js";
 
 // Field components
 export { Field } from "./components/field/field.js";
