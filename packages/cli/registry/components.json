@@ -1,0 +1,563 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-01-06T00:00:00Z",
+  "components": [
+    {
+      "name": "button",
+      "displayName": "Button",
+      "description": "Accessible button with loading and disabled states",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "button/button.tsx",
+          "target": "button.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "button/button.ts",
+          "target": "button.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "button",
+        "keyboardSupport": ["Enter", "Space"]
+      }
+    },
+    {
+      "name": "dialog",
+      "displayName": "Dialog",
+      "description": "Modal dialog with focus management and keyboard navigation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "dialog/dialog.tsx",
+          "target": "dialog.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "dialog/dialog.ts",
+          "target": "dialog.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "dialog/dialog-content.ts",
+          "target": "dialog-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "dialog/dialog-title.ts",
+          "target": "dialog-title.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "dialog/dialog-description.ts",
+          "target": "dialog-description.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "dialog-modal",
+        "keyboardSupport": ["Escape", "Tab"]
+      }
+    },
+    {
+      "name": "menu",
+      "displayName": "Menu",
+      "description": "Dropdown menu with keyboard navigation and submenus",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "menu/menu.tsx",
+          "target": "menu.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "menu/menu.ts",
+          "target": "menu.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "menu/menu-content.ts",
+          "target": "menu-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "menu/menu-item.ts",
+          "target": "menu-item.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "menu-button",
+        "keyboardSupport": ["Enter", "Space", "ArrowUp", "ArrowDown", "Escape"]
+      }
+    },
+    {
+      "name": "popover",
+      "displayName": "Popover",
+      "description": "Non-modal overlay positioned relative to trigger",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "popover/popover.tsx",
+          "target": "popover.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "popover/popover.ts",
+          "target": "popover.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "popover/popover-content.ts",
+          "target": "popover-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "dialog-non-modal",
+        "keyboardSupport": ["Escape", "Tab"]
+      }
+    },
+    {
+      "name": "tooltip",
+      "displayName": "Tooltip",
+      "description": "Informational overlay on hover/focus",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "tooltip/tooltip.tsx",
+          "target": "tooltip.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "tooltip/tooltip.ts",
+          "target": "tooltip.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "tooltip/tooltip-content.ts",
+          "target": "tooltip-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "tooltip",
+        "keyboardSupport": ["Escape"]
+      }
+    },
+    {
+      "name": "input",
+      "displayName": "Input",
+      "description": "Accessible text input with validation states",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "input/input.tsx",
+          "target": "input.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "input/input.ts",
+          "target": "input.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "textbox",
+        "keyboardSupport": ["Tab"]
+      }
+    },
+    {
+      "name": "textarea",
+      "displayName": "Textarea",
+      "description": "Multi-line text input with auto-resize",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "textarea/textarea.tsx",
+          "target": "textarea.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "textarea/textarea.ts",
+          "target": "textarea.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "textbox-multiline",
+        "keyboardSupport": ["Tab"]
+      }
+    },
+    {
+      "name": "checkbox",
+      "displayName": "Checkbox",
+      "description": "Tri-state checkbox with indeterminate support",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "checkbox/checkbox.tsx",
+          "target": "checkbox.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "checkbox/checkbox.ts",
+          "target": "checkbox.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "checkbox",
+        "keyboardSupport": ["Space"]
+      }
+    },
+    {
+      "name": "radio-group",
+      "displayName": "Radio Group",
+      "description": "Radio button group with keyboard navigation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "radio/radio-group.tsx",
+          "target": "radio-group.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "radio/radio-group.ts",
+          "target": "radio-group.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "radio/radio.ts",
+          "target": "radio.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "radio-group",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
+      }
+    },
+    {
+      "name": "switch",
+      "displayName": "Switch",
+      "description": "Toggle switch for boolean settings",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "switch/switch.tsx",
+          "target": "switch.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "switch/switch.ts",
+          "target": "switch.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "switch",
+        "keyboardSupport": ["Space"]
+      }
+    },
+    {
+      "name": "field",
+      "displayName": "Field",
+      "description": "Form field wrapper with label, description, and error states",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "field/field.tsx",
+          "target": "field.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "field/field.ts",
+          "target": "field.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "field/label.ts",
+          "target": "label.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "field/field-description.ts",
+          "target": "field-description.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "field/field-error.ts",
+          "target": "field-error.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "landmark-form",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "icon",
+      "displayName": "Icon",
+      "description": "SVG icon with size and accessibility handling",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "icon/icon.tsx",
+          "target": "icon.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "icon/icon.ts",
+          "target": "icon.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "icon/icon-adapter.ts",
+          "target": "icon-adapter.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "img",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "link",
+      "displayName": "Link",
+      "description": "Accessible anchor with external link handling",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "link/link.tsx",
+          "target": "link.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "link/link.ts",
+          "target": "link.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "link",
+        "keyboardSupport": ["Enter"]
+      }
+    },
+    {
+      "name": "spinner",
+      "displayName": "Spinner",
+      "description": "Loading spinner with accessibility announcements",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "spinner/spinner.tsx",
+          "target": "spinner.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "spinner/spinner.ts",
+          "target": "spinner.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "status",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "text",
+      "displayName": "Text",
+      "description": "Typography component with semantic variants",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "text/text.tsx",
+          "target": "text.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "text/text.ts",
+          "target": "text.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "none",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "visually-hidden",
+      "displayName": "Visually Hidden",
+      "description": "Hide content visually while keeping it accessible",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "visually-hidden/visually-hidden.tsx",
+          "target": "visually-hidden.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "visually-hidden/visually-hidden.ts",
+          "target": "visually-hidden.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "none",
+        "keyboardSupport": []
+      }
+    }
+  ]
+}

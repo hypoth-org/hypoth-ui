@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schema/ds.config.json",
+  "title": "Hypoth UI Configuration",
+  "description": "Project configuration for @hypoth-ui/cli",
+  "type": "object",
+  "required": ["$schema", "style", "framework", "typescript", "packageManager", "paths", "aliases", "components"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON schema URL for validation"
+    },
+    "style": {
+      "type": "string",
+      "description": "Installation mode",
+      "enum": ["copy", "package"],
+      "default": "package"
+    },
+    "framework": {
+      "type": "string",
+      "description": "Project framework",
+      "enum": ["react", "next", "wc", "vanilla"]
+    },
+    "typescript": {
+      "type": "boolean",
+      "description": "Whether project uses TypeScript",
+      "default": true
+    },
+    "packageManager": {
+      "type": "string",
+      "description": "Package manager to use for installations",
+      "enum": ["npm", "pnpm", "yarn", "bun"],
+      "default": "npm"
+    },
+    "paths": {
+      "type": "object",
+      "description": "Path configuration",
+      "required": ["components", "utils"],
+      "properties": {
+        "components": {
+          "type": "string",
+          "description": "Where to copy components (relative to project root)",
+          "default": "src/components/ui"
+        },
+        "utils": {
+          "type": "string",
+          "description": "Where to place utility files",
+          "default": "src/lib"
+        }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Import alias configuration",
+      "required": ["components", "lib"],
+      "properties": {
+        "components": {
+          "type": "string",
+          "description": "Alias for components directory",
+          "default": "@/components/ui"
+        },
+        "lib": {
+          "type": "string",
+          "description": "Alias for lib directory",
+          "default": "@/lib"
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "Installed components",
+      "items": {
+        "$ref": "#/definitions/InstalledComponent"
+      },
+      "default": []
+    }
+  },
+  "definitions": {
+    "InstalledComponent": {
+      "type": "object",
+      "required": ["name", "version", "installedAt", "mode"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component identifier"
+        },
+        "version": {
+          "type": "string",
+          "description": "Installed version",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "installedAt": {
+          "type": "string",
+          "description": "Installation timestamp",
+          "format": "date-time"
+        },
+        "mode": {
+          "type": "string",
+          "description": "How component was installed",
+          "enum": ["copy", "package"]
+        }
+      }
+    }
+  }
+}
