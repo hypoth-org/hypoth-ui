@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hypoth-ui.dev/schema/registry.json",
+  "title": "Hypoth UI Component Registry",
+  "description": "Schema for the component registry used by @hypoth-ui/cli",
+  "type": "object",
+  "required": ["version", "updatedAt", "components"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Registry format version (semver)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "updatedAt": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of last update",
+      "format": "date-time"
+    },
+    "components": {
+      "type": "array",
+      "description": "Available components",
+      "items": {
+        "$ref": "#/definitions/ComponentDefinition"
+      }
+    }
+  },
+  "definitions": {
+    "ComponentDefinition": {
+      "type": "object",
+      "required": [
+        "name",
+        "displayName",
+        "description",
+        "version",
+        "status",
+        "frameworks",
+        "dependencies",
+        "registryDependencies",
+        "files",
+        "a11y"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short component description"
+        },
+        "version": {
+          "type": "string",
+          "description": "Component version (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "status": {
+          "type": "string",
+          "description": "Component maturity level",
+          "enum": ["alpha", "beta", "stable"]
+        },
+        "frameworks": {
+          "type": "array",
+          "description": "Supported frameworks",
+          "items": {
+            "type": "string",
+            "enum": ["react", "wc"]
+          },
+          "minItems": 1
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "npm package dependencies",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registryDependencies": {
+          "type": "array",
+          "description": "Other registry components this depends on",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "description": "Files to copy in copy mode",
+          "items": {
+            "$ref": "#/definitions/ComponentFile"
+          }
+        },
+        "a11y": {
+          "$ref": "#/definitions/A11yMetadata"
+        }
+      }
+    },
+    "ComponentFile": {
+      "type": "object",
+      "required": ["path", "target", "type"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Source path in registry"
+        },
+        "target": {
+          "type": "string",
+          "description": "Target filename in user project"
+        },
+        "type": {
+          "type": "string",
+          "description": "File type",
+          "enum": ["tsx", "ts", "css", "json"]
+        },
+        "framework": {
+          "type": "string",
+          "description": "Framework-specific file (omit for shared)",
+          "enum": ["react", "wc"]
+        }
+      }
+    },
+    "A11yMetadata": {
+      "type": "object",
+      "required": ["apgPattern", "keyboardSupport"],
+      "properties": {
+        "apgPattern": {
+          "type": "string",
+          "description": "APG pattern name or 'custom'"
+        },
+        "keyboardSupport": {
+          "type": "array",
+          "description": "Supported keyboard interactions",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

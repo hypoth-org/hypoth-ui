@@ -25,6 +25,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (existing monorepo standard) + None added; removing @ds/governance from active workspace (013-defer-governance)
 - N/A (file moves only) (013-defer-governance)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (React adapter peer dependency) (014-shared-a11y-api)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Commander.js (CLI framework), prompts (interactive prompts), picocolors (terminal colors), execa (subprocess execution) (015-cli-tool)
+- File-based (ds.config.json local config, remote JSON registry) (015-cli-tool)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -81,9 +83,9 @@ pnpm a11y:validate                          # Validate audit records
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 015-cli-tool: Added TypeScript 5.3+ (strict mode, ES2022 target) + Commander.js (CLI framework), prompts (interactive prompts), picocolors (terminal colors), execa (subprocess execution)
 - 014-shared-a11y-api: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (React adapter peer dependency)
 - 013-defer-governance: Added TypeScript 5.3+ (existing monorepo standard) + None added; removing @ds/governance from active workspace
-- 012-governance-adoption: Added TypeScript 5.3+ (strict mode) + @changesets/cli (versioning), conventional-commits (commit format), @ds/docs-core (docs integration)
 
 
 <!-- MANUAL ADDITIONS START -->

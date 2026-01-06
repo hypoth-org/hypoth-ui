@@ -60,6 +60,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["packages/cli/src/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
     }
   ],
   "javascript": {
