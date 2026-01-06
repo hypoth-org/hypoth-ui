@@ -3,12 +3,16 @@ import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
+export type TooltipContentState = "open" | "closed";
+
 /**
  * Tooltip content container.
  *
  * @element ds-tooltip-content
  *
  * @slot - Content to display in the tooltip
+ *
+ * @attr {string} data-state - Animation state ("open" or "closed")
  *
  * @example
  * ```html
@@ -22,6 +26,10 @@ export class DsTooltipContent extends DSElement {
   /** Unique ID for ARIA association */
   @property({ type: String, reflect: true })
   override id = "";
+
+  /** Animation state (open or closed) - set by parent ds-tooltip */
+  @property({ type: String, reflect: true, attribute: "data-state" })
+  dataState: TooltipContentState = "closed";
 
   override connectedCallback(): void {
     super.connectedCallback();

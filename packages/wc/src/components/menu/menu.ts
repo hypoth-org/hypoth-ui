@@ -2,12 +2,15 @@ import {
   type AnchorPosition,
   type DismissableLayer,
   type Placement,
+  type Presence,
   type RovingFocus,
   type TypeAhead,
   createAnchorPosition,
   createDismissableLayer,
+  createPresence,
   createRovingFocus,
   createTypeAhead,
+  prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
@@ -16,6 +19,7 @@ import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 // Import child components to ensure they're registered
+import type { DsMenuContent } from "./menu-content.js";
 import "./menu-content.js";
 import "./menu-item.js";
 
@@ -65,8 +69,13 @@ export class DsMenu extends DSElement {
   @property({ type: Boolean })
   flip = true;
 
+  /** Whether to animate open/close transitions */
+  @property({ type: Boolean })
+  animated = true;
+
   private anchorPosition: AnchorPosition | null = null;
   private dismissLayer: DismissableLayer | null = null;
+  private presence: Presence | null = null;
   private rovingFocus: RovingFocus | null = null;
   private typeAhead: TypeAhead | null = null;
   private triggerElement: HTMLElement | null = null;
@@ -114,6 +123,36 @@ export class DsMenu extends DSElement {
   public close(): void {
     if (!this.open) return;
 
+    const content = this.querySelector("ds-menu-content") as DsMenuContent | null;
+
+    // If animated, use presence for exit animation
+    if (this.animated && content && !prefersReducedMotion()) {
+      // Cleanup dismiss layer so it doesn't re-trigger
+      this.dismissLayer?.deactivate();
+      this.dismissLayer = null;
+
+      // Create presence for exit animation
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      // No animation - close immediately
+      this.cleanup();
+      this.open = false;
+      emitEvent(this, StandardEvents.CLOSE);
+
+      // Return focus to trigger
+      this.triggerElement?.focus();
+    }
+  }
+
+  /**
+   * Completes the close after exit animation.
+   */
+  private completeClose(): void {
     this.cleanup();
     this.open = false;
     emitEvent(this, StandardEvents.CLOSE);
@@ -325,6 +364,10 @@ export class DsMenu extends DSElement {
     this.dismissLayer?.deactivate();
     this.dismissLayer = null;
 
+    // Cleanup presence
+    this.presence?.destroy();
+    this.presence = null;
+
     // Cleanup roving focus
     this.rovingFocus?.destroy();
     this.rovingFocus = null;
@@ -351,11 +394,16 @@ export class DsMenu extends DSElement {
     if (changedProperties.has("open")) {
       this.updateTriggerAria();
 
-      const content = this.querySelector("ds-menu-content");
+      const content = this.querySelector("ds-menu-content") as DsMenuContent | null;
 
       if (this.open) {
         // Show content
         content?.removeAttribute("hidden");
+
+        // Set data-state to open for entry animation
+        if (content) {
+          content.dataState = "open";
+        }
 
         // Wait for DOM update
         await this.updateComplete;

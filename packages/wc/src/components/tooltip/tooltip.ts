@@ -1,10 +1,18 @@
-import { type AnchorPosition, type Placement, createAnchorPosition } from "@ds/primitives-dom";
+import {
+  type AnchorPosition,
+  type Placement,
+  type Presence,
+  createAnchorPosition,
+  createPresence,
+  prefersReducedMotion,
+} from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
 // Import child component to ensure it's registered
+import type { DsTooltipContent } from "./tooltip-content.js";
 import "./tooltip-content.js";
 
 /**
@@ -47,7 +55,12 @@ export class DsTooltip extends DSElement {
   @property({ type: Number, attribute: "hide-delay" })
   hideDelay = 100;
 
+  /** Whether to animate open/close transitions */
+  @property({ type: Boolean })
+  animated = true;
+
   private anchorPosition: AnchorPosition | null = null;
+  private presence: Presence | null = null;
   private showTimeout: ReturnType<typeof setTimeout> | null = null;
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
   private escapeHandler: ((event: KeyboardEvent) => void) | null = null;
@@ -117,8 +130,21 @@ export class DsTooltip extends DSElement {
     if (!this.open) return;
 
     this.hideTimeout = setTimeout(() => {
-      this.cleanup();
-      this.open = false;
+      const content = this.querySelector("ds-tooltip-content") as DsTooltipContent | null;
+
+      // If animated, use presence for exit animation
+      if (this.animated && content && !prefersReducedMotion()) {
+        this.presence = createPresence({
+          onExitComplete: () => {
+            this.cleanup();
+            this.open = false;
+          },
+        });
+        this.presence.hide(content);
+      } else {
+        this.cleanup();
+        this.open = false;
+      }
       this.hideTimeout = null;
     }, this.hideDelay);
   }
@@ -215,17 +241,24 @@ export class DsTooltip extends DSElement {
     this.clearTimeouts();
     this.anchorPosition?.destroy();
     this.anchorPosition = null;
+    this.presence?.destroy();
+    this.presence = null;
   }
 
   override async updated(changedProperties: Map<string, unknown>): Promise<void> {
     super.updated(changedProperties);
 
     if (changedProperties.has("open")) {
-      const content = this.querySelector("ds-tooltip-content");
+      const content = this.querySelector("ds-tooltip-content") as DsTooltipContent | null;
 
       if (this.open) {
         // Show content
         content?.removeAttribute("hidden");
+
+        // Set data-state to open for entry animation
+        if (content) {
+          content.dataState = "open";
+        }
 
         // Wait for DOM update
         await this.updateComplete;

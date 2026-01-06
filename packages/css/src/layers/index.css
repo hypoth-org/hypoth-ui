@@ -1,11 +1,12 @@
 /* CSS Layer Order Declaration */
 /* Layers are listed from lowest to highest precedence */
-@layer reset, tokens, base, components, utilities, overrides;
+@layer reset, tokens, base, components, animations, utilities, overrides;
 
 /* Import all layer definitions */
 @import "./reset.css" layer(reset);
 @import "./tokens.css" layer(tokens);
 @import "./base.css" layer(base);
 @import "./components.css" layer(components);
+@import "./animations.css" layer(animations);
 @import "./utilities.css" layer(utilities);
 @import "./overrides.css" layer(overrides);

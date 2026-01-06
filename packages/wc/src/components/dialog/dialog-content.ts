@@ -4,6 +4,7 @@ import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
 export type DialogContentSize = "sm" | "md" | "lg" | "xl" | "full";
+export type DialogContentState = "open" | "closed";
 
 /**
  * Dialog content container component.
@@ -16,6 +17,8 @@ export type DialogContentSize = "sm" | "md" | "lg" | "xl" | "full";
  * @slot - Dialog content (title, description, body, actions)
  *
  * @csspart container - The content container element
+ *
+ * @attr {string} data-state - Animation state ("open" or "closed")
  *
  * @example
  * ```html
@@ -33,6 +36,10 @@ export class DsDialogContent extends DSElement {
   /** Size variant of the dialog */
   @property({ type: String, reflect: true })
   size: DialogContentSize = "md";
+
+  /** Animation state (open or closed) - set by parent ds-dialog */
+  @property({ type: String, reflect: true, attribute: "data-state" })
+  dataState: DialogContentState = "open";
 
   override render() {
     return html`

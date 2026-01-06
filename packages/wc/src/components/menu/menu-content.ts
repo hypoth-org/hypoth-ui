@@ -3,12 +3,16 @@ import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
+export type MenuContentState = "open" | "closed";
+
 /**
  * Menu content container with role="menu".
  *
  * @element ds-menu-content
  *
  * @slot - Menu items (ds-menu-item elements)
+ *
+ * @attr {string} data-state - Animation state ("open" or "closed")
  *
  * @example
  * ```html
@@ -25,6 +29,10 @@ export class DsMenuContent extends DSElement {
   /** Unique ID for ARIA association */
   @property({ type: String, reflect: true })
   override id = "";
+
+  /** Animation state (open or closed) - set by parent ds-menu */
+  @property({ type: String, reflect: true, attribute: "data-state" })
+  dataState: MenuContentState = "closed";
 
   override connectedCallback(): void {
     super.connectedCallback();

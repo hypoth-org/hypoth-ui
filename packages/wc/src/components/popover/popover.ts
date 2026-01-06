@@ -2,8 +2,11 @@ import {
   type AnchorPosition,
   type DismissableLayer,
   type Placement,
+  type Presence,
   createAnchorPosition,
   createDismissableLayer,
+  createPresence,
+  prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
@@ -12,6 +15,7 @@ import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 // Import child component to ensure it's registered
+import type { DsPopoverContent } from "./popover-content.js";
 import "./popover-content.js";
 
 /**
@@ -76,8 +80,13 @@ export class DsPopover extends DSElement {
   })
   closeOnOutsideClick = true;
 
+  /** Whether to animate open/close transitions */
+  @property({ type: Boolean })
+  animated = true;
+
   private anchorPosition: AnchorPosition | null = null;
   private dismissLayer: DismissableLayer | null = null;
+  private presence: Presence | null = null;
   private triggerElement: HTMLElement | null = null;
   private resizeObserver: ResizeObserver | null = null;
   private scrollHandler: (() => void) | null = null;
@@ -116,6 +125,36 @@ export class DsPopover extends DSElement {
   public close(): void {
     if (!this.open) return;
 
+    const content = this.querySelector("ds-popover-content") as DsPopoverContent | null;
+
+    // If animated, use presence for exit animation
+    if (this.animated && content && !prefersReducedMotion()) {
+      // Cleanup dismiss layer so clicks don't re-trigger close
+      this.dismissLayer?.deactivate();
+      this.dismissLayer = null;
+
+      // Create presence for exit animation
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      // No animation - close immediately
+      this.cleanup();
+      this.open = false;
+      emitEvent(this, StandardEvents.CLOSE);
+
+      // Return focus to trigger
+      this.triggerElement?.focus();
+    }
+  }
+
+  /**
+   * Completes the close after exit animation.
+   */
+  private completeClose(): void {
     this.cleanup();
     this.open = false;
     emitEvent(this, StandardEvents.CLOSE);
@@ -234,6 +273,10 @@ export class DsPopover extends DSElement {
     this.dismissLayer?.deactivate();
     this.dismissLayer = null;
 
+    // Cleanup presence
+    this.presence?.destroy();
+    this.presence = null;
+
     // Cleanup resize observer
     this.resizeObserver?.disconnect();
     this.resizeObserver = null;
@@ -252,11 +295,16 @@ export class DsPopover extends DSElement {
     if (changedProperties.has("open")) {
       this.updateTriggerAria();
 
-      const content = this.querySelector("ds-popover-content");
+      const content = this.querySelector("ds-popover-content") as DsPopoverContent | null;
 
       if (this.open) {
         // Show content
         content?.removeAttribute("hidden");
+
+        // Set data-state to open for entry animation
+        if (content) {
+          content.dataState = "open";
+        }
 
         // Wait for DOM update
         await this.updateComplete;

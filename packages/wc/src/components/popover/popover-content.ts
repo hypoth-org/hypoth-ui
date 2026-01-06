@@ -3,12 +3,16 @@ import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
+export type PopoverContentState = "open" | "closed";
+
 /**
  * Popover content container.
  *
  * @element ds-popover-content
  *
  * @slot - Content to display in the popover
+ *
+ * @attr {string} data-state - Animation state ("open" or "closed")
  *
  * @example
  * ```html
@@ -25,6 +29,10 @@ export class DsPopoverContent extends DSElement {
   /** Unique ID for ARIA association */
   @property({ type: String, reflect: true })
   override id = "";
+
+  /** Animation state (open or closed) - set by parent ds-popover */
+  @property({ type: String, reflect: true, attribute: "data-state" })
+  dataState: PopoverContentState = "closed";
 
   override connectedCallback(): void {
     super.connectedCallback();

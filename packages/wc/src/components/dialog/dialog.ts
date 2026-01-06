@@ -1,5 +1,12 @@
-import { type FocusTrap, createFocusTrap } from "@ds/primitives-dom";
-import { type DismissableLayer, createDismissableLayer } from "@ds/primitives-dom";
+import {
+  type FocusTrap,
+  createFocusTrap,
+  type DismissableLayer,
+  createDismissableLayer,
+  type Presence,
+  createPresence,
+  prefersReducedMotion,
+} from "@ds/primitives-dom";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
@@ -7,6 +14,7 @@ import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 // Import child components to ensure they're registered
+import type { DsDialogContent } from "./dialog-content.js";
 import "./dialog-content.js";
 import "./dialog-title.js";
 import "./dialog-description.js";
@@ -54,6 +62,10 @@ export class DsDialog extends DSElement {
   @property({ type: Boolean, attribute: "close-on-backdrop" })
   closeOnBackdrop = true;
 
+  /** Whether to animate open/close transitions */
+  @property({ type: Boolean })
+  animated = true;
+
   /** Dialog role - stored internally, read from attribute */
   @state()
   private dialogRole: DialogRole = "dialog";
@@ -64,6 +76,7 @@ export class DsDialog extends DSElement {
 
   private focusTrap: FocusTrap | null = null;
   private dismissLayer: DismissableLayer | null = null;
+  private presence: Presence | null = null;
   private triggerElement: HTMLElement | null = null;
   private attributeObserver: MutationObserver | null = null;
   private backdropElement: HTMLElement | null = null;
@@ -136,10 +149,42 @@ export class DsDialog extends DSElement {
       return;
     }
 
-    // Clean up focus trap and dismiss layer first
-    this.cleanup();
+    const content = this.querySelector("ds-dialog-content") as DsDialogContent | null;
 
-    // Close immediately and emit event
+    // If animated, use presence for exit animation
+    if (this.animated && content && !prefersReducedMotion()) {
+      this.isClosing = true;
+
+      // Clean up focus trap and dismiss layer
+      this.focusTrap?.deactivate();
+      this.focusTrap = null;
+      this.dismissLayer?.deactivate();
+      this.dismissLayer = null;
+
+      // Create presence for exit animation
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      // No animation - close immediately
+      this.cleanup();
+      this.open = false;
+      this.isClosing = false;
+      emitEvent(this, StandardEvents.CLOSE);
+
+      // Return focus to trigger
+      this.triggerElement?.focus();
+    }
+  }
+
+  /**
+   * Completes the close after exit animation.
+   */
+  private completeClose(): void {
+    this.cleanup();
     this.open = false;
     this.isClosing = false;
     emitEvent(this, StandardEvents.CLOSE);
@@ -211,15 +256,24 @@ export class DsDialog extends DSElement {
     this.focusTrap = null;
     this.dismissLayer?.deactivate();
     this.dismissLayer = null;
+    this.presence?.destroy();
+    this.presence = null;
   }
 
   override async updated(changedProperties: Map<string, unknown>): Promise<void> {
     super.updated(changedProperties);
 
     if (changedProperties.has("open")) {
+      const content = this.querySelector("ds-dialog-content") as DsDialogContent | null;
+
       if (this.open) {
         // Wait for the next microtask to ensure DOM is committed
         await this.updateComplete;
+
+        // Set data-state to open for entry animation
+        if (content) {
+          content.dataState = "open";
+        }
 
         // Setup focus and dismiss
         this.setupFocusAndDismiss();
