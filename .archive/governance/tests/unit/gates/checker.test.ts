@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { GatesConfig } from "../../../src/types/index.js";
 import type { GateContext } from "../../../src/gates/types.js";
+import type { GatesConfig } from "../../../src/types/index.js";
 
 describe("Gates Checker", () => {
   const mockConfig: GatesConfig = {
@@ -74,9 +74,7 @@ describe("Gates Checker", () => {
 
   describe("formatGatesReport", () => {
     it("should format report as readable text", async () => {
-      const { runGates, formatGatesReport } = await import(
-        "../../../src/gates/checker.js"
-      );
+      const { runGates, formatGatesReport } = await import("../../../src/gates/checker.js");
 
       const report = await runGates(mockConfig, mockContext, {
         gates: ["design-review"],
@@ -91,9 +89,7 @@ describe("Gates Checker", () => {
 
   describe("getRequiredFailures", () => {
     it("should return only required gates that failed", async () => {
-      const { getRequiredFailures } = await import(
-        "../../../src/gates/checker.js"
-      );
+      const { getRequiredFailures } = await import("../../../src/gates/checker.js");
 
       const report = {
         passed: false,

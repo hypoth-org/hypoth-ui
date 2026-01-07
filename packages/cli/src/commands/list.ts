@@ -7,9 +7,9 @@
  */
 
 import pc from "picocolors";
+import type { DSConfig, ListOptions } from "../types/index.js";
 import { configExists, readConfig } from "../utils/config.js";
-import { loadBundledRegistry, getComponentsForFramework } from "../utils/registry.js";
-import type { ListOptions, DSConfig } from "../types/index.js";
+import { getComponentsForFramework, loadBundledRegistry } from "../utils/registry.js";
 
 /**
  * Execute the list command
@@ -81,9 +81,10 @@ export async function listCommand(options: ListOptions = {}): Promise<void> {
     const name = (installedMark + component.name).padEnd(nameWidth + 2).slice(0, nameWidth + 2);
     const status = formatStatus(component.status).padEnd(statusWidth);
     const version = component.version.padEnd(versionWidth);
-    const desc = component.description.length > descWidth
-      ? `${component.description.slice(0, descWidth - 3)}...`
-      : component.description;
+    const desc =
+      component.description.length > descWidth
+        ? `${component.description.slice(0, descWidth - 3)}...`
+        : component.description;
 
     console.log(`${name}${status}${version}${pc.dim(desc)}`);
   }

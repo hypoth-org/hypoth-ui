@@ -87,10 +87,7 @@ export function loadDeprecationRegistry(registryPath: string): DeprecationRegist
 /**
  * Save deprecation registry to file
  */
-export function saveDeprecationRegistry(
-  registryPath: string,
-  registry: DeprecationRegistry
-): void {
+export function saveDeprecationRegistry(registryPath: string, registry: DeprecationRegistry): void {
   const content = JSON.stringify(registry, null, 2);
   fs.writeFileSync(registryPath, content, "utf-8");
 }
@@ -127,9 +124,7 @@ export function removeDeprecation(
 ): DeprecationRegistry {
   return {
     ...registry,
-    deprecations: registry.deprecations.filter(
-      (d) => !(d.item === item && d.type === type)
-    ),
+    deprecations: registry.deprecations.filter((d) => !(d.item === item && d.type === type)),
   };
 }
 
@@ -142,9 +137,7 @@ export function queryDeprecations(
 ): DeprecationWithStatus[] {
   const currentVersion = options.currentVersion ?? "1.0.0";
 
-  let results = registry.deprecations.map((d) =>
-    calculateDeprecationStatus(d, currentVersion)
-  );
+  let results = registry.deprecations.map((d) => calculateDeprecationStatus(d, currentVersion));
 
   // Filter by type
   if (options.type) {
@@ -163,9 +156,7 @@ export function queryDeprecations(
 
   // Filter by edition
   if (options.edition) {
-    results = results.filter(
-      (d) => !d.editions || d.editions.includes(options.edition as Edition)
-    );
+    results = results.filter((d) => !d.editions || d.editions.includes(options.edition as Edition));
   }
 
   return results;
@@ -191,9 +182,7 @@ export function getActiveDeprecations(
   registry: DeprecationRegistry,
   currentVersion: string
 ): DeprecationWithStatus[] {
-  return queryDeprecations(registry, { currentVersion }).filter(
-    (d) => d.status !== "removed"
-  );
+  return queryDeprecations(registry, { currentVersion }).filter((d) => d.status !== "removed");
 }
 
 /**

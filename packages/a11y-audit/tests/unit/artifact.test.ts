@@ -10,11 +10,7 @@ describe("artifact utilities", () => {
   describe("calculateOverallStatus logic", () => {
     // Simple status calculation logic tests
     it("should return conformant when all items pass", () => {
-      const items = [
-        { status: "pass" },
-        { status: "pass" },
-        { status: "na" },
-      ];
+      const items = [{ status: "pass" }, { status: "pass" }, { status: "na" }];
       const hasFail = items.some((i) => i.status === "fail");
       const allPass = items.every((i) => i.status === "pass" || i.status === "na");
       expect(hasFail).toBe(false);
@@ -22,19 +18,13 @@ describe("artifact utilities", () => {
     });
 
     it("should detect failures", () => {
-      const items = [
-        { status: "pass" },
-        { status: "fail" },
-      ];
+      const items = [{ status: "pass" }, { status: "fail" }];
       const hasFail = items.some((i) => i.status === "fail");
       expect(hasFail).toBe(true);
     });
 
     it("should detect blocked items", () => {
-      const items = [
-        { status: "pass" },
-        { status: "blocked" },
-      ];
+      const items = [{ status: "pass" }, { status: "blocked" }];
       const hasBlocked = items.some((i) => i.status === "blocked");
       expect(hasBlocked).toBe(true);
     });

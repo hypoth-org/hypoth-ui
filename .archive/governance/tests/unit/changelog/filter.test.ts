@@ -5,9 +5,7 @@ import type { ChangesetEntry, Edition } from "../../../src/types/index.js";
 describe("Changelog Filter", () => {
   describe("filterByEdition", () => {
     it("should return only changes for the specified edition", async () => {
-      const { filterByEdition } = await import(
-        "../../../src/changelog/filter.js"
-      );
+      const { filterByEdition } = await import("../../../src/changelog/filter.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -45,9 +43,7 @@ describe("Changelog Filter", () => {
     });
 
     it("should preserve security flag when filtering", async () => {
-      const { filterByEdition } = await import(
-        "../../../src/changelog/filter.js"
-      );
+      const { filterByEdition } = await import("../../../src/changelog/filter.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -67,9 +63,7 @@ describe("Changelog Filter", () => {
 
   describe("filterSecurityUpdates", () => {
     it("should return only security-related changes", async () => {
-      const { filterSecurityUpdates } = await import(
-        "../../../src/changelog/filter.js"
-      );
+      const { filterSecurityUpdates } = await import("../../../src/changelog/filter.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -97,9 +91,7 @@ describe("Changelog Filter", () => {
 
   describe("filterBreakingChanges", () => {
     it("should return only breaking changes", async () => {
-      const { filterBreakingChanges } = await import(
-        "../../../src/changelog/filter.js"
-      );
+      const { filterBreakingChanges } = await import("../../../src/changelog/filter.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -127,9 +119,7 @@ describe("Changelog Filter", () => {
 
   describe("aggregateChangesForTenant", () => {
     it("should aggregate changes across versions for a tenant", async () => {
-      const { aggregateChangesForTenant } = await import(
-        "../../../src/changelog/filter.js"
-      );
+      const { aggregateChangesForTenant } = await import("../../../src/changelog/filter.js");
 
       const releases = [
         {
@@ -158,12 +148,7 @@ describe("Changelog Filter", () => {
         },
       ];
 
-      const aggregated = aggregateChangesForTenant(
-        releases,
-        "core",
-        "1.0.0",
-        "1.2.0"
-      );
+      const aggregated = aggregateChangesForTenant(releases, "core", "1.0.0", "1.2.0");
 
       expect(aggregated.changes).toHaveLength(2);
       expect(aggregated.from_version).toBe("1.0.0");

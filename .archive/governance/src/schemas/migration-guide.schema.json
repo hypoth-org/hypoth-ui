@@ -74,7 +74,13 @@
         "type": {
           "type": "string",
           "description": "Type of breaking change",
-          "enum": ["api-change", "component-removal", "token-rename", "behavior-change", "dependency-update"]
+          "enum": [
+            "api-change",
+            "component-removal",
+            "token-rename",
+            "behavior-change",
+            "dependency-update"
+          ]
         },
         "severity": {
           "type": "string",

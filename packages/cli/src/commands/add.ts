@@ -9,19 +9,28 @@
 
 import * as p from "@clack/prompts";
 import pc from "picocolors";
-import { readConfig, writeConfig, addInstalledComponent, isComponentInstalled } from "../utils/config.js";
-import { loadBundledRegistry, getComponent, resolveDependencies, getNpmDependencies, isComponentCompatible, getComponentNames } from "../utils/registry.js";
-import { installPackages } from "../utils/install.js";
-import { copyComponentFiles, ensureComponentsDir } from "../utils/copy.js";
 import type { AddOptions, ComponentDefinition, DSConfig } from "../types/index.js";
+import {
+  addInstalledComponent,
+  isComponentInstalled,
+  readConfig,
+  writeConfig,
+} from "../utils/config.js";
+import { copyComponentFiles, ensureComponentsDir } from "../utils/copy.js";
+import { installPackages } from "../utils/install.js";
+import {
+  getComponent,
+  getComponentNames,
+  getNpmDependencies,
+  isComponentCompatible,
+  loadBundledRegistry,
+  resolveDependencies,
+} from "../utils/registry.js";
 
 /**
  * Execute the add command
  */
-export async function addCommand(
-  componentArgs: string[],
-  options: AddOptions = {}
-): Promise<void> {
+export async function addCommand(componentArgs: string[], options: AddOptions = {}): Promise<void> {
   p.intro(pc.bgCyan(pc.black(" hypoth-ui add ")));
 
   const cwd = process.cwd();
@@ -39,9 +48,7 @@ export async function addCommand(
   const registry = loadBundledRegistry();
 
   // Handle --all flag
-  const components = options.all
-    ? getComponentNames(registry)
-    : componentArgs;
+  const components = options.all ? getComponentNames(registry) : componentArgs;
 
   if (options.all) {
     p.log.info(`Installing all ${components.length} components`);
@@ -146,7 +153,11 @@ export async function addCommand(
         });
 
         if (result.errors.length > 0) {
-          spinner.stop(pc.red(`Failed to copy ${component.name}: ${result.errors[0]?.error ?? "Unknown error"}`));
+          spinner.stop(
+            pc.red(
+              `Failed to copy ${component.name}: ${result.errors[0]?.error ?? "Unknown error"}`
+            )
+          );
           continue;
         }
 

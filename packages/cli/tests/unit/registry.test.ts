@@ -3,16 +3,16 @@
  */
 
 import { describe, expect, it } from "vitest";
+import type { ComponentRegistry } from "../../src/types/index.js";
 import {
+  componentExists,
   getComponent,
   getComponentNames,
-  componentExists,
   getComponentsForFramework,
-  resolveDependencies,
   getNpmDependencies,
   isComponentCompatible,
+  resolveDependencies,
 } from "../../src/utils/registry.js";
-import type { ComponentRegistry } from "../../src/types/index.js";
 
 describe("registry utilities", () => {
   // Test registry with sample components

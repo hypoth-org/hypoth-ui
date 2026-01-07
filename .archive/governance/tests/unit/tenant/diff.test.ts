@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Edition } from "../../../src/types/index.js";
 import type { ReleaseWithEntries } from "../../../src/changelog/types.js";
+import type { Edition } from "../../../src/types/index.js";
 
 describe("Tenant Diff", () => {
   const mockReleases: ReleaseWithEntries[] = [
@@ -46,9 +46,7 @@ describe("Tenant Diff", () => {
 
   describe("calculateVersionDiff", () => {
     it("should calculate versions behind", async () => {
-      const { calculateVersionDiff } = await import(
-        "../../../src/tenant/diff.js"
-      );
+      const { calculateVersionDiff } = await import("../../../src/tenant/diff.js");
 
       const diff = calculateVersionDiff("1.0.0", "2.0.0", mockReleases, "core");
 
@@ -57,9 +55,7 @@ describe("Tenant Diff", () => {
     });
 
     it("should detect security updates", async () => {
-      const { calculateVersionDiff } = await import(
-        "../../../src/tenant/diff.js"
-      );
+      const { calculateVersionDiff } = await import("../../../src/tenant/diff.js");
 
       const diff = calculateVersionDiff("1.1.0", "1.2.0", mockReleases, "core");
 
@@ -68,9 +64,7 @@ describe("Tenant Diff", () => {
     });
 
     it("should filter by edition", async () => {
-      const { calculateVersionDiff } = await import(
-        "../../../src/tenant/diff.js"
-      );
+      const { calculateVersionDiff } = await import("../../../src/tenant/diff.js");
 
       // Core edition should not see the breaking change (pro/enterprise only)
       const coreDiff = calculateVersionDiff("1.0.0", "2.0.0", mockReleases, "core");
@@ -84,9 +78,7 @@ describe("Tenant Diff", () => {
 
   describe("summarizeChanges", () => {
     it("should count changes by type", async () => {
-      const { summarizeChanges } = await import(
-        "../../../src/tenant/diff.js"
-      );
+      const { summarizeChanges } = await import("../../../src/tenant/diff.js");
 
       const entries = mockReleases.flatMap((r) => r.entries);
       const summary = summarizeChanges(entries);
@@ -100,9 +92,7 @@ describe("Tenant Diff", () => {
 
   describe("generateTenantUpdateReport", () => {
     it("should generate full report", async () => {
-      const { generateTenantUpdateReport } = await import(
-        "../../../src/tenant/diff.js"
-      );
+      const { generateTenantUpdateReport } = await import("../../../src/tenant/diff.js");
 
       const tenant = {
         id: "acme",

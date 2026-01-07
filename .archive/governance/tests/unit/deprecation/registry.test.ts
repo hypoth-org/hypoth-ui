@@ -4,9 +4,7 @@ import type { DeprecationRecord } from "../../../src/types/index.js";
 describe("Deprecation Registry", () => {
   describe("calculateDeprecationStatus", () => {
     it("should mark as active when far from removal", async () => {
-      const { calculateDeprecationStatus } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { calculateDeprecationStatus } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -21,9 +19,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should mark as warning when 2 versions away", async () => {
-      const { calculateDeprecationStatus } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { calculateDeprecationStatus } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -38,9 +34,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should mark as removal-imminent when 1 version away", async () => {
-      const { calculateDeprecationStatus } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { calculateDeprecationStatus } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -55,9 +49,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should mark as removed when past removal version", async () => {
-      const { calculateDeprecationStatus } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { calculateDeprecationStatus } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -74,18 +66,14 @@ describe("Deprecation Registry", () => {
 
   describe("createDeprecation", () => {
     it("should calculate removal version 2 majors ahead", async () => {
-      const { createDeprecation } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { createDeprecation } = await import("../../../src/deprecation/registry.js");
 
       const record = createDeprecation("OldButton", "component", "1.0.0");
       expect(record.removal_version).toBe("3.0.0");
     });
 
     it("should include optional fields", async () => {
-      const { createDeprecation } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { createDeprecation } = await import("../../../src/deprecation/registry.js");
 
       const record = createDeprecation("OldButton", "component", "1.0.0", {
         replacement: "NewButton",
@@ -101,9 +89,7 @@ describe("Deprecation Registry", () => {
 
   describe("validateDeprecationWindow", () => {
     it("should accept 2 major version window", async () => {
-      const { validateDeprecationWindow } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { validateDeprecationWindow } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -116,9 +102,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should reject 1 major version window", async () => {
-      const { validateDeprecationWindow } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { validateDeprecationWindow } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -131,9 +115,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should accept longer windows", async () => {
-      const { validateDeprecationWindow } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { validateDeprecationWindow } = await import("../../../src/deprecation/registry.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -148,9 +130,7 @@ describe("Deprecation Registry", () => {
 
   describe("queryDeprecations", () => {
     it("should filter by type", async () => {
-      const { queryDeprecations } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { queryDeprecations } = await import("../../../src/deprecation/registry.js");
 
       const registry = {
         deprecations: [
@@ -179,9 +159,7 @@ describe("Deprecation Registry", () => {
     });
 
     it("should filter by status", async () => {
-      const { queryDeprecations } = await import(
-        "../../../src/deprecation/registry.js"
-      );
+      const { queryDeprecations } = await import("../../../src/deprecation/registry.js");
 
       const registry = {
         deprecations: [

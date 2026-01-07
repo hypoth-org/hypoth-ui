@@ -6,7 +6,7 @@
 
 import * as fs from "node:fs";
 import * as path from "node:path";
-import type { ChangesetEntry, ChangeType, Edition } from "../types/index.js";
+import type { ChangeType, ChangesetEntry, Edition } from "../types/index.js";
 import type { ParsedChangeset } from "./types.js";
 
 /** Parse YAML-like frontmatter from changeset content */
@@ -81,9 +81,7 @@ function parseFrontmatter(content: string): {
 /**
  * Parse a single changeset file
  */
-export function parseChangesetFile(
-  filePath: string
-): ParsedChangeset | null {
+export function parseChangesetFile(filePath: string): ParsedChangeset | null {
   if (!fs.existsSync(filePath)) {
     return null;
   }
@@ -135,9 +133,7 @@ export function parseChangesets(changesetDir: string): ParsedChangeset[] {
 /**
  * Convert parsed changesets to ChangesetEntry format
  */
-export function toChangesetEntries(
-  changesets: ParsedChangeset[]
-): ChangesetEntry[] {
+export function toChangesetEntries(changesets: ParsedChangeset[]): ChangesetEntry[] {
   return changesets.map((cs) => {
     // Determine overall change type (highest bump wins)
     const types = Object.values(cs.packages);

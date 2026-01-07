@@ -9,24 +9,21 @@
  *   ds-tenant-diff --tenant <tenant-id> --releases <releases-file>
  */
 
-import { Command } from "commander";
 import * as fs from "node:fs";
-import type { Edition } from "../types/index.js";
+import { Command } from "commander";
 import type { ReleaseWithEntries } from "../changelog/types.js";
-import type { TenantInfo } from "../tenant/types.js";
 import {
   calculateVersionDiff,
   formatUpdateReport,
   generateTenantUpdateReport,
   generateUpdateRecommendation,
 } from "../tenant/diff.js";
+import type { TenantInfo } from "../tenant/types.js";
+import type { Edition } from "../types/index.js";
 
 const program = new Command();
 
-program
-  .name("ds-tenant-diff")
-  .description("Generate update reports for tenants")
-  .version("1.0.0");
+program.name("ds-tenant-diff").description("Generate update reports for tenants").version("1.0.0");
 
 // Quick diff command
 program

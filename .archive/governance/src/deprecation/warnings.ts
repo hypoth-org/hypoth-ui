@@ -122,7 +122,8 @@ export function generateWarning(deprecation: DeprecationWithStatus): Deprecation
  * Format warning for console output
  */
 export function formatConsoleWarning(warning: DeprecationWarning): string {
-  const prefix = warning.severity === "error" ? "ERROR" : warning.severity === "warning" ? "WARN" : "INFO";
+  const prefix =
+    warning.severity === "error" ? "ERROR" : warning.severity === "warning" ? "WARN" : "INFO";
   const lines: string[] = [`[${prefix}] ${warning.message}`];
 
   if (warning.details) {

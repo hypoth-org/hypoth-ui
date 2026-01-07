@@ -9,15 +9,10 @@
 
 import * as p from "@clack/prompts";
 import pc from "picocolors";
-import { detectProject, isValidProject } from "../utils/detect.js";
-import {
-  configExists,
-  createConfig,
-  readConfig,
-  writeConfig,
-} from "../utils/config.js";
-import { installPackages } from "../utils/install.js";
 import type { DSConfig, Framework, InitOptions, PackageManager } from "../types/index.js";
+import { configExists, createConfig, readConfig, writeConfig } from "../utils/config.js";
+import { detectProject, isValidProject } from "../utils/detect.js";
+import { installPackages } from "../utils/install.js";
 
 /**
  * Core packages that are always installed (never copied)
@@ -34,7 +29,9 @@ export async function initCommand(options: InitOptions = {}): Promise<void> {
 
   // Check for valid project
   if (!isValidProject(cwd)) {
-    p.cancel(pc.red("No package.json found. Please run this command in a valid project directory."));
+    p.cancel(
+      pc.red("No package.json found. Please run this command in a valid project directory.")
+    );
     process.exit(1);
   }
 
@@ -87,10 +84,7 @@ export async function initCommand(options: InitOptions = {}): Promise<void> {
 /**
  * Handle existing configuration
  */
-async function handleExistingConfig(
-  cwd: string,
-  options: InitOptions
-): Promise<boolean> {
+async function handleExistingConfig(cwd: string, options: InitOptions): Promise<boolean> {
   if (options.yes) {
     p.log.warn("Overwriting existing ds.config.json");
     return true;
@@ -99,9 +93,7 @@ async function handleExistingConfig(
   const existingConfig = readConfig(cwd);
   const componentsCount = existingConfig.components.length;
 
-  p.log.warn(
-    `Found existing ds.config.json with ${componentsCount} installed component(s)`
-  );
+  p.log.warn(`Found existing ds.config.json with ${componentsCount} installed component(s)`);
 
   const action = await p.select({
     message: "What would you like to do?",
@@ -131,8 +123,8 @@ async function promptForConfig(
   detection: ReturnType<typeof detectProject>,
   options: InitOptions
 ): Promise<DSConfig> {
-  const style = options.style ?? await promptForStyle();
-  const framework = options.framework ?? await promptForFramework(detection);
+  const style = options.style ?? (await promptForStyle());
+  const framework = options.framework ?? (await promptForFramework(detection));
   const paths = await promptForPaths(detection, framework);
 
   return createConfig({
@@ -179,9 +171,7 @@ async function promptForStyle(): Promise<"copy" | "package"> {
 /**
  * Prompt for framework selection
  */
-async function promptForFramework(
-  detection: ReturnType<typeof detectProject>
-): Promise<Framework> {
+async function promptForFramework(detection: ReturnType<typeof detectProject>): Promise<Framework> {
   // If detection is confident, use it
   if (detection.framework !== "unknown" && detection.confidence === "high") {
     const useDetected = await p.confirm({
@@ -229,12 +219,9 @@ async function promptForPaths(
 
   // Framework-specific defaults
   const defaultComponentsPath =
-    framework === "next"
-      ? `${srcDir}/components/ui`
-      : `${srcDir}/components/ui`;
+    framework === "next" ? `${srcDir}/components/ui` : `${srcDir}/components/ui`;
 
-  const defaultUtilsPath =
-    framework === "next" ? `${srcDir}/lib` : `${srcDir}/lib`;
+  const defaultUtilsPath = framework === "next" ? `${srcDir}/lib` : `${srcDir}/lib`;
 
   const componentsPath = await p.text({
     message: "Where should components be placed?",
@@ -267,11 +254,8 @@ async function promptForPaths(
 /**
  * Create config from defaults (for -y flag)
  */
-function createConfigFromDefaults(
-  detection: ReturnType<typeof detectProject>
-): DSConfig {
-  const framework =
-    detection.framework !== "unknown" ? detection.framework : "react";
+function createConfigFromDefaults(detection: ReturnType<typeof detectProject>): DSConfig {
+  const framework = detection.framework !== "unknown" ? detection.framework : "react";
   const srcDir = detection.srcDir;
 
   return createConfig({
@@ -305,7 +289,9 @@ function displayNextSteps(config: DSConfig): void {
   console.log("");
 
   if (config.style === "copy") {
-    console.log(`  ${pc.cyan("3.")} Components will be copied to: ${pc.dim(config.paths.components)}`);
+    console.log(
+      `  ${pc.cyan("3.")} Components will be copied to: ${pc.dim(config.paths.components)}`
+    );
     console.log("");
   }
 }
@@ -313,10 +299,7 @@ function displayNextSteps(config: DSConfig): void {
 /**
  * Get display-friendly install command
  */
-function getInstallCommandForDisplay(
-  pm: PackageManager,
-  packages: string[]
-): string {
+function getInstallCommandForDisplay(pm: PackageManager, packages: string[]): string {
   const pkgList = packages.join(" ");
   switch (pm) {
     case "pnpm":

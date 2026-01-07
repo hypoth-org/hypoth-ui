@@ -131,7 +131,5 @@ export async function installPackagesWithRetry(
     }
   }
 
-  throw new Error(
-    `Failed to install packages after ${maxRetries} attempts: ${lastError?.message}`
-  );
+  throw new Error(`Failed to install packages after ${maxRetries} attempts: ${lastError?.message}`);
 }

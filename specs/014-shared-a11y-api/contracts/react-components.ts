@@ -5,7 +5,13 @@
  * Components use compound patterns and consume behavior primitives from @ds/primitives-dom.
  */
 
-import type { ReactNode, HTMLAttributes, RefObject, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type {
+  ForwardRefExoticComponent,
+  HTMLAttributes,
+  ReactNode,
+  RefAttributes,
+  RefObject,
+} from "react";
 
 // =============================================================================
 // Utility Types
@@ -30,8 +36,8 @@ export interface SlotProps extends HTMLAttributes<HTMLElement> {
 // Button
 // =============================================================================
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
+export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** Visual variant */
@@ -43,7 +49,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** Loading state */
   loading?: boolean;
   /** Button type */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   /** Button content */
   children?: ReactNode;
 }
@@ -56,7 +62,7 @@ export type ButtonComponent = ForwardRefExoticComponent<
 // Dialog
 // =============================================================================
 
-export type DialogRole = 'dialog' | 'alertdialog';
+export type DialogRole = "dialog" | "alertdialog";
 
 export interface DialogRootProps {
   /** Controlled open state */
@@ -82,7 +88,7 @@ export interface DialogTriggerProps extends AsChildProps<HTMLAttributes<HTMLButt
 
 export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
   /** Content size */
-  size?: 'sm' | 'md' | 'lg' | 'full';
+  size?: "sm" | "md" | "lg" | "full";
   /** Portal container (default: document.body) */
   container?: HTMLElement | null;
   /** Focus first focusable on open */
@@ -130,7 +136,9 @@ export interface DialogCompound {
   Trigger: ForwardRefExoticComponent<DialogTriggerProps & RefAttributes<HTMLButtonElement>>;
   Content: ForwardRefExoticComponent<DialogContentProps & RefAttributes<HTMLDivElement>>;
   Title: ForwardRefExoticComponent<DialogTitleProps & RefAttributes<HTMLHeadingElement>>;
-  Description: ForwardRefExoticComponent<DialogDescriptionProps & RefAttributes<HTMLParagraphElement>>;
+  Description: ForwardRefExoticComponent<
+    DialogDescriptionProps & RefAttributes<HTMLParagraphElement>
+  >;
   Close: ForwardRefExoticComponent<DialogCloseProps & RefAttributes<HTMLButtonElement>>;
 }
 
@@ -139,10 +147,18 @@ export interface DialogCompound {
 // =============================================================================
 
 export type Placement =
-  | 'top' | 'top-start' | 'top-end'
-  | 'bottom' | 'bottom-start' | 'bottom-end'
-  | 'left' | 'left-start' | 'left-end'
-  | 'right' | 'right-start' | 'right-end';
+  | "top"
+  | "top-start"
+  | "top-end"
+  | "bottom"
+  | "bottom-start"
+  | "bottom-end"
+  | "left"
+  | "left-start"
+  | "left-end"
+  | "right"
+  | "right-start"
+  | "right-end";
 
 export interface MenuRootProps {
   /** Controlled open state */

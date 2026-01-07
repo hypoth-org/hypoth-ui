@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "updatedAt": "2026-01-06T00:00:00Z",
+  "version": "1.1.0",
+  "updatedAt": "2026-01-07T00:00:00Z",
   "components": [
     {
       "name": "button",
@@ -9,9 +9,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -39,10 +37,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens",
-        "@hypoth-ui/primitives-dom"
-      ],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
       "registryDependencies": ["button"],
       "files": [
         {
@@ -88,10 +83,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens",
-        "@hypoth-ui/primitives-dom"
-      ],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
       "registryDependencies": ["button"],
       "files": [
         {
@@ -131,10 +123,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens",
-        "@hypoth-ui/primitives-dom"
-      ],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
       "registryDependencies": [],
       "files": [
         {
@@ -168,10 +157,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens",
-        "@hypoth-ui/primitives-dom"
-      ],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
       "registryDependencies": [],
       "files": [
         {
@@ -205,9 +191,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": ["field"],
       "files": [
         {
@@ -235,9 +219,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": ["field"],
       "files": [
         {
@@ -265,9 +247,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": ["field"],
       "files": [
         {
@@ -295,10 +275,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens",
-        "@hypoth-ui/primitives-dom"
-      ],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
       "registryDependencies": ["field"],
       "files": [
         {
@@ -332,9 +309,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": ["field"],
       "files": [
         {
@@ -362,9 +337,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -410,9 +383,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -446,9 +417,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -476,9 +445,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -506,9 +473,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -536,9 +501,7 @@
       "version": "1.0.0",
       "status": "stable",
       "frameworks": ["react", "wc"],
-      "dependencies": [
-        "@hypoth-ui/tokens"
-      ],
+      "dependencies": ["@hypoth-ui/tokens"],
       "registryDependencies": [],
       "files": [
         {
@@ -557,6 +520,472 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
+      }
+    },
+    {
+      "name": "select",
+      "displayName": "Select",
+      "description": "Accessible select dropdown with search, virtualization, and keyboard navigation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field", "popover"],
+      "files": [
+        {
+          "path": "select/index.tsx",
+          "target": "select/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "select/select-root.tsx",
+          "target": "select/select-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "select/select-trigger.tsx",
+          "target": "select/select-trigger.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "select/select-content.tsx",
+          "target": "select/select-content.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "select/select-option.tsx",
+          "target": "select/select-option.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "select/select.ts",
+          "target": "select/select.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "select/select-trigger.ts",
+          "target": "select/select-trigger.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "select/select-content.ts",
+          "target": "select/select-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "select/select-option.ts",
+          "target": "select/select-option.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "listbox",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "Home", "End", "Enter", "Space", "Escape"]
+      }
+    },
+    {
+      "name": "combobox",
+      "displayName": "Combobox",
+      "description": "Autocomplete input with async search, multi-select tags, and creatable options",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field", "popover"],
+      "files": [
+        {
+          "path": "combobox/index.tsx",
+          "target": "combobox/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-root.tsx",
+          "target": "combobox/combobox-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-input.tsx",
+          "target": "combobox/combobox-input.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-content.tsx",
+          "target": "combobox/combobox-content.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-option.tsx",
+          "target": "combobox/combobox-option.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-tag.tsx",
+          "target": "combobox/combobox-tag.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox.ts",
+          "target": "combobox/combobox.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "combobox/combobox-input.ts",
+          "target": "combobox/combobox-input.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "combobox/combobox-content.ts",
+          "target": "combobox/combobox-content.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "combobox/combobox-option.ts",
+          "target": "combobox/combobox-option.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "combobox/combobox-tag.ts",
+          "target": "combobox/combobox-tag.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "combobox",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "Enter", "Escape", "Backspace"]
+      }
+    },
+    {
+      "name": "date-picker",
+      "displayName": "Date Picker",
+      "description": "Calendar date picker with single/range selection, min/max constraints, and locale support",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom", "date-fns"],
+      "registryDependencies": ["field", "popover", "button"],
+      "files": [
+        {
+          "path": "date-picker/index.tsx",
+          "target": "date-picker/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "date-picker/date-picker-root.tsx",
+          "target": "date-picker/date-picker-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "date-picker/date-picker-trigger.tsx",
+          "target": "date-picker/date-picker-trigger.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "date-picker/date-picker-content.tsx",
+          "target": "date-picker/date-picker-content.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "date-picker/date-picker-calendar.tsx",
+          "target": "date-picker/date-picker-calendar.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "date-picker/date-picker.ts",
+          "target": "date-picker/date-picker.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "date-picker/date-picker-calendar.ts",
+          "target": "date-picker/date-picker-calendar.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "dialog-date-picker",
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+          "Enter",
+          "Escape"
+        ]
+      }
+    },
+    {
+      "name": "slider",
+      "displayName": "Slider",
+      "description": "Range slider with single/dual thumbs, step snapping, and keyboard control",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "slider/index.tsx",
+          "target": "slider/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "slider/slider-root.tsx",
+          "target": "slider/slider-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "slider/slider-track.tsx",
+          "target": "slider/slider-track.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "slider/slider-range.tsx",
+          "target": "slider/slider-range.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "slider/slider-thumb.tsx",
+          "target": "slider/slider-thumb.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "slider/slider.ts",
+          "target": "slider/slider.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "slider",
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End"
+        ]
+      }
+    },
+    {
+      "name": "number-input",
+      "displayName": "Number Input",
+      "description": "Numeric input with increment/decrement buttons, step, min/max validation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field", "button"],
+      "files": [
+        {
+          "path": "number-input/index.tsx",
+          "target": "number-input/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "number-input/number-input-root.tsx",
+          "target": "number-input/number-input-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "number-input/number-input-field.tsx",
+          "target": "number-input/number-input-field.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "number-input/number-input-increment.tsx",
+          "target": "number-input/number-input-increment.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "number-input/number-input-decrement.tsx",
+          "target": "number-input/number-input-decrement.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "number-input/number-input.ts",
+          "target": "number-input/number-input.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "spinbutton",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"]
+      }
+    },
+    {
+      "name": "file-upload",
+      "displayName": "File Upload",
+      "description": "Drag-and-drop file upload with validation, progress tracking, and preview",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field", "button"],
+      "files": [
+        {
+          "path": "file-upload/index.tsx",
+          "target": "file-upload/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "file-upload/file-upload-root.tsx",
+          "target": "file-upload/file-upload-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "file-upload/file-upload-dropzone.tsx",
+          "target": "file-upload/file-upload-dropzone.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "file-upload/file-upload-input.tsx",
+          "target": "file-upload/file-upload-input.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "file-upload/file-upload-item.tsx",
+          "target": "file-upload/file-upload-item.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "file-upload/file-upload.ts",
+          "target": "file-upload/file-upload.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "button",
+        "keyboardSupport": ["Enter", "Space"]
+      }
+    },
+    {
+      "name": "time-picker",
+      "displayName": "Time Picker",
+      "description": "Time input with 12/24 hour format, minute intervals, and segmented fields",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "time-picker/index.tsx",
+          "target": "time-picker/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "time-picker/time-picker-root.tsx",
+          "target": "time-picker/time-picker-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "time-picker/time-picker-segment.tsx",
+          "target": "time-picker/time-picker-segment.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "time-picker/time-picker.ts",
+          "target": "time-picker/time-picker.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "spinbutton",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"]
+      }
+    },
+    {
+      "name": "pin-input",
+      "displayName": "PIN Input",
+      "description": "OTP/PIN entry with auto-advance, paste support, and masking",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["field"],
+      "files": [
+        {
+          "path": "pin-input/index.tsx",
+          "target": "pin-input/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "pin-input/pin-input-root.tsx",
+          "target": "pin-input/pin-input-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "pin-input/pin-input-field.tsx",
+          "target": "pin-input/pin-input-field.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "pin-input/pin-input.ts",
+          "target": "pin-input/pin-input.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "textbox",
+        "keyboardSupport": ["ArrowLeft", "ArrowRight", "Backspace", "Delete"]
       }
     }
   ]

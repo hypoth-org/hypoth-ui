@@ -31,9 +31,7 @@ export function readConfig(cwd: string = process.cwd()): DSConfig {
   const configPath = getConfigPath(cwd);
 
   if (!existsSync(configPath)) {
-    throw new Error(
-      `Configuration file not found. Run 'hypoth-ui init' first.`
-    );
+    throw new Error(`Configuration file not found. Run 'hypoth-ui init' first.`);
   }
 
   try {
@@ -60,9 +58,7 @@ export function writeConfig(config: DSConfig, cwd: string = process.cwd()): void
 /**
  * Create a new configuration with defaults
  */
-export function createConfig(
-  options: Partial<DSConfig>
-): DSConfig {
+export function createConfig(options: Partial<DSConfig>): DSConfig {
   const config: DSConfig = {
     $schema: CONFIG_SCHEMA_URL,
     style: options.style ?? "package",
@@ -100,9 +96,7 @@ export function validateConfig(config: unknown): DSConfig {
   }
 
   if (!["react", "next", "wc", "vanilla"].includes(cfg.framework as string)) {
-    throw new Error(
-      'Invalid configuration: framework must be "react", "next", "wc", or "vanilla"'
-    );
+    throw new Error('Invalid configuration: framework must be "react", "next", "wc", or "vanilla"');
   }
 
   if (typeof cfg.typescript !== "boolean") {
@@ -122,9 +116,7 @@ export function validateConfig(config: unknown): DSConfig {
 
   const paths = cfg.paths as Record<string, unknown>;
   if (typeof paths.components !== "string" || typeof paths.utils !== "string") {
-    throw new Error(
-      "Invalid configuration: paths.components and paths.utils must be strings"
-    );
+    throw new Error("Invalid configuration: paths.components and paths.utils must be strings");
   }
 
   // Aliases validation
@@ -134,9 +126,7 @@ export function validateConfig(config: unknown): DSConfig {
 
   const aliases = cfg.aliases as Record<string, unknown>;
   if (typeof aliases.components !== "string" || typeof aliases.lib !== "string") {
-    throw new Error(
-      "Invalid configuration: aliases.components and aliases.lib must be strings"
-    );
+    throw new Error("Invalid configuration: aliases.components and aliases.lib must be strings");
   }
 
   // Components array validation

@@ -39,10 +39,7 @@ function gateToDefinition(gate: ContributionGate): GateDefinition {
 /**
  * Run a single gate check
  */
-async function runGate(
-  definition: GateDefinition,
-  context: GateContext
-): Promise<GateCheckResult> {
+async function runGate(definition: GateDefinition, context: GateContext): Promise<GateCheckResult> {
   const start = Date.now();
 
   // Use custom runner if available
@@ -155,11 +152,7 @@ export function formatGatesReport(report: GatesReport): string {
   lines.push("");
 
   for (const result of report.results) {
-    const status = result.skipped
-      ? "SKIP"
-      : result.passed
-        ? "PASS"
-        : "FAIL";
+    const status = result.skipped ? "SKIP" : result.passed ? "PASS" : "FAIL";
     const icon = result.skipped ? "⊘" : result.passed ? "✓" : "✗";
 
     lines.push(`  ${icon} [${status}] ${result.gate}`);
@@ -199,13 +192,8 @@ export async function checkGates(
 /**
  * Get required gates that failed
  */
-export function getRequiredFailures(
-  report: GatesReport,
-  config: GatesConfig
-): GateCheckResult[] {
+export function getRequiredFailures(report: GatesReport, config: GatesConfig): GateCheckResult[] {
   const requiredGateIds = config.gates.filter((g) => g.required).map((g) => g.id);
 
-  return report.results.filter(
-    (r) => !r.passed && !r.skipped && requiredGateIds.includes(r.gate)
-  );
+  return report.results.filter((r) => !r.passed && !r.skipped && requiredGateIds.includes(r.gate));
 }

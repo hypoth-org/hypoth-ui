@@ -6,10 +6,7 @@
   "bin": {
     "hypoth-ui": "./dist/index.js"
   },
-  "files": [
-    "dist",
-    "registry"
-  ],
+  "files": ["dist", "registry"],
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -39,12 +36,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": [
-    "cli",
-    "design-system",
-    "components",
-    "hypoth-ui"
-  ],
+  "keywords": ["cli", "design-system", "components", "hypoth-ui"],
   "license": "MIT",
   "repository": {
     "type": "git",

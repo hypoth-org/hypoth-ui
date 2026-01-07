@@ -12,7 +12,7 @@
 /**
  * Animation lifecycle states
  */
-export type AnimationState = 'idle' | 'animating-in' | 'animating-out' | 'exited';
+export type AnimationState = "idle" | "animating-in" | "animating-out" | "exited";
 
 // =============================================================================
 // Presence Utility (@ds/primitives-dom)
@@ -142,7 +142,7 @@ export interface WCAnimationAttributes {
    * @attribute data-state
    * @values 'open' | 'closed'
    */
-  'data-state': 'open' | 'closed';
+  "data-state": "open" | "closed";
 
   /**
    * Entry animation preset(s) - space separated
@@ -151,7 +151,7 @@ export interface WCAnimationAttributes {
    * @values 'fade-in' | 'scale-in' | 'slide-up' | 'slide-down' | 'fade-in scale-in' | ...
    * @optional - uses component default if not specified
    */
-  'data-animate-in'?: string;
+  "data-animate-in"?: string;
 
   /**
    * Exit animation preset(s) - space separated
@@ -160,7 +160,7 @@ export interface WCAnimationAttributes {
    * @values 'fade-out' | 'scale-out' | 'slide-up' | 'slide-down' | 'fade-out scale-out' | ...
    * @optional - uses component default if not specified
    */
-  'data-animate-out'?: string;
+  "data-animate-out"?: string;
 
   /**
    * Disable animations for this specific component
@@ -168,7 +168,7 @@ export interface WCAnimationAttributes {
    * @attribute data-no-animation
    * @values '' (presence indicates disabled)
    */
-  'data-no-animation'?: '';
+  "data-no-animation"?: "";
 }
 
 // =============================================================================

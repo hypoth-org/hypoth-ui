@@ -4,7 +4,16 @@
   "title": "Hypoth UI Configuration",
   "description": "Project configuration for @hypoth-ui/cli",
   "type": "object",
-  "required": ["$schema", "style", "framework", "typescript", "packageManager", "paths", "aliases", "components"],
+  "required": [
+    "$schema",
+    "style",
+    "framework",
+    "typescript",
+    "packageManager",
+    "paths",
+    "aliases",
+    "components"
+  ],
   "properties": {
     "$schema": {
       "type": "string",

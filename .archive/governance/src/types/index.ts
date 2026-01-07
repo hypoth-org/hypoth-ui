@@ -120,7 +120,12 @@ export interface BreakingChange {
   /** Brief title of the change */
   title: string;
   /** Type of breaking change */
-  type: "api-change" | "component-removal" | "token-rename" | "behavior-change" | "dependency-update";
+  type:
+    | "api-change"
+    | "component-removal"
+    | "token-rename"
+    | "behavior-change"
+    | "dependency-update";
   /** Impact severity */
   severity?: "low" | "medium" | "high";
   /** Components affected by this change */

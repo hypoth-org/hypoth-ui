@@ -10,12 +10,20 @@
 // =============================================================================
 
 export type Placement =
-  | 'top' | 'top-start' | 'top-end'
-  | 'bottom' | 'bottom-start' | 'bottom-end'
-  | 'left' | 'left-start' | 'left-end'
-  | 'right' | 'right-start' | 'right-end';
+  | "top"
+  | "top-start"
+  | "top-end"
+  | "bottom"
+  | "bottom-start"
+  | "bottom-end"
+  | "left"
+  | "left-start"
+  | "left-end"
+  | "right"
+  | "right-start"
+  | "right-end";
 
-export type IdGenerator = () => string
+export type IdGenerator = () => string;
 
 // =============================================================================
 // Button Behavior
@@ -27,19 +35,19 @@ export interface ButtonBehaviorOptions {
   /** Whether button is in loading state */
   loading?: boolean;
   /** Button type */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
 export interface ButtonBehaviorState {
   disabled: boolean;
   loading: boolean;
-  type: 'button' | 'submit' | 'reset';
+  type: "button" | "submit" | "reset";
 }
 
 export interface ButtonAriaProps {
-  'aria-disabled': boolean;
-  'aria-busy': boolean;
-  type: 'button' | 'submit' | 'reset';
+  "aria-disabled": boolean;
+  "aria-busy": boolean;
+  type: "button" | "submit" | "reset";
 }
 
 export interface ButtonBehavior {
@@ -53,13 +61,13 @@ export interface ButtonBehavior {
   handleKeyDown(event: KeyboardEvent): void;
 }
 
-export type CreateButtonBehavior = (options?: ButtonBehaviorOptions) => ButtonBehavior
+export type CreateButtonBehavior = (options?: ButtonBehaviorOptions) => ButtonBehavior;
 
 // =============================================================================
 // Dialog Behavior
 // =============================================================================
 
-export type DialogRole = 'dialog' | 'alertdialog';
+export type DialogRole = "dialog" | "alertdialog";
 
 export interface DialogBehaviorOptions {
   /** Initial open state */
@@ -94,24 +102,24 @@ export interface DialogBehaviorContext {
 }
 
 export type DialogEvent =
-  | { type: 'OPEN' }
-  | { type: 'CLOSE' }
-  | { type: 'DISMISS'; reason: 'escape' | 'outside-click' };
+  | { type: "OPEN" }
+  | { type: "CLOSE" }
+  | { type: "DISMISS"; reason: "escape" | "outside-click" };
 
 export interface DialogTriggerProps {
   id: string;
-  'aria-haspopup': 'dialog';
-  'aria-expanded': boolean;
-  'aria-controls': string;
+  "aria-haspopup": "dialog";
+  "aria-expanded": boolean;
+  "aria-controls": string;
   onClick: () => void;
 }
 
 export interface DialogContentProps {
   id: string;
   role: DialogRole;
-  'aria-modal': 'true';
-  'aria-labelledby': string;
-  'aria-describedby'?: string;
+  "aria-modal": "true";
+  "aria-labelledby": string;
+  "aria-describedby"?: string;
   tabIndex: -1;
 }
 
@@ -150,7 +158,7 @@ export interface DialogBehavior {
   destroy(): void;
 }
 
-export type CreateDialogBehavior = (options?: DialogBehaviorOptions) => DialogBehavior
+export type CreateDialogBehavior = (options?: DialogBehaviorOptions) => DialogBehavior;
 
 // =============================================================================
 // Menu Behavior
@@ -190,34 +198,34 @@ export interface MenuBehaviorContext {
 }
 
 export type MenuEvent =
-  | { type: 'OPEN'; focusFirst?: 'first' | 'last' }
-  | { type: 'CLOSE' }
-  | { type: 'SELECT'; value: string }
-  | { type: 'DISMISS' }
-  | { type: 'FOCUS_ITEM'; index: number };
+  | { type: "OPEN"; focusFirst?: "first" | "last" }
+  | { type: "CLOSE" }
+  | { type: "SELECT"; value: string }
+  | { type: "DISMISS" }
+  | { type: "FOCUS_ITEM"; index: number };
 
 export interface MenuTriggerProps {
   id: string;
-  'aria-haspopup': 'menu';
-  'aria-expanded': boolean;
-  'aria-controls': string;
+  "aria-haspopup": "menu";
+  "aria-expanded": boolean;
+  "aria-controls": string;
   onClick: () => void;
   onKeyDown: (event: KeyboardEvent) => void;
 }
 
 export interface MenuContentProps {
   id: string;
-  role: 'menu';
-  'aria-labelledby': string;
-  'aria-orientation': 'vertical';
+  role: "menu";
+  "aria-labelledby": string;
+  "aria-orientation": "vertical";
   tabIndex: -1;
   onKeyDown: (event: KeyboardEvent) => void;
 }
 
 export interface MenuItemProps {
-  role: 'menuitem';
+  role: "menuitem";
   tabIndex: number;
-  'aria-disabled'?: 'true';
+  "aria-disabled"?: "true";
   onClick: () => void;
   onKeyDown: (event: KeyboardEvent) => void;
   onPointerEnter: () => void;
@@ -231,7 +239,7 @@ export interface MenuBehavior {
   /** Send event to state machine */
   send(event: MenuEvent): void;
   /** Open menu */
-  open(focusFirst?: 'first' | 'last'): void;
+  open(focusFirst?: "first" | "last"): void;
   /** Close menu */
   close(): void;
   /** Toggle menu */
@@ -254,7 +262,7 @@ export interface MenuBehavior {
   destroy(): void;
 }
 
-export type CreateMenuBehavior = (options?: MenuBehaviorOptions) => MenuBehavior
+export type CreateMenuBehavior = (options?: MenuBehaviorOptions) => MenuBehavior;
 
 // =============================================================================
 // Export Map
