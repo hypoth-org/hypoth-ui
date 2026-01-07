@@ -2,7 +2,7 @@
  * Dialog Title component - accessible title for the dialog.
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, forwardRef } from "react";
 import { useDialogContext } from "./dialog-context.js";
 
 export interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {

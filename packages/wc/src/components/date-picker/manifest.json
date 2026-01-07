@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "date-picker",
+  "name": "DatePicker",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A calendar-based date selection component with range support, min/max constraints, and keyboard navigation",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "dialog",
+    "keyboard": ["Arrow keys", "Enter", "Space", "Escape", "Page Up/Down", "Home", "End"],
+    "screenReader": "Current date announced. Navigation buttons announce month changes. Calendar grid announces date with weekday and selection state.",
+    "ariaPatterns": [
+      "role=grid",
+      "role=gridcell",
+      "role=button",
+      "aria-selected",
+      "aria-disabled",
+      "aria-label",
+      "aria-live"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.hover",
+    "color.background.selected",
+    "color.background.range",
+    "color.border.default",
+    "color.border.focus",
+    "color.text.primary",
+    "color.text.secondary",
+    "color.text.disabled",
+    "spacing.xs",
+    "spacing.sm",
+    "spacing.md",
+    "radius.sm",
+    "radius.md",
+    "radius.full",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for selecting dates where calendar context is helpful. Use range mode for date ranges.",
+  "antiPatterns": "Do not use for time-only selection - use TimePicker. Avoid for simple date entry where typing is preferred.",
+  "platforms": ["wc", "react"]
+}

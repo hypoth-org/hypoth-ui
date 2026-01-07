@@ -3,14 +3,14 @@
  * Provides accessible button with loading and disabled states.
  */
 
-import { createButtonBehavior, type ButtonBehaviorOptions } from "@ds/primitives-dom";
+import { type ButtonBehaviorOptions, createButtonBehavior } from "@ds/primitives-dom";
 import {
+  type ButtonHTMLAttributes,
+  type ReactNode,
   forwardRef,
   useCallback,
   useEffect,
   useMemo,
-  type ButtonHTMLAttributes,
-  type ReactNode,
 } from "react";
 import { Slot } from "../../primitives/slot.js";
 

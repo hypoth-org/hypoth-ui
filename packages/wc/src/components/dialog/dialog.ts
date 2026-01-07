@@ -1,9 +1,9 @@
 import {
-  type FocusTrap,
-  createFocusTrap,
   type DismissableLayer,
-  createDismissableLayer,
+  type FocusTrap,
   type Presence,
+  createDismissableLayer,
+  createFocusTrap,
   createPresence,
   prefersReducedMotion,
 } from "@ds/primitives-dom";

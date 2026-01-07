@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "time-picker",
+  "name": "TimePicker",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A segmented time input component with hour, minute, and optional second/AM-PM segments",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "spinbutton",
+    "keyboard": ["Arrow Up/Down", "Arrow Left/Right", "Tab", "Numeric keys"],
+    "screenReader": "Each segment announces label and value. Value changes are announced. Focus navigation between segments.",
+    "ariaPatterns": [
+      "role=group",
+      "role=spinbutton",
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-valuenow",
+      "aria-label",
+      "aria-disabled"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.hover",
+    "color.background.focus",
+    "color.border.default",
+    "color.border.focus",
+    "color.text.primary",
+    "color.text.secondary",
+    "color.text.disabled",
+    "spacing.xs",
+    "spacing.sm",
+    "radius.sm",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for time entry with clear segment separation. Supports 12-hour and 24-hour formats.",
+  "antiPatterns": "Do not use for date-time selection - combine with DatePicker. Avoid for duration input.",
+  "platforms": ["wc", "react"]
+}

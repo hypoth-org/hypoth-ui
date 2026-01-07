@@ -1,4 +1,4 @@
-import { createButtonBehavior, type ButtonBehavior } from "@ds/primitives-dom";
+import { type ButtonBehavior, createButtonBehavior } from "@ds/primitives-dom";
 import { type TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";

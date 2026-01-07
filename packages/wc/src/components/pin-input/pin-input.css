@@ -1,0 +1,173 @@
+/* PinInput Component Styles */
+@layer components {
+  /* PinInput container */
+  .ds-pin-input {
+    --_pin-input-field-size: var(--ds-pin-input-field-size, 3rem);
+    --_pin-input-field-bg: var(--ds-pin-input-field-bg, var(--ds-color-background-default));
+    --_pin-input-field-border: var(--ds-pin-input-field-border, var(--ds-color-border-default));
+    --_pin-input-border-radius: var(--ds-pin-input-border-radius, var(--ds-radius-md));
+    --_pin-input-gap: var(--ds-pin-input-gap, var(--ds-spacing-2));
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_pin-input-gap);
+  }
+
+  .ds-pin-input[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Individual field */
+  .ds-pin-input__field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_pin-input-field-size);
+    height: var(--_pin-input-field-size);
+    padding: 0;
+    font-family: inherit;
+    font-size: var(--ds-font-size-xl);
+    font-weight: var(--ds-font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: var(--ds-color-foreground-default);
+    text-align: center;
+    background-color: var(--_pin-input-field-bg);
+    border: 2px solid var(--_pin-input-field-border);
+    border-radius: var(--_pin-input-border-radius);
+    caret-color: transparent;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .ds-pin-input__field::placeholder {
+    color: var(--ds-color-foreground-muted);
+    opacity: 0.5;
+  }
+
+  .ds-pin-input__field:hover:not(:disabled):not(:focus) {
+    border-color: var(--ds-color-border-emphasis);
+  }
+
+  .ds-pin-input__field:focus {
+    border-color: var(--ds-color-primary-default);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--ds-color-primary-subtle);
+  }
+
+  .ds-pin-input__field:disabled {
+    cursor: not-allowed;
+  }
+
+  .ds-pin-input__field[data-invalid] {
+    border-color: var(--ds-color-destructive-default);
+  }
+
+  .ds-pin-input__field[data-invalid]:focus {
+    box-shadow: 0 0 0 3px var(--ds-color-destructive-subtle);
+  }
+
+  .ds-pin-input__field[data-filled] {
+    border-color: var(--ds-color-primary-default);
+  }
+
+  /* Masked variant (dots instead of numbers) */
+  .ds-pin-input[data-mask] .ds-pin-input__field {
+    -webkit-text-security: disc;
+  }
+
+  /* Size variants */
+  .ds-pin-input--sm {
+    --_pin-input-field-size: 2.5rem;
+    --_pin-input-gap: var(--ds-spacing-1);
+  }
+
+  .ds-pin-input--sm .ds-pin-input__field {
+    font-size: var(--ds-font-size-lg);
+  }
+
+  .ds-pin-input--lg {
+    --_pin-input-field-size: 3.5rem;
+    --_pin-input-gap: var(--ds-spacing-3);
+  }
+
+  .ds-pin-input--lg .ds-pin-input__field {
+    font-size: var(--ds-font-size-2xl);
+  }
+
+  /* Grouped variant (with separator) */
+  .ds-pin-input--grouped {
+    gap: 0;
+  }
+
+  .ds-pin-input--grouped .ds-pin-input__field {
+    border-radius: 0;
+    margin-left: -1px;
+  }
+
+  .ds-pin-input--grouped .ds-pin-input__field:first-child {
+    border-radius: var(--_pin-input-border-radius) 0 0 var(--_pin-input-border-radius);
+    margin-left: 0;
+  }
+
+  .ds-pin-input--grouped .ds-pin-input__field:last-child {
+    border-radius: 0 var(--_pin-input-border-radius) var(--_pin-input-border-radius) 0;
+  }
+
+  .ds-pin-input--grouped .ds-pin-input__field:focus {
+    z-index: 1;
+  }
+
+  /* Separator between groups */
+  .ds-pin-input__separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ds-spacing-3);
+    font-size: var(--ds-font-size-xl);
+    font-weight: var(--ds-font-weight-bold);
+    color: var(--ds-color-foreground-muted);
+  }
+
+  /* Success state (all filled) */
+  .ds-pin-input[data-complete] .ds-pin-input__field {
+    border-color: var(--ds-color-success-default);
+  }
+
+  .ds-pin-input[data-complete] .ds-pin-input__field:focus {
+    box-shadow: 0 0 0 3px var(--ds-color-success-subtle);
+  }
+
+  /* Error state */
+  .ds-pin-input[data-error] .ds-pin-input__field {
+    border-color: var(--ds-color-destructive-default);
+    animation: ds-pin-input-shake 300ms ease;
+  }
+
+  @keyframes ds-pin-input-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-4px);
+    }
+    40%,
+    80% {
+      transform: translateX(4px);
+    }
+  }
+
+  /* Alphanumeric variant */
+  .ds-pin-input[data-alphanumeric] .ds-pin-input__field {
+    text-transform: uppercase;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-pin-input[data-error] .ds-pin-input__field {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,227 @@
+---
+title: Select
+description: A dropdown select component with accessible keyboard navigation, typeahead search, and option groups.
+component: select
+status: stable
+category: forms
+order: 30
+---
+
+# Select
+
+Select provides a dropdown for choosing a single option from a list, with full keyboard navigation and accessibility.
+
+## Usage
+
+Basic select with options:
+
+```html
+<ds-select>
+  <ds-select-trigger>
+    <ds-select-value placeholder="Select an option"></ds-select-value>
+  </ds-select-trigger>
+  <ds-select-content>
+    <ds-select-option value="apple">Apple</ds-select-option>
+    <ds-select-option value="banana">Banana</ds-select-option>
+    <ds-select-option value="cherry">Cherry</ds-select-option>
+  </ds-select-content>
+</ds-select>
+```
+
+### React
+
+```tsx
+import { Select } from "@ds/react";
+
+function FruitSelect() {
+  return (
+    <Select>
+      <Select.Trigger>
+        <Select.Value placeholder="Select a fruit" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Option value="apple">Apple</Select.Option>
+        <Select.Option value="banana">Banana</Select.Option>
+        <Select.Option value="cherry">Cherry</Select.Option>
+      </Select.Content>
+    </Select>
+  );
+}
+```
+
+## With Groups
+
+Organize options into logical groups:
+
+```html
+<ds-select>
+  <ds-select-trigger>
+    <ds-select-value placeholder="Select a fruit"></ds-select-value>
+  </ds-select-trigger>
+  <ds-select-content>
+    <ds-select-group>
+      <ds-select-label>Citrus</ds-select-label>
+      <ds-select-option value="orange">Orange</ds-select-option>
+      <ds-select-option value="lemon">Lemon</ds-select-option>
+    </ds-select-group>
+    <ds-select-group>
+      <ds-select-label>Berries</ds-select-label>
+      <ds-select-option value="strawberry">Strawberry</ds-select-option>
+      <ds-select-option value="blueberry">Blueberry</ds-select-option>
+    </ds-select-group>
+  </ds-select-content>
+</ds-select>
+```
+
+## Disabled Options
+
+Individual options can be disabled:
+
+```html
+<ds-select>
+  <ds-select-trigger>
+    <ds-select-value placeholder="Select"></ds-select-value>
+  </ds-select-trigger>
+  <ds-select-content>
+    <ds-select-option value="available">Available</ds-select-option>
+    <ds-select-option value="unavailable" disabled>Unavailable</ds-select-option>
+    <ds-select-option value="limited">Limited</ds-select-option>
+  </ds-select-content>
+</ds-select>
+```
+
+## Controlled Mode
+
+Control the select value programmatically:
+
+```tsx
+import { Select } from "@ds/react";
+import { useState } from "react";
+
+function ControlledSelect() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Select value={value} onValueChange={setValue}>
+      <Select.Trigger>
+        <Select.Value placeholder="Choose..." />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Option value="1">Option 1</Select.Option>
+        <Select.Option value="2">Option 2</Select.Option>
+      </Select.Content>
+    </Select>
+  );
+}
+```
+
+## With Field
+
+Use with Field for labels and error handling:
+
+```html
+<ds-field required>
+  <ds-label>Country</ds-label>
+  <ds-select>
+    <ds-select-trigger>
+      <ds-select-value placeholder="Select country"></ds-select-value>
+    </ds-select-trigger>
+    <ds-select-content>
+      <ds-select-option value="us">United States</ds-select-option>
+      <ds-select-option value="ca">Canada</ds-select-option>
+      <ds-select-option value="uk">United Kingdom</ds-select-option>
+    </ds-select-content>
+  </ds-select>
+  <ds-field-error>Please select a country</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-select
+
+Root container that manages state.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | - | The selected value |
+| `open` | boolean | false | Whether the dropdown is open |
+| `disabled` | boolean | false | Disable the entire select |
+| `required` | boolean | false | Mark as required for forms |
+
+### ds-select-trigger
+
+The button that opens the dropdown.
+
+### ds-select-value
+
+Displays the selected value or placeholder.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `placeholder` | string | - | Text shown when no value selected |
+
+### ds-select-content
+
+The dropdown panel containing options.
+
+### ds-select-option
+
+Individual selectable option.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | required | The value when selected |
+| `disabled` | boolean | false | Disable this option |
+
+### ds-select-group
+
+Container for grouping options.
+
+### ds-select-label
+
+Label for an option group.
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: string }` | Fired when selection changes |
+| `ds:open` | - | Fired when dropdown opens |
+| `ds:close` | - | Fired when dropdown closes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Enter/Space` | Open dropdown or select option |
+| `Arrow Down` | Move to next option |
+| `Arrow Up` | Move to previous option |
+| `Home` | Move to first option |
+| `End` | Move to last option |
+| `Escape` | Close dropdown |
+| `Type-ahead` | Jump to matching option |
+
+## Accessibility
+
+- Uses `role="combobox"` on trigger
+- Uses `role="listbox"` on content
+- Uses `role="option"` on each option
+- Announces selection changes to screen readers
+- Full keyboard navigation support
+- Typeahead search for quick selection
+
+## Best Practices
+
+### Do
+
+- Use for 5+ options (use Radio for fewer)
+- Provide a clear placeholder
+- Group related options when appropriate
+- Keep option text concise
+
+### Don't
+
+- Don't use for navigation (use Menu)
+- Don't nest interactive elements in options
+- Don't use for multiple selection (use Combobox)

@@ -88,7 +88,7 @@ export class DsField extends DSElement {
     const description = this.querySelector("ds-field-description");
     const error = this.querySelector("ds-field-error");
     const formControl = this.querySelector(
-      "ds-input, ds-textarea, ds-checkbox, ds-radio-group, ds-switch, input, textarea, select"
+      "ds-input, ds-textarea, ds-checkbox, ds-radio-group, ds-switch, ds-select, ds-combobox, ds-date-picker, ds-slider, ds-number-input, ds-file-upload, ds-time-picker, ds-pin-input, input, textarea, select"
     );
 
     // Track which components are present

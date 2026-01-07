@@ -2,7 +2,7 @@
  * Dialog Close component - button that closes the dialog.
  */
 
-import { forwardRef, useCallback, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { type ButtonHTMLAttributes, type ReactNode, forwardRef, useCallback } from "react";
 import { Slot } from "../../primitives/slot.js";
 import { useDialogContext } from "./dialog-context.js";
 

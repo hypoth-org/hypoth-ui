@@ -1,0 +1,226 @@
+---
+title: DatePicker
+description: A calendar-based date selection component with range support, min/max constraints, and keyboard navigation.
+component: date-picker
+status: stable
+category: forms
+order: 32
+---
+
+# DatePicker
+
+DatePicker provides a calendar interface for selecting dates, with support for single dates, date ranges, and date constraints.
+
+## Usage
+
+Basic date picker:
+
+```html
+<ds-date-picker>
+  <ds-date-picker-trigger>
+    <ds-date-picker-value placeholder="Select date"></ds-date-picker-value>
+  </ds-date-picker-trigger>
+  <ds-date-picker-content></ds-date-picker-content>
+</ds-date-picker>
+```
+
+### React
+
+```tsx
+import { DatePicker } from "@ds/react";
+
+function BasicDatePicker() {
+  return (
+    <DatePicker>
+      <DatePicker.Trigger>
+        <DatePicker.Value placeholder="Select date" />
+      </DatePicker.Trigger>
+      <DatePicker.Content />
+    </DatePicker>
+  );
+}
+```
+
+## Controlled Mode
+
+Control the date value programmatically:
+
+```tsx
+import { DatePicker } from "@ds/react";
+import { useState } from "react";
+
+function ControlledDatePicker() {
+  const [date, setDate] = useState<Date | null>(null);
+
+  return (
+    <DatePicker value={date} onValueChange={setDate}>
+      <DatePicker.Trigger>
+        <DatePicker.Value placeholder="Pick a date" />
+      </DatePicker.Trigger>
+      <DatePicker.Content />
+    </DatePicker>
+  );
+}
+```
+
+## Range Selection
+
+Select a date range:
+
+```html
+<ds-date-picker range>
+  <ds-date-picker-trigger>
+    <ds-date-picker-value placeholder="Select date range"></ds-date-picker-value>
+  </ds-date-picker-trigger>
+  <ds-date-picker-content></ds-date-picker-content>
+</ds-date-picker>
+```
+
+### React Range
+
+```tsx
+import { DatePicker } from "@ds/react";
+import { useState } from "react";
+
+function DateRangePicker() {
+  const [range, setRange] = useState<{ start: Date; end: Date } | null>(null);
+
+  return (
+    <DatePicker range rangeValue={range} onRangeChange={setRange}>
+      <DatePicker.Trigger>
+        <DatePicker.Value placeholder="Select range" />
+      </DatePicker.Trigger>
+      <DatePicker.Content />
+    </DatePicker>
+  );
+}
+```
+
+## Min/Max Constraints
+
+Limit selectable dates:
+
+```html
+<ds-date-picker min="2024-01-01" max="2024-12-31">
+  <ds-date-picker-trigger>
+    <ds-date-picker-value placeholder="Select 2024 date"></ds-date-picker-value>
+  </ds-date-picker-trigger>
+  <ds-date-picker-content></ds-date-picker-content>
+</ds-date-picker>
+```
+
+### Disable Specific Dates
+
+```tsx
+import { DatePicker } from "@ds/react";
+
+function BookingDatePicker() {
+  const isDateDisabled = (date: Date) => {
+    // Disable weekends
+    return date.getDay() === 0 || date.getDay() === 6;
+  };
+
+  return (
+    <DatePicker isDateDisabled={isDateDisabled}>
+      <DatePicker.Trigger>
+        <DatePicker.Value placeholder="Select weekday" />
+      </DatePicker.Trigger>
+      <DatePicker.Content />
+    </DatePicker>
+  );
+}
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field required>
+  <ds-label>Appointment Date</ds-label>
+  <ds-date-picker>
+    <ds-date-picker-trigger>
+      <ds-date-picker-value placeholder="Select date"></ds-date-picker-value>
+    </ds-date-picker-trigger>
+    <ds-date-picker-content></ds-date-picker-content>
+  </ds-date-picker>
+  <ds-field-error>Please select a date</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-date-picker
+
+Root container that manages state.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | Date | - | Selected date |
+| `range` | boolean | false | Enable range selection |
+| `min` | string/Date | - | Minimum selectable date |
+| `max` | string/Date | - | Maximum selectable date |
+| `disabled` | boolean | false | Disable the picker |
+| `locale` | string | "en-US" | Locale for formatting |
+
+### ds-date-picker-trigger
+
+Button that opens the calendar.
+
+### ds-date-picker-value
+
+Displays the selected date.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `placeholder` | string | - | Text when no date selected |
+| `format` | string | "PP" | date-fns format string |
+
+### ds-date-picker-content
+
+The calendar popover.
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: Date }` | Fired when date changes |
+| `ds:range-change` | `{ start: Date, end: Date }` | Fired when range changes |
+| `ds:open` | - | Fired when calendar opens |
+| `ds:close` | - | Fired when calendar closes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Left/Right` | Move by day |
+| `Arrow Up/Down` | Move by week |
+| `Page Up/Down` | Move by month |
+| `Shift + Page Up/Down` | Move by year |
+| `Home` | Go to start of week |
+| `End` | Go to end of week |
+| `Enter/Space` | Select focused date |
+| `Escape` | Close calendar |
+
+## Accessibility
+
+- Calendar uses `role="grid"`
+- Each day uses `role="gridcell"`
+- Current date announced with day of week
+- Disabled dates have `aria-disabled`
+- Month/year changes announced via live region
+
+## Best Practices
+
+### Do
+
+- Use when calendar context helps selection
+- Provide min/max when dates are constrained
+- Use range mode for booking/scheduling
+- Consider time zones for dates
+
+### Don't
+
+- Don't use for date of birth (use separate selects)
+- Don't use for time-only selection
+- Don't disable too many dates without explanation

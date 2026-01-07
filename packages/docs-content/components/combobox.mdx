@@ -1,0 +1,236 @@
+---
+title: Combobox
+description: A searchable dropdown component with filtering, multiple selection, tags, and creatable options.
+component: combobox
+status: stable
+category: forms
+order: 31
+---
+
+# Combobox
+
+Combobox combines a text input with a dropdown list, allowing users to filter options by typing or select multiple values as tags.
+
+## Usage
+
+Basic combobox with search:
+
+```html
+<ds-combobox>
+  <ds-combobox-input placeholder="Search fruits..."></ds-combobox-input>
+  <ds-combobox-content>
+    <ds-combobox-option value="apple">Apple</ds-combobox-option>
+    <ds-combobox-option value="banana">Banana</ds-combobox-option>
+    <ds-combobox-option value="cherry">Cherry</ds-combobox-option>
+  </ds-combobox-content>
+</ds-combobox>
+```
+
+### React
+
+```tsx
+import { Combobox } from "@ds/react";
+
+function FruitCombobox() {
+  return (
+    <Combobox>
+      <Combobox.Input placeholder="Search fruits..." />
+      <Combobox.Content>
+        <Combobox.Option value="apple">Apple</Combobox.Option>
+        <Combobox.Option value="banana">Banana</Combobox.Option>
+        <Combobox.Option value="cherry">Cherry</Combobox.Option>
+      </Combobox.Content>
+    </Combobox>
+  );
+}
+```
+
+## Multiple Selection
+
+Enable multi-select with tags:
+
+```html
+<ds-combobox multiple>
+  <ds-combobox-input placeholder="Add tags..."></ds-combobox-input>
+  <ds-combobox-content>
+    <ds-combobox-option value="react">React</ds-combobox-option>
+    <ds-combobox-option value="vue">Vue</ds-combobox-option>
+    <ds-combobox-option value="angular">Angular</ds-combobox-option>
+  </ds-combobox-content>
+</ds-combobox>
+```
+
+### React Multi-Select
+
+```tsx
+import { Combobox } from "@ds/react";
+import { useState } from "react";
+
+function TagSelector() {
+  const [values, setValues] = useState<string[]>([]);
+
+  return (
+    <Combobox multiple values={values} onValuesChange={setValues}>
+      <Combobox.Input placeholder="Add skills..." />
+      <Combobox.Content>
+        <Combobox.Option value="javascript">JavaScript</Combobox.Option>
+        <Combobox.Option value="typescript">TypeScript</Combobox.Option>
+        <Combobox.Option value="python">Python</Combobox.Option>
+      </Combobox.Content>
+    </Combobox>
+  );
+}
+```
+
+## Creatable
+
+Allow users to create new options:
+
+```html
+<ds-combobox creatable>
+  <ds-combobox-input placeholder="Select or create..."></ds-combobox-input>
+  <ds-combobox-content>
+    <ds-combobox-option value="existing">Existing Option</ds-combobox-option>
+  </ds-combobox-content>
+</ds-combobox>
+```
+
+## Async Loading
+
+Load options asynchronously:
+
+```tsx
+import { Combobox } from "@ds/react";
+import { useState } from "react";
+
+function AsyncCombobox() {
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async (query: string) => {
+    setLoading(true);
+    const results = await fetchOptions(query);
+    setOptions(results);
+    setLoading(false);
+  };
+
+  return (
+    <Combobox onInputChange={handleSearch}>
+      <Combobox.Input placeholder="Search..." />
+      <Combobox.Content>
+        {loading ? (
+          <Combobox.Loading>Loading...</Combobox.Loading>
+        ) : options.length === 0 ? (
+          <Combobox.Empty>No results found</Combobox.Empty>
+        ) : (
+          options.map((opt) => (
+            <Combobox.Option key={opt.value} value={opt.value}>
+              {opt.label}
+            </Combobox.Option>
+          ))
+        )}
+      </Combobox.Content>
+    </Combobox>
+  );
+}
+```
+
+## With Field
+
+Use with Field for labels and validation:
+
+```html
+<ds-field required>
+  <ds-label>Skills</ds-label>
+  <ds-field-description>Select your top skills</ds-field-description>
+  <ds-combobox multiple>
+    <ds-combobox-input placeholder="Add skills..."></ds-combobox-input>
+    <ds-combobox-content>
+      <ds-combobox-option value="js">JavaScript</ds-combobox-option>
+      <ds-combobox-option value="ts">TypeScript</ds-combobox-option>
+    </ds-combobox-content>
+  </ds-combobox>
+  <ds-field-error>Please select at least one skill</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-combobox
+
+Root container that manages state.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | - | Selected value (single mode) |
+| `values` | string[] | [] | Selected values (multiple mode) |
+| `multiple` | boolean | false | Enable multiple selection |
+| `creatable` | boolean | false | Allow creating new options |
+| `disabled` | boolean | false | Disable the combobox |
+| `debounce` | number | 300 | Input debounce in ms |
+
+### ds-combobox-input
+
+The text input for searching and typing.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `placeholder` | string | - | Placeholder text |
+
+### ds-combobox-content
+
+The dropdown panel containing options.
+
+### ds-combobox-option
+
+Individual selectable option.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | required | The value when selected |
+| `disabled` | boolean | false | Disable this option |
+
+### ds-combobox-tag
+
+Tag display for selected values in multiple mode.
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: string \| string[] }` | Fired when selection changes |
+| `ds:input` | `{ value: string }` | Fired on input change |
+| `ds:create` | `{ value: string }` | Fired when creating new option |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Down` | Open dropdown / next option |
+| `Arrow Up` | Previous option |
+| `Enter` | Select highlighted option |
+| `Escape` | Close dropdown |
+| `Backspace` | Remove last tag (when input empty) |
+
+## Accessibility
+
+- Uses `role="combobox"` on input
+- Uses `aria-autocomplete="list"`
+- Announces filtering results
+- Tags have accessible remove buttons
+- Full keyboard navigation
+
+## Best Practices
+
+### Do
+
+- Use for searchable lists with many options
+- Use multiple mode for tag-based selection
+- Show loading state during async operations
+- Debounce input for async search
+
+### Don't
+
+- Don't use for small static lists (use Select)
+- Don't overload with too many features at once
+- Don't disable without clear indication

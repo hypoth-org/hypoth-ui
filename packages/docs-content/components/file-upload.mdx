@@ -1,0 +1,193 @@
+---
+title: FileUpload
+description: A file selection component with drag-and-drop support, file validation, and upload progress tracking.
+component: file-upload
+status: stable
+category: forms
+order: 35
+---
+
+# FileUpload
+
+FileUpload provides a drag-and-drop zone for file selection with validation, previews, and upload progress indication.
+
+## Usage
+
+Basic file upload:
+
+```html
+<ds-file-upload></ds-file-upload>
+```
+
+### React
+
+```tsx
+import { FileUpload } from "@ds/react";
+
+function DocumentUpload() {
+  const handleChange = (files: File[]) => {
+    console.log("Selected files:", files);
+  };
+
+  return <FileUpload onChange={handleChange} />;
+}
+```
+
+## Multiple Files
+
+Allow selecting multiple files:
+
+```html
+<ds-file-upload multiple max-files="5"></ds-file-upload>
+```
+
+### React Multiple
+
+```tsx
+import { FileUpload } from "@ds/react";
+
+function MultiFileUpload() {
+  return (
+    <FileUpload multiple maxFiles={5}>
+      <FileUpload.DropZone>
+        <p>Drop files here or click to browse</p>
+      </FileUpload.DropZone>
+      <FileUpload.FileList />
+    </FileUpload>
+  );
+}
+```
+
+## File Type Validation
+
+Restrict accepted file types:
+
+```html
+<!-- Images only -->
+<ds-file-upload accept="image/*"></ds-file-upload>
+
+<!-- Specific types -->
+<ds-file-upload accept=".pdf,.doc,.docx"></ds-file-upload>
+
+<!-- Combined -->
+<ds-file-upload accept="image/*,.pdf"></ds-file-upload>
+```
+
+## File Size Limit
+
+Set maximum file size (in bytes):
+
+```html
+<!-- 5MB limit -->
+<ds-file-upload max-size="5242880"></ds-file-upload>
+```
+
+## Upload Progress
+
+Handle file uploads with progress:
+
+```tsx
+import { FileUpload } from "@ds/react";
+
+function UploadWithProgress() {
+  const handleUpload = async (files: File[]) => {
+    for (const file of files) {
+      // Simulate upload with progress
+      await uploadFile(file, (progress) => {
+        // Update progress indicator
+      });
+    }
+  };
+
+  return (
+    <FileUpload onUpload={handleUpload}>
+      <FileUpload.DropZone>
+        <p>Drop files to upload</p>
+      </FileUpload.DropZone>
+      <FileUpload.FileList />
+    </FileUpload>
+  );
+}
+```
+
+## Custom Dropzone Content
+
+Customize the drop zone appearance:
+
+```html
+<ds-file-upload>
+  <ds-file-upload-dropzone>
+    <ds-icon name="upload"></ds-icon>
+    <p>Drag and drop files here</p>
+    <p>or click to browse</p>
+    <span>Max 10MB per file</span>
+  </ds-file-upload-dropzone>
+</ds-file-upload>
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field required>
+  <ds-label>Resume</ds-label>
+  <ds-field-description>Upload your resume (PDF, max 5MB)</ds-field-description>
+  <ds-file-upload accept=".pdf" max-size="5242880"></ds-file-upload>
+  <ds-field-error>Please upload a valid PDF file</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-file-upload
+
+Root container that manages state.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `accept` | string | - | Accepted file types |
+| `multiple` | boolean | false | Allow multiple files |
+| `max-files` | number | - | Maximum number of files |
+| `max-size` | number | - | Maximum file size in bytes |
+| `disabled` | boolean | false | Disable the upload |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ files: File[] }` | Fired when files change |
+| `ds:error` | `{ error: string, file?: File }` | Fired on validation error |
+| `ds:remove` | `{ file: File, index: number }` | Fired when file removed |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Enter/Space` | Open file picker |
+| `Delete/Backspace` | Remove focused file |
+| `Tab` | Navigate between files |
+
+## Accessibility
+
+- Dropzone has `role="button"` for keyboard access
+- Files listed with `role="list"` and `role="listitem"`
+- Remove buttons have descriptive labels
+- Progress announced via live region
+- Error states announced to screen readers
+
+## Best Practices
+
+### Do
+
+- Provide clear file type/size requirements
+- Show progress for large file uploads
+- Allow removing selected files
+- Give meaningful error messages
+
+### Don't
+
+- Don't hide the click-to-browse option
+- Don't auto-upload without indication
+- Don't allow unlimited file sizes
+- Don't forget error handling

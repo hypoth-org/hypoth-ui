@@ -3,9 +3,9 @@
  * Focuses on asChild behavior and compound component pattern.
  */
 
-import { createRef, forwardRef } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createRef, forwardRef } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { Dialog } from "../../src/components/dialog/index.js";
 
@@ -47,7 +47,9 @@ describe("Dialog", () => {
       render(
         <Dialog.Root>
           <Dialog.Trigger asChild className="trigger-class">
-            <button type="button" className="custom-class">Open</button>
+            <button type="button" className="custom-class">
+              Open
+            </button>
           </Dialog.Trigger>
           <Dialog.Content>
             <Dialog.Title>Title</Dialog.Title>
@@ -67,7 +69,9 @@ describe("Dialog", () => {
       render(
         <Dialog.Root>
           <Dialog.Trigger asChild>
-            <button type="button" onClick={childClickHandler}>Open</button>
+            <button type="button" onClick={childClickHandler}>
+              Open
+            </button>
           </Dialog.Trigger>
           <Dialog.Content>
             <Dialog.Title>Title</Dialog.Title>

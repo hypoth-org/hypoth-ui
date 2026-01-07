@@ -1,0 +1,159 @@
+---
+title: NumberInput
+description: A numeric input component with increment/decrement controls, step support, and min/max constraints.
+component: number-input
+status: stable
+category: forms
+order: 34
+---
+
+# NumberInput
+
+NumberInput provides a numeric input field with increment/decrement buttons and keyboard controls for precise value entry.
+
+## Usage
+
+Basic number input:
+
+```html
+<ds-number-input min="0" max="100" value="50"></ds-number-input>
+```
+
+### React
+
+```tsx
+import { NumberInput } from "@ds/react";
+
+function QuantityInput() {
+  return <NumberInput min={0} max={100} defaultValue={1} />;
+}
+```
+
+## Controlled Mode
+
+Control the value programmatically:
+
+```tsx
+import { NumberInput } from "@ds/react";
+import { useState } from "react";
+
+function ControlledNumberInput() {
+  const [value, setValue] = useState(10);
+
+  return (
+    <div>
+      <NumberInput value={value} onValueChange={setValue} min={0} max={100} />
+      <p>Value: {value}</p>
+    </div>
+  );
+}
+```
+
+## Step
+
+Set increment step size:
+
+```html
+<ds-number-input min="0" max="100" step="5" value="25"></ds-number-input>
+```
+
+### Decimal Values
+
+```html
+<ds-number-input min="0" max="10" step="0.1" precision="1" value="5.5"></ds-number-input>
+```
+
+## Prefix and Suffix
+
+Display currency or unit indicators:
+
+```html
+<!-- Currency -->
+<ds-number-input prefix="$" value="100"></ds-number-input>
+
+<!-- Percentage -->
+<ds-number-input suffix="%" min="0" max="100" value="50"></ds-number-input>
+
+<!-- Units -->
+<ds-number-input suffix="kg" min="0" value="75"></ds-number-input>
+```
+
+## Without Controls
+
+Hide increment/decrement buttons:
+
+```html
+<ds-number-input hide-controls value="42"></ds-number-input>
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field required>
+  <ds-label>Quantity</ds-label>
+  <ds-number-input min="1" max="99" value="1"></ds-number-input>
+  <ds-field-description>Enter quantity (1-99)</ds-field-description>
+  <ds-field-error>Please enter a valid quantity</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-number-input
+
+The number input component.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | number | - | Current value |
+| `min` | number | - | Minimum value |
+| `max` | number | - | Maximum value |
+| `step` | number | 1 | Step increment |
+| `precision` | number | 0 | Decimal places |
+| `prefix` | string | - | Text before value |
+| `suffix` | string | - | Text after value |
+| `hide-controls` | boolean | false | Hide +/- buttons |
+| `disabled` | boolean | false | Disable the input |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: number }` | Fired when value changes |
+| `ds:input` | `{ value: number }` | Fired on input |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Up` | Increase by step |
+| `Arrow Down` | Decrease by step |
+| `Shift + Arrow Up` | Increase by 10× step |
+| `Shift + Arrow Down` | Decrease by 10× step |
+| `Home` | Go to minimum |
+| `End` | Go to maximum |
+
+## Accessibility
+
+- Uses `role="spinbutton"`
+- Has `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
+- Increment/decrement buttons have `aria-label`
+- Buttons disabled at bounds
+- Input accepts only numeric characters
+
+## Best Practices
+
+### Do
+
+- Use for precise numeric entry
+- Set appropriate min/max bounds
+- Use step that matches expected input
+- Show prefix/suffix for context
+
+### Don't
+
+- Don't use for imprecise ranges (use Slider)
+- Don't use for dates/times (use DatePicker/TimePicker)
+- Don't allow invalid values to be entered

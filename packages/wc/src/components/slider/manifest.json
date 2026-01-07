@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "slider",
+  "name": "Slider",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A range input component with single or dual thumbs for value selection within min/max bounds",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "slider",
+    "keyboard": ["Arrow keys", "Page Up/Down", "Home", "End"],
+    "screenReader": "Announces current value, minimum, and maximum. Value changes are announced.",
+    "ariaPatterns": [
+      "role=slider",
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-valuenow",
+      "aria-valuetext",
+      "aria-orientation",
+      "aria-disabled",
+      "aria-label"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.muted",
+    "color.background.primary",
+    "color.background.surface",
+    "color.border.default",
+    "color.border.focus",
+    "spacing.xs",
+    "spacing.sm",
+    "radius.sm",
+    "radius.full",
+    "shadow.sm"
+  ],
+  "recommendedUsage": "Use for selecting a value within a continuous range. Use range mode for selecting a range between two values.",
+  "antiPatterns": "Do not use for precise numeric entry - use NumberInput instead. Avoid for discrete choices - use Radio or Select.",
+  "platforms": ["wc", "react"]
+}

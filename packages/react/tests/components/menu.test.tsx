@@ -3,9 +3,9 @@
  * Focuses on asChild behavior and compound component pattern.
  */
 
-import { createRef, forwardRef } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createRef, forwardRef } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { Menu } from "../../src/components/menu/index.js";
 
@@ -47,7 +47,9 @@ describe("Menu", () => {
       render(
         <Menu.Root>
           <Menu.Trigger asChild className="trigger-class">
-            <button type="button" className="custom-class">Options</button>
+            <button type="button" className="custom-class">
+              Options
+            </button>
           </Menu.Trigger>
           <Menu.Content>
             <Menu.Item>Edit</Menu.Item>
@@ -67,7 +69,9 @@ describe("Menu", () => {
       render(
         <Menu.Root>
           <Menu.Trigger asChild>
-            <button type="button" onClick={childClickHandler}>Options</button>
+            <button type="button" onClick={childClickHandler}>
+              Options
+            </button>
           </Menu.Trigger>
           <Menu.Content>
             <Menu.Item>Edit</Menu.Item>
@@ -134,7 +138,9 @@ describe("Menu", () => {
       render(
         <Menu.Root>
           <Menu.Trigger asChild>
-            <button type="button" onKeyDown={childKeyDownHandler}>Options</button>
+            <button type="button" onKeyDown={childKeyDownHandler}>
+              Options
+            </button>
           </Menu.Trigger>
           <Menu.Content>
             <Menu.Item>Edit</Menu.Item>
@@ -149,6 +155,4 @@ describe("Menu", () => {
       expect(childKeyDownHandler).toHaveBeenCalledTimes(1);
     });
   });
-
 });
-

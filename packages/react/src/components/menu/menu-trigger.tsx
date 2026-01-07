@@ -3,12 +3,12 @@
  */
 
 import {
+  type ButtonHTMLAttributes,
+  type ReactNode,
   forwardRef,
   useCallback,
   useEffect,
   useRef,
-  type ButtonHTMLAttributes,
-  type ReactNode,
 } from "react";
 import { Slot } from "../../primitives/slot.js";
 import { useMenuContext } from "./menu-context.js";

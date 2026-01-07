@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "combobox",
+  "name": "Combobox",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A searchable dropdown component with filtering, multiple selection, tags, and creatable options",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "combobox",
+    "keyboard": ["Arrow keys", "Enter", "Escape", "Backspace", "Home", "End", "Type-ahead"],
+    "screenReader": "Input announces autocomplete and expanded state. Options announced with position. Tags announced with remove instructions.",
+    "ariaPatterns": [
+      "role=combobox",
+      "role=listbox",
+      "role=option",
+      "aria-autocomplete=list",
+      "aria-expanded",
+      "aria-selected",
+      "aria-activedescendant",
+      "aria-multiselectable"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.hover",
+    "color.background.selected",
+    "color.background.tag",
+    "color.border.default",
+    "color.border.focus",
+    "color.text.primary",
+    "color.text.secondary",
+    "color.text.placeholder",
+    "spacing.xs",
+    "spacing.sm",
+    "spacing.md",
+    "radius.sm",
+    "radius.md",
+    "shadow.md"
+  ],
+  "recommendedUsage": "Use for searchable selection with many options. Use multiple mode for tag-based multi-selection.",
+  "antiPatterns": "Do not use for small lists without search needs - use Select instead. Avoid complex option content.",
+  "platforms": ["wc", "react"]
+}

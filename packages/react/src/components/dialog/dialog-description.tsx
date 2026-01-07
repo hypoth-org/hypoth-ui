@@ -2,7 +2,7 @@
  * Dialog Description component - accessible description for the dialog.
  */
 
-import { forwardRef, useEffect, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, forwardRef, useEffect } from "react";
 import { useDialogContext } from "./dialog-context.js";
 
 export interface DialogDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, cloneElement, isValidElement, type ReactElement } from "react";
+import { Children, type ReactElement, cloneElement, isValidElement } from "react";
 import { usePresence } from "./use-presence.js";
 
 export interface PresenceProps {

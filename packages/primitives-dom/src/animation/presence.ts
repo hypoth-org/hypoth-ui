@@ -104,8 +104,7 @@ export function createPresence(options: PresenceOptions = {}): Presence {
     // Check if any animations are running
     // In test environments or when CSS is not loaded, there may be no animations
     // getAnimations() may not exist in some test environments (happy-dom)
-    const animations =
-      typeof element.getAnimations === "function" ? element.getAnimations() : [];
+    const animations = typeof element.getAnimations === "function" ? element.getAnimations() : [];
     if (animations.length === 0) {
       // No animations running - complete immediately
       state = "exited";

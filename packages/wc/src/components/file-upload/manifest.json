@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "file-upload",
+  "name": "FileUpload",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A file selection component with drag-and-drop support, file validation, and upload progress tracking",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "button",
+    "keyboard": ["Enter", "Space", "Delete/Backspace"],
+    "screenReader": "Dropzone announces interaction instructions. File list announces file names and sizes. Progress announced with live region.",
+    "ariaPatterns": [
+      "role=button",
+      "role=list",
+      "role=listitem",
+      "role=progressbar",
+      "aria-label",
+      "aria-disabled",
+      "aria-invalid",
+      "aria-valuenow"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.muted",
+    "color.background.hover",
+    "color.background.error",
+    "color.border.default",
+    "color.border.dashed",
+    "color.border.focus",
+    "color.border.error",
+    "color.text.primary",
+    "color.text.secondary",
+    "color.text.error",
+    "spacing.sm",
+    "spacing.md",
+    "spacing.lg",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for file selection with preview and validation. Supports single or multiple file uploads.",
+  "antiPatterns": "Do not use for simple file inputs without preview needs. Avoid for very large file counts - consider pagination.",
+  "platforms": ["wc", "react"]
+}
