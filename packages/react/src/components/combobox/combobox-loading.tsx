@@ -5,7 +5,7 @@
 import { type HTMLAttributes, type ReactNode, forwardRef } from "react";
 import { useComboboxContext } from "./combobox-context.js";
 
-export interface ComboboxLoadingProps extends HTMLAttributes<HTMLDivElement> {
+export interface ComboboxLoadingProps extends HTMLAttributes<HTMLOutputElement> {
   /** Loading indicator content */
   children?: ReactNode;
 }
@@ -18,7 +18,7 @@ export interface ComboboxLoadingProps extends HTMLAttributes<HTMLDivElement> {
  * <Combobox.Loading>Searching...</Combobox.Loading>
  * ```
  */
-export const ComboboxLoading = forwardRef<HTMLDivElement, ComboboxLoadingProps>(
+export const ComboboxLoading = forwardRef<HTMLOutputElement, ComboboxLoadingProps>(
   ({ children, className, ...restProps }, ref) => {
     const { loading } = useComboboxContext("Combobox.Loading");
 

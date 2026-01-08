@@ -5,7 +5,7 @@
 import { type HTMLAttributes, type ReactNode, forwardRef } from "react";
 import { useComboboxContext } from "./combobox-context.js";
 
-export interface ComboboxEmptyProps extends HTMLAttributes<HTMLDivElement> {
+export interface ComboboxEmptyProps extends HTMLAttributes<HTMLOutputElement> {
   /** Empty state content */
   children?: ReactNode;
 }
@@ -18,7 +18,7 @@ export interface ComboboxEmptyProps extends HTMLAttributes<HTMLDivElement> {
  * <Combobox.Empty>No results found</Combobox.Empty>
  * ```
  */
-export const ComboboxEmpty = forwardRef<HTMLDivElement, ComboboxEmptyProps>(
+export const ComboboxEmpty = forwardRef<HTMLOutputElement, ComboboxEmptyProps>(
   ({ children, className, ...restProps }, ref) => {
     const { filteredOptions, loading, inputValue } = useComboboxContext("Combobox.Empty");
 
