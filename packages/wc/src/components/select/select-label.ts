@@ -21,11 +21,9 @@ export class DsSelectLabel extends DSElement {
   override connectedCallback(): void {
     super.connectedCallback();
 
-    // Set ARIA role - presentation since it's not interactive
-    this.setAttribute("role", "presentation");
-
-    // Set aria-hidden since screen readers should use the group's aria-labelledby
-    this.setAttribute("aria-hidden", "true");
+    // Set role="none" to remove from accessibility tree for listbox compliance
+    // The group uses aria-labelledby to reference this element's text content
+    this.setAttribute("role", "none");
 
     // Generate ID if not set (used for aria-labelledby on parent group)
     if (!this.id) {

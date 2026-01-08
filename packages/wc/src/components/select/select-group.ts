@@ -67,11 +67,9 @@ export class DsSelectGroup extends DSElement {
   }
 
   override render() {
-    return html`
-      <div class="ds-select-group" part="container">
-        <slot></slot>
-      </div>
-    `;
+    // Render slot directly without wrapper to avoid aria-required-children violation
+    // The host element already has role="group" set in connectedCallback
+    return html`<slot></slot>`;
   }
 }
 
