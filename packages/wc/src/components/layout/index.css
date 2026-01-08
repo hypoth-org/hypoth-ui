@@ -1,0 +1,30 @@
+/**
+ * Layout Components CSS Index
+ *
+ * Imports all layout component styles in dependency order.
+ * All styles are wrapped in @layer components by their source files.
+ */
+
+/* Foundation */
+@import "./_tokens.css";
+@import "./_responsive.css";
+
+/* Core Layout Components */
+@import "./flow.css";
+@import "./container.css";
+@import "./grid.css";
+@import "./box.css";
+
+/* Page Composition Components */
+@import "./page.css";
+@import "./section.css";
+@import "./app-shell.css";
+@import "./header.css";
+@import "./footer.css";
+@import "./main.css";
+
+/* Helper Components */
+@import "./spacer.css";
+@import "./center.css";
+@import "./split.css";
+@import "./wrap.css";

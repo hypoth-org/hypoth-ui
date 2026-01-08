@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, type HTMLAttributes } from "react";
+import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
 
 export type ProgressVariant = "linear" | "circular";
@@ -58,7 +58,16 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLElement>, "childr
  * ```
  */
 export const Progress = forwardRef<HTMLElement, ProgressProps>(function Progress(
-  { value, max = 100, variant = "linear", size = "md", label, showValue = false, className, ...props },
+  {
+    value,
+    max = 100,
+    variant = "linear",
+    size = "md",
+    label,
+    showValue = false,
+    className,
+    ...props
+  },
   ref
 ) {
   return createElement("ds-progress", {

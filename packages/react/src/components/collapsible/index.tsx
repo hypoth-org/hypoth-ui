@@ -134,11 +134,7 @@ CollapsibleRoot.displayName = "Collapsible.Root";
  */
 const CollapsibleTrigger = forwardRef<HTMLElement, CollapsibleTriggerProps>(
   function CollapsibleTrigger({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-collapsible-trigger",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-collapsible-trigger", { ref, class: className, ...props }, children);
   }
 );
 CollapsibleTrigger.displayName = "Collapsible.Trigger";

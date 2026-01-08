@@ -2,8 +2,8 @@ import { type TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 
 export type TagVariant =
   | "neutral"
@@ -135,8 +135,9 @@ export class DsTag extends DSElement {
       >
         <slot name="icon"></slot>
         <slot></slot>
-        ${this.removable
-          ? html`
+        ${
+          this.removable
+            ? html`
               <button
                 type="button"
                 class="ds-tag__remove"
@@ -147,7 +148,8 @@ export class DsTag extends DSElement {
                 ${closeIcon}
               </button>
             `
-          : nothing}
+            : nothing
+        }
       </span>
     `;
   }

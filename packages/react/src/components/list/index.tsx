@@ -4,8 +4,8 @@
  * List compound component exports
  */
 
-import { ListRoot } from "./list.js";
 import { ListItem } from "./list-item.js";
+import { ListRoot } from "./list.js";
 
 export type { ListRootProps, ListSelectionMode, ListOrientation, ListSize } from "./list.js";
 export type { ListItemProps } from "./list-item.js";

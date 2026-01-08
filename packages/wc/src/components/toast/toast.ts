@@ -120,9 +120,11 @@ export class DsToast extends DSElement {
 
         <div class="ds-toast__content">
           <p class="ds-toast__title">${this.toastTitle}</p>
-          ${this.description
-            ? html`<p class="ds-toast__description">${this.description}</p>`
-            : nothing}
+          ${
+            this.description
+              ? html`<p class="ds-toast__description">${this.description}</p>`
+              : nothing
+          }
           <slot name="action" class="ds-toast__action"></slot>
         </div>
 
@@ -135,8 +137,9 @@ export class DsToast extends DSElement {
           ${CLOSE_ICON}
         </button>
 
-        ${this.duration > 0
-          ? html`
+        ${
+          this.duration > 0
+            ? html`
               <div class="ds-toast__progress">
                 <div
                   class="ds-toast__progress-bar"
@@ -144,7 +147,8 @@ export class DsToast extends DSElement {
                 ></div>
               </div>
             `
-          : nothing}
+            : nothing
+        }
       </div>
     `;
   }

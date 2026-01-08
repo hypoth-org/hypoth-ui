@@ -7,15 +7,12 @@
  * and focus restoration. Essential for accessible modal dialogs and overlays.
  */
 
-import {
-  type FocusScopeOptions,
-  createFocusScope,
-} from "@ds/primitives-dom";
+import { type FocusScopeOptions, createFocusScope } from "@ds/primitives-dom";
 import {
   type ReactNode,
   type RefObject,
-  forwardRef,
   createElement,
+  forwardRef,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -103,8 +100,7 @@ export const FocusScope = forwardRef<FocusScopeRef, FocusScopeProps>(
     useImperativeHandle(ref, () => ({
       focusFirst: () => scopeRef.current?.focusFirst(),
       focusLast: () => scopeRef.current?.focusLast(),
-      getFocusableElements: () =>
-        scopeRef.current?.getFocusableElements() ?? [],
+      getFocusableElements: () => scopeRef.current?.getFocusableElements() ?? [],
     }));
 
     // Create and manage the focus scope
@@ -144,11 +140,7 @@ export const FocusScope = forwardRef<FocusScopeRef, FocusScopeProps>(
       }
     }, [active]);
 
-    return createElement(
-      Component,
-      { ref: containerRef, className },
-      children
-    );
+    return createElement(Component, { ref: containerRef, className }, children);
   }
 );
 

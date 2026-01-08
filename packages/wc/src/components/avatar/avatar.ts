@@ -124,8 +124,9 @@ export class DsAvatar extends DSElement {
         data-size=${this.size}
         data-shape=${this.shape !== "circle" ? this.shape : nothing}
       >
-        ${this.showImage
-          ? html`
+        ${
+          this.showImage
+            ? html`
               <img
                 part="image"
                 class="ds-avatar__image"
@@ -135,23 +136,29 @@ export class DsAvatar extends DSElement {
                 @load=${this.handleImageLoad}
               />
             `
-          : nothing}
-        ${this.showInitials
-          ? html`
+            : nothing
+        }
+        ${
+          this.showInitials
+            ? html`
               <span part="initials" class="ds-avatar__initials">
                 ${this.initials}
               </span>
             `
-          : nothing}
-        ${this.showIcon
-          ? html`
+            : nothing
+        }
+        ${
+          this.showIcon
+            ? html`
               <span part="icon" class="ds-avatar__icon">
                 ${defaultUserIcon}
               </span>
             `
-          : nothing}
-        ${this.showStatus && this.status
-          ? html`
+            : nothing
+        }
+        ${
+          this.showStatus && this.status
+            ? html`
               <span
                 part="status"
                 class="ds-avatar__status"
@@ -159,7 +166,8 @@ export class DsAvatar extends DSElement {
                 aria-label=${`Status: ${this.status}`}
               ></span>
             `
-          : nothing}
+            : nothing
+        }
       </span>
     `;
   }

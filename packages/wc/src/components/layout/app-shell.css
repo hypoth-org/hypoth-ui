@@ -1,0 +1,44 @@
+/**
+ * AppShell Component Styles
+ *
+ * Application structure with landmark regions using CSS Grid.
+ */
+
+@layer components {
+  /* Base AppShell */
+  .ds-app-shell {
+    display: grid;
+    min-height: 100vh;
+    min-height: 100dvh;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+  }
+
+  /* ============================================
+   * Sidebar Variants
+   * ============================================ */
+  .ds-app-shell[data-sidebar="left"] {
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+    grid-template-columns: auto 1fr;
+  }
+
+  .ds-app-shell[data-sidebar="right"] {
+    grid-template-areas:
+      "header header"
+      "main sidebar"
+      "footer footer";
+    grid-template-columns: 1fr auto;
+  }
+
+  /* Sidebar element */
+  .ds-sidebar {
+    grid-area: sidebar;
+  }
+}

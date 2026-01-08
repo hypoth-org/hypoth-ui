@@ -88,14 +88,7 @@ export interface ContextMenuLabelProps extends HTMLAttributes<HTMLElement> {
  * ContextMenu root component.
  */
 const ContextMenuRoot = forwardRef<HTMLElement, ContextMenuRootProps>(function ContextMenuRoot(
-  {
-    children,
-    className,
-    open: controlledOpen,
-    onOpenChange,
-    animated = true,
-    ...props
-  },
+  { children, className, open: controlledOpen, onOpenChange, animated = true, ...props },
   ref
 ) {
   const [internalOpen, setInternalOpen] = useState(false);
@@ -159,11 +152,7 @@ ContextMenuRoot.displayName = "ContextMenu.Root";
  */
 const ContextMenuTrigger = forwardRef<HTMLElement, ContextMenuTriggerProps>(
   function ContextMenuTrigger({ children, className, ...props }, ref) {
-    return createElement(
-      "span",
-      { ref, className, slot: "trigger", ...props },
-      children
-    );
+    return createElement("span", { ref, className, slot: "trigger", ...props }, children);
   }
 );
 ContextMenuTrigger.displayName = "ContextMenu.Trigger";
@@ -173,11 +162,7 @@ ContextMenuTrigger.displayName = "ContextMenu.Trigger";
  */
 const ContextMenuContent = forwardRef<HTMLElement, ContextMenuContentProps>(
   function ContextMenuContent({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-context-menu-content",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-context-menu-content", { ref, class: className, ...props }, children);
   }
 );
 ContextMenuContent.displayName = "ContextMenu.Content";
@@ -185,53 +170,51 @@ ContextMenuContent.displayName = "ContextMenu.Content";
 /**
  * ContextMenu item component.
  */
-const ContextMenuItem = forwardRef<HTMLElement, ContextMenuItemProps>(
-  function ContextMenuItem(
-    { children, className, value, variant = "default", disabled = false, onSelect, ...props },
-    ref
-  ) {
-    const elementRef = useRef<HTMLElement>(null);
+const ContextMenuItem = forwardRef<HTMLElement, ContextMenuItemProps>(function ContextMenuItem(
+  { children, className, value, variant = "default", disabled = false, onSelect, ...props },
+  ref
+) {
+  const elementRef = useRef<HTMLElement>(null);
 
-    // Combine refs
-    const combinedRef = (node: HTMLElement | null) => {
-      (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-      }
+  // Combine refs
+  const combinedRef = (node: HTMLElement | null) => {
+    (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
+    if (typeof ref === "function") {
+      ref(node);
+    } else if (ref) {
+      (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+    }
+  };
+
+  // Attach select handler
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element || !onSelect) return;
+
+    const handleSelect = (event: Event) => {
+      const customEvent = event as CustomEvent<{ value: string }>;
+      onSelect(customEvent.detail.value);
     };
+    element.addEventListener("ds:select", handleSelect);
 
-    // Attach select handler
-    useEffect(() => {
-      const element = elementRef.current;
-      if (!element || !onSelect) return;
+    return () => {
+      element.removeEventListener("ds:select", handleSelect);
+    };
+  }, [onSelect]);
 
-      const handleSelect = (event: Event) => {
-        const customEvent = event as CustomEvent<{ value: string }>;
-        onSelect(customEvent.detail.value);
-      };
-      element.addEventListener("ds:select", handleSelect);
-
-      return () => {
-        element.removeEventListener("ds:select", handleSelect);
-      };
-    }, [onSelect]);
-
-    return createElement(
-      "ds-context-menu-item",
-      {
-        ref: combinedRef,
-        class: className,
-        value,
-        variant,
-        disabled: disabled || undefined,
-        ...props,
-      },
-      children
-    );
-  }
-);
+  return createElement(
+    "ds-context-menu-item",
+    {
+      ref: combinedRef,
+      class: className,
+      value,
+      variant,
+      disabled: disabled || undefined,
+      ...props,
+    },
+    children
+  );
+});
 ContextMenuItem.displayName = "ContextMenu.Item";
 
 /**
@@ -239,10 +222,7 @@ ContextMenuItem.displayName = "ContextMenu.Item";
  */
 const ContextMenuSeparator = forwardRef<HTMLElement, ContextMenuSeparatorProps>(
   function ContextMenuSeparator({ className, ...props }, ref) {
-    return createElement(
-      "ds-context-menu-separator",
-      { ref, class: className, ...props }
-    );
+    return createElement("ds-context-menu-separator", { ref, class: className, ...props });
   }
 );
 ContextMenuSeparator.displayName = "ContextMenu.Separator";
@@ -250,15 +230,12 @@ ContextMenuSeparator.displayName = "ContextMenu.Separator";
 /**
  * ContextMenu label component.
  */
-const ContextMenuLabel = forwardRef<HTMLElement, ContextMenuLabelProps>(
-  function ContextMenuLabel({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-context-menu-label",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const ContextMenuLabel = forwardRef<HTMLElement, ContextMenuLabelProps>(function ContextMenuLabel(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-context-menu-label", { ref, class: className, ...props }, children);
+});
 ContextMenuLabel.displayName = "ContextMenu.Label";
 
 // ============================================================================

@@ -2,8 +2,8 @@ import { type TemplateResult, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 
 export type DataTableSortDirection = "asc" | "desc" | "none";
 
@@ -292,8 +292,9 @@ export class DsDataTable extends DSElement {
         aria-label="Data table"
         ?data-loading=${this.loading}
       >
-        ${this.selectedRows.size > 0
-          ? html`
+        ${
+          this.selectedRows.size > 0
+            ? html`
               <div class="ds-data-table__selection-info">
                 <span class="ds-data-table__selection-count">
                   ${this.selectedRows.size} selected
@@ -307,26 +308,28 @@ export class DsDataTable extends DSElement {
                 </button>
               </div>
             `
-          : nothing}
+            : nothing
+        }
 
         <div
-          class=${this.virtualized
-            ? "ds-data-table__virtualized"
-            : "ds-data-table__container"}
+          class=${this.virtualized ? "ds-data-table__virtualized" : "ds-data-table__container"}
         >
           <slot></slot>
 
-          ${this.loading
-            ? html`
+          ${
+            this.loading
+              ? html`
                 <div class="ds-data-table__loading">
                   <ds-spinner size="lg"></ds-spinner>
                 </div>
               `
-            : nothing}
+              : nothing
+          }
         </div>
 
-        ${this.totalRows > 0
-          ? html`
+        ${
+          this.totalRows > 0
+            ? html`
               <div class="ds-data-table__footer">
                 <div class="ds-data-table__info">
                   Showing ${this.startRow}-${this.endRow} of ${this.totalRows}
@@ -348,7 +351,8 @@ export class DsDataTable extends DSElement {
                 ${this.renderPagination()}
               </div>
             `
-          : nothing}
+            : nothing
+        }
       </div>
     `;
   }

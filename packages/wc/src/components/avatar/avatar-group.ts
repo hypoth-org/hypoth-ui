@@ -82,8 +82,9 @@ export class DsAvatarGroup extends DSElement {
         aria-label="Avatar group"
         data-size=${this.size}
       >
-        ${this.overflowCount > 0
-          ? html`
+        ${
+          this.overflowCount > 0
+            ? html`
               <span
                 part="overflow"
                 class="ds-avatar-group__overflow"
@@ -92,7 +93,8 @@ export class DsAvatarGroup extends DSElement {
                 +${this.overflowCount}
               </span>
             `
-          : nothing}
+            : nothing
+        }
         <slot @slotchange=${this.updateAvatarVisibility}></slot>
       </div>
     `;

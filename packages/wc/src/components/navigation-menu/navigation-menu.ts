@@ -88,7 +88,10 @@ export class DsNavigationMenu extends DSElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.removeEventListener("ds:navigation-trigger", this.handleTriggerInteraction as EventListener);
+    this.removeEventListener(
+      "ds:navigation-trigger",
+      this.handleTriggerInteraction as EventListener
+    );
     this.removeEventListener("ds:navigation-item-enter", this.handleItemEnter as EventListener);
     this.removeEventListener("ds:navigation-item-leave", this.handleItemLeave as EventListener);
     this.cleanup();
@@ -142,7 +145,9 @@ export class DsNavigationMenu extends DSElement {
     }
   }
 
-  private handleTriggerInteraction = (event: CustomEvent<{ value: string; type: "click" | "focus" }>): void => {
+  private handleTriggerInteraction = (
+    event: CustomEvent<{ value: string; type: "click" | "focus" }>
+  ): void => {
     const { value } = event.detail;
 
     if (this.value === value) {

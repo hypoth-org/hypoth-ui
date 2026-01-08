@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, type HTMLAttributes } from "react";
+import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
 
 export type BadgeVariant =

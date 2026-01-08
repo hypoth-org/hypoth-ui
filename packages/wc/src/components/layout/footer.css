@@ -1,0 +1,33 @@
+/**
+ * Footer Component Styles
+ *
+ * Landmark footer with sticky and safe-area support.
+ */
+
+@layer components {
+  /* Base Footer */
+  .ds-footer {
+    grid-area: footer;
+  }
+
+  /* ============================================
+   * Sticky Variant
+   * ============================================ */
+  .ds-footer[data-sticky] {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--ds-z-footer, var(--ds-z-sticky, 100));
+  }
+
+  /* ============================================
+   * Safe Area Variant
+   * ============================================ */
+  .ds-footer[data-safe-area] {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Combined sticky and safe-area */
+  .ds-footer[data-sticky][data-safe-area] {
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+}

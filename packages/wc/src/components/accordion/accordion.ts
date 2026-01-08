@@ -24,7 +24,7 @@
  * ```
  */
 
-import { createRovingFocus, type RovingFocus } from "@ds/primitives-dom";
+import { type RovingFocus, createRovingFocus } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
@@ -169,7 +169,7 @@ export class DsAccordion extends DSElement {
     // Emit change event
     const eventValue =
       this.type === "single"
-        ? Array.from(newValue)[0] ?? ""
+        ? (Array.from(newValue)[0] ?? "")
         : JSON.stringify(Array.from(newValue));
 
     emitEvent(this, "ds:change", { detail: { value: eventValue } });

@@ -24,7 +24,9 @@
       "a11y": {
         "apgPattern": "alert",
         "keyboardSupport": ["Tab", "Escape"],
-        "knownLimitations": ["Does not steal focus by design; may be missed by screen reader users if dismissed quickly"]
+        "knownLimitations": [
+          "Does not steal focus by design; may be missed by screen reader users if dismissed quickly"
+        ]
       },
       "tokensUsed": ["color.status", "color.surface", "spacing.component", "shadow.overlay"],
       "recommendedUsage": "Non-blocking notifications for async operations and background events",
@@ -54,7 +56,9 @@
       "a11y": {
         "apgPattern": "custom",
         "keyboardSupport": [],
-        "knownLimitations": ["Decorative; ensure parent element has accessible name if badge conveys important info"]
+        "knownLimitations": [
+          "Decorative; ensure parent element has accessible name if badge conveys important info"
+        ]
       },
       "tokensUsed": ["color.status", "typography.caption"],
       "recommendedUsage": "Display counts, status indicators, or notifications on icons/avatars",
@@ -114,7 +118,9 @@
       "a11y": {
         "apgPattern": "grid",
         "keyboardSupport": ["Arrow keys", "Home", "End", "Page Up", "Page Down", "Space"],
-        "knownLimitations": ["Virtualization may cause screen reader navigation issues with very large datasets"]
+        "knownLimitations": [
+          "Virtualization may cause screen reader navigation issues with very large datasets"
+        ]
       },
       "tokensUsed": ["color.border", "color.surface", "spacing.component", "typography.body"],
       "recommendedUsage": "Display large datasets with virtualization, filtering, and pagination",

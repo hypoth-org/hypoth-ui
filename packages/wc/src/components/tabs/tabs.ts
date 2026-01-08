@@ -97,9 +97,7 @@ export class DsTabs extends DSElement {
     if (this.activeValue === value) return;
 
     // Check if trigger exists and is not disabled
-    const trigger = this.querySelector(
-      `ds-tabs-trigger[value="${value}"]`
-    ) as DsTabsTrigger | null;
+    const trigger = this.querySelector(`ds-tabs-trigger[value="${value}"]`) as DsTabsTrigger | null;
     if (!trigger || trigger.disabled) return;
 
     if (!this.isControlled) {

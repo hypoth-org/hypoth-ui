@@ -1,0 +1,17 @@
+/**
+ * Main Component Styles
+ *
+ * Main content region for skip-link targeting.
+ */
+
+@layer components {
+  /* Base Main */
+  .ds-main {
+    grid-area: main;
+  }
+
+  /* Remove focus outline when programmatically focused (skip-link) */
+  .ds-main:focus {
+    outline: none;
+  }
+}

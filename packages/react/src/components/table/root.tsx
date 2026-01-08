@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
 import "@ds/wc";
 
 export type TableSize = "compact" | "default" | "spacious";

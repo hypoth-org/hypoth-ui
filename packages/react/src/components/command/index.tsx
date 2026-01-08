@@ -33,8 +33,7 @@ import {
 // Types
 // ============================================================================
 
-export interface CommandRootProps
-  extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
+export interface CommandRootProps extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
   children?: ReactNode;
   value?: string;
   defaultValue?: string;
@@ -55,8 +54,7 @@ export interface CommandListProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
 }
 
-export interface CommandItemProps
-  extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
+export interface CommandItemProps extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
   children?: ReactNode;
   value?: string;
   keywords?: string;
@@ -83,195 +81,175 @@ export interface CommandLoadingProps extends HTMLAttributes<HTMLElement> {
 // Components
 // ============================================================================
 
-const CommandRoot = forwardRef<HTMLElement, CommandRootProps>(
-  function CommandRoot(
-    {
-      children,
-      className,
-      value: controlledValue,
-      defaultValue = "",
-      onValueChange,
-      onSelect,
-      loading,
-      filter = true,
-      label,
-      ...props
+const CommandRoot = forwardRef<HTMLElement, CommandRootProps>(function CommandRoot(
+  {
+    children,
+    className,
+    value: controlledValue,
+    defaultValue = "",
+    onValueChange,
+    onSelect,
+    loading,
+    filter = true,
+    label,
+    ...props
+  },
+  ref
+) {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isControlled = controlledValue !== undefined;
+  const value = isControlled ? controlledValue : internalValue;
+  const elementRef = useRef<HTMLElement>(null);
+
+  const combinedRef = (node: HTMLElement | null) => {
+    (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
+    if (typeof ref === "function") ref(node);
+    else if (ref) (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+  };
+
+  const handleValueChange = useCallback(
+    (event: Event) => {
+      const e = event as CustomEvent<{ value: string }>;
+      if (!isControlled) setInternalValue(e.detail.value);
+      onValueChange?.(e.detail.value);
     },
-    ref
-  ) {
-    const [internalValue, setInternalValue] = useState(defaultValue);
-    const isControlled = controlledValue !== undefined;
-    const value = isControlled ? controlledValue : internalValue;
-    const elementRef = useRef<HTMLElement>(null);
+    [isControlled, onValueChange]
+  );
 
-    const combinedRef = (node: HTMLElement | null) => {
-      (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      if (typeof ref === "function") ref(node);
-      else if (ref)
-        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+  const handleSelect = useCallback(
+    (event: Event) => {
+      const e = event as CustomEvent<{ value: string }>;
+      onSelect?.(e.detail.value);
+    },
+    [onSelect]
+  );
+
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return;
+    element.addEventListener("ds:value-change", handleValueChange);
+    element.addEventListener("ds:select", handleSelect);
+    return () => {
+      element.removeEventListener("ds:value-change", handleValueChange);
+      element.removeEventListener("ds:select", handleSelect);
     };
+  }, [handleValueChange, handleSelect]);
 
-    const handleValueChange = useCallback(
-      (event: Event) => {
-        const e = event as CustomEvent<{ value: string }>;
-        if (!isControlled) setInternalValue(e.detail.value);
-        onValueChange?.(e.detail.value);
-      },
-      [isControlled, onValueChange]
-    );
-
-    const handleSelect = useCallback(
-      (event: Event) => {
-        const e = event as CustomEvent<{ value: string }>;
-        onSelect?.(e.detail.value);
-      },
-      [onSelect]
-    );
-
-    useEffect(() => {
-      const element = elementRef.current;
-      if (!element) return;
-      element.addEventListener("ds:value-change", handleValueChange);
-      element.addEventListener("ds:select", handleSelect);
-      return () => {
-        element.removeEventListener("ds:value-change", handleValueChange);
-        element.removeEventListener("ds:select", handleSelect);
-      };
-    }, [handleValueChange, handleSelect]);
-
-    return createElement(
-      "ds-command",
-      {
-        ref: combinedRef,
-        class: className,
-        value,
-        loading: loading || undefined,
-        filter: filter || undefined,
-        label,
-        ...props,
-      },
-      children
-    );
-  }
-);
+  return createElement(
+    "ds-command",
+    {
+      ref: combinedRef,
+      class: className,
+      value,
+      loading: loading || undefined,
+      filter: filter || undefined,
+      label,
+      ...props,
+    },
+    children
+  );
+});
 CommandRoot.displayName = "Command.Root";
 
-const CommandInput = forwardRef<HTMLElement, CommandInputProps>(
-  function CommandInput(
-    { className, placeholder, disabled, value, ...props },
-    ref
-  ) {
-    return createElement("ds-command-input", {
-      ref,
-      class: className,
-      placeholder,
-      disabled: disabled || undefined,
-      value,
-      ...props,
-    });
-  }
-);
+const CommandInput = forwardRef<HTMLElement, CommandInputProps>(function CommandInput(
+  { className, placeholder, disabled, value, ...props },
+  ref
+) {
+  return createElement("ds-command-input", {
+    ref,
+    class: className,
+    placeholder,
+    disabled: disabled || undefined,
+    value,
+    ...props,
+  });
+});
 CommandInput.displayName = "Command.Input";
 
-const CommandList = forwardRef<HTMLElement, CommandListProps>(
-  function CommandList({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-command-list",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const CommandList = forwardRef<HTMLElement, CommandListProps>(function CommandList(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-command-list", { ref, class: className, ...props }, children);
+});
 CommandList.displayName = "Command.List";
 
-const CommandItem = forwardRef<HTMLElement, CommandItemProps>(
-  function CommandItem(
-    { children, className, value, keywords, disabled, onSelect, ...props },
-    ref
-  ) {
-    const elementRef = useRef<HTMLElement>(null);
+const CommandItem = forwardRef<HTMLElement, CommandItemProps>(function CommandItem(
+  { children, className, value, keywords, disabled, onSelect, ...props },
+  ref
+) {
+  const elementRef = useRef<HTMLElement>(null);
 
-    const combinedRef = (node: HTMLElement | null) => {
-      (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      if (typeof ref === "function") ref(node);
-      else if (ref)
-        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-    };
+  const combinedRef = (node: HTMLElement | null) => {
+    (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
+    if (typeof ref === "function") ref(node);
+    else if (ref) (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+  };
 
-    const handleSelect = useCallback(
-      (event: Event) => {
-        const e = event as CustomEvent<{ value: string }>;
-        onSelect?.(e.detail.value);
-      },
-      [onSelect]
-    );
+  const handleSelect = useCallback(
+    (event: Event) => {
+      const e = event as CustomEvent<{ value: string }>;
+      onSelect?.(e.detail.value);
+    },
+    [onSelect]
+  );
 
-    useEffect(() => {
-      const element = elementRef.current;
-      if (!element) return;
-      element.addEventListener("ds:command-select", handleSelect);
-      return () =>
-        element.removeEventListener("ds:command-select", handleSelect);
-    }, [handleSelect]);
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return;
+    element.addEventListener("ds:command-select", handleSelect);
+    return () => element.removeEventListener("ds:command-select", handleSelect);
+  }, [handleSelect]);
 
-    return createElement(
-      "ds-command-item",
-      {
-        ref: combinedRef,
-        class: className,
-        value,
-        keywords,
-        disabled: disabled || undefined,
-        ...props,
-      },
-      children
-    );
-  }
-);
+  return createElement(
+    "ds-command-item",
+    {
+      ref: combinedRef,
+      class: className,
+      value,
+      keywords,
+      disabled: disabled || undefined,
+      ...props,
+    },
+    children
+  );
+});
 CommandItem.displayName = "Command.Item";
 
-const CommandGroup = forwardRef<HTMLElement, CommandGroupProps>(
-  function CommandGroup({ children, className, heading, ...props }, ref) {
-    return createElement(
-      "ds-command-group",
-      { ref, class: className, heading, ...props },
-      children
-    );
-  }
-);
+const CommandGroup = forwardRef<HTMLElement, CommandGroupProps>(function CommandGroup(
+  { children, className, heading, ...props },
+  ref
+) {
+  return createElement("ds-command-group", { ref, class: className, heading, ...props }, children);
+});
 CommandGroup.displayName = "Command.Group";
 
-const CommandSeparator = forwardRef<HTMLElement, CommandSeparatorProps>(
-  function CommandSeparator({ className, ...props }, ref) {
-    return createElement("ds-command-separator", {
-      ref,
-      class: className,
-      ...props,
-    });
-  }
-);
+const CommandSeparator = forwardRef<HTMLElement, CommandSeparatorProps>(function CommandSeparator(
+  { className, ...props },
+  ref
+) {
+  return createElement("ds-command-separator", {
+    ref,
+    class: className,
+    ...props,
+  });
+});
 CommandSeparator.displayName = "Command.Separator";
 
-const CommandEmpty = forwardRef<HTMLElement, CommandEmptyProps>(
-  function CommandEmpty({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-command-empty",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const CommandEmpty = forwardRef<HTMLElement, CommandEmptyProps>(function CommandEmpty(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-command-empty", { ref, class: className, ...props }, children);
+});
 CommandEmpty.displayName = "Command.Empty";
 
-const CommandLoading = forwardRef<HTMLElement, CommandLoadingProps>(
-  function CommandLoading({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-command-loading",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const CommandLoading = forwardRef<HTMLElement, CommandLoadingProps>(function CommandLoading(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-command-loading", { ref, class: className, ...props }, children);
+});
 CommandLoading.displayName = "Command.Loading";
 
 // ============================================================================

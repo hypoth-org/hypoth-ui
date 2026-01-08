@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
 import "@ds/wc";
 import type { AvatarSize } from "./avatar.js";
 
@@ -42,11 +42,7 @@ export const AvatarGroup = forwardRef<HTMLElement, AvatarGroupProps>(function Av
   { max = 5, size = "md", children, className, ...props },
   ref
 ) {
-  return createElement(
-    "ds-avatar-group",
-    { ref, max, size, class: className, ...props },
-    children
-  );
+  return createElement("ds-avatar-group", { ref, max, size, class: className, ...props }, children);
 });
 
 // TypeScript declaration for JSX

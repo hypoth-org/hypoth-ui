@@ -1,0 +1,167 @@
+/**
+ * Box Component Styles
+ *
+ * Token-only styling escape hatch for padding, background, and radius.
+ */
+
+@layer components {
+  /* Base Box - no default styles */
+  .ds-box {
+    display: block;
+  }
+
+  /* ============================================
+   * Padding Variants (all sides)
+   * ============================================ */
+  .ds-box[data-p="none"] {
+    padding: 0;
+  }
+
+  .ds-box[data-p="xs"] {
+    padding: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-box[data-p="sm"] {
+    padding: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-box[data-p="md"] {
+    padding: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-box[data-p="lg"] {
+    padding: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-box[data-p="xl"] {
+    padding: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-box[data-p="2xl"] {
+    padding: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-box[data-p="3xl"] {
+    padding: var(--ds-spacing-3xl, 4rem);
+  }
+
+  /* ============================================
+   * Padding X (horizontal)
+   * ============================================ */
+  .ds-box[data-px="none"] {
+    padding-inline: 0;
+  }
+
+  .ds-box[data-px="xs"] {
+    padding-inline: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-box[data-px="sm"] {
+    padding-inline: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-box[data-px="md"] {
+    padding-inline: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-box[data-px="lg"] {
+    padding-inline: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-box[data-px="xl"] {
+    padding-inline: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-box[data-px="2xl"] {
+    padding-inline: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-box[data-px="3xl"] {
+    padding-inline: var(--ds-spacing-3xl, 4rem);
+  }
+
+  /* ============================================
+   * Padding Y (vertical)
+   * ============================================ */
+  .ds-box[data-py="none"] {
+    padding-block: 0;
+  }
+
+  .ds-box[data-py="xs"] {
+    padding-block: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-box[data-py="sm"] {
+    padding-block: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-box[data-py="md"] {
+    padding-block: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-box[data-py="lg"] {
+    padding-block: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-box[data-py="xl"] {
+    padding-block: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-box[data-py="2xl"] {
+    padding-block: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-box[data-py="3xl"] {
+    padding-block: var(--ds-spacing-3xl, 4rem);
+  }
+
+  /* ============================================
+   * Background Variants
+   * ============================================ */
+  .ds-box[data-bg="background"] {
+    background-color: var(--ds-color-background, var(--ds-color-background-default, #ffffff));
+  }
+
+  .ds-box[data-bg="surface"] {
+    background-color: var(--ds-color-surface, var(--ds-color-background-subtle, #f9fafb));
+  }
+
+  .ds-box[data-bg="surface-raised"] {
+    background-color: var(--ds-color-surface-raised, var(--ds-color-background-default, #ffffff));
+  }
+
+  .ds-box[data-bg="surface-sunken"] {
+    background-color: var(--ds-color-surface-sunken, var(--ds-color-background-muted, #f3f4f6));
+  }
+
+  .ds-box[data-bg="muted"] {
+    background-color: var(--ds-color-muted, var(--ds-color-background-muted, #f3f4f6));
+  }
+
+  /* ============================================
+   * Radius Variants
+   * ============================================ */
+  .ds-box[data-radius="none"] {
+    border-radius: 0;
+  }
+
+  .ds-box[data-radius="sm"] {
+    border-radius: var(--ds-radius-sm, 0.25rem);
+  }
+
+  .ds-box[data-radius="md"] {
+    border-radius: var(--ds-radius-md, 0.375rem);
+  }
+
+  .ds-box[data-radius="lg"] {
+    border-radius: var(--ds-radius-lg, 0.5rem);
+  }
+
+  .ds-box[data-radius="xl"] {
+    border-radius: var(--ds-radius-xl, 0.75rem);
+  }
+
+  .ds-box[data-radius="full"] {
+    border-radius: 9999px;
+  }
+}

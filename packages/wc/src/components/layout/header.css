@@ -1,0 +1,33 @@
+/**
+ * Header Component Styles
+ *
+ * Landmark header with sticky and safe-area support.
+ */
+
+@layer components {
+  /* Base Header */
+  .ds-header {
+    grid-area: header;
+  }
+
+  /* ============================================
+   * Sticky Variant
+   * ============================================ */
+  .ds-header[data-sticky] {
+    position: sticky;
+    top: 0;
+    z-index: var(--ds-z-header, var(--ds-z-sticky, 100));
+  }
+
+  /* ============================================
+   * Safe Area Variant
+   * ============================================ */
+  .ds-header[data-safe-area] {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Combined sticky and safe-area */
+  .ds-header[data-sticky][data-safe-area] {
+    top: env(safe-area-inset-top, 0px);
+  }
+}

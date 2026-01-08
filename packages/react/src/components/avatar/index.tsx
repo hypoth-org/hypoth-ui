@@ -4,8 +4,8 @@
  * Avatar compound component exports
  */
 
-import { Avatar as AvatarRoot } from "./avatar.js";
 import { AvatarGroup } from "./avatar-group.js";
+import { Avatar as AvatarRoot } from "./avatar.js";
 
 export type { AvatarProps, AvatarSize, AvatarShape, AvatarStatus } from "./avatar.js";
 export type { AvatarGroupProps } from "./avatar-group.js";

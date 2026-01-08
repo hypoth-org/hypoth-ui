@@ -1,0 +1,49 @@
+/**
+ * Page Component Styles
+ *
+ * Page wrapper with min-height and background.
+ */
+
+@layer components {
+  /* Base Page */
+  .ds-page {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport for mobile */
+    background-color: var(--ds-color-background, var(--ds-color-background-default, #ffffff));
+  }
+
+  /* ============================================
+   * Background Variants
+   * ============================================ */
+  .ds-page[data-bg="background"] {
+    background-color: var(--ds-color-background, var(--ds-color-background-default, #ffffff));
+  }
+
+  .ds-page[data-bg="surface"] {
+    background-color: var(--ds-color-surface, var(--ds-color-background-subtle, #f9fafb));
+  }
+
+  .ds-page[data-bg="surface-raised"] {
+    background-color: var(--ds-color-surface-raised, var(--ds-color-background-default, #ffffff));
+  }
+
+  .ds-page[data-bg="surface-sunken"] {
+    background-color: var(--ds-color-surface-sunken, var(--ds-color-background-muted, #f3f4f6));
+  }
+
+  .ds-page[data-bg="muted"] {
+    background-color: var(--ds-color-muted, var(--ds-color-background-muted, #f3f4f6));
+  }
+
+  /* ============================================
+   * Min-Height Variants
+   * ============================================ */
+  .ds-page[data-min-height="viewport"] {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .ds-page[data-min-height="full"] {
+    min-height: 100%;
+  }
+}

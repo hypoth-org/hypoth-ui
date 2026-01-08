@@ -1,0 +1,509 @@
+/**
+ * Responsive Breakpoint Mixins
+ *
+ * Pre-generated media query classes for responsive layout properties.
+ * Breakpoints match @ds/tokens breakpoint values.
+ */
+
+@layer components {
+  /* ============================================
+   * Flow Direction Responsive Classes
+   * ============================================ */
+
+  /* Small (640px) */
+  @media (min-width: 640px) {
+    .ds-flow--sm\:dir-row {
+      flex-direction: row;
+    }
+    .ds-flow--sm\:dir-column {
+      flex-direction: column;
+    }
+    .ds-flow--sm\:dir-row-reverse {
+      flex-direction: row-reverse;
+    }
+    .ds-flow--sm\:dir-column-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* Medium (768px) */
+  @media (min-width: 768px) {
+    .ds-flow--md\:dir-row {
+      flex-direction: row;
+    }
+    .ds-flow--md\:dir-column {
+      flex-direction: column;
+    }
+    .ds-flow--md\:dir-row-reverse {
+      flex-direction: row-reverse;
+    }
+    .ds-flow--md\:dir-column-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* Large (1024px) */
+  @media (min-width: 1024px) {
+    .ds-flow--lg\:dir-row {
+      flex-direction: row;
+    }
+    .ds-flow--lg\:dir-column {
+      flex-direction: column;
+    }
+    .ds-flow--lg\:dir-row-reverse {
+      flex-direction: row-reverse;
+    }
+    .ds-flow--lg\:dir-column-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* Extra Large (1280px) */
+  @media (min-width: 1280px) {
+    .ds-flow--xl\:dir-row {
+      flex-direction: row;
+    }
+    .ds-flow--xl\:dir-column {
+      flex-direction: column;
+    }
+    .ds-flow--xl\:dir-row-reverse {
+      flex-direction: row-reverse;
+    }
+    .ds-flow--xl\:dir-column-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* 2XL (1536px) */
+  @media (min-width: 1536px) {
+    .ds-flow--2xl\:dir-row {
+      flex-direction: row;
+    }
+    .ds-flow--2xl\:dir-column {
+      flex-direction: column;
+    }
+    .ds-flow--2xl\:dir-row-reverse {
+      flex-direction: row-reverse;
+    }
+    .ds-flow--2xl\:dir-column-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* ============================================
+   * Flow Gap Responsive Classes
+   * ============================================ */
+
+  /* Small (640px) */
+  @media (min-width: 640px) {
+    .ds-flow--sm\:gap-none {
+      gap: 0;
+    }
+    .ds-flow--sm\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-flow--sm\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-flow--sm\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-flow--sm\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-flow--sm\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-flow--sm\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-flow--sm\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Medium (768px) */
+  @media (min-width: 768px) {
+    .ds-flow--md\:gap-none {
+      gap: 0;
+    }
+    .ds-flow--md\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-flow--md\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-flow--md\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-flow--md\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-flow--md\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-flow--md\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-flow--md\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Large (1024px) */
+  @media (min-width: 1024px) {
+    .ds-flow--lg\:gap-none {
+      gap: 0;
+    }
+    .ds-flow--lg\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-flow--lg\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-flow--lg\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-flow--lg\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-flow--lg\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-flow--lg\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-flow--lg\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Extra Large (1280px) */
+  @media (min-width: 1280px) {
+    .ds-flow--xl\:gap-none {
+      gap: 0;
+    }
+    .ds-flow--xl\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-flow--xl\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-flow--xl\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-flow--xl\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-flow--xl\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-flow--xl\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-flow--xl\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* 2XL (1536px) */
+  @media (min-width: 1536px) {
+    .ds-flow--2xl\:gap-none {
+      gap: 0;
+    }
+    .ds-flow--2xl\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-flow--2xl\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-flow--2xl\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-flow--2xl\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-flow--2xl\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-flow--2xl\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-flow--2xl\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* ============================================
+   * Grid Columns Responsive Classes
+   * ============================================ */
+
+  /* Small (640px) */
+  @media (min-width: 640px) {
+    .ds-grid--sm\:cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .ds-grid--sm\:cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* Medium (768px) */
+  @media (min-width: 768px) {
+    .ds-grid--md\:cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .ds-grid--md\:cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* Large (1024px) */
+  @media (min-width: 1024px) {
+    .ds-grid--lg\:cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .ds-grid--lg\:cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* Extra Large (1280px) */
+  @media (min-width: 1280px) {
+    .ds-grid--xl\:cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .ds-grid--xl\:cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* 2XL (1536px) */
+  @media (min-width: 1536px) {
+    .ds-grid--2xl\:cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .ds-grid--2xl\:cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* ============================================
+   * Grid Gap Responsive Classes
+   * ============================================ */
+
+  /* Small (640px) */
+  @media (min-width: 640px) {
+    .ds-grid--sm\:gap-none {
+      gap: 0;
+    }
+    .ds-grid--sm\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-grid--sm\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-grid--sm\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-grid--sm\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-grid--sm\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-grid--sm\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-grid--sm\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Medium (768px) */
+  @media (min-width: 768px) {
+    .ds-grid--md\:gap-none {
+      gap: 0;
+    }
+    .ds-grid--md\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-grid--md\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-grid--md\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-grid--md\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-grid--md\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-grid--md\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-grid--md\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Large (1024px) */
+  @media (min-width: 1024px) {
+    .ds-grid--lg\:gap-none {
+      gap: 0;
+    }
+    .ds-grid--lg\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-grid--lg\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-grid--lg\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-grid--lg\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-grid--lg\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-grid--lg\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-grid--lg\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* Extra Large (1280px) */
+  @media (min-width: 1280px) {
+    .ds-grid--xl\:gap-none {
+      gap: 0;
+    }
+    .ds-grid--xl\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-grid--xl\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-grid--xl\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-grid--xl\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-grid--xl\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-grid--xl\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-grid--xl\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+
+  /* 2XL (1536px) */
+  @media (min-width: 1536px) {
+    .ds-grid--2xl\:gap-none {
+      gap: 0;
+    }
+    .ds-grid--2xl\:gap-xs {
+      gap: var(--ds-spacing-xs, 0.25rem);
+    }
+    .ds-grid--2xl\:gap-sm {
+      gap: var(--ds-spacing-sm, 0.5rem);
+    }
+    .ds-grid--2xl\:gap-md {
+      gap: var(--ds-spacing-md, 1rem);
+    }
+    .ds-grid--2xl\:gap-lg {
+      gap: var(--ds-spacing-lg, 1.5rem);
+    }
+    .ds-grid--2xl\:gap-xl {
+      gap: var(--ds-spacing-xl, 2rem);
+    }
+    .ds-grid--2xl\:gap-2xl {
+      gap: var(--ds-spacing-2xl, 3rem);
+    }
+    .ds-grid--2xl\:gap-3xl {
+      gap: var(--ds-spacing-3xl, 4rem);
+    }
+  }
+}

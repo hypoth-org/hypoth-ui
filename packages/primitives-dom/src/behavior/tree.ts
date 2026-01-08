@@ -127,12 +127,7 @@ export interface TreeBehavior {
  * ```
  */
 export function createTreeBehavior(options: TreeBehaviorOptions = {}): TreeBehavior {
-  const {
-    selectionMode = "single",
-    onExpandChange,
-    onSelectionChange,
-    onActivate,
-  } = options;
+  const { selectionMode = "single", onExpandChange, onSelectionChange, onActivate } = options;
 
   // State
   const selectedIds = new Set<string>();
@@ -205,9 +200,7 @@ export function createTreeBehavior(options: TreeBehaviorOptions = {}): TreeBehav
             expand(focusedId);
           } else {
             // Move to first child
-            const firstChild = visibleItems.find(
-              (item) => item.parentId === focusedId
-            );
+            const firstChild = visibleItems.find((item) => item.parentId === focusedId);
             if (firstChild) {
               focus(firstChild.id);
               getItemElement(firstChild.id)?.focus();
@@ -268,9 +261,7 @@ export function createTreeBehavior(options: TreeBehaviorOptions = {}): TreeBehav
       case "*": {
         event.preventDefault();
         // Expand all siblings
-        const siblings = visibleItems.filter(
-          (item) => item.parentId === currentItem.parentId
-        );
+        const siblings = visibleItems.filter((item) => item.parentId === currentItem.parentId);
         for (const sibling of siblings) {
           expand(sibling.id);
         }

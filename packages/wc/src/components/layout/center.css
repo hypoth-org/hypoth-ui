@@ -1,0 +1,53 @@
+/**
+ * Center Component Styles
+ *
+ * Centers content horizontally/vertically with optional max-width.
+ */
+
+@layer components {
+  /* Base Center */
+  .ds-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ============================================
+   * Vertical Centering
+   * ============================================ */
+  .ds-center[data-vertical] {
+    align-items: center;
+    min-height: 100%;
+  }
+
+  /* ============================================
+   * Max-Width Variants
+   * ============================================ */
+  .ds-center[data-max-width="sm"] {
+    max-width: var(--ds-container-sm, 640px);
+    margin-inline: auto;
+  }
+
+  .ds-center[data-max-width="md"] {
+    max-width: var(--ds-container-md, 768px);
+    margin-inline: auto;
+  }
+
+  .ds-center[data-max-width="lg"] {
+    max-width: var(--ds-container-lg, 1024px);
+    margin-inline: auto;
+  }
+
+  .ds-center[data-max-width="xl"] {
+    max-width: var(--ds-container-xl, 1280px);
+    margin-inline: auto;
+  }
+
+  .ds-center[data-max-width="2xl"] {
+    max-width: var(--ds-container-2xl, 1536px);
+    margin-inline: auto;
+  }
+
+  .ds-center[data-max-width="full"] {
+    max-width: 100%;
+  }
+}
