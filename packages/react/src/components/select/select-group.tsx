@@ -4,7 +4,7 @@
 
 import { type HTMLAttributes, type ReactNode, forwardRef, useId } from "react";
 
-export interface SelectGroupProps extends HTMLAttributes<HTMLDivElement> {
+export interface SelectGroupProps extends HTMLAttributes<HTMLFieldSetElement> {
   /** Group content (Label and Options) */
   children?: ReactNode;
   /** Optional label text (alternative to using Select.Label as child) */
@@ -29,23 +29,23 @@ export interface SelectGroupProps extends HTMLAttributes<HTMLDivElement> {
  * </Select.Content>
  * ```
  */
-export const SelectGroup = forwardRef<HTMLDivElement, SelectGroupProps>(
+export const SelectGroup = forwardRef<HTMLFieldSetElement, SelectGroupProps>(
   ({ children, className, label, ...restProps }, ref) => {
     const groupId = useId();
     const labelId = `${groupId}-label`;
 
     return (
-      <div
+      <fieldset
         ref={ref}
-        role="group"
         aria-label={label}
         aria-labelledby={!label ? labelId : undefined}
         className={className}
         data-group-label-id={labelId}
         {...restProps}
       >
+        {label && <legend className="sr-only">{label}</legend>}
         {children}
-      </div>
+      </fieldset>
     );
   }
 );

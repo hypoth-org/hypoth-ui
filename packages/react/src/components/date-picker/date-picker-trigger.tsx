@@ -27,7 +27,7 @@ export interface DatePickerTriggerProps extends ButtonHTMLAttributes<HTMLButtonE
  */
 export const DatePickerTrigger = forwardRef<HTMLButtonElement, DatePickerTriggerProps>(
   ({ children, asChild = false, onClick, onKeyDown, ...restProps }, ref) => {
-    const { behavior, open, setOpen } = useDatePickerContext("DatePicker.Trigger");
+    const { behavior, open, setOpen: _setOpen } = useDatePickerContext("DatePicker.Trigger");
     const internalRef = useRef<HTMLButtonElement>(null);
 
     // Handle click to toggle

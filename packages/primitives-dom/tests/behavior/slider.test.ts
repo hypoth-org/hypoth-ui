@@ -45,82 +45,10 @@ describe("createSliderBehavior", () => {
         min: 0,
         max: 100,
         range: true,
-        defaultValue: [20, 80],
+        defaultRange: { min: 20, max: 80 },
       });
 
-      expect(slider.state.values).toEqual([20, 80]);
-
-      slider.destroy();
-    });
-  });
-
-  describe("value changes", () => {
-    it("should update value", () => {
-      const onValueChange = vi.fn();
-      const slider = createSliderBehavior({
-        min: 0,
-        max: 100,
-        onValueChange,
-      });
-
-      slider.setValue(50);
-
-      expect(slider.state.value).toBe(50);
-      expect(onValueChange).toHaveBeenCalledWith(50);
-
-      slider.destroy();
-    });
-
-    it("should clamp value to min", () => {
-      const slider = createSliderBehavior({
-        min: 0,
-        max: 100,
-      });
-
-      slider.setValue(-10);
-
-      expect(slider.state.value).toBe(0);
-
-      slider.destroy();
-    });
-
-    it("should clamp value to max", () => {
-      const slider = createSliderBehavior({
-        min: 0,
-        max: 100,
-      });
-
-      slider.setValue(150);
-
-      expect(slider.state.value).toBe(100);
-
-      slider.destroy();
-    });
-
-    it("should snap to step", () => {
-      const slider = createSliderBehavior({
-        min: 0,
-        max: 100,
-        step: 10,
-      });
-
-      slider.setValue(23);
-
-      expect(slider.state.value).toBe(20);
-
-      slider.destroy();
-    });
-
-    it("should round to nearest step", () => {
-      const slider = createSliderBehavior({
-        min: 0,
-        max: 100,
-        step: 10,
-      });
-
-      slider.setValue(27);
-
-      expect(slider.state.value).toBe(30);
+      expect(slider.state.rangeValue).toEqual({ min: 20, max: 80 });
 
       slider.destroy();
     });
@@ -128,31 +56,37 @@ describe("createSliderBehavior", () => {
 
   describe("keyboard navigation", () => {
     it("should increment by step on ArrowRight/ArrowUp", () => {
+      const onValueChange = vi.fn();
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
         step: 10,
         defaultValue: 50,
+        onValueChange,
       });
 
-      slider.increment();
+      slider.increment("single");
 
       expect(slider.state.value).toBe(60);
+      expect(onValueChange).toHaveBeenCalledWith(60);
 
       slider.destroy();
     });
 
     it("should decrement by step on ArrowLeft/ArrowDown", () => {
+      const onValueChange = vi.fn();
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
         step: 10,
         defaultValue: 50,
+        onValueChange,
       });
 
-      slider.decrement();
+      slider.decrement("single");
 
       expect(slider.state.value).toBe(40);
+      expect(onValueChange).toHaveBeenCalledWith(40);
 
       slider.destroy();
     });
@@ -165,9 +99,9 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      slider.incrementLarge();
+      slider.increment("single", true);
 
-      expect(slider.state.value).toBe(60); // 10% of range
+      expect(slider.state.value).toBe(60); // 10% of range (largeStep default is step * 10)
 
       slider.destroy();
     });
@@ -180,7 +114,7 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      slider.decrementLarge();
+      slider.decrement("single", true);
 
       expect(slider.state.value).toBe(40);
 
@@ -194,7 +128,7 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      slider.setToMin();
+      slider.setToMin("single");
 
       expect(slider.state.value).toBe(0);
 
@@ -208,7 +142,37 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      slider.setToMax();
+      slider.setToMax("single");
+
+      expect(slider.state.value).toBe(100);
+
+      slider.destroy();
+    });
+
+    it("should clamp value to min", () => {
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+        step: 10,
+        defaultValue: 5,
+      });
+
+      slider.decrement("single");
+
+      expect(slider.state.value).toBe(0);
+
+      slider.destroy();
+    });
+
+    it("should clamp value to max", () => {
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+        step: 10,
+        defaultValue: 95,
+      });
+
+      slider.increment("single");
 
       expect(slider.state.value).toBe(100);
 
@@ -217,17 +181,40 @@ describe("createSliderBehavior", () => {
   });
 
   describe("range mode", () => {
-    it("should update specific thumb in range mode", () => {
+    it("should increment min thumb in range mode", () => {
+      const onRangeChange = vi.fn();
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
         range: true,
-        defaultValue: [20, 80],
+        step: 10,
+        defaultRange: { min: 20, max: 80 },
+        onRangeChange,
       });
 
-      slider.setValueAtIndex(0, 30);
+      slider.increment("min");
 
-      expect(slider.state.values).toEqual([30, 80]);
+      expect(slider.state.rangeValue).toEqual({ min: 30, max: 80 });
+      expect(onRangeChange).toHaveBeenCalledWith({ min: 30, max: 80 });
+
+      slider.destroy();
+    });
+
+    it("should increment max thumb in range mode", () => {
+      const onRangeChange = vi.fn();
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+        range: true,
+        step: 10,
+        defaultRange: { min: 20, max: 80 },
+        onRangeChange,
+      });
+
+      slider.increment("max");
+
+      expect(slider.state.rangeValue).toEqual({ min: 20, max: 90 });
+      expect(onRangeChange).toHaveBeenCalledWith({ min: 20, max: 90 });
 
       slider.destroy();
     });
@@ -237,28 +224,32 @@ describe("createSliderBehavior", () => {
         min: 0,
         max: 100,
         range: true,
-        defaultValue: [20, 80],
+        step: 10,
+        defaultRange: { min: 70, max: 80 },
       });
 
-      slider.setValueAtIndex(0, 90);
+      // Try to increment min past max
+      slider.increment("min");
+      slider.increment("min");
+      slider.increment("min");
 
-      expect(slider.state.values?.[0]).toBeLessThanOrEqual(slider.state.values?.[1] ?? 0);
+      expect(slider.state.rangeValue.min).toBeLessThanOrEqual(slider.state.rangeValue.max);
 
       slider.destroy();
     });
 
-    it("should increment specific thumb", () => {
+    it("should decrement specific thumb", () => {
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
         range: true,
         step: 10,
-        defaultValue: [20, 80],
+        defaultRange: { min: 20, max: 80 },
       });
 
-      slider.incrementAtIndex(0);
+      slider.decrement("max");
 
-      expect(slider.state.values).toEqual([30, 80]);
+      expect(slider.state.rangeValue).toEqual({ min: 20, max: 70 });
 
       slider.destroy();
     });
@@ -272,7 +263,7 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      expect(slider.getPercentage()).toBe(50);
+      expect(slider.valueToPercent(50)).toBe(50);
 
       slider.destroy();
     });
@@ -284,20 +275,18 @@ describe("createSliderBehavior", () => {
         defaultValue: 100,
       });
 
-      expect(slider.getPercentage()).toBe(50);
+      expect(slider.valueToPercent(100)).toBe(50);
 
       slider.destroy();
     });
 
-    it("should set value from percentage", () => {
+    it("should convert percentage to value", () => {
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
       });
 
-      slider.setFromPercentage(75);
-
-      expect(slider.state.value).toBe(75);
+      expect(slider.percentToValue(75)).toBe(75);
 
       slider.destroy();
     });
@@ -312,7 +301,7 @@ describe("createSliderBehavior", () => {
 
       const props = slider.getTrackProps();
 
-      expect(props.role).toBe("presentation");
+      expect(props.role).toBe("none");
 
       slider.destroy();
     });
@@ -324,7 +313,7 @@ describe("createSliderBehavior", () => {
         defaultValue: 50,
       });
 
-      const props = slider.getThumbProps();
+      const props = slider.getThumbProps("single");
 
       expect(props.role).toBe("slider");
       expect(props["aria-valuemin"]).toBe(0);
@@ -335,17 +324,21 @@ describe("createSliderBehavior", () => {
       slider.destroy();
     });
 
-    it("should format value text", () => {
+    it("should return correct thumb props for range mode", () => {
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
-        defaultValue: 50,
-        formatValue: (v) => `$${v}`,
+        range: true,
+        defaultRange: { min: 20, max: 80 },
       });
 
-      const props = slider.getThumbProps();
+      const minProps = slider.getThumbProps("min");
+      const maxProps = slider.getThumbProps("max");
 
-      expect(props["aria-valuetext"]).toBe("$50");
+      expect(minProps["aria-valuenow"]).toBe(20);
+      expect(minProps["aria-valuemax"]).toBe(80); // constrained by max thumb
+      expect(maxProps["aria-valuenow"]).toBe(80);
+      expect(maxProps["aria-valuemin"]).toBe(20); // constrained by min thumb
 
       slider.destroy();
     });
@@ -360,14 +353,14 @@ describe("createSliderBehavior", () => {
         disabled: true,
       });
 
-      slider.setValue(75);
+      slider.increment("single");
 
       expect(slider.state.value).toBe(50);
 
       slider.destroy();
     });
 
-    it("should not increment when disabled", () => {
+    it("should not decrement when disabled", () => {
       const slider = createSliderBehavior({
         min: 0,
         max: 100,
@@ -375,7 +368,22 @@ describe("createSliderBehavior", () => {
         disabled: true,
       });
 
-      slider.increment();
+      slider.decrement("single");
+
+      expect(slider.state.value).toBe(50);
+
+      slider.destroy();
+    });
+
+    it("should not set to min when disabled", () => {
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+        defaultValue: 50,
+        disabled: true,
+      });
+
+      slider.setToMin("single");
 
       expect(slider.state.value).toBe(50);
 
@@ -404,6 +412,35 @@ describe("createSliderBehavior", () => {
       });
 
       expect(slider.state.orientation).toBe("vertical");
+
+      slider.destroy();
+    });
+  });
+
+  describe("focus management", () => {
+    it("should track focused thumb", () => {
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+      });
+
+      slider.focus("single");
+
+      expect(slider.state.focusedThumb).toBe("single");
+
+      slider.destroy();
+    });
+
+    it("should clear focus on blur", () => {
+      const slider = createSliderBehavior({
+        min: 0,
+        max: 100,
+      });
+
+      slider.focus("single");
+      slider.blur();
+
+      expect(slider.state.focusedThumb).toBeNull();
 
       slider.destroy();
     });

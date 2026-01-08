@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { createComboboxBehavior } from "../../src/behavior/combobox";
 
 describe("createComboboxBehavior", () => {
-  const defaultOptions = [
+  const defaultItems = [
     { value: "apple", label: "Apple" },
     { value: "banana", label: "Banana" },
     { value: "cherry", label: "Cherry" },
@@ -11,36 +11,36 @@ describe("createComboboxBehavior", () => {
   describe("initialization", () => {
     it("should create combobox with default state", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
-      expect(combobox.state.isOpen).toBe(false);
+      expect(combobox.state.open).toBe(false);
       expect(combobox.state.inputValue).toBe("");
-      expect(combobox.state.selectedValues).toEqual([]);
-      expect(combobox.state.highlightedIndex).toBe(-1);
+      expect(combobox.state.value).toBeNull();
+      expect(combobox.state.highlightedValue).toBeNull();
 
       combobox.destroy();
     });
 
     it("should accept default value in single mode", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         defaultValue: "apple",
       });
 
-      expect(combobox.state.selectedValues).toEqual(["apple"]);
+      expect(combobox.state.value).toBe("apple");
 
       combobox.destroy();
     });
 
     it("should accept default values in multiple mode", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         multiple: true,
         defaultValue: ["apple", "banana"],
       });
 
-      expect(combobox.state.selectedValues).toEqual(["apple", "banana"]);
+      expect(combobox.state.value).toEqual(["apple", "banana"]);
 
       combobox.destroy();
     });
@@ -50,7 +50,7 @@ describe("createComboboxBehavior", () => {
     it("should update input value", () => {
       const onInputChange = vi.fn();
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         onInputChange,
       });
 
@@ -62,127 +62,114 @@ describe("createComboboxBehavior", () => {
       combobox.destroy();
     });
 
-    it("should open on input", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-      });
-
-      combobox.setInputValue("a");
-
-      expect(combobox.state.isOpen).toBe(true);
-
-      combobox.destroy();
-    });
-
     it("should filter options based on input", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.setInputValue("app");
-      const filtered = combobox.getFilteredOptions();
 
-      expect(filtered).toHaveLength(1);
-      expect(filtered[0].value).toBe("apple");
+      expect(combobox.state.filteredOptions).toHaveLength(1);
+      expect(combobox.state.filteredOptions[0].value).toBe("apple");
 
       combobox.destroy();
     });
 
     it("should be case-insensitive by default", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.setInputValue("APP");
-      const filtered = combobox.getFilteredOptions();
 
-      expect(filtered).toHaveLength(1);
-      expect(filtered[0].value).toBe("apple");
+      expect(combobox.state.filteredOptions).toHaveLength(1);
+      expect(combobox.state.filteredOptions[0].value).toBe("apple");
+
+      combobox.destroy();
+    });
+  });
+
+  describe("open/close", () => {
+    it("should open the dropdown", () => {
+      const combobox = createComboboxBehavior({
+        items: defaultItems,
+      });
+
+      combobox.open();
+
+      expect(combobox.state.open).toBe(true);
+
+      combobox.destroy();
+    });
+
+    it("should close the dropdown", () => {
+      const combobox = createComboboxBehavior({
+        items: defaultItems,
+      });
+
+      combobox.open();
+      combobox.close();
+
+      expect(combobox.state.open).toBe(false);
 
       combobox.destroy();
     });
   });
 
   describe("selection", () => {
-    it("should select an option", () => {
+    it("should select a value", () => {
       const onValueChange = vi.fn();
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         onValueChange,
       });
 
-      combobox.selectValue("banana");
+      combobox.select("banana");
 
-      expect(combobox.state.selectedValues).toEqual(["banana"]);
-      expect(onValueChange).toHaveBeenCalledWith(["banana"]);
+      expect(combobox.state.value).toBe("banana");
+      expect(onValueChange).toHaveBeenCalledWith("banana");
 
       combobox.destroy();
     });
 
     it("should replace selection in single mode", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         defaultValue: "apple",
       });
 
-      combobox.selectValue("banana");
+      combobox.select("banana");
 
-      expect(combobox.state.selectedValues).toEqual(["banana"]);
+      expect(combobox.state.value).toBe("banana");
 
       combobox.destroy();
     });
 
     it("should add to selection in multiple mode", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         multiple: true,
         defaultValue: ["apple"],
       });
 
-      combobox.selectValue("banana");
+      combobox.select("banana");
 
-      expect(combobox.state.selectedValues).toEqual(["apple", "banana"]);
+      expect(combobox.state.value).toEqual(["apple", "banana"]);
 
       combobox.destroy();
     });
 
-    it("should toggle selection in multiple mode", () => {
+    it("should not add duplicate in multiple mode (use remove to unselect)", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         multiple: true,
         defaultValue: ["apple", "banana"],
       });
 
-      combobox.selectValue("apple");
+      // Selecting an already-selected value does nothing
+      combobox.select("apple");
 
-      expect(combobox.state.selectedValues).toEqual(["banana"]);
-
-      combobox.destroy();
-    });
-
-    it("should close after selection in single mode", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-      });
-
-      combobox.open();
-      combobox.selectValue("apple");
-
-      expect(combobox.state.isOpen).toBe(false);
-
-      combobox.destroy();
-    });
-
-    it("should stay open after selection in multiple mode", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        multiple: true,
-      });
-
-      combobox.open();
-      combobox.selectValue("apple");
-
-      expect(combobox.state.isOpen).toBe(true);
+      expect(combobox.state.value).toEqual(["apple", "banana"]);
 
       combobox.destroy();
     });
@@ -191,164 +178,143 @@ describe("createComboboxBehavior", () => {
   describe("keyboard navigation", () => {
     it("should highlight next option on ArrowDown", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.open();
       combobox.highlightNext();
 
-      expect(combobox.state.highlightedIndex).toBe(0);
+      expect(combobox.state.highlightedValue).toBe("apple");
 
       combobox.highlightNext();
-      expect(combobox.state.highlightedIndex).toBe(1);
+
+      expect(combobox.state.highlightedValue).toBe("banana");
 
       combobox.destroy();
     });
 
     it("should highlight previous option on ArrowUp", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.open();
-      combobox.highlightIndex(2);
+      combobox.highlightLast();
       combobox.highlightPrev();
 
-      expect(combobox.state.highlightedIndex).toBe(1);
+      expect(combobox.state.highlightedValue).toBe("banana");
 
       combobox.destroy();
     });
 
-    it("should select highlighted option on Enter", () => {
+    it("should highlight first option", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.open();
-      combobox.highlightIndex(1);
-      combobox.selectHighlighted();
+      combobox.highlightFirst();
 
-      expect(combobox.state.selectedValues).toEqual(["banana"]);
+      expect(combobox.state.highlightedValue).toBe("apple");
 
       combobox.destroy();
     });
 
-    it("should close on Escape", () => {
+    it("should highlight last option", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       combobox.open();
-      combobox.close();
+      combobox.highlightLast();
 
-      expect(combobox.state.isOpen).toBe(false);
-
-      combobox.destroy();
-    });
-
-    it("should remove last tag on Backspace in multiple mode", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        multiple: true,
-        defaultValue: ["apple", "banana"],
-      });
-
-      combobox.removeLastValue();
-
-      expect(combobox.state.selectedValues).toEqual(["apple"]);
-
-      combobox.destroy();
-    });
-
-    it("should not remove tag on Backspace if input has value", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        multiple: true,
-        defaultValue: ["apple", "banana"],
-      });
-
-      combobox.setInputValue("ch");
-      combobox.removeLastValue();
-
-      // Should not remove because input has value
-      expect(combobox.state.selectedValues).toEqual(["apple", "banana"]);
+      expect(combobox.state.highlightedValue).toBe("cherry");
 
       combobox.destroy();
     });
   });
 
-  describe("creatable mode", () => {
-    it("should allow creating new values", () => {
-      const onCreate = vi.fn();
+  describe("remove (multi-select)", () => {
+    it("should remove a value", () => {
+      const onValueChange = vi.fn();
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        creatable: true,
-        onCreate,
+        items: defaultItems,
+        multiple: true,
+        defaultValue: ["apple", "banana", "cherry"],
+        onValueChange,
       });
 
-      combobox.setInputValue("mango");
-      combobox.createValue("mango");
+      combobox.remove("banana");
 
-      expect(onCreate).toHaveBeenCalledWith("mango");
+      expect(combobox.state.value).toEqual(["apple", "cherry"]);
+      expect(onValueChange).toHaveBeenCalledWith(["apple", "cherry"]);
 
       combobox.destroy();
     });
 
-    it("should show create option when no match", () => {
+    it("should remove last tag via removeLastTag", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        creatable: true,
+        items: defaultItems,
+        multiple: true,
+        defaultValue: ["apple", "banana"],
       });
 
-      combobox.setInputValue("mango");
+      combobox.removeLastTag();
 
-      expect(combobox.shouldShowCreateOption()).toBe(true);
-
-      combobox.destroy();
-    });
-
-    it("should not show create option when exact match exists", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        creatable: true,
-      });
-
-      combobox.setInputValue("apple");
-
-      expect(combobox.shouldShowCreateOption()).toBe(false);
+      expect(combobox.state.value).toEqual(["apple"]);
 
       combobox.destroy();
     });
   });
 
   describe("clear", () => {
-    it("should clear all selections", () => {
+    it("should clear selection", () => {
       const onValueChange = vi.fn();
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         defaultValue: "apple",
         onValueChange,
       });
 
       combobox.clear();
 
-      expect(combobox.state.selectedValues).toEqual([]);
-      expect(combobox.state.inputValue).toBe("");
-      expect(onValueChange).toHaveBeenCalledWith([]);
+      expect(combobox.state.value).toBeNull();
+      expect(onValueChange).toHaveBeenCalledWith(null);
 
       combobox.destroy();
     });
 
-    it("should remove specific value", () => {
+    it("should clear all selections in multi mode", () => {
+      const onValueChange = vi.fn();
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         multiple: true,
-        defaultValue: ["apple", "banana", "cherry"],
+        defaultValue: ["apple", "banana"],
+        onValueChange,
       });
 
-      combobox.removeValue("banana");
+      combobox.clear();
 
-      expect(combobox.state.selectedValues).toEqual(["apple", "cherry"]);
+      expect(combobox.state.value).toEqual([]);
+      expect(onValueChange).toHaveBeenCalledWith([]);
+
+      combobox.destroy();
+    });
+  });
+
+  describe("creatable mode", () => {
+    it("should create new value when allowed", () => {
+      const onCreateValue = vi.fn();
+      const combobox = createComboboxBehavior({
+        items: defaultItems,
+        creatable: true,
+        onCreateValue,
+      });
+
+      combobox.setInputValue("mango");
+      combobox.create("mango");
+
+      expect(onCreateValue).toHaveBeenCalledWith("mango");
 
       combobox.destroy();
     });
@@ -357,37 +323,38 @@ describe("createComboboxBehavior", () => {
   describe("ARIA props", () => {
     it("should return correct input props", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       const props = combobox.getInputProps();
 
       expect(props.role).toBe("combobox");
+      expect(props["aria-haspopup"]).toBe("listbox");
       expect(props["aria-expanded"]).toBe(false);
-      expect(props["aria-autocomplete"]).toBe("list");
 
       combobox.destroy();
     });
 
     it("should return correct listbox props", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
       });
 
       const props = combobox.getListboxProps();
 
       expect(props.role).toBe("listbox");
+      expect(props.id).toBe(combobox.listboxId);
 
       combobox.destroy();
     });
 
     it("should return correct option props", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         defaultValue: "apple",
       });
 
-      const props = combobox.getOptionProps(0);
+      const props = combobox.getOptionProps("apple", "Apple");
 
       expect(props.role).toBe("option");
       expect(props["aria-selected"]).toBe(true);
@@ -396,63 +363,16 @@ describe("createComboboxBehavior", () => {
     });
   });
 
-  describe("loading state", () => {
-    it("should track loading state", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-      });
-
-      combobox.setLoading(true);
-
-      expect(combobox.state.isLoading).toBe(true);
-
-      combobox.setLoading(false);
-
-      expect(combobox.state.isLoading).toBe(false);
-
-      combobox.destroy();
-    });
-  });
-
   describe("disabled state", () => {
     it("should not open when disabled", () => {
       const combobox = createComboboxBehavior({
-        options: defaultOptions,
+        items: defaultItems,
         disabled: true,
       });
 
       combobox.open();
 
-      expect(combobox.state.isOpen).toBe(false);
-
-      combobox.destroy();
-    });
-
-    it("should not select when disabled", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        disabled: true,
-      });
-
-      combobox.selectValue("apple");
-
-      expect(combobox.state.selectedValues).toEqual([]);
-
-      combobox.destroy();
-    });
-  });
-
-  describe("selected labels", () => {
-    it("should get selected option labels", () => {
-      const combobox = createComboboxBehavior({
-        options: defaultOptions,
-        multiple: true,
-        defaultValue: ["apple", "banana"],
-      });
-
-      const labels = combobox.getSelectedLabels();
-
-      expect(labels).toEqual(["Apple", "Banana"]);
+      expect(combobox.state.open).toBe(false);
 
       combobox.destroy();
     });

@@ -4,7 +4,7 @@
 
 import { type HTMLAttributes, forwardRef } from "react";
 
-export interface SelectSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
+export interface SelectSeparatorProps extends HTMLAttributes<HTMLHRElement> {}
 
 /**
  * Visual separator for grouping options.
@@ -18,17 +18,9 @@ export interface SelectSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
  * </Select.Content>
  * ```
  */
-export const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(
+export const SelectSeparator = forwardRef<HTMLHRElement, SelectSeparatorProps>(
   ({ className, ...restProps }, ref) => {
-    return (
-      <div
-        ref={ref}
-        role="separator"
-        aria-orientation="horizontal"
-        className={className}
-        {...restProps}
-      />
-    );
+    return <hr ref={ref} className={className} {...restProps} />;
   }
 );
 

@@ -78,9 +78,9 @@ export function ComboboxRoot<Multi extends boolean = false>({
   items: staticItems = [],
   debounce = 300,
   virtualizationThreshold = 100,
-  placement = "bottom-start",
-  offset = 4,
-  flip = true,
+  placement: _placement = "bottom-start",
+  offset: _offset = 4,
+  flip: _flip = true,
   disabled = false,
 }: ComboboxRootProps<Multi>) {
   // Compute default based on multiple mode
@@ -110,7 +110,7 @@ export function ComboboxRoot<Multi extends boolean = false>({
   const [filteredOptions, setFilteredOptions] = useState<Option<string>[]>(staticItems);
 
   // Loading state
-  const [loading, setLoading] = useState(false);
+  const [loading, _setLoading] = useState(false);
 
   const setOpen = useCallback(
     (nextOpen: boolean) => {
@@ -200,6 +200,7 @@ export function ComboboxRoot<Multi extends boolean = false>({
     ]
   );
 
+  // biome-ignore lint/suspicious/noExplicitAny: Generic context type requires cast for conditional Multi type
   return <ComboboxProvider value={contextValue as any}>{children}</ComboboxProvider>;
 }
 

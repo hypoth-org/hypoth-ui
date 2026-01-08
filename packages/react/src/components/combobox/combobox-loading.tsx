@@ -28,9 +28,9 @@ export const ComboboxLoading = forwardRef<HTMLDivElement, ComboboxLoadingProps>(
     }
 
     return (
-      <div ref={ref} role="status" aria-live="polite" className={className} {...restProps}>
+      <output ref={ref} aria-live="polite" className={className} {...restProps}>
         {children}
-      </div>
+      </output>
     );
   }
 );

@@ -26,7 +26,7 @@ export interface DatePickerCalendarProps extends HTMLAttributes<HTMLDivElement> 
 export const DatePickerCalendar = forwardRef<HTMLDivElement, DatePickerCalendarProps>(
   ({ className, renderHeader, onKeyDown, ...restProps }, ref) => {
     const {
-      behavior,
+      behavior: _behavior,
       mode,
       value,
       setValue,
@@ -289,11 +289,12 @@ export const DatePickerCalendar = forwardRef<HTMLDivElement, DatePickerCalendarP
         )}
 
         {/* Calendar grid */}
+        {/* biome-ignore lint/a11y/useSemanticElements: table with role="grid" is valid for calendar grids per WAI-ARIA */}
         <table role="grid" aria-label={`${monthLabel} ${year}`}>
           <thead>
             <tr>
-              {weekdayNames.map((day, i) => (
-                <th key={i} scope="col" abbr={day}>
+              {weekdayNames.map((day) => (
+                <th key={day} scope="col" abbr={day}>
                   {day}
                 </th>
               ))}
@@ -301,8 +302,9 @@ export const DatePickerCalendar = forwardRef<HTMLDivElement, DatePickerCalendarP
           </thead>
           <tbody>
             {weeks.map((week, weekIndex) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: weeks in a month don't reorder
               <tr key={weekIndex}>
-                {week.map((date, dayIndex) => {
+                {week.map((date) => {
                   const disabled = isDateDisabled(date);
                   const selected =
                     mode === "single"
@@ -312,21 +314,27 @@ export const DatePickerCalendar = forwardRef<HTMLDivElement, DatePickerCalendarP
                   const today = isToday(date);
                   const currentMonth = isCurrentMonth(date);
                   const focused = isSameDay(date, focusedDate);
+                  const dateKey = date.toISOString().split("T")[0];
 
                   return (
                     <td
-                      key={dayIndex}
-                      role="gridcell"
+                      key={dateKey}
                       aria-selected={selected}
                       aria-disabled={disabled || undefined}
                       tabIndex={focused ? 0 : -1}
-                      data-date={date.toISOString().split("T")[0]}
+                      data-date={dateKey}
                       data-selected={selected || undefined}
                       data-in-range={inRange || undefined}
                       data-today={today || undefined}
                       data-current-month={currentMonth || undefined}
                       data-focused={focused || undefined}
                       onClick={() => !disabled && selectDate(date)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          !disabled && selectDate(date);
+                        }
+                      }}
                     >
                       {date.getDate()}
                     </td>

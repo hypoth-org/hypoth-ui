@@ -77,9 +77,9 @@ export function DatePickerRoot({
   maxDate,
   locale = "en-US",
   firstDayOfWeek = 0,
-  placement = "bottom-start",
-  offset = 4,
-  flip = true,
+  placement: _placement = "bottom-start",
+  offset: _offset = 4,
+  flip: _flip = true,
   disabled = false,
 }: DatePickerRootProps) {
   const today = useMemo(() => {

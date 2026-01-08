@@ -6,7 +6,7 @@ import { type FileInfo, formatBytes } from "@ds/primitives-dom";
 import { type HTMLAttributes, type ReactNode, forwardRef, useCallback } from "react";
 import { useFileUploadContext } from "./file-upload-context.js";
 
-export interface FileUploadItemProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface FileUploadItemProps extends Omit<HTMLAttributes<HTMLLIElement>, "children"> {
   /** The file info to display */
   file: FileInfo;
   /** Custom render function for file content */
@@ -28,7 +28,7 @@ export interface FileUploadItemProps extends Omit<HTMLAttributes<HTMLDivElement>
  * </FileUpload.Item>
  * ```
  */
-export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
+export const FileUploadItem = forwardRef<HTMLLIElement, FileUploadItemProps>(
   ({ file, children, className, ...restProps }, ref) => {
     const { behavior, disabled } = useFileUploadContext("FileUpload.Item");
 
@@ -92,9 +92,9 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
     };
 
     return (
-      <div ref={ref} className={className} data-status={file.status} role="listitem" {...restProps}>
+      <li ref={ref} className={className} data-status={file.status} {...restProps}>
         {renderContent()}
-      </div>
+      </li>
     );
   }
 );

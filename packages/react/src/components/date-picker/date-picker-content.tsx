@@ -18,7 +18,7 @@ import {
 } from "react";
 import { useDatePickerContext } from "./date-picker-context.js";
 
-export interface DatePickerContentProps extends HTMLAttributes<HTMLDivElement> {
+export interface DatePickerContentProps extends HTMLAttributes<HTMLDialogElement> {
   /** Content */
   children?: ReactNode;
 }
@@ -34,10 +34,10 @@ export interface DatePickerContentProps extends HTMLAttributes<HTMLDivElement> {
  * </DatePicker.Content>
  * ```
  */
-export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentProps>(
+export const DatePickerContent = forwardRef<HTMLDialogElement, DatePickerContentProps>(
   ({ children, className, ...restProps }, ref) => {
     const { open, setOpen } = useDatePickerContext("DatePicker.Content");
-    const internalRef = useRef<HTMLDivElement>(null);
+    const internalRef = useRef<HTMLDialogElement>(null);
 
     // Behavior instances
     const anchorPositionRef = useRef<AnchorPosition | null>(null);
@@ -46,12 +46,12 @@ export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentPro
 
     // Merge refs
     const mergedRef = useCallback(
-      (element: HTMLDivElement | null) => {
-        (internalRef as React.MutableRefObject<HTMLDivElement | null>).current = element;
+      (element: HTMLDialogElement | null) => {
+        (internalRef as React.MutableRefObject<HTMLDialogElement | null>).current = element;
         if (typeof ref === "function") {
           ref(element);
         } else if (ref) {
-          (ref as React.MutableRefObject<HTMLDivElement | null>).current = element;
+          (ref as React.MutableRefObject<HTMLDialogElement | null>).current = element;
         }
       },
       [ref]
@@ -103,9 +103,9 @@ export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentPro
     if (!open) return null;
 
     return (
-      <div
+      <dialog
         ref={mergedRef}
-        role="dialog"
+        open
         aria-modal="true"
         aria-label="Choose date"
         className={className}
@@ -113,7 +113,7 @@ export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentPro
         {...restProps}
       >
         {children}
-      </div>
+      </dialog>
     );
   }
 );

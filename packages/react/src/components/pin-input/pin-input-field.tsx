@@ -87,7 +87,7 @@ export const PinInputField = forwardRef<HTMLInputElement, PinInputFieldProps>(
     const handleKeyDown = useCallback(
       (event: KeyboardEvent<HTMLInputElement>) => {
         switch (event.key) {
-          case "Backspace":
+          case "Backspace": {
             event.preventDefault();
             behavior.backspace(index);
             const prevIndex = behavior.state.focusedIndex;
@@ -95,6 +95,7 @@ export const PinInputField = forwardRef<HTMLInputElement, PinInputFieldProps>(
               focusInput(prevIndex);
             }
             break;
+          }
           case "ArrowLeft":
             event.preventDefault();
             behavior.focusPrev();
@@ -109,12 +110,13 @@ export const PinInputField = forwardRef<HTMLInputElement, PinInputFieldProps>(
               focusInput(behavior.state.focusedIndex);
             }
             break;
-          case "Delete":
+          case "Delete": {
             event.preventDefault();
             const chars = behavior.state.value.split("");
             chars[index] = " ";
             behavior.setValue(chars.join(""));
             break;
+          }
         }
 
         onKeyDown?.(event);

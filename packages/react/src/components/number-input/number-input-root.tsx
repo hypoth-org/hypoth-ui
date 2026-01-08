@@ -106,11 +106,12 @@ export function NumberInputRoot({
     []
   );
 
-  // Initialize input value
-  // biome-ignore lint/correctness/useExhaustiveDependencies: initial sync
+  // Initialize input value - sync from behavior on mount
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional one-time init
   useMemo(() => {
     setInputValue(behavior.state.inputValue);
-  }, [behavior]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const contextValue = useMemo(
     () => ({

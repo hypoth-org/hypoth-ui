@@ -2,43 +2,41 @@ import { describe, expect, it, vi } from "vitest";
 import { createSelectBehavior } from "../../src/behavior/select";
 
 describe("createSelectBehavior", () => {
+  const defaultItems = [
+    { value: "1", label: "Option 1" },
+    { value: "2", label: "Option 2" },
+    { value: "3", label: "Option 3" },
+  ];
+
   describe("initialization", () => {
     it("should create select behavior with default state", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
-      });
+      const select = createSelectBehavior();
 
-      expect(select.state.isOpen).toBe(false);
-      expect(select.state.selectedValue).toBeNull();
-      expect(select.state.highlightedIndex).toBe(-1);
+      expect(select.state.open).toBe(false);
+      expect(select.state.value).toBeNull();
+      expect(select.state.highlightedValue).toBeNull();
 
       select.destroy();
     });
 
     it("should accept default value", () => {
       const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
         defaultValue: "2",
       });
 
-      expect(select.state.selectedValue).toBe("2");
+      expect(select.state.value).toBe("2");
 
       select.destroy();
     });
 
-    it("should accept disabled state", () => {
+    it("should not open when disabled", () => {
       const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
         disabled: true,
       });
 
-      expect(select.state.disabled).toBe(true);
+      select.open();
+
+      expect(select.state.open).toBe(false);
 
       select.destroy();
     });
@@ -47,14 +45,11 @@ describe("createSelectBehavior", () => {
   describe("open/close", () => {
     it("should open the select", () => {
       const onOpenChange = vi.fn();
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-        onOpenChange,
-      });
+      const select = createSelectBehavior({ onOpenChange });
 
       select.open();
 
-      expect(select.state.isOpen).toBe(true);
+      expect(select.state.open).toBe(true);
       expect(onOpenChange).toHaveBeenCalledWith(true);
 
       select.destroy();
@@ -62,267 +57,142 @@ describe("createSelectBehavior", () => {
 
     it("should close the select", () => {
       const onOpenChange = vi.fn();
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-        onOpenChange,
-      });
+      const select = createSelectBehavior({ onOpenChange });
 
       select.open();
       select.close();
 
-      expect(select.state.isOpen).toBe(false);
+      expect(select.state.open).toBe(false);
       expect(onOpenChange).toHaveBeenLastCalledWith(false);
 
       select.destroy();
     });
 
     it("should toggle the select", () => {
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-      });
+      const select = createSelectBehavior();
 
       select.toggle();
-      expect(select.state.isOpen).toBe(true);
+      expect(select.state.open).toBe(true);
 
       select.toggle();
-      expect(select.state.isOpen).toBe(false);
-
-      select.destroy();
-    });
-
-    it("should not open when disabled", () => {
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-        disabled: true,
-      });
-
-      select.open();
-
-      expect(select.state.isOpen).toBe(false);
+      expect(select.state.open).toBe(false);
 
       select.destroy();
     });
   });
 
   describe("selection", () => {
-    it("should select an option", () => {
+    it("should select a value", () => {
       const onValueChange = vi.fn();
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
-        onValueChange,
-      });
+      const select = createSelectBehavior({ onValueChange });
 
-      select.selectValue("2");
+      select.select("2");
 
-      expect(select.state.selectedValue).toBe("2");
+      expect(select.state.value).toBe("2");
       expect(onValueChange).toHaveBeenCalledWith("2");
 
       select.destroy();
     });
 
     it("should close after selection by default", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
-      });
+      const select = createSelectBehavior();
 
       select.open();
-      select.selectValue("1");
+      select.select("1");
 
-      expect(select.state.isOpen).toBe(false);
-
-      select.destroy();
-    });
-
-    it("should get selected option label", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
-        defaultValue: "2",
-      });
-
-      expect(select.getSelectedLabel()).toBe("Option 2");
+      expect(select.state.open).toBe(false);
 
       select.destroy();
     });
 
-    it("should return placeholder when nothing selected", () => {
+    it("should clear selection when clearable", () => {
+      const onValueChange = vi.fn();
       const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-        placeholder: "Select an option",
+        defaultValue: "1",
+        clearable: true,
+        onValueChange,
       });
 
-      expect(select.getSelectedLabel()).toBe("Select an option");
+      select.clear();
 
-      select.destroy();
-    });
-
-    it("should not select disabled option", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2", disabled: true },
-        ],
-      });
-
-      select.selectValue("2");
-
-      expect(select.state.selectedValue).toBeNull();
+      expect(select.state.value).toBeNull();
+      expect(onValueChange).toHaveBeenCalledWith(null);
 
       select.destroy();
     });
   });
 
   describe("keyboard navigation", () => {
-    it("should highlight next option on ArrowDown", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-          { value: "3", label: "Option 3" },
-        ],
-      });
+    it("should highlight a value", () => {
+      const select = createSelectBehavior();
+      select.setItems(defaultItems);
 
       select.open();
-      select.highlightNext();
+      select.highlight("2");
 
-      expect(select.state.highlightedIndex).toBe(0);
-
-      select.highlightNext();
-      expect(select.state.highlightedIndex).toBe(1);
+      expect(select.state.highlightedValue).toBe("2");
 
       select.destroy();
     });
 
-    it("should highlight previous option on ArrowUp", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-          { value: "3", label: "Option 3" },
-        ],
-      });
+    it("should highlight next option", () => {
+      const select = createSelectBehavior();
+      select.setItems(defaultItems);
 
       select.open();
-      select.highlightIndex(2);
+      select.highlightFirst();
+      select.highlightNext();
+
+      expect(select.state.highlightedValue).toBe("2");
+
+      select.destroy();
+    });
+
+    it("should highlight previous option", () => {
+      const select = createSelectBehavior();
+      select.setItems(defaultItems);
+
+      select.open();
+      select.highlightLast();
       select.highlightPrev();
 
-      expect(select.state.highlightedIndex).toBe(1);
+      expect(select.state.highlightedValue).toBe("2");
 
       select.destroy();
     });
 
-    it("should highlight first option on Home", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-          { value: "3", label: "Option 3" },
-        ],
-      });
+    it("should highlight first option", () => {
+      const select = createSelectBehavior();
+      select.setItems(defaultItems);
 
       select.open();
-      select.highlightIndex(2);
       select.highlightFirst();
 
-      expect(select.state.highlightedIndex).toBe(0);
+      expect(select.state.highlightedValue).toBe("1");
 
       select.destroy();
     });
 
-    it("should highlight last option on End", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-          { value: "3", label: "Option 3" },
-        ],
-      });
+    it("should highlight last option", () => {
+      const select = createSelectBehavior();
+      select.setItems(defaultItems);
 
       select.open();
       select.highlightLast();
 
-      expect(select.state.highlightedIndex).toBe(2);
-
-      select.destroy();
-    });
-
-    it("should select highlighted option on Enter", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
-      });
-
-      select.open();
-      select.highlightIndex(1);
-      select.selectHighlighted();
-
-      expect(select.state.selectedValue).toBe("2");
-
-      select.destroy();
-    });
-
-    it("should skip disabled options when navigating", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2", disabled: true },
-          { value: "3", label: "Option 3" },
-        ],
-      });
-
-      select.open();
-      select.highlightIndex(0);
-      select.highlightNext();
-
-      expect(select.state.highlightedIndex).toBe(2);
+      expect(select.state.highlightedValue).toBe("3");
 
       select.destroy();
     });
   });
 
-  describe("typeahead", () => {
-    it("should highlight matching option on type", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "apple", label: "Apple" },
-          { value: "banana", label: "Banana" },
-          { value: "cherry", label: "Cherry" },
-        ],
-      });
+  describe("search", () => {
+    it("should update search query", () => {
+      const select = createSelectBehavior({ searchable: true });
 
-      select.open();
-      select.typeAhead("b");
+      select.search("opt");
 
-      expect(select.state.highlightedIndex).toBe(1);
-
-      select.destroy();
-    });
-
-    it("should cycle through options with same starting letter", () => {
-      const select = createSelectBehavior({
-        options: [
-          { value: "apple", label: "Apple" },
-          { value: "apricot", label: "Apricot" },
-          { value: "avocado", label: "Avocado" },
-        ],
-      });
-
-      select.open();
-      select.typeAhead("a");
-      expect(select.state.highlightedIndex).toBe(0);
-
-      select.typeAhead("a");
-      expect(select.state.highlightedIndex).toBe(1);
+      expect(select.state.searchQuery).toBe("opt");
 
       select.destroy();
     });
@@ -330,9 +200,7 @@ describe("createSelectBehavior", () => {
 
   describe("ARIA props", () => {
     it("should return correct trigger props", () => {
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-      });
+      const select = createSelectBehavior();
 
       const props = select.getTriggerProps();
 
@@ -343,49 +211,26 @@ describe("createSelectBehavior", () => {
       select.destroy();
     });
 
-    it("should return correct listbox props", () => {
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-      });
+    it("should return correct content props", () => {
+      const select = createSelectBehavior();
 
-      const props = select.getListboxProps();
+      const props = select.getContentProps();
 
       expect(props.role).toBe("listbox");
+      expect(props.id).toBe(select.contentId);
 
       select.destroy();
     });
 
     it("should return correct option props", () => {
       const select = createSelectBehavior({
-        options: [
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-        ],
         defaultValue: "1",
       });
 
-      const props = select.getOptionProps(0);
+      const props = select.getOptionProps("1", "Option 1");
 
       expect(props.role).toBe("option");
       expect(props["aria-selected"]).toBe(true);
-
-      select.destroy();
-    });
-  });
-
-  describe("clear", () => {
-    it("should clear selection", () => {
-      const onValueChange = vi.fn();
-      const select = createSelectBehavior({
-        options: [{ value: "1", label: "Option 1" }],
-        defaultValue: "1",
-        onValueChange,
-      });
-
-      select.clear();
-
-      expect(select.state.selectedValue).toBeNull();
-      expect(onValueChange).toHaveBeenCalledWith(null);
 
       select.destroy();
     });

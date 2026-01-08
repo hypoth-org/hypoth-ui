@@ -28,7 +28,7 @@ export interface SelectTriggerProps extends ButtonHTMLAttributes<HTMLButtonEleme
  */
 export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ children, asChild = false, onClick, onKeyDown, ...restProps }, ref) => {
-    const { behavior, open, setOpen, value, highlightedValue } = useSelectContext("Select.Trigger");
+    const { behavior, open } = useSelectContext("Select.Trigger");
     const internalRef = useRef<HTMLButtonElement>(null);
 
     // Handle click to toggle select
