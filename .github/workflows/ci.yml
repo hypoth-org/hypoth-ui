@@ -220,12 +220,12 @@ jobs:
           echo "📊 @ds/react: ${REACT_SIZE} bytes gzipped"
 
           # Foundation packages limits (gzipped)
-          # WC package includes advanced form controls (combobox, select, slider, etc.)
-          WC_LIMIT=30720  # 30KB
+          # WC package includes form controls, overlays, navigation, and structure components
+          WC_LIMIT=51200  # 50KB
           REACT_LIMIT=30720  # 30KB
 
           if [ "$WC_SIZE" -gt "$WC_LIMIT" ]; then
-            echo "❌ @ds/wc exceeds 30KB limit!"
+            echo "❌ @ds/wc exceeds 50KB limit!"
             exit 1
           fi
 

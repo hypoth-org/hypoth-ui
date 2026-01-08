@@ -1,0 +1,193 @@
+/**
+ * AlertDialog Component Styles
+ *
+ * Modal dialog for important confirmations that require explicit user action.
+ * AlertDialogs cannot be dismissed by clicking outside or pressing Escape.
+ */
+
+@layer components {
+  /* AlertDialog container */
+  ds-alert-dialog {
+    /* Component token references */
+    --_alert-dialog-backdrop-color: var(--ds-alert-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
+    --_alert-dialog-content-bg: var(--ds-alert-dialog-content-bg, var(--ds-color-surface, #ffffff));
+    --_alert-dialog-content-border-radius: var(--ds-alert-dialog-border-radius, var(--ds-radius-lg, 0.5rem));
+    --_alert-dialog-content-shadow: var(
+      --ds-alert-dialog-shadow,
+      var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04))
+    );
+    --_alert-dialog-content-padding: var(--ds-alert-dialog-padding, var(--ds-space-6, 1.5rem));
+    --_alert-dialog-max-width: var(--ds-alert-dialog-max-width, 28rem);
+
+    display: contents;
+  }
+
+  /* Backdrop */
+  .ds-alert-dialog__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--_alert-dialog-backdrop-color);
+    animation: ds-alert-dialog-backdrop-in 150ms ease-out;
+  }
+
+  .ds-alert-dialog__backdrop[hidden] {
+    display: none;
+  }
+
+  .ds-alert-dialog__backdrop[data-closing] {
+    animation: ds-alert-dialog-backdrop-out 150ms ease-in;
+  }
+
+  @keyframes ds-alert-dialog-backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ds-alert-dialog-backdrop-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Content container */
+  ds-alert-dialog-content {
+    position: relative;
+    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: var(--_alert-dialog-max-width);
+    padding: var(--_alert-dialog-content-padding);
+    margin: var(--ds-space-4, 1rem);
+    background-color: var(--_alert-dialog-content-bg);
+    border-radius: var(--_alert-dialog-content-border-radius);
+    box-shadow: var(--_alert-dialog-content-shadow);
+    animation: ds-alert-dialog-content-in 200ms ease-out;
+  }
+
+  ds-alert-dialog-content[data-state="closed"] {
+    animation: ds-alert-dialog-content-out 150ms ease-in;
+  }
+
+  @keyframes ds-alert-dialog-content-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes ds-alert-dialog-content-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+  }
+
+  /* Size variants */
+  ds-alert-dialog-content[size="sm"] {
+    --_alert-dialog-max-width: 20rem;
+    --_alert-dialog-content-padding: var(--ds-space-4, 1rem);
+  }
+
+  ds-alert-dialog-content[size="lg"] {
+    --_alert-dialog-max-width: 40rem;
+  }
+
+  ds-alert-dialog-content[size="xl"] {
+    --_alert-dialog-max-width: 56rem;
+  }
+
+  ds-alert-dialog-content[size="full"] {
+    --_alert-dialog-max-width: calc(100vw - 2rem);
+  }
+
+  /* Header */
+  ds-alert-dialog-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-2, 0.5rem);
+    text-align: center;
+  }
+
+  /* Footer */
+  ds-alert-dialog-footer {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--ds-space-2, 0.5rem);
+    margin-top: var(--ds-space-6, 1.5rem);
+  }
+
+  @media (min-width: 640px) {
+    ds-alert-dialog-footer {
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: var(--ds-space-3, 0.75rem);
+    }
+  }
+
+  /* Title */
+  ds-alert-dialog-title {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-font-size-lg, 1.125rem);
+    font-weight: var(--ds-font-weight-semibold, 600);
+    line-height: var(--ds-line-height-tight, 1.25);
+    color: var(--ds-color-text, #1a1a1a);
+  }
+
+  /* Description */
+  ds-alert-dialog-description {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-color-text-muted, #6b7280);
+  }
+
+  /* Trigger - display contents to let child button handle styling */
+  ds-alert-dialog-trigger {
+    display: contents;
+  }
+
+  /* Action button - inherits button styles but typically destructive */
+  ds-alert-dialog-action {
+    display: contents;
+  }
+
+  /* Cancel button - inherits button styles */
+  ds-alert-dialog-cancel {
+    display: contents;
+  }
+
+  /* Prevent body scroll when alert dialog is open */
+  body:has(ds-alert-dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-alert-dialog__backdrop,
+    ds-alert-dialog-content {
+      animation: none;
+    }
+  }
+}

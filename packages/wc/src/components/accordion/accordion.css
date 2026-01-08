@@ -1,0 +1,148 @@
+/**
+ * Accordion component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-accordion-border-color: Border color (default: #e2e8f0)
+ * --ds-accordion-trigger-bg: Trigger background (default: transparent)
+ * --ds-accordion-trigger-bg-hover: Trigger hover background (default: #f8fafc)
+ * --ds-accordion-trigger-padding: Trigger padding (default: 1rem)
+ * --ds-accordion-content-padding: Content padding (default: 1rem)
+ * --ds-accordion-animation-duration: Animation duration (default: 200ms)
+ */
+
+@layer components {
+  ds-accordion {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--ds-accordion-border-color, #e2e8f0);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  ds-accordion-item {
+    display: block;
+    border-bottom: 1px solid var(--ds-accordion-border-color, #e2e8f0);
+  }
+
+  ds-accordion-item:last-child {
+    border-bottom: none;
+  }
+
+  ds-accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--ds-accordion-trigger-padding, 1rem);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: left;
+    background-color: var(--ds-accordion-trigger-bg, transparent);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    outline: none;
+  }
+
+  ds-accordion-trigger:hover:not([aria-disabled="true"]) {
+    background-color: var(--ds-accordion-trigger-bg-hover, #f8fafc);
+  }
+
+  ds-accordion-trigger:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--ds-accordion-focus-ring, #3b82f6);
+  }
+
+  ds-accordion-trigger[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* Chevron indicator */
+  ds-accordion-trigger::after {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: transform var(--ds-accordion-animation-duration, 200ms) ease;
+    flex-shrink: 0;
+  }
+
+  ds-accordion-trigger[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+
+  ds-accordion-content {
+    display: block;
+    padding: var(--ds-accordion-content-padding, 1rem);
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  ds-accordion-content[hidden] {
+    display: none;
+  }
+
+  /* Expand animation */
+  ds-accordion-content[data-state="open"] {
+    animation: ds-accordion-expand var(--ds-accordion-animation-duration, 200ms) ease-out;
+  }
+
+  /* Collapse animation */
+  ds-accordion-content[data-state="closed"]:not([hidden]) {
+    animation: ds-accordion-collapse var(--ds-accordion-animation-duration, 200ms) ease-out;
+  }
+
+  @keyframes ds-accordion-expand {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--ds-accordion-content-height, auto);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ds-accordion-collapse {
+    from {
+      height: var(--ds-accordion-content-height, auto);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    ds-accordion-trigger::after {
+      transition: none;
+    }
+
+    ds-accordion-content[data-state="open"],
+    ds-accordion-content[data-state="closed"]:not([hidden]) {
+      animation: none;
+    }
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    ds-accordion {
+      --ds-accordion-border-color: #334155;
+    }
+
+    ds-accordion-trigger {
+      --ds-accordion-trigger-bg-hover: #1e293b;
+    }
+
+    ds-accordion-trigger::after {
+      filter: invert(1);
+    }
+  }
+}

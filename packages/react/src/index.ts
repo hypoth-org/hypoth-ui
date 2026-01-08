@@ -236,6 +236,207 @@ export { TimePicker } from "./components/time-picker/index.js";
 // PinInput compound component
 export { PinInput } from "./components/pin-input/index.js";
 
+// Card compound component
+export { Card } from "./components/card/index.js";
+export type {
+  CardRootProps,
+  CardHeaderProps,
+  CardContentProps,
+  CardFooterProps,
+} from "./components/card/index.js";
+
+// Separator component
+export { Separator } from "./components/separator/index.js";
+export type { SeparatorProps, SeparatorOrientation } from "./components/separator/index.js";
+
+// AspectRatio component
+export { AspectRatio } from "./components/aspect-ratio/index.js";
+export type { AspectRatioProps } from "./components/aspect-ratio/index.js";
+
+// Collapsible compound component
+export { Collapsible } from "./components/collapsible/index.js";
+export type {
+  CollapsibleRootProps,
+  CollapsibleTriggerProps,
+  CollapsibleContentProps,
+} from "./components/collapsible/index.js";
+
+// Tabs compound component
+export { Tabs } from "./components/tabs/index.js";
+export type {
+  TabsRootProps,
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+  TabsOrientation,
+  TabsActivationMode,
+} from "./components/tabs/index.js";
+
+// Accordion compound component
+export { Accordion } from "./components/accordion/index.js";
+export type {
+  AccordionRootProps,
+  AccordionItemProps,
+  AccordionTriggerProps,
+  AccordionContentProps,
+  AccordionType,
+  AccordionOrientation,
+} from "./components/accordion/index.js";
+
+// AlertDialog compound component
+export { AlertDialog } from "./components/alert-dialog/index.js";
+export type {
+  AlertDialogRootProps,
+  AlertDialogTriggerProps,
+  AlertDialogContentProps,
+  AlertDialogContentSize,
+  AlertDialogHeaderProps,
+  AlertDialogFooterProps,
+  AlertDialogTitleProps,
+  AlertDialogDescriptionProps,
+  AlertDialogActionProps,
+  AlertDialogCancelProps,
+} from "./components/alert-dialog/index.js";
+
+// Sheet compound component
+export { Sheet } from "./components/sheet/index.js";
+export type {
+  SheetRootProps,
+  SheetTriggerProps,
+  SheetContentProps,
+  SheetSide,
+  SheetContentSize,
+  SheetHeaderProps,
+  SheetFooterProps,
+  SheetTitleProps,
+  SheetDescriptionProps,
+  SheetCloseProps,
+} from "./components/sheet/index.js";
+
+// Drawer compound component
+export { Drawer } from "./components/drawer/index.js";
+export type {
+  DrawerRootProps,
+  DrawerTriggerProps,
+  DrawerContentProps,
+  DrawerSide,
+  DrawerHeaderProps,
+  DrawerFooterProps,
+  DrawerTitleProps,
+  DrawerDescriptionProps,
+} from "./components/drawer/index.js";
+
+// DropdownMenu compound component
+export { DropdownMenu } from "./components/dropdown-menu/index.js";
+export type {
+  DropdownMenuRootProps,
+  DropdownMenuTriggerProps,
+  DropdownMenuContentProps,
+  DropdownMenuItemProps,
+  DropdownMenuSeparatorProps,
+  DropdownMenuLabelProps,
+  DropdownMenuCheckboxItemProps,
+  DropdownMenuRadioGroupProps,
+  DropdownMenuRadioItemProps,
+  DropdownMenuPlacement,
+  DropdownMenuItemVariant,
+} from "./components/dropdown-menu/index.js";
+
+// ContextMenu compound component
+export { ContextMenu } from "./components/context-menu/index.js";
+export type {
+  ContextMenuRootProps,
+  ContextMenuTriggerProps,
+  ContextMenuContentProps,
+  ContextMenuItemProps,
+  ContextMenuSeparatorProps,
+  ContextMenuLabelProps,
+  ContextMenuItemVariant,
+} from "./components/context-menu/index.js";
+
+// HoverCard compound component
+export { HoverCard } from "./components/hover-card/index.js";
+export type {
+  HoverCardRootProps,
+  HoverCardTriggerProps,
+  HoverCardContentProps,
+  HoverCardPlacement,
+} from "./components/hover-card/index.js";
+
+// NavigationMenu compound component
+export { NavigationMenu } from "./components/navigation-menu/index.js";
+export type {
+  NavigationMenuRootProps,
+  NavigationMenuListProps,
+  NavigationMenuItemProps,
+  NavigationMenuTriggerProps,
+  NavigationMenuContentProps,
+  NavigationMenuLinkProps,
+  NavigationMenuIndicatorProps,
+  NavigationMenuViewportProps,
+  NavigationMenuOrientation,
+} from "./components/navigation-menu/index.js";
+
+// ScrollArea compound component
+export { ScrollArea } from "./components/scroll-area/index.js";
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaType,
+} from "./components/scroll-area/index.js";
+
+// Breadcrumb compound component
+export { Breadcrumb } from "./components/breadcrumb/index.js";
+export type {
+  BreadcrumbRootProps,
+  BreadcrumbListProps,
+  BreadcrumbItemProps,
+  BreadcrumbLinkProps,
+  BreadcrumbPageProps,
+  BreadcrumbSeparatorProps,
+} from "./components/breadcrumb/index.js";
+
+// Pagination compound component
+export { Pagination } from "./components/pagination/index.js";
+export type {
+  PaginationRootProps,
+  PaginationContentProps,
+  PaginationItemProps,
+  PaginationLinkProps,
+  PaginationPreviousProps,
+  PaginationNextProps,
+  PaginationEllipsisProps,
+} from "./components/pagination/index.js";
+
+// Stepper compound component
+export { Stepper } from "./components/stepper/index.js";
+export type {
+  StepperRootProps,
+  StepperItemProps,
+  StepperTriggerProps,
+  StepperIndicatorProps,
+  StepperTitleProps,
+  StepperDescriptionProps,
+  StepperSeparatorProps,
+  StepperContentProps,
+  StepperOrientation,
+} from "./components/stepper/index.js";
+
+// Command compound component
+export { Command } from "./components/command/index.js";
+export type {
+  CommandRootProps,
+  CommandInputProps,
+  CommandListProps,
+  CommandItemProps,
+  CommandGroupProps,
+  CommandSeparatorProps,
+  CommandEmptyProps,
+  CommandLoadingProps,
+} from "./components/command/index.js";
+
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";
 export { createComponent } from "./utils/create-component.js";

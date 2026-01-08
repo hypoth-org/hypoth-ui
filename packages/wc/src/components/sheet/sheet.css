@@ -1,0 +1,292 @@
+/**
+ * Sheet Component Styles
+ *
+ * Slide-in overlay panel from screen edges with focus management.
+ */
+
+@layer components {
+  /* Sheet container */
+  ds-sheet {
+    /* Component token references */
+    --_sheet-overlay-color: var(--ds-sheet-overlay-color, rgba(0, 0, 0, 0.5));
+    --_sheet-content-bg: var(--ds-sheet-content-bg, var(--ds-color-surface, #ffffff));
+    --_sheet-content-shadow: var(
+      --ds-sheet-shadow,
+      var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04))
+    );
+    --_sheet-content-padding: var(--ds-sheet-padding, var(--ds-space-6, 1.5rem));
+
+    display: contents;
+  }
+
+  /* Overlay */
+  ds-sheet-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-z-index-overlay, var(--ds-z-overlay, 900));
+    background-color: var(--_sheet-overlay-color);
+    animation: ds-sheet-overlay-in 150ms ease-out;
+  }
+
+  ds-sheet-overlay[hidden] {
+    display: none;
+  }
+
+  ds-sheet-overlay[data-closing] {
+    animation: ds-sheet-overlay-out 150ms ease-in;
+  }
+
+  @keyframes ds-sheet-overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ds-sheet-overlay-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Content container */
+  ds-sheet-content {
+    position: fixed;
+    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    display: flex;
+    flex-direction: column;
+    background-color: var(--_sheet-content-bg);
+    box-shadow: var(--_sheet-content-shadow);
+  }
+
+  /* Side positioning */
+  ds-sheet-content[side="right"] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--_sheet-width, 24rem);
+    max-width: 100vw;
+    animation: ds-sheet-slide-in-right 200ms ease-out;
+  }
+
+  ds-sheet-content[side="right"][data-state="closed"] {
+    animation: ds-sheet-slide-out-right 150ms ease-in;
+  }
+
+  ds-sheet-content[side="left"] {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--_sheet-width, 24rem);
+    max-width: 100vw;
+    animation: ds-sheet-slide-in-left 200ms ease-out;
+  }
+
+  ds-sheet-content[side="left"][data-state="closed"] {
+    animation: ds-sheet-slide-out-left 150ms ease-in;
+  }
+
+  ds-sheet-content[side="top"] {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--_sheet-height, 24rem);
+    max-height: 100vh;
+    animation: ds-sheet-slide-in-top 200ms ease-out;
+  }
+
+  ds-sheet-content[side="top"][data-state="closed"] {
+    animation: ds-sheet-slide-out-top 150ms ease-in;
+  }
+
+  ds-sheet-content[side="bottom"] {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--_sheet-height, 24rem);
+    max-height: 100vh;
+    animation: ds-sheet-slide-in-bottom 200ms ease-out;
+  }
+
+  ds-sheet-content[side="bottom"][data-state="closed"] {
+    animation: ds-sheet-slide-out-bottom 150ms ease-in;
+  }
+
+  /* Slide animations */
+  @keyframes ds-sheet-slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ds-sheet-slide-out-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes ds-sheet-slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ds-sheet-slide-out-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes ds-sheet-slide-in-top {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ds-sheet-slide-out-top {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes ds-sheet-slide-in-bottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ds-sheet-slide-out-bottom {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Size variants for horizontal (left/right) sheets */
+  ds-sheet-content[side="right"][size="sm"],
+  ds-sheet-content[side="left"][size="sm"] {
+    --_sheet-width: 18rem;
+  }
+
+  ds-sheet-content[side="right"][size="lg"],
+  ds-sheet-content[side="left"][size="lg"] {
+    --_sheet-width: 32rem;
+  }
+
+  ds-sheet-content[side="right"][size="xl"],
+  ds-sheet-content[side="left"][size="xl"] {
+    --_sheet-width: 40rem;
+  }
+
+  ds-sheet-content[side="right"][size="full"],
+  ds-sheet-content[side="left"][size="full"] {
+    --_sheet-width: 100vw;
+  }
+
+  /* Size variants for vertical (top/bottom) sheets */
+  ds-sheet-content[side="top"][size="sm"],
+  ds-sheet-content[side="bottom"][size="sm"] {
+    --_sheet-height: 16rem;
+  }
+
+  ds-sheet-content[side="top"][size="lg"],
+  ds-sheet-content[side="bottom"][size="lg"] {
+    --_sheet-height: 32rem;
+  }
+
+  ds-sheet-content[side="top"][size="xl"],
+  ds-sheet-content[side="bottom"][size="xl"] {
+    --_sheet-height: 40rem;
+  }
+
+  ds-sheet-content[side="top"][size="full"],
+  ds-sheet-content[side="bottom"][size="full"] {
+    --_sheet-height: 100vh;
+  }
+
+  /* Header */
+  ds-sheet-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-1, 0.25rem);
+    padding: var(--_sheet-content-padding);
+    padding-bottom: var(--ds-space-4, 1rem);
+    border-bottom: 1px solid var(--ds-color-border, #e5e7eb);
+  }
+
+  /* Footer */
+  ds-sheet-footer {
+    display: flex;
+    gap: var(--ds-space-3, 0.75rem);
+    justify-content: flex-end;
+    padding: var(--_sheet-content-padding);
+    padding-top: var(--ds-space-4, 1rem);
+    margin-top: auto;
+    border-top: 1px solid var(--ds-color-border, #e5e7eb);
+  }
+
+  /* Title */
+  ds-sheet-title {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-font-size-lg, 1.125rem);
+    font-weight: var(--ds-font-weight-semibold, 600);
+    line-height: var(--ds-line-height-tight, 1.25);
+    color: var(--ds-color-text, #1a1a1a);
+  }
+
+  /* Description */
+  ds-sheet-description {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-color-text-muted, #6b7280);
+  }
+
+  /* Close button - display contents to let child handle styling */
+  ds-sheet-close {
+    display: contents;
+  }
+
+  /* Prevent body scroll when sheet is open */
+  body:has(ds-sheet[open]) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    ds-sheet-overlay,
+    ds-sheet-content {
+      animation: none;
+    }
+  }
+}
