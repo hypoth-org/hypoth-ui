@@ -1,0 +1,182 @@
+/**
+ * Badge Component Styles
+ *
+ * Small status indicators for counts, notifications, and indicators.
+ */
+
+@layer components {
+  /* Badge base */
+  .ds-badge {
+    --_badge-bg: var(--ds-badge-bg, var(--ds-color-primary, #2563eb));
+    --_badge-color: var(--ds-badge-color, var(--ds-color-on-primary, #fff));
+    --_badge-font-size: var(--ds-badge-font-size, 0.75rem);
+    --_badge-font-weight: var(--ds-badge-font-weight, 500);
+    --_badge-padding-x: var(--ds-badge-padding-x, 0.5rem);
+    --_badge-padding-y: var(--ds-badge-padding-y, 0.125rem);
+    --_badge-radius: var(--ds-badge-radius, var(--ds-radius-full, 9999px));
+    --_badge-min-width: var(--ds-badge-min-width, 1.25rem);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--_badge-min-width);
+    height: auto;
+    padding: var(--_badge-padding-y) var(--_badge-padding-x);
+    font-size: var(--_badge-font-size);
+    font-weight: var(--_badge-font-weight);
+    line-height: 1;
+    color: var(--_badge-color);
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: var(--_badge-bg);
+    border-radius: var(--_badge-radius);
+  }
+
+  /* Variant: neutral/default */
+  .ds-badge[data-variant="neutral"] {
+    --_badge-bg: var(--ds-color-surface-muted, #e5e7eb);
+    --_badge-color: var(--ds-color-text, #111827);
+  }
+
+  /* Variant: primary */
+  .ds-badge[data-variant="primary"] {
+    --_badge-bg: var(--ds-color-primary, #2563eb);
+    --_badge-color: var(--ds-color-on-primary, #fff);
+  }
+
+  /* Variant: secondary */
+  .ds-badge[data-variant="secondary"] {
+    --_badge-bg: var(--ds-color-secondary, #6b7280);
+    --_badge-color: var(--ds-color-on-secondary, #fff);
+  }
+
+  /* Variant: success */
+  .ds-badge[data-variant="success"] {
+    --_badge-bg: var(--ds-color-success, #22c55e);
+    --_badge-color: var(--ds-color-on-success, #fff);
+  }
+
+  /* Variant: warning */
+  .ds-badge[data-variant="warning"] {
+    --_badge-bg: var(--ds-color-warning, #f59e0b);
+    --_badge-color: var(--ds-color-on-warning, #000);
+  }
+
+  /* Variant: error */
+  .ds-badge[data-variant="error"] {
+    --_badge-bg: var(--ds-color-error, #ef4444);
+    --_badge-color: var(--ds-color-on-error, #fff);
+  }
+
+  /* Variant: info */
+  .ds-badge[data-variant="info"] {
+    --_badge-bg: var(--ds-color-info, #3b82f6);
+    --_badge-color: var(--ds-color-on-info, #fff);
+  }
+
+  /* Outline variant modifier */
+  .ds-badge[data-outline] {
+    background-color: transparent;
+    border: 1px solid var(--_badge-bg);
+    color: var(--_badge-bg);
+  }
+
+  /* Size: small */
+  .ds-badge[data-size="sm"] {
+    --_badge-font-size: 0.625rem;
+    --_badge-padding-x: 0.375rem;
+    --_badge-padding-y: 0.0625rem;
+    --_badge-min-width: 1rem;
+  }
+
+  /* Size: large */
+  .ds-badge[data-size="lg"] {
+    --_badge-font-size: 0.875rem;
+    --_badge-padding-x: 0.625rem;
+    --_badge-padding-y: 0.1875rem;
+    --_badge-min-width: 1.5rem;
+  }
+
+  /* Dot variant (no content, just indicator) */
+  .ds-badge[data-dot] {
+    width: 0.5rem;
+    height: 0.5rem;
+    min-width: unset;
+    padding: 0;
+  }
+
+  .ds-badge[data-dot][data-size="sm"] {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
+
+  .ds-badge[data-dot][data-size="lg"] {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+
+  /* Badge positioned on another element */
+  .ds-badge-wrapper {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .ds-badge-wrapper .ds-badge {
+    position: absolute;
+  }
+
+  /* Position: top-right (default) */
+  .ds-badge-wrapper .ds-badge,
+  .ds-badge-wrapper .ds-badge[data-position="top-right"] {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  /* Position: top-left */
+  .ds-badge-wrapper .ds-badge[data-position="top-left"] {
+    top: 0;
+    right: auto;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Position: bottom-right */
+  .ds-badge-wrapper .ds-badge[data-position="bottom-right"] {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    transform: translate(50%, 50%);
+  }
+
+  /* Position: bottom-left */
+  .ds-badge-wrapper .ds-badge[data-position="bottom-left"] {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+  }
+
+  /* Pulse animation for notification badges */
+  .ds-badge[data-pulse] {
+    animation: ds-badge-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes ds-badge-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-badge[data-pulse] {
+      animation: none;
+    }
+  }
+}

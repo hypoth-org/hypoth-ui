@@ -150,6 +150,9 @@ export type { BoxProps } from "./primitives/box.js";
 export type { SlotProps } from "./primitives/slot.js";
 export type { PresenceProps } from "./primitives/Presence.js";
 export type { UsePresenceOptions, UsePresenceReturn } from "./primitives/use-presence.js";
+export type { PortalProps } from "./primitives/portal.js";
+export type { FocusScopeProps, FocusScopeRef } from "./primitives/focus-scope.js";
+export type { ClientOnlyProps } from "./primitives/client-only.js";
 
 // Utility types
 export type { WrapperConfig } from "./utils/create-component.js";
@@ -186,6 +189,9 @@ export { Box } from "./primitives/box.js";
 export { Slot } from "./primitives/slot.js";
 export { Presence } from "./primitives/Presence.js";
 export { usePresence } from "./primitives/use-presence.js";
+export { Portal } from "./primitives/portal.js";
+export { FocusScope } from "./primitives/focus-scope.js";
+export { ClientOnly, useIsClient } from "./primitives/client-only.js";
 
 // Field components
 export { Field } from "./components/field/field.js";
@@ -436,6 +442,114 @@ export type {
   CommandEmptyProps,
   CommandLoadingProps,
 } from "./components/command/index.js";
+
+// Alert component
+export { Alert } from "./components/alert/index.js";
+export type { AlertProps, AlertVariant } from "./components/alert/index.js";
+
+// Toast compound component
+export { Toast, useToast } from "./components/toast/index.js";
+export type {
+  ToastProviderProps,
+  ToastVariant,
+  ToastPosition,
+  ToastState,
+  ToastAction,
+  ToastData,
+  ToastOptions,
+  UseToastReturn,
+} from "./components/toast/index.js";
+
+// Progress component
+export { Progress } from "./components/progress/index.js";
+export type { ProgressProps, ProgressVariant, ProgressSize } from "./components/progress/index.js";
+
+// Avatar compound component
+export { Avatar, AvatarGroup } from "./components/avatar/index.js";
+export type {
+  AvatarProps,
+  AvatarSize,
+  AvatarShape,
+  AvatarStatus,
+  AvatarGroupProps,
+} from "./components/avatar/index.js";
+
+// Table compound component
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./components/table/index.js";
+export type {
+  TableRootProps,
+  TableSize,
+  TableHeaderProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeadProps,
+  TableAlign,
+  SortDirection,
+  TableCellProps,
+} from "./components/table/index.js";
+
+// Skeleton component
+export { Skeleton } from "./components/skeleton/index.js";
+export type {
+  SkeletonProps,
+  SkeletonVariant,
+  SkeletonSize,
+  SkeletonWidth,
+  SkeletonAnimation,
+} from "./components/skeleton/index.js";
+
+// Badge component
+export { Badge } from "./components/badge/index.js";
+export type {
+  BadgeProps,
+  BadgeVariant,
+  BadgeSize,
+  BadgePosition,
+} from "./components/badge/index.js";
+
+// Tag component
+export { Tag } from "./components/tag/index.js";
+export type { TagProps, TagVariant, TagSize } from "./components/tag/index.js";
+
+// Tree compound component
+export { Tree, TreeItem } from "./components/tree/index.js";
+export type {
+  TreeRootProps,
+  TreeSelectionMode,
+  TreeSize,
+  TreeItemProps,
+} from "./components/tree/index.js";
+
+// List compound component
+export { List, ListItem } from "./components/list/index.js";
+export type {
+  ListRootProps,
+  ListSelectionMode,
+  ListOrientation,
+  ListSize,
+  ListItemProps,
+} from "./components/list/index.js";
+
+// Calendar component
+export { Calendar } from "./components/calendar/index.js";
+export type { CalendarProps, CalendarSize } from "./components/calendar/index.js";
+
+// DataTable component
+export { DataTable } from "./components/data-table/index.js";
+export type {
+  DataTableProps,
+  DataTableColumn,
+  DataTableSort,
+  DataTablePagination,
+  DataTableSortDirection,
+} from "./components/data-table/index.js";
 
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";

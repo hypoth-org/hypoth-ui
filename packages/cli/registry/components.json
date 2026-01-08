@@ -1965,6 +1965,396 @@
         "apgPattern": "listbox",
         "keyboardSupport": ["ArrowUp", "ArrowDown", "Enter", "Escape"]
       }
+    },
+    {
+      "name": "alert",
+      "displayName": "Alert",
+      "description": "Contextual feedback message with status variants",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "alert/index.tsx",
+          "target": "alert/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "alert/alert.ts",
+          "target": "alert/alert.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "alert",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "toast",
+      "displayName": "Toast",
+      "description": "Non-blocking notification with auto-dismiss and positioning",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "toast/index.tsx",
+          "target": "toast/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "toast/toast.ts",
+          "target": "toast/toast.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "toast/toast-provider.ts",
+          "target": "toast/toast-provider.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "alert",
+        "keyboardSupport": ["Escape"]
+      }
+    },
+    {
+      "name": "progress",
+      "displayName": "Progress",
+      "description": "Linear and circular progress indicators",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "progress/index.tsx",
+          "target": "progress/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "progress/progress.ts",
+          "target": "progress/progress.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "progressbar",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "avatar",
+      "displayName": "Avatar",
+      "description": "User avatar with image, initials, or fallback icon",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "avatar/index.tsx",
+          "target": "avatar/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "avatar/avatar.ts",
+          "target": "avatar/avatar.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "avatar/avatar-group.ts",
+          "target": "avatar/avatar-group.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "img",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "table",
+      "displayName": "Table",
+      "description": "Data table with sorting, selection, and sticky headers",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "table/index.tsx",
+          "target": "table/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "table/table.ts",
+          "target": "table/table.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "table/table-header.ts",
+          "target": "table/table-header.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "table/table-body.ts",
+          "target": "table/table-body.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "table/table-row.ts",
+          "target": "table/table-row.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "table/table-head.ts",
+          "target": "table/table-head.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "table/table-cell.ts",
+          "target": "table/table-cell.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "table",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
+      }
+    },
+    {
+      "name": "data-table",
+      "displayName": "DataTable",
+      "description": "Advanced data table with pagination, virtualization, and filtering",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": ["table"],
+      "files": [
+        {
+          "path": "data-table/index.tsx",
+          "target": "data-table/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "data-table/data-table.ts",
+          "target": "data-table/data-table.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "grid",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"]
+      }
+    },
+    {
+      "name": "skeleton",
+      "displayName": "Skeleton",
+      "description": "Loading placeholder with shimmer animation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "skeleton/index.tsx",
+          "target": "skeleton/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "skeleton/skeleton.ts",
+          "target": "skeleton/skeleton.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "none",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "badge",
+      "displayName": "Badge",
+      "description": "Status indicator with variants and dot mode",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "badge/index.tsx",
+          "target": "badge/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "badge/badge.ts",
+          "target": "badge/badge.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "status",
+        "keyboardSupport": []
+      }
+    },
+    {
+      "name": "tag",
+      "displayName": "Tag",
+      "description": "Removable tag/chip for categories and selections",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "tag/index.tsx",
+          "target": "tag/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "tag/tag.ts",
+          "target": "tag/tag.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "button",
+        "keyboardSupport": ["Enter", "Space", "Backspace", "Delete"]
+      }
+    },
+    {
+      "name": "tree",
+      "displayName": "Tree",
+      "description": "Hierarchical tree view with expand/collapse and selection",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "tree/index.tsx",
+          "target": "tree/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "tree/tree.ts",
+          "target": "tree/tree.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "tree/tree-item.ts",
+          "target": "tree/tree-item.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "treeview",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Home", "End"]
+      }
+    },
+    {
+      "name": "list",
+      "displayName": "List",
+      "description": "Selectable list with keyboard navigation",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "list/index.tsx",
+          "target": "list/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "list/list.ts",
+          "target": "list/list.ts",
+          "type": "ts",
+          "framework": "wc"
+        },
+        {
+          "path": "list/list-item.ts",
+          "target": "list/list-item.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "listbox",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "Home", "End", "Enter", "Space"]
+      }
+    },
+    {
+      "name": "calendar",
+      "displayName": "Calendar",
+      "description": "Calendar widget for date selection",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": ["react", "wc"],
+      "dependencies": ["@hypoth-ui/tokens"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "calendar/index.tsx",
+          "target": "calendar/index.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "calendar/calendar.ts",
+          "target": "calendar/calendar.ts",
+          "type": "ts",
+          "framework": "wc"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "grid",
+        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "PageUp", "PageDown", "Home", "End", "Enter", "Space"]
+      }
     }
   ]
 }

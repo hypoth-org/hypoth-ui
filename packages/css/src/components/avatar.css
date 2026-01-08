@@ -1,0 +1,210 @@
+/**
+ * Avatar Component Styles
+ *
+ * User representation with image, initials fallback, and status indicators.
+ * Supports size variants and AvatarGroup stacking.
+ */
+
+@layer components {
+  /* Avatar base */
+  .ds-avatar {
+    --_avatar-size: var(--ds-avatar-size, 2.5rem);
+    --_avatar-radius: var(--ds-avatar-radius, var(--ds-radius-full, 9999px));
+    --_avatar-bg: var(--ds-avatar-bg, var(--ds-color-surface-muted, #f3f4f6));
+    --_avatar-color: var(--ds-avatar-color, var(--ds-color-text-muted, #6b7280));
+    --_avatar-font-size: var(--ds-avatar-font-size, 0.875rem);
+    --_avatar-font-weight: var(--ds-avatar-font-weight, 500);
+    --_avatar-border: var(--ds-avatar-border, 2px solid var(--ds-color-surface, #fff));
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_avatar-size);
+    height: var(--_avatar-size);
+    overflow: hidden;
+    font-size: var(--_avatar-font-size);
+    font-weight: var(--_avatar-font-weight);
+    color: var(--_avatar-color);
+    text-transform: uppercase;
+    vertical-align: middle;
+    background-color: var(--_avatar-bg);
+    border-radius: var(--_avatar-radius);
+    flex-shrink: 0;
+  }
+
+  /* Avatar image */
+  .ds-avatar__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  /* Avatar initials */
+  .ds-avatar__initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+  }
+
+  /* Avatar fallback icon */
+  .ds-avatar__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+    color: var(--_avatar-color);
+  }
+
+  .ds-avatar__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Size variants */
+  .ds-avatar[data-size="xs"] {
+    --_avatar-size: 1.5rem;
+    --_avatar-font-size: 0.625rem;
+  }
+
+  .ds-avatar[data-size="sm"] {
+    --_avatar-size: 2rem;
+    --_avatar-font-size: 0.75rem;
+  }
+
+  .ds-avatar[data-size="md"] {
+    --_avatar-size: 2.5rem;
+    --_avatar-font-size: 0.875rem;
+  }
+
+  .ds-avatar[data-size="lg"] {
+    --_avatar-size: 3rem;
+    --_avatar-font-size: 1rem;
+  }
+
+  .ds-avatar[data-size="xl"] {
+    --_avatar-size: 4rem;
+    --_avatar-font-size: 1.25rem;
+  }
+
+  .ds-avatar[data-size="2xl"] {
+    --_avatar-size: 5rem;
+    --_avatar-font-size: 1.5rem;
+  }
+
+  /* Shape variants */
+  .ds-avatar[data-shape="square"] {
+    --_avatar-radius: var(--ds-radius-md, 0.375rem);
+  }
+
+  /* Status indicator */
+  .ds-avatar__status {
+    --_status-size: calc(var(--_avatar-size) * 0.3);
+    --_status-offset: calc(var(--_avatar-size) * 0.05);
+
+    position: absolute;
+    right: var(--_status-offset);
+    bottom: var(--_status-offset);
+    width: var(--_status-size);
+    height: var(--_status-size);
+    border: 2px solid var(--ds-color-surface, #fff);
+    border-radius: var(--ds-radius-full, 9999px);
+  }
+
+  .ds-avatar__status[data-status="online"] {
+    background-color: var(--ds-color-success, #22c55e);
+  }
+
+  .ds-avatar__status[data-status="offline"] {
+    background-color: var(--ds-color-text-muted, #9ca3af);
+  }
+
+  .ds-avatar__status[data-status="away"] {
+    background-color: var(--ds-color-warning, #f59e0b);
+  }
+
+  .ds-avatar__status[data-status="busy"] {
+    background-color: var(--ds-color-error, #ef4444);
+  }
+
+  /* Avatar Group */
+  .ds-avatar-group {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .ds-avatar-group .ds-avatar {
+    border: var(--_avatar-border);
+    margin-left: calc(var(--_avatar-size) * -0.25);
+  }
+
+  .ds-avatar-group .ds-avatar:last-child {
+    margin-left: 0;
+  }
+
+  /* Overflow indicator */
+  .ds-avatar-group__overflow {
+    --_avatar-bg: var(--ds-color-surface-muted, #e5e7eb);
+    --_avatar-color: var(--ds-color-text-muted, #6b7280);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_avatar-size);
+    height: var(--_avatar-size);
+    font-size: calc(var(--_avatar-font-size) * 0.85);
+    font-weight: 600;
+    color: var(--_avatar-color);
+    background-color: var(--_avatar-bg);
+    border: var(--_avatar-border);
+    border-radius: var(--_avatar-radius);
+    margin-left: calc(var(--_avatar-size) * -0.25);
+    flex-shrink: 0;
+  }
+
+  /* Size inheritance for groups */
+  .ds-avatar-group[data-size="xs"] {
+    --_avatar-size: 1.5rem;
+    --_avatar-font-size: 0.625rem;
+  }
+
+  .ds-avatar-group[data-size="sm"] {
+    --_avatar-size: 2rem;
+    --_avatar-font-size: 0.75rem;
+  }
+
+  .ds-avatar-group[data-size="md"] {
+    --_avatar-size: 2.5rem;
+    --_avatar-font-size: 0.875rem;
+  }
+
+  .ds-avatar-group[data-size="lg"] {
+    --_avatar-size: 3rem;
+    --_avatar-font-size: 1rem;
+  }
+
+  .ds-avatar-group[data-size="xl"] {
+    --_avatar-size: 4rem;
+    --_avatar-font-size: 1.25rem;
+  }
+
+  /* Hover effect on avatars in group */
+  .ds-avatar-group .ds-avatar:hover {
+    z-index: 1;
+    transform: translateY(-2px);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-avatar-group .ds-avatar:hover {
+      transform: none;
+    }
+  }
+}

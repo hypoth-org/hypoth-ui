@@ -222,6 +222,37 @@ define("ds-button", DsButton);
 | `DsCommandEmpty` | `<ds-command-empty>` | Empty state |
 | `DsCommandLoading` | `<ds-command-loading>` | Loading state |
 
+### Feedback
+
+| Component | Element | Description |
+|-----------|---------|-------------|
+| `DsAlert` | `<ds-alert>` | Alert message with variants (info, success, warning, error) |
+| `DsToast` | `<ds-toast>` | Toast notification |
+| `DsToastProvider` | `<ds-toast-provider>` | Toast container with positioning |
+| `DsProgress` | `<ds-progress>` | Progress indicator (linear/circular) |
+
+### Data Display
+
+| Component | Element | Description |
+|-----------|---------|-------------|
+| `DsAvatar` | `<ds-avatar>` | User avatar with image, initials, or fallback |
+| `DsAvatarGroup` | `<ds-avatar-group>` | Stacked avatar group |
+| `DsTable` | `<ds-table>` | Data table root |
+| `DsTableHeader` | `<ds-table-header>` | Table header section |
+| `DsTableBody` | `<ds-table-body>` | Table body section |
+| `DsTableRow` | `<ds-table-row>` | Table row |
+| `DsTableHead` | `<ds-table-head>` | Table header cell with sorting |
+| `DsTableCell` | `<ds-table-cell>` | Table data cell |
+| `DsDataTable` | `<ds-data-table>` | Advanced data table with pagination/virtualization |
+| `DsSkeleton` | `<ds-skeleton>` | Loading placeholder skeleton |
+| `DsBadge` | `<ds-badge>` | Status badge with variants |
+| `DsTag` | `<ds-tag>` | Removable tag/chip |
+| `DsTree` | `<ds-tree>` | Tree view root |
+| `DsTreeItem` | `<ds-tree-item>` | Expandable tree item |
+| `DsList` | `<ds-list>` | List container |
+| `DsListItem` | `<ds-list-item>` | Selectable list item |
+| `DsCalendar` | `<ds-calendar>` | Calendar date picker |
+
 ## Architecture
 
 ### Light DOM Rendering

@@ -31,6 +31,7 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - N/A (stateless animation system) (016-motion-system)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), date-fns 3.x (DatePicker/TimePicker only) (017-advanced-form-controls)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (018-structure-nav-overlays)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead) (019-feedback-data-utilities)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -87,9 +88,9 @@ pnpm a11y:validate                          # Validate audit records
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 019-feedback-data-utilities: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead)
 - 018-structure-nav-overlays: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
 - 017-advanced-form-controls: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), date-fns 3.x (DatePicker/TimePicker only)
-- 016-motion-system: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (adapter peer dependency), existing `@ds/primitives-dom`
 
 
 <!-- MANUAL ADDITIONS START -->

@@ -1,0 +1,99 @@
+/**
+ * Feedback Components Base Styles
+ *
+ * Shared CSS custom properties and base styles for feedback components
+ * (Alert, Toast, Progress, Badge, etc.)
+ */
+
+@layer components {
+  /* Status color mappings - maps semantic tokens to component tokens */
+  :root {
+    /* Info status */
+    --ds-status-info-bg: var(--ds-color-status-info-background, #eff6ff);
+    --ds-status-info-fg: var(--ds-color-status-info-foreground, #1d4ed8);
+    --ds-status-info-border: var(--ds-color-status-info-border, #bfdbfe);
+    --ds-status-info-icon: var(--ds-color-status-info-default, #2563eb);
+
+    /* Success status */
+    --ds-status-success-bg: var(--ds-color-status-success-background, #f0fdf4);
+    --ds-status-success-fg: var(--ds-color-status-success-foreground, #15803d);
+    --ds-status-success-border: var(--ds-color-status-success-border, #bbf7d0);
+    --ds-status-success-icon: var(--ds-color-status-success-default, #16a34a);
+
+    /* Warning status */
+    --ds-status-warning-bg: var(--ds-color-status-warning-background, #fffbeb);
+    --ds-status-warning-fg: var(--ds-color-status-warning-foreground, #b45309);
+    --ds-status-warning-border: var(--ds-color-status-warning-border, #fde68a);
+    --ds-status-warning-icon: var(--ds-color-status-warning-default, #f59e0b);
+
+    /* Error status */
+    --ds-status-error-bg: var(--ds-color-status-error-background, #fef2f2);
+    --ds-status-error-fg: var(--ds-color-status-error-foreground, #b91c1c);
+    --ds-status-error-border: var(--ds-color-status-error-border, #fecaca);
+    --ds-status-error-icon: var(--ds-color-status-error-default, #dc2626);
+
+    /* Neutral status */
+    --ds-status-neutral-bg: var(--ds-color-status-neutral-background, #f9fafb);
+    --ds-status-neutral-fg: var(--ds-color-status-neutral-foreground, #374151);
+    --ds-status-neutral-border: var(--ds-color-status-neutral-border, #e5e7eb);
+    --ds-status-neutral-icon: var(--ds-color-status-neutral-default, #6b7280);
+  }
+
+  /* Common feedback component layout */
+  .ds-feedback-icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .ds-feedback-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ds-feedback-title {
+    font-weight: var(--ds-font-weight-semibold, 600);
+    line-height: var(--ds-line-height-tight, 1.25);
+  }
+
+  .ds-feedback-description {
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    opacity: 0.9;
+  }
+
+  .ds-feedback-close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    color: currentColor;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    opacity: 0.7;
+    transition: opacity 150ms;
+  }
+
+  .ds-feedback-close:hover {
+    opacity: 1;
+  }
+
+  .ds-feedback-close:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring, #2563eb);
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion support for all feedback animations */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-feedback-enter,
+    .ds-feedback-exit {
+      animation: none !important;
+      transition: opacity 0.01ms !important;
+    }
+  }
+}
