@@ -560,3 +560,39 @@ export {
   mergeStyles,
   mergeProps,
 } from "./utils/merge-props.js";
+
+// Layout primitives
+export {
+  Flow,
+  Container,
+  Grid,
+  Box as LayoutBox,
+  Page,
+  Section,
+  AppShell,
+  Spacer,
+  Center,
+  Split,
+  Wrap,
+  Stack,
+  Inline,
+} from "./components/layout/index.js";
+export type {
+  FlowProps,
+  ContainerProps,
+  GridProps,
+  BoxProps as LayoutBoxProps,
+  PageProps,
+  SectionProps,
+  AppShellProps,
+  HeaderProps as LayoutHeaderProps,
+  FooterProps as LayoutFooterProps,
+  MainProps,
+  SidebarProps,
+  SpacerProps,
+  CenterProps,
+  SplitProps,
+  WrapProps,
+  StackProps,
+  InlineProps,
+} from "./components/layout/index.js";

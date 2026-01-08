@@ -48,3 +48,6 @@
 @import "@ds/wc/src/components/pagination/pagination.css";
 @import "@ds/wc/src/components/stepper/stepper.css";
 @import "@ds/wc/src/components/command/command.css";
+
+/* Layout Primitives */
+@import "@ds/wc/src/components/layout/index.css";

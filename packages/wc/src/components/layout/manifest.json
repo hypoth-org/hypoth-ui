@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "layout",
+  "name": "Layout Primitives",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Framework-agnostic layout primitives for page composition. Includes Flow, Container, Grid, Box, Page, Section, AppShell, Header, Footer, Main, Spacer, Center, Split, and Wrap components.",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "custom",
+    "keyboard": ["Tab"],
+    "screenReader": "Layout components use semantic HTML elements where appropriate. AppShell regions include ARIA landmark roles (banner, main, contentinfo).",
+    "ariaPatterns": ["role=banner (Header)", "role=main (Main)", "role=contentinfo (Footer)"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "spacing.none",
+    "spacing.xs",
+    "spacing.sm",
+    "spacing.md",
+    "spacing.lg",
+    "spacing.xl",
+    "color.background.default",
+    "color.surface.default",
+    "radius.none",
+    "radius.sm",
+    "radius.md",
+    "radius.lg",
+    "radius.xl",
+    "radius.full"
+  ],
+  "recommendedUsage": "Use Flow for 1D layouts (rows/columns), Container for max-width constraints, Grid for 2D layouts. Compose pages with AppShell, Page, and Section components.",
+  "antiPatterns": "Do not use raw CSS values - all props accept design tokens only. Do not nest AppShell components.",
+  "platforms": ["wc", "react"]
+}

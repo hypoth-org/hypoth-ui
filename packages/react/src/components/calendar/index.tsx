@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, useEffect, useRef, type HTMLAttributes } from "react";
+import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
 import "@ds/wc";
 
 export type CalendarSize = "default" | "compact";

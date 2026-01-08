@@ -6,13 +6,7 @@
  * Context provider and viewport for toast notifications.
  */
 
-import {
-  type ReactNode,
-  createContext,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import { type ReactNode, createContext, useCallback, useMemo, useState } from "react";
 import { Portal } from "../../primitives/portal.js";
 import { ToastItem } from "./toast.js";
 

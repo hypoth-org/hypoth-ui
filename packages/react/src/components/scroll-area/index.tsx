@@ -66,34 +66,32 @@ export interface ScrollAreaThumbProps extends HTMLAttributes<HTMLElement> {}
 /**
  * ScrollArea root component.
  */
-const ScrollAreaRoot = forwardRef<HTMLElement, ScrollAreaRootProps>(
-  function ScrollAreaRoot(
+const ScrollAreaRoot = forwardRef<HTMLElement, ScrollAreaRootProps>(function ScrollAreaRoot(
+  {
+    children,
+    className,
+    type = "hover",
+    scrollHideDelay = 600,
+    orientation = "vertical",
+    style,
+    ...props
+  },
+  ref
+) {
+  return createElement(
+    "ds-scroll-area",
     {
-      children,
-      className,
-      type = "hover",
-      scrollHideDelay = 600,
-      orientation = "vertical",
+      ref,
+      class: className,
+      type,
+      "scroll-hide-delay": scrollHideDelay,
+      orientation,
       style,
-      ...props
+      ...props,
     },
-    ref
-  ) {
-    return createElement(
-      "ds-scroll-area",
-      {
-        ref,
-        class: className,
-        type,
-        "scroll-hide-delay": scrollHideDelay,
-        orientation,
-        style,
-        ...props,
-      },
-      children
-    );
-  }
-);
+    children
+  );
+});
 ScrollAreaRoot.displayName = "ScrollArea.Root";
 
 /**
@@ -101,11 +99,7 @@ ScrollAreaRoot.displayName = "ScrollArea.Root";
  */
 const ScrollAreaViewport = forwardRef<HTMLElement, ScrollAreaViewportProps>(
   function ScrollAreaViewport({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-scroll-area-viewport",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-scroll-area-viewport", { ref, class: className, ...props }, children);
   }
 );
 ScrollAreaViewport.displayName = "ScrollArea.Viewport";
@@ -114,10 +108,7 @@ ScrollAreaViewport.displayName = "ScrollArea.Viewport";
  * ScrollArea scrollbar component.
  */
 const ScrollAreaScrollbar = forwardRef<HTMLElement, ScrollAreaScrollbarProps>(
-  function ScrollAreaScrollbar(
-    { children, className, orientation = "vertical", ...props },
-    ref
-  ) {
+  function ScrollAreaScrollbar({ children, className, orientation = "vertical", ...props }, ref) {
     return createElement(
       "ds-scroll-area-scrollbar",
       { ref, class: className, orientation, ...props },
@@ -130,14 +121,12 @@ ScrollAreaScrollbar.displayName = "ScrollArea.Scrollbar";
 /**
  * ScrollArea thumb component.
  */
-const ScrollAreaThumb = forwardRef<HTMLElement, ScrollAreaThumbProps>(
-  function ScrollAreaThumb({ className, ...props }, ref) {
-    return createElement(
-      "ds-scroll-area-thumb",
-      { ref, class: className, ...props }
-    );
-  }
-);
+const ScrollAreaThumb = forwardRef<HTMLElement, ScrollAreaThumbProps>(function ScrollAreaThumb(
+  { className, ...props },
+  ref
+) {
+  return createElement("ds-scroll-area-thumb", { ref, class: className, ...props });
+});
 ScrollAreaThumb.displayName = "ScrollArea.Thumb";
 
 // ============================================================================
@@ -152,9 +141,4 @@ export const ScrollArea = {
 };
 
 // Also export individual components
-export {
-  ScrollAreaRoot,
-  ScrollAreaViewport,
-  ScrollAreaScrollbar,
-  ScrollAreaThumb,
-};
+export { ScrollAreaRoot, ScrollAreaViewport, ScrollAreaScrollbar, ScrollAreaThumb };

@@ -180,11 +180,7 @@ NavigationMenuRoot.displayName = "NavigationMenu.Root";
  */
 const NavigationMenuList = forwardRef<HTMLElement, NavigationMenuListProps>(
   function NavigationMenuList({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-navigation-menu-list",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-navigation-menu-list", { ref, class: className, ...props }, children);
   }
 );
 NavigationMenuList.displayName = "NavigationMenu.List";
@@ -207,10 +203,7 @@ NavigationMenuItem.displayName = "NavigationMenu.Item";
  * NavigationMenu trigger component.
  */
 const NavigationMenuTrigger = forwardRef<HTMLElement, NavigationMenuTriggerProps>(
-  function NavigationMenuTrigger(
-    { children, className, disabled = false, ...props },
-    ref
-  ) {
+  function NavigationMenuTrigger({ children, className, disabled = false, ...props }, ref) {
     return createElement(
       "ds-navigation-menu-trigger",
       { ref, class: className, disabled: disabled || undefined, ...props },
@@ -292,10 +285,7 @@ NavigationMenuLink.displayName = "NavigationMenu.Link";
  */
 const NavigationMenuIndicator = forwardRef<HTMLElement, NavigationMenuIndicatorProps>(
   function NavigationMenuIndicator({ className, ...props }, ref) {
-    return createElement(
-      "ds-navigation-menu-indicator",
-      { ref, class: className, ...props }
-    );
+    return createElement("ds-navigation-menu-indicator", { ref, class: className, ...props });
   }
 );
 NavigationMenuIndicator.displayName = "NavigationMenu.Indicator";
@@ -305,10 +295,7 @@ NavigationMenuIndicator.displayName = "NavigationMenu.Indicator";
  */
 const NavigationMenuViewport = forwardRef<HTMLElement, NavigationMenuViewportProps>(
   function NavigationMenuViewport({ className, ...props }, ref) {
-    return createElement(
-      "ds-navigation-menu-viewport",
-      { ref, class: className, ...props }
-    );
+    return createElement("ds-navigation-menu-viewport", { ref, class: className, ...props });
   }
 );
 NavigationMenuViewport.displayName = "NavigationMenu.Viewport";

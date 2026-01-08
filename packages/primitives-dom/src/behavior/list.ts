@@ -241,10 +241,7 @@ export function createListBehavior(options: ListBehaviorOptions = {}): ListBehav
 
     // Find matching item
     const startIndex = focusedId ? itemIds.indexOf(focusedId) + 1 : 0;
-    const searchOrder = [
-      ...itemIds.slice(startIndex),
-      ...itemIds.slice(0, startIndex),
-    ];
+    const searchOrder = [...itemIds.slice(startIndex), ...itemIds.slice(0, startIndex)];
 
     for (const id of searchOrder) {
       const element = getItemElement(id);
@@ -306,10 +303,7 @@ export function createListBehavior(options: ListBehaviorOptions = {}): ListBehav
     onFocusChange?.(id);
   }
 
-  function focusFirst(
-    itemIds: string[],
-    getItemElement: (id: string) => HTMLElement | null
-  ): void {
+  function focusFirst(itemIds: string[], getItemElement: (id: string) => HTMLElement | null): void {
     const firstId = itemIds[0];
     if (firstId) {
       focus(firstId);
@@ -317,10 +311,7 @@ export function createListBehavior(options: ListBehaviorOptions = {}): ListBehav
     }
   }
 
-  function focusLast(
-    itemIds: string[],
-    getItemElement: (id: string) => HTMLElement | null
-  ): void {
+  function focusLast(itemIds: string[], getItemElement: (id: string) => HTMLElement | null): void {
     const lastId = itemIds[itemIds.length - 1];
     if (lastId) {
       focus(lastId);

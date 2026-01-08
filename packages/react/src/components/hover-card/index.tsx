@@ -170,29 +170,23 @@ HoverCardRoot.displayName = "HoverCard.Root";
 /**
  * HoverCard trigger component.
  */
-const HoverCardTrigger = forwardRef<HTMLElement, HoverCardTriggerProps>(
-  function HoverCardTrigger({ children, className, ...props }, ref) {
-    return createElement(
-      "span",
-      { ref, className, slot: "trigger", ...props },
-      children
-    );
-  }
-);
+const HoverCardTrigger = forwardRef<HTMLElement, HoverCardTriggerProps>(function HoverCardTrigger(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("span", { ref, className, slot: "trigger", ...props }, children);
+});
 HoverCardTrigger.displayName = "HoverCard.Trigger";
 
 /**
  * HoverCard content component.
  */
-const HoverCardContent = forwardRef<HTMLElement, HoverCardContentProps>(
-  function HoverCardContent({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-hover-card-content",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const HoverCardContent = forwardRef<HTMLElement, HoverCardContentProps>(function HoverCardContent(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-hover-card-content", { ref, class: className, ...props }, children);
+});
 HoverCardContent.displayName = "HoverCard.Content";
 
 // ============================================================================
@@ -206,8 +200,4 @@ export const HoverCard = {
 };
 
 // Also export individual components
-export {
-  HoverCardRoot,
-  HoverCardTrigger,
-  HoverCardContent,
-};
+export { HoverCardRoot, HoverCardTrigger, HoverCardContent };

@@ -1,0 +1,28 @@
+/**
+ * Layout Token CSS Custom Properties
+ *
+ * Exposes spacing tokens as CSS variables for layout components.
+ * Uses existing token values from @ds/tokens.
+ */
+
+@layer components {
+  :root {
+    /* Layout-specific z-index tokens */
+    --ds-z-sticky: 100;
+    --ds-z-header: 100;
+    --ds-z-footer: 100;
+
+    /* Container max-width tokens */
+    --ds-container-sm: 640px;
+    --ds-container-md: 768px;
+    --ds-container-lg: 1024px;
+    --ds-container-xl: 1280px;
+    --ds-container-2xl: 1536px;
+
+    /* Default container padding */
+    --ds-container-padding: var(--ds-spacing-md, 1rem);
+
+    /* Section default spacing */
+    --ds-section-spacing: var(--ds-spacing-lg, 1.5rem);
+  }
+}

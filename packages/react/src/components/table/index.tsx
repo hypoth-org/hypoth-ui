@@ -4,12 +4,12 @@
  * Table compound component exports
  */
 
-import { TableRoot } from "./root.js";
-import { TableHeader } from "./header.js";
 import { TableBody } from "./body.js";
-import { TableRow } from "./row.js";
-import { TableHead } from "./head.js";
 import { TableCell } from "./cell.js";
+import { TableHead } from "./head.js";
+import { TableHeader } from "./header.js";
+import { TableRoot } from "./root.js";
+import { TableRow } from "./row.js";
 
 export type { TableRootProps, TableSize } from "./root.js";
 export type { TableHeaderProps } from "./header.js";

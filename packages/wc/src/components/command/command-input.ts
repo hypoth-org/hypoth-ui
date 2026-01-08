@@ -95,7 +95,11 @@ export class DsCommandInput extends DSElement {
         break;
       case "ArrowUp":
         event.preventDefault();
-        if (list && "focusLast" in list && typeof (list as unknown as { focusLast: () => void }).focusLast === "function") {
+        if (
+          list &&
+          "focusLast" in list &&
+          typeof (list as unknown as { focusLast: () => void }).focusLast === "function"
+        ) {
           (list as unknown as { focusLast: () => void }).focusLast();
         }
         break;

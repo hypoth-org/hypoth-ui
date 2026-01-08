@@ -53,7 +53,12 @@ export { Alert, type AlertProps, type AlertVariant } from "./components/alert/in
 export { Toast, useToast } from "./components/toast/index.js";
 
 // Progress component
-export { Progress, type ProgressProps, type ProgressVariant, type ProgressSize } from "./components/progress/index.js";
+export {
+  Progress,
+  type ProgressProps,
+  type ProgressVariant,
+  type ProgressSize,
+} from "./components/progress/index.js";
 
 // Avatar compound component
 export { Avatar, AvatarGroup } from "./components/avatar/index.js";

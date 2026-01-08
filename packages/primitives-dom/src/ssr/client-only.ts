@@ -117,9 +117,7 @@ export interface ClientOnlyController {
  * });
  * ```
  */
-export function createClientOnly(
-  options: ClientOnlyOptions = {}
-): ClientOnlyController {
+export function createClientOnly(options: ClientOnlyOptions = {}): ClientOnlyController {
   const { onReady: onReadyCallback, delay = 0 } = options;
 
   let isReady = false;

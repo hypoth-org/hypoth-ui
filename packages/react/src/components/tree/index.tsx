@@ -4,8 +4,8 @@
  * Tree compound component exports
  */
 
-import { TreeRoot } from "./tree.js";
 import { TreeItem } from "./tree-item.js";
+import { TreeRoot } from "./tree.js";
 
 export type { TreeRootProps, TreeSelectionMode, TreeSize } from "./tree.js";
 export type { TreeItemProps } from "./tree-item.js";

@@ -94,9 +94,7 @@ export class DsAlert extends DSElement {
    * Info and success use 'status' for polite announcement.
    */
   private getRole(): "alert" | "status" {
-    return this.variant === "error" || this.variant === "warning"
-      ? "alert"
-      : "status";
+    return this.variant === "error" || this.variant === "warning" ? "alert" : "status";
   }
 
   override render(): TemplateResult {
@@ -114,18 +112,22 @@ export class DsAlert extends DSElement {
         ?data-closable=${this.closable}
         @keydown=${this.handleKeyDown}
       >
-        ${!this.hideIcon
-          ? html`
+        ${
+          !this.hideIcon
+            ? html`
               <slot name="icon">
                 ${VARIANT_ICONS[this.variant]}
               </slot>
             `
-          : nothing}
+            : nothing
+        }
 
         <div part="content" class="ds-alert__content">
-          ${this.alertTitle
-            ? html`<p part="title" class="ds-alert__title">${this.alertTitle}</p>`
-            : nothing}
+          ${
+            this.alertTitle
+              ? html`<p part="title" class="ds-alert__title">${this.alertTitle}</p>`
+              : nothing
+          }
 
           <div part="description" class="ds-alert__description">
             <slot></slot>
@@ -134,8 +136,9 @@ export class DsAlert extends DSElement {
           <slot name="action" class="ds-alert__action"></slot>
         </div>
 
-        ${this.closable
-          ? html`
+        ${
+          this.closable
+            ? html`
               <button
                 part="close"
                 class="ds-alert__close"
@@ -146,7 +149,8 @@ export class DsAlert extends DSElement {
                 ${CLOSE_ICON}
               </button>
             `
-          : nothing}
+            : nothing
+        }
       </div>
     `;
   }

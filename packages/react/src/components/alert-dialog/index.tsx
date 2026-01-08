@@ -188,11 +188,7 @@ AlertDialogRoot.displayName = "AlertDialog.Root";
  */
 const AlertDialogTrigger = forwardRef<HTMLElement, AlertDialogTriggerProps>(
   function AlertDialogTrigger({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-alert-dialog-trigger",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-alert-dialog-trigger", { ref, class: className, ...props }, children);
   }
 );
 AlertDialogTrigger.displayName = "AlertDialog.Trigger";
@@ -216,11 +212,7 @@ AlertDialogContent.displayName = "AlertDialog.Content";
  */
 const AlertDialogHeader = forwardRef<HTMLElement, AlertDialogHeaderProps>(
   function AlertDialogHeader({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-alert-dialog-header",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-alert-dialog-header", { ref, class: className, ...props }, children);
   }
 );
 AlertDialogHeader.displayName = "AlertDialog.Header";
@@ -230,11 +222,7 @@ AlertDialogHeader.displayName = "AlertDialog.Header";
  */
 const AlertDialogFooter = forwardRef<HTMLElement, AlertDialogFooterProps>(
   function AlertDialogFooter({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-alert-dialog-footer",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-alert-dialog-footer", { ref, class: className, ...props }, children);
   }
 );
 AlertDialogFooter.displayName = "AlertDialog.Footer";
@@ -242,15 +230,12 @@ AlertDialogFooter.displayName = "AlertDialog.Footer";
 /**
  * AlertDialog title component.
  */
-const AlertDialogTitle = forwardRef<HTMLElement, AlertDialogTitleProps>(
-  function AlertDialogTitle({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-alert-dialog-title",
-      { ref, class: className, ...props },
-      children
-    );
-  }
-);
+const AlertDialogTitle = forwardRef<HTMLElement, AlertDialogTitleProps>(function AlertDialogTitle(
+  { children, className, ...props },
+  ref
+) {
+  return createElement("ds-alert-dialog-title", { ref, class: className, ...props }, children);
+});
 AlertDialogTitle.displayName = "AlertDialog.Title";
 
 /**

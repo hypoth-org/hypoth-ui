@@ -289,7 +289,11 @@ export {
 } from "./components/toast/index.js";
 
 // Progress component
-export { DsProgress, type ProgressVariant, type ProgressSize } from "./components/progress/index.js";
+export {
+  DsProgress,
+  type ProgressVariant,
+  type ProgressSize,
+} from "./components/progress/index.js";
 
 // Avatar components
 export {
@@ -361,3 +365,35 @@ export {
   type DataTablePagination,
   type DataTableSortDirection,
 } from "./components/data-table/index.js";
+
+// Layout primitives
+export {
+  DsFlow,
+  DsContainer,
+  DsGrid,
+  DsBox,
+  DsPage,
+  DsSection,
+  DsAppShell,
+  DsHeader,
+  DsFooter,
+  DsMain,
+  DsSpacer,
+  DsCenter,
+  DsSplit,
+  DsWrap,
+} from "./components/layout/index.js";
+export type {
+  SpacingToken,
+  BreakpointToken,
+  ContainerSizeToken,
+  SurfaceToken,
+  RadiusToken,
+  FlexDirection,
+  FlexAlign,
+  FlexJustify,
+  FlexWrap,
+  GridColumns,
+  SplitRatio,
+  SpacerAxis,
+} from "./components/layout/index.js";

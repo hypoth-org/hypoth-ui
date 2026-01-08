@@ -99,9 +99,11 @@ export class DsProgress extends DSElement {
           class="ds-progress__bar"
           style=${this.isIndeterminate ? "" : `width: ${this.percentage}%`}
         ></div>
-        ${this.label
-          ? html`<span part="label" class="ds-progress__label">${this.label}</span>`
-          : nothing}
+        ${
+          this.label
+            ? html`<span part="label" class="ds-progress__label">${this.label}</span>`
+            : nothing
+        }
       </div>
     `;
   }
@@ -147,17 +149,17 @@ export class DsProgress extends DSElement {
             stroke-dashoffset=${this.isIndeterminate ? 0 : offset}
           />
         </svg>
-        ${this.showValue && !this.isIndeterminate
-          ? html`<span class="ds-progress-circular__label">${Math.round(this.percentage)}%</span>`
-          : nothing}
+        ${
+          this.showValue && !this.isIndeterminate
+            ? html`<span class="ds-progress-circular__label">${Math.round(this.percentage)}%</span>`
+            : nothing
+        }
       </div>
     `;
   }
 
   override render(): TemplateResult {
-    return this.variant === "circular"
-      ? this.renderCircular()
-      : this.renderLinear();
+    return this.variant === "circular" ? this.renderCircular() : this.renderLinear();
   }
 }
 

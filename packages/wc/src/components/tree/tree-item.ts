@@ -2,8 +2,8 @@ import { type TemplateResult, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 import type { DsTree } from "./tree.js";
 
 // Chevron icon
@@ -67,8 +67,7 @@ export class DsTreeItem extends DSElement {
 
   private updateHasChildren(): void {
     const childrenSlot = this.querySelector("[slot=children]");
-    this.hasChildren =
-      childrenSlot !== null && childrenSlot.querySelector("ds-tree-item") !== null;
+    this.hasChildren = childrenSlot !== null && childrenSlot.querySelector("ds-tree-item") !== null;
   }
 
   private handleExpandClick(event: Event): void {
@@ -167,8 +166,9 @@ export class DsTreeItem extends DSElement {
           @click=${this.handleContentClick}
           @keydown=${this.handleKeyDown}
         >
-          ${this.hasChildren
-            ? html`
+          ${
+            this.hasChildren
+              ? html`
                 <button
                   type="button"
                   class="ds-tree-item__expand"
@@ -179,14 +179,16 @@ export class DsTreeItem extends DSElement {
                   ${chevronIcon}
                 </button>
               `
-            : html`<span class="ds-tree-item__spacer"></span>`}
+              : html`<span class="ds-tree-item__spacer"></span>`
+          }
           <slot name="icon"></slot>
           <span class="ds-tree-item__label">
             <slot></slot>
           </span>
         </div>
-        ${this.hasChildren
-          ? html`
+        ${
+          this.hasChildren
+            ? html`
               <ul
                 class="ds-tree-item__children ds-tree"
                 role="group"
@@ -195,7 +197,8 @@ export class DsTreeItem extends DSElement {
                 <slot name="children" @slotchange=${this.updateHasChildren}></slot>
               </ul>
             `
-          : nothing}
+            : nothing
+        }
       </li>
     `;
   }

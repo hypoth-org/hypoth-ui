@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, createElement, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
 import "@ds/wc";
 import type { TableAlign } from "./head.js";
 

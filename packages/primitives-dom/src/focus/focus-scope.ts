@@ -44,9 +44,7 @@ export interface FocusScope {
  * Get all focusable elements within a container
  */
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
-  const elements = Array.from(
-    container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-  );
+  const elements = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
 
   return elements.filter((el) => {
     // Filter out hidden or disabled elements
@@ -174,8 +172,7 @@ export function createFocusScope(
       // Store currently focused element for restoration
       if (currentOptions.restoreFocus) {
         previouslyFocused =
-          currentOptions.returnFocus ??
-          (document.activeElement as HTMLElement | null);
+          currentOptions.returnFocus ?? (document.activeElement as HTMLElement | null);
       }
 
       // Set up event listeners

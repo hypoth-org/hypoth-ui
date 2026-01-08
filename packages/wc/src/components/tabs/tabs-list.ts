@@ -8,7 +8,7 @@
  * @slot - Tab triggers (ds-tabs-trigger)
  */
 
-import { createRovingFocus, type RovingFocus } from "@ds/primitives-dom";
+import { type RovingFocus, createRovingFocus } from "@ds/primitives-dom";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";

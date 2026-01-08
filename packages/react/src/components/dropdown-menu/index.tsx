@@ -221,11 +221,7 @@ DropdownMenuRoot.displayName = "DropdownMenu.Root";
  */
 const DropdownMenuTrigger = forwardRef<HTMLElement, DropdownMenuTriggerProps>(
   function DropdownMenuTrigger({ children, className, ...props }, ref) {
-    return createElement(
-      "span",
-      { ref, className, slot: "trigger", ...props },
-      children
-    );
+    return createElement("span", { ref, className, slot: "trigger", ...props }, children);
   }
 );
 DropdownMenuTrigger.displayName = "DropdownMenu.Trigger";
@@ -235,11 +231,7 @@ DropdownMenuTrigger.displayName = "DropdownMenu.Trigger";
  */
 const DropdownMenuContent = forwardRef<HTMLElement, DropdownMenuContentProps>(
   function DropdownMenuContent({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-dropdown-menu-content",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-dropdown-menu-content", { ref, class: className, ...props }, children);
   }
 );
 DropdownMenuContent.displayName = "DropdownMenu.Content";
@@ -247,53 +239,51 @@ DropdownMenuContent.displayName = "DropdownMenu.Content";
 /**
  * DropdownMenu item component.
  */
-const DropdownMenuItem = forwardRef<HTMLElement, DropdownMenuItemProps>(
-  function DropdownMenuItem(
-    { children, className, value, variant = "default", disabled = false, onSelect, ...props },
-    ref
-  ) {
-    const elementRef = useRef<HTMLElement>(null);
+const DropdownMenuItem = forwardRef<HTMLElement, DropdownMenuItemProps>(function DropdownMenuItem(
+  { children, className, value, variant = "default", disabled = false, onSelect, ...props },
+  ref
+) {
+  const elementRef = useRef<HTMLElement>(null);
 
-    // Combine refs
-    const combinedRef = (node: HTMLElement | null) => {
-      (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-      }
+  // Combine refs
+  const combinedRef = (node: HTMLElement | null) => {
+    (elementRef as React.MutableRefObject<HTMLElement | null>).current = node;
+    if (typeof ref === "function") {
+      ref(node);
+    } else if (ref) {
+      (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+    }
+  };
+
+  // Attach select handler
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element || !onSelect) return;
+
+    const handleSelect = (event: Event) => {
+      const customEvent = event as CustomEvent<{ value: string }>;
+      onSelect(customEvent.detail.value);
     };
+    element.addEventListener("ds:select", handleSelect);
 
-    // Attach select handler
-    useEffect(() => {
-      const element = elementRef.current;
-      if (!element || !onSelect) return;
+    return () => {
+      element.removeEventListener("ds:select", handleSelect);
+    };
+  }, [onSelect]);
 
-      const handleSelect = (event: Event) => {
-        const customEvent = event as CustomEvent<{ value: string }>;
-        onSelect(customEvent.detail.value);
-      };
-      element.addEventListener("ds:select", handleSelect);
-
-      return () => {
-        element.removeEventListener("ds:select", handleSelect);
-      };
-    }, [onSelect]);
-
-    return createElement(
-      "ds-dropdown-menu-item",
-      {
-        ref: combinedRef,
-        class: className,
-        value,
-        variant,
-        disabled: disabled || undefined,
-        ...props,
-      },
-      children
-    );
-  }
-);
+  return createElement(
+    "ds-dropdown-menu-item",
+    {
+      ref: combinedRef,
+      class: className,
+      value,
+      variant,
+      disabled: disabled || undefined,
+      ...props,
+    },
+    children
+  );
+});
 DropdownMenuItem.displayName = "DropdownMenu.Item";
 
 /**
@@ -301,10 +291,7 @@ DropdownMenuItem.displayName = "DropdownMenu.Item";
  */
 const DropdownMenuSeparator = forwardRef<HTMLElement, DropdownMenuSeparatorProps>(
   function DropdownMenuSeparator({ className, ...props }, ref) {
-    return createElement(
-      "ds-dropdown-menu-separator",
-      { ref, class: className, ...props }
-    );
+    return createElement("ds-dropdown-menu-separator", { ref, class: className, ...props });
   }
 );
 DropdownMenuSeparator.displayName = "DropdownMenu.Separator";
@@ -314,11 +301,7 @@ DropdownMenuSeparator.displayName = "DropdownMenu.Separator";
  */
 const DropdownMenuLabel = forwardRef<HTMLElement, DropdownMenuLabelProps>(
   function DropdownMenuLabel({ children, className, ...props }, ref) {
-    return createElement(
-      "ds-dropdown-menu-label",
-      { ref, class: className, ...props },
-      children
-    );
+    return createElement("ds-dropdown-menu-label", { ref, class: className, ...props }, children);
   }
 );
 DropdownMenuLabel.displayName = "DropdownMenu.Label";
@@ -378,10 +361,7 @@ DropdownMenuCheckboxItem.displayName = "DropdownMenu.CheckboxItem";
  * DropdownMenu radio group component.
  */
 const DropdownMenuRadioGroup = forwardRef<HTMLElement, DropdownMenuRadioGroupProps>(
-  function DropdownMenuRadioGroup(
-    { children, className, value, onValueChange, ...props },
-    ref
-  ) {
+  function DropdownMenuRadioGroup({ children, className, value, onValueChange, ...props }, ref) {
     const elementRef = useRef<HTMLElement>(null);
 
     // Combine refs
@@ -428,10 +408,7 @@ DropdownMenuRadioGroup.displayName = "DropdownMenu.RadioGroup";
  * DropdownMenu radio item component.
  */
 const DropdownMenuRadioItem = forwardRef<HTMLElement, DropdownMenuRadioItemProps>(
-  function DropdownMenuRadioItem(
-    { children, className, value, disabled = false, ...props },
-    ref
-  ) {
+  function DropdownMenuRadioItem({ children, className, value, disabled = false, ...props }, ref) {
     return createElement(
       "ds-dropdown-menu-radio-item",
       {

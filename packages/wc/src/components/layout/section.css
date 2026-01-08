@@ -1,0 +1,47 @@
+/**
+ * Section Component Styles
+ *
+ * Semantic section wrapper with consistent vertical spacing.
+ */
+
+@layer components {
+  /* Base Section */
+  .ds-section {
+    padding-block: var(--ds-section-spacing, var(--ds-spacing-lg, 1.5rem));
+  }
+
+  /* ============================================
+   * Spacing Variants
+   * ============================================ */
+  .ds-section[data-spacing="none"] {
+    padding-block: 0;
+  }
+
+  .ds-section[data-spacing="xs"] {
+    padding-block: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-section[data-spacing="sm"] {
+    padding-block: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-section[data-spacing="md"] {
+    padding-block: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-section[data-spacing="lg"] {
+    padding-block: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-section[data-spacing="xl"] {
+    padding-block: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-section[data-spacing="2xl"] {
+    padding-block: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-section[data-spacing="3xl"] {
+    padding-block: var(--ds-spacing-3xl, 4rem);
+  }
+}

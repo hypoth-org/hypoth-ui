@@ -73,7 +73,11 @@ export class DsToastProvider extends DSElement {
   override updated(changedProperties: Map<string, unknown>): void {
     super.updated(changedProperties);
 
-    if (changedProperties.has("max") || changedProperties.has("duration") || changedProperties.has("position")) {
+    if (
+      changedProperties.has("max") ||
+      changedProperties.has("duration") ||
+      changedProperties.has("position")
+    ) {
       this.controller.setOptions({
         maxToasts: this.max,
         defaultDuration: this.duration,
@@ -125,8 +129,9 @@ export class DsToastProvider extends DSElement {
               @ds:pause=${this.handlePause}
               @ds:resume=${this.handleResume}
             >
-              ${toast.action
-                ? html`
+              ${
+                toast.action
+                  ? html`
                     <button
                       slot="action"
                       class="ds-button ds-button--sm ds-button--ghost"
@@ -135,7 +140,8 @@ export class DsToastProvider extends DSElement {
                       ${toast.action.label}
                     </button>
                   `
-                : null}
+                  : null
+              }
             </ds-toast>
           `
         )}

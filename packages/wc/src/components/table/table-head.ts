@@ -1,8 +1,8 @@
 import { type TemplateResult, html, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 
 export type TableAlign = "left" | "center" | "right";
 export type SortDirection = "asc" | "desc" | "none";
@@ -92,20 +92,20 @@ export class DsTableHead extends DSElement {
         data-align=${this.align !== "left" ? this.align : nothing}
         ?data-sortable=${this.sortable}
         data-sort-direction=${this.sortable ? this.sortDirection : nothing}
-        aria-sort=${this.sortable && this.sortDirection !== "none"
-          ? this.sortDirection === "asc"
-            ? "ascending"
-            : "descending"
-          : nothing}
+        aria-sort=${
+          this.sortable && this.sortDirection !== "none"
+            ? this.sortDirection === "asc"
+              ? "ascending"
+              : "descending"
+            : nothing
+        }
         tabindex=${this.sortable ? 0 : nothing}
         style=${style || nothing}
         @click=${this.handleClick}
         @keydown=${this.handleKeyDown}
       >
         <slot></slot>
-        ${this.sortable
-          ? html`<span class="ds-table__sort-icon">${sortIcon}</span>`
-          : nothing}
+        ${this.sortable ? html`<span class="ds-table__sort-icon">${sortIcon}</span>` : nothing}
       </th>
     `;
   }

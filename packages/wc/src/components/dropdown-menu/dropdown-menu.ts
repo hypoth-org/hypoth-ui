@@ -374,7 +374,9 @@ export class DsDropdownMenu extends DSElement {
     if (changedProperties.has("open")) {
       this.updateTriggerAria();
 
-      const content = this.querySelector("ds-dropdown-menu-content") as DsDropdownMenuContent | null;
+      const content = this.querySelector(
+        "ds-dropdown-menu-content"
+      ) as DsDropdownMenuContent | null;
 
       if (this.open) {
         content?.removeAttribute("hidden");

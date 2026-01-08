@@ -69,7 +69,10 @@
     --_toast-fg: var(--ds-toast-fg, var(--ds-color-text, #1a1a1a));
     --_toast-border: var(--ds-toast-border, var(--ds-color-border, #e5e7eb));
     --_toast-accent: var(--ds-toast-accent, var(--ds-status-neutral-icon));
-    --_toast-shadow: var(--ds-toast-shadow, var(--ds-shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)));
+    --_toast-shadow: var(
+      --ds-toast-shadow,
+      var(--ds-shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))
+    );
     --_toast-radius: var(--ds-toast-radius, var(--ds-radius-lg, 0.5rem));
     --_toast-padding: var(--ds-toast-padding, var(--ds-space-4, 1rem));
     --_toast-max-width: var(--ds-toast-max-width, 24rem);

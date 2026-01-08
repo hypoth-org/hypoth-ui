@@ -24,10 +24,7 @@ export interface PortalProps {
 /**
  * Get the portal container element
  */
-function getContainer(
-  container?: Element | null,
-  containerSelector?: string
-): Element | null {
+function getContainer(container?: Element | null, containerSelector?: string): Element | null {
   if (typeof document === "undefined") return null;
 
   if (container) return container;

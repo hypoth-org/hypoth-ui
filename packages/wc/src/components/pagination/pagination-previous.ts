@@ -35,7 +35,9 @@ export class DsPaginationPrevious extends DSElement {
   private handleClick = (): void => {
     if (this.disabled) return;
 
-    const pagination = this.closest("ds-pagination") as HTMLElement & { previousPage: () => void } | null;
+    const pagination = this.closest("ds-pagination") as
+      | (HTMLElement & { previousPage: () => void })
+      | null;
     pagination?.previousPage();
   };
 

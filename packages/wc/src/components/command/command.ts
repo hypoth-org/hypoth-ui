@@ -133,9 +133,7 @@ export class DsCommand extends DSElement {
   private _updateGroupVisibility(): void {
     const groups = this.querySelectorAll("ds-command-group");
     groups.forEach((group) => {
-      const visibleItems = group.querySelectorAll(
-        "ds-command-item:not([data-filtered])"
-      );
+      const visibleItems = group.querySelectorAll("ds-command-item:not([data-filtered])");
       if (visibleItems.length === 0) {
         group.setAttribute("data-empty", "true");
       } else {

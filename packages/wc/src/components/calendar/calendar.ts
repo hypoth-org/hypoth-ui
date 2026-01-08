@@ -2,8 +2,8 @@ import { type TemplateResult, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
-import { define } from "../../registry/define.js";
 import { emitEvent } from "../../events/emit.js";
+import { define } from "../../registry/define.js";
 
 export type CalendarSize = "default" | "compact";
 

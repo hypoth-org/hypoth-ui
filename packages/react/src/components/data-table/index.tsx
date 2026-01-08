@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, createElement, type ReactNode } from "react";
+import { type ReactNode, createElement, forwardRef, useEffect, useRef } from "react";
 
 // Define types locally (mirroring WC types)
 export type DataTableSortDirection = "asc" | "desc" | "none";

@@ -100,9 +100,7 @@ export class DsBadge extends DSElement {
         ?data-dot=${this.dot}
         data-position=${this.position}
         ?data-pulse=${this.pulse}
-        aria-label=${this.dot
-          ? "Notification indicator"
-          : `${this.displayContent} notifications`}
+        aria-label=${this.dot ? "Notification indicator" : `${this.displayContent} notifications`}
       >
         ${this.dot ? nothing : this.displayContent}
       </span>

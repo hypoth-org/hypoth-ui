@@ -71,9 +71,11 @@ export class DsTable extends DSElement {
         ?data-fixed=${this.fixed}
         ?data-sticky-header=${this.stickyHeader}
       >
-        ${this.caption
-          ? html`<caption class="ds-table__caption">${this.caption}</caption>`
-          : nothing}
+        ${
+          this.caption
+            ? html`<caption class="ds-table__caption">${this.caption}</caption>`
+            : nothing
+        }
         <slot></slot>
       </table>
     `;

@@ -1,5 +1,5 @@
-import { DSElement } from "../../base/ds-element.js";
 import { createRovingFocus } from "@ds/primitives-dom";
+import { DSElement } from "../../base/ds-element.js";
 
 /**
  * Command palette list component - contains command items with keyboard navigation.
@@ -69,9 +69,7 @@ export class DsCommandList extends DSElement {
 
   private _getVisibleItems(): HTMLElement[] {
     return Array.from(
-      this.querySelectorAll(
-        "ds-command-item:not([data-filtered]):not([disabled])"
-      )
+      this.querySelectorAll("ds-command-item:not([data-filtered]):not([disabled])")
     ) as HTMLElement[];
   }
 

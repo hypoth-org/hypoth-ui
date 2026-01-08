@@ -1,0 +1,93 @@
+/**
+ * Spacer Component Styles
+ *
+ * Explicit space element for fine-grained spacing control.
+ */
+
+@layer components {
+  /* Base Spacer */
+  .ds-spacer {
+    flex: none;
+  }
+
+  /* ============================================
+   * Axis Variants
+   * ============================================ */
+  .ds-spacer[data-axis="vertical"] {
+    width: 100%;
+  }
+
+  .ds-spacer[data-axis="horizontal"] {
+    height: 100%;
+  }
+
+  /* ============================================
+   * Size Variants (Vertical)
+   * ============================================ */
+  .ds-spacer[data-axis="vertical"][data-size="none"] {
+    height: 0;
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="xs"] {
+    height: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="sm"] {
+    height: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="md"] {
+    height: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="lg"] {
+    height: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="xl"] {
+    height: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="2xl"] {
+    height: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-spacer[data-axis="vertical"][data-size="3xl"] {
+    height: var(--ds-spacing-3xl, 4rem);
+  }
+
+  /* ============================================
+   * Size Variants (Horizontal)
+   * ============================================ */
+  .ds-spacer[data-axis="horizontal"][data-size="none"] {
+    width: 0;
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="xs"] {
+    width: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="sm"] {
+    width: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="md"] {
+    width: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="lg"] {
+    width: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="xl"] {
+    width: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="2xl"] {
+    width: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-spacer[data-axis="horizontal"][data-size="3xl"] {
+    width: var(--ds-spacing-3xl, 4rem);
+  }
+}

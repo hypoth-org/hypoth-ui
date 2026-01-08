@@ -222,7 +222,7 @@ export class DsHoverCard extends DSElement {
     this.openTimer = setTimeout(() => {
       this.show();
     }, this.openDelay);
-  };
+  }
 
   private scheduleClose(): void {
     this.cancelOpen();
@@ -237,7 +237,7 @@ export class DsHoverCard extends DSElement {
     this.closeTimer = setTimeout(() => {
       this.close();
     }, this.closeDelay);
-  };
+  }
 
   private cancelOpen(): void {
     if (this.openTimer) {

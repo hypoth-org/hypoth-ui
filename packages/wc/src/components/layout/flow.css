@@ -1,0 +1,138 @@
+/**
+ * Flow Component Styles
+ *
+ * Primary 1D layout primitive with responsive direction switching.
+ * Replaces separate Stack/Inline components with unified API.
+ */
+
+@layer components {
+  /* Base Flow */
+  .ds-flow {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* Inline variant */
+  .ds-flow--inline {
+    display: inline-flex;
+  }
+
+  /* ============================================
+   * Direction Variants (via data attribute)
+   * ============================================ */
+  .ds-flow[data-direction="row"] {
+    flex-direction: row;
+  }
+
+  .ds-flow[data-direction="column"] {
+    flex-direction: column;
+  }
+
+  .ds-flow[data-direction="row-reverse"] {
+    flex-direction: row-reverse;
+  }
+
+  .ds-flow[data-direction="column-reverse"] {
+    flex-direction: column-reverse;
+  }
+
+  /* ============================================
+   * Gap Variants (via data attribute)
+   * ============================================ */
+  .ds-flow[data-gap="none"] {
+    gap: 0;
+  }
+
+  .ds-flow[data-gap="xs"] {
+    gap: var(--ds-spacing-xs, 0.25rem);
+  }
+
+  .ds-flow[data-gap="sm"] {
+    gap: var(--ds-spacing-sm, 0.5rem);
+  }
+
+  .ds-flow[data-gap="md"] {
+    gap: var(--ds-spacing-md, 1rem);
+  }
+
+  .ds-flow[data-gap="lg"] {
+    gap: var(--ds-spacing-lg, 1.5rem);
+  }
+
+  .ds-flow[data-gap="xl"] {
+    gap: var(--ds-spacing-xl, 2rem);
+  }
+
+  .ds-flow[data-gap="2xl"] {
+    gap: var(--ds-spacing-2xl, 3rem);
+  }
+
+  .ds-flow[data-gap="3xl"] {
+    gap: var(--ds-spacing-3xl, 4rem);
+  }
+
+  /* ============================================
+   * Align Variants (cross-axis)
+   * ============================================ */
+  .ds-flow[data-align="start"] {
+    align-items: flex-start;
+  }
+
+  .ds-flow[data-align="center"] {
+    align-items: center;
+  }
+
+  .ds-flow[data-align="end"] {
+    align-items: flex-end;
+  }
+
+  .ds-flow[data-align="stretch"] {
+    align-items: stretch;
+  }
+
+  .ds-flow[data-align="baseline"] {
+    align-items: baseline;
+  }
+
+  /* ============================================
+   * Justify Variants (main-axis)
+   * ============================================ */
+  .ds-flow[data-justify="start"] {
+    justify-content: flex-start;
+  }
+
+  .ds-flow[data-justify="center"] {
+    justify-content: center;
+  }
+
+  .ds-flow[data-justify="end"] {
+    justify-content: flex-end;
+  }
+
+  .ds-flow[data-justify="between"] {
+    justify-content: space-between;
+  }
+
+  .ds-flow[data-justify="around"] {
+    justify-content: space-around;
+  }
+
+  .ds-flow[data-justify="evenly"] {
+    justify-content: space-evenly;
+  }
+
+  /* ============================================
+   * Wrap Variants
+   * ============================================ */
+  .ds-flow[data-wrap="nowrap"] {
+    flex-wrap: nowrap;
+  }
+
+  .ds-flow[data-wrap="wrap"] {
+    flex-wrap: wrap;
+  }
+
+  .ds-flow[data-wrap="wrap-reverse"] {
+    flex-wrap: wrap-reverse;
+  }
+}
