@@ -20,7 +20,11 @@
 
 // Component types (server-safe, no runtime code)
 export type { ButtonProps } from "./components/button/index.js";
-export type { ButtonProps as LegacyButtonProps, ButtonVariant, ButtonSize } from "./components/button.js";
+export type {
+  ButtonProps as LegacyButtonProps,
+  ButtonVariant,
+  ButtonSize,
+} from "./components/button.js";
 export type { InputProps, InputType, InputSize } from "./components/input.js";
 export type { LinkProps, LinkVariant } from "./components/link.js";
 export type { IconProps, IconName, IconSize } from "./components/icon.js";
@@ -68,6 +72,78 @@ export type {
   MenuSeparatorProps,
   MenuLabelProps,
 } from "./components/menu/index.js";
+
+// Select compound component types
+export type {
+  SelectRootProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectContentProps,
+  SelectOptionProps,
+  SelectSeparatorProps,
+  SelectLabelProps,
+} from "./components/select/index.js";
+
+// Combobox compound component types
+export type {
+  ComboboxRootProps,
+  ComboboxInputProps,
+  ComboboxContentProps,
+  ComboboxOptionProps,
+  ComboboxTagProps,
+  ComboboxEmptyProps,
+  ComboboxLoadingProps,
+} from "./components/combobox/index.js";
+
+// DatePicker compound component types
+export type {
+  DatePickerRootProps,
+  DatePickerTriggerProps,
+  DatePickerContentProps,
+  DatePickerCalendarProps,
+  DatePickerMode,
+} from "./components/date-picker/index.js";
+
+// Slider compound component types
+export type {
+  SliderRootProps,
+  SliderTrackProps,
+  SliderRangeProps,
+  SliderThumbProps,
+} from "./components/slider/index.js";
+
+// NumberInput compound component types
+export type {
+  NumberInputRootProps,
+  NumberInputFieldProps,
+  NumberInputIncrementProps,
+  NumberInputDecrementProps,
+  NumberInputFormat,
+} from "./components/number-input/index.js";
+
+// FileUpload compound component types
+export type {
+  FileUploadRootProps,
+  FileUploadDropzoneProps,
+  FileUploadInputProps,
+  FileUploadItemProps,
+  FileInfo,
+  FileUploadError,
+} from "./components/file-upload/index.js";
+
+// TimePicker compound component types
+export type {
+  TimePickerRootProps,
+  TimePickerSegmentProps,
+  TimeValue,
+  TimeSegment,
+} from "./components/time-picker/index.js";
+
+// PinInput compound component types
+export type {
+  PinInputRootProps,
+  PinInputFieldProps,
+} from "./components/pin-input/index.js";
 
 // Primitive types (server-safe, no runtime code)
 export type { BoxProps } from "./primitives/box.js";
@@ -135,6 +211,30 @@ export { TooltipContent } from "./components/tooltip-content.js";
 
 // Menu compound component
 export { Menu } from "./components/menu/index.js";
+
+// Select compound component
+export { Select } from "./components/select/index.js";
+
+// Combobox compound component
+export { Combobox } from "./components/combobox/index.js";
+
+// DatePicker compound component
+export { DatePicker } from "./components/date-picker/index.js";
+
+// Slider compound component
+export { Slider } from "./components/slider/index.js";
+
+// NumberInput compound component
+export { NumberInput } from "./components/number-input/index.js";
+
+// FileUpload compound component
+export { FileUpload, formatBytes } from "./components/file-upload/index.js";
+
+// TimePicker compound component
+export { TimePicker } from "./components/time-picker/index.js";
+
+// PinInput compound component
+export { PinInput } from "./components/pin-input/index.js";
 
 // Utilities
 export { createEventHandler, attachEventListeners } from "./utils/events.js";

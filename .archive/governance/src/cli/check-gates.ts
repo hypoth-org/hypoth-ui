@@ -10,10 +10,10 @@
  *   ds-check-gates --parallel
  */
 
-import { Command } from "commander";
-import * as path from "node:path";
 import { exec } from "node:child_process";
+import * as path from "node:path";
 import { promisify } from "node:util";
+import { Command } from "commander";
 import {
   checkGates,
   formatGatesReport,
@@ -35,18 +35,12 @@ const defaultConfigPath = path.join(process.cwd(), "packages/governance/gates.js
 async function getChangedFiles(repoRoot: string): Promise<string[]> {
   try {
     // Get files changed in current branch compared to main
-    const { stdout } = await execAsync(
-      "git diff --name-only main...HEAD",
-      { cwd: repoRoot }
-    );
+    const { stdout } = await execAsync("git diff --name-only main...HEAD", { cwd: repoRoot });
     return stdout.trim().split("\n").filter(Boolean);
   } catch {
     // Fallback: staged files
     try {
-      const { stdout } = await execAsync(
-        "git diff --name-only --cached",
-        { cwd: repoRoot }
-      );
+      const { stdout } = await execAsync("git diff --name-only --cached", { cwd: repoRoot });
       return stdout.trim().split("\n").filter(Boolean);
     } catch {
       return [];
@@ -59,20 +53,14 @@ async function getChangedFiles(repoRoot: string): Promise<string[]> {
  */
 async function getCurrentBranch(repoRoot: string): Promise<string> {
   try {
-    const { stdout } = await execAsync(
-      "git rev-parse --abbrev-ref HEAD",
-      { cwd: repoRoot }
-    );
+    const { stdout } = await execAsync("git rev-parse --abbrev-ref HEAD", { cwd: repoRoot });
     return stdout.trim();
   } catch {
     return "unknown";
   }
 }
 
-program
-  .name("ds-check-gates")
-  .description("Run contribution gates")
-  .version("1.0.0");
+program.name("ds-check-gates").description("Run contribution gates").version("1.0.0");
 
 // Main check command
 program
@@ -111,9 +99,7 @@ program
         const requiredFailures = getRequiredFailures(report, config);
 
         if (requiredFailures.length > 0) {
-          console.error(
-            `\nBlocked: ${requiredFailures.length} required gate(s) failed.`
-          );
+          console.error(`\nBlocked: ${requiredFailures.length} required gate(s) failed.`);
           process.exit(1);
         }
       }
@@ -189,11 +175,7 @@ program
 
       // Output in a CI-friendly format
       for (const result of report.results) {
-        const status = result.skipped
-          ? "skipped"
-          : result.passed
-            ? "success"
-            : "failure";
+        const status = result.skipped ? "skipped" : result.passed ? "success" : "failure";
         console.log(`${result.gate}:${status}`);
       }
 

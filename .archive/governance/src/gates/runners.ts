@@ -161,10 +161,7 @@ export const docsPresenceRunner: GateRunner = async (context) => {
 
   // Find new component files
   const componentFiles = context.files.filter(
-    (f) =>
-      f.includes("packages/wc/src/components/") &&
-      f.endsWith(".ts") &&
-      !f.endsWith(".test.ts")
+    (f) => f.includes("packages/wc/src/components/") && f.endsWith(".ts") && !f.endsWith(".test.ts")
   );
 
   const missingDocs: string[] = [];
@@ -192,9 +189,7 @@ export const docsPresenceRunner: GateRunner = async (context) => {
     gate: "docs-presence",
     type: "automated",
     passed,
-    error: passed
-      ? undefined
-      : `Missing documentation for: ${missingDocs.join(", ")}`,
+    error: passed ? undefined : `Missing documentation for: ${missingDocs.join(", ")}`,
     details: passed
       ? "All components have documentation"
       : `${missingDocs.length} component(s) missing docs`,
@@ -278,10 +273,7 @@ export const changesetRunner: GateRunner = async (context) => {
 
   // Check if any source files are modified
   const sourceFiles = context.files.filter(
-    (f) =>
-      f.includes("/src/") &&
-      !f.endsWith(".test.ts") &&
-      !f.endsWith(".spec.ts")
+    (f) => f.includes("/src/") && !f.endsWith(".test.ts") && !f.endsWith(".spec.ts")
   );
 
   if (sourceFiles.length === 0) {

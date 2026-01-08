@@ -2,7 +2,7 @@
  * Menu Label component - non-interactive label for a group of items.
  */
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode, forwardRef } from "react";
 
 export interface MenuLabelProps extends HTMLAttributes<HTMLDivElement> {
   /** Label content */

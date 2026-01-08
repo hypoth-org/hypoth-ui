@@ -1,4 +1,4 @@
-import { createContext, useContext, type Provider } from "react";
+import { type Provider, createContext, useContext } from "react";
 
 /**
  * Creates a compound component context with a built-in hook.
@@ -18,7 +18,9 @@ import { createContext, useContext, type Provider } from "react";
  * const { open, setOpen } = useDialogContext("DialogTrigger");
  * ```
  */
-export function createCompoundContext<T>(displayName: string): [Provider<T>, (consumerName: string) => T] {
+export function createCompoundContext<T>(
+  displayName: string
+): [Provider<T>, (consumerName: string) => T] {
   const Context = createContext<T | null>(null);
   Context.displayName = displayName;
 

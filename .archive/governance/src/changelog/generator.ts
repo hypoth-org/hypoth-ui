@@ -108,10 +108,7 @@ export function generateChangelog(
   const date = new Date().toISOString().split("T")[0];
   const grouped = groupChangesByType(entries);
 
-  const sections: string[] = [
-    `## [${version}] - ${date}`,
-    "",
-  ];
+  const sections: string[] = [`## [${version}] - ${date}`, ""];
 
   // Add sections in order
   const sectionOrder: Array<[string, ChangesetEntry[]]> = [
@@ -162,11 +159,7 @@ export function prependToChangelog(
   const match = existingContent.match(versionPattern);
 
   if (match?.index !== undefined) {
-    return (
-      existingContent.slice(0, match.index) +
-      newSection +
-      existingContent.slice(match.index)
-    );
+    return existingContent.slice(0, match.index) + newSection + existingContent.slice(match.index);
   }
 
   // If no existing versions, append to end

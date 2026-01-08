@@ -174,7 +174,7 @@ describe("Dialog accessibility", () => {
         const labelledBy = dialog.getAttribute("aria-labelledby");
         expect(labelledBy).toBeTruthy();
 
-        const title = document.getElementById(labelledBy!);
+        const title = labelledBy ? document.getElementById(labelledBy) : null;
         expect(title).toHaveTextContent("My Dialog Title");
       });
     });
@@ -196,7 +196,7 @@ describe("Dialog accessibility", () => {
         const describedBy = dialog.getAttribute("aria-describedby");
         expect(describedBy).toBeTruthy();
 
-        const description = document.getElementById(describedBy!);
+        const description = describedBy ? document.getElementById(describedBy) : null;
         expect(description).toHaveTextContent("Description text here");
       });
     });
@@ -252,7 +252,7 @@ describe("Dialog accessibility", () => {
         const controls = trigger.getAttribute("aria-controls");
         expect(controls).toBeTruthy();
 
-        const dialog = document.getElementById(controls!);
+        const dialog = controls ? document.getElementById(controls) : null;
         expect(dialog).toHaveAttribute("role", "dialog");
       });
     });

@@ -3,8 +3,12 @@
  * Provides state management, ARIA computation, focus management, and keyboard handling for dialogs.
  */
 
-import { createFocusTrap, type FocusTrap } from "../focus/focus-trap.js";
-import { createDismissableLayer, type DismissableLayer, type DismissReason } from "../layer/dismissable-layer.js";
+import { type FocusTrap, createFocusTrap } from "../focus/focus-trap.js";
+import {
+  type DismissReason,
+  type DismissableLayer,
+  createDismissableLayer,
+} from "../layer/dismissable-layer.js";
 
 // =============================================================================
 // Types

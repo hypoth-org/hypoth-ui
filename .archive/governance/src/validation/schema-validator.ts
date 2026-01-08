@@ -5,16 +5,16 @@
  */
 
 import Ajv from "ajv";
-import type {
-  DeprecationRegistry,
-  GatesConfig,
-  MigrationGuide,
-} from "../types/index.js";
+import type { DeprecationRegistry, GatesConfig, MigrationGuide } from "../types/index.js";
 
 // Import schemas
 import changesetEntrySchema from "../schemas/changeset-entry.schema.json" with { type: "json" };
-import contributionGatesSchema from "../schemas/contribution-gates.schema.json" with { type: "json" };
-import deprecationRegistrySchema from "../schemas/deprecation-registry.schema.json" with { type: "json" };
+import contributionGatesSchema from "../schemas/contribution-gates.schema.json" with {
+  type: "json",
+};
+import deprecationRegistrySchema from "../schemas/deprecation-registry.schema.json" with {
+  type: "json",
+};
 import migrationGuideSchema from "../schemas/migration-guide.schema.json" with { type: "json" };
 
 /** Validation result */
@@ -76,7 +76,9 @@ export function validate(schemaType: SchemaType, data: unknown): ValidationResul
 /**
  * Validate a deprecation registry
  */
-export function validateDeprecationRegistry(data: unknown): ValidationResult & { data?: DeprecationRegistry } {
+export function validateDeprecationRegistry(
+  data: unknown
+): ValidationResult & { data?: DeprecationRegistry } {
   const result = validate("deprecation-registry", data);
   if (result.valid) {
     return { ...result, data: data as DeprecationRegistry };
@@ -98,7 +100,9 @@ export function validateGatesConfig(data: unknown): ValidationResult & { data?: 
 /**
  * Validate migration guide frontmatter
  */
-export function validateMigrationGuide(data: unknown): ValidationResult & { data?: MigrationGuide } {
+export function validateMigrationGuide(
+  data: unknown
+): ValidationResult & { data?: MigrationGuide } {
   const result = validate("migration-guide", data);
   if (result.valid) {
     return { ...result, data: data as MigrationGuide };
@@ -110,9 +114,7 @@ export function validateMigrationGuide(data: unknown): ValidationResult & { data
  * Format validation errors as a string
  */
 export function formatErrors(errors: ValidationError[]): string {
-  return errors
-    .map((err) => `  - ${err.path}: ${err.message} (${err.keyword})`)
-    .join("\n");
+  return errors.map((err) => `  - ${err.path}: ${err.message} (${err.keyword})`).join("\n");
 }
 
 /**

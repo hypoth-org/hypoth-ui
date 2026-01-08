@@ -5,9 +5,13 @@
  * filtered by edition.
  */
 
-import type { ChangesetEntry, Edition } from "../types/index.js";
+import {
+  filterBreakingChanges,
+  filterByEdition,
+  filterSecurityUpdates,
+} from "../changelog/filter.js";
 import type { ReleaseWithEntries } from "../changelog/types.js";
-import { filterByEdition, filterSecurityUpdates, filterBreakingChanges } from "../changelog/filter.js";
+import type { ChangesetEntry, Edition } from "../types/index.js";
 import type {
   TenantChangeSummary,
   TenantInfo,
@@ -52,7 +56,9 @@ export function calculateVersionDiff(
 ): VersionDiff {
   // Filter releases between versions
   const relevantReleases = releases.filter((r) => {
-    return compareVersions(r.version, fromVersion) > 0 && compareVersions(r.version, toVersion) <= 0;
+    return (
+      compareVersions(r.version, fromVersion) > 0 && compareVersions(r.version, toVersion) <= 0
+    );
   });
 
   const from = parseVersion(fromVersion);
@@ -81,9 +87,7 @@ export function calculateVersionDiff(
 /**
  * Summarize changes for a tenant
  */
-export function summarizeChanges(
-  entries: ChangesetEntry[]
-): TenantChangeSummary {
+export function summarizeChanges(entries: ChangesetEntry[]): TenantChangeSummary {
   const security = entries.filter((e) => e.security === true);
   const breaking = entries.filter((e) => e.type === "major" || e.breaking_type);
   const features = entries.filter((e) => e.type === "minor" && !e.security && !e.breaking_type);
@@ -174,9 +178,7 @@ export function determineUpdateUrgency(report: TenantUpdateReport): UpdateUrgenc
 /**
  * Generate update recommendation
  */
-export function generateUpdateRecommendation(
-  report: TenantUpdateReport
-): UpdateRecommendation {
+export function generateUpdateRecommendation(report: TenantUpdateReport): UpdateRecommendation {
   const urgency = determineUpdateUrgency(report);
   const reasons: string[] = [];
   const nextSteps: string[] = [];

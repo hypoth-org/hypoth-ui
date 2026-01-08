@@ -1,0 +1,173 @@
+---
+title: Slider
+description: A range input component with single or dual thumbs for value selection within min/max bounds.
+component: slider
+status: stable
+category: forms
+order: 33
+---
+
+# Slider
+
+Slider allows users to select a value or range within a defined minimum and maximum by dragging a thumb along a track.
+
+## Usage
+
+Basic slider:
+
+```html
+<ds-slider min="0" max="100" value="50"></ds-slider>
+```
+
+### React
+
+```tsx
+import { Slider } from "@ds/react";
+
+function VolumeSlider() {
+  return <Slider min={0} max={100} defaultValue={50} />;
+}
+```
+
+## Controlled Mode
+
+Control the slider value programmatically:
+
+```tsx
+import { Slider } from "@ds/react";
+import { useState } from "react";
+
+function ControlledSlider() {
+  const [value, setValue] = useState(50);
+
+  return (
+    <div>
+      <Slider value={value} onValueChange={setValue} min={0} max={100} />
+      <p>Value: {value}</p>
+    </div>
+  );
+}
+```
+
+## Step
+
+Set increment step size:
+
+```html
+<ds-slider min="0" max="100" step="10" value="50"></ds-slider>
+```
+
+## Range Mode
+
+Select a range with two thumbs:
+
+```html
+<ds-slider min="0" max="100" range values="[20, 80]"></ds-slider>
+```
+
+### React Range
+
+```tsx
+import { Slider } from "@ds/react";
+import { useState } from "react";
+
+function PriceRangeSlider() {
+  const [range, setRange] = useState([100, 500]);
+
+  return (
+    <div>
+      <Slider
+        range
+        min={0}
+        max={1000}
+        values={range}
+        onValuesChange={setRange}
+      />
+      <p>${range[0]} - ${range[1]}</p>
+    </div>
+  );
+}
+```
+
+## With Labels
+
+Add min/max labels:
+
+```html
+<div class="slider-container">
+  <span>0</span>
+  <ds-slider min="0" max="100" value="50"></ds-slider>
+  <span>100</span>
+</div>
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field>
+  <ds-label>Brightness</ds-label>
+  <ds-slider min="0" max="100" value="75"></ds-slider>
+  <ds-field-description>Adjust display brightness</ds-field-description>
+</ds-field>
+```
+
+## Components
+
+### ds-slider
+
+Root container that manages state.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `min` | number | 0 | Minimum value |
+| `max` | number | 100 | Maximum value |
+| `step` | number | 1 | Step increment |
+| `value` | number | min | Current value (single mode) |
+| `values` | number[] | - | Current values (range mode) |
+| `range` | boolean | false | Enable range mode |
+| `disabled` | boolean | false | Disable the slider |
+| `orientation` | string | "horizontal" | "horizontal" or "vertical" |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: number \| number[] }` | Fired when value changes |
+| `ds:input` | `{ value: number \| number[] }` | Fired during dragging |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Right/Up` | Increase by step |
+| `Arrow Left/Down` | Decrease by step |
+| `Page Up` | Increase by 10× step |
+| `Page Down` | Decrease by 10× step |
+| `Home` | Go to minimum |
+| `End` | Go to maximum |
+
+## Accessibility
+
+- Uses `role="slider"`
+- Has `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
+- Has `aria-orientation` attribute
+- Has `aria-disabled` when disabled
+- Thumbs are focusable and keyboard-navigable
+- Range mode has distinct labels for each thumb
+
+## Best Practices
+
+### Do
+
+- Use for continuous value ranges
+- Provide clear min/max context
+- Use step values that make sense for the range
+- Consider showing current value
+
+### Don't
+
+- Don't use for precise number entry (use NumberInput)
+- Don't use for discrete options (use Radio or Select)
+- Don't make range too wide for the step size

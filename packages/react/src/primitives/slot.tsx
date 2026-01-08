@@ -67,7 +67,11 @@ export const Slot = forwardRef<HTMLElement, SlotProps>(
 
     // Warn in development if the child component doesn't forward refs
     useEffect(() => {
-      if (process.env.NODE_ENV !== "production" && isCustomComponent && internalRef.current === null) {
+      if (
+        process.env.NODE_ENV !== "production" &&
+        isCustomComponent &&
+        internalRef.current === null
+      ) {
         const componentName =
           typeof child.type === "function"
             ? (child.type as { displayName?: string; name?: string }).displayName ||

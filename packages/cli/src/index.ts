@@ -10,17 +10,14 @@
  */
 
 import { Command } from "commander";
-import type { InitOptions, AddOptions, ListOptions, DiffOptions } from "./types/index.js";
+import type { AddOptions, DiffOptions, InitOptions, ListOptions } from "./types/index.js";
 
 // Package version (will be injected at build time)
 const VERSION = "0.0.1";
 
 const program = new Command();
 
-program
-  .name("hypoth-ui")
-  .description("CLI for installing hypoth-ui components")
-  .version(VERSION);
+program.name("hypoth-ui").description("CLI for installing hypoth-ui components").version(VERSION);
 
 // =============================================================================
 // init command

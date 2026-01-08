@@ -2,7 +2,7 @@
  * Menu Separator component - visual separator between items.
  */
 
-import { forwardRef, type HTMLAttributes } from "react";
+import { type HTMLAttributes, forwardRef } from "react";
 
 export interface MenuSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -16,11 +16,9 @@ export interface MenuSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
  * <Menu.Item value="delete">Delete</Menu.Item>
  * ```
  */
-export const MenuSeparator = forwardRef<HTMLDivElement, MenuSeparatorProps>(
-  (props, ref) => {
-    // biome-ignore lint/a11y/useFocusableInteractive: separator is decorative, not interactive
-    return <div ref={ref} role="separator" aria-orientation="horizontal" {...props} />;
-  }
-);
+export const MenuSeparator = forwardRef<HTMLDivElement, MenuSeparatorProps>((props, ref) => {
+  // biome-ignore lint/a11y/useFocusableInteractive: separator is decorative, not interactive
+  return <div ref={ref} role="separator" aria-orientation="horizontal" {...props} />;
+});
 
 MenuSeparator.displayName = "Menu.Separator";

@@ -77,3 +77,40 @@ export { DsTooltipContent } from "./components/tooltip/tooltip-content.js";
 export { DsMenu } from "./components/menu/menu.js";
 export { DsMenuContent } from "./components/menu/menu-content.js";
 export { DsMenuItem } from "./components/menu/menu-item.js";
+
+// Select components
+export { DsSelect } from "./components/select/select.js";
+export { DsSelectTrigger } from "./components/select/select-trigger.js";
+export { DsSelectContent } from "./components/select/select-content.js";
+export type { SelectContentState } from "./components/select/select-content.js";
+export { DsSelectOption } from "./components/select/select-option.js";
+
+// Combobox components
+export { DsCombobox } from "./components/combobox/combobox.js";
+export { DsComboboxInput } from "./components/combobox/combobox-input.js";
+export { DsComboboxContent } from "./components/combobox/combobox-content.js";
+export type { ComboboxContentState } from "./components/combobox/combobox-content.js";
+export { DsComboboxOption } from "./components/combobox/combobox-option.js";
+export { DsComboboxTag } from "./components/combobox/combobox-tag.js";
+
+// DatePicker components
+export { DsDatePicker } from "./components/date-picker/date-picker.js";
+export type { DatePickerMode } from "./components/date-picker/date-picker.js";
+export { DsDatePickerCalendar } from "./components/date-picker/date-picker-calendar.js";
+export type { CalendarState } from "./components/date-picker/date-picker-calendar.js";
+
+// Slider component
+export { DsSlider } from "./components/slider/slider.js";
+
+// NumberInput component
+export { DsNumberInput } from "./components/number-input/number-input.js";
+export type { NumberInputFormat } from "./components/number-input/number-input.js";
+
+// FileUpload component
+export { DsFileUpload } from "./components/file-upload/file-upload.js";
+
+// TimePicker component
+export { DsTimePicker } from "./components/time-picker/time-picker.js";
+
+// PinInput component
+export { DsPinInput } from "./components/pin-input/pin-input.js";

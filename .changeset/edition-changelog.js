@@ -139,9 +139,7 @@ async function getDependencyReleaseLine(_changesets, dependenciesUpdated) {
     return "";
   }
 
-  const deps = dependenciesUpdated.map(
-    (dep) => `  - ${dep.name}@${dep.newVersion}`
-  );
+  const deps = dependenciesUpdated.map((dep) => `  - ${dep.name}@${dep.newVersion}`);
 
   return `- Updated dependencies:\n${deps.join("\n")}`;
 }

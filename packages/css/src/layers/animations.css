@@ -110,27 +110,23 @@
 
 /* Dialog animations */
 ds-dialog-content[data-state="open"] {
-  animation:
-    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+  animation: ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
     ds-scale-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
 }
 
 ds-dialog-content[data-state="closed"] {
-  animation:
-    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+  animation: ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
     ds-scale-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
 }
 
 /* Popover animations */
 ds-popover-content[data-state="open"] {
-  animation:
-    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+  animation: ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
     ds-slide-up var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
 }
 
 ds-popover-content[data-state="closed"] {
-  animation:
-    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+  animation: ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
     ds-slide-down var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
 }
 
@@ -145,14 +141,12 @@ ds-tooltip-content[data-state="closed"] {
 
 /* Menu animations */
 ds-menu-content[data-state="open"] {
-  animation:
-    ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
+  animation: ds-fade-in var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out),
     ds-slide-up var(--ds-motion-duration-normal) var(--ds-motion-easing-ease-out);
 }
 
 ds-menu-content[data-state="closed"] {
-  animation:
-    ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
+  animation: ds-fade-out var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in),
     ds-slide-down var(--ds-motion-duration-fast) var(--ds-motion-easing-ease-in);
 }
 

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "number-input",
+  "name": "NumberInput",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A numeric input component with increment/decrement controls, step support, and min/max constraints",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "spinbutton",
+    "keyboard": ["Arrow Up/Down", "Page Up/Down", "Home", "End", "Shift+Arrow"],
+    "screenReader": "Announces current value, minimum, maximum. Value changes are announced. Buttons have descriptive labels.",
+    "ariaPatterns": [
+      "role=spinbutton",
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-valuenow",
+      "aria-disabled",
+      "aria-invalid"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.hover",
+    "color.background.disabled",
+    "color.border.default",
+    "color.border.focus",
+    "color.border.error",
+    "color.text.primary",
+    "color.text.disabled",
+    "spacing.xs",
+    "spacing.sm",
+    "spacing.md",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for precise numeric input with increment/decrement controls. Supports formatting with prefix/suffix.",
+  "antiPatterns": "Do not use for imprecise ranges - use Slider instead. Avoid for non-numeric input.",
+  "platforms": ["wc", "react"]
+}

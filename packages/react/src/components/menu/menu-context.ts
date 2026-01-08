@@ -14,5 +14,4 @@ export interface MenuContextValue {
   setOpen: (open: boolean) => void;
 }
 
-export const [MenuProvider, useMenuContext] =
-  createCompoundContext<MenuContextValue>("Menu");
+export const [MenuProvider, useMenuContext] = createCompoundContext<MenuContextValue>("Menu");

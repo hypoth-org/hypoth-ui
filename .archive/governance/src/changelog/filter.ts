@@ -11,40 +11,28 @@ import type { ReleaseWithEntries, TenantChangelogAggregate } from "./types.js";
 /**
  * Filter changelog entries by edition
  */
-export function filterByEdition(
-  entries: ChangesetEntry[],
-  edition: Edition
-): ChangesetEntry[] {
+export function filterByEdition(entries: ChangesetEntry[], edition: Edition): ChangesetEntry[] {
   return entries.filter((entry) => entry.editions.includes(edition));
 }
 
 /**
  * Filter to only security-related changes
  */
-export function filterSecurityUpdates(
-  entries: ChangesetEntry[]
-): ChangesetEntry[] {
+export function filterSecurityUpdates(entries: ChangesetEntry[]): ChangesetEntry[] {
   return entries.filter((entry) => entry.security === true);
 }
 
 /**
  * Filter to only breaking changes
  */
-export function filterBreakingChanges(
-  entries: ChangesetEntry[]
-): ChangesetEntry[] {
-  return entries.filter(
-    (entry) => entry.type === "major" || entry.breaking_type !== undefined
-  );
+export function filterBreakingChanges(entries: ChangesetEntry[]): ChangesetEntry[] {
+  return entries.filter((entry) => entry.type === "major" || entry.breaking_type !== undefined);
 }
 
 /**
  * Filter by package
  */
-export function filterByPackage(
-  entries: ChangesetEntry[],
-  packageName: string
-): ChangesetEntry[] {
+export function filterByPackage(entries: ChangesetEntry[], packageName: string): ChangesetEntry[] {
   return entries.filter((entry) => entry.packages.includes(packageName));
 }
 
@@ -55,9 +43,7 @@ export function filterByPackages(
   entries: ChangesetEntry[],
   packageNames: string[]
 ): ChangesetEntry[] {
-  return entries.filter((entry) =>
-    entry.packages.some((pkg) => packageNames.includes(pkg))
-  );
+  return entries.filter((entry) => entry.packages.some((pkg) => packageNames.includes(pkg)));
 }
 
 /**
@@ -81,15 +67,8 @@ function compareVersions(a: string, b: string): number {
 /**
  * Check if version is in range (exclusive start, inclusive end)
  */
-function isVersionInRange(
-  version: string,
-  fromVersion: string,
-  toVersion: string
-): boolean {
-  return (
-    compareVersions(version, fromVersion) > 0 &&
-    compareVersions(version, toVersion) <= 0
-  );
+function isVersionInRange(version: string, fromVersion: string, toVersion: string): boolean {
+  return compareVersions(version, fromVersion) > 0 && compareVersions(version, toVersion) <= 0;
 }
 
 /**
@@ -152,9 +131,7 @@ export function requiresAction(entry: ChangesetEntry): boolean {
 /**
  * Get changes requiring immediate action
  */
-export function getActionRequiredChanges(
-  entries: ChangesetEntry[]
-): ChangesetEntry[] {
+export function getActionRequiredChanges(entries: ChangesetEntry[]): ChangesetEntry[] {
   return entries.filter(requiresAction);
 }
 
@@ -172,9 +149,7 @@ export interface PrioritizedChanges {
   low: ChangesetEntry[];
 }
 
-export function prioritizeChanges(
-  entries: ChangesetEntry[]
-): PrioritizedChanges {
+export function prioritizeChanges(entries: ChangesetEntry[]): PrioritizedChanges {
   const result: PrioritizedChanges = {
     critical: [],
     high: [],

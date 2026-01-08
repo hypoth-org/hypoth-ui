@@ -1,0 +1,174 @@
+---
+title: TimePicker
+description: A segmented time input component with hour, minute, and optional second/AM-PM segments.
+component: time-picker
+status: stable
+category: forms
+order: 36
+---
+
+# TimePicker
+
+TimePicker provides a segmented input for time selection, with support for 12-hour and 24-hour formats.
+
+## Usage
+
+Basic time picker:
+
+```html
+<ds-time-picker></ds-time-picker>
+```
+
+### React
+
+```tsx
+import { TimePicker } from "@ds/react";
+
+function MeetingTime() {
+  return <TimePicker />;
+}
+```
+
+## Controlled Mode
+
+Control the time value programmatically:
+
+```tsx
+import { TimePicker } from "@ds/react";
+import { useState } from "react";
+
+function ControlledTimePicker() {
+  const [time, setTime] = useState("09:00");
+
+  return (
+    <div>
+      <TimePicker value={time} onValueChange={setTime} />
+      <p>Selected: {time}</p>
+    </div>
+  );
+}
+```
+
+## 12-Hour Format
+
+Use 12-hour format with AM/PM:
+
+```html
+<ds-time-picker hour-cycle="12" value="14:30"></ds-time-picker>
+```
+
+### React 12-Hour
+
+```tsx
+import { TimePicker } from "@ds/react";
+
+function TwelveHourPicker() {
+  return <TimePicker hourCycle="12" defaultValue="14:30" />;
+}
+```
+
+## 24-Hour Format
+
+Use 24-hour format (default):
+
+```html
+<ds-time-picker hour-cycle="24" value="14:30"></ds-time-picker>
+```
+
+## With Seconds
+
+Show seconds segment:
+
+```html
+<ds-time-picker show-seconds value="14:30:45"></ds-time-picker>
+```
+
+## Minute Step
+
+Set minute increment intervals:
+
+```html
+<!-- 15-minute intervals -->
+<ds-time-picker minute-step="15"></ds-time-picker>
+
+<!-- 30-minute intervals -->
+<ds-time-picker minute-step="30"></ds-time-picker>
+```
+
+## Min/Max Time
+
+Limit selectable time range:
+
+```html
+<!-- Business hours only -->
+<ds-time-picker min="09:00" max="17:00"></ds-time-picker>
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field required>
+  <ds-label>Appointment Time</ds-label>
+  <ds-time-picker hour-cycle="12" minute-step="15"></ds-time-picker>
+  <ds-field-description>Select a time between 9 AM and 5 PM</ds-field-description>
+  <ds-field-error>Please select a valid time</ds-field-error>
+</ds-field>
+```
+
+## Components
+
+### ds-time-picker
+
+The time picker component.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `value` | string | - | Time value (HH:mm or HH:mm:ss) |
+| `hour-cycle` | "12" \| "24" | "24" | Hour format |
+| `show-seconds` | boolean | false | Show seconds segment |
+| `minute-step` | number | 1 | Minute increment |
+| `min` | string | - | Minimum time |
+| `max` | string | - | Maximum time |
+| `disabled` | boolean | false | Disable the picker |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: string }` | Fired when time changes |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Arrow Up` | Increase segment value |
+| `Arrow Down` | Decrease segment value |
+| `Arrow Left` | Move to previous segment |
+| `Arrow Right` | Move to next segment |
+| `Tab` | Move to next segment |
+| `0-9` | Direct numeric input |
+
+## Accessibility
+
+- Container has `role="group"`
+- Each segment has `role="spinbutton"`
+- Segments have `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
+- Segments have descriptive `aria-label`
+- Value changes announced to screen readers
+
+## Best Practices
+
+### Do
+
+- Match hour format to locale expectations
+- Use minute-step for appointment scheduling
+- Provide min/max for business hour constraints
+- Combine with DatePicker for date-time selection
+
+### Don't
+
+- Don't use for duration input
+- Don't use with seconds unless needed
+- Don't allow times outside valid range

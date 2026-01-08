@@ -74,11 +74,7 @@ export function detectTypeScript(
   cwd: string,
   signals: string[]
 ): { typescript: boolean; tsconfigPath?: string } {
-  const tsconfigPaths = [
-    "tsconfig.json",
-    "tsconfig.base.json",
-    "jsconfig.json",
-  ];
+  const tsconfigPaths = ["tsconfig.json", "tsconfig.base.json", "jsconfig.json"];
 
   for (const configPath of tsconfigPaths) {
     const fullPath = join(cwd, configPath);
@@ -99,10 +95,7 @@ export function detectTypeScript(
 /**
  * Detect framework from package.json dependencies
  */
-export function detectFramework(
-  cwd: string,
-  signals: string[]
-): Framework | "unknown" {
+export function detectFramework(cwd: string, signals: string[]): Framework | "unknown" {
   const packageJsonPath = join(cwd, "package.json");
 
   if (!existsSync(packageJsonPath)) {

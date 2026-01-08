@@ -7,9 +7,9 @@
  */
 
 import pc from "picocolors";
+import type { DSConfig, DiffOptions } from "../types/index.js";
 import { readConfig } from "../utils/config.js";
 import { fetchRegistry, getComponent } from "../utils/registry.js";
-import type { DiffOptions, DSConfig } from "../types/index.js";
 
 interface UpdateInfo {
   name: string;

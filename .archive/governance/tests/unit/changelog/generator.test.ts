@@ -6,9 +6,7 @@ describe("Changelog Generator", () => {
   describe("generateChangelogEntry", () => {
     it("should format a feature entry correctly", async () => {
       // Import dynamically to ensure module exists
-      const { generateChangelogEntry } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { generateChangelogEntry } = await import("../../../src/changelog/generator.js");
 
       const entry: ChangesetEntry = {
         id: "happy-dog-123",
@@ -25,9 +23,7 @@ describe("Changelog Generator", () => {
     });
 
     it("should mark security changes prominently", async () => {
-      const { generateChangelogEntry } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { generateChangelogEntry } = await import("../../../src/changelog/generator.js");
 
       const entry: ChangesetEntry = {
         id: "urgent-fix-456",
@@ -45,9 +41,7 @@ describe("Changelog Generator", () => {
     });
 
     it("should include breaking change marker for major changes", async () => {
-      const { generateChangelogEntry } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { generateChangelogEntry } = await import("../../../src/changelog/generator.js");
 
       const entry: ChangesetEntry = {
         id: "breaking-789",
@@ -66,9 +60,7 @@ describe("Changelog Generator", () => {
 
   describe("groupChangesByType", () => {
     it("should group entries by change type", async () => {
-      const { groupChangesByType } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { groupChangesByType } = await import("../../../src/changelog/generator.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -102,9 +94,7 @@ describe("Changelog Generator", () => {
     });
 
     it("should separate security changes into their own group", async () => {
-      const { groupChangesByType } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { groupChangesByType } = await import("../../../src/changelog/generator.js");
 
       const entries: ChangesetEntry[] = [
         {
@@ -133,9 +123,7 @@ describe("Changelog Generator", () => {
 
   describe("generateChangelog", () => {
     it("should generate a valid changelog markdown", async () => {
-      const { generateChangelog } = await import(
-        "../../../src/changelog/generator.js"
-      );
+      const { generateChangelog } = await import("../../../src/changelog/generator.js");
 
       const entries: ChangesetEntry[] = [
         {

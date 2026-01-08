@@ -18,3 +18,13 @@
 @import "@ds/wc/src/components/popover/popover.css";
 @import "@ds/wc/src/components/tooltip/tooltip.css";
 @import "@ds/wc/src/components/menu/menu.css";
+
+/* Advanced Form Controls */
+@import "@ds/wc/src/components/select/select.css";
+@import "@ds/wc/src/components/combobox/combobox.css";
+@import "@ds/wc/src/components/date-picker/date-picker.css";
+@import "@ds/wc/src/components/slider/slider.css";
+@import "@ds/wc/src/components/number-input/number-input.css";
+@import "@ds/wc/src/components/file-upload/file-upload.css";
+@import "@ds/wc/src/components/time-picker/time-picker.css";
+@import "@ds/wc/src/components/pin-input/pin-input.css";

@@ -2,7 +2,14 @@
  * Dialog Trigger component - opens the dialog when activated.
  */
 
-import { forwardRef, useCallback, useEffect, useRef, type ButtonHTMLAttributes, type ReactNode } from "react";
+import {
+  type ButtonHTMLAttributes,
+  type ReactNode,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import { Slot } from "../../primitives/slot.js";
 import { useDialogContext } from "./dialog-context.js";
 

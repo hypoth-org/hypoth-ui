@@ -2,22 +2,22 @@
  * Unit tests for configuration management utilities
  */
 
-import { existsSync, mkdirSync, rmSync, writeFileSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import {
-  configExists,
-  getConfigPath,
-  readConfig,
-  writeConfig,
-  createConfig,
-  validateConfig,
-  addInstalledComponent,
-  isComponentInstalled,
-  getInstalledComponent,
-} from "../../src/utils/config.js";
 import type { DSConfig } from "../../src/types/index.js";
+import {
+  addInstalledComponent,
+  configExists,
+  createConfig,
+  getConfigPath,
+  getInstalledComponent,
+  isComponentInstalled,
+  readConfig,
+  validateConfig,
+  writeConfig,
+} from "../../src/utils/config.js";
 
 describe("config utilities", () => {
   let testDir: string;
@@ -135,33 +135,33 @@ describe("config utilities", () => {
     });
 
     it("should throw on invalid style", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, style: "invalid" })
-      ).toThrow('style must be "copy" or "package"');
+      expect(() => validateConfig({ ...validConfig, style: "invalid" })).toThrow(
+        'style must be "copy" or "package"'
+      );
     });
 
     it("should throw on invalid framework", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, framework: "invalid" })
-      ).toThrow('framework must be "react", "next", "wc", or "vanilla"');
+      expect(() => validateConfig({ ...validConfig, framework: "invalid" })).toThrow(
+        'framework must be "react", "next", "wc", or "vanilla"'
+      );
     });
 
     it("should throw on invalid typescript value", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, typescript: "yes" })
-      ).toThrow("typescript must be a boolean");
+      expect(() => validateConfig({ ...validConfig, typescript: "yes" })).toThrow(
+        "typescript must be a boolean"
+      );
     });
 
     it("should throw on invalid packageManager", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, packageManager: "invalid" })
-      ).toThrow('packageManager must be "npm", "pnpm", "yarn", or "bun"');
+      expect(() => validateConfig({ ...validConfig, packageManager: "invalid" })).toThrow(
+        'packageManager must be "npm", "pnpm", "yarn", or "bun"'
+      );
     });
 
     it("should throw on missing paths", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, paths: null })
-      ).toThrow("paths must be an object");
+      expect(() => validateConfig({ ...validConfig, paths: null })).toThrow(
+        "paths must be an object"
+      );
     });
 
     it("should throw on missing paths.components", () => {
@@ -171,9 +171,9 @@ describe("config utilities", () => {
     });
 
     it("should throw on missing aliases", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, aliases: null })
-      ).toThrow("aliases must be an object");
+      expect(() => validateConfig({ ...validConfig, aliases: null })).toThrow(
+        "aliases must be an object"
+      );
     });
 
     it("should throw on invalid aliases", () => {
@@ -183,9 +183,9 @@ describe("config utilities", () => {
     });
 
     it("should throw on invalid components array", () => {
-      expect(() =>
-        validateConfig({ ...validConfig, components: "not an array" })
-      ).toThrow("components must be an array");
+      expect(() => validateConfig({ ...validConfig, components: "not an array" })).toThrow(
+        "components must be an array"
+      );
     });
 
     it("should return valid config", () => {

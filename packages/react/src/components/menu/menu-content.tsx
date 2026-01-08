@@ -3,12 +3,12 @@
  */
 
 import {
+  type HTMLAttributes,
+  type ReactNode,
   forwardRef,
   useCallback,
   useEffect,
   useRef,
-  type HTMLAttributes,
-  type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
 import { useMenuContext } from "./menu-context.js";

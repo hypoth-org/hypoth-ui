@@ -20,7 +20,9 @@ export function generateMigrationMarkdown(guide: MigrationGuideData): string {
   lines.push("");
 
   // Effort indicator
-  lines.push(`**Estimated Effort:** ${guide.effort.charAt(0).toUpperCase() + guide.effort.slice(1)}`);
+  lines.push(
+    `**Estimated Effort:** ${guide.effort.charAt(0).toUpperCase() + guide.effort.slice(1)}`
+  );
   lines.push("");
 
   // Prerequisites

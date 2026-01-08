@@ -17,7 +17,11 @@
  */
 
 import { DialogClose, type DialogCloseProps } from "./dialog-close.js";
-import { DialogContent, type DialogContentProps, type DialogContentSize } from "./dialog-content.js";
+import {
+  DialogContent,
+  type DialogContentProps,
+  type DialogContentSize,
+} from "./dialog-content.js";
 import { DialogDescription, type DialogDescriptionProps } from "./dialog-description.js";
 import { DialogRoot, type DialogRootProps } from "./dialog-root.js";
 import { DialogTitle, type DialogTitleProps } from "./dialog-title.js";

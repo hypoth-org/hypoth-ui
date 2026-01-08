@@ -11,9 +11,9 @@
  *   ds-deprecate migrate <from> <to>
  */
 
-import { Command } from "commander";
 import * as path from "node:path";
-import type { DeprecationType, Edition } from "../types/index.js";
+import { Command } from "commander";
+import { generateMigrationMarkdown, generateVersionMigration } from "../deprecation/migration.js";
 import {
   addDeprecation,
   createDeprecation,
@@ -24,14 +24,8 @@ import {
   saveDeprecationRegistry,
   validateDeprecationWindow,
 } from "../deprecation/registry.js";
-import {
-  formatConsoleWarning,
-  generateWarning,
-} from "../deprecation/warnings.js";
-import {
-  generateMigrationMarkdown,
-  generateVersionMigration,
-} from "../deprecation/migration.js";
+import { formatConsoleWarning, generateWarning } from "../deprecation/warnings.js";
+import type { DeprecationType, Edition } from "../types/index.js";
 
 const program = new Command();
 
@@ -47,7 +41,10 @@ program
 program
   .command("add <item>")
   .description("Add a new deprecation")
-  .requiredOption("-t, --type <type>", "Deprecation type (component, prop, css-variable, utility, pattern)")
+  .requiredOption(
+    "-t, --type <type>",
+    "Deprecation type (component, prop, css-variable, utility, pattern)"
+  )
   .requiredOption("-v, --version <version>", "Version where deprecation starts")
   .option("-r, --replacement <replacement>", "Replacement item")
   .option("-p, --package <package>", "Package name")

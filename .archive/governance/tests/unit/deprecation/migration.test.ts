@@ -4,9 +4,7 @@ import type { DeprecationRecord } from "../../../src/types/index.js";
 describe("Migration Utilities", () => {
   describe("deprecationToMigrationSteps", () => {
     it("should generate steps for component deprecation with replacement", async () => {
-      const { deprecationToMigrationSteps } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { deprecationToMigrationSteps } = await import("../../../src/deprecation/migration.js");
 
       const record: DeprecationRecord = {
         item: "OldButton",
@@ -24,9 +22,7 @@ describe("Migration Utilities", () => {
     });
 
     it("should generate steps for prop deprecation", async () => {
-      const { deprecationToMigrationSteps } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { deprecationToMigrationSteps } = await import("../../../src/deprecation/migration.js");
 
       const record: DeprecationRecord = {
         item: "isDisabled",
@@ -41,9 +37,7 @@ describe("Migration Utilities", () => {
     });
 
     it("should generate steps for CSS variable deprecation", async () => {
-      const { deprecationToMigrationSteps } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { deprecationToMigrationSteps } = await import("../../../src/deprecation/migration.js");
 
       const record: DeprecationRecord = {
         item: "--ds-color-primary",
@@ -60,9 +54,7 @@ describe("Migration Utilities", () => {
 
   describe("estimateMigrationEffort", () => {
     it("should return low for few simple changes", async () => {
-      const { estimateMigrationEffort } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { estimateMigrationEffort } = await import("../../../src/deprecation/migration.js");
 
       const deprecations: DeprecationRecord[] = [
         {
@@ -77,9 +69,7 @@ describe("Migration Utilities", () => {
     });
 
     it("should return medium for multiple changes", async () => {
-      const { estimateMigrationEffort } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { estimateMigrationEffort } = await import("../../../src/deprecation/migration.js");
 
       const deprecations: DeprecationRecord[] = [
         {
@@ -100,9 +90,7 @@ describe("Migration Utilities", () => {
     });
 
     it("should return high for many component changes", async () => {
-      const { estimateMigrationEffort } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { estimateMigrationEffort } = await import("../../../src/deprecation/migration.js");
 
       const deprecations: DeprecationRecord[] = [
         {
@@ -131,9 +119,7 @@ describe("Migration Utilities", () => {
 
   describe("generateMigrationMarkdown", () => {
     it("should generate valid markdown", async () => {
-      const { generateMigrationMarkdown } = await import(
-        "../../../src/deprecation/migration.js"
-      );
+      const { generateMigrationMarkdown } = await import("../../../src/deprecation/migration.js");
 
       const guide = {
         title: "Migration Guide: 1.0.0 to 2.0.0",

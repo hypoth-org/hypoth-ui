@@ -151,16 +151,10 @@ export function transformImports(
   let result = content;
 
   // Transform @/components imports
-  result = result.replace(
-    /@\/components\//g,
-    `${config.aliases.components}/`
-  );
+  result = result.replace(/@\/components\//g, `${config.aliases.components}/`);
 
   // Transform @/lib imports
-  result = result.replace(
-    /@\/lib\//g,
-    `${config.aliases.lib}/`
-  );
+  result = result.replace(/@\/lib\//g, `${config.aliases.lib}/`);
 
   return result;
 }
@@ -199,10 +193,7 @@ export function componentFilesExist(
 /**
  * Ensure the components directory exists
  */
-export function ensureComponentsDir(
-  config: DSConfig,
-  cwd: string = process.cwd()
-): void {
+export function ensureComponentsDir(config: DSConfig, cwd: string = process.cwd()): void {
   const targetDir = join(cwd, config.paths.components);
   if (!existsSync(targetDir)) {
     mkdirSync(targetDir, { recursive: true });

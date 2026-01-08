@@ -2,8 +2,8 @@
  * Dialog Root component - provides context to all Dialog compound components.
  */
 
-import { createDialogBehavior, type DialogRole } from "@ds/primitives-dom";
-import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { type DialogRole, createDialogBehavior } from "@ds/primitives-dom";
+import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { DialogProvider } from "./dialog-context.js";
 
 export interface DialogRootProps {

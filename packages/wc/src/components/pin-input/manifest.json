@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "pin-input",
+  "name": "PinInput",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "A multi-digit input component for verification codes with auto-advance, paste support, and masking",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "textbox",
+    "keyboard": ["Arrow Left/Right", "Backspace", "Delete", "Numeric/Alphanumeric keys", "Paste"],
+    "screenReader": "Each field announces position in group. Complete code announced when filled. Supports one-time-code autocomplete.",
+    "ariaPatterns": [
+      "role=group",
+      "aria-label",
+      "inputmode=numeric",
+      "inputmode=text",
+      "autocomplete=one-time-code",
+      "aria-invalid"
+    ],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.focus",
+    "color.border.default",
+    "color.border.focus",
+    "color.border.error",
+    "color.text.primary",
+    "color.text.disabled",
+    "spacing.xs",
+    "spacing.sm",
+    "spacing.md",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for OTP/verification codes. Enable mask for sensitive PINs. Use alphanumeric for mixed codes.",
+  "antiPatterns": "Do not use for passwords - use Input with type=password. Avoid for long codes - consider different UX.",
+  "platforms": ["wc", "react"]
+}

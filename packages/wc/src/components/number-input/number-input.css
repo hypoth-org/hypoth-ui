@@ -1,0 +1,205 @@
+/* NumberInput Component Styles */
+@layer components {
+  /* NumberInput container */
+  .ds-number-input {
+    --_number-input-bg: var(--ds-number-input-bg, var(--ds-color-background-default));
+    --_number-input-border: var(--ds-number-input-border, var(--ds-color-border-default));
+    --_number-input-border-radius: var(--ds-number-input-border-radius, var(--ds-radius-md));
+    --_number-input-button-width: var(--ds-number-input-button-width, 2rem);
+
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+  }
+
+  .ds-number-input[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Input field */
+  .ds-number-input__field {
+    flex: 1;
+    min-width: 4rem;
+    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md);
+    font-family: inherit;
+    font-size: var(--ds-font-size-base);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--ds-line-height-normal);
+    color: var(--ds-color-foreground-default);
+    text-align: center;
+    background-color: var(--_number-input-bg);
+    border: 1px solid var(--_number-input-border);
+    border-radius: var(--_number-input-border-radius);
+    transition: border-color 150ms ease;
+  }
+
+  .ds-number-input__field:hover:not(:disabled) {
+    border-color: var(--ds-color-border-emphasis);
+  }
+
+  .ds-number-input__field:focus {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: 2px;
+    border-color: var(--ds-color-primary-default);
+  }
+
+  .ds-number-input__field:disabled {
+    cursor: not-allowed;
+  }
+
+  .ds-number-input__field[data-invalid] {
+    border-color: var(--ds-color-destructive-default);
+  }
+
+  /* Hide native spin buttons */
+  .ds-number-input__field::-webkit-inner-spin-button,
+  .ds-number-input__field::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .ds-number-input__field {
+    -moz-appearance: textfield;
+  }
+
+  /* Button group variant (buttons on sides) */
+  .ds-number-input--buttons-sides .ds-number-input__field {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .ds-number-input--buttons-sides .ds-number-input__decrement {
+    border-radius: var(--_number-input-border-radius) 0 0 var(--_number-input-border-radius);
+    border-right: none;
+  }
+
+  .ds-number-input--buttons-sides .ds-number-input__increment {
+    border-radius: 0 var(--_number-input-border-radius) var(--_number-input-border-radius) 0;
+    border-left: none;
+  }
+
+  /* Button group variant (buttons stacked on right) */
+  .ds-number-input--buttons-stacked .ds-number-input__field {
+    border-radius: var(--_number-input-border-radius) 0 0 var(--_number-input-border-radius);
+    border-right: none;
+  }
+
+  .ds-number-input--buttons-stacked .ds-number-input__buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ds-number-input--buttons-stacked .ds-number-input__increment {
+    border-radius: 0 var(--_number-input-border-radius) 0 0;
+    border-bottom: none;
+  }
+
+  .ds-number-input--buttons-stacked .ds-number-input__decrement {
+    border-radius: 0 0 var(--_number-input-border-radius) 0;
+  }
+
+  .ds-number-input--buttons-stacked .ds-number-input__increment,
+  .ds-number-input--buttons-stacked .ds-number-input__decrement {
+    height: 50%;
+    padding: 0;
+  }
+
+  /* Increment/Decrement buttons */
+  .ds-number-input__increment,
+  .ds-number-input__decrement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_number-input-button-width);
+    padding: 0;
+    color: var(--ds-color-foreground-default);
+    cursor: pointer;
+    background-color: var(--_number-input-bg);
+    border: 1px solid var(--_number-input-border);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .ds-number-input__increment:hover:not(:disabled),
+  .ds-number-input__decrement:hover:not(:disabled) {
+    background-color: var(--ds-color-background-subtle);
+  }
+
+  .ds-number-input__increment:active:not(:disabled),
+  .ds-number-input__decrement:active:not(:disabled) {
+    background-color: var(--ds-color-background-muted);
+  }
+
+  .ds-number-input__increment:focus-visible,
+  .ds-number-input__decrement:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: -2px;
+    z-index: 1;
+  }
+
+  .ds-number-input__increment:disabled,
+  .ds-number-input__decrement:disabled {
+    color: var(--ds-color-foreground-muted);
+    cursor: not-allowed;
+  }
+
+  .ds-number-input__increment svg,
+  .ds-number-input__decrement svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* With prefix/suffix */
+  .ds-number-input__prefix,
+  .ds-number-input__suffix {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--ds-spacing-component-padding-sm);
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-foreground-muted);
+    background-color: var(--ds-color-background-subtle);
+    border: 1px solid var(--_number-input-border);
+  }
+
+  .ds-number-input__prefix {
+    border-right: none;
+    border-radius: var(--_number-input-border-radius) 0 0 var(--_number-input-border-radius);
+  }
+
+  .ds-number-input__suffix {
+    border-left: none;
+    border-radius: 0 var(--_number-input-border-radius) var(--_number-input-border-radius) 0;
+  }
+
+  .ds-number-input:has(.ds-number-input__prefix) .ds-number-input__field {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .ds-number-input:has(.ds-number-input__suffix) .ds-number-input__field {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* Size variants */
+  .ds-number-input--sm .ds-number-input__field {
+    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
+    font-size: var(--ds-font-size-sm);
+  }
+
+  .ds-number-input--sm .ds-number-input__increment,
+  .ds-number-input--sm .ds-number-input__decrement {
+    width: 1.5rem;
+  }
+
+  .ds-number-input--lg .ds-number-input__field {
+    padding: var(--ds-spacing-component-padding-md) var(--ds-spacing-component-padding-lg);
+    font-size: var(--ds-font-size-lg);
+  }
+
+  .ds-number-input--lg .ds-number-input__increment,
+  .ds-number-input--lg .ds-number-input__decrement {
+    width: 2.5rem;
+  }
+}

@@ -3,10 +3,18 @@
  * Provides state management, ARIA computation, roving focus, type-ahead, and keyboard handling for menus.
  */
 
-import { createDismissableLayer, type DismissableLayer, type DismissReason } from "../layer/dismissable-layer.js";
-import { createRovingFocus, type RovingFocus } from "../keyboard/roving-focus.js";
-import { createTypeAhead, type TypeAhead } from "../keyboard/type-ahead.js";
-import { createAnchorPosition, type AnchorPosition, type Placement } from "../positioning/anchor-position.js";
+import { type RovingFocus, createRovingFocus } from "../keyboard/roving-focus.js";
+import { type TypeAhead, createTypeAhead } from "../keyboard/type-ahead.js";
+import {
+  type DismissReason,
+  type DismissableLayer,
+  createDismissableLayer,
+} from "../layer/dismissable-layer.js";
+import {
+  type AnchorPosition,
+  type Placement,
+  createAnchorPosition,
+} from "../positioning/anchor-position.js";
 
 // =============================================================================
 // Types

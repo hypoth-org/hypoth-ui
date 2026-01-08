@@ -1,0 +1,214 @@
+---
+title: PinInput
+description: A multi-digit input component for verification codes with auto-advance, paste support, and masking.
+component: pin-input
+status: stable
+category: forms
+order: 37
+---
+
+# PinInput
+
+PinInput provides a series of individual input fields for entering verification codes, PINs, or one-time passwords.
+
+## Usage
+
+Basic 6-digit PIN input:
+
+```html
+<ds-pin-input length="6"></ds-pin-input>
+```
+
+### React
+
+```tsx
+import { PinInput } from "@ds/react";
+
+function VerificationCode() {
+  const handleComplete = (value: string) => {
+    console.log("Code entered:", value);
+  };
+
+  return <PinInput length={6} onComplete={handleComplete} />;
+}
+```
+
+## Controlled Mode
+
+Control the PIN value programmatically:
+
+```tsx
+import { PinInput } from "@ds/react";
+import { useState } from "react";
+
+function ControlledPinInput() {
+  const [value, setValue] = useState("");
+
+  return (
+    <div>
+      <PinInput length={6} value={value} onValueChange={setValue} />
+      <p>Value: {value}</p>
+    </div>
+  );
+}
+```
+
+## Masked Input
+
+Hide entered digits for security:
+
+```html
+<ds-pin-input length="4" mask></ds-pin-input>
+```
+
+### React Masked
+
+```tsx
+import { PinInput } from "@ds/react";
+
+function SecurePinInput() {
+  return <PinInput length={4} mask />;
+}
+```
+
+## Alphanumeric Mode
+
+Accept letters and numbers:
+
+```html
+<ds-pin-input length="6" alphanumeric></ds-pin-input>
+```
+
+## With Default Value
+
+Pre-fill the input:
+
+```html
+<ds-pin-input length="6" value="123456"></ds-pin-input>
+```
+
+## Grouped Layout
+
+Group digits visually:
+
+```html
+<ds-pin-input length="6" grouped></ds-pin-input>
+```
+
+## OTP Auto-complete
+
+Enable one-time code autocomplete for mobile:
+
+```html
+<ds-pin-input length="6" autocomplete="one-time-code"></ds-pin-input>
+```
+
+## With Field
+
+Use with Field for form integration:
+
+```html
+<ds-field required>
+  <ds-label>Verification Code</ds-label>
+  <ds-field-description>Enter the 6-digit code sent to your email</ds-field-description>
+  <ds-pin-input length="6"></ds-pin-input>
+  <ds-field-error>Invalid verification code</ds-field-error>
+</ds-field>
+```
+
+## Complete Flow
+
+Handle verification with loading state:
+
+```tsx
+import { PinInput } from "@ds/react";
+import { useState } from "react";
+
+function VerificationFlow() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleComplete = async (code: string) => {
+    setLoading(true);
+    setError("");
+
+    try {
+      await verifyCode(code);
+      // Success - redirect or show message
+    } catch (err) {
+      setError("Invalid code. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <PinInput
+        length={6}
+        onComplete={handleComplete}
+        disabled={loading}
+      />
+      {error && <p className="error">{error}</p>}
+    </div>
+  );
+}
+```
+
+## Components
+
+### ds-pin-input
+
+The PIN input component.
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `length` | number | 6 | Number of digits |
+| `value` | string | - | Current value |
+| `mask` | boolean | false | Hide entered digits |
+| `alphanumeric` | boolean | false | Accept letters |
+| `grouped` | boolean | false | Visual grouping |
+| `disabled` | boolean | false | Disable the input |
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds:change` | `{ value: string }` | Fired when value changes |
+| `ds:complete` | `{ value: string }` | Fired when all digits entered |
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `0-9` | Enter digit, advance focus |
+| `A-Z` | Enter letter (alphanumeric mode) |
+| `Arrow Left` | Move to previous field |
+| `Arrow Right` | Move to next field |
+| `Backspace` | Delete and move back |
+| `Delete` | Delete current digit |
+| `Ctrl/Cmd + V` | Paste full code |
+
+## Accessibility
+
+- Container has `role="group"`
+- Each field has descriptive `aria-label`
+- Supports `autocomplete="one-time-code"`
+- Masked mode uses `type="password"`
+- Focus management announced to screen readers
+
+## Best Practices
+
+### Do
+
+- Use for OTP/verification codes
+- Enable mask for sensitive PINs
+- Handle the complete event for validation
+- Support paste for user convenience
+
+### Don't
+
+- Don't use for passwords (use password input)
+- Don't use for very long codes (>8 digits)
+- Don't auto-submit without user confirmation
+- Don't block paste functionality
