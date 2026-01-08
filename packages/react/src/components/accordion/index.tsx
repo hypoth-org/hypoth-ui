@@ -106,7 +106,6 @@ const AccordionRoot = forwardRef<HTMLElement, AccordionRootProps>(function Accor
     className,
     type = "single",
     orientation = "vertical",
-    ...restProps
   } = props;
 
   // Handle single vs multiple mode

@@ -27,7 +27,7 @@ export class DsAspectRatio extends DSElement {
    * Can also be a number (e.g., 1.777 for 16:9).
    */
   @property({ reflect: true })
-  ratio: string = "1/1";
+  ratio = "1/1";
 
   override updated(): void {
     this.updateCssVariable();
