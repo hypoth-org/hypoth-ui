@@ -1,0 +1,33 @@
+/**
+ * AspectRatio component styles
+ *
+ * Uses CSS aspect-ratio property with custom property fallback.
+ *
+ * CSS custom properties:
+ * --ds-aspect-ratio: Aspect ratio value (set dynamically from ratio attribute)
+ */
+
+@layer components {
+  ds-aspect-ratio {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ds-aspect-ratio, 1);
+  }
+
+  /* Ensure slotted content fills the container */
+  ds-aspect-ratio > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Support for elements that shouldn't use object-fit */
+  ds-aspect-ratio > div,
+  ds-aspect-ratio > section,
+  ds-aspect-ratio > article {
+    object-fit: unset;
+  }
+}

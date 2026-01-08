@@ -1,0 +1,73 @@
+/**
+ * Collapsible component styles
+ *
+ * CSS custom properties for theming:
+ * --ds-collapsible-animation-duration: Animation duration (default: 200ms)
+ */
+
+@layer components {
+  ds-collapsible {
+    display: block;
+  }
+
+  ds-collapsible-trigger {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  ds-collapsible-trigger[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  ds-collapsible-content {
+    display: block;
+    overflow: hidden;
+  }
+
+  ds-collapsible-content[hidden] {
+    display: none;
+  }
+
+  /* Expand animation */
+  ds-collapsible-content[data-state="open"] {
+    animation: ds-collapsible-expand var(--ds-collapsible-animation-duration, 200ms) ease-out;
+  }
+
+  /* Collapse animation */
+  ds-collapsible-content[data-state="closed"]:not([hidden]) {
+    animation: ds-collapsible-collapse var(--ds-collapsible-animation-duration, 200ms) ease-out;
+  }
+
+  @keyframes ds-collapsible-expand {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--ds-collapsible-content-height, auto);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ds-collapsible-collapse {
+    from {
+      height: var(--ds-collapsible-content-height, auto);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    ds-collapsible-content[data-state="open"],
+    ds-collapsible-content[data-state="closed"]:not([hidden]) {
+      animation: none;
+    }
+  }
+}

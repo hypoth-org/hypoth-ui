@@ -1,0 +1,132 @@
+/**
+ * ContextMenu Component Styles
+ *
+ * Right-click context menu with keyboard navigation.
+ */
+
+@layer components {
+  /* ContextMenu container */
+  ds-context-menu {
+    display: contents;
+  }
+
+  /* Context menu trigger area */
+  ds-context-menu [slot="trigger"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Content container */
+  ds-context-menu-content {
+    position: fixed;
+    z-index: var(--ds-z-index-dropdown, var(--ds-z-dropdown, 950));
+    min-width: 8rem;
+    padding: var(--ds-space-1, 0.25rem);
+    background-color: var(--ds-color-surface, #ffffff);
+    border: 1px solid var(--ds-color-border, #e5e7eb);
+    border-radius: var(--ds-radius-md, 0.375rem);
+    box-shadow: var(
+      --ds-shadow-md,
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06)
+    );
+    outline: none;
+    animation: ds-context-menu-in 100ms ease-out;
+  }
+
+  ds-context-menu-content[hidden] {
+    display: none;
+  }
+
+  ds-context-menu-content[data-state="closed"] {
+    animation: ds-context-menu-out 75ms ease-in;
+  }
+
+  @keyframes ds-context-menu-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes ds-context-menu-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* Menu item */
+  ds-context-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2, 0.5rem);
+    padding: var(--ds-space-2, 0.5rem) var(--ds-space-3, 0.75rem);
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: var(--ds-line-height-normal, 1.5);
+    color: var(--ds-color-text, #1a1a1a);
+    cursor: pointer;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    outline: none;
+    transition: background-color 100ms;
+  }
+
+  ds-context-menu-item:hover,
+  ds-context-menu-item:focus {
+    background-color: var(--ds-color-surface-hover, #f3f4f6);
+  }
+
+  ds-context-menu-item[disabled] {
+    color: var(--ds-color-text-disabled, #9ca3af);
+    cursor: not-allowed;
+  }
+
+  ds-context-menu-item[disabled]:hover,
+  ds-context-menu-item[disabled]:focus {
+    background-color: transparent;
+  }
+
+  ds-context-menu-item[variant="destructive"] {
+    color: var(--ds-color-error, #dc2626);
+  }
+
+  ds-context-menu-item[variant="destructive"]:hover,
+  ds-context-menu-item[variant="destructive"]:focus {
+    background-color: var(--ds-color-error-subtle, #fef2f2);
+  }
+
+  /* Separator */
+  ds-context-menu-separator {
+    display: block;
+    height: 1px;
+    margin: var(--ds-space-1, 0.25rem) 0;
+    background-color: var(--ds-color-border, #e5e7eb);
+  }
+
+  /* Label */
+  ds-context-menu-label {
+    display: block;
+    padding: var(--ds-space-2, 0.5rem) var(--ds-space-3, 0.75rem);
+    font-size: var(--ds-font-size-xs, 0.75rem);
+    font-weight: var(--ds-font-weight-semibold, 600);
+    color: var(--ds-color-text-muted, #6b7280);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    ds-context-menu-content {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+/**
+ * HoverCard Component Styles
+ *
+ * Rich preview card that appears on hover with enter/exit animations.
+ */
+
+@layer components {
+  /* HoverCard container */
+  ds-hover-card {
+    display: contents;
+  }
+
+  /* HoverCard trigger */
+  ds-hover-card [slot="trigger"] {
+    cursor: pointer;
+  }
+
+  /* Content container */
+  ds-hover-card-content {
+    position: fixed;
+    z-index: var(--ds-z-index-popover, var(--ds-z-popover, 900));
+    min-width: 16rem;
+    max-width: 20rem;
+    padding: var(--ds-space-4, 1rem);
+    background-color: var(--ds-color-surface, #ffffff);
+    border: 1px solid var(--ds-color-border, #e5e7eb);
+    border-radius: var(--ds-radius-md, 0.375rem);
+    box-shadow: var(
+      --ds-shadow-lg,
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05)
+    );
+    outline: none;
+    animation: ds-hover-card-in 200ms ease-out;
+  }
+
+  ds-hover-card-content[hidden] {
+    display: none;
+  }
+
+  ds-hover-card-content[data-state="closed"] {
+    animation: ds-hover-card-out 150ms ease-in;
+  }
+
+  /* Entry animation */
+  @keyframes ds-hover-card-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Exit animation */
+  @keyframes ds-hover-card-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96) translateY(2px);
+    }
+  }
+
+  /* Placement-specific animations */
+  ds-hover-card-content[data-placement^="top"] {
+    animation-name: ds-hover-card-in-top;
+  }
+
+  ds-hover-card-content[data-placement^="top"][data-state="closed"] {
+    animation-name: ds-hover-card-out-top;
+  }
+
+  @keyframes ds-hover-card-in-top {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes ds-hover-card-out-top {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96) translateY(-2px);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    ds-hover-card-content {
+      animation: none;
+    }
+  }
+}

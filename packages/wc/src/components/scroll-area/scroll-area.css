@@ -1,0 +1,145 @@
+/**
+ * ScrollArea Component Styles
+ *
+ * Custom scrollbar with consistent appearance across browsers.
+ */
+
+@layer components {
+  /* ScrollArea container */
+  ds-scroll-area {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Viewport */
+  ds-scroll-area-viewport {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  ds-scroll-area-viewport::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
+  }
+
+  ds-scroll-area-viewport:focus {
+    outline: none;
+  }
+
+  ds-scroll-area-viewport:focus-visible {
+    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline-offset: -2px;
+  }
+
+  /* Scrollbar track */
+  ds-scroll-area-scrollbar {
+    position: absolute;
+    display: flex;
+    padding: 2px;
+    background-color: transparent;
+    transition: opacity 200ms, background-color 200ms;
+  }
+
+  ds-scroll-area-scrollbar[orientation="vertical"] {
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  ds-scroll-area-scrollbar[orientation="horizontal"] {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    flex-direction: row;
+  }
+
+  /* Hide scrollbar when no overflow (for auto type) */
+  ds-scroll-area[type="auto"] ds-scroll-area-scrollbar[orientation="vertical"] {
+    display: none;
+  }
+
+  ds-scroll-area[type="auto"][data-overflow-y] ds-scroll-area-scrollbar[orientation="vertical"] {
+    display: flex;
+  }
+
+  ds-scroll-area[type="auto"] ds-scroll-area-scrollbar[orientation="horizontal"] {
+    display: none;
+  }
+
+  ds-scroll-area[type="auto"][data-overflow-x] ds-scroll-area-scrollbar[orientation="horizontal"] {
+    display: flex;
+  }
+
+  /* Hover type scrollbar */
+  ds-scroll-area[type="hover"] ds-scroll-area-scrollbar {
+    opacity: 0;
+  }
+
+  ds-scroll-area[type="hover"] ds-scroll-area-scrollbar[data-state="visible"],
+  ds-scroll-area[type="hover"]:hover ds-scroll-area-scrollbar {
+    opacity: 1;
+  }
+
+  /* Scrollbar on hover expands */
+  ds-scroll-area-scrollbar:hover {
+    background-color: var(--ds-color-surface-hover, rgba(0, 0, 0, 0.05));
+  }
+
+  /* Scrollbar thumb */
+  ds-scroll-area-thumb {
+    position: absolute;
+    display: block;
+    flex: 1;
+    background-color: var(--ds-color-border, #d1d5db);
+    border-radius: var(--ds-radius-full, 9999px);
+    transition: background-color 150ms;
+    cursor: pointer;
+  }
+
+  ds-scroll-area-scrollbar[orientation="vertical"] ds-scroll-area-thumb {
+    width: 100%;
+    min-height: 30px;
+  }
+
+  ds-scroll-area-scrollbar[orientation="horizontal"] ds-scroll-area-thumb {
+    height: 100%;
+    min-width: 30px;
+  }
+
+  ds-scroll-area-thumb:hover,
+  ds-scroll-area-thumb[data-dragging] {
+    background-color: var(--ds-color-text-muted, #9ca3af);
+  }
+
+  /* Hide scrollbar when not needed */
+  ds-scroll-area:not([data-overflow-y]) ds-scroll-area-scrollbar[orientation="vertical"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  ds-scroll-area:not([data-overflow-x]) ds-scroll-area-scrollbar[orientation="horizontal"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Always show scrollbars */
+  ds-scroll-area[type="always"] ds-scroll-area-scrollbar {
+    opacity: 1;
+  }
+
+  /* Show only on scroll */
+  ds-scroll-area[type="scroll"] ds-scroll-area-scrollbar {
+    opacity: 0;
+  }
+
+  ds-scroll-area[type="scroll"] ds-scroll-area-scrollbar[data-state="visible"] {
+    opacity: 1;
+  }
+}

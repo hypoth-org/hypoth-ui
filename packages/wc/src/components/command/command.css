@@ -1,0 +1,213 @@
+@layer components {
+  /* ============================================================================
+   * Command Palette
+   * ============================================================================ */
+
+  ds-command {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 640px;
+    background: var(--ds-color-surface);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    box-shadow: var(--ds-shadow-lg);
+    overflow: hidden;
+  }
+
+  /* ============================================================================
+   * Command Input
+   * ============================================================================ */
+
+  ds-command-input {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-spacing-2);
+    padding: var(--ds-spacing-3) var(--ds-spacing-4);
+    border-bottom: 1px solid var(--ds-color-border);
+  }
+
+  ds-command-input .ds-command-input__field,
+  ds-command-input input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: var(--ds-font-size-md);
+    line-height: var(--ds-line-height-normal);
+    color: var(--ds-color-text);
+    outline: none;
+  }
+
+  ds-command-input .ds-command-input__field::placeholder,
+  ds-command-input input::placeholder {
+    color: var(--ds-color-text-muted);
+  }
+
+  ds-command-input[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ============================================================================
+   * Command List
+   * ============================================================================ */
+
+  ds-command-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--ds-spacing-2);
+  }
+
+  /* Custom scrollbar styling */
+  ds-command-list::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ds-command-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ds-command-list::-webkit-scrollbar-thumb {
+    background: var(--ds-color-border);
+    border-radius: var(--ds-radius-full);
+  }
+
+  ds-command-list::-webkit-scrollbar-thumb:hover {
+    background: var(--ds-color-border-hover);
+  }
+
+  /* ============================================================================
+   * Command Item
+   * ============================================================================ */
+
+  ds-command-item {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-spacing-2);
+    padding: var(--ds-spacing-2) var(--ds-spacing-3);
+    border-radius: var(--ds-radius-md);
+    font-size: var(--ds-font-size-sm);
+    line-height: var(--ds-line-height-normal);
+    color: var(--ds-color-text);
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  ds-command-item:hover,
+  ds-command-item[data-active] {
+    background: var(--ds-color-surface-hover);
+  }
+
+  ds-command-item:focus-visible {
+    outline: 2px solid var(--ds-color-focus);
+    outline-offset: -2px;
+  }
+
+  ds-command-item[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Filtered out items */
+  ds-command-item[data-filtered] {
+    display: none;
+  }
+
+  /* ============================================================================
+   * Command Group
+   * ============================================================================ */
+
+  ds-command-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ds-command-group[data-empty] {
+    display: none;
+  }
+
+  ds-command-group + ds-command-group {
+    margin-top: var(--ds-spacing-2);
+    padding-top: var(--ds-spacing-2);
+    border-top: 1px solid var(--ds-color-border);
+  }
+
+  ds-command-group .ds-command-group__heading {
+    padding: var(--ds-spacing-1) var(--ds-spacing-3);
+    font-size: var(--ds-font-size-xs);
+    font-weight: var(--ds-font-weight-medium);
+    color: var(--ds-color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ============================================================================
+   * Command Separator
+   * ============================================================================ */
+
+  ds-command-separator {
+    display: block;
+    height: 1px;
+    margin: var(--ds-spacing-2) 0;
+    background: var(--ds-color-border);
+  }
+
+  /* ============================================================================
+   * Command Empty
+   * ============================================================================ */
+
+  ds-command-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--ds-spacing-6) var(--ds-spacing-4);
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-text-muted);
+    text-align: center;
+  }
+
+  ds-command-empty[hidden] {
+    display: none;
+  }
+
+  /* ============================================================================
+   * Command Loading
+   * ============================================================================ */
+
+  ds-command-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ds-spacing-2);
+    padding: var(--ds-spacing-4);
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-text-muted);
+  }
+
+  /* ============================================================================
+   * Loading state on root
+   * ============================================================================ */
+
+  ds-command[loading] ds-command-list {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* ============================================================================
+   * Reduced motion
+   * ============================================================================ */
+
+  @media (prefers-reduced-motion: reduce) {
+    ds-command-item {
+      transition: none;
+    }
+  }
+}
