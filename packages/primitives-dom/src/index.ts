@@ -7,6 +7,12 @@ export { FOCUSABLE_SELECTOR, DEFAULT_TYPEAHEAD_TIMEOUT } from "./constants.js";
 // Focus management
 export { createFocusTrap, type FocusTrap, type FocusTrapOptions } from "./focus/focus-trap.js";
 
+export {
+  createFocusScope,
+  type FocusScope,
+  type FocusScopeOptions,
+} from "./focus/focus-scope.js";
+
 // Keyboard navigation
 export {
   createRovingFocus,
@@ -38,6 +44,13 @@ export {
   type DismissableLayerOptions,
   type DismissReason,
 } from "./layer/dismissable-layer.js";
+
+export {
+  createPortal,
+  renderToPortal,
+  type Portal,
+  type PortalOptions,
+} from "./layer/portal.js";
 
 // ARIA utilities
 export {
@@ -189,3 +202,46 @@ export {
   type Presence,
   type PresenceOptions,
 } from "./animation/index.js";
+
+// SSR utilities
+export {
+  isBrowser,
+  isServer,
+  isDocumentReady,
+  onDocumentReady,
+  clientOnly,
+  clientValue,
+  createClientOnly,
+  useClientOnly,
+  type ClientOnlyOptions,
+  type ClientOnlyController,
+} from "./ssr/client-only.js";
+
+// Table behavior
+export {
+  createTableBehavior,
+  sortData,
+  type TableBehavior,
+  type TableBehaviorOptions,
+  type SortState,
+  type SelectionState,
+  type SortDirection as TableSortDirection,
+} from "./behavior/table.js";
+
+// Tree behavior
+export {
+  createTreeBehavior,
+  type TreeBehavior,
+  type TreeBehaviorOptions,
+  type TreeItem,
+  type TreeSelectionMode as TreeBehaviorSelectionMode,
+} from "./behavior/tree.js";
+
+// List behavior
+export {
+  createListBehavior,
+  type ListBehavior,
+  type ListBehaviorOptions,
+  type ListSelectionMode as ListBehaviorSelectionMode,
+  type ListOrientation as ListBehaviorOrientation,
+} from "./behavior/list.js";

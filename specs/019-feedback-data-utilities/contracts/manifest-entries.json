@@ -1,0 +1,244 @@
+{
+  "components": [
+    {
+      "id": "alert",
+      "name": "Alert",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "alert",
+        "keyboardSupport": ["Tab", "Escape"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.status", "spacing.component", "typography.body"],
+      "recommendedUsage": "Display important messages about system state or user actions",
+      "antiPatterns": "Do not use for inline validation errors; use FieldError instead"
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "alert",
+        "keyboardSupport": ["Tab", "Escape"],
+        "knownLimitations": ["Does not steal focus by design; may be missed by screen reader users if dismissed quickly"]
+      },
+      "tokensUsed": ["color.status", "color.surface", "spacing.component", "shadow.overlay"],
+      "recommendedUsage": "Non-blocking notifications for async operations and background events",
+      "antiPatterns": "Do not use for critical errors requiring user acknowledgment; use AlertDialog instead"
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "progressbar",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.action", "color.surface", "spacing.component"],
+      "recommendedUsage": "Show loading progress for determinate or indeterminate operations",
+      "antiPatterns": "Do not use for page-level loading; use Skeleton or Spinner instead"
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [],
+        "knownLimitations": ["Decorative; ensure parent element has accessible name if badge conveys important info"]
+      },
+      "tokensUsed": ["color.status", "typography.caption"],
+      "recommendedUsage": "Display counts, status indicators, or notifications on icons/avatars",
+      "antiPatterns": "Do not use for interactive elements; Badge is display-only"
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "img",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "color.status", "spacing.component"],
+      "recommendedUsage": "Display user profile images with fallback to initials",
+      "antiPatterns": "Do not use decorative avatars without alt text"
+    },
+    {
+      "id": "avatar-group",
+      "name": "AvatarGroup",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "group",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "spacing.component"],
+      "recommendedUsage": "Display multiple avatars with overflow indicator",
+      "antiPatterns": "Avoid showing more than 5-7 visible avatars for clarity"
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "grid",
+        "keyboardSupport": ["Arrow keys", "Home", "End", "Space"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.border", "color.surface", "spacing.component", "typography.body"],
+      "recommendedUsage": "Display structured data in rows and columns with sorting and selection",
+      "antiPatterns": "Do not use for layout purposes; use CSS Grid instead"
+    },
+    {
+      "id": "data-table",
+      "name": "DataTable",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "grid",
+        "keyboardSupport": ["Arrow keys", "Home", "End", "Page Up", "Page Down", "Space"],
+        "knownLimitations": ["Virtualization may cause screen reader navigation issues with very large datasets"]
+      },
+      "tokensUsed": ["color.border", "color.surface", "spacing.component", "typography.body"],
+      "recommendedUsage": "Display large datasets with virtualization, filtering, and pagination",
+      "antiPatterns": "Do not use for small datasets (<100 rows); use Table instead for better accessibility"
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "motion.duration"],
+      "recommendedUsage": "Show loading placeholders that match content layout",
+      "antiPatterns": "Do not animate if user prefers reduced motion"
+    },
+    {
+      "id": "tag",
+      "name": "Tag",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": ["Enter", "Backspace"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.status", "spacing.component", "typography.caption"],
+      "recommendedUsage": "Display categorization labels with optional remove action",
+      "antiPatterns": "Do not use for navigation; use Link instead"
+    },
+    {
+      "id": "list",
+      "name": "List",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "listbox",
+        "keyboardSupport": ["Arrow keys", "Home", "End", "Space", "Enter", "Type-ahead"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "color.action", "spacing.component"],
+      "recommendedUsage": "Display selectable collections with keyboard navigation",
+      "antiPatterns": "Do not use for static lists; use semantic HTML ul/li instead"
+    },
+    {
+      "id": "tree",
+      "name": "Tree",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "treeview",
+        "keyboardSupport": ["Arrow keys", "Home", "End", "Enter", "Space", "Type-ahead"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "color.action", "spacing.component"],
+      "recommendedUsage": "Display and navigate hierarchical data structures",
+      "antiPatterns": "Do not use for flat lists; use List instead"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "grid",
+        "keyboardSupport": ["Arrow keys", "Home", "End", "Page Up", "Page Down", "Enter"],
+        "knownLimitations": []
+      },
+      "tokensUsed": ["color.surface", "color.action", "spacing.component", "typography.body"],
+      "recommendedUsage": "Display month grid for date visualization and event display",
+      "antiPatterns": "Do not use for date input; use DatePicker instead"
+    },
+    {
+      "id": "portal",
+      "name": "Portal",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [],
+        "knownLimitations": ["Ensure focus management is handled by consuming component"]
+      },
+      "tokensUsed": [],
+      "recommendedUsage": "Render children outside DOM hierarchy for overlays and modals",
+      "antiPatterns": "Do not use for non-overlay content; breaks document flow"
+    },
+    {
+      "id": "focus-scope",
+      "name": "FocusScope",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": ["Tab", "Shift+Tab"],
+        "knownLimitations": []
+      },
+      "tokensUsed": [],
+      "recommendedUsage": "Trap focus within modal dialogs and overlay components",
+      "antiPatterns": "Do not trap focus for non-modal content"
+    },
+    {
+      "id": "client-only",
+      "name": "ClientOnly",
+      "status": "alpha",
+      "availabilityTags": ["public"],
+      "platforms": ["wc", "react"],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "tokensUsed": [],
+      "recommendedUsage": "Prevent SSR for browser-only components",
+      "antiPatterns": "Do not wrap entire app; use sparingly for client-only features"
+    }
+  ]
+}

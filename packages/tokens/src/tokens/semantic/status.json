@@ -1,0 +1,41 @@
+{
+  "color": {
+    "status": {
+      "info": {
+        "default": { "$value": "{color.primitives.blue.600}", "$type": "color" },
+        "hover": { "$value": "{color.primitives.blue.700}", "$type": "color" },
+        "foreground": { "$value": "{color.primitives.blue.700}", "$type": "color" },
+        "background": { "$value": "{color.primitives.blue.50}", "$type": "color" },
+        "border": { "$value": "{color.primitives.blue.200}", "$type": "color" }
+      },
+      "success": {
+        "default": { "$value": "{color.primitives.green.600}", "$type": "color" },
+        "hover": { "$value": "{color.primitives.green.700}", "$type": "color" },
+        "foreground": { "$value": "{color.primitives.green.700}", "$type": "color" },
+        "background": { "$value": "{color.primitives.green.50}", "$type": "color" },
+        "border": { "$value": "{color.primitives.green.200}", "$type": "color" }
+      },
+      "warning": {
+        "default": { "$value": "{color.primitives.amber.500}", "$type": "color" },
+        "hover": { "$value": "{color.primitives.amber.600}", "$type": "color" },
+        "foreground": { "$value": "{color.primitives.amber.700}", "$type": "color" },
+        "background": { "$value": "{color.primitives.amber.50}", "$type": "color" },
+        "border": { "$value": "{color.primitives.amber.200}", "$type": "color" }
+      },
+      "error": {
+        "default": { "$value": "{color.primitives.red.600}", "$type": "color" },
+        "hover": { "$value": "{color.primitives.red.700}", "$type": "color" },
+        "foreground": { "$value": "{color.primitives.red.700}", "$type": "color" },
+        "background": { "$value": "{color.primitives.red.50}", "$type": "color" },
+        "border": { "$value": "{color.primitives.red.200}", "$type": "color" }
+      },
+      "neutral": {
+        "default": { "$value": "{color.primitives.gray.500}", "$type": "color" },
+        "hover": { "$value": "{color.primitives.gray.600}", "$type": "color" },
+        "foreground": { "$value": "{color.primitives.gray.700}", "$type": "color" },
+        "background": { "$value": "{color.primitives.gray.50}", "$type": "color" },
+        "border": { "$value": "{color.primitives.gray.200}", "$type": "color" }
+      }
+    }
+  }
+}

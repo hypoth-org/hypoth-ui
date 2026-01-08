@@ -1,0 +1,170 @@
+/**
+ * Progress Component Styles
+ *
+ * Loading progress indicators with linear and circular variants,
+ * supporting both determinate and indeterminate modes.
+ */
+
+@layer components {
+  /* Linear Progress */
+  .ds-progress {
+    --_progress-track: var(--ds-progress-track, var(--ds-color-border, #e5e7eb));
+    --_progress-fill: var(--ds-progress-fill, var(--ds-color-primary, #2563eb));
+    --_progress-height: var(--ds-progress-height, 0.5rem);
+    --_progress-radius: var(--ds-progress-radius, var(--ds-radius-full, 9999px));
+
+    position: relative;
+    width: 100%;
+    height: var(--_progress-height);
+    overflow: hidden;
+    background-color: var(--_progress-track);
+    border-radius: var(--_progress-radius);
+  }
+
+  .ds-progress__bar {
+    height: 100%;
+    background-color: var(--_progress-fill);
+    border-radius: var(--_progress-radius);
+    transition: width 300ms ease-out;
+  }
+
+  /* Size variants */
+  .ds-progress[data-size="sm"] {
+    --_progress-height: 0.25rem;
+  }
+
+  .ds-progress[data-size="lg"] {
+    --_progress-height: 0.75rem;
+  }
+
+  /* Indeterminate animation */
+  .ds-progress[data-indeterminate] .ds-progress__bar {
+    width: 40%;
+    animation: ds-progress-indeterminate 1.5s ease-in-out infinite;
+  }
+
+  @keyframes ds-progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
+  }
+
+  /* Circular Progress */
+  .ds-progress-circular {
+    --_progress-size: var(--ds-progress-circular-size, 2.5rem);
+    --_progress-stroke: var(--ds-progress-circular-stroke, 0.25rem);
+    --_progress-track: var(--ds-progress-track, var(--ds-color-border, #e5e7eb));
+    --_progress-fill: var(--ds-progress-fill, var(--ds-color-primary, #2563eb));
+
+    position: relative;
+    width: var(--_progress-size);
+    height: var(--_progress-size);
+  }
+
+  .ds-progress-circular__svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .ds-progress-circular__track {
+    fill: none;
+    stroke: var(--_progress-track);
+    stroke-width: var(--_progress-stroke);
+  }
+
+  .ds-progress-circular__fill {
+    fill: none;
+    stroke: var(--_progress-fill);
+    stroke-width: var(--_progress-stroke);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 300ms ease-out;
+  }
+
+  /* Circular size variants */
+  .ds-progress-circular[data-size="sm"] {
+    --_progress-size: 1.5rem;
+    --_progress-stroke: 0.1875rem;
+  }
+
+  .ds-progress-circular[data-size="lg"] {
+    --_progress-size: 4rem;
+    --_progress-stroke: 0.375rem;
+  }
+
+  /* Circular indeterminate animation */
+  .ds-progress-circular[data-indeterminate] .ds-progress-circular__svg {
+    animation: ds-progress-circular-rotate 2s linear infinite;
+  }
+
+  .ds-progress-circular[data-indeterminate] .ds-progress-circular__fill {
+    stroke-dasharray: 80 200;
+    animation: ds-progress-circular-dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes ds-progress-circular-rotate {
+    100% {
+      transform: rotate(270deg);
+    }
+  }
+
+  @keyframes ds-progress-circular-dash {
+    0% {
+      stroke-dasharray: 1 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+
+  /* Label */
+  .ds-progress__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Show label for circular */
+  .ds-progress-circular__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: var(--ds-font-size-xs, 0.75rem);
+    font-weight: var(--ds-font-weight-medium, 500);
+    transform: translate(-50%, -50%);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-progress[data-indeterminate] .ds-progress__bar {
+      animation: none;
+      width: 100%;
+      opacity: 0.5;
+    }
+
+    .ds-progress-circular[data-indeterminate] .ds-progress-circular__svg,
+    .ds-progress-circular[data-indeterminate] .ds-progress-circular__fill {
+      animation: none;
+    }
+
+    .ds-progress-circular[data-indeterminate] .ds-progress-circular__fill {
+      stroke-dasharray: 140 200;
+      stroke-dashoffset: -20px;
+    }
+  }
+}

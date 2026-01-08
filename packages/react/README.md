@@ -150,6 +150,38 @@ import { Button, Input, Dialog } from "@ds/react";
 |-----------|---------|-------------|
 | `Command` | Compound | Command palette (`Root`, `Input`, `List`, `Item`, `Group`, `Separator`, `Empty`, `Loading`) |
 
+### Feedback
+
+| Component | Pattern | Description |
+|-----------|---------|-------------|
+| `Alert` | Simple | Alert message with variants (info, success, warning, error) |
+| `Toast` | Compound | Toast notifications (`Provider`, + `useToast` hook) |
+| `Progress` | Simple | Progress indicator (linear/circular) |
+
+### Data Display
+
+| Component | Pattern | Description |
+|-----------|---------|-------------|
+| `Avatar` | Simple | User avatar with image, initials, or fallback |
+| `AvatarGroup` | Simple | Stacked avatar group |
+| `Table` | Compound | Data table (`Root` as `Table`, `Header`, `Body`, `Row`, `Head`, `Cell`) |
+| `DataTable` | Simple | Advanced data table with pagination/virtualization |
+| `Skeleton` | Simple | Loading placeholder skeleton |
+| `Badge` | Simple | Status badge with variants |
+| `Tag` | Simple | Removable tag/chip |
+| `Tree` | Compound | Tree view (`Root` as `Tree`, `Item` as `Tree.Item`) |
+| `List` | Compound | Selectable list (`Root` as `List`, `Item` as `List.Item`) |
+| `Calendar` | Simple | Calendar date picker |
+
+### Utility Primitives
+
+| Primitive | Description |
+|-----------|-------------|
+| `Portal` | Render children into a portal |
+| `FocusScope` | Focus trap container |
+| `ClientOnly` | Client-side only rendering |
+| `useIsClient` | Hook for client-side detection |
+
 ## Compound Component Pattern
 
 Most complex components use the compound pattern:

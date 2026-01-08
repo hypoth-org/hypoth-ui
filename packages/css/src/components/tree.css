@@ -1,0 +1,199 @@
+/**
+ * Tree Component Styles
+ *
+ * Hierarchical tree view with expand/collapse and selection.
+ */
+
+@layer components {
+  /* Tree root */
+  .ds-tree {
+    --_tree-indent: var(--ds-tree-indent, 1.25rem);
+    --_tree-icon-size: var(--ds-tree-icon-size, 1rem);
+    --_tree-gap: var(--ds-tree-gap, 0.25rem);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--_tree-gap);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* Nested tree (subtree) */
+  .ds-tree .ds-tree {
+    padding-left: var(--_tree-indent);
+    margin-top: var(--_tree-gap);
+  }
+
+  /* Tree item */
+  .ds-tree-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Tree item content (the clickable row) */
+  .ds-tree-item__content {
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+    padding: 0.375rem 0.5rem;
+    color: var(--ds-color-text, #111827);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    transition: background-color 150ms ease;
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    line-height: 1.4;
+  }
+
+  .ds-tree-item__content:hover {
+    background-color: var(--ds-color-surface-hover, #f3f4f6);
+  }
+
+  .ds-tree-item__content:focus-visible {
+    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline-offset: -2px;
+  }
+
+  /* Selected state */
+  .ds-tree-item[data-selected] > .ds-tree-item__content {
+    background-color: var(--ds-color-primary-100, #dbeafe);
+    color: var(--ds-color-primary-700, #1d4ed8);
+  }
+
+  .ds-tree-item[data-selected] > .ds-tree-item__content:hover {
+    background-color: var(--ds-color-primary-200, #bfdbfe);
+  }
+
+  /* Disabled state */
+  .ds-tree-item[data-disabled] > .ds-tree-item__content {
+    color: var(--ds-color-text-muted, #9ca3af);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .ds-tree-item[data-disabled] > .ds-tree-item__content:hover {
+    background-color: transparent;
+  }
+
+  /* Expand/collapse icon */
+  .ds-tree-item__expand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_tree-icon-size);
+    height: var(--_tree-icon-size);
+    padding: 0;
+    color: var(--ds-color-text-muted, #6b7280);
+    background: none;
+    border: none;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    cursor: pointer;
+    transition: transform 200ms ease, color 150ms ease;
+    flex-shrink: 0;
+  }
+
+  .ds-tree-item__expand:hover {
+    color: var(--ds-color-text, #111827);
+  }
+
+  .ds-tree-item__expand svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* Expanded state rotation */
+  .ds-tree-item[data-expanded] > .ds-tree-item__content .ds-tree-item__expand {
+    transform: rotate(90deg);
+  }
+
+  /* Spacer for items without children (alignment) */
+  .ds-tree-item__spacer {
+    width: var(--_tree-icon-size);
+    flex-shrink: 0;
+  }
+
+  /* Item icon */
+  .ds-tree-item__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_tree-icon-size);
+    height: var(--_tree-icon-size);
+    color: var(--ds-color-text-muted, #6b7280);
+    flex-shrink: 0;
+  }
+
+  .ds-tree-item__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Item label */
+  .ds-tree-item__label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Children container */
+  .ds-tree-item__children {
+    display: none;
+  }
+
+  .ds-tree-item[data-expanded] > .ds-tree-item__children {
+    display: block;
+  }
+
+  /* Connecting lines variant */
+  .ds-tree[data-lines] .ds-tree-item {
+    position: relative;
+  }
+
+  .ds-tree[data-lines] .ds-tree-item::before {
+    position: absolute;
+    top: 1.125rem;
+    left: calc(var(--_tree-icon-size) / 2);
+    width: 1px;
+    height: calc(100% - 1.125rem);
+    content: "";
+    background-color: var(--ds-color-border, #e5e7eb);
+  }
+
+  .ds-tree[data-lines] .ds-tree-item:last-child::before {
+    display: none;
+  }
+
+  .ds-tree[data-lines] .ds-tree .ds-tree-item__content::before {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--_tree-icon-size) / 2 - var(--_tree-indent));
+    width: calc(var(--_tree-indent) - var(--_tree-icon-size) / 2 - 0.25rem);
+    height: 1px;
+    content: "";
+    background-color: var(--ds-color-border, #e5e7eb);
+  }
+
+  /* Compact size */
+  .ds-tree[data-size="compact"] {
+    --_tree-indent: 1rem;
+    --_tree-icon-size: 0.875rem;
+    --_tree-gap: 0.125rem;
+  }
+
+  .ds-tree[data-size="compact"] .ds-tree-item__content {
+    padding: 0.25rem 0.375rem;
+    font-size: var(--ds-font-size-xs, 0.75rem);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-tree-item__expand {
+      transition: none;
+    }
+  }
+}
