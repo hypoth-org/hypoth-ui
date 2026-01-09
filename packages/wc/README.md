@@ -20,11 +20,49 @@ pnpm add @ds/css @ds/tokens
 import { DsButton, DsDialog, DsInput } from "@ds/wc";
 ```
 
-Or import individual components:
+### Granular Imports (Recommended for Tree-Shaking)
+
+Import from category-specific entry points for optimal bundle size:
 
 ```typescript
-import { DsButton } from "@ds/wc/components/button/button.js";
+// Core primitives
+import { DsButton, DsLink, DsIcon, DsText, DsSpinner, DsVisuallyHidden } from "@ds/wc/primitives";
+
+// Form controls
+import { DsInput, DsTextarea, DsCheckbox, DsSwitch, DsSlider } from "@ds/wc/form-controls";
+
+// Overlay components
+import { DsDialog, DsSheet, DsDrawer, DsPopover, DsTooltip } from "@ds/wc/overlays";
+
+// Navigation components
+import { DsTabs, DsAccordion, DsBreadcrumb, DsPagination, DsStepper } from "@ds/wc/navigation";
+
+// Data display components
+import { DsAvatar, DsTable, DsBadge, DsTag, DsTree } from "@ds/wc/data-display";
+
+// Feedback components
+import { DsAlert, DsToast, DsProgress } from "@ds/wc/feedback";
+
+// Layout components
+import { DsCard, DsSeparator, DsAspectRatio, DsScrollArea } from "@ds/wc/layout";
+
+// Base classes and utilities
+import { DSElement, define, html, css } from "@ds/wc/core";
 ```
+
+### Available Subpath Exports
+
+| Entry Point | Contents |
+|-------------|----------|
+| `@ds/wc` | All components (main entry) |
+| `@ds/wc/core` | Base classes, define utility, Lit re-exports |
+| `@ds/wc/primitives` | Core UI primitives (Button, Link, Icon, Text, etc.) |
+| `@ds/wc/form-controls` | Form inputs (Input, Checkbox, Select, etc.) |
+| `@ds/wc/overlays` | Dialog, Sheet, Drawer, Popover, Tooltip, etc. |
+| `@ds/wc/navigation` | Tabs, Accordion, Breadcrumb, Pagination, Stepper |
+| `@ds/wc/data-display` | Avatar, Table, Badge, Tag, Tree, etc. |
+| `@ds/wc/feedback` | Alert, Toast, Progress |
+| `@ds/wc/layout` | Card, Separator, AspectRatio, ScrollArea |
 
 ### Register Components
 

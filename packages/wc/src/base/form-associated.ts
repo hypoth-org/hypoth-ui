@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+import type { LitElement } from "lit";
 import type { PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
@@ -31,7 +31,7 @@ export interface ValidationFlags {
 /**
  * Type for mixin constructor with any args.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: Mixin pattern requires any[] for constructor args
 type Constructor<T = object> = new (...args: any[]) => T;
 
 /**
@@ -148,7 +148,7 @@ export function FormAssociatedMixin<T extends Constructor<LitElement>>(Base: T) 
      */
     private _customValidityMessage = "";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: Mixin pattern requires any[] for constructor args
     constructor(...args: any[]) {
       super(...args);
       this._internals = this.attachInternals();

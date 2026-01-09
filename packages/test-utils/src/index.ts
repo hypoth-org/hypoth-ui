@@ -32,7 +32,7 @@ export {
   tab,
   enter,
   space,
-  escape,
+  pressEscape,
   arrowUp,
   arrowDown,
   arrowLeft,
@@ -67,3 +67,10 @@ export {
   renderHTML,
   type ComponentWrapper,
 } from "./component.js";
+
+// Shared tests
+export {
+  runButtonKeyboardTests,
+  createWCButtonTestContext,
+  type ButtonTestContext,
+} from "./shared-tests/button.js";

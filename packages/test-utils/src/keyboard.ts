@@ -126,7 +126,7 @@ export function space(element: Element): void {
 /**
  * Simulates pressing Escape key.
  */
-export function escape(element: Element): void {
+export function pressEscape(element: Element): void {
   pressKey(element, "Escape");
 }
 

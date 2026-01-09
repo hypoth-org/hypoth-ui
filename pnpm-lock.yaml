@@ -369,6 +369,9 @@ importers:
         specifier: workspace:*
         version: link:../primitives-dom
     devDependencies:
+      '@ds/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
       '@ds/wc':
         specifier: workspace:*
         version: link:../wc
@@ -454,6 +457,9 @@ importers:
       '@axe-core/playwright':
         specifier: ^4.8.0
         version: 4.11.0(playwright-core@1.57.0)
+      '@ds/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
       happy-dom:
         specifier: ^13.10.0
         version: 13.10.1
