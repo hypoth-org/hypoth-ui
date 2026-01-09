@@ -1,0 +1,86 @@
+{
+  "$type": "color",
+  "$description": "Purple 16-step color scale for accents",
+  "purple": {
+    "1": {
+      "$value": "#fcfbff",
+      "$type": "color",
+      "$description": "Page background"
+    },
+    "2": {
+      "$value": "#f6f6ff",
+      "$type": "color",
+      "$description": "Raised surface"
+    },
+    "3": {
+      "$value": "#eeecff",
+      "$type": "color",
+      "$description": "Nested surface"
+    },
+    "4": {
+      "$value": "#e4e1fb",
+      "$type": "color",
+      "$description": "Deep nested"
+    },
+    "5": {
+      "$value": "#d6d3f6",
+      "$type": "color",
+      "$description": "Element background"
+    },
+    "6": {
+      "$value": "#c6c1ee",
+      "$type": "color",
+      "$description": "Element hover"
+    },
+    "7": {
+      "$value": "#b3ace3",
+      "$type": "color",
+      "$description": "Element active"
+    },
+    "8": {
+      "$value": "#9d95d3",
+      "$type": "color",
+      "$description": "Subtle border"
+    },
+    "9": {
+      "$value": "#857bc1",
+      "$type": "color",
+      "$description": "Default border"
+    },
+    "10": {
+      "$value": "#6f61ae",
+      "$type": "color",
+      "$description": "Strong border"
+    },
+    "11": {
+      "$value": "#6a57b3",
+      "$type": "color",
+      "$description": "Solid default"
+    },
+    "12": {
+      "$value": "#59479c",
+      "$type": "color",
+      "$description": "Solid hover"
+    },
+    "13": {
+      "$value": "#493785",
+      "$type": "color",
+      "$description": "Solid active"
+    },
+    "14": {
+      "$value": "#392870",
+      "$type": "color",
+      "$description": "Solid emphasis"
+    },
+    "15": {
+      "$value": "#2a1c55",
+      "$type": "color",
+      "$description": "Muted text"
+    },
+    "16": {
+      "$value": "#13092d",
+      "$type": "color",
+      "$description": "Default text"
+    }
+  }
+}

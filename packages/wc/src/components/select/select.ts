@@ -53,8 +53,7 @@ import "./select-label.js";
  * @slot trigger - Trigger element (ds-select-trigger with button inside)
  * @slot - Select content (ds-select-content with ds-select-option children)
  *
- * @fires ds:open - Fired when select opens
- * @fires ds:close - Fired when select closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  * @fires ds:change - Fired when value changes (detail: { value, label })
  * @fires ds:invalid - Fired when customValidation is true and validation fails
  *
@@ -123,6 +122,14 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
   @property({ type: Number, attribute: "virtualization-threshold" })
   virtualizationThreshold = 100;
 
+  /** Whether the select is in a loading state (e.g., fetching options) */
+  @property({ type: Boolean, reflect: true })
+  loading = false;
+
+  /** Text to display/announce during loading */
+  @property({ type: String, attribute: "loading-text" })
+  loadingText = "Loading...";
+
   /**
    * Data-driven options array. Use this for programmatic option rendering.
    * When provided, options will be rendered from this array instead of slots.
@@ -173,7 +180,9 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
       },
       onOpenChange: (open) => {
         this.open = open;
-        emitEvent(this, open ? StandardEvents.OPEN : StandardEvents.CLOSE);
+        emitEvent(this, StandardEvents.OPEN_CHANGE, {
+          detail: { open, reason: "trigger" },
+        });
       },
     });
 
@@ -202,7 +211,7 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
    * Opens the select.
    */
   public show(): void {
-    if (this.open || this.disabled) return;
+    if (this.open || this.disabled || this.loading) return;
     this.behavior?.open();
   }
 
@@ -321,7 +330,7 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
 
     if (trigger && this.contains(trigger)) {
       event.preventDefault();
-      if (this.disabled) return;
+      if (this.disabled || this.loading) return;
       this.focusFirstOnOpen = this.value ? "selected" : "first";
       this.toggle();
     }
@@ -351,7 +360,7 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
   };
 
   private handleTriggerKeyDown(event: KeyboardEvent): void {
-    if (this.disabled) return;
+    if (this.disabled || this.loading) return;
 
     switch (event.key) {
       case "Enter":
@@ -441,6 +450,20 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
     if (trigger && content) {
       trigger.disabled = this.disabled;
       trigger.updateAria(this.open, undefined, content.id);
+    }
+
+    // Set aria-busy on the trigger element when loading
+    this.updateLoadingState();
+  }
+
+  private updateLoadingState(): void {
+    const triggerElement = this.getTriggerElement();
+    if (triggerElement) {
+      if (this.loading) {
+        triggerElement.setAttribute("aria-busy", "true");
+      } else {
+        triggerElement.removeAttribute("aria-busy");
+      }
     }
   }
 
@@ -670,6 +693,15 @@ export class DsSelect extends FormAssociatedMixin(DSElement) {
         trigger.disabled = this.disabled;
       }
       if (this.disabled && this.open) {
+        this.close();
+      }
+    }
+
+    // Handle loading state changes
+    if (changedProperties.has("loading")) {
+      this.updateLoadingState();
+      // Close dropdown if loading starts while open
+      if (this.loading && this.open) {
         this.close();
       }
     }

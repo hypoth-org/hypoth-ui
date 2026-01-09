@@ -52,6 +52,18 @@ export {
   type PortalOptions,
 } from "./layer/portal.js";
 
+// Overlay behavior
+export {
+  createOverlayBehavior,
+  type OverlayBehavior,
+  type OverlayBehaviorOptions,
+  type OverlayBehaviorState,
+  type OverlayBehaviorContext,
+  type OverlayEvent,
+  type OverlayTriggerProps,
+  type OverlayContentProps,
+} from "./overlay/create-overlay-behavior.js";
+
 // ARIA utilities
 export {
   announce,

@@ -40,3 +40,37 @@ export {
   getCategoryFromPath,
 } from "./categories.js";
 export type { TokenCategory } from "./categories.js";
+
+// 16-Step Color Scale Types
+export {
+  ColorStepCategories,
+  ColorStepUsage,
+  getColorVar,
+  getColorCSSVarName,
+} from "./colors.js";
+export type {
+  ColorStep,
+  PrimitiveColorName,
+  SemanticColorName,
+  SemanticColorAlias,
+  ColorTokenValue,
+  ColorCSSVariable,
+} from "./colors.js";
+
+// Density System Types
+export {
+  DensityScales,
+  SpacingByDensity,
+  getSpacingVar,
+  getComponentVar,
+  getDensitySelector,
+} from "./density.js";
+export type {
+  DensityMode,
+  SpacingScale,
+  ComponentSize,
+  ComponentTokenKey,
+  SpacingCSSVariable,
+  ComponentCSSVariable,
+  DensityCSSVariable,
+} from "./density.js";

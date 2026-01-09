@@ -1,12 +1,28 @@
 import type React from "react";
 import { type TextareaHTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../primitives/responsive.js";
 
 export type TextareaSize = "sm" | "md" | "lg";
 
 export interface TextareaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "onInput"> {
-  /** Textarea size */
-  size?: TextareaSize;
+  /**
+   * Textarea size - supports responsive object syntax
+   * @example
+   * ```tsx
+   * // Single value
+   * <Textarea size="md" />
+   *
+   * // Responsive
+   * <Textarea size={{ base: "sm", md: "md", lg: "lg" }} />
+   * ```
+   */
+  size?: ResponsiveProp<TextareaSize>;
   /** Error state */
   error?: boolean;
   /** Auto-resize to fit content */
@@ -82,9 +98,14 @@ export const Textarea = forwardRef<HTMLElement, TextareaProps>((props, forwarded
     };
   }, [onValueChange, onChange]);
 
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-textarea", {
     ref: internalRef,
-    size,
+    size: resolvedSize,
     name,
     value,
     placeholder,
@@ -97,6 +118,8 @@ export const Textarea = forwardRef<HTMLElement, TextareaProps>((props, forwarded
     minlength: minLength,
     maxlength: maxLength,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...rest,
   });
 });

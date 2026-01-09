@@ -2,6 +2,12 @@
 
 import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../../primitives/responsive.js";
 
 export type SkeletonVariant = "text" | "circular" | "rectangular" | "rounded";
 export type SkeletonSize = "xs" | "sm" | "md" | "lg" | "xl";
@@ -16,9 +22,17 @@ export interface SkeletonProps extends Omit<HTMLAttributes<HTMLElement>, "childr
   variant?: SkeletonVariant;
 
   /**
-   * Size preset for height.
+   * Size preset for height - supports responsive object syntax.
+   * @example
+   * ```tsx
+   * // Single value
+   * <Skeleton size="md" />
+   *
+   * // Responsive
+   * <Skeleton size={{ base: "sm", md: "lg" }} />
+   * ```
    */
-  size?: SkeletonSize;
+  size?: ResponsiveProp<SkeletonSize>;
 
   /**
    * Width preset.
@@ -82,16 +96,23 @@ export const Skeleton = forwardRef<HTMLElement, SkeletonProps>(function Skeleton
   },
   ref
 ) {
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = size ? resolveResponsiveValue(size, "md") : undefined;
+  const isResponsive = size ? isResponsiveObject(size) : false;
+  const responsiveSizeAttr = isResponsive && size ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-skeleton", {
     ref,
     variant,
-    size,
+    size: resolvedSize,
     width,
     "custom-width": customWidth,
     "custom-height": customHeight,
     animation,
     label,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...props,
   });
 });

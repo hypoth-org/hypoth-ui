@@ -4,11 +4,14 @@
 
 import { type Placement, createMenuBehavior } from "@ds/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
+import { useStableId } from "../../hooks/use-stable-id.js";
 import { MenuProvider } from "./menu-context.js";
 
 export interface MenuRootProps {
   /** Menu content */
   children?: ReactNode;
+  /** Custom ID for the menu (SSR-safe auto-generated if not provided) */
+  id?: string;
   /** Controlled open state */
   open?: boolean;
   /** Default open state (uncontrolled) */
@@ -44,6 +47,7 @@ export interface MenuRootProps {
  */
 export function MenuRoot({
   children,
+  id,
   open: controlledOpen,
   defaultOpen = false,
   onOpenChange,
@@ -53,6 +57,9 @@ export function MenuRoot({
   flip = true,
   loop = true,
 }: MenuRootProps) {
+  // Generate SSR-safe stable ID using React 18's useId under the hood
+  const stableId = useStableId({ id, prefix: "menu" });
+
   // Support both controlled and uncontrolled modes
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isControlled = controlledOpen !== undefined;
@@ -80,8 +87,10 @@ export function MenuRoot({
         loop,
         onOpenChange: setOpen,
         onSelect,
+        // Use SSR-safe stable ID generator
+        generateId: () => stableId,
       }),
-    []
+    [stableId]
   );
 
   const contextValue = useMemo(

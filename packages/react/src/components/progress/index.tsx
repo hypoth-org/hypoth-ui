@@ -2,6 +2,12 @@
 
 import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../../primitives/responsive.js";
 
 export type ProgressVariant = "linear" | "circular";
 export type ProgressSize = "sm" | "md" | "lg";
@@ -25,10 +31,18 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLElement>, "childr
   variant?: ProgressVariant;
 
   /**
-   * Size variant.
+   * Size variant - supports responsive object syntax.
    * @default "md"
+   * @example
+   * ```tsx
+   * // Single value
+   * <Progress value={75} size="md" />
+   *
+   * // Responsive
+   * <Progress value={75} size={{ base: "sm", md: "lg" }} />
+   * ```
    */
-  size?: ProgressSize;
+  size?: ResponsiveProp<ProgressSize>;
 
   /**
    * Accessible label.
@@ -70,15 +84,22 @@ export const Progress = forwardRef<HTMLElement, ProgressProps>(function Progress
   },
   ref
 ) {
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-progress", {
     ref,
     value,
     max,
     variant,
-    size,
+    size: resolvedSize,
     label,
     "show-value": showValue || undefined,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...props,
   });
 });

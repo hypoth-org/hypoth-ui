@@ -5,6 +5,7 @@ import { DSElement } from "../../base/ds-element.js";
 import { emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 import type { DsTree } from "./tree.js";
+import { calculateTreeItemPosition } from "./tree-utils.js";
 
 // Chevron icon
 const chevronIcon = html`
@@ -53,16 +54,66 @@ export class DsTreeItem extends DSElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * Whether this item is loading (e.g., fetching children).
+   * Can be set directly or inherited from tree's loadingNodes.
+   */
+  @property({ type: Boolean, reflect: true })
+  loading = false;
+
   @state()
   private hasChildren = false;
+
+  @state()
+  private _level = 1;
+
+  @state()
+  private _setSize = 1;
+
+  @state()
+  private _posInSet = 1;
 
   private get treeRoot(): DsTree | null {
     return this.closest("ds-tree") as DsTree | null;
   }
 
+  /**
+   * Returns true if this item is loading (either directly or via tree's loadingNodes).
+   */
+  private get isLoading(): boolean {
+    if (this.loading) return true;
+    const tree = this.treeRoot;
+    if (tree && this.itemId) {
+      return tree.isNodeLoading(this.itemId);
+    }
+    return false;
+  }
+
+  /**
+   * Returns true if the tree root is in a loading state.
+   */
+  private get isTreeLoading(): boolean {
+    return this.treeRoot?.loading ?? false;
+  }
+
   override connectedCallback(): void {
     super.connectedCallback();
     this.updateHasChildren();
+    // Calculate position after DOM is ready
+    requestAnimationFrame(() => {
+      this.updateAriaPosition();
+    });
+  }
+
+  /**
+   * Update ARIA position attributes for APG compliance.
+   * Provides screen readers with context like "Item 3 of 5, level 2".
+   */
+  private updateAriaPosition(): void {
+    const position = calculateTreeItemPosition(this as unknown as HTMLElement);
+    this._level = position.level;
+    this._setSize = position.setSize;
+    this._posInSet = position.posInSet;
   }
 
   private updateHasChildren(): void {
@@ -72,7 +123,7 @@ export class DsTreeItem extends DSElement {
 
   private handleExpandClick(event: Event): void {
     event.stopPropagation();
-    if (this.disabled || !this.hasChildren) return;
+    if (this.disabled || this.isTreeLoading || this.isLoading || !this.hasChildren) return;
 
     this.expanded = !this.expanded;
     emitEvent(this, "expand", {
@@ -84,7 +135,7 @@ export class DsTreeItem extends DSElement {
   }
 
   private handleContentClick(): void {
-    if (this.disabled) return;
+    if (this.disabled || this.isTreeLoading) return;
 
     const tree = this.treeRoot;
     if (tree) {
@@ -101,7 +152,7 @@ export class DsTreeItem extends DSElement {
   }
 
   private handleKeyDown(event: KeyboardEvent): void {
-    if (this.disabled) return;
+    if (this.disabled || this.isTreeLoading) return;
 
     switch (event.key) {
       case "ArrowRight":
@@ -150,15 +201,22 @@ export class DsTreeItem extends DSElement {
     // Check for children via slot
     this.updateHasChildren();
 
+    const itemLoading = this.isLoading;
+
     return html`
       <li
         class=${classMap(classes)}
         role="treeitem"
         aria-expanded=${this.hasChildren ? (this.expanded ? "true" : "false") : nothing}
         aria-selected=${this.selected ? "true" : "false"}
+        aria-busy=${itemLoading ? "true" : nothing}
+        aria-level=${this._level}
+        aria-setsize=${this._setSize}
+        aria-posinset=${this._posInSet}
         ?data-expanded=${this.expanded}
         ?data-selected=${this.selected}
         ?data-disabled=${this.disabled}
+        ?data-loading=${itemLoading}
       >
         <div
           class="ds-tree-item__content"

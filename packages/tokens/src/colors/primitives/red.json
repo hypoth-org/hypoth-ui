@@ -1,0 +1,86 @@
+{
+  "$type": "color",
+  "$description": "Red 16-step color scale for error states",
+  "red": {
+    "1": {
+      "$value": "#fffbfa",
+      "$type": "color",
+      "$description": "Page background"
+    },
+    "2": {
+      "$value": "#fff4f3",
+      "$type": "color",
+      "$description": "Raised surface"
+    },
+    "3": {
+      "$value": "#ffe9e6",
+      "$type": "color",
+      "$description": "Nested surface"
+    },
+    "4": {
+      "$value": "#ffdbd7",
+      "$type": "color",
+      "$description": "Deep nested"
+    },
+    "5": {
+      "$value": "#ffc8c3",
+      "$type": "color",
+      "$description": "Element background"
+    },
+    "6": {
+      "$value": "#f8b3ad",
+      "$type": "color",
+      "$description": "Element hover"
+    },
+    "7": {
+      "$value": "#ed9b94",
+      "$type": "color",
+      "$description": "Element active"
+    },
+    "8": {
+      "$value": "#de8079",
+      "$type": "color",
+      "$description": "Subtle border"
+    },
+    "9": {
+      "$value": "#cb615c",
+      "$type": "color",
+      "$description": "Default border"
+    },
+    "10": {
+      "$value": "#b7413f",
+      "$type": "color",
+      "$description": "Strong border"
+    },
+    "11": {
+      "$value": "#ba2b2e",
+      "$type": "color",
+      "$description": "Solid default"
+    },
+    "12": {
+      "$value": "#a21820",
+      "$type": "color",
+      "$description": "Solid hover"
+    },
+    "13": {
+      "$value": "#8a0013",
+      "$type": "color",
+      "$description": "Solid active"
+    },
+    "14": {
+      "$value": "#6f000c",
+      "$type": "color",
+      "$description": "Solid emphasis"
+    },
+    "15": {
+      "$value": "#540007",
+      "$type": "color",
+      "$description": "Muted text"
+    },
+    "16": {
+      "$value": "#2a0002",
+      "$type": "color",
+      "$description": "Default text"
+    }
+  }
+}

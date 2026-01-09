@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["**/dist/**", "**/node_modules/**", "**/.next/**", "**/coverage/**"]
+    "ignore": ["**/dist/**", "**/node_modules/**", "**/.next/**", "**/coverage/**", "**/specs/**"]
   },
   "formatter": {
     "enabled": true,
@@ -63,6 +63,39 @@
     },
     {
       "include": ["packages/cli/src/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["packages/cli/scripts/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["packages/docs-renderer-next/components/**/*.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useSemanticElements": "off"
+          },
+          "suspicious": {
+            "noArrayIndexKey": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["packages/tokens/scripts/**/*.ts"],
       "linter": {
         "rules": {
           "suspicious": {

@@ -1,5 +1,11 @@
 import type React from "react";
 import { type InputHTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../primitives/responsive.js";
 
 export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
 export type InputSize = "sm" | "md" | "lg";
@@ -8,8 +14,18 @@ export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "onInput"> {
   /** Input type */
   type?: InputType;
-  /** Input size */
-  size?: InputSize;
+  /**
+   * Input size - supports responsive object syntax
+   * @example
+   * ```tsx
+   * // Single value
+   * <Input size="md" />
+   *
+   * // Responsive
+   * <Input size={{ base: "sm", md: "md", lg: "lg" }} />
+   * ```
+   */
+  size?: ResponsiveProp<InputSize>;
   /** Error state */
   error?: boolean;
   /** Change handler - fires when input loses focus with changed value */
@@ -85,10 +101,15 @@ export const Input = forwardRef<HTMLElement, InputProps>((props, forwardedRef) =
     };
   }, [onValueChange, onChange]);
 
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-input", {
     ref: internalRef,
     type,
-    size,
+    size: resolvedSize,
     name,
     value,
     placeholder,
@@ -100,6 +121,8 @@ export const Input = forwardRef<HTMLElement, InputProps>((props, forwardedRef) =
     maxlength: maxLength,
     pattern,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...rest,
   });
 });

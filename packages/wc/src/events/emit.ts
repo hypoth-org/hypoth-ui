@@ -68,23 +68,49 @@ export function emitEvent<T = unknown>(
  *
  * Components SHOULD use these standard names when applicable
  * for consistency across the component library.
+ *
+ * Naming conventions (per event-names.ts):
+ * - React props use camelCase callbacks (e.g., onPress, onValueChange)
+ * - Web Components use ds: prefixed custom events (e.g., ds:press, ds:change)
  */
 export const StandardEvents = {
+  /** User activation (click, Enter, Space) - buttons, links, menu items */
+  PRESS: "press",
   /** Value changed (inputs, selects) */
   CHANGE: "change",
   /** Item selected (lists, menus) */
   SELECT: "select",
-  /** Component opened (dialogs, dropdowns) */
-  OPEN: "open",
-  /** Component closed (dialogs, dropdowns) */
-  CLOSE: "close",
-  /** Before close - cancelable (dialogs) */
-  BEFORE_CLOSE: "before-close",
+  /** Open state changed (dialogs, dropdowns, menus) - detail: { open, reason } */
+  OPEN_CHANGE: "open-change",
   /** Component dismissed (toasts, alerts) */
   DISMISS: "dismiss",
   /** Focus moved within component */
   FOCUS_CHANGE: "focus-change",
-  /** Click event (buttons) */
+  /** Expanded state changed (trees, accordions, collapsibles) */
+  EXPANDED_CHANGE: "expanded-change",
+  /** Checked state changed (checkboxes, switches, radio groups) */
+  CHECKED_CHANGE: "checked-change",
+  /** Sort state changed (tables) */
+  SORT_CHANGE: "sort-change",
+  /** Index changed (pagination, tabs, steppers, carousels) */
+  INDEX_CHANGE: "index-change",
+  /** Search query changed */
+  SEARCH: "search",
+  /** Hover state changed */
+  HOVER_CHANGE: "hover-change",
+  /** Items reordered (drag-and-drop) */
+  REORDER: "reorder",
+  /** Content copied to clipboard */
+  COPY: "copy",
+  /** Element resized */
+  RESIZE: "resize",
+  /** @deprecated Use OPEN_CHANGE instead */
+  OPEN: "open",
+  /** @deprecated Use OPEN_CHANGE instead */
+  CLOSE: "close",
+  /** @deprecated Use OPEN_CHANGE with cancelable: true instead */
+  BEFORE_CLOSE: "before-close",
+  /** @deprecated Use PRESS instead */
   CLICK: "click",
   /** Navigate event (links) */
   NAVIGATE: "navigate",

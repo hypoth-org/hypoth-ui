@@ -46,10 +46,42 @@ export class DsTree extends DSElement {
   @property({ type: String })
   label = "Tree";
 
+  /**
+   * Whether the tree is in a loading state.
+   * When true, sets aria-busy and disables keyboard navigation.
+   */
+  @property({ type: Boolean, reflect: true })
+  loading = false;
+
+  /**
+   * Text to display/announce during loading.
+   */
+  @property({ type: String, attribute: "loading-text" })
+  loadingText = "Loading...";
+
+  /**
+   * Node IDs that are currently loading children.
+   * Allows for node-level loading indicators.
+   */
+  @property({ attribute: false })
+  loadingNodes: Set<string> | string[] = new Set();
+
   @state()
   private selectedItems: Set<string> = new Set();
 
+  /**
+   * Checks if a specific node is currently loading.
+   */
+  isNodeLoading(nodeId: string): boolean {
+    if (this.loadingNodes instanceof Set) {
+      return this.loadingNodes.has(nodeId);
+    }
+    return this.loadingNodes.includes(nodeId);
+  }
+
   handleItemSelect(itemId: string): void {
+    // Disable selection during loading
+    if (this.loading) return;
     if (this.selectionMode === "none") return;
 
     if (this.selectionMode === "single") {
@@ -85,8 +117,10 @@ export class DsTree extends DSElement {
         role="tree"
         aria-label=${this.label}
         aria-multiselectable=${this.selectionMode === "multiple" ? "true" : nothing}
+        aria-busy=${this.loading ? "true" : nothing}
         data-size=${this.size !== "default" ? this.size : nothing}
         ?data-lines=${this.lines}
+        ?data-loading=${this.loading}
       >
         <slot></slot>
       </ul>

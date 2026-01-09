@@ -4,11 +4,14 @@
 
 import { type DialogRole, createDialogBehavior } from "@ds/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
+import { useStableId } from "../../hooks/use-stable-id.js";
 import { DialogProvider } from "./dialog-context.js";
 
 export interface DialogRootProps {
   /** Dialog content */
   children?: ReactNode;
+  /** Custom ID for the dialog (SSR-safe auto-generated if not provided) */
+  id?: string;
   /** Controlled open state */
   open?: boolean;
   /** Default open state (uncontrolled) */
@@ -39,12 +42,16 @@ export interface DialogRootProps {
  */
 export function DialogRoot({
   children,
+  id,
   open: controlledOpen,
   defaultOpen = false,
   onOpenChange,
   role = "dialog",
   modal = true,
 }: DialogRootProps) {
+  // Generate SSR-safe stable ID using React 18's useId under the hood
+  const stableId = useStableId({ id, prefix: "dialog" });
+
   // Support both controlled and uncontrolled modes
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isControlled = controlledOpen !== undefined;
@@ -73,8 +80,10 @@ export function DialogRoot({
         closeOnEscape: true,
         closeOnOutsideClick: true,
         onOpenChange: setOpen,
+        // Use SSR-safe stable ID generator
+        generateId: () => stableId,
       }),
-    []
+    [stableId]
   );
 
   const contextValue = useMemo(

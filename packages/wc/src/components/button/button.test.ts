@@ -70,7 +70,7 @@ describe("DsButton", () => {
       await button.updateComplete;
 
       const clickHandler = vi.fn();
-      button.addEventListener("ds:click", clickHandler);
+      button.addEventListener("ds:press", clickHandler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -107,7 +107,7 @@ describe("DsButton", () => {
       await button.updateComplete;
 
       const clickHandler = vi.fn();
-      button.addEventListener("ds:click", clickHandler);
+      button.addEventListener("ds:press", clickHandler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -117,13 +117,13 @@ describe("DsButton", () => {
   });
 
   describe("events", () => {
-    it("emits ds:click event on click", async () => {
+    it("emits ds:press event on click", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
       const clickHandler = vi.fn();
-      button.addEventListener("ds:click", clickHandler);
+      button.addEventListener("ds:press", clickHandler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -131,13 +131,13 @@ describe("DsButton", () => {
       expect(clickHandler).toHaveBeenCalled();
     });
 
-    it("includes original event in ds:click detail", async () => {
+    it("includes original event in ds:press detail", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
       let eventDetail: unknown;
-      button.addEventListener("ds:click", ((e: CustomEvent) => {
+      button.addEventListener("ds:press", ((e: CustomEvent) => {
         eventDetail = e.detail;
       }) as EventListener);
 
@@ -154,14 +154,14 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: "Enter" });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).toHaveBeenCalled();
+      expect(pressHandler).toHaveBeenCalled();
     });
 
     it("activates on Space key", async () => {
@@ -169,14 +169,14 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: " " });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).toHaveBeenCalled();
+      expect(pressHandler).toHaveBeenCalled();
     });
 
     it("does not activate on Enter when disabled", async () => {
@@ -185,14 +185,14 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: "Enter" });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).not.toHaveBeenCalled();
+      expect(pressHandler).not.toHaveBeenCalled();
     });
   });
 

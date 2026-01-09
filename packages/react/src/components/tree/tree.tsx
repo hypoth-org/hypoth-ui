@@ -39,6 +39,25 @@ export interface TreeRootProps extends HTMLAttributes<HTMLElement> {
   label?: string;
 
   /**
+   * Whether the tree is in a loading state.
+   * When true, sets aria-busy and disables keyboard navigation.
+   * @default false
+   */
+  loading?: boolean;
+
+  /**
+   * Text to display/announce during loading.
+   * @default "Loading..."
+   */
+  loadingText?: string;
+
+  /**
+   * Node IDs that are currently loading children.
+   * Allows for node-level loading indicators.
+   */
+  loadingNodes?: string[];
+
+  /**
    * Callback when selection changes.
    */
   onSelectionChange?: (selectedItems: string[]) => void;
@@ -58,6 +77,9 @@ export const TreeRoot = forwardRef<HTMLElement, TreeRootProps>(function TreeRoot
     size = "default",
     lines = false,
     label = "Tree",
+    loading = false,
+    loadingText = "Loading...",
+    loadingNodes,
     onSelectionChange,
     children,
     className,
@@ -90,6 +112,14 @@ export const TreeRoot = forwardRef<HTMLElement, TreeRootProps>(function TreeRoot
     return () => element.removeEventListener("ds:selection-change", handleSelectionChange);
   }, [onSelectionChange]);
 
+  // Sync loadingNodes as a property (cannot be set via attribute)
+  useEffect(() => {
+    const element = internalRef.current as HTMLElement & { loadingNodes?: Set<string> | string[] } | null;
+    if (element && loadingNodes !== undefined) {
+      element.loadingNodes = loadingNodes;
+    }
+  }, [loadingNodes]);
+
   return createElement(
     "ds-tree",
     {
@@ -98,6 +128,8 @@ export const TreeRoot = forwardRef<HTMLElement, TreeRootProps>(function TreeRoot
       size,
       lines: lines || undefined,
       label,
+      loading: loading || undefined,
+      "loading-text": loadingText,
       class: className,
       ...props,
     },

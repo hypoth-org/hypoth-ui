@@ -1,14 +1,15 @@
 /**
  * Dialog behavior primitive.
  * Provides state management, ARIA computation, focus management, and keyboard handling for dialogs.
+ *
+ * Uses createOverlayBehavior internally for common overlay functionality.
  */
 
-import { type FocusTrap, createFocusTrap } from "../focus/focus-trap.js";
+import type { DismissReason } from "../layer/dismissable-layer.js";
 import {
-  type DismissReason,
-  type DismissableLayer,
-  createDismissableLayer,
-} from "../layer/dismissable-layer.js";
+  type OverlayBehavior,
+  createOverlayBehavior,
+} from "../overlay/create-overlay-behavior.js";
 
 // =============================================================================
 // Types
@@ -115,6 +116,9 @@ function defaultGenerateId(): string {
 /**
  * Creates a dialog behavior primitive.
  *
+ * Uses createOverlayBehavior internally for common overlay functionality
+ * (open/close state, focus trap, dismissal handling).
+ *
  * @example
  * ```ts
  * const dialog = createDialogBehavior({
@@ -156,12 +160,22 @@ export function createDialogBehavior(options: DialogBehaviorOptions = {}): Dialo
   const titleId = `${baseId}-title`;
   const descriptionId = `${baseId}-description`;
 
-  // Internal state
-  let state: DialogBehaviorState = {
-    open: defaultOpen,
-    role,
-  };
+  // Create overlay behavior for common functionality
+  const overlay: OverlayBehavior = createOverlayBehavior({
+    defaultOpen,
+    modal: true, // Dialogs are always modal
+    closeOnEscape,
+    closeOnOutsideClick,
+    returnFocusOnClose: true,
+    onOpenChange,
+    generateId: () => baseId,
+  });
 
+  // Dialog-specific state (role, description tracking)
+  const dialogRole: DialogRole = role;
+  let hasDescription = false;
+
+  // Context for dialog-specific IDs
   let context: DialogBehaviorContext = {
     triggerId,
     contentId,
@@ -170,53 +184,26 @@ export function createDialogBehavior(options: DialogBehaviorOptions = {}): Dialo
     triggerElement: null,
   };
 
-  // Focus and layer management
-  let focusTrap: FocusTrap | null = null;
-  let dismissLayer: DismissableLayer | null = null;
-
-  function setOpen(open: boolean): void {
-    if (state.open === open) return;
-
-    state = { ...state, open };
-    onOpenChange?.(open);
-
-    if (!open) {
-      // Deactivate focus trap and dismiss layer
-      focusTrap?.deactivate();
-      dismissLayer?.deactivate();
-      focusTrap = null;
-      dismissLayer = null;
-    }
-  }
-
   function send(event: DialogEvent): void {
     switch (event.type) {
       case "OPEN":
-        setOpen(true);
+        overlay.open();
         break;
       case "CLOSE":
-        setOpen(false);
+        overlay.close();
         break;
       case "DISMISS":
-        // Dismissal via escape or outside click
-        setOpen(false);
+        overlay.close();
         break;
     }
   }
 
-  function open(): void {
-    send({ type: "OPEN" });
-  }
-
-  function close(): void {
-    send({ type: "CLOSE" });
-  }
-
   function getTriggerProps(): DialogTriggerProps {
+    const overlayProps = overlay.getTriggerProps();
     return {
       id: triggerId,
       "aria-haspopup": "dialog",
-      "aria-expanded": state.open ? "true" : "false",
+      "aria-expanded": overlayProps["aria-expanded"],
       "aria-controls": contentId,
     };
   }
@@ -224,10 +211,10 @@ export function createDialogBehavior(options: DialogBehaviorOptions = {}): Dialo
   function getContentProps(): DialogContentProps {
     return {
       id: contentId,
-      role: state.role,
+      role: dialogRole,
       "aria-modal": "true",
       "aria-labelledby": titleId,
-      "aria-describedby": context.descriptionId ?? undefined,
+      "aria-describedby": hasDescription ? descriptionId : undefined,
       tabIndex: -1,
     };
   }
@@ -246,62 +233,38 @@ export function createDialogBehavior(options: DialogBehaviorOptions = {}): Dialo
 
   function setTriggerElement(element: HTMLElement | null): void {
     context = { ...context, triggerElement: element };
+    overlay.setTriggerElement(element);
   }
 
   function setContentElement(element: HTMLElement | null): void {
-    // Cleanup existing focus trap and dismiss layer
-    focusTrap?.deactivate();
-    dismissLayer?.deactivate();
-    focusTrap = null;
-    dismissLayer = null;
-
-    if (element && state.open) {
-      // Create and activate focus trap
-      focusTrap = createFocusTrap({
-        container: element,
-        returnFocus: context.triggerElement ?? true,
-        fallbackFocus: element,
-      });
-      focusTrap.activate();
-
-      // Create and activate dismissable layer
-      dismissLayer = createDismissableLayer({
-        container: element,
-        excludeElements: context.triggerElement ? [context.triggerElement] : [],
-        closeOnEscape,
-        closeOnOutsideClick,
-        onDismiss: (reason) => {
-          send({ type: "DISMISS", reason });
-        },
-      });
-      dismissLayer.activate();
-    }
+    overlay.setContentElement(element);
   }
 
-  function setHasDescription(hasDescription: boolean): void {
+  function setHasDescription(has: boolean): void {
+    hasDescription = has;
     context = {
       ...context,
-      descriptionId: hasDescription ? descriptionId : null,
+      descriptionId: has ? descriptionId : null,
     };
   }
 
   function destroy(): void {
-    focusTrap?.deactivate();
-    dismissLayer?.deactivate();
-    focusTrap = null;
-    dismissLayer = null;
+    overlay.destroy();
   }
 
   return {
-    get state() {
-      return state;
+    get state(): DialogBehaviorState {
+      return {
+        open: overlay.state.open,
+        role: dialogRole,
+      };
     },
     get context() {
       return context;
     },
     send,
-    open,
-    close,
+    open: () => overlay.open(),
+    close: () => overlay.close(),
     getTriggerProps,
     getContentProps,
     getTitleProps,

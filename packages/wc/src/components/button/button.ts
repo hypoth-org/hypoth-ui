@@ -5,9 +5,13 @@ import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { validateProp } from "../../utils/dev-warnings.js";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
+
+const VALID_VARIANTS: readonly ButtonVariant[] = ["primary", "secondary", "ghost", "destructive"];
+const VALID_SIZES: readonly ButtonSize[] = ["sm", "md", "lg"];
 
 /**
  * A button component following WAI-ARIA button pattern.
@@ -17,7 +21,7 @@ export type ButtonSize = "sm" | "md" | "lg";
  *
  * @csspart button - The button element
  *
- * @fires click - When the button is clicked
+ * @fires ds:press - When the button is activated (click, Enter, Space)
  */
 export class DsButton extends DSElement {
   static override styles = [];
@@ -64,6 +68,10 @@ export class DsButton extends DSElement {
       type: this.type,
       onActivate: () => this.handleActivate(),
     });
+
+    // Dev warnings: Validate variant and size
+    validateProp("ds-button", "variant", this.variant, VALID_VARIANTS);
+    validateProp("ds-button", "size", this.size, VALID_SIZES);
   }
 
   override updated(changedProperties: Map<string, unknown>): void {
@@ -94,9 +102,13 @@ export class DsButton extends DSElement {
       return;
     }
 
-    // Dispatch ds:click event using standard convention
-    emitEvent(this, StandardEvents.CLICK, {
-      detail: { originalEvent: event },
+    // Dispatch ds:press event per standard event naming convention
+    emitEvent(this, StandardEvents.PRESS, {
+      detail: {
+        originalEvent: event,
+        target: this,
+        isKeyboard: false,
+      },
     });
   }
 
@@ -106,6 +118,15 @@ export class DsButton extends DSElement {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       if (!this.disabled && !this.loading) {
+        // Dispatch ds:press event with keyboard flag
+        emitEvent(this, StandardEvents.PRESS, {
+          detail: {
+            originalEvent: event,
+            target: this,
+            isKeyboard: true,
+          },
+        });
+        // Also trigger native click for backward compatibility
         this.click();
       }
     }

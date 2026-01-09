@@ -10,6 +10,7 @@ import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasRequiredChild, Warnings } from "../../utils/dev-warnings.js";
 
 // Import child components to ensure they're registered
 import type { DsDialogContent } from "./dialog-content.js";
@@ -30,9 +31,7 @@ export type DialogRole = "dialog" | "alertdialog";
  * @slot trigger - Button or element that opens the dialog
  * @slot - Dialog content (ds-dialog-content)
  *
- * @fires ds:open - Fired when dialog opens
- * @fires ds:close - Fired when dialog closes
- * @fires ds:before-close - Fired before dialog closes (cancelable)
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  *
  * @example
  * ```html
@@ -145,13 +144,14 @@ export class DsDialog extends DSElement {
   /**
    * Handles close triggered by the behavior (escape/outside click).
    */
-  private handleBehaviorClose(): void {
-    // Emit before-close event (cancelable)
-    const beforeCloseEvent = emitEvent(this, StandardEvents.BEFORE_CLOSE, {
+  private handleBehaviorClose(reason: "escape" | "outside-click" = "escape"): void {
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
       cancelable: true,
     });
 
-    if (beforeCloseEvent.defaultPrevented) {
+    if (openChangeEvent.defaultPrevented) {
       // Re-open the behavior since we're preventing close
       this.dialogBehavior?.open();
       return;
@@ -162,6 +162,7 @@ export class DsDialog extends DSElement {
     // If animated, use presence for exit animation
     if (this.animated && content && !prefersReducedMotion()) {
       this.isClosing = true;
+      this._closeReason = reason;
 
       // Create presence for exit animation
       this.presence = createPresence({
@@ -174,9 +175,11 @@ export class DsDialog extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
+
+  /** Tracks the reason for closing (for animation completion) */
+  private _closeReason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic";
 
   /**
    * Opens the dialog.
@@ -194,21 +197,25 @@ export class DsDialog extends DSElement {
 
     this.open = true;
     this.dialogBehavior?.open();
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the dialog.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
 
-    // Emit before-close event (cancelable)
-    const beforeCloseEvent = emitEvent(this, StandardEvents.BEFORE_CLOSE, {
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
       cancelable: true,
     });
 
-    if (beforeCloseEvent.defaultPrevented) {
+    if (openChangeEvent.defaultPrevented) {
       return;
     }
 
@@ -220,6 +227,7 @@ export class DsDialog extends DSElement {
     // If animated, use presence for exit animation
     if (this.animated && content && !prefersReducedMotion()) {
       this.isClosing = true;
+      this._closeReason = reason;
 
       // Create presence for exit animation
       this.presence = createPresence({
@@ -232,19 +240,19 @@ export class DsDialog extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
   /**
    * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
    */
   private completeClose(): void {
     this.presence?.destroy();
     this.presence = null;
     this.open = false;
     this.isClosing = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    // Event was already emitted before animation started
   }
 
   private handleTriggerClick = (event: Event): void => {
@@ -270,7 +278,7 @@ export class DsDialog extends DSElement {
 
     // Click was on backdrop (outside content)
     if (this.closeOnBackdrop) {
-      this.close();
+      this.close("outside-click");
     }
   };
 
@@ -346,6 +354,11 @@ export class DsDialog extends DSElement {
     content.setAttribute("role", this.dialogRole);
     content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
+    // Dev warning: Check for required dialog title
+    if (!hasRequiredChild(this, "ds-dialog-title") && !this.getAttribute("aria-label")) {
+      devWarn(Warnings.dialogMissingTitle("ds-dialog"));
+    }
+
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-dialog-title");
     if (title) {
@@ -366,6 +379,10 @@ export class DsDialog extends DSElement {
       content.setAttribute("aria-describedby", description.id);
       this.dialogBehavior.setHasDescription(true);
     } else {
+      // Dev warning: Title without description
+      if (title) {
+        devWarn(Warnings.dialogMissingDescription("ds-dialog"));
+      }
       this.dialogBehavior.setHasDescription(false);
     }
   }

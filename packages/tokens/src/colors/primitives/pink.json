@@ -1,0 +1,86 @@
+{
+  "$type": "color",
+  "$description": "Pink 16-step color scale for decorative accents",
+  "pink": {
+    "1": {
+      "$value": "#fffafc",
+      "$type": "color",
+      "$description": "Page background"
+    },
+    "2": {
+      "$value": "#fff3f8",
+      "$type": "color",
+      "$description": "Raised surface"
+    },
+    "3": {
+      "$value": "#fee7f1",
+      "$type": "color",
+      "$description": "Nested surface"
+    },
+    "4": {
+      "$value": "#f8dce8",
+      "$type": "color",
+      "$description": "Deep nested"
+    },
+    "5": {
+      "$value": "#f2cbdc",
+      "$type": "color",
+      "$description": "Element background"
+    },
+    "6": {
+      "$value": "#e8b7cd",
+      "$type": "color",
+      "$description": "Element hover"
+    },
+    "7": {
+      "$value": "#dba0bb",
+      "$type": "color",
+      "$description": "Element active"
+    },
+    "8": {
+      "$value": "#ca87a6",
+      "$type": "color",
+      "$description": "Subtle border"
+    },
+    "9": {
+      "$value": "#b56b8f",
+      "$type": "color",
+      "$description": "Default border"
+    },
+    "10": {
+      "$value": "#a04f78",
+      "$type": "color",
+      "$description": "Strong border"
+    },
+    "11": {
+      "$value": "#a14174",
+      "$type": "color",
+      "$description": "Solid default"
+    },
+    "12": {
+      "$value": "#8b3262",
+      "$type": "color",
+      "$description": "Solid hover"
+    },
+    "13": {
+      "$value": "#762351",
+      "$type": "color",
+      "$description": "Solid active"
+    },
+    "14": {
+      "$value": "#611440",
+      "$type": "color",
+      "$description": "Solid emphasis"
+    },
+    "15": {
+      "$value": "#490c30",
+      "$type": "color",
+      "$description": "Muted text"
+    },
+    "16": {
+      "$value": "#260116",
+      "$type": "color",
+      "$description": "Default text"
+    }
+  }
+}

@@ -2,6 +2,12 @@
 
 import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../../primitives/responsive.js";
 
 export type BadgeVariant =
   | "neutral"
@@ -32,10 +38,18 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLElement>, "content">
   variant?: BadgeVariant;
 
   /**
-   * Size variant.
+   * Size variant - supports responsive object syntax.
    * @default "md"
+   * @example
+   * ```tsx
+   * // Single value
+   * <Badge content={5} size="md" />
+   *
+   * // Responsive
+   * <Badge content={5} size={{ base: "sm", md: "md" }} />
+   * ```
    */
-  size?: BadgeSize;
+  size?: ResponsiveProp<BadgeSize>;
 
   /**
    * Use outline style.
@@ -92,17 +106,24 @@ export const Badge = forwardRef<HTMLElement, BadgeProps>(function Badge(
   },
   ref
 ) {
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-badge", {
     ref,
     content: content?.toString() ?? "",
     max,
     variant,
-    size,
+    size: resolvedSize,
     outline: outline || undefined,
     dot: dot || undefined,
     position,
     pulse: pulse || undefined,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...props,
   });
 });

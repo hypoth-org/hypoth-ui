@@ -1,0 +1,86 @@
+{
+  "$type": "color",
+  "$description": "Gray 16-step color scale for neutral UI elements",
+  "gray": {
+    "1": {
+      "$value": "#fbfcfd",
+      "$type": "color",
+      "$description": "Page background"
+    },
+    "2": {
+      "$value": "#f5f7f9",
+      "$type": "color",
+      "$description": "Raised surface"
+    },
+    "3": {
+      "$value": "#eceff1",
+      "$type": "color",
+      "$description": "Nested surface"
+    },
+    "4": {
+      "$value": "#e2e5e8",
+      "$type": "color",
+      "$description": "Deep nested"
+    },
+    "5": {
+      "$value": "#d3d8dc",
+      "$type": "color",
+      "$description": "Element background"
+    },
+    "6": {
+      "$value": "#c2c8cd",
+      "$type": "color",
+      "$description": "Element hover"
+    },
+    "7": {
+      "$value": "#aeb5bb",
+      "$type": "color",
+      "$description": "Element active"
+    },
+    "8": {
+      "$value": "#97a0a6",
+      "$type": "color",
+      "$description": "Subtle border"
+    },
+    "9": {
+      "$value": "#7e888e",
+      "$type": "color",
+      "$description": "Default border"
+    },
+    "10": {
+      "$value": "#667078",
+      "$type": "color",
+      "$description": "Strong border"
+    },
+    "11": {
+      "$value": "#5f6b74",
+      "$type": "color",
+      "$description": "Solid default"
+    },
+    "12": {
+      "$value": "#4f5a62",
+      "$type": "color",
+      "$description": "Solid hover"
+    },
+    "13": {
+      "$value": "#3f4951",
+      "$type": "color",
+      "$description": "Solid active"
+    },
+    "14": {
+      "$value": "#303940",
+      "$type": "color",
+      "$description": "Solid emphasis"
+    },
+    "15": {
+      "$value": "#232a2f",
+      "$type": "color",
+      "$description": "Muted text"
+    },
+    "16": {
+      "$value": "#0e1216",
+      "$type": "color",
+      "$description": "Default text"
+    }
+  }
+}

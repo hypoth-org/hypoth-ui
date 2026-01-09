@@ -68,10 +68,10 @@ test.describe("Web Components Loader (DsLoader)", () => {
     expect(lightDomCheck.innerInputClass).toContain("ds-input__field");
   });
 
-  test("should emit ds:click events from button", async ({ page }) => {
+  test("should emit ds:press events from button", async ({ page }) => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
 
-    // Find the "Click me" button - click the inner button element to trigger ds:click
+    // Find the "Click me" button - click the inner button element to trigger ds:press
     const button = page.locator('ds-button:has-text("Click me") button');
     await expect(button).toBeVisible();
 

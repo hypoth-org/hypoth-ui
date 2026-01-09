@@ -4,6 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasAccessibleLabel, Warnings } from "../../utils/dev-warnings.js";
 
 export type TextareaSize = "sm" | "md" | "lg";
 
@@ -115,6 +116,17 @@ export class DsTextarea extends DSElement {
 
     // Initial sync
     this.syncAriaAttributes();
+
+    // Dev warning: Check for accessible label after DOM is ready
+    requestAnimationFrame(() => {
+      if (!hasAccessibleLabel(this)) {
+        const field = this.closest("ds-field");
+        const hasFieldLabel = field?.querySelector("ds-label") !== null;
+        if (!hasFieldLabel) {
+          devWarn(Warnings.inputMissingLabel("ds-textarea"));
+        }
+      }
+    });
   }
 
   override disconnectedCallback(): void {

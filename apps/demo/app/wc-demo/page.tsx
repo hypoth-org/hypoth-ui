@@ -23,11 +23,11 @@ export default function WcDemoPage() {
       setInputValue(customEvent.detail.value);
     };
 
-    button?.addEventListener("ds:click", handleClick);
+    button?.addEventListener("ds:press", handleClick);
     input?.addEventListener("ds:change", handleChange);
 
     return () => {
-      button?.removeEventListener("ds:click", handleClick);
+      button?.removeEventListener("ds:press", handleClick);
       input?.removeEventListener("ds:change", handleChange);
     };
   }, []);
@@ -42,7 +42,7 @@ export default function WcDemoPage() {
 
       <section style={{ marginTop: "2rem" }}>
         <h2>Button Component</h2>
-        <p>Click the button to test ds:click events:</p>
+        <p>Click the button to test ds:press events:</p>
         <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
           <ds-button ref={buttonRef} variant="primary">
             Click me

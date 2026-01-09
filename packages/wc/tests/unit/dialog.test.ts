@@ -116,12 +116,12 @@ describe("DsDialog", () => {
       expect(dialog?.hasAttribute("open")).toBe(false);
     });
 
-    it("should emit ds:open event when opened", async () => {
-      const openHandler = vi.fn();
+    it("should emit ds:open-change event when opened", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-dialog @ds:open=${openHandler}>
+          <ds-dialog @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open</button>
             <ds-dialog-content>Content</ds-dialog-content>
           </ds-dialog>
@@ -136,15 +136,17 @@ describe("DsDialog", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(openHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const lastCall = openChangeHandler.mock.calls[openChangeHandler.mock.calls.length - 1];
+      expect((lastCall[0] as CustomEvent).detail.open).toBe(true);
     });
 
-    it("should emit ds:close event when closed", async () => {
-      const closeHandler = vi.fn();
+    it("should emit ds:open-change event when closed", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-dialog open @ds:close=${closeHandler}>
+          <ds-dialog open @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open</button>
             <ds-dialog-content>Content</ds-dialog-content>
           </ds-dialog>
@@ -159,7 +161,9 @@ describe("DsDialog", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(closeHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const lastCall = openChangeHandler.mock.calls[openChangeHandler.mock.calls.length - 1];
+      expect((lastCall[0] as CustomEvent).detail.open).toBe(false);
     });
   });
 

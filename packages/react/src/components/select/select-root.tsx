@@ -4,11 +4,14 @@
 
 import { type Placement, createSelectBehavior } from "@ds/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
+import { useStableId } from "../../hooks/use-stable-id.js";
 import { SelectProvider } from "./select-context.js";
 
 export interface SelectRootProps {
   /** Select content */
   children?: ReactNode;
+  /** Custom ID for the select (SSR-safe auto-generated if not provided) */
+  id?: string;
   /** Controlled open state */
   open?: boolean;
   /** Default open state (uncontrolled) */
@@ -35,6 +38,10 @@ export interface SelectRootProps {
   searchable?: boolean;
   /** Allow clearing the selection */
   clearable?: boolean;
+  /** Whether the select is in a loading state (e.g., fetching options) */
+  loading?: boolean;
+  /** Text to display/announce during loading */
+  loadingText?: string;
 }
 
 /**
@@ -54,6 +61,7 @@ export interface SelectRootProps {
  */
 export function SelectRoot({
   children,
+  id,
   open: controlledOpen,
   defaultOpen = false,
   onOpenChange,
@@ -67,7 +75,12 @@ export function SelectRoot({
   readOnly = false,
   searchable = true,
   clearable = false,
+  loading = false,
+  loadingText = "Loading...",
 }: SelectRootProps) {
+  // Generate SSR-safe stable ID using React 18's useId under the hood
+  const stableId = useStableId({ id, prefix: "select" });
+
   // Support both controlled and uncontrolled modes for open
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isOpenControlled = controlledOpen !== undefined;
@@ -113,8 +126,10 @@ export function SelectRoot({
         clearable,
         onValueChange: (v) => setValue(v),
         onOpenChange: (o) => setOpen(o),
+        // Use SSR-safe stable ID generator
+        generateId: () => stableId,
       }),
-    []
+    [stableId]
   );
 
   const contextValue = useMemo(
@@ -126,8 +141,10 @@ export function SelectRoot({
       setValue,
       highlightedValue,
       setHighlightedValue,
+      loading,
+      loadingText,
     }),
-    [behavior, open, setOpen, value, setValue, highlightedValue]
+    [behavior, open, setOpen, value, setValue, highlightedValue, loading, loadingText]
   );
 
   return <SelectProvider value={contextValue}>{children}</SelectProvider>;

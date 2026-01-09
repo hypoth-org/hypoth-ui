@@ -9,6 +9,12 @@ import {
   useRef,
 } from "react";
 import "@ds/wc";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../../primitives/responsive.js";
 
 export type TagVariant =
   | "neutral"
@@ -28,10 +34,18 @@ export interface TagProps extends HTMLAttributes<HTMLElement> {
   variant?: TagVariant;
 
   /**
-   * Size variant.
+   * Size variant - supports responsive object syntax.
    * @default "md"
+   * @example
+   * ```tsx
+   * // Single value
+   * <Tag size="md">React</Tag>
+   *
+   * // Responsive
+   * <Tag size={{ base: "sm", md: "md" }}>React</Tag>
+   * ```
    */
-  size?: TagSize;
+  size?: ResponsiveProp<TagSize>;
 
   /**
    * Use solid (filled) style instead of subtle.
@@ -133,18 +147,25 @@ export const Tag = forwardRef<HTMLElement, TagProps>(function Tag(
     return () => element.removeEventListener("ds:remove", handleRemove);
   }, [onRemove]);
 
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement(
     "ds-tag",
     {
       ref: internalRef,
       variant,
-      size,
+      size: resolvedSize,
       solid: solid || undefined,
       removable: removable || undefined,
       clickable: clickable || undefined,
       disabled: disabled || undefined,
       value,
       class: className,
+      // Add responsive data attribute for CSS targeting
+      "data-size-responsive": responsiveSizeAttr,
       ...props,
     },
     children

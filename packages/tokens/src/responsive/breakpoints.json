@@ -1,0 +1,48 @@
+{
+  "$type": "dimension",
+  "$description": "Responsive breakpoint tokens for the design system",
+  "breakpoint": {
+    "sm": {
+      "$value": "640px",
+      "$description": "Small screens (mobile landscape)"
+    },
+    "md": {
+      "$value": "768px",
+      "$description": "Medium screens (tablets)"
+    },
+    "lg": {
+      "$value": "1024px",
+      "$description": "Large screens (laptops)"
+    },
+    "xl": {
+      "$value": "1280px",
+      "$description": "Extra large screens (desktops)"
+    },
+    "2xl": {
+      "$value": "1536px",
+      "$description": "2X large screens (wide monitors)"
+    }
+  },
+  "container": {
+    "sm": {
+      "$value": "640px",
+      "$description": "Container max-width at sm breakpoint"
+    },
+    "md": {
+      "$value": "768px",
+      "$description": "Container max-width at md breakpoint"
+    },
+    "lg": {
+      "$value": "1024px",
+      "$description": "Container max-width at lg breakpoint"
+    },
+    "xl": {
+      "$value": "1280px",
+      "$description": "Container max-width at xl breakpoint"
+    },
+    "2xl": {
+      "$value": "1536px",
+      "$description": "Container max-width at 2xl breakpoint"
+    }
+  }
+}

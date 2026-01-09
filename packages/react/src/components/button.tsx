@@ -7,6 +7,12 @@ import {
   useEffect,
   useRef,
 } from "react";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../primitives/responsive.js";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -14,8 +20,18 @@ export type ButtonSize = "sm" | "md" | "lg";
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   /** Visual style variant */
   variant?: ButtonVariant;
-  /** Button size */
-  size?: ButtonSize;
+  /**
+   * Button size - supports responsive object syntax
+   * @example
+   * ```tsx
+   * // Single value
+   * <Button size="md" />
+   *
+   * // Responsive
+   * <Button size={{ base: "sm", md: "md", lg: "lg" }} />
+   * ```
+   */
+  size?: ResponsiveProp<ButtonSize>;
   /** Loading state */
   loading?: boolean;
   /** Click handler */
@@ -71,17 +87,24 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, forwardedRef)
     return () => element.removeEventListener("click", handler);
   }, [onClick, loading]);
 
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   // Use createElement to avoid JSX intrinsic element issues
   return createElement(
     "ds-button",
     {
       ref: internalRef,
       variant,
-      size,
+      size: resolvedSize,
       disabled: disabled || undefined,
       loading: loading || undefined,
       type,
       class: className,
+      // Add responsive data attribute for CSS targeting
+      "data-size-responsive": responsiveSizeAttr,
       ...rest,
     },
     children

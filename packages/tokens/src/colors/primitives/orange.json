@@ -1,0 +1,86 @@
+{
+  "$type": "color",
+  "$description": "Orange 16-step color scale for attention states",
+  "orange": {
+    "1": {
+      "$value": "#fffbf9",
+      "$type": "color",
+      "$description": "Page background"
+    },
+    "2": {
+      "$value": "#fff4ef",
+      "$type": "color",
+      "$description": "Raised surface"
+    },
+    "3": {
+      "$value": "#ffeade",
+      "$type": "color",
+      "$description": "Nested surface"
+    },
+    "4": {
+      "$value": "#fcdecd",
+      "$type": "color",
+      "$description": "Deep nested"
+    },
+    "5": {
+      "$value": "#f7ceb7",
+      "$type": "color",
+      "$description": "Element background"
+    },
+    "6": {
+      "$value": "#efba9e",
+      "$type": "color",
+      "$description": "Element hover"
+    },
+    "7": {
+      "$value": "#e2a481",
+      "$type": "color",
+      "$description": "Element active"
+    },
+    "8": {
+      "$value": "#d38b62",
+      "$type": "color",
+      "$description": "Subtle border"
+    },
+    "9": {
+      "$value": "#bf6e3e",
+      "$type": "color",
+      "$description": "Default border"
+    },
+    "10": {
+      "$value": "#ab5210",
+      "$type": "color",
+      "$description": "Strong border"
+    },
+    "11": {
+      "$value": "#a54b00",
+      "$type": "color",
+      "$description": "Solid default"
+    },
+    "12": {
+      "$value": "#8b3f00",
+      "$type": "color",
+      "$description": "Solid hover"
+    },
+    "13": {
+      "$value": "#733200",
+      "$type": "color",
+      "$description": "Solid active"
+    },
+    "14": {
+      "$value": "#5b2700",
+      "$type": "color",
+      "$description": "Solid emphasis"
+    },
+    "15": {
+      "$value": "#451b00",
+      "$type": "color",
+      "$description": "Muted text"
+    },
+    "16": {
+      "$value": "#220900",
+      "$type": "color",
+      "$description": "Default text"
+    }
+  }
+}

@@ -35,6 +35,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency) (020-layout-primitives)
 - N/A (stateless layout components) (020-layout-primitives)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives) (021-ds-audit-remediation)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing) (022-ds-quality-overhaul)
+- N/A (stateless UI components; file-based docs/manifests) (022-ds-quality-overhaul)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -84,6 +86,15 @@ pnpm --filter @ds/wc test:a11y              # Run WC accessibility tests only
 pnpm a11y:audit -- -c ds-button --category form-controls  # Start manual audit
 pnpm a11y:report -- -v 1.0.0                # Generate conformance report
 pnpm a11y:validate                          # Validate audit records
+
+# CLI Tool Commands
+pnpm --filter @hypoth-ui/cli build          # Build CLI tool
+hypoth-ui init                              # Initialize project config (ds.config.json)
+hypoth-ui add button dialog                 # Add components to project
+hypoth-ui add button --copy                 # Copy component source instead of package install
+hypoth-ui list                              # List available components
+hypoth-ui list --installed                  # List installed components
+pnpm --filter @hypoth-ui/cli sync:templates # Sync component templates from source
 ```
 
 ## Code Style
@@ -91,10 +102,47 @@ pnpm a11y:validate                          # Validate audit records
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 022-ds-quality-overhaul: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing)
 - 021-ds-audit-remediation: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives)
 - 020-layout-primitives: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency)
-- 019-feedback-data-utilities: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead)
 
 
 <!-- MANUAL ADDITIONS START -->
+
+## Key Patterns
+
+### Event Naming Convention
+All custom events use `ds:` prefix with kebab-case names:
+- `ds:change` - Value change events
+- `ds:open-change` - Open/close state changes
+- `ds:press` - Button/link activation
+- `ds:select` - Selection events
+
+### Component Architecture
+1. **Web Components (Lit)**: Core implementation in `packages/wc/`
+2. **React Adapters**: Thin wrappers in `packages/react/` using `createElement`
+3. **Behavior Primitives**: Shared logic in `packages/primitives-dom/`
+
+### Responsive Props
+Components support responsive object syntax:
+```tsx
+<Button size={{ base: "sm", md: "md", lg: "lg" }} />
+```
+
+### Dev Warnings
+Development-only warnings for common misuse patterns:
+- DS001: Missing required child element
+- DS002: Invalid prop combination
+- DS003: Accessibility violation
+- DS004: Deprecated usage
+- DS005: Missing context
+- DS006: Invalid value
+
+### Loading States
+Components support `loading` prop with skeleton fallbacks:
+```tsx
+<Button loading>Saving...</Button>
+<DataTable loading loadingItemCount={5} />
+```
+
 <!-- MANUAL ADDITIONS END -->
