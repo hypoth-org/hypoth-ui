@@ -9,9 +9,8 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
-import { emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
-import type { DsTabs, TabsActivationMode } from "./tabs.js";
+import type { DsTabs } from "./tabs.js";
 
 export class DsTabsTrigger extends DSElement {
   /** Unique value identifying this tab */
@@ -26,25 +25,18 @@ export class DsTabsTrigger extends DSElement {
   @state()
   private selected = false;
 
-  /** ID for the associated content panel */
-  private contentId = "";
-
   override connectedCallback(): void {
     super.connectedCallback();
 
-    // Set ARIA role and attributes
-    this.setAttribute("role", "tab");
-    this.setAttribute("tabindex", "-1");
-
-    // Generate IDs for ARIA relationships
-    const id = `tab-${this.value}-${crypto.randomUUID().slice(0, 8)}`;
-    this.id = id;
-    this.contentId = `panel-${this.value}-${crypto.randomUUID().slice(0, 8)}`;
-
-    // Handle click
+    // Handle interactions
     this.addEventListener("click", this.handleClick);
     this.addEventListener("keydown", this.handleKeyDown);
     this.addEventListener("focus", this.handleFocus);
+
+    // Register with behavior after DOM is ready
+    requestAnimationFrame(() => {
+      this.registerWithBehavior();
+    });
   }
 
   override disconnectedCallback(): void {
@@ -52,70 +44,82 @@ export class DsTabsTrigger extends DSElement {
     this.removeEventListener("click", this.handleClick);
     this.removeEventListener("keydown", this.handleKeyDown);
     this.removeEventListener("focus", this.handleFocus);
-  }
 
-  /**
-   * Set the selected state (called by parent).
-   */
-  public setSelected(selected: boolean): void {
-    this.selected = selected;
-    this.updateAccessibility();
-  }
-
-  /**
-   * Get the content panel ID.
-   */
-  public getContentId(): string {
-    return this.contentId;
-  }
-
-  private handleClick = (): void => {
-    if (this.disabled) return;
-    this.activate();
-  };
-
-  private handleKeyDown = (event: KeyboardEvent): void => {
-    if (this.disabled) return;
-
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      this.activate();
-    }
-  };
-
-  private handleFocus = (): void => {
-    if (this.disabled) return;
-
+    // Unregister from behavior
     const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
-    const activationMode: TabsActivationMode = tabsRoot?.activationMode ?? "automatic";
-
-    // In automatic mode, focus activates the tab
-    if (activationMode === "automatic") {
-      this.activate();
-    }
-  };
-
-  private activate(): void {
-    emitEvent(this, "ds:tab-activate", {
-      detail: { value: this.value },
-      bubbles: true,
-    });
+    tabsRoot?.getTabsBehavior()?.unregisterTab(this.value);
   }
 
-  private updateAccessibility(): void {
-    this.setAttribute("aria-selected", String(this.selected));
-    this.setAttribute("tabindex", this.selected ? "0" : "-1");
-    this.setAttribute("aria-controls", this.contentId);
+  private registerWithBehavior(): void {
+    const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
 
-    if (this.disabled) {
-      this.setAttribute("aria-disabled", "true");
+    if (!tabsBehavior) return;
+
+    // Register this tab
+    tabsBehavior.registerTab(this.value, { disabled: this.disabled });
+
+    // Apply trigger props from behavior
+    this.applyBehaviorProps();
+  }
+
+  private applyBehaviorProps(): void {
+    const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
+
+    if (!tabsBehavior) return;
+
+    const triggerProps = tabsBehavior.getTriggerProps(this.value, { disabled: this.disabled });
+    this.id = triggerProps.id;
+    this.setAttribute("role", triggerProps.role);
+    this.setAttribute("tabindex", String(triggerProps.tabIndex));
+    this.setAttribute("aria-selected", triggerProps["aria-selected"]);
+    this.setAttribute("aria-controls", triggerProps["aria-controls"]);
+
+    if (triggerProps["aria-disabled"]) {
+      this.setAttribute("aria-disabled", triggerProps["aria-disabled"]);
     } else {
       this.removeAttribute("aria-disabled");
     }
   }
 
-  override updated(): void {
-    this.updateAccessibility();
+  /**
+   * Update from behavior (called by parent).
+   */
+  public updateFromBehavior(selected: boolean): void {
+    this.selected = selected;
+    this.applyBehaviorProps();
+  }
+
+  private handleClick = (): void => {
+    const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
+    tabsBehavior?.handleTriggerClick(this.value);
+  };
+
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
+    tabsBehavior?.handleTriggerKeyDown(event, this.value);
+  };
+
+  private handleFocus = (): void => {
+    const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
+    tabsBehavior?.handleTriggerFocus(this.value);
+  };
+
+  override updated(changedProperties: Map<string, unknown>): void {
+    // Re-register if disabled state changes
+    if (changedProperties.has("disabled")) {
+      const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
+      const tabsBehavior = tabsRoot?.getTabsBehavior();
+      if (tabsBehavior) {
+        tabsBehavior.unregisterTab(this.value);
+        tabsBehavior.registerTab(this.value, { disabled: this.disabled });
+        this.applyBehaviorProps();
+      }
+    }
   }
 
   override render() {

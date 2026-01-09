@@ -100,8 +100,8 @@
 - [x] T023a [US3] Remove duplicated focus-trap/dismiss-layer code from DsAlertDialog after migration
 - [x] T024 [US3] Remove duplicated focus-trap/dismiss-layer code from DsSheet after migration
 - [x] T025 [US3] Remove duplicated focus-trap/dismiss-layer code from DsDrawer after migration
-- [ ] T026 [P] [US3] Refactor DsDropdownMenu to use createMenuBehavior in packages/wc/src/components/dropdown-menu/dropdown-menu.ts
-- [ ] T027 [P] [US3] Refactor DsContextMenu to use createMenuBehavior in packages/wc/src/components/context-menu/context-menu.ts
+- [x] T026 [P] [US3] Refactor DsDropdownMenu to use createMenuBehavior in packages/wc/src/components/dropdown-menu/dropdown-menu.ts
+- [x] T027 [P] [US3] Refactor DsContextMenu to use createMenuBehavior in packages/wc/src/components/context-menu/context-menu.ts
 - [x] T028 [US3] Verify keyboard navigation matches React implementations for all migrated overlays
 - [x] T029 [US3] Run existing overlay component tests to verify no regressions
 
@@ -122,12 +122,12 @@
 - [x] T032 [US4] Implement automatic and manual activation modes in createTabsBehavior
 - [x] T033 [US4] Add getTabListProps, getTriggerProps, getPanelProps methods to createTabsBehavior
 - [x] T034 [US4] Export createTabsBehavior and types from packages/primitives-dom/src/index.ts
-- [ ] T035 [US4] Refactor DsTabs to use createTabsBehavior in packages/wc/src/components/tabs/tabs.ts
-- [ ] T036 [US4] Refactor DsTabsList to apply props from behavior in packages/wc/src/components/tabs/tabs-list.ts
-- [ ] T037 [US4] Refactor DsTabsTrigger to apply props from behavior in packages/wc/src/components/tabs/tabs-trigger.ts
-- [ ] T038 [US4] Refactor DsTabsContent to apply props from behavior in packages/wc/src/components/tabs/tabs-content.ts
-- [ ] T039 [US4] Remove duplicated keyboard navigation code from DsTabs after migration
-- [ ] T040 [US4] Verify WAI-ARIA Tabs pattern compliance (arrow keys, Home/End, focus management)
+- [x] T035 [US4] Refactor DsTabs to use createTabsBehavior in packages/wc/src/components/tabs/tabs.ts
+- [x] T036 [US4] Refactor DsTabsList to apply props from behavior in packages/wc/src/components/tabs/tabs-list.ts
+- [x] T037 [US4] Refactor DsTabsTrigger to apply props from behavior in packages/wc/src/components/tabs/tabs-trigger.ts
+- [x] T038 [US4] Refactor DsTabsContent to apply props from behavior in packages/wc/src/components/tabs/tabs-content.ts
+- [x] T039 [US4] Remove duplicated keyboard navigation code from DsTabs after migration
+- [x] T040 [US4] Verify WAI-ARIA Tabs pattern compliance (arrow keys, Home/End, focus management)
 
 **Checkpoint**: DsTabs uses createTabsBehavior; keyboard navigation centralized in primitives-dom
 
@@ -141,16 +141,16 @@
 
 ### Implementation for User Story 5
 
-- [ ] T041 [P] [US5] Create form-controls barrel file in packages/wc/src/form-controls.ts
-- [ ] T042 [P] [US5] Create overlays barrel file in packages/wc/src/overlays.ts
-- [ ] T043 [P] [US5] Create data-display barrel file in packages/wc/src/data-display.ts
-- [ ] T044 [P] [US5] Create navigation barrel file in packages/wc/src/navigation.ts
-- [ ] T045 [US5] Add exports field to packages/wc/package.json with subpath entries for categories
-- [ ] T046 [US5] Add individual component subpath exports (./button, ./dialog, etc.) to packages/wc/package.json
-- [ ] T047 [US5] Update packages/wc/tsup.config.ts to build multiple entry points
-- [ ] T048 [US5] Verify TypeScript types resolve correctly for all subpath imports
-- [ ] T049 [US5] Verify main entry (.) remains backward compatible
-- [ ] T050 [US5] Build package and verify at least 10 subpath entries exist
+- [x] T041 [P] [US5] Create form-controls barrel file in packages/wc/src/form-controls.ts
+- [x] T042 [P] [US5] Create overlays barrel file in packages/wc/src/overlays.ts
+- [x] T043 [P] [US5] Create data-display barrel file in packages/wc/src/data-display.ts
+- [x] T044 [P] [US5] Create navigation barrel file in packages/wc/src/navigation.ts
+- [x] T045 [US5] Add exports field to packages/wc/package.json with subpath entries for categories
+- [x] T046 [US5] Add individual component subpath exports (./button, ./dialog, etc.) to packages/wc/package.json
+- [x] T047 [US5] Update packages/wc/tsup.config.ts to build multiple entry points
+- [x] T048 [US5] Verify TypeScript types resolve correctly for all subpath imports
+- [x] T049 [US5] Verify main entry (.) remains backward compatible
+- [x] T050 [US5] Build package and verify at least 10 subpath entries exist
 
 **Checkpoint**: @ds/wc supports granular imports like @ds/wc/button with proper TypeScript support
 
@@ -164,12 +164,12 @@
 
 ### Implementation for User Story 6
 
-- [ ] T051 [P] [US6] Create shared test utilities package structure in packages/test-utils/
-- [ ] T052 [P] [US6] Create keyboard simulation helpers in packages/test-utils/src/keyboard.ts
-- [ ] T053 [P] [US6] Create ARIA assertion helpers in packages/test-utils/src/aria.ts
-- [ ] T054 [US6] Create component wrapper abstraction for WC and React in packages/test-utils/src/component.ts
-- [ ] T055 [US6] Export all utilities from packages/test-utils/src/index.ts
-- [ ] T056 [US6] Add packages/test-utils to pnpm workspace in pnpm-workspace.yaml
+- [x] T051 [P] [US6] Create shared test utilities package structure in packages/test-utils/
+- [x] T052 [P] [US6] Create keyboard simulation helpers in packages/test-utils/src/keyboard.ts
+- [x] T053 [P] [US6] Create ARIA assertion helpers in packages/test-utils/src/aria.ts
+- [x] T054 [US6] Create component wrapper abstraction for WC and React in packages/test-utils/src/component.ts
+- [x] T055 [US6] Export all utilities from packages/test-utils/src/index.ts
+- [x] T056 [US6] Add packages/test-utils to pnpm workspace in pnpm-workspace.yaml
 - [ ] T057 [US6] Create example shared test for button keyboard activation
 - [ ] T058 [US6] Verify shared test passes against both ds-button (WC) and Button (React)
 

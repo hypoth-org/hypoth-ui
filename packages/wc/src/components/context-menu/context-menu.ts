@@ -25,14 +25,10 @@
  */
 
 import {
-  type DismissableLayer,
+  type MenuBehavior,
   type Presence,
-  type RovingFocus,
-  type TypeAhead,
-  createDismissableLayer,
+  createMenuBehavior,
   createPresence,
-  createRovingFocus,
-  createTypeAhead,
   prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html } from "lit";
@@ -65,10 +61,8 @@ export class DsContextMenu extends DSElement {
   @state()
   private pointerY = 0;
 
-  private dismissLayer: DismissableLayer | null = null;
+  private menuBehavior: MenuBehavior | null = null;
   private presence: Presence | null = null;
-  private rovingFocus: RovingFocus | null = null;
-  private typeAhead: TypeAhead | null = null;
   private longPressTimer: ReturnType<typeof setTimeout> | null = null;
 
   override connectedCallback(): void {
@@ -84,6 +78,9 @@ export class DsContextMenu extends DSElement {
 
     // Listen for item selection
     this.addEventListener("ds:select", this.handleItemSelect);
+
+    // Initialize menu behavior
+    this.initMenuBehavior();
   }
 
   override disconnectedCallback(): void {
@@ -97,6 +94,44 @@ export class DsContextMenu extends DSElement {
   }
 
   /**
+   * Initializes the menu behavior primitive.
+   */
+  private initMenuBehavior(): void {
+    this.menuBehavior = createMenuBehavior({
+      defaultOpen: this.open,
+      loop: true,
+      onOpenChange: (open) => {
+        // Sync state when behavior changes (e.g., from escape or outside click)
+        if (!open && this.open) {
+          this.handleBehaviorClose();
+        }
+      },
+      onSelect: (value) => {
+        emitEvent(this, StandardEvents.SELECT, { detail: { value } });
+      },
+    });
+  }
+
+  /**
+   * Handles close triggered by the behavior (escape/outside click).
+   */
+  private handleBehaviorClose(): void {
+    const content = this.querySelector("ds-context-menu-content") as DsContextMenuContent | null;
+
+    if (this.animated && content && !prefersReducedMotion()) {
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      this.open = false;
+      emitEvent(this, StandardEvents.CLOSE);
+    }
+  }
+
+  /**
    * Opens the menu at the specified position.
    */
   public show(x: number, y: number): void {
@@ -107,6 +142,7 @@ export class DsContextMenu extends DSElement {
     this.pointerX = x;
     this.pointerY = y;
     this.open = true;
+    this.menuBehavior?.open("first");
     emitEvent(this, StandardEvents.OPEN);
   }
 
@@ -118,10 +154,10 @@ export class DsContextMenu extends DSElement {
 
     const content = this.querySelector("ds-context-menu-content") as DsContextMenuContent | null;
 
-    if (this.animated && content && !prefersReducedMotion()) {
-      this.dismissLayer?.deactivate();
-      this.dismissLayer = null;
+    // Close the behavior
+    this.menuBehavior?.close();
 
+    if (this.animated && content && !prefersReducedMotion()) {
       this.presence = createPresence({
         onExitComplete: () => {
           this.completeClose();
@@ -129,14 +165,14 @@ export class DsContextMenu extends DSElement {
       });
       this.presence.hide(content);
     } else {
-      this.cleanup();
       this.open = false;
       emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
   private completeClose(): void {
-    this.cleanup();
+    this.presence?.destroy();
+    this.presence = null;
     this.open = false;
     emitEvent(this, StandardEvents.CLOSE);
   }
@@ -185,10 +221,6 @@ export class DsContextMenu extends DSElement {
     this.close();
   };
 
-  private handleDismiss = (): void => {
-    this.close();
-  };
-
   private positionContent(): void {
     const content = this.querySelector("ds-context-menu-content") as HTMLElement | null;
     if (!content) return;
@@ -219,82 +251,22 @@ export class DsContextMenu extends DSElement {
     content.style.top = `${y}px`;
   }
 
-  private setupDismissLayer(): void {
-    const content = this.querySelector("ds-context-menu-content") as HTMLElement | null;
-    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-
-    if (!content) return;
-
-    this.dismissLayer = createDismissableLayer({
-      container: content,
-      excludeElements: trigger ? [trigger] : [],
-      onDismiss: this.handleDismiss,
-      closeOnEscape: true,
-      closeOnOutsideClick: true,
-    });
-    this.dismissLayer.activate();
-  }
-
-  private setupRovingFocus(): void {
-    const content = this.querySelector("ds-context-menu-content") as HTMLElement | null;
-
-    if (!content) return;
-
-    this.rovingFocus = createRovingFocus({
-      container: content,
-      selector: "ds-context-menu-item:not([disabled])",
-      direction: "vertical",
-      loop: true,
-      skipDisabled: true,
-    });
-  }
-
-  private setupTypeAhead(): void {
-    const content = this.querySelector("ds-context-menu-content") as HTMLElement | null;
-
-    if (!content) return;
-
-    this.typeAhead = createTypeAhead({
-      items: () =>
-        Array.from(content.querySelectorAll<HTMLElement>("ds-context-menu-item:not([disabled])")),
-      getText: (item) => item.textContent?.trim() || "",
-      onMatch: (_item, index) => {
-        this.rovingFocus?.setFocusedIndex(index);
-      },
-    });
-
-    content.addEventListener("keydown", this.handleTypeAheadKeyDown);
-  }
-
-  private handleTypeAheadKeyDown = (event: KeyboardEvent): void => {
-    this.typeAhead?.handleKeyDown(event);
-  };
-
-  private focusFirstItem(): void {
+  private registerMenuItems(): void {
     const content = this.querySelector("ds-context-menu-content");
-    if (!content) return;
+    if (!content || !this.menuBehavior) return;
 
     const items = content.querySelectorAll<HTMLElement>("ds-context-menu-item:not([disabled])");
-    if (items.length === 0) return;
 
-    this.rovingFocus?.setFocusedIndex(0);
+    items.forEach((item) => {
+      this.menuBehavior?.registerItem(item);
+    });
   }
 
   private cleanup(): void {
-    const content = this.querySelector("ds-context-menu-content") as HTMLElement | null;
-
-    if (content) {
-      content.removeEventListener("keydown", this.handleTypeAheadKeyDown);
-    }
-
-    this.dismissLayer?.deactivate();
-    this.dismissLayer = null;
+    this.menuBehavior?.destroy();
+    this.menuBehavior = null;
     this.presence?.destroy();
     this.presence = null;
-    this.rovingFocus?.destroy();
-    this.rovingFocus = null;
-    this.typeAhead?.reset();
-    this.typeAhead = null;
 
     if (this.longPressTimer) {
       clearTimeout(this.longPressTimer);
@@ -317,13 +289,20 @@ export class DsContextMenu extends DSElement {
 
         await this.updateComplete;
 
+        // Position content at pointer location
         this.positionContent();
-        this.setupDismissLayer();
-        this.setupRovingFocus();
-        this.setupTypeAhead();
-        this.focusFirstItem();
+
+        // Register menu items with behavior
+        this.registerMenuItems();
+
+        // Set content element (activates dismiss layer, roving focus, type-ahead)
+        // Note: Context menu handles positioning manually, not via anchor
+        this.menuBehavior?.setContentElement(content);
       } else {
         content?.setAttribute("hidden", "");
+
+        // Clear content element
+        this.menuBehavior?.setContentElement(null);
       }
     }
   }

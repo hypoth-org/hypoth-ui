@@ -1,58 +1,45 @@
 /**
  * Tabs List component - container for tab triggers.
  *
- * Implements keyboard navigation with arrow keys.
+ * Implements keyboard navigation with arrow keys via behavior primitive.
  *
  * @element ds-tabs-list
  *
  * @slot - Tab triggers (ds-tabs-trigger)
  */
 
-import { type RovingFocus, createRovingFocus } from "@ds/primitives-dom";
 import { html } from "lit";
-import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
-import type { DsTabs, TabsOrientation } from "./tabs.js";
+import type { DsTabs } from "./tabs.js";
 
 export class DsTabsList extends DSElement {
-  /** Loop focus at ends */
-  @property({ type: Boolean })
-  loop = true;
-
-  private rovingFocus: RovingFocus | null = null;
-
   override connectedCallback(): void {
     super.connectedCallback();
 
-    // Set ARIA role
-    this.setAttribute("role", "tablist");
-
-    // Initialize roving focus after DOM is ready
+    // Initialize after DOM is ready
     requestAnimationFrame(() => {
-      this.setupRovingFocus();
+      this.setupBehavior();
     });
   }
 
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.rovingFocus?.destroy();
-    this.rovingFocus = null;
-  }
-
-  private setupRovingFocus(): void {
+  /**
+   * Setup behavior connection (called by parent when options change).
+   */
+  public setupBehavior(): void {
     const tabsRoot = this.closest("ds-tabs") as DsTabs | null;
-    const orientation: TabsOrientation = tabsRoot?.orientation ?? "horizontal";
+    const tabsBehavior = tabsRoot?.getTabsBehavior();
 
-    // Update aria-orientation
-    this.setAttribute("aria-orientation", orientation);
+    if (!tabsBehavior) return;
 
-    this.rovingFocus = createRovingFocus({
-      container: this,
-      selector: "ds-tabs-trigger:not([disabled])",
-      direction: orientation,
-      loop: this.loop,
-    });
+    // Apply tablist props from behavior
+    const tablistProps = tabsBehavior.getTabListProps();
+    this.setAttribute("id", tablistProps.id);
+    this.setAttribute("role", tablistProps.role);
+    this.setAttribute("aria-orientation", tablistProps["aria-orientation"]);
+
+    // Set tablist element to activate roving focus
+    tabsBehavior.setTablistElement(this);
   }
 
   override render() {

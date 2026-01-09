@@ -28,17 +28,11 @@
  */
 
 import {
-  type AnchorPosition,
-  type DismissableLayer,
+  type MenuBehavior,
   type Placement,
   type Presence,
-  type RovingFocus,
-  type TypeAhead,
-  createAnchorPosition,
-  createDismissableLayer,
+  createMenuBehavior,
   createPresence,
-  createRovingFocus,
-  createTypeAhead,
   prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html } from "lit";
@@ -82,14 +76,8 @@ export class DsDropdownMenu extends DSElement {
   @property({ type: Boolean })
   modal = true;
 
-  private anchorPosition: AnchorPosition | null = null;
-  private dismissLayer: DismissableLayer | null = null;
+  private menuBehavior: MenuBehavior | null = null;
   private presence: Presence | null = null;
-  private rovingFocus: RovingFocus | null = null;
-  private typeAhead: TypeAhead | null = null;
-  private triggerElement: HTMLElement | null = null;
-  private resizeObserver: ResizeObserver | null = null;
-  private scrollHandler: (() => void) | null = null;
   private focusFirstOnOpen: "first" | "last" | null = null;
 
   override connectedCallback(): void {
@@ -101,6 +89,9 @@ export class DsDropdownMenu extends DSElement {
 
     // Listen for item selection
     this.addEventListener("ds:select", this.handleItemSelect);
+
+    // Initialize menu behavior
+    this.initMenuBehavior();
 
     // Setup after first render
     this.updateComplete.then(() => {
@@ -117,12 +108,60 @@ export class DsDropdownMenu extends DSElement {
   }
 
   /**
+   * Initializes the menu behavior primitive.
+   */
+  private initMenuBehavior(): void {
+    this.menuBehavior = createMenuBehavior({
+      defaultOpen: this.open,
+      placement: this.placement,
+      offset: this.offset,
+      flip: this.flip,
+      loop: true,
+      onOpenChange: (open) => {
+        // Sync state when behavior changes (e.g., from escape or outside click)
+        if (!open && this.open) {
+          this.handleBehaviorClose();
+        }
+      },
+      onSelect: (value) => {
+        emitEvent(this, StandardEvents.SELECT, { detail: { value } });
+      },
+    });
+
+    // Set trigger element if one exists
+    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
+    if (trigger) {
+      this.menuBehavior.setTriggerElement(trigger);
+    }
+  }
+
+  /**
+   * Handles close triggered by the behavior (escape/outside click).
+   */
+  private handleBehaviorClose(): void {
+    const content = this.querySelector("ds-dropdown-menu-content") as DsDropdownMenuContent | null;
+
+    if (this.animated && content && !prefersReducedMotion()) {
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      this.open = false;
+      emitEvent(this, StandardEvents.CLOSE);
+    }
+  }
+
+  /**
    * Opens the menu.
    */
   public show(): void {
     if (this.open) return;
 
     this.open = true;
+    this.menuBehavior?.open(this.focusFirstOnOpen ?? "first");
     emitEvent(this, StandardEvents.OPEN);
   }
 
@@ -134,10 +173,10 @@ export class DsDropdownMenu extends DSElement {
 
     const content = this.querySelector("ds-dropdown-menu-content") as DsDropdownMenuContent | null;
 
-    if (this.animated && content && !prefersReducedMotion()) {
-      this.dismissLayer?.deactivate();
-      this.dismissLayer = null;
+    // Close the behavior
+    this.menuBehavior?.close();
 
+    if (this.animated && content && !prefersReducedMotion()) {
       this.presence = createPresence({
         onExitComplete: () => {
           this.completeClose();
@@ -145,18 +184,16 @@ export class DsDropdownMenu extends DSElement {
       });
       this.presence.hide(content);
     } else {
-      this.cleanup();
       this.open = false;
       emitEvent(this, StandardEvents.CLOSE);
-      this.triggerElement?.focus();
     }
   }
 
   private completeClose(): void {
-    this.cleanup();
+    this.presence?.destroy();
+    this.presence = null;
     this.open = false;
     emitEvent(this, StandardEvents.CLOSE);
-    this.triggerElement?.focus();
   }
 
   public toggle(): void {
@@ -173,7 +210,7 @@ export class DsDropdownMenu extends DSElement {
 
     if (trigger && this.contains(trigger)) {
       event.preventDefault();
-      this.triggerElement = trigger as HTMLElement;
+      this.menuBehavior?.setTriggerElement(trigger as HTMLElement);
       this.focusFirstOnOpen = "first";
       this.toggle();
     }
@@ -185,7 +222,7 @@ export class DsDropdownMenu extends DSElement {
 
     if (!trigger || !this.contains(trigger)) return;
 
-    this.triggerElement = trigger as HTMLElement;
+    this.menuBehavior?.setTriggerElement(trigger as HTMLElement);
 
     switch (event.key) {
       case "Enter":
@@ -211,161 +248,47 @@ export class DsDropdownMenu extends DSElement {
     this.close();
   };
 
-  private handleDismiss = (): void => {
-    this.close();
-  };
-
   private setupTriggerAccessibility(): void {
     const trigger = this.querySelector('[slot="trigger"]');
     const content = this.querySelector("ds-dropdown-menu-content");
 
-    if (trigger && content) {
-      this.triggerElement = trigger as HTMLElement;
-      trigger.setAttribute("aria-haspopup", "menu");
-      trigger.setAttribute("aria-expanded", String(this.open));
-      if (content.id) {
-        trigger.setAttribute("aria-controls", content.id);
-      }
+    if (trigger && content && this.menuBehavior) {
+      this.menuBehavior.setTriggerElement(trigger as HTMLElement);
+
+      // Apply trigger props from behavior
+      const triggerProps = this.menuBehavior.getTriggerProps();
+      trigger.setAttribute("aria-haspopup", triggerProps["aria-haspopup"]);
+      trigger.setAttribute("aria-expanded", triggerProps["aria-expanded"]);
+      trigger.setAttribute("aria-controls", triggerProps["aria-controls"]);
     }
   }
 
   private updateTriggerAria(): void {
     const trigger = this.querySelector('[slot="trigger"]');
-    if (trigger) {
-      trigger.setAttribute("aria-expanded", String(this.open));
+    if (trigger && this.menuBehavior) {
+      const triggerProps = this.menuBehavior.getTriggerProps();
+      trigger.setAttribute("aria-expanded", triggerProps["aria-expanded"]);
     }
   }
 
-  private setupPositioning(): void {
-    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
-
-    if (!trigger || !content) return;
-
-    this.anchorPosition = createAnchorPosition({
-      anchor: trigger,
-      floating: content,
-      placement: this.placement,
-      offset: this.offset,
-      flip: this.flip,
-      onPositionChange: (pos) => {
-        content.setAttribute("data-placement", pos.placement);
-      },
-    });
-
-    this.resizeObserver = new ResizeObserver(() => {
-      this.anchorPosition?.update();
-    });
-    this.resizeObserver.observe(trigger);
-    this.resizeObserver.observe(content);
-
-    this.scrollHandler = () => {
-      this.anchorPosition?.update();
-    };
-    window.addEventListener("scroll", this.scrollHandler, { passive: true });
-    window.addEventListener("resize", this.scrollHandler, { passive: true });
-  }
-
-  private setupDismissLayer(): void {
-    const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
-    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-
-    if (!content) return;
-
-    this.dismissLayer = createDismissableLayer({
-      container: content,
-      excludeElements: trigger ? [trigger] : [],
-      onDismiss: this.handleDismiss,
-      closeOnEscape: true,
-      closeOnOutsideClick: true,
-    });
-    this.dismissLayer.activate();
-  }
-
-  private setupRovingFocus(): void {
-    const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
-
-    if (!content) return;
-
-    this.rovingFocus = createRovingFocus({
-      container: content,
-      selector:
-        "ds-dropdown-menu-item:not([disabled]), ds-dropdown-menu-checkbox-item:not([disabled]), ds-dropdown-menu-radio-item:not([disabled])",
-      direction: "vertical",
-      loop: true,
-      skipDisabled: true,
-    });
-  }
-
-  private setupTypeAhead(): void {
-    const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
-
-    if (!content) return;
-
-    this.typeAhead = createTypeAhead({
-      items: () =>
-        Array.from(
-          content.querySelectorAll<HTMLElement>(
-            "ds-dropdown-menu-item:not([disabled]), ds-dropdown-menu-checkbox-item:not([disabled]), ds-dropdown-menu-radio-item:not([disabled])"
-          )
-        ),
-      getText: (item) => item.textContent?.trim() || "",
-      onMatch: (_item, index) => {
-        this.rovingFocus?.setFocusedIndex(index);
-      },
-    });
-
-    content.addEventListener("keydown", this.handleTypeAheadKeyDown);
-  }
-
-  private handleTypeAheadKeyDown = (event: KeyboardEvent): void => {
-    this.typeAhead?.handleKeyDown(event);
-  };
-
-  private focusInitialItem(): void {
+  private registerMenuItems(): void {
     const content = this.querySelector("ds-dropdown-menu-content");
-    if (!content) return;
+    if (!content || !this.menuBehavior) return;
 
     const items = content.querySelectorAll<HTMLElement>(
       "ds-dropdown-menu-item:not([disabled]), ds-dropdown-menu-checkbox-item:not([disabled]), ds-dropdown-menu-radio-item:not([disabled])"
     );
-    if (items.length === 0) return;
 
-    if (this.focusFirstOnOpen === "last") {
-      const lastIndex = items.length - 1;
-      this.rovingFocus?.setFocusedIndex(lastIndex);
-    } else {
-      this.rovingFocus?.setFocusedIndex(0);
-    }
-
-    this.focusFirstOnOpen = null;
+    items.forEach((item) => {
+      this.menuBehavior?.registerItem(item);
+    });
   }
 
   private cleanup(): void {
-    const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
-
-    if (content) {
-      content.removeEventListener("keydown", this.handleTypeAheadKeyDown);
-    }
-
-    this.anchorPosition?.destroy();
-    this.anchorPosition = null;
-    this.dismissLayer?.deactivate();
-    this.dismissLayer = null;
+    this.menuBehavior?.destroy();
+    this.menuBehavior = null;
     this.presence?.destroy();
     this.presence = null;
-    this.rovingFocus?.destroy();
-    this.rovingFocus = null;
-    this.typeAhead?.reset();
-    this.typeAhead = null;
-    this.resizeObserver?.disconnect();
-    this.resizeObserver = null;
-
-    if (this.scrollHandler) {
-      window.removeEventListener("scroll", this.scrollHandler);
-      window.removeEventListener("resize", this.scrollHandler);
-      this.scrollHandler = null;
-    }
   }
 
   override async updated(changedProperties: Map<string, unknown>): Promise<void> {
@@ -387,13 +310,33 @@ export class DsDropdownMenu extends DSElement {
 
         await this.updateComplete;
 
-        this.setupPositioning();
-        this.setupDismissLayer();
-        this.setupRovingFocus();
-        this.setupTypeAhead();
-        this.focusInitialItem();
+        // Register menu items with behavior
+        this.registerMenuItems();
+
+        // Set content element (activates positioning, dismiss layer, roving focus, type-ahead)
+        this.menuBehavior?.setContentElement(content);
       } else {
         content?.setAttribute("hidden", "");
+
+        // Clear content element
+        this.menuBehavior?.setContentElement(null);
+      }
+    }
+
+    // Re-create behavior if placement/offset/flip change
+    if (
+      changedProperties.has("placement") ||
+      changedProperties.has("offset") ||
+      changedProperties.has("flip")
+    ) {
+      const wasOpen = this.menuBehavior?.state.open;
+      this.menuBehavior?.destroy();
+      this.initMenuBehavior();
+      if (wasOpen) {
+        this.menuBehavior?.open();
+        const content = this.querySelector("ds-dropdown-menu-content") as HTMLElement | null;
+        this.registerMenuItems();
+        this.menuBehavior?.setContentElement(content);
       }
     }
   }
