@@ -17,12 +17,24 @@ export class DsNavigationMenuTrigger extends DSElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  private observer: MutationObserver | null = null;
+
   override connectedCallback(): void {
     super.connectedCallback();
 
     this.setAttribute("role", "menuitem");
     this.setAttribute("tabindex", "0");
     this.setAttribute("aria-haspopup", "menu");
+    this.updateAriaExpanded();
+
+    // Observe parent item's data-state changes to update aria-expanded
+    const item = this.closest("ds-navigation-menu-item");
+    if (item) {
+      this.observer = new MutationObserver(() => {
+        this.updateAriaExpanded();
+      });
+      this.observer.observe(item, { attributes: true, attributeFilter: ["data-state"] });
+    }
 
     this.addEventListener("click", this.handleClick);
     this.addEventListener("keydown", this.handleKeyDown);
@@ -32,6 +44,18 @@ export class DsNavigationMenuTrigger extends DSElement {
     super.disconnectedCallback();
     this.removeEventListener("click", this.handleClick);
     this.removeEventListener("keydown", this.handleKeyDown);
+    this.observer?.disconnect();
+    this.observer = null;
+  }
+
+  /**
+   * Update aria-expanded based on parent item's state.
+   * Per APG, menuitem with submenu should have aria-expanded.
+   */
+  private updateAriaExpanded(): void {
+    const item = this.closest("ds-navigation-menu-item");
+    const isOpen = item?.getAttribute("data-state") === "open";
+    this.setAttribute("aria-expanded", String(isOpen));
   }
 
   private getItemValue(): string {

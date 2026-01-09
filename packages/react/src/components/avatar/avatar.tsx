@@ -2,6 +2,12 @@
 
 import { type HTMLAttributes, createElement, forwardRef } from "react";
 import "@ds/wc";
+import {
+  type ResponsiveProp,
+  generateResponsiveDataAttr,
+  isResponsiveObject,
+  resolveResponsiveValue,
+} from "../../primitives/responsive.js";
 
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type AvatarShape = "circle" | "square";
@@ -24,10 +30,18 @@ export interface AvatarProps extends Omit<HTMLAttributes<HTMLElement>, "children
   name?: string;
 
   /**
-   * Size variant.
+   * Size variant - supports responsive object syntax.
    * @default "md"
+   * @example
+   * ```tsx
+   * // Single value
+   * <Avatar name="John Doe" size="md" />
+   *
+   * // Responsive
+   * <Avatar name="John Doe" size={{ base: "sm", md: "lg" }} />
+   * ```
    */
-  size?: AvatarSize;
+  size?: ResponsiveProp<AvatarSize>;
 
   /**
    * Shape variant.
@@ -76,16 +90,23 @@ export const Avatar = forwardRef<HTMLElement, AvatarProps>(function Avatar(
   },
   ref
 ) {
+  // Resolve responsive size - use base value for the WC attribute
+  const resolvedSize = resolveResponsiveValue(size, "md");
+  const isResponsive = isResponsiveObject(size);
+  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size) : undefined;
+
   return createElement("ds-avatar", {
     ref,
     src,
     alt,
     name,
-    size,
+    size: resolvedSize,
     shape,
     status,
     "show-status": showStatus || undefined,
     class: className,
+    // Add responsive data attribute for CSS targeting
+    "data-size-responsive": responsiveSizeAttr,
     ...props,
   });
 });

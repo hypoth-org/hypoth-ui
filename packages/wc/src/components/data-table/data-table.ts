@@ -142,6 +142,9 @@ export class DsDataTable extends DSElement {
   @state()
   private selectedRows: Set<string> = new Set();
 
+  @state()
+  private sortAnnouncement = "";
+
   private get pageSizeOptions(): number[] {
     return this.pageSizes.split(",").map((s) => Number(s.trim()));
   }
@@ -172,12 +175,34 @@ export class DsDataTable extends DSElement {
     this.sortColumn = newDirection === "none" ? "" : column;
     this.sortDirection = newDirection;
 
+    // Announce sort change to screen readers via live region
+    this.announceSortChange(column, newDirection);
+
     emitEvent(this, "sort", {
       detail: {
         column: this.sortColumn,
         direction: this.sortDirection,
       },
     });
+  }
+
+  /**
+   * Announce sort state changes to screen readers.
+   * Uses a live region to provide immediate feedback.
+   */
+  private announceSortChange(column: string, direction: DataTableSortDirection): void {
+    if (direction === "asc") {
+      this.sortAnnouncement = `Sorted by ${column}, ascending`;
+    } else if (direction === "desc") {
+      this.sortAnnouncement = `Sorted by ${column}, descending`;
+    } else {
+      this.sortAnnouncement = `Sort cleared`;
+    }
+
+    // Clear announcement after a brief delay to allow re-announcement on next sort
+    setTimeout(() => {
+      this.sortAnnouncement = "";
+    }, 1000);
   }
 
   handlePageChange(newPage: number): void {
@@ -290,8 +315,19 @@ export class DsDataTable extends DSElement {
         class=${classMap(classes)}
         role="region"
         aria-label="Data table"
+        aria-busy=${this.loading ? "true" : nothing}
         ?data-loading=${this.loading}
       >
+        <!-- Live region for sort announcements (APG compliance) -->
+        <div
+          class="ds-data-table__live-region"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
+        >
+          ${this.sortAnnouncement}
+        </div>
         ${
           this.selectedRows.size > 0
             ? html`

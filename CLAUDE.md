@@ -35,6 +35,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency) (020-layout-primitives)
 - N/A (stateless layout components) (020-layout-primitives)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives) (021-ds-audit-remediation)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing) (022-ds-quality-overhaul)
+- N/A (stateless UI components; file-based docs/manifests) (022-ds-quality-overhaul)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -91,9 +93,9 @@ pnpm a11y:validate                          # Validate audit records
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 022-ds-quality-overhaul: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing)
 - 021-ds-audit-remediation: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives)
 - 020-layout-primitives: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency)
-- 019-feedback-data-utilities: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead)
 
 
 <!-- MANUAL ADDITIONS START -->

@@ -175,6 +175,15 @@ export type {
   AsChildProps,
 } from "./types/polymorphic.js";
 
+// Loading state types (server-safe, no runtime code)
+export type {
+  LoadingProps,
+  TableLoadingProps,
+  TreeLoadingProps,
+  LoadingState,
+  OnLoadingChange,
+} from "./types/loading.js";
+
 // Re-export components from client entry for backwards compatibility
 // These will include the 'use client' directive when bundled
 export { Button } from "./components/button/index.js";
@@ -561,6 +570,19 @@ export {
   mergeProps,
 } from "./utils/merge-props.js";
 
+// SSR-safe ID generation hooks
+export {
+  useStableId,
+  useStableIds,
+  useScopedIdGenerator,
+  useConditionalId,
+} from "./hooks/index.js";
+export type {
+  UseStableIdOptions,
+  UseStableIdsOptions,
+  StableIds,
+} from "./hooks/index.js";
+
 // Layout primitives
 export {
   Flow,
@@ -596,3 +618,36 @@ export type {
   StackProps,
   InlineProps,
 } from "./components/layout/index.js";
+
+// Theme system
+export {
+  ThemeProvider,
+  DensityProvider,
+  useTheme,
+  useThemeState,
+  useColorMode,
+  useDensity,
+  useDensityContext,
+  getThemeScriptContent,
+  getThemeScriptTag,
+  getThemeScriptProps,
+  parseThemeCookie,
+  getSystemColorMode,
+  syncThemeStorage,
+  DEFAULT_STORAGE_KEYS,
+  DEFAULT_THEME,
+  THEME_ATTRIBUTES,
+} from "./theme/index.js";
+export type {
+  ColorMode,
+  Density,
+  ResolvedColorMode,
+  ThemeConfig,
+  ThemeContextValue,
+  DensityContextValue,
+  ThemeProviderProps,
+  DensityProviderProps,
+  ThemeScriptOptions,
+  ThemeScriptProps,
+  StorageKeys,
+} from "./theme/index.js";

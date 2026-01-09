@@ -1,0 +1,48 @@
+{
+  "$type": "dimension",
+  "$description": "Default density tokens - balanced spacing for general use",
+  "$mode": "default",
+  "spacing": {
+    "1": { "$value": "0.25rem", "$type": "dimension", "$description": "4px" },
+    "2": { "$value": "0.5rem", "$type": "dimension", "$description": "8px" },
+    "3": { "$value": "0.75rem", "$type": "dimension", "$description": "12px" },
+    "4": { "$value": "1rem", "$type": "dimension", "$description": "16px" },
+    "5": { "$value": "1.25rem", "$type": "dimension", "$description": "20px" },
+    "6": { "$value": "1.5rem", "$type": "dimension", "$description": "24px" },
+    "8": { "$value": "2rem", "$type": "dimension", "$description": "32px" },
+    "10": { "$value": "2.5rem", "$type": "dimension", "$description": "40px" },
+    "12": { "$value": "3rem", "$type": "dimension", "$description": "48px" }
+  },
+  "component": {
+    "button": {
+      "padding-x": { "$value": "1rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.5rem", "$type": "dimension" },
+      "height-sm": { "$value": "2rem", "$type": "dimension", "$description": "32px" },
+      "height-md": { "$value": "2.25rem", "$type": "dimension", "$description": "36px" },
+      "height-lg": { "$value": "2.75rem", "$type": "dimension", "$description": "44px" }
+    },
+    "input": {
+      "padding-x": { "$value": "0.75rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.5rem", "$type": "dimension" },
+      "height-sm": { "$value": "2rem", "$type": "dimension", "$description": "32px" },
+      "height-md": { "$value": "2.25rem", "$type": "dimension", "$description": "36px" },
+      "height-lg": { "$value": "2.75rem", "$type": "dimension", "$description": "44px" }
+    },
+    "card": {
+      "padding": { "$value": "1.5rem", "$type": "dimension" }
+    },
+    "list-item": {
+      "padding-x": { "$value": "0.75rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.5rem", "$type": "dimension" }
+    },
+    "table-cell": {
+      "padding-x": { "$value": "1rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.75rem", "$type": "dimension" }
+    },
+    "icon": {
+      "size-sm": { "$value": "1rem", "$type": "dimension", "$description": "16px" },
+      "size-md": { "$value": "1.25rem", "$type": "dimension", "$description": "20px" },
+      "size-lg": { "$value": "1.5rem", "$type": "dimension", "$description": "24px" }
+    }
+  }
+}

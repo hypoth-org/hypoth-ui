@@ -57,10 +57,19 @@ export class DsStepper extends DSElement {
   @property({ type: Boolean })
   linear = false;
 
+  /**
+   * Accessible label for the stepper.
+   * Per APG, the stepper should have a clear label describing its purpose.
+   */
+  @property({ type: String, attribute: "aria-label" })
+  override ariaLabel = "Progress steps";
+
   override connectedCallback(): void {
     super.connectedCallback();
+    // Use role="list" for ordered sequence of steps per APG
+    // Combined with aria-current="step" on active item for process indication
     this.setAttribute("role", "list");
-    this.setAttribute("aria-label", "Progress");
+    this.setAttribute("aria-label", this.ariaLabel);
 
     this.addEventListener("ds:step-select", this.handleStepSelect as EventListener);
   }

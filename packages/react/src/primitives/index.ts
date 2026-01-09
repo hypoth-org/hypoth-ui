@@ -10,3 +10,23 @@ export { usePresence, type UsePresenceOptions, type UsePresenceReturn } from "./
 export { Portal, type PortalProps } from "./portal.js";
 export { FocusScope, type FocusScopeProps, type FocusScopeRef } from "./focus-scope.js";
 export { ClientOnly, type ClientOnlyProps, useIsClient } from "./client-only.js";
+
+// Responsive utilities
+export {
+  type Breakpoint,
+  type ResponsiveProp,
+  type WithResponsive,
+  BREAKPOINTS,
+  BREAKPOINT_QUERIES,
+  BREAKPOINT_ORDER,
+  isResponsiveObject,
+  getValueAtBreakpoint,
+  getBaseValue,
+  resolveResponsiveValue,
+  generateResponsiveCssVars,
+  generateResponsiveDataAttr,
+  useBreakpoint,
+  useBreakpointValue,
+  useResponsiveValue,
+  responsiveCss,
+} from "./responsive.js";

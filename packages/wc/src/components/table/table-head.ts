@@ -81,6 +81,19 @@ export class DsTableHead extends DSElement {
     return "none";
   }
 
+  /**
+   * Get the aria-sort attribute value.
+   * Per APG, sortable columns should always have aria-sort:
+   * - "ascending" for A-Z or low-high sort
+   * - "descending" for Z-A or high-low sort
+   * - "none" when sortable but not currently sorted
+   */
+  private getAriaSort(): "ascending" | "descending" | "none" {
+    if (this.sortDirection === "asc") return "ascending";
+    if (this.sortDirection === "desc") return "descending";
+    return "none";
+  }
+
   override render(): TemplateResult {
     const style = this.width ? `width: ${this.width}` : "";
 
@@ -92,13 +105,7 @@ export class DsTableHead extends DSElement {
         data-align=${this.align !== "left" ? this.align : nothing}
         ?data-sortable=${this.sortable}
         data-sort-direction=${this.sortable ? this.sortDirection : nothing}
-        aria-sort=${
-          this.sortable && this.sortDirection !== "none"
-            ? this.sortDirection === "asc"
-              ? "ascending"
-              : "descending"
-            : nothing
-        }
+        aria-sort=${this.sortable ? this.getAriaSort() : nothing}
         tabindex=${this.sortable ? 0 : nothing}
         style=${style || nothing}
         @click=${this.handleClick}

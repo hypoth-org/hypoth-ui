@@ -17,7 +17,7 @@ export type ButtonSize = "sm" | "md" | "lg";
  *
  * @csspart button - The button element
  *
- * @fires click - When the button is clicked
+ * @fires ds:press - When the button is activated (click, Enter, Space)
  */
 export class DsButton extends DSElement {
   static override styles = [];
@@ -94,9 +94,13 @@ export class DsButton extends DSElement {
       return;
     }
 
-    // Dispatch ds:click event using standard convention
-    emitEvent(this, StandardEvents.CLICK, {
-      detail: { originalEvent: event },
+    // Dispatch ds:press event per standard event naming convention
+    emitEvent(this, StandardEvents.PRESS, {
+      detail: {
+        originalEvent: event,
+        target: this,
+        isKeyboard: false,
+      },
     });
   }
 
@@ -106,7 +110,14 @@ export class DsButton extends DSElement {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       if (!this.disabled && !this.loading) {
-        this.click();
+        // Dispatch ds:press event with keyboard flag
+        emitEvent(this, StandardEvents.PRESS, {
+          detail: {
+            originalEvent: event,
+            target: this,
+            isKeyboard: true,
+          },
+        });
       }
     }
   }

@@ -20,6 +20,10 @@ export interface SelectContextValue {
   highlightedValue: string | null;
   /** Set highlighted value */
   setHighlightedValue: (value: string | null) => void;
+  /** Whether the select is in a loading state */
+  loading: boolean;
+  /** Text to display during loading */
+  loadingText: string;
 }
 
 export const [SelectProvider, useSelectContext] =
