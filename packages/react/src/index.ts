@@ -157,6 +157,18 @@ export type { ClientOnlyProps } from "./primitives/client-only.js";
 // Utility types
 export type { WrapperConfig } from "./utils/create-component.js";
 
+// Error boundary types and component
+export type {
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
+  WithErrorBoundaryOptions,
+} from "./utils/error-boundary.js";
+export {
+  ErrorBoundary,
+  withErrorBoundary,
+  DSErrorFallback,
+} from "./utils/error-boundary.js";
+
 // Event types (server-safe, no runtime code)
 export type {
   DsNavigateEventDetail,

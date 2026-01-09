@@ -5,9 +5,13 @@ import { classMap } from "lit/directives/class-map.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { validateProp } from "../../utils/dev-warnings.js";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
+
+const VALID_VARIANTS: readonly ButtonVariant[] = ["primary", "secondary", "ghost", "destructive"];
+const VALID_SIZES: readonly ButtonSize[] = ["sm", "md", "lg"];
 
 /**
  * A button component following WAI-ARIA button pattern.
@@ -64,6 +68,10 @@ export class DsButton extends DSElement {
       type: this.type,
       onActivate: () => this.handleActivate(),
     });
+
+    // Dev warnings: Validate variant and size
+    validateProp("ds-button", "variant", this.variant, VALID_VARIANTS);
+    validateProp("ds-button", "size", this.size, VALID_SIZES);
   }
 
   override updated(changedProperties: Map<string, unknown>): void {

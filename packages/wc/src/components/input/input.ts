@@ -4,6 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasAccessibleLabel, Warnings } from "../../utils/dev-warnings.js";
 
 export type InputType = "text" | "email" | "password" | "number" | "tel" | "url" | "search";
 export type InputSize = "sm" | "md" | "lg";
@@ -107,6 +108,18 @@ export class DsInput extends DSElement {
 
     // Initial sync
     this.syncAriaAttributes();
+
+    // Dev warning: Check for accessible label after DOM is ready
+    requestAnimationFrame(() => {
+      if (!hasAccessibleLabel(this)) {
+        // Also check if inside a ds-field with a label
+        const field = this.closest("ds-field");
+        const hasFieldLabel = field?.querySelector("ds-label") !== null;
+        if (!hasFieldLabel) {
+          devWarn(Warnings.inputMissingLabel("ds-input"));
+        }
+      }
+    });
   }
 
   override disconnectedCallback(): void {

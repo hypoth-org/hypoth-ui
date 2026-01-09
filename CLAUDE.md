@@ -86,6 +86,15 @@ pnpm --filter @ds/wc test:a11y              # Run WC accessibility tests only
 pnpm a11y:audit -- -c ds-button --category form-controls  # Start manual audit
 pnpm a11y:report -- -v 1.0.0                # Generate conformance report
 pnpm a11y:validate                          # Validate audit records
+
+# CLI Tool Commands
+pnpm --filter @hypoth-ui/cli build          # Build CLI tool
+hypoth-ui init                              # Initialize project config (ds.config.json)
+hypoth-ui add button dialog                 # Add components to project
+hypoth-ui add button --copy                 # Copy component source instead of package install
+hypoth-ui list                              # List available components
+hypoth-ui list --installed                  # List installed components
+pnpm --filter @hypoth-ui/cli sync:templates # Sync component templates from source
 ```
 
 ## Code Style
@@ -99,4 +108,41 @@ TypeScript 5.x (strict mode): Follow standard conventions
 
 
 <!-- MANUAL ADDITIONS START -->
+
+## Key Patterns
+
+### Event Naming Convention
+All custom events use `ds:` prefix with kebab-case names:
+- `ds:change` - Value change events
+- `ds:open-change` - Open/close state changes
+- `ds:press` - Button/link activation
+- `ds:select` - Selection events
+
+### Component Architecture
+1. **Web Components (Lit)**: Core implementation in `packages/wc/`
+2. **React Adapters**: Thin wrappers in `packages/react/` using `createElement`
+3. **Behavior Primitives**: Shared logic in `packages/primitives-dom/`
+
+### Responsive Props
+Components support responsive object syntax:
+```tsx
+<Button size={{ base: "sm", md: "md", lg: "lg" }} />
+```
+
+### Dev Warnings
+Development-only warnings for common misuse patterns:
+- DS001: Missing required child element
+- DS002: Invalid prop combination
+- DS003: Accessibility violation
+- DS004: Deprecated usage
+- DS005: Missing context
+- DS006: Invalid value
+
+### Loading States
+Components support `loading` prop with skeleton fallbacks:
+```tsx
+<Button loading>Saving...</Button>
+<DataTable loading loadingItemCount={5} />
+```
+
 <!-- MANUAL ADDITIONS END -->

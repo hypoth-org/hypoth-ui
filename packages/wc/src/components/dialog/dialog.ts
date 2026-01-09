@@ -10,6 +10,7 @@ import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasRequiredChild, Warnings } from "../../utils/dev-warnings.js";
 
 // Import child components to ensure they're registered
 import type { DsDialogContent } from "./dialog-content.js";
@@ -353,6 +354,11 @@ export class DsDialog extends DSElement {
     content.setAttribute("role", this.dialogRole);
     content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
+    // Dev warning: Check for required dialog title
+    if (!hasRequiredChild(this, "ds-dialog-title") && !this.getAttribute("aria-label")) {
+      devWarn(Warnings.dialogMissingTitle("ds-dialog"));
+    }
+
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-dialog-title");
     if (title) {
@@ -373,6 +379,10 @@ export class DsDialog extends DSElement {
       content.setAttribute("aria-describedby", description.id);
       this.dialogBehavior.setHasDescription(true);
     } else {
+      // Dev warning: Title without description
+      if (title) {
+        devWarn(Warnings.dialogMissingDescription("ds-dialog"));
+      }
       this.dialogBehavior.setHasDescription(false);
     }
   }

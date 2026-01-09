@@ -1,15 +1,17 @@
 /**
  * Menu behavior primitive.
  * Provides state management, ARIA computation, roving focus, type-ahead, and keyboard handling for menus.
+ *
+ * Uses createOverlayBehavior internally for open/close state and dismissal handling.
  */
 
 import { type RovingFocus, createRovingFocus } from "../keyboard/roving-focus.js";
 import { type TypeAhead, createTypeAhead } from "../keyboard/type-ahead.js";
+import type { DismissReason } from "../layer/dismissable-layer.js";
 import {
-  type DismissReason,
-  type DismissableLayer,
-  createDismissableLayer,
-} from "../layer/dismissable-layer.js";
+  type OverlayBehavior,
+  createOverlayBehavior,
+} from "../overlay/create-overlay-behavior.js";
 import {
   type AnchorPosition,
   type Placement,
@@ -172,11 +174,28 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
   const triggerId = `${baseId}-trigger`;
   const contentId = `${baseId}-content`;
 
-  // Internal state
-  let state: MenuBehaviorState = {
-    open: defaultOpen,
-    activeIndex: -1,
-  };
+  // Create overlay behavior for open/close state and dismissal
+  const overlay: OverlayBehavior = createOverlayBehavior({
+    defaultOpen,
+    modal: false, // Menus are not modal
+    closeOnEscape: true,
+    closeOnOutsideClick: true,
+    returnFocusOnClose: true,
+    onOpenChange: (open) => {
+      // Sync active index
+      activeIndex = open ? 0 : -1;
+      onOpenChange?.(open);
+
+      if (!open) {
+        // Cleanup menu-specific utilities
+        cleanupMenuUtilities();
+      }
+    },
+    generateId: () => baseId,
+  });
+
+  // Menu-specific state
+  let activeIndex = -1;
 
   let context: MenuBehaviorContext = {
     triggerId,
@@ -185,48 +204,37 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
     items: [],
   };
 
-  // Utilities
-  let dismissLayer: DismissableLayer | null = null;
+  // Menu-specific utilities (not handled by overlay)
   let rovingFocus: RovingFocus | null = null;
   let typeAhead: TypeAhead | null = null;
   let anchorPosition: AnchorPosition | null = null;
 
-  function setOpen(open: boolean, _focusFirst?: "first" | "last"): void {
-    if (state.open === open) return;
-
-    state = { ...state, open, activeIndex: open ? 0 : -1 };
-    onOpenChange?.(open);
-
-    if (!open) {
-      // Cleanup utilities
-      dismissLayer?.deactivate();
-      rovingFocus?.destroy();
-      typeAhead?.reset();
-      anchorPosition?.destroy();
-      dismissLayer = null;
-      rovingFocus = null;
-      typeAhead = null;
-      anchorPosition = null;
-    }
+  function cleanupMenuUtilities(): void {
+    rovingFocus?.destroy();
+    typeAhead?.reset();
+    anchorPosition?.destroy();
+    rovingFocus = null;
+    typeAhead = null;
+    anchorPosition = null;
   }
 
   function send(event: MenuEvent): void {
     switch (event.type) {
       case "OPEN":
-        setOpen(true, event.focusFirst);
+        overlay.open();
         break;
       case "CLOSE":
-        setOpen(false);
+        overlay.close();
         break;
       case "SELECT":
         onSelect?.(event.value);
-        setOpen(false);
+        overlay.close();
         break;
       case "DISMISS":
-        setOpen(false);
+        overlay.close();
         break;
       case "FOCUS_ITEM":
-        state = { ...state, activeIndex: event.index };
+        activeIndex = event.index;
         break;
     }
   }
@@ -240,18 +248,14 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
   }
 
   function toggle(): void {
-    if (state.open) {
-      close();
-    } else {
-      open();
-    }
+    overlay.toggle();
   }
 
   function getTriggerProps(): MenuTriggerProps {
     return {
       id: triggerId,
       "aria-haspopup": "menu",
-      "aria-expanded": state.open ? "true" : "false",
+      "aria-expanded": overlay.isOpen() ? "true" : "false",
       "aria-controls": contentId,
     };
   }
@@ -268,7 +272,7 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
 
   function getItemProps(index: number, opts: { disabled?: boolean } = {}): MenuItemProps {
     const { disabled = false } = opts;
-    const isHighlighted = state.activeIndex === index;
+    const isHighlighted = activeIndex === index;
 
     return {
       role: "menuitem",
@@ -298,11 +302,9 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
       case "Escape":
         event.preventDefault();
         close();
-        // Return focus to trigger
         context.triggerElement?.focus();
         break;
       case "Tab":
-        // Close menu on Tab
         event.preventDefault();
         close();
         context.triggerElement?.focus();
@@ -310,7 +312,7 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
       case "Enter":
       case " ": {
         event.preventDefault();
-        const activeItem = context.items[state.activeIndex];
+        const activeItem = context.items[activeIndex];
         if (activeItem && !activeItem.getAttribute("aria-disabled")) {
           const value = activeItem.getAttribute("data-value") ?? "";
           send({ type: "SELECT", value });
@@ -319,7 +321,6 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
         break;
       }
       default:
-        // Let roving focus and type-ahead handle arrow keys and character input
         break;
     }
   }
@@ -339,33 +340,17 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
 
   function setTriggerElement(element: HTMLElement | null): void {
     context = { ...context, triggerElement: element };
+    overlay.setTriggerElement(element);
   }
 
   function setContentElement(element: HTMLElement | null): void {
-    // Cleanup existing utilities
-    dismissLayer?.deactivate();
-    rovingFocus?.destroy();
-    typeAhead?.reset();
-    anchorPosition?.destroy();
-    dismissLayer = null;
-    rovingFocus = null;
-    typeAhead = null;
-    anchorPosition = null;
+    // Cleanup existing menu utilities
+    cleanupMenuUtilities();
 
-    if (element && state.open) {
-      // Create and activate dismissable layer
-      dismissLayer = createDismissableLayer({
-        container: element,
-        excludeElements: context.triggerElement ? [context.triggerElement] : [],
-        closeOnEscape: true,
-        closeOnOutsideClick: true,
-        onDismiss: (reason) => {
-          send({ type: "DISMISS", reason });
-          context.triggerElement?.focus();
-        },
-      });
-      dismissLayer.activate();
+    // Let overlay handle dismiss layer
+    overlay.setContentElement(element);
 
+    if (element && overlay.isOpen()) {
       // Create roving focus
       rovingFocus = createRovingFocus({
         container: element,
@@ -407,7 +392,7 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
         firstFocusable.focus();
         const index = context.items.indexOf(firstFocusable);
         if (index !== -1) {
-          state = { ...state, activeIndex: index };
+          activeIndex = index;
         }
       }
     }
@@ -437,19 +422,16 @@ export function createMenuBehavior(options: MenuBehaviorOptions = {}): MenuBehav
   }
 
   function destroy(): void {
-    dismissLayer?.deactivate();
-    rovingFocus?.destroy();
-    typeAhead?.reset();
-    anchorPosition?.destroy();
-    dismissLayer = null;
-    rovingFocus = null;
-    typeAhead = null;
-    anchorPosition = null;
+    cleanupMenuUtilities();
+    overlay.destroy();
   }
 
   return {
-    get state() {
-      return state;
+    get state(): MenuBehaviorState {
+      return {
+        open: overlay.isOpen(),
+        activeIndex,
+      };
     },
     get context() {
       return context;

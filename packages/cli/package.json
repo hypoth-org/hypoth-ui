@@ -6,7 +6,7 @@
   "bin": {
     "hypoth-ui": "./dist/index.js"
   },
-  "files": ["dist", "registry"],
+  "files": ["dist", "registry", "templates"],
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -18,7 +18,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:unit": "vitest run tests/unit",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "sync:templates": "tsx scripts/sync-templates.ts"
   },
   "dependencies": {
     "commander": "^12.1.0",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@types/node": "^20.10.0",
     "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.0",
     "vitest": "^1.0.0"
   },

@@ -173,13 +173,13 @@ function generateColorCSS(primitives: ParsedToken[], semantic: ParsedToken[], da
   lines.push("  :root {");
   lines.push("    /* Primitive Color Scales */");
   for (const token of primitives) {
-    const cssVar = `--ds-color-${token.path.join("-")}`;
+    const cssVar = `--ds-color-${token.path.replace(/\./g, "-")}`;
     lines.push(`    ${cssVar}: ${token.value};`);
   }
   lines.push("");
   lines.push("    /* Semantic Color Aliases */");
   for (const token of semantic) {
-    const cssVar = `--ds-color-${token.path.join("-")}`;
+    const cssVar = `--ds-color-${token.path.replace(/\./g, "-")}`;
     // Handle references - convert {blue.1} to var(--ds-color-blue-1)
     let value = String(token.value);
     if (value.startsWith("{") && value.endsWith("}")) {
@@ -195,7 +195,7 @@ function generateColorCSS(primitives: ParsedToken[], semantic: ParsedToken[], da
   lines.push("  /* Dark Mode Color Inversions */");
   lines.push('  [data-color-mode="dark"], [data-theme="dark"] {');
   for (const token of dark) {
-    const cssVar = `--ds-color-${token.path.join("-")}`;
+    const cssVar = `--ds-color-${token.path.replace(/\./g, "-")}`;
     let value = String(token.value);
     if (value.startsWith("{") && value.endsWith("}")) {
       const ref = value.slice(1, -1).replace(/\./g, "-");
@@ -210,7 +210,7 @@ function generateColorCSS(primitives: ParsedToken[], semantic: ParsedToken[], da
   lines.push("  @media (prefers-color-scheme: dark) {");
   lines.push('    :root:not([data-color-mode="light"]):not([data-theme="light"]) {');
   for (const token of dark) {
-    const cssVar = `--ds-color-${token.path.join("-")}`;
+    const cssVar = `--ds-color-${token.path.replace(/\./g, "-")}`;
     let value = String(token.value);
     if (value.startsWith("{") && value.endsWith("}")) {
       const ref = value.slice(1, -1).replace(/\./g, "-");
@@ -321,7 +321,7 @@ function generateDensityCSS(densityModes: Map<string, ParsedToken[]>): string {
     }
 
     for (const token of tokens) {
-      const cssVar = `--ds-${token.path.join("-")}`;
+      const cssVar = `--ds-${token.path.replace(/\./g, "-")}`;
       lines.push(`    ${cssVar}: ${token.value};`);
     }
     lines.push("  }");

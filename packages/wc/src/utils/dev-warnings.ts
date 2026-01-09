@@ -4,6 +4,23 @@
  * Provides console warnings in development mode for common component misuse.
  * These warnings are stripped in production builds via dead code elimination.
  *
+ * ## Warning Codes Reference
+ *
+ * | Code | Name | Description | Example Fix |
+ * |------|------|-------------|-------------|
+ * | DS001 | MISSING_REQUIRED_CHILD | A required child element is missing | Add `<ds-dialog-title>` to dialogs |
+ * | DS002 | INVALID_PROP_COMBINATION | Two incompatible props used together | Don't use `disabled` with `loading` |
+ * | DS003 | ACCESSIBILITY_VIOLATION | ARIA or accessibility issue detected | Add `aria-label` or wrap in `<ds-field>` |
+ * | DS004 | DEPRECATED_USAGE | Using deprecated API | Use the suggested replacement |
+ * | DS005 | MISSING_CONTEXT | Component needs parent context | Wrap input in `<ds-field>` |
+ * | DS006 | INVALID_VALUE | Invalid value for a prop | Use valid variant: "primary" | "secondary" |
+ *
+ * ## Production Builds
+ *
+ * All warnings are automatically stripped in production builds via:
+ * - Dead code elimination on `process.env.NODE_ENV !== 'production'` check
+ * - Tree-shaking removes the warning utility if unused
+ *
  * @packageDocumentation
  */
 
@@ -13,6 +30,13 @@
 
 /**
  * Warning code identifiers
+ *
+ * - DS001: Required child element is missing (e.g., DialogTitle in Dialog)
+ * - DS002: Invalid combination of props (e.g., disabled + loading together)
+ * - DS003: Accessibility violation (e.g., missing label on form input)
+ * - DS004: Deprecated usage (e.g., old prop name)
+ * - DS005: Missing required context (e.g., Input not in Field)
+ * - DS006: Invalid value for a prop (e.g., invalid variant name)
  */
 export const WarningCodes = {
   MISSING_REQUIRED_CHILD: "DS001",
