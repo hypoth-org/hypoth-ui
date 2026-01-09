@@ -122,9 +122,9 @@ describe("ds-button accessibility", () => {
 
     it("should respond to Enter key", async () => {
       await button.updateComplete;
-      let clicked = false;
-      button.addEventListener("click", () => {
-        clicked = true;
+      let pressed = false;
+      button.addEventListener("ds:press", () => {
+        pressed = true;
       });
 
       const innerButton = button.querySelector("button");
@@ -134,14 +134,14 @@ describe("ds-button accessibility", () => {
       });
       innerButton?.dispatchEvent(event);
 
-      expect(clicked).toBe(true);
+      expect(pressed).toBe(true);
     });
 
     it("should respond to Space key", async () => {
       await button.updateComplete;
-      let clicked = false;
-      button.addEventListener("click", () => {
-        clicked = true;
+      let pressed = false;
+      button.addEventListener("ds:press", () => {
+        pressed = true;
       });
 
       const innerButton = button.querySelector("button");
@@ -151,7 +151,7 @@ describe("ds-button accessibility", () => {
       });
       innerButton?.dispatchEvent(event);
 
-      expect(clicked).toBe(true);
+      expect(pressed).toBe(true);
     });
   });
 

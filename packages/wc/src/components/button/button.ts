@@ -126,6 +126,8 @@ export class DsButton extends DSElement {
             isKeyboard: true,
           },
         });
+        // Also trigger native click for backward compatibility
+        this.click();
       }
     }
   }

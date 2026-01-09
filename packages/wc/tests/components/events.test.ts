@@ -18,14 +18,14 @@ describe("Component Events", () => {
     container.remove();
   });
 
-  describe("DsButton ds:click event", () => {
-    it("should emit ds:click event when clicked", async () => {
+  describe("DsButton ds:press event", () => {
+    it("should emit ds:press event when clicked", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
       const handler = vi.fn();
-      button.addEventListener("ds:click", handler);
+      button.addEventListener("ds:press", handler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -39,7 +39,7 @@ describe("Component Events", () => {
       await button.updateComplete;
 
       const handler = vi.fn();
-      button.addEventListener("ds:click", handler);
+      button.addEventListener("ds:press", handler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -48,14 +48,14 @@ describe("Component Events", () => {
       expect(event.detail).toHaveProperty("originalEvent");
     });
 
-    it("should not emit ds:click when disabled", async () => {
+    it("should not emit ds:press when disabled", async () => {
       const button = document.createElement("ds-button") as DsButton;
       button.disabled = true;
       container.appendChild(button);
       await button.updateComplete;
 
       const handler = vi.fn();
-      button.addEventListener("ds:click", handler);
+      button.addEventListener("ds:press", handler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -69,7 +69,7 @@ describe("Component Events", () => {
       await button.updateComplete;
 
       const handler = vi.fn();
-      container.addEventListener("ds:click", handler);
+      container.addEventListener("ds:press", handler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();
@@ -127,13 +127,13 @@ describe("Component Events", () => {
   });
 
   describe("Event composition (composed: true)", () => {
-    it("ds:click should have composed: true", async () => {
+    it("ds:press should have composed: true", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
       const handler = vi.fn();
-      button.addEventListener("ds:click", handler);
+      button.addEventListener("ds:press", handler);
 
       const innerButton = button.querySelector("button");
       innerButton?.click();

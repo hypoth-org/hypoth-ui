@@ -159,11 +159,11 @@ describe("ds-button", () => {
   });
 
   describe("keyboard interaction", () => {
-    it("should trigger click on Enter key", async () => {
+    it("should trigger ds:press on Enter key", async () => {
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", {
@@ -172,14 +172,14 @@ describe("ds-button", () => {
       });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).toHaveBeenCalled();
+      expect(pressHandler).toHaveBeenCalled();
     });
 
-    it("should trigger click on Space key", async () => {
+    it("should trigger ds:press on Space key", async () => {
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", {
@@ -188,15 +188,15 @@ describe("ds-button", () => {
       });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).toHaveBeenCalled();
+      expect(pressHandler).toHaveBeenCalled();
     });
 
-    it("should not trigger click on Enter when disabled", async () => {
+    it("should not trigger ds:press on Enter when disabled", async () => {
       button.disabled = true;
       await button.updateComplete;
 
-      const clickHandler = vi.fn();
-      button.addEventListener("click", clickHandler);
+      const pressHandler = vi.fn();
+      button.addEventListener("ds:press", pressHandler);
 
       const innerButton = button.querySelector("button");
       const event = new KeyboardEvent("keydown", {
@@ -205,7 +205,7 @@ describe("ds-button", () => {
       });
       innerButton?.dispatchEvent(event);
 
-      expect(clickHandler).not.toHaveBeenCalled();
+      expect(pressHandler).not.toHaveBeenCalled();
     });
   });
 
