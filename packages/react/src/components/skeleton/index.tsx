@@ -99,7 +99,7 @@ export const Skeleton = forwardRef<HTMLElement, SkeletonProps>(function Skeleton
   // Resolve responsive size - use base value for the WC attribute
   const resolvedSize = size ? resolveResponsiveValue(size, "md") : undefined;
   const isResponsive = size ? isResponsiveObject(size) : false;
-  const responsiveSizeAttr = isResponsive ? generateResponsiveDataAttr(size!) : undefined;
+  const responsiveSizeAttr = isResponsive && size ? generateResponsiveDataAttr(size) : undefined;
 
   return createElement("ds-skeleton", {
     ref,

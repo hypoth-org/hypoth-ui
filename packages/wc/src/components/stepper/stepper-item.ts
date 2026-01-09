@@ -30,7 +30,7 @@ export class DsStepperItem extends DSElement {
     this.setAttribute("data-state", "pending");
   }
 
-  override updated(changedProperties: Map<string, unknown>): void {
+  override updated(_changedProperties: Map<string, unknown>): void {
     // Update aria-current when state changes
     // Per APG, aria-current="step" indicates the current step in a process
     const state = this.getAttribute("data-state");

@@ -196,7 +196,7 @@ export class DsDataTable extends DSElement {
     } else if (direction === "desc") {
       this.sortAnnouncement = `Sorted by ${column}, descending`;
     } else {
-      this.sortAnnouncement = `Sort cleared`;
+      this.sortAnnouncement = "Sort cleared";
     }
 
     // Clear announcement after a brief delay to allow re-announcement on next sort

@@ -312,7 +312,7 @@ export const responsiveCss = {
    * Generate media query CSS for responsive prop
    */
   generateMediaQueries<T extends string>(
-    propName: string,
+    _propName: string,
     value: ResponsiveProp<T>,
     cssGenerator: (val: T) => string
   ): string {

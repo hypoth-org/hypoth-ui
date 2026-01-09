@@ -105,13 +105,6 @@ export const BASE_COLORS: BaseColorConfig[] = [
 ];
 
 /**
- * Linear interpolation between two values
- */
-function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * t;
-}
-
-/**
  * Clamp a value between min and max
  */
 function clamp(value: number, min: number, max: number): number {
@@ -161,7 +154,7 @@ function linearToSrgb(value: number): number {
   if (value <= 0.0031308) {
     return value * 12.92;
   }
-  return 1.055 * Math.pow(value, 1 / 2.4) - 0.055;
+  return 1.055 * value ** (1 / 2.4) - 0.055;
 }
 
 /**
@@ -296,9 +289,9 @@ export function generateAllColorScales(): Map<string, object> {
  * Run with: npx tsx scripts/generate-scales.ts
  */
 async function main(): Promise<void> {
-  const fs = await import("fs");
-  const path = await import("path");
-  const url = await import("url");
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const url = await import("node:url");
 
   const __filename = url.fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -310,7 +303,7 @@ async function main(): Promise<void> {
 
   for (const [name, tokens] of scales.entries()) {
     const filePath = path.join(outputDir, `${name}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(tokens, null, 2) + "\n");
+    fs.writeFileSync(filePath, `${JSON.stringify(tokens, null, 2)}\n`);
     console.log(`Generated: ${name}.json`);
   }
 

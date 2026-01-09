@@ -91,7 +91,7 @@ export function hexToRgb(hex: string): RgbColor {
           .join("")
       : cleanHex;
 
-  const num = parseInt(fullHex, 16);
+  const num = Number.parseInt(fullHex, 16);
 
   return {
     r: (num >> 16) & 255,
@@ -106,7 +106,7 @@ export function hexToRgb(hex: string): RgbColor {
  */
 function toLinearComponent(component: number): number {
   const srgb = component / 255;
-  return srgb <= 0.03928 ? srgb / 12.92 : Math.pow((srgb + 0.055) / 1.055, 2.4);
+  return srgb <= 0.03928 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4;
 }
 
 /**

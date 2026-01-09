@@ -231,7 +231,7 @@ export function parseThemeCookie(
 export function setCookie(
   name: string,
   value: string,
-  days: number = 365
+  days = 365
 ): void {
   if (!isBrowser()) return;
   const expires = new Date();
