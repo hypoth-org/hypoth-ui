@@ -1,7 +1,10 @@
 import { type RovingFocus, createRovingFocus } from "@ds/primitives-dom";
 import { html } from "lit";
+import type { PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
+import { FormAssociatedMixin } from "../../base/form-associated.js";
+import type { ValidationFlags } from "../../base/form-associated.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 import type { DsRadio } from "./radio.js";
@@ -12,46 +15,48 @@ import "./radio.js";
 export type RadioOrientation = "horizontal" | "vertical";
 
 /**
- * Container for radio button group with roving tabindex.
+ * Container for radio button group with roving tabindex and native form participation.
+ *
+ * Uses ElementInternals for form association - the selected value is submitted with the form
+ * and the group participates in constraint validation.
  *
  * @element ds-radio-group
  * @fires ds:change - Fired when selection changes with { value }
+ * @fires ds:invalid - Fired when customValidation is true and validation fails
  *
  * @slot - ds-radio children
  *
  * @example
  * ```html
- * <ds-field>
- *   <ds-label>Size</ds-label>
- *   <ds-radio-group name="size">
- *     <ds-radio value="sm">Small</ds-radio>
- *     <ds-radio value="md">Medium</ds-radio>
- *     <ds-radio value="lg">Large</ds-radio>
- *   </ds-radio-group>
- * </ds-field>
+ * <form>
+ *   <ds-field>
+ *     <ds-label>Size</ds-label>
+ *     <ds-radio-group name="size" required>
+ *       <ds-radio value="sm">Small</ds-radio>
+ *       <ds-radio value="md">Medium</ds-radio>
+ *       <ds-radio value="lg">Large</ds-radio>
+ *     </ds-radio-group>
+ *     <ds-field-error></ds-field-error>
+ *   </ds-field>
+ *   <button type="submit">Submit</button>
+ * </form>
  * ```
  */
-export class DsRadioGroup extends DSElement {
-  /** Form field name */
-  @property({ type: String, reflect: true })
-  name = "";
-
-  /** Currently selected value */
-  @property({ type: String })
-  value = "";
-
+export class DsRadioGroup extends FormAssociatedMixin(DSElement) {
   /** Layout and navigation axis */
   @property({ type: String, reflect: true })
   orientation: RadioOrientation = "vertical";
 
-  /** Disabled state for all radios */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+  /** Default value for form reset */
+  private _defaultValue = "";
 
   private rovingFocus: RovingFocus | null = null;
   private childObserver: MutationObserver | null = null;
 
   override connectedCallback(): void {
+    // Store default value for form reset
+    this._defaultValue = this.value;
+
     super.connectedCallback();
 
     // Set role on the group
@@ -182,6 +187,54 @@ export class DsRadioGroup extends DSElement {
     }
 
     if (changedProperties.has("disabled")) {
+      this.setupRadios();
+    }
+  }
+
+  // Form association implementation
+
+  protected getFormValue(): string | null {
+    return this.value || null;
+  }
+
+  protected getValidationAnchor(): HTMLElement | undefined {
+    // Use the first radio control as validation anchor
+    return this.querySelector("ds-radio [role='radio']") as HTMLElement | undefined;
+  }
+
+  protected getValidationFlags(): ValidationFlags {
+    if (this.required && !this.value) {
+      return { valueMissing: true };
+    }
+    return {};
+  }
+
+  protected getValidationMessage(flags: ValidationFlags): string {
+    if (flags.valueMissing) {
+      return "Please select an option";
+    }
+    return "";
+  }
+
+  protected shouldUpdateFormValue(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value");
+  }
+
+  protected shouldUpdateValidity(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value");
+  }
+
+  protected onFormReset(): void {
+    this.value = this._defaultValue;
+    this.setupRadios();
+  }
+
+  protected onFormStateRestore(
+    state: string | File | FormData | null,
+    _mode: "restore" | "autocomplete"
+  ): void {
+    if (typeof state === "string") {
+      this.value = state;
       this.setupRadios();
     }
   }

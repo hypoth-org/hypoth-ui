@@ -5,6 +5,7 @@ export default defineConfig({
     globals: true,
     environment: "happy-dom",
     include: ["tests/**/*.test.ts", "src/components/**/*.test.ts"],
+    setupFiles: ["./tests/setup.ts"],
     deps: {
       inline: [/lit/],
     },

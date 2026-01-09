@@ -22,6 +22,12 @@
  * ```
  */
 
+import {
+  type TabsBehavior,
+  type TabsOrientation as BehaviorTabsOrientation,
+  type TabsActivationMode as BehaviorTabsActivationMode,
+  createTabsBehavior,
+} from "@ds/primitives-dom";
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
@@ -30,13 +36,14 @@ import { define } from "../../registry/define.js";
 
 // Import child components
 import type { DsTabsContent } from "./tabs-content.js";
+import type { DsTabsList } from "./tabs-list.js";
 import type { DsTabsTrigger } from "./tabs-trigger.js";
 import "./tabs-list.js";
 import "./tabs-trigger.js";
 import "./tabs-content.js";
 
-export type TabsOrientation = "horizontal" | "vertical";
-export type TabsActivationMode = "automatic" | "manual";
+export type TabsOrientation = BehaviorTabsOrientation;
+export type TabsActivationMode = BehaviorTabsActivationMode;
 
 export class DsTabs extends DSElement {
   /** Controlled value */
@@ -59,9 +66,16 @@ export class DsTabs extends DSElement {
   @property({ attribute: "activation-mode" })
   activationMode: TabsActivationMode = "automatic";
 
+  /** Loop keyboard navigation at ends */
+  @property({ type: Boolean })
+  loop = true;
+
   /** Internal tracked value */
   @state()
   private internalValue: string | undefined;
+
+  /** Behavior primitive instance */
+  private tabsBehavior: TabsBehavior | null = null;
 
   /** Whether we're in controlled mode */
   private get isControlled(): boolean {
@@ -73,6 +87,11 @@ export class DsTabs extends DSElement {
     return this.isControlled ? this.value : this.internalValue;
   }
 
+  /** Get the tabs behavior (for child components) */
+  getTabsBehavior(): TabsBehavior | null {
+    return this.tabsBehavior;
+  }
+
   override connectedCallback(): void {
     super.connectedCallback();
 
@@ -81,13 +100,30 @@ export class DsTabs extends DSElement {
       this.internalValue = this.defaultValue;
     }
 
-    // Listen for trigger activations
-    this.addEventListener("ds:tab-activate", this.handleTabActivate as EventListener);
+    // Initialize behavior
+    this.initTabsBehavior();
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.removeEventListener("ds:tab-activate", this.handleTabActivate as EventListener);
+    this.tabsBehavior?.destroy();
+    this.tabsBehavior = null;
+  }
+
+  private initTabsBehavior(): void {
+    this.tabsBehavior = createTabsBehavior({
+      defaultValue: this.activeValue ?? this.defaultValue ?? "",
+      orientation: this.orientation,
+      activationMode: this.activationMode,
+      loop: this.loop,
+      onValueChange: (newValue) => {
+        if (!this.isControlled) {
+          this.internalValue = newValue;
+        }
+        emitEvent(this, "ds:change", { detail: { value: newValue } });
+        this.updateTabsState();
+      },
+    });
   }
 
   /**
@@ -95,49 +131,60 @@ export class DsTabs extends DSElement {
    */
   public selectTab(value: string): void {
     if (this.activeValue === value) return;
-
-    // Check if trigger exists and is not disabled
-    const trigger = this.querySelector(`ds-tabs-trigger[value="${value}"]`) as DsTabsTrigger | null;
-    if (!trigger || trigger.disabled) return;
-
-    if (!this.isControlled) {
-      this.internalValue = value;
-    }
-
-    emitEvent(this, "ds:change", { detail: { value } });
-    this.updateTabs();
+    this.tabsBehavior?.select(value);
   }
-
-  private handleTabActivate = (event: CustomEvent<{ value: string }>): void => {
-    this.selectTab(event.detail.value);
-  };
 
   override updated(changedProperties: Map<string, unknown>): void {
     // Handle controlled value changes
-    if (changedProperties.has("value") || changedProperties.has("internalValue")) {
-      this.updateTabs();
+    if (changedProperties.has("value") && this.isControlled && this.value) {
+      this.tabsBehavior?.select(this.value);
+      this.updateTabsState();
+    }
+
+    // Handle internal value changes
+    if (changedProperties.has("internalValue")) {
+      this.updateTabsState();
     }
 
     // Initial update when defaultValue is set
     if (changedProperties.has("defaultValue") && !this.isControlled && !this.internalValue) {
       this.internalValue = this.defaultValue;
-      this.updateTabs();
+      this.tabsBehavior?.select(this.defaultValue ?? "");
+      this.updateTabsState();
+    }
+
+    // Re-create behavior if orientation/activationMode/loop change
+    if (
+      changedProperties.has("orientation") ||
+      changedProperties.has("activationMode") ||
+      changedProperties.has("loop")
+    ) {
+      const currentValue = this.activeValue;
+      this.tabsBehavior?.destroy();
+      this.initTabsBehavior();
+      if (currentValue) {
+        this.tabsBehavior?.select(currentValue);
+      }
+      // Re-setup tablist element
+      const tabsList = this.querySelector("ds-tabs-list") as DsTabsList | null;
+      tabsList?.setupBehavior();
+      this.updateTabsState();
     }
   }
 
-  private updateTabs(): void {
+  private updateTabsState(): void {
     const activeValue = this.activeValue;
 
     // Update triggers
     const triggers = this.querySelectorAll("ds-tabs-trigger") as NodeListOf<DsTabsTrigger>;
     for (const trigger of triggers) {
-      trigger.setSelected(trigger.value === activeValue);
+      trigger.updateFromBehavior(trigger.value === activeValue);
     }
 
     // Update content panels
     const contents = this.querySelectorAll("ds-tabs-content") as NodeListOf<DsTabsContent>;
     for (const content of contents) {
-      content.setActive(content.value === activeValue);
+      content.updateFromBehavior(content.value === activeValue);
     }
   }
 

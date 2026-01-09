@@ -33,6 +33,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@ds/test-utils": "workspace:*",
     "@ds/wc": "workspace:*",
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^14.0.0",

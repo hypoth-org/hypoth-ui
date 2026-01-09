@@ -1,37 +1,39 @@
 import { html } from "lit";
+import type { PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { DSElement } from "../../base/ds-element.js";
+import { FormAssociatedMixin } from "../../base/form-associated.js";
+import type { ValidationFlags } from "../../base/form-associated.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
 /**
- * Checkbox input with tri-state support.
+ * Checkbox input with tri-state support and native form participation.
+ *
+ * Uses ElementInternals for form association - values are submitted with the form
+ * and the checkbox participates in constraint validation.
  *
  * @element ds-checkbox
  * @fires ds:change - Fired on state change with { checked, indeterminate }
+ * @fires ds:invalid - Fired when customValidation is true and validation fails
  *
  * @slot - Checkbox label
  *
  * @example
  * ```html
- * <ds-checkbox>Accept terms and conditions</ds-checkbox>
+ * <form>
+ *   <ds-checkbox name="accept" required>Accept terms and conditions</ds-checkbox>
+ *   <button type="submit">Submit</button>
+ * </form>
  *
  * <ds-field>
- *   <ds-checkbox required>I agree to the terms</ds-checkbox>
- *   <ds-field-error>You must accept the terms</ds-field-error>
+ *   <ds-checkbox name="newsletter" custom-validation>Subscribe to newsletter</ds-checkbox>
+ *   <ds-field-error></ds-field-error>
  * </ds-field>
  * ```
  */
-export class DsCheckbox extends DSElement {
-  /** Form field name */
-  @property({ type: String, reflect: true })
-  name = "";
-
-  /** Value when checked */
-  @property({ type: String })
-  value = "on";
-
+export class DsCheckbox extends FormAssociatedMixin(DSElement) {
   /** Checked state */
   @property({ type: Boolean, reflect: true })
   checked = false;
@@ -39,14 +41,6 @@ export class DsCheckbox extends DSElement {
   /** Indeterminate (mixed) state */
   @property({ type: Boolean, reflect: true })
   indeterminate = false;
-
-  /** Disabled state */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
-
-  /** Required state */
-  @property({ type: Boolean, reflect: true })
-  required = false;
 
   /** ARIA describedby - IDs of elements that describe this checkbox */
   @state()
@@ -60,6 +54,9 @@ export class DsCheckbox extends DSElement {
   @state()
   private labelId = "";
 
+  /** Default checked state for form reset */
+  private _defaultChecked = false;
+
   private attributeObserver: MutationObserver | null = null;
 
   override connectedCallback(): void {
@@ -67,8 +64,15 @@ export class DsCheckbox extends DSElement {
     this.labelText = this.textContent?.trim() ?? "";
     // Generate unique ID for label
     this.labelId = `checkbox-label-${crypto.randomUUID().slice(0, 8)}`;
+    // Store default checked state
+    this._defaultChecked = this.checked;
 
     super.connectedCallback();
+
+    // Set default value for form association
+    if (!this.value) {
+      this.value = "on";
+    }
 
     // Observe ARIA attribute changes on the host element
     this.attributeObserver = new MutationObserver((mutations) => {
@@ -150,6 +154,52 @@ export class DsCheckbox extends DSElement {
       this.toggle();
     }
   };
+
+  // Form association implementation
+
+  protected getFormValue(): string | null {
+    return this.checked ? this.value : null;
+  }
+
+  protected getValidationAnchor(): HTMLElement | undefined {
+    return this.querySelector(".ds-checkbox__control") as HTMLElement | undefined;
+  }
+
+  protected getValidationFlags(): ValidationFlags {
+    if (this.required && !this.checked) {
+      return { valueMissing: true };
+    }
+    return {};
+  }
+
+  protected getValidationMessage(flags: ValidationFlags): string {
+    if (flags.valueMissing) {
+      return "Please check this box to proceed";
+    }
+    return "";
+  }
+
+  protected shouldUpdateFormValue(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("checked");
+  }
+
+  protected shouldUpdateValidity(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("checked");
+  }
+
+  protected onFormReset(): void {
+    this.checked = this._defaultChecked;
+    this.indeterminate = false;
+  }
+
+  protected onFormStateRestore(
+    state: string | File | FormData | null,
+    _mode: "restore" | "autocomplete"
+  ): void {
+    if (typeof state === "string") {
+      this.checked = state === this.value;
+    }
+  }
 
   override render() {
     return html`

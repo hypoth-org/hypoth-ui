@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "_comment": "This file defines the target exports structure for @ds/wc package.json",
+
+  "name": "@ds/wc",
+  "sideEffects": false,
+
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+
+    "_comment_form_controls": "Individual form control components",
+    "./button": {
+      "types": "./dist/components/button/button.d.ts",
+      "import": "./dist/components/button/button.js"
+    },
+    "./input": {
+      "types": "./dist/components/input/input.d.ts",
+      "import": "./dist/components/input/input.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/checkbox.d.ts",
+      "import": "./dist/components/checkbox/checkbox.js"
+    },
+    "./switch": {
+      "types": "./dist/components/switch/switch.d.ts",
+      "import": "./dist/components/switch/switch.js"
+    },
+    "./radio": {
+      "types": "./dist/components/radio/index.d.ts",
+      "import": "./dist/components/radio/index.js"
+    },
+    "./select": {
+      "types": "./dist/components/select/index.d.ts",
+      "import": "./dist/components/select/index.js"
+    },
+    "./combobox": {
+      "types": "./dist/components/combobox/index.d.ts",
+      "import": "./dist/components/combobox/index.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/textarea/textarea.d.ts",
+      "import": "./dist/components/textarea/textarea.js"
+    },
+
+    "_comment_category_bundles": "Category-level bundles for convenience",
+    "./form-controls": {
+      "types": "./dist/form-controls.d.ts",
+      "import": "./dist/form-controls.js"
+    },
+    "./overlays": {
+      "types": "./dist/overlays.d.ts",
+      "import": "./dist/overlays.js"
+    },
+    "./data-display": {
+      "types": "./dist/data-display.d.ts",
+      "import": "./dist/data-display.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.js"
+    },
+    "./layout": {
+      "types": "./dist/layout.d.ts",
+      "import": "./dist/layout.js"
+    },
+
+    "_comment_individual_overlays": "Individual overlay components",
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/components/dialog/index.js"
+    },
+    "./sheet": {
+      "types": "./dist/components/sheet/index.d.ts",
+      "import": "./dist/components/sheet/index.js"
+    },
+    "./drawer": {
+      "types": "./dist/components/drawer/index.d.ts",
+      "import": "./dist/components/drawer/index.js"
+    },
+    "./popover": {
+      "types": "./dist/components/popover/index.d.ts",
+      "import": "./dist/components/popover/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/components/tooltip/index.js"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/components/dropdown-menu/index.d.ts",
+      "import": "./dist/components/dropdown-menu/index.js"
+    },
+    "./context-menu": {
+      "types": "./dist/components/context-menu/index.d.ts",
+      "import": "./dist/components/context-menu/index.js"
+    },
+
+    "_comment_compound_components": "Compound components (tabs, accordion, etc.)",
+    "./tabs": {
+      "types": "./dist/components/tabs/index.d.ts",
+      "import": "./dist/components/tabs/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/accordion/index.d.ts",
+      "import": "./dist/components/accordion/index.js"
+    },
+
+    "_comment_utilities": "Utility exports",
+    "./base": {
+      "types": "./dist/base/ds-element.d.ts",
+      "import": "./dist/base/ds-element.js"
+    },
+    "./registry": {
+      "types": "./dist/registry/index.d.ts",
+      "import": "./dist/registry/index.js"
+    },
+    "./events": {
+      "types": "./dist/events/emit.d.ts",
+      "import": "./dist/events/emit.js"
+    },
+
+    "./package.json": "./package.json"
+  },
+
+  "_implementation_notes": {
+    "category_barrel_files": [
+      "Create src/form-controls.ts that re-exports all form control components",
+      "Create src/overlays.ts that re-exports all overlay components",
+      "Create src/data-display.ts that re-exports all data display components",
+      "Create src/navigation.ts that re-exports all navigation components",
+      "Create src/layout.ts that re-exports all layout components"
+    ],
+    "build_configuration": {
+      "tool": "tsup",
+      "entry_points": [
+        "src/index.ts",
+        "src/form-controls.ts",
+        "src/overlays.ts",
+        "src/data-display.ts",
+        "src/navigation.ts",
+        "src/layout.ts"
+      ],
+      "format": ["esm"],
+      "dts": true
+    },
+    "usage_examples": {
+      "full_import": "import { Button, Dialog } from '@ds/wc';",
+      "category_import": "import { Button, Checkbox } from '@ds/wc/form-controls';",
+      "individual_import": "import { DsButton } from '@ds/wc/button';"
+    }
+  }
+}

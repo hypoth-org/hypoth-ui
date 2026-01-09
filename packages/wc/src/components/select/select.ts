@@ -17,9 +17,12 @@ import {
   prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html, nothing } from "lit";
+import type { PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import { DSElement } from "../../base/ds-element.js";
+import { FormAssociatedMixin } from "../../base/form-associated.js";
+import type { ValidationFlags } from "../../base/form-associated.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
@@ -34,7 +37,10 @@ import "./select-group.js";
 import "./select-label.js";
 
 /**
- * Select component with keyboard navigation and type-ahead.
+ * Select component with keyboard navigation, type-ahead, and native form participation.
+ *
+ * Uses ElementInternals for form association - the selected value is submitted with the form
+ * and the select participates in constraint validation.
  *
  * Implements WAI-ARIA Listbox pattern with:
  * - Arrow key navigation between options
@@ -50,21 +56,25 @@ import "./select-label.js";
  * @fires ds:open - Fired when select opens
  * @fires ds:close - Fired when select closes
  * @fires ds:change - Fired when value changes (detail: { value, label })
+ * @fires ds:invalid - Fired when customValidation is true and validation fails
  *
  * @example
  * ```html
- * <ds-select>
- *   <ds-select-trigger slot="trigger">
- *     <button>Select fruit</button>
- *   </ds-select-trigger>
- *   <ds-select-content>
- *     <ds-select-option value="apple">Apple</ds-select-option>
- *     <ds-select-option value="banana">Banana</ds-select-option>
- *   </ds-select-content>
- * </ds-select>
+ * <form>
+ *   <ds-select name="fruit" required>
+ *     <ds-select-trigger slot="trigger">
+ *       <button>Select fruit</button>
+ *     </ds-select-trigger>
+ *     <ds-select-content>
+ *       <ds-select-option value="apple">Apple</ds-select-option>
+ *       <ds-select-option value="banana">Banana</ds-select-option>
+ *     </ds-select-content>
+ *   </ds-select>
+ *   <button type="submit">Submit</button>
+ * </form>
  * ```
  */
-export class DsSelect extends DSElement {
+export class DsSelect extends FormAssociatedMixin(DSElement) {
   /** Whether the select is open */
   @property({ type: Boolean, reflect: true })
   open = false;
@@ -124,6 +134,9 @@ export class DsSelect extends DSElement {
   @state()
   private visibleItemIds = new Set<string>();
 
+  /** Default value for form reset */
+  private _defaultValue = "";
+
   private behavior: SelectBehavior<string> | null = null;
   private anchorPosition: AnchorPosition | null = null;
   private dismissLayer: DismissableLayer | null = null;
@@ -136,6 +149,9 @@ export class DsSelect extends DSElement {
   private focusFirstOnOpen: "first" | "last" | "selected" | null = null;
 
   override connectedCallback(): void {
+    // Store default value for form reset
+    this._defaultValue = this.value;
+
     super.connectedCallback();
 
     // Initialize behavior
@@ -665,6 +681,53 @@ export class DsSelect extends DSElement {
       this.setupDismissLayer();
       this.setupRovingFocus();
       this.setupTypeAhead();
+    }
+  }
+
+  // Form association implementation
+
+  protected getFormValue(): string | null {
+    return this.value || null;
+  }
+
+  protected getValidationAnchor(): HTMLElement | undefined {
+    return this.getTriggerElement() as HTMLElement | undefined;
+  }
+
+  protected getValidationFlags(): ValidationFlags {
+    if (this.required && !this.value) {
+      return { valueMissing: true };
+    }
+    return {};
+  }
+
+  protected getValidationMessage(flags: ValidationFlags): string {
+    if (flags.valueMissing) {
+      return "Please select an option";
+    }
+    return "";
+  }
+
+  protected shouldUpdateFormValue(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value");
+  }
+
+  protected shouldUpdateValidity(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value");
+  }
+
+  protected onFormReset(): void {
+    this.value = this._defaultValue;
+    this.updateOptionStates();
+  }
+
+  protected onFormStateRestore(
+    state: string | File | FormData | null,
+    _mode: "restore" | "autocomplete"
+  ): void {
+    if (typeof state === "string") {
+      this.value = state;
+      this.updateOptionStates();
     }
   }
 

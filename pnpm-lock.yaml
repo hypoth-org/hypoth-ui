@@ -369,6 +369,9 @@ importers:
         specifier: workspace:*
         version: link:../primitives-dom
     devDependencies:
+      '@ds/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
       '@ds/wc':
         specifier: workspace:*
         version: link:../wc
@@ -409,6 +412,15 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
+  packages/test-utils:
+    devDependencies:
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
+
   packages/tokens:
     devDependencies:
       style-dictionary:
@@ -445,6 +457,9 @@ importers:
       '@axe-core/playwright':
         specifier: ^4.8.0
         version: 4.11.0(playwright-core@1.57.0)
+      '@ds/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
       happy-dom:
         specifier: ^13.10.0
         version: 13.10.1

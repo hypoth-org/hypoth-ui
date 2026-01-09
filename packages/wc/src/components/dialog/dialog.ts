@@ -1,9 +1,7 @@
 import {
-  type DismissableLayer,
-  type FocusTrap,
+  type DialogBehavior,
   type Presence,
-  createDismissableLayer,
-  createFocusTrap,
+  createDialogBehavior,
   createPresence,
   prefersReducedMotion,
 } from "@ds/primitives-dom";
@@ -74,10 +72,8 @@ export class DsDialog extends DSElement {
   @state()
   private isClosing = false;
 
-  private focusTrap: FocusTrap | null = null;
-  private dismissLayer: DismissableLayer | null = null;
+  private dialogBehavior: DialogBehavior | null = null;
   private presence: Presence | null = null;
-  private triggerElement: HTMLElement | null = null;
   private attributeObserver: MutationObserver | null = null;
   private backdropElement: HTMLElement | null = null;
 
@@ -109,6 +105,9 @@ export class DsDialog extends DSElement {
       this.dialogRole = initialRole;
       this.removeAttribute("role");
     }
+
+    // Initialize dialog behavior
+    this.initDialogBehavior();
   }
 
   override disconnectedCallback(): void {
@@ -120,6 +119,66 @@ export class DsDialog extends DSElement {
   }
 
   /**
+   * Initializes the dialog behavior primitive.
+   */
+  private initDialogBehavior(): void {
+    this.dialogBehavior = createDialogBehavior({
+      defaultOpen: this.open,
+      role: this.dialogRole,
+      closeOnEscape: this.closeOnEscape,
+      closeOnOutsideClick: this.closeOnBackdrop,
+      onOpenChange: (open) => {
+        // Sync state when behavior changes (e.g., from escape or outside click)
+        if (!open && this.open) {
+          this.handleBehaviorClose();
+        }
+      },
+    });
+
+    // Set trigger element if one exists
+    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
+    if (trigger) {
+      this.dialogBehavior.setTriggerElement(trigger);
+    }
+  }
+
+  /**
+   * Handles close triggered by the behavior (escape/outside click).
+   */
+  private handleBehaviorClose(): void {
+    // Emit before-close event (cancelable)
+    const beforeCloseEvent = emitEvent(this, StandardEvents.BEFORE_CLOSE, {
+      cancelable: true,
+    });
+
+    if (beforeCloseEvent.defaultPrevented) {
+      // Re-open the behavior since we're preventing close
+      this.dialogBehavior?.open();
+      return;
+    }
+
+    const content = this.querySelector("ds-dialog-content") as DsDialogContent | null;
+
+    // If animated, use presence for exit animation
+    if (this.animated && content && !prefersReducedMotion()) {
+      this.isClosing = true;
+
+      // Create presence for exit animation
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      // No animation - close immediately
+      this.open = false;
+      this.isClosing = false;
+      emitEvent(this, StandardEvents.CLOSE);
+    }
+  }
+
+  /**
    * Opens the dialog.
    */
   public show(): void {
@@ -127,10 +186,14 @@ export class DsDialog extends DSElement {
 
     // Store trigger element for focus return
     const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    this.triggerElement =
-      trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    if (trigger) {
+      this.dialogBehavior?.setTriggerElement(trigger);
+    } else if (document.activeElement instanceof HTMLElement) {
+      this.dialogBehavior?.setTriggerElement(document.activeElement);
+    }
 
     this.open = true;
+    this.dialogBehavior?.open();
     emitEvent(this, StandardEvents.OPEN);
   }
 
@@ -151,15 +214,12 @@ export class DsDialog extends DSElement {
 
     const content = this.querySelector("ds-dialog-content") as DsDialogContent | null;
 
+    // Close the behavior (this deactivates focus trap and dismiss layer)
+    this.dialogBehavior?.close();
+
     // If animated, use presence for exit animation
     if (this.animated && content && !prefersReducedMotion()) {
       this.isClosing = true;
-
-      // Clean up focus trap and dismiss layer
-      this.focusTrap?.deactivate();
-      this.focusTrap = null;
-      this.dismissLayer?.deactivate();
-      this.dismissLayer = null;
 
       // Create presence for exit animation
       this.presence = createPresence({
@@ -170,13 +230,9 @@ export class DsDialog extends DSElement {
       this.presence.hide(content);
     } else {
       // No animation - close immediately
-      this.cleanup();
       this.open = false;
       this.isClosing = false;
       emitEvent(this, StandardEvents.CLOSE);
-
-      // Return focus to trigger
-      this.triggerElement?.focus();
     }
   }
 
@@ -184,13 +240,11 @@ export class DsDialog extends DSElement {
    * Completes the close after exit animation.
    */
   private completeClose(): void {
-    this.cleanup();
+    this.presence?.destroy();
+    this.presence = null;
     this.open = false;
     this.isClosing = false;
     emitEvent(this, StandardEvents.CLOSE);
-
-    // Return focus to trigger
-    this.triggerElement?.focus();
   }
 
   private handleTriggerClick = (event: Event): void => {
@@ -199,7 +253,7 @@ export class DsDialog extends DSElement {
 
     if (trigger && this.contains(trigger)) {
       // Store trigger before opening
-      this.triggerElement = trigger as HTMLElement;
+      this.dialogBehavior?.setTriggerElement(trigger as HTMLElement);
       this.show();
     }
   };
@@ -220,42 +274,9 @@ export class DsDialog extends DSElement {
     }
   };
 
-  private handleDismiss = (reason: "escape" | "outside-click"): void => {
-    if (reason === "escape" && this.closeOnEscape) {
-      this.close();
-    } else if (reason === "outside-click" && this.closeOnBackdrop) {
-      this.close();
-    }
-  };
-
-  private setupFocusAndDismiss(): void {
-    const content = this.querySelector("ds-dialog-content");
-    if (!content) return;
-
-    // Set up focus trap
-    this.focusTrap = createFocusTrap({
-      container: content as HTMLElement,
-      returnFocus: false, // We handle this manually
-    });
-    this.focusTrap.activate();
-
-    // Set up dismiss layer
-    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    this.dismissLayer = createDismissableLayer({
-      container: content as HTMLElement,
-      excludeElements: trigger ? [trigger] : [],
-      onDismiss: this.handleDismiss,
-      closeOnEscape: this.closeOnEscape,
-      closeOnOutsideClick: this.closeOnBackdrop,
-    });
-    this.dismissLayer.activate();
-  }
-
   private cleanup(): void {
-    this.focusTrap?.deactivate();
-    this.focusTrap = null;
-    this.dismissLayer?.deactivate();
-    this.dismissLayer = null;
+    this.dialogBehavior?.destroy();
+    this.dialogBehavior = null;
     this.presence?.destroy();
     this.presence = null;
   }
@@ -275,8 +296,8 @@ export class DsDialog extends DSElement {
           content.dataState = "open";
         }
 
-        // Setup focus and dismiss
-        this.setupFocusAndDismiss();
+        // Set content element on behavior (activates focus trap and dismiss layer)
+        this.dialogBehavior?.setContentElement(content);
         this.updateContentAccessibility();
 
         // Attach backdrop click handler
@@ -286,12 +307,28 @@ export class DsDialog extends DSElement {
         // Clean up backdrop listener
         this.backdropElement?.removeEventListener("click", this.handleBackdropClick);
         this.backdropElement = null;
+
+        // Clear content element on behavior
+        this.dialogBehavior?.setContentElement(null);
       }
     }
 
     // Update role on content when dialogRole changes
     if (changedProperties.has("dialogRole") && this.open) {
       this.updateContentAccessibility();
+    }
+
+    // Sync behavior options when they change
+    if (changedProperties.has("closeOnEscape") || changedProperties.has("closeOnBackdrop")) {
+      // Re-create behavior with new options
+      const wasOpen = this.dialogBehavior?.state.open;
+      this.dialogBehavior?.destroy();
+      this.initDialogBehavior();
+      if (wasOpen) {
+        this.dialogBehavior?.open();
+        const content = this.querySelector("ds-dialog-content") as HTMLElement | null;
+        this.dialogBehavior?.setContentElement(content);
+      }
     }
   }
 
@@ -300,17 +337,21 @@ export class DsDialog extends DSElement {
    */
   private updateContentAccessibility(): void {
     const content = this.querySelector("ds-dialog-content");
-    if (!content) return;
+    if (!content || !this.dialogBehavior) return;
 
-    // Set role on content
+    // Get props from behavior
+    const contentProps = this.dialogBehavior.getContentProps();
+
+    // Apply content props
     content.setAttribute("role", this.dialogRole);
-    content.setAttribute("aria-modal", "true");
+    content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-dialog-title");
     if (title) {
+      const titleProps = this.dialogBehavior.getTitleProps();
       if (!title.id) {
-        title.id = `dialog-title-${crypto.randomUUID().slice(0, 8)}`;
+        title.id = titleProps.id;
       }
       content.setAttribute("aria-labelledby", title.id);
     }
@@ -318,10 +359,14 @@ export class DsDialog extends DSElement {
     // Connect description via aria-describedby
     const description = this.querySelector("ds-dialog-description");
     if (description) {
+      const descProps = this.dialogBehavior.getDescriptionProps();
       if (!description.id) {
-        description.id = `dialog-desc-${crypto.randomUUID().slice(0, 8)}`;
+        description.id = descProps.id;
       }
       content.setAttribute("aria-describedby", description.id);
+      this.dialogBehavior.setHasDescription(true);
+    } else {
+      this.dialogBehavior.setHasDescription(false);
     }
   }
 
