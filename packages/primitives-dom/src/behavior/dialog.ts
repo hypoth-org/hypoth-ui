@@ -172,7 +172,7 @@ export function createDialogBehavior(options: DialogBehaviorOptions = {}): Dialo
   });
 
   // Dialog-specific state (role, description tracking)
-  let dialogRole: DialogRole = role;
+  const dialogRole: DialogRole = role;
   let hasDescription = false;
 
   // Context for dialog-specific IDs

@@ -108,9 +108,8 @@ export function devWarn(warning: DevWarning): void {
   if (emittedWarnings.has(key)) return;
   emittedWarnings.add(key);
 
-  const fullMessage =
-    `${prefix} ${warning.message} (${codeStr})` +
-    (warning.suggestion ? `\n💡 ${warning.suggestion}` : "");
+  const suggestionText = warning.suggestion ? `\n💡 ${warning.suggestion}` : "";
+  const fullMessage = `${prefix} ${warning.message} (${codeStr})${suggestionText}`;
 
   console.warn(fullMessage);
 
@@ -254,7 +253,7 @@ export const Warnings = {
     code: "INVALID_PROP_COMBINATION",
     component,
     message: `Props "${prop1}" and "${prop2}" should not be used together.`,
-    suggestion: `Choose one or the other based on your use case.`,
+    suggestion: "Choose one or the other based on your use case.",
     context: { conflicting: [prop1, prop2] },
   }),
 

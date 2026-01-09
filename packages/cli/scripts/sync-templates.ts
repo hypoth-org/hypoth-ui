@@ -8,8 +8,8 @@
  * Usage: pnpm sync:templates
  */
 
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 const CLI_ROOT = join(import.meta.dirname, "..");
 const TEMPLATES_DIR = join(CLI_ROOT, "templates");

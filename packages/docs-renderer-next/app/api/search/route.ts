@@ -160,7 +160,7 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get("q") || "";
   const type = searchParams.get("type") as "component" | "guide" | null;
   const category = searchParams.get("category");
-  const limit = parseInt(searchParams.get("limit") || "20", 10);
+  const limit = Number.parseInt(searchParams.get("limit") || "20", 10);
 
   if (!query.trim()) {
     return NextResponse.json({

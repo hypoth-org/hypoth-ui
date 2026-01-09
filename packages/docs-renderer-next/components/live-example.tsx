@@ -79,6 +79,7 @@ export function LiveExample({
           {variants.map((variant, index) => (
             <button
               key={variant.name}
+              type="button"
               className={`live-example__variant-tab ${activeVariant === index ? "live-example__variant-tab--active" : ""}`}
               onClick={() => setActiveVariant(index)}
               role="tab"
@@ -98,6 +99,7 @@ export function LiveExample({
       {/* Controls */}
       <div className="live-example__controls">
         <button
+          type="button"
           className={`live-example__toggle ${showCode ? "live-example__toggle--active" : ""}`}
           onClick={() => setShowCode(!showCode)}
           aria-expanded={showCode}
@@ -110,6 +112,7 @@ export function LiveExample({
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
+            aria-hidden="true"
           >
             <path d="M10.5 4.5L14 8l-3.5 3.5M5.5 4.5L2 8l3.5 3.5" />
           </svg>
@@ -117,7 +120,7 @@ export function LiveExample({
         </button>
 
         {showCode && (
-          <button className="live-example__copy" onClick={handleCopy} aria-label="Copy code">
+          <button type="button" className="live-example__copy" onClick={handleCopy} aria-label="Copy code">
             {copied ? (
               <>
                 <svg
@@ -127,6 +130,7 @@ export function LiveExample({
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
+                  aria-hidden="true"
                 >
                   <path d="M3.5 8l3 3 6-6" />
                 </svg>
@@ -141,6 +145,7 @@ export function LiveExample({
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.5"
+                  aria-hidden="true"
                 >
                   <rect x="5" y="5" width="9" height="9" rx="1" />
                   <path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2" />
@@ -343,7 +348,7 @@ export function CodeBlock({
       {filename && (
         <div className="code-block__header">
           <span className="code-block__filename">{filename}</span>
-          <button className="code-block__copy" onClick={handleCopy} aria-label="Copy code">
+          <button type="button" className="code-block__copy" onClick={handleCopy} aria-label="Copy code">
             {copied ? (
               <svg
                 width="14"
@@ -352,6 +357,7 @@ export function CodeBlock({
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                aria-hidden="true"
               >
                 <path d="M3.5 8l3 3 6-6" />
               </svg>
@@ -363,6 +369,7 @@ export function CodeBlock({
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
+                aria-hidden="true"
               >
                 <rect x="5" y="5" width="9" height="9" rx="1" />
                 <path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2" />

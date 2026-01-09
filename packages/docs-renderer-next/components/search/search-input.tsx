@@ -182,6 +182,7 @@ export function SearchInput({
               viewBox="0 0 16 16"
               fill="none"
               className="search-input__spinner"
+              aria-hidden="true"
             >
               <circle
                 cx="8"
@@ -238,6 +239,7 @@ export function SearchInput({
           className="search-input__dropdown"
           role="listbox"
           aria-label="Search results"
+          tabIndex={-1}
         >
           {results.length === 0 && !isLoading && (
             <div className="search-input__empty">
@@ -252,6 +254,7 @@ export function SearchInput({
                 const globalIndex = idx;
                 return (
                   <button
+                    type="button"
                     key={result.id}
                     id={`search-result-${globalIndex}`}
                     className={`search-input__result ${selectedIndex === globalIndex ? "search-input__result--selected" : ""}`}
@@ -261,7 +264,7 @@ export function SearchInput({
                     aria-selected={selectedIndex === globalIndex}
                   >
                     <span className="search-input__result-icon">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
                         <rect x="1" y="1" width="5" height="5" rx="1" />
                         <rect x="8" y="1" width="5" height="5" rx="1" />
                         <rect x="1" y="8" width="5" height="5" rx="1" />
@@ -294,6 +297,7 @@ export function SearchInput({
                 const globalIndex = componentResults.length + idx;
                 return (
                   <button
+                    type="button"
                     key={result.id}
                     id={`search-result-${globalIndex}`}
                     className={`search-input__result ${selectedIndex === globalIndex ? "search-input__result--selected" : ""}`}
@@ -303,7 +307,7 @@ export function SearchInput({
                     aria-selected={selectedIndex === globalIndex}
                   >
                     <span className="search-input__result-icon">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
                         <path d="M2 2h10v10H2V2zm1 1v8h8V3H3z" />
                         <path d="M4 5h6M4 7h6M4 9h4" stroke="currentColor" strokeWidth="1" />
                       </svg>

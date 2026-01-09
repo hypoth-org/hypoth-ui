@@ -95,8 +95,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       const { fallback } = this.props;
 
       // If fallback is a function, call it with error and reset callback
-      if (typeof fallback === "function") {
-        return fallback(this.state.error!, this.resetError);
+      if (typeof fallback === "function" && this.state.error) {
+        return fallback(this.state.error, this.resetError);
       }
 
       // If fallback is provided, render it
