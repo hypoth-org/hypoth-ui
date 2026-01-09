@@ -1,5 +1,12 @@
-// Base class
+// Base class and mixins
 export { DSElement, LightElement } from "./base/ds-element.js";
+export { FormAssociatedMixin } from "./base/form-associated.js";
+export type {
+  FormAssociatedElement,
+  FormAssociatedInterface,
+  FormLifecycleCallbacks,
+  ValidationFlags,
+} from "./base/form-associated.js";
 
 // Event utilities
 export { emitEvent, StandardEvents } from "./events/emit.js";

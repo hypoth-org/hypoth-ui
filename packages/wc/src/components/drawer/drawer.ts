@@ -27,11 +27,9 @@
  */
 
 import {
-  type DismissableLayer,
-  type FocusTrap,
+  type DialogBehavior,
   type Presence,
-  createDismissableLayer,
-  createFocusTrap,
+  createDialogBehavior,
   createPresence,
   prefersReducedMotion,
 } from "@ds/primitives-dom";
@@ -80,10 +78,8 @@ export class DsDrawer extends DSElement {
   @state()
   private isClosing = false;
 
-  private focusTrap: FocusTrap | null = null;
-  private dismissLayer: DismissableLayer | null = null;
+  private dialogBehavior: DialogBehavior | null = null;
   private presence: Presence | null = null;
-  private triggerElement: HTMLElement | null = null;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -93,6 +89,9 @@ export class DsDrawer extends DSElement {
 
     // Listen for close requests from child components
     this.addEventListener("ds:drawer-close", this.handleCloseRequest as EventListener);
+
+    // Initialize dialog behavior
+    this.initDialogBehavior();
   }
 
   override disconnectedCallback(): void {
@@ -103,6 +102,55 @@ export class DsDrawer extends DSElement {
   }
 
   /**
+   * Initializes the dialog behavior primitive.
+   */
+  private initDialogBehavior(): void {
+    this.dialogBehavior = createDialogBehavior({
+      defaultOpen: this.open,
+      role: "dialog",
+      closeOnEscape: this.closeOnEscape,
+      closeOnOutsideClick: this.closeOnOverlay,
+      onOpenChange: (open) => {
+        // Sync state when behavior changes (e.g., from escape or outside click)
+        if (!open && this.open) {
+          this.handleBehaviorClose();
+        }
+      },
+    });
+
+    // Set trigger element if one exists
+    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
+    if (trigger) {
+      this.dialogBehavior.setTriggerElement(trigger);
+    }
+  }
+
+  /**
+   * Handles close triggered by the behavior (escape/outside click).
+   */
+  private handleBehaviorClose(): void {
+    const content = this.querySelector("ds-drawer-content") as DsDrawerContent | null;
+
+    // If animated, use presence for exit animation
+    if (this.animated && content && !prefersReducedMotion()) {
+      this.isClosing = true;
+
+      // Create presence for exit animation
+      this.presence = createPresence({
+        onExitComplete: () => {
+          this.completeClose();
+        },
+      });
+      this.presence.hide(content);
+    } else {
+      // No animation - close immediately
+      this.open = false;
+      this.isClosing = false;
+      emitEvent(this, StandardEvents.CLOSE);
+    }
+  }
+
+  /**
    * Opens the drawer.
    */
   public show(): void {
@@ -110,10 +158,14 @@ export class DsDrawer extends DSElement {
 
     // Store trigger element for focus return
     const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    this.triggerElement =
-      trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    if (trigger) {
+      this.dialogBehavior?.setTriggerElement(trigger);
+    } else if (document.activeElement instanceof HTMLElement) {
+      this.dialogBehavior?.setTriggerElement(document.activeElement);
+    }
 
     this.open = true;
+    this.dialogBehavior?.open();
     emitEvent(this, StandardEvents.OPEN);
   }
 
@@ -125,15 +177,12 @@ export class DsDrawer extends DSElement {
 
     const content = this.querySelector("ds-drawer-content") as DsDrawerContent | null;
 
+    // Close the behavior (deactivates focus trap and dismiss layer)
+    this.dialogBehavior?.close();
+
     // If animated, use presence for exit animation
     if (this.animated && content && !prefersReducedMotion()) {
       this.isClosing = true;
-
-      // Clean up focus trap and dismiss layer
-      this.focusTrap?.deactivate();
-      this.focusTrap = null;
-      this.dismissLayer?.deactivate();
-      this.dismissLayer = null;
 
       // Create presence for exit animation
       this.presence = createPresence({
@@ -144,13 +193,9 @@ export class DsDrawer extends DSElement {
       this.presence.hide(content);
     } else {
       // No animation - close immediately
-      this.cleanup();
       this.open = false;
       this.isClosing = false;
       emitEvent(this, StandardEvents.CLOSE);
-
-      // Return focus to trigger
-      this.triggerElement?.focus();
     }
   }
 
@@ -158,13 +203,11 @@ export class DsDrawer extends DSElement {
    * Completes the close after exit animation.
    */
   private completeClose(): void {
-    this.cleanup();
+    this.presence?.destroy();
+    this.presence = null;
     this.open = false;
     this.isClosing = false;
     emitEvent(this, StandardEvents.CLOSE);
-
-    // Return focus to trigger
-    this.triggerElement?.focus();
   }
 
   private handleTriggerClick = (event: Event): void => {
@@ -173,7 +216,7 @@ export class DsDrawer extends DSElement {
 
     if (trigger && this.contains(trigger)) {
       // Store trigger before opening
-      this.triggerElement = trigger as HTMLElement;
+      this.dialogBehavior?.setTriggerElement(trigger as HTMLElement);
       this.show();
     }
   };
@@ -188,42 +231,9 @@ export class DsDrawer extends DSElement {
     }
   };
 
-  private handleDismiss = (reason: "escape" | "outside-click"): void => {
-    if (reason === "escape" && this.closeOnEscape) {
-      this.close();
-    } else if (reason === "outside-click" && this.closeOnOverlay) {
-      this.close();
-    }
-  };
-
-  private setupFocusAndDismiss(): void {
-    const content = this.querySelector("ds-drawer-content");
-    if (!content) return;
-
-    // Set up focus trap
-    this.focusTrap = createFocusTrap({
-      container: content as HTMLElement,
-      returnFocus: false, // We handle this manually
-    });
-    this.focusTrap.activate();
-
-    // Set up dismiss layer
-    const trigger = this.querySelector('[slot="trigger"]') as HTMLElement | null;
-    this.dismissLayer = createDismissableLayer({
-      container: content as HTMLElement,
-      excludeElements: trigger ? [trigger] : [],
-      onDismiss: this.handleDismiss,
-      closeOnEscape: this.closeOnEscape,
-      closeOnOutsideClick: this.closeOnOverlay,
-    });
-    this.dismissLayer.activate();
-  }
-
   private cleanup(): void {
-    this.focusTrap?.deactivate();
-    this.focusTrap = null;
-    this.dismissLayer?.deactivate();
-    this.dismissLayer = null;
+    this.dialogBehavior?.destroy();
+    this.dialogBehavior = null;
     this.presence?.destroy();
     this.presence = null;
   }
@@ -244,9 +254,25 @@ export class DsDrawer extends DSElement {
           content.side = this.side;
         }
 
-        // Setup focus and dismiss
-        this.setupFocusAndDismiss();
+        // Set content element on behavior (activates focus trap and dismiss layer)
+        this.dialogBehavior?.setContentElement(content);
         this.updateContentAccessibility();
+      } else {
+        // Clear content element on behavior
+        this.dialogBehavior?.setContentElement(null);
+      }
+    }
+
+    // Sync behavior options when they change
+    if (changedProperties.has("closeOnEscape") || changedProperties.has("closeOnOverlay")) {
+      // Re-create behavior with new options
+      const wasOpen = this.dialogBehavior?.state.open;
+      this.dialogBehavior?.destroy();
+      this.initDialogBehavior();
+      if (wasOpen) {
+        this.dialogBehavior?.open();
+        const content = this.querySelector("ds-drawer-content") as HTMLElement | null;
+        this.dialogBehavior?.setContentElement(content);
       }
     }
   }
@@ -256,17 +282,21 @@ export class DsDrawer extends DSElement {
    */
   private updateContentAccessibility(): void {
     const content = this.querySelector("ds-drawer-content");
-    if (!content) return;
+    if (!content || !this.dialogBehavior) return;
+
+    // Get props from behavior
+    const contentProps = this.dialogBehavior.getContentProps();
 
     // Set role on content
     content.setAttribute("role", "dialog");
-    content.setAttribute("aria-modal", "true");
+    content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-drawer-title");
     if (title) {
+      const titleProps = this.dialogBehavior.getTitleProps();
       if (!title.id) {
-        title.id = `drawer-title-${crypto.randomUUID().slice(0, 8)}`;
+        title.id = titleProps.id;
       }
       content.setAttribute("aria-labelledby", title.id);
     }
@@ -274,10 +304,14 @@ export class DsDrawer extends DSElement {
     // Connect description via aria-describedby
     const description = this.querySelector("ds-drawer-description");
     if (description) {
+      const descProps = this.dialogBehavior.getDescriptionProps();
       if (!description.id) {
-        description.id = `drawer-desc-${crypto.randomUUID().slice(0, 8)}`;
+        description.id = descProps.id;
       }
       content.setAttribute("aria-describedby", description.id);
+      this.dialogBehavior.setHasDescription(true);
+    } else {
+      this.dialogBehavior.setHasDescription(false);
     }
   }
 

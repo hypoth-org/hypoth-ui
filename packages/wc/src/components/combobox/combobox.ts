@@ -15,9 +15,12 @@ import {
   prefersReducedMotion,
 } from "@ds/primitives-dom";
 import { html, nothing } from "lit";
+import type { PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import { DSElement } from "../../base/ds-element.js";
+import { FormAssociatedMixin } from "../../base/form-associated.js";
+import type { ValidationFlags } from "../../base/form-associated.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
 
@@ -31,7 +34,10 @@ import "./combobox-option.js";
 import "./combobox-tag.js";
 
 /**
- * Combobox component with async loading, multi-select, and keyboard navigation.
+ * Combobox component with async loading, multi-select, keyboard navigation, and native form participation.
+ *
+ * Uses ElementInternals for form association - the selected value(s) are submitted with the form
+ * and the combobox participates in constraint validation.
  *
  * Implements WAI-ARIA Combobox pattern with:
  * - Text input with autocomplete suggestions
@@ -50,21 +56,25 @@ import "./combobox-tag.js";
  * @fires ds:close - Fired when combobox closes
  * @fires ds:change - Fired when value changes (detail: { value, label } or { values, labels })
  * @fires ds:input - Fired when input value changes (detail: { value })
+ * @fires ds:invalid - Fired when customValidation is true and validation fails
  *
  * @example
  * ```html
- * <ds-combobox>
- *   <ds-combobox-input slot="input">
- *     <input placeholder="Search fruits..." />
- *   </ds-combobox-input>
- *   <ds-combobox-content>
- *     <ds-combobox-option value="apple">Apple</ds-combobox-option>
- *     <ds-combobox-option value="banana">Banana</ds-combobox-option>
- *   </ds-combobox-content>
- * </ds-combobox>
+ * <form>
+ *   <ds-combobox name="fruit" required>
+ *     <ds-combobox-input slot="input">
+ *       <input placeholder="Search fruits..." />
+ *     </ds-combobox-input>
+ *     <ds-combobox-content>
+ *       <ds-combobox-option value="apple">Apple</ds-combobox-option>
+ *       <ds-combobox-option value="banana">Banana</ds-combobox-option>
+ *     </ds-combobox-content>
+ *   </ds-combobox>
+ *   <button type="submit">Submit</button>
+ * </form>
  * ```
  */
-export class DsCombobox extends DSElement {
+export class DsCombobox extends FormAssociatedMixin(DSElement) {
   /** Whether the combobox is open */
   @property({ type: Boolean, reflect: true })
   open = false;
@@ -147,6 +157,12 @@ export class DsCombobox extends DSElement {
   @state()
   private visibleItemIds = new Set<string>();
 
+  /** Default value for form reset (single-select) */
+  private _defaultValue = "";
+
+  /** Default values for form reset (multi-select) */
+  private _defaultValues: string[] = [];
+
   private behavior: ComboboxBehavior<string, false> | ComboboxBehavior<string, true> | null = null;
   private anchorPosition: AnchorPosition | null = null;
   private dismissLayer: DismissableLayer | null = null;
@@ -159,6 +175,10 @@ export class DsCombobox extends DSElement {
   private debounceTimeout: number | null = null;
 
   override connectedCallback(): void {
+    // Store default value(s) for form reset
+    this._defaultValue = this.value;
+    this._defaultValues = [...this.values];
+
     super.connectedCallback();
 
     // Initialize behavior based on multiple prop
@@ -832,6 +852,69 @@ export class DsCombobox extends DSElement {
         <slot name="empty">No results found</slot>
       </div>
     `;
+  }
+
+  // Form association implementation
+
+  protected getFormValue(): FormData | string | null {
+    if (this.multiple) {
+      // For multi-select, submit as FormData with multiple values
+      if (this.values.length === 0) return null;
+      const formData = new FormData();
+      for (const val of this.values) {
+        formData.append(this.name, val);
+      }
+      return formData;
+    }
+    return this.value || null;
+  }
+
+  protected getValidationAnchor(): HTMLElement | undefined {
+    return this.getInputElement() as HTMLElement | undefined;
+  }
+
+  protected getValidationFlags(): ValidationFlags {
+    const hasValue = this.multiple ? this.values.length > 0 : Boolean(this.value);
+    if (this.required && !hasValue) {
+      return { valueMissing: true };
+    }
+    return {};
+  }
+
+  protected getValidationMessage(flags: ValidationFlags): string {
+    if (flags.valueMissing) {
+      return "Please select an option";
+    }
+    return "";
+  }
+
+  protected shouldUpdateFormValue(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value") || changedProperties.has("values");
+  }
+
+  protected shouldUpdateValidity(changedProperties: PropertyValues): boolean {
+    return changedProperties.has("value") || changedProperties.has("values");
+  }
+
+  protected onFormReset(): void {
+    if (this.multiple) {
+      this.values = [...this._defaultValues];
+    } else {
+      this.value = this._defaultValue;
+    }
+    this.updateOptionStates();
+  }
+
+  protected onFormStateRestore(
+    state: string | File | FormData | null,
+    _mode: "restore" | "autocomplete"
+  ): void {
+    if (this.multiple && state instanceof FormData) {
+      this.values = state.getAll(this.name) as string[];
+    } else if (typeof state === "string") {
+      this.value = state;
+    }
+    this.updateOptionStates();
   }
 
   /**

@@ -245,3 +245,18 @@ export {
   type ListSelectionMode as ListBehaviorSelectionMode,
   type ListOrientation as ListBehaviorOrientation,
 } from "./behavior/list.js";
+
+// Tabs behavior
+export {
+  createTabsBehavior,
+  type TabsBehavior,
+  type TabsBehaviorOptions,
+  type TabsBehaviorState,
+  type TabsBehaviorContext,
+  type TabsOrientation,
+  type TabsActivationMode,
+  type TabsEvent,
+  type TabListProps,
+  type TabTriggerProps,
+  type TabPanelProps,
+} from "./behavior/tabs.js";
