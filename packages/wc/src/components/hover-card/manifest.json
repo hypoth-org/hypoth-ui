@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "hover-card",
+  "name": "HoverCard",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Rich preview card that appears on hover or focus with configurable delays",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "tooltip",
+    "keyboard": ["Escape"],
+    "screenReader": "Trigger has aria-haspopup and aria-expanded. Opens on focus for keyboard users. Content is accessible while open. Escape dismisses the card. Non-modal - doesn't trap focus.",
+    "ariaPatterns": ["aria-haspopup", "aria-expanded", "aria-controls"],
+    "knownLimitations": ["Content must be reachable by both mouse and keyboard users"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "spacing.md",
+    "radius.lg",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for previewing linked content like user profiles, article summaries, or product details. Configure appropriate open/close delays for the interaction pattern.",
+  "antiPatterns": "Do not use for essential information that must be visible. Avoid putting interactive forms inside hover cards. Do not use for touch-only interfaces.",
+  "platforms": ["wc", "react"]
+}

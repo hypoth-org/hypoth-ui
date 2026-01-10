@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "scroll-area",
+  "name": "ScrollArea",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Custom scrollbar container with consistent styling across browsers and configurable visibility",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "none",
+    "keyboard": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "PageUp", "PageDown", "Home", "End", "Space"],
+    "screenReader": "Native scroll behavior is preserved. Content remains accessible. Custom scrollbars do not interfere with assistive technology. Focus management within scrollable area works as expected.",
+    "ariaPatterns": [],
+    "knownLimitations": ["Custom scrollbar styling may not be visible to users who have system-wide scrollbar preferences"]
+  },
+  "tokensUsed": [
+    "color.background.muted",
+    "color.text.muted",
+    "radius.full"
+  ],
+  "recommendedUsage": "Use to provide consistent scrollbar appearance across browsers. Configure visibility type (auto, always, hover, scroll) based on UX needs. Support both vertical and horizontal scrolling.",
+  "antiPatterns": "Do not hide scrollbars completely as it removes important affordance. Avoid nested scroll areas. Ensure sufficient contrast for scrollbar visibility.",
+  "platforms": ["wc", "react"]
+}

@@ -9,3 +9,7 @@ export type {
   FormLifecycleCallbacks,
   ValidationFlags,
 } from "./form-associated.js";
+
+// Component controller mixin
+export { ComponentControllerMixin } from "./component-controller.js";
+export type { CleanupFn, ComponentControllerInterface } from "./component-controller.js";

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "toast",
+  "name": "Toast",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Transient notification message for feedback on user actions with auto-dismiss and pause on hover",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "alert",
+    "keyboard": ["Tab", "Escape"],
+    "screenReader": "Uses role=status with aria-live=polite for non-intrusive announcements. aria-atomic ensures complete message is announced. Dismiss button has accessible label. Progress bar is decorative.",
+    "ariaPatterns": ["role=status", "aria-live=polite", "aria-atomic"],
+    "knownLimitations": ["Very short duration toasts may be dismissed before screen reader completes announcement"]
+  },
+  "tokensUsed": [
+    "color.semantic.info",
+    "color.semantic.success",
+    "color.semantic.warning",
+    "color.semantic.error",
+    "color.background.surface",
+    "spacing.md",
+    "radius.lg",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for transient feedback on actions (save confirmation, error notification). Configure appropriate duration. Pause auto-dismiss on hover. Provide action button for undo or retry operations.",
+  "antiPatterns": "Do not use for persistent information - use Alert instead. Avoid showing multiple toasts simultaneously. Do not use for critical errors requiring user action.",
+  "platforms": ["wc", "react"]
+}

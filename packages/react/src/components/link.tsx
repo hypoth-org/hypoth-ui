@@ -1,5 +1,5 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import { createElement, forwardRef, useEffect, useRef } from "react";
+import { createElement, forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../primitives/slot.js";
 import type { DsNavigateEventDetail, NavigateEventHandler } from "../types/events.js";
 import type { AsChildProps } from "../types/polymorphic.js";
@@ -41,6 +41,10 @@ export const Link = forwardRef<HTMLElement, LinkProps>((props, forwardedRef) => 
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handler in ref for stable callback reference
+  const onNavigateRef = useRef(onNavigate);
+  onNavigateRef.current = onNavigate;
+
   // Merge refs
   useEffect(() => {
     if (typeof forwardedRef === "function") {
@@ -50,18 +54,19 @@ export const Link = forwardRef<HTMLElement, LinkProps>((props, forwardedRef) => 
     }
   }, [forwardedRef]);
 
-  // Attach ds:navigate event listener
+  // Stable handler that reads from ref
+  const handleNavigate = useCallback((event: Event) => {
+    onNavigateRef.current?.(event as CustomEvent<DsNavigateEventDetail>);
+  }, []);
+
+  // Attach ds:navigate event listener - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
-    if (!element || !onNavigate) return;
+    if (!element) return;
 
-    const handler = (event: Event) => {
-      onNavigate(event as CustomEvent<DsNavigateEventDetail>);
-    };
-
-    element.addEventListener("ds:navigate", handler);
-    return () => element.removeEventListener("ds:navigate", handler);
-  }, [onNavigate]);
+    element.addEventListener("ds:navigate", handleNavigate);
+    return () => element.removeEventListener("ds:navigate", handleNavigate);
+  }, [handleNavigate]);
 
   // asChild mode: render child with link styling classes
   if (asChild) {

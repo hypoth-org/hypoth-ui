@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "data-table",
+  "name": "DataTable",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Advanced data grid with virtualization, sorting, filtering, pagination, and row selection",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "grid",
+    "keyboard": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Home", "End", "PageUp", "PageDown"],
+    "screenReader": "Uses role=region with 'Data table' label. Sortable columns announce sort state changes via live region. Row selection is announced. Loading state uses aria-busy. Pagination controls have accessible labels.",
+    "ariaPatterns": ["role=region", "role=grid", "role=gridcell", "aria-sort", "aria-selected", "aria-busy", "aria-current=page", "aria-live=polite"],
+    "knownLimitations": ["Complex keyboard navigation within cells may require additional implementation for editable cells"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.text.default",
+    "spacing.sm",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use for displaying large datasets with interactive features. Enable virtualization for performance with many rows. Provide clear column headers and accessible captions.",
+  "antiPatterns": "Do not use for simple lists - use List or Table instead. Avoid hiding essential data in horizontal scroll. Ensure mobile-friendly alternatives for complex tables.",
+  "platforms": ["wc", "react"]
+}

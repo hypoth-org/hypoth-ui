@@ -1,0 +1,263 @@
+/**
+ * High Contrast Mode Support
+ *
+ * Provides CSS fallbacks for Windows High Contrast Mode (forced-colors).
+ * Uses forced-color-adjust to control system color application and
+ * ensures focus indicators remain visible.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors
+ */
+
+/* =============================================================================
+   Focus Indicators
+   ============================================================================= */
+
+/**
+ * Ensure focus outlines use system colors in high contrast mode.
+ * The outline will be visible regardless of background color.
+ */
+@media (forced-colors: active) {
+  /* Interactive elements */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  /* Custom components that need visible focus */
+  ds-button:focus-visible,
+  ds-link:focus-visible,
+  ds-input:focus-visible,
+  ds-textarea:focus-visible,
+  ds-checkbox:focus-visible,
+  ds-radio:focus-visible,
+  ds-switch:focus-visible,
+  ds-select:focus-visible,
+  ds-slider:focus-visible,
+  ds-tab:focus-visible,
+  ds-menu-item:focus-visible,
+  ds-tree-item:focus-visible,
+  ds-list-item:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
+
+/* =============================================================================
+   Form Controls
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  /* Checkbox and radio indicators */
+  ds-checkbox [data-indicator],
+  ds-radio [data-indicator] {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+  }
+
+  ds-checkbox[checked] [data-indicator],
+  ds-radio[checked] [data-indicator] {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  ds-checkbox[disabled] [data-indicator],
+  ds-radio[disabled] [data-indicator] {
+    border-color: GrayText;
+  }
+
+  /* Switch track and thumb */
+  ds-switch [data-track] {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+  }
+
+  ds-switch[checked] [data-track] {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  ds-switch [data-thumb] {
+    background: ButtonText;
+  }
+
+  ds-switch[checked] [data-thumb] {
+    background: HighlightText;
+  }
+
+  /* Input and textarea borders */
+  ds-input,
+  ds-textarea,
+  ds-select {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: Field;
+    color: FieldText;
+  }
+
+  ds-input:focus,
+  ds-textarea:focus,
+  ds-select:focus {
+    border-color: Highlight;
+  }
+
+  ds-input[disabled],
+  ds-textarea[disabled],
+  ds-select[disabled] {
+    border-color: GrayText;
+    color: GrayText;
+  }
+}
+
+/* =============================================================================
+   Buttons
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  ds-button {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  ds-button[variant="primary"] {
+    background: Highlight;
+    border-color: Highlight;
+    color: HighlightText;
+  }
+
+  ds-button[variant="destructive"] {
+    /* Use system colors, but add a visual distinction */
+    border-width: 3px;
+  }
+
+  ds-button[disabled] {
+    border-color: GrayText;
+    color: GrayText;
+  }
+
+  ds-button:hover:not([disabled]) {
+    border-color: Highlight;
+  }
+}
+
+/* =============================================================================
+   Dialogs and Overlays
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  /* Dialog content needs visible border */
+  ds-dialog-content,
+  ds-drawer-content,
+  ds-sheet-content,
+  ds-alert-dialog-content {
+    forced-color-adjust: none;
+    border: 3px solid ButtonText;
+    background: Canvas;
+  }
+
+  /* Popover and tooltip */
+  ds-popover-content,
+  ds-tooltip-content,
+  ds-hover-card-content {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: Canvas;
+  }
+
+  /* Menu content */
+  ds-menu-content,
+  ds-dropdown-menu-content,
+  ds-context-menu-content {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: Canvas;
+  }
+
+  /* Menu item hover/focus */
+  ds-menu-item:hover,
+  ds-menu-item:focus {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* =============================================================================
+   Navigation
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  /* Tabs */
+  ds-tab[aria-selected="true"] {
+    forced-color-adjust: none;
+    border-bottom: 3px solid Highlight;
+  }
+
+  ds-tab:hover:not([aria-selected="true"]) {
+    border-bottom: 3px solid ButtonText;
+  }
+
+  /* Links */
+  ds-link {
+    color: LinkText;
+    text-decoration: underline;
+  }
+
+  ds-link:visited {
+    color: VisitedText;
+  }
+}
+
+/* =============================================================================
+   Feedback Components
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  /* Progress bar */
+  ds-progress [data-track] {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: Field;
+  }
+
+  ds-progress [data-indicator] {
+    background: Highlight;
+  }
+
+  /* Alert and toast */
+  ds-alert,
+  ds-toast {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText;
+    background: Canvas;
+  }
+
+  ds-alert[variant="destructive"],
+  ds-toast[variant="destructive"] {
+    border-width: 3px;
+  }
+
+  /* Badge */
+  ds-badge {
+    forced-color-adjust: none;
+    border: 1px solid ButtonText;
+  }
+}
+
+/* =============================================================================
+   Separator
+   ============================================================================= */
+
+@media (forced-colors: active) {
+  ds-separator {
+    forced-color-adjust: none;
+    border-color: ButtonText;
+    background: ButtonText;
+  }
+}

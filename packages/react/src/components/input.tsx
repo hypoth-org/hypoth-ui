@@ -1,5 +1,12 @@
 import type React from "react";
-import { type InputHTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type InputHTMLAttributes,
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import {
   type ResponsiveProp,
   generateResponsiveDataAttr,
@@ -60,6 +67,12 @@ export const Input = forwardRef<HTMLElement, InputProps>((props, forwardedRef) =
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handlers in refs for stable callback references
+  const onChangeRef = useRef(onChange);
+  const onValueChangeRef = useRef(onValueChange);
+  onChangeRef.current = onChange;
+  onValueChangeRef.current = onValueChange;
+
   // Merge refs
   useEffect(() => {
     if (typeof forwardedRef === "function") {
@@ -69,37 +82,30 @@ export const Input = forwardRef<HTMLElement, InputProps>((props, forwardedRef) =
     }
   }, [forwardedRef]);
 
-  // Handle input events
+  // Stable handler that reads from ref
+  const handleInputEvent = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ value: string }>;
+    onValueChangeRef.current?.(customEvent.detail.value, event);
+  }, []);
+
+  const handleChangeEvent = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ value: string }>;
+    onChangeRef.current?.(customEvent.detail.value, event);
+  }, []);
+
+  // Handle input events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
     if (!element) return;
 
-    const handleInputEvent = (event: Event) => {
-      const customEvent = event as CustomEvent<{ value: string }>;
-      onValueChange?.(customEvent.detail.value, event);
-    };
-
-    const handleChangeEvent = (event: Event) => {
-      const customEvent = event as CustomEvent<{ value: string }>;
-      onChange?.(customEvent.detail.value, event);
-    };
-
-    if (onValueChange) {
-      element.addEventListener("input", handleInputEvent);
-    }
-    if (onChange) {
-      element.addEventListener("change", handleChangeEvent);
-    }
+    element.addEventListener("input", handleInputEvent);
+    element.addEventListener("change", handleChangeEvent);
 
     return () => {
-      if (onValueChange) {
-        element.removeEventListener("input", handleInputEvent);
-      }
-      if (onChange) {
-        element.removeEventListener("change", handleChangeEvent);
-      }
+      element.removeEventListener("input", handleInputEvent);
+      element.removeEventListener("change", handleChangeEvent);
     };
-  }, [onValueChange, onChange]);
+  }, [handleInputEvent, handleChangeEvent]);
 
   // Resolve responsive size - use base value for the WC attribute
   const resolvedSize = resolveResponsiveValue(size, "md");

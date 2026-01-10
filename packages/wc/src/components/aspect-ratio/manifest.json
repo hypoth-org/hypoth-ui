@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "aspect-ratio",
+  "name": "AspectRatio",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Container that maintains a consistent width-to-height ratio for responsive media and content",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "none",
+    "keyboard": [],
+    "screenReader": "No specific screen reader behavior. Content within the aspect ratio container should have appropriate alt text or labels.",
+    "ariaPatterns": [],
+    "knownLimitations": []
+  },
+  "tokensUsed": [],
+  "recommendedUsage": "Use for embedding responsive images, videos, maps, or other media that require consistent proportions across different viewport sizes. Common ratios: 16/9 (video), 4/3 (classic), 1/1 (square).",
+  "antiPatterns": "Do not use for text-heavy content where natural height flow is preferred. Avoid using when content should grow based on its intrinsic size.",
+  "platforms": ["wc", "react"]
+}

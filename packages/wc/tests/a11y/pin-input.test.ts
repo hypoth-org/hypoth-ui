@@ -1,4 +1,5 @@
-import { axe, toHaveNoViolations } from "jest-axe";
+import { toHaveNoViolations } from "jest-axe";
+import { axe } from "./setup.js";
 import { html, render } from "lit";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import "../../src/components/pin-input/index.js";

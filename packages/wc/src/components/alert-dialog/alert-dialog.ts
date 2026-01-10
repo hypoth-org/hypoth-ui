@@ -46,6 +46,7 @@ import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasRequiredChild, Warnings } from "../../utils/dev-warnings.js";
 
 // Import child components to ensure they're registered
 import type { DsAlertDialogContent } from "./alert-dialog-content.js";
@@ -245,6 +246,11 @@ export class DsAlertDialog extends DSElement {
     content.setAttribute("role", "alertdialog");
     content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
+    // Dev warning: Check for required alert dialog title
+    if (!hasRequiredChild(this, "ds-alert-dialog-title") && !this.getAttribute("aria-label")) {
+      devWarn(Warnings.dialogMissingTitle("ds-alert-dialog"));
+    }
+
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-alert-dialog-title");
     if (title) {
@@ -265,6 +271,10 @@ export class DsAlertDialog extends DSElement {
       content.setAttribute("aria-describedby", description.id);
       this.dialogBehavior.setHasDescription(true);
     } else {
+      // Dev warning: Title without description
+      if (title) {
+        devWarn(Warnings.dialogMissingDescription("ds-alert-dialog"));
+      }
       this.dialogBehavior.setHasDescription(false);
     }
   }

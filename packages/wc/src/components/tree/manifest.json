@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "tree",
+  "name": "Tree",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Hierarchical data display with expandable nodes, selection modes, and optional connecting lines",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "treeview",
+    "keyboard": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Home", "End", "*"],
+    "screenReader": "Root uses role=tree with accessible label. Items use role=treeitem. Nested groups use role=group. aria-expanded indicates node state. aria-selected for selection. aria-multiselectable for multiple selection mode.",
+    "ariaPatterns": ["role=tree", "role=treeitem", "role=group", "aria-expanded", "aria-selected", "aria-multiselectable", "aria-busy", "aria-label"],
+    "knownLimitations": ["Lazy-loaded nodes should manage aria-busy state appropriately"]
+  },
+  "tokensUsed": [
+    "color.text.default",
+    "color.primary",
+    "color.border.default",
+    "spacing.sm",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use for file explorers, nested categories, or organizational hierarchies. Configure selection mode (single, multiple, none) based on use case. Use lines variant for visual hierarchy clarity.",
+  "antiPatterns": "Do not use for simple lists - use List instead. Avoid very deep nesting (more than 5 levels). Do not hide critical items deep in the tree structure.",
+  "platforms": ["wc", "react"]
+}

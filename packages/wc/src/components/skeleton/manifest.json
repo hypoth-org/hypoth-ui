@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "skeleton",
+  "name": "Skeleton",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Loading placeholder that mimics content layout with configurable shapes and animations",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "status",
+    "keyboard": [],
+    "screenReader": "Uses role=status with aria-busy=true to announce loading state. Provides accessible label (default 'Loading...'). Screen readers announce the loading status without repeated announcements.",
+    "ariaPatterns": ["role=status", "aria-busy", "aria-label"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.muted",
+    "color.background.subtle",
+    "radius.sm",
+    "radius.full"
+  ],
+  "recommendedUsage": "Use while content is loading to indicate layout structure. Match skeleton shapes to expected content (text, circular for avatars, rectangular for images). Disable animation for reduced motion preference.",
+  "antiPatterns": "Do not use for indeterminate loading of unknown content - use Spinner instead. Avoid using skeletons for very brief loading states. Do not animate skeletons if user prefers reduced motion.",
+  "platforms": ["wc", "react"]
+}

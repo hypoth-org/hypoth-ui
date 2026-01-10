@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "collapsible",
+  "name": "Collapsible",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Toggleable content section with animated expand/collapse transitions",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "disclosure",
+    "keyboard": ["Enter", "Space"],
+    "screenReader": "Trigger announces with aria-expanded state (true/false) and aria-controls pointing to content region. Disabled state is announced via aria-disabled. Content region has unique ID for association.",
+    "ariaPatterns": ["aria-expanded", "aria-controls", "aria-disabled"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "spacing.md",
+    "motion.duration.normal",
+    "motion.easing.default"
+  ],
+  "recommendedUsage": "Use for progressive disclosure of optional or supplementary content. Ideal for 'Show more' patterns, additional details, or secondary information that doesn't need to be visible by default.",
+  "antiPatterns": "Do not use for critical content that users must see. For multiple collapsible sections, consider Accordion instead. Avoid nesting collapsibles deeply.",
+  "platforms": ["wc", "react"]
+}

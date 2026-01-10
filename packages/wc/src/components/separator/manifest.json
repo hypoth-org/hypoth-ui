@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "separator",
+  "name": "Separator",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Visual divider for separating content sections horizontally or vertically",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "separator",
+    "keyboard": [],
+    "screenReader": "Uses role=separator with aria-orientation for semantic separators. Decorative separators use role=none to be ignored by assistive technology. Non-decorative separators create logical content boundaries.",
+    "ariaPatterns": ["role=separator", "role=none", "aria-orientation"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.border.default",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use to visually divide sections of content. Use decorative prop when separation is purely visual. Choose orientation based on content layout (horizontal for stacked, vertical for inline).",
+  "antiPatterns": "Do not use multiple consecutive separators. Avoid using separators where whitespace alone provides sufficient visual separation. Do not use for interactive dividers - use resizable panels instead.",
+  "platforms": ["wc", "react"]
+}

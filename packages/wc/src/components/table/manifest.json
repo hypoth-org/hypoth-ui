@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "table",
+  "name": "Table",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Semantic data table with configurable styling, sizing, and optional sticky headers",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "table",
+    "keyboard": ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"],
+    "screenReader": "Uses role=grid for interactive tables. Caption provides accessible table description. Column and row headers use appropriate th elements. Screen readers can navigate cell by cell.",
+    "ariaPatterns": ["role=grid", "role=gridcell", "role=columnheader", "role=rowheader"],
+    "knownLimitations": ["Complex tables with merged cells may require additional ARIA annotations"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.muted",
+    "color.border.default",
+    "spacing.sm",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use for displaying structured tabular data. Provide meaningful caption for context. Use striped variant for better row scanning. Enable sticky header for long tables.",
+  "antiPatterns": "Do not use for layout purposes. Avoid hiding important columns on mobile without alternative views. For complex interactive features, use DataTable instead.",
+  "platforms": ["wc", "react"]
+}

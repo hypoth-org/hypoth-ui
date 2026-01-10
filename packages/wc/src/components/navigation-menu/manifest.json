@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "navigation-menu",
+  "name": "NavigationMenu",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Mega-menu style horizontal navigation with dropdown content panels and smooth transitions",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "navigation",
+    "keyboard": ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Enter", "Space", "Escape", "Tab"],
+    "screenReader": "Root has role=navigation with 'Main' label. Triggers use roving tabindex for horizontal navigation. Dropdowns are announced when expanded. Links within content are focusable.",
+    "ariaPatterns": ["role=navigation", "aria-label", "aria-expanded", "data-state"],
+    "knownLimitations": ["Complex mega-menus may require additional ARIA for optimal screen reader experience"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.text.default",
+    "color.primary",
+    "spacing.md",
+    "spacing.lg",
+    "radius.md",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for main site navigation with multi-level content. Configure hover delays for appropriate interaction timing. Include viewport for animated content transitions.",
+  "antiPatterns": "Do not use for simple link lists - use a standard nav element. Avoid excessive nesting. Do not hide primary navigation items in dropdowns without clear triggers.",
+  "platforms": ["wc", "react"]
+}

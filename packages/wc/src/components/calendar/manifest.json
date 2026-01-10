@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "calendar",
+  "name": "Calendar",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Interactive date grid for selecting dates with month/year navigation and locale support",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "grid",
+    "keyboard": ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Enter", "Space", "Home", "End", "PageUp", "PageDown"],
+    "screenReader": "Announces as an application with 'Calendar' label. Month/year heading uses aria-live for navigation changes. Day cells use role=gridcell with aria-selected state. Disabled dates announce as disabled.",
+    "ariaPatterns": ["role=application", "role=grid", "role=gridcell", "role=columnheader", "aria-selected", "aria-disabled", "aria-live=polite"],
+    "knownLimitations": ["Date range selection not yet implemented"]
+  },
+  "tokensUsed": [
+    "color.primary",
+    "color.background.surface",
+    "color.text.default",
+    "color.text.muted",
+    "spacing.sm",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use within DatePicker for date selection or standalone for displaying a calendar view. Configure locale, min/max bounds, and disabled dates as needed.",
+  "antiPatterns": "Do not use for date range selection until range support is added. Avoid using for read-only date display where a simpler format would suffice.",
+  "platforms": ["wc", "react"]
+}
