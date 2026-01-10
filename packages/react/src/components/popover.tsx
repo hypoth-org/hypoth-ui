@@ -1,5 +1,12 @@
 import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type HTMLAttributes,
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 
 export type Placement =
   | "top"
@@ -57,6 +64,12 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>((props, forwardedRe
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handlers in refs for stable callback references
+  const onOpenRef = useRef(onOpen);
+  const onCloseRef = useRef(onClose);
+  onOpenRef.current = onOpen;
+  onCloseRef.current = onClose;
+
   useEffect(() => {
     if (typeof forwardedRef === "function") {
       forwardedRef(internalRef.current);
@@ -65,29 +78,28 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>((props, forwardedRe
     }
   }, [forwardedRef]);
 
+  // Stable handlers that read from refs
+  const handleOpen = useCallback(() => {
+    onOpenRef.current?.();
+  }, []);
+
+  const handleClose = useCallback(() => {
+    onCloseRef.current?.();
+  }, []);
+
+  // Handle events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
     if (!element) return;
 
-    const handleOpen = () => onOpen?.();
-    const handleClose = () => onClose?.();
-
-    if (onOpen) {
-      element.addEventListener("ds:open", handleOpen);
-    }
-    if (onClose) {
-      element.addEventListener("ds:close", handleClose);
-    }
+    element.addEventListener("ds:open", handleOpen);
+    element.addEventListener("ds:close", handleClose);
 
     return () => {
-      if (onOpen) {
-        element.removeEventListener("ds:open", handleOpen);
-      }
-      if (onClose) {
-        element.removeEventListener("ds:close", handleClose);
-      }
+      element.removeEventListener("ds:open", handleOpen);
+      element.removeEventListener("ds:close", handleClose);
     };
-  }, [onOpen, onClose]);
+  }, [handleOpen, handleClose]);
 
   return createElement(
     "ds-popover",

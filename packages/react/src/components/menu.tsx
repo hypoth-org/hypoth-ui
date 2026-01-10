@@ -1,5 +1,12 @@
 import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type HTMLAttributes,
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import type { Placement } from "./popover.js";
 
 export interface MenuProps extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
@@ -41,6 +48,14 @@ export const Menu = forwardRef<HTMLElement, MenuProps>((props, forwardedRef) => 
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handlers in refs for stable callback references
+  const onOpenRef = useRef(onOpen);
+  const onCloseRef = useRef(onClose);
+  const onSelectRef = useRef(onSelect);
+  onOpenRef.current = onOpen;
+  onCloseRef.current = onClose;
+  onSelectRef.current = onSelect;
+
   useEffect(() => {
     if (typeof forwardedRef === "function") {
       forwardedRef(internalRef.current);
@@ -49,39 +64,35 @@ export const Menu = forwardRef<HTMLElement, MenuProps>((props, forwardedRef) => 
     }
   }, [forwardedRef]);
 
+  // Stable handlers that read from refs
+  const handleOpen = useCallback(() => {
+    onOpenRef.current?.();
+  }, []);
+
+  const handleClose = useCallback(() => {
+    onCloseRef.current?.();
+  }, []);
+
+  const handleSelect = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ value: string }>;
+    onSelectRef.current?.(customEvent.detail.value, event);
+  }, []);
+
+  // Handle events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
     if (!element) return;
 
-    const handleOpen = () => onOpen?.();
-    const handleClose = () => onClose?.();
-    const handleSelect = (event: Event) => {
-      const customEvent = event as CustomEvent<{ value: string }>;
-      onSelect?.(customEvent.detail.value, event);
-    };
-
-    if (onOpen) {
-      element.addEventListener("ds:open", handleOpen);
-    }
-    if (onClose) {
-      element.addEventListener("ds:close", handleClose);
-    }
-    if (onSelect) {
-      element.addEventListener("ds:select", handleSelect);
-    }
+    element.addEventListener("ds:open", handleOpen);
+    element.addEventListener("ds:close", handleClose);
+    element.addEventListener("ds:select", handleSelect);
 
     return () => {
-      if (onOpen) {
-        element.removeEventListener("ds:open", handleOpen);
-      }
-      if (onClose) {
-        element.removeEventListener("ds:close", handleClose);
-      }
-      if (onSelect) {
-        element.removeEventListener("ds:select", handleSelect);
-      }
+      element.removeEventListener("ds:open", handleOpen);
+      element.removeEventListener("ds:close", handleClose);
+      element.removeEventListener("ds:select", handleSelect);
     };
-  }, [onOpen, onClose, onSelect]);
+  }, [handleOpen, handleClose, handleSelect]);
 
   return createElement(
     "ds-menu",

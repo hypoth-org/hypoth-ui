@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "sheet",
+  "name": "Sheet",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Modal overlay panel that slides in from any screen edge with focus trapping and backdrop",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "dialog",
+    "keyboard": ["Tab", "Shift+Tab", "Escape"],
+    "screenReader": "Announces as a dialog with role=dialog and aria-modal. Title linked via aria-labelledby. Description via aria-describedby. Focus trapped within sheet. Focus returns to trigger on close.",
+    "ariaPatterns": ["role=dialog", "aria-modal", "aria-labelledby", "aria-describedby"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.background.overlay",
+    "spacing.lg",
+    "radius.lg",
+    "shadow.xl",
+    "motion.duration.normal"
+  ],
+  "recommendedUsage": "Use for slide-in panels containing forms, settings, or supplementary content. Configure side (top, right, bottom, left) based on content type and reading direction. Include clear close affordance.",
+  "antiPatterns": "Do not use for small confirmations - use Dialog or AlertDialog. Avoid very wide sheets that feel like page takeovers. Do not nest sheets.",
+  "platforms": ["wc", "react"]
+}

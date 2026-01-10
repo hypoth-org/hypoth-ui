@@ -1,5 +1,12 @@
 import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type HTMLAttributes,
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 
 export type RadioOrientation = "horizontal" | "vertical";
 
@@ -42,6 +49,10 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>((props, forwa
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handler in ref for stable callback reference
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+
   useEffect(() => {
     if (typeof forwardedRef === "function") {
       forwardedRef(internalRef.current);
@@ -50,18 +61,20 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>((props, forwa
     }
   }, [forwardedRef]);
 
+  // Stable handler that reads from ref
+  const handleChange = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ value: string }>;
+    onChangeRef.current?.(customEvent.detail.value, event);
+  }, []);
+
+  // Handle change events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
-    if (!element || !onChange) return;
-
-    const handleChange = (event: Event) => {
-      const customEvent = event as CustomEvent<{ value: string }>;
-      onChange(customEvent.detail.value, event);
-    };
+    if (!element) return;
 
     element.addEventListener("ds:change", handleChange);
     return () => element.removeEventListener("ds:change", handleChange);
-  }, [onChange]);
+  }, [handleChange]);
 
   return createElement(
     "ds-radio-group",

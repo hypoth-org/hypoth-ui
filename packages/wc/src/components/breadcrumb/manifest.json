@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "breadcrumb",
+  "name": "Breadcrumb",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Navigation trail showing the current page location within a hierarchical structure",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "breadcrumb",
+    "keyboard": ["Tab", "Enter"],
+    "screenReader": "Announces as navigation with 'Breadcrumb' label. Current page is indicated with aria-current='page'. Links are navigable via keyboard. Separator elements are hidden from assistive technology.",
+    "ariaPatterns": ["role=navigation", "aria-label=Breadcrumb", "aria-current=page"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.text.default",
+    "color.text.muted",
+    "color.primary",
+    "spacing.sm"
+  ],
+  "recommendedUsage": "Use on pages with deep hierarchical structure to help users understand their location and navigate back to parent pages. Place consistently at the top of page content.",
+  "antiPatterns": "Do not use for flat site structures with few levels. Avoid using as primary navigation. Do not include the current page as a link.",
+  "platforms": ["wc", "react"]
+}

@@ -1,5 +1,12 @@
 import type React from "react";
-import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
+import {
+  type HTMLAttributes,
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 
 export interface CheckboxProps extends Omit<HTMLAttributes<HTMLElement>, "onChange"> {
   /** Checkbox name */
@@ -43,6 +50,10 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>((props, forwarded
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handler in ref for stable callback reference
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+
   useEffect(() => {
     if (typeof forwardedRef === "function") {
       forwardedRef(internalRef.current);
@@ -51,18 +62,20 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>((props, forwarded
     }
   }, [forwardedRef]);
 
+  // Stable handler that reads from ref
+  const handleChange = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ checked: boolean }>;
+    onChangeRef.current?.(customEvent.detail.checked, event);
+  }, []);
+
+  // Handle change events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
-    if (!element || !onChange) return;
-
-    const handleChange = (event: Event) => {
-      const customEvent = event as CustomEvent<{ checked: boolean }>;
-      onChange(customEvent.detail.checked, event);
-    };
+    if (!element) return;
 
     element.addEventListener("ds:change", handleChange);
     return () => element.removeEventListener("ds:change", handleChange);
-  }, [onChange]);
+  }, [handleChange]);
 
   return createElement(
     "ds-checkbox",

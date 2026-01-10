@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "dropdown-menu",
+  "name": "DropdownMenu",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Action menu with items, separators, checkbox items, radio groups, and submenu support",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "menu-button",
+    "keyboard": ["Enter", "Space", "ArrowUp", "ArrowDown", "ArrowRight", "ArrowLeft", "Escape", "Home", "End"],
+    "screenReader": "Trigger announces with aria-haspopup=menu and aria-expanded. Menu uses role=menu. Items use role=menuitem, menuitemcheckbox, or menuitemradio. Type-ahead navigation supported. Submenus expand with ArrowRight.",
+    "ariaPatterns": ["role=menu", "role=menuitem", "role=menuitemcheckbox", "role=menuitemradio", "aria-haspopup=menu", "aria-expanded", "aria-checked"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.text.default",
+    "color.primary",
+    "color.semantic.error",
+    "spacing.sm",
+    "radius.md",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for action menus triggered by buttons. Group related actions with labels and separators. Use destructive variant for dangerous actions. Include keyboard shortcuts when applicable.",
+  "antiPatterns": "Do not use for navigation - use NavigationMenu instead. Avoid deeply nested submenus. Do not use for form field selection - use Select instead.",
+  "platforms": ["wc", "react"]
+}

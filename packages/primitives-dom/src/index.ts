@@ -72,6 +72,18 @@ export {
   type LiveRegionOptions,
 } from "./aria/live-region.js";
 
+export {
+  generateAriaId,
+  resetAriaIdCounter,
+  getAriaIdCounter,
+} from "./aria/id-generator.js";
+
+export {
+  connectAriaDescribedBy,
+  connectSingleDescriber,
+  addAriaDescriber,
+} from "./aria/describedby.js";
+
 // Positioning utilities
 export {
   createAnchorPosition,
@@ -272,3 +284,27 @@ export {
   type TabTriggerProps,
   type TabPanelProps,
 } from "./behavior/tabs.js";
+
+// Composite primitives
+export {
+  createModalOverlay,
+  type ModalOverlay,
+  type ModalOverlayOptions,
+  type ModalOverlayState,
+} from "./composites/modal-overlay.js";
+
+export {
+  createPopoverOverlay,
+  type PopoverOverlay,
+  type PopoverOverlayOptions,
+  type PopoverOverlayState,
+} from "./composites/popover-overlay.js";
+
+export {
+  createSelectableList,
+  type SelectableList,
+  type SelectableListOptions,
+  type SelectableListState,
+  type SelectionMode,
+  type ListOrientation,
+} from "./composites/selectable-list.js";

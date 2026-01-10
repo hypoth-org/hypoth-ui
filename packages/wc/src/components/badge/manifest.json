@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "badge",
+  "name": "Badge",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Compact status indicator for counts, notifications, labels, or highlighting new content",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "status",
+    "keyboard": ["N/A (non-interactive)"],
+    "screenReader": "Announces as a status element. Dot badges announce as 'Notification indicator'. Count badges announce the count with context (e.g., '5 notifications'). Max overflow is announced (e.g., '99+ notifications').",
+    "ariaPatterns": ["role=status", "aria-label"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.primary",
+    "color.semantic.success",
+    "color.semantic.warning",
+    "color.semantic.error",
+    "color.semantic.info",
+    "spacing.xs",
+    "radius.full"
+  ],
+  "recommendedUsage": "Use for notification counts, status indicators, or categorization labels. Use dot variant for presence indication without specific count. Set max prop to handle large numbers gracefully.",
+  "antiPatterns": "Do not use for interactive elements - use Button or Tag instead. Avoid using too many badges in close proximity as it reduces their effectiveness.",
+  "platforms": ["wc", "react"]
+}

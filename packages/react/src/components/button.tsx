@@ -4,6 +4,7 @@ import {
   type MouseEvent,
   createElement,
   forwardRef,
+  useCallback,
   useEffect,
   useRef,
 } from "react";
@@ -59,6 +60,12 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, forwardedRef)
 
   const internalRef = useRef<HTMLElement>(null);
 
+  // Store handlers in refs for stable callback references
+  const onClickRef = useRef(onClick);
+  const loadingRef = useRef(loading);
+  onClickRef.current = onClick;
+  loadingRef.current = loading;
+
   // Merge refs
   useEffect(() => {
     if (typeof forwardedRef === "function") {
@@ -68,24 +75,25 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, forwardedRef)
     }
   }, [forwardedRef]);
 
-  // Handle click events - prevent clicks when loading
+  // Stable click handler that reads from refs
+  const handleClick = useCallback((event: Event) => {
+    // Prevent click when loading
+    if (loadingRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    onClickRef.current?.(event as unknown as MouseEvent<HTMLElement>);
+  }, []);
+
+  // Handle click events - no handler deps needed
   useEffect(() => {
     const element = internalRef.current;
-    if (!element || !onClick) return;
+    if (!element) return;
 
-    const handler = (event: Event) => {
-      // Prevent click when loading
-      if (loading) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-      onClick(event as unknown as MouseEvent<HTMLElement>);
-    };
-
-    element.addEventListener("click", handler);
-    return () => element.removeEventListener("click", handler);
-  }, [onClick, loading]);
+    element.addEventListener("click", handleClick);
+    return () => element.removeEventListener("click", handleClick);
+  }, [handleClick]);
 
   // Resolve responsive size - use base value for the WC attribute
   const resolvedSize = resolveResponsiveValue(size, "md");

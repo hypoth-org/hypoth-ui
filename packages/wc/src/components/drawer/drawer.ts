@@ -38,6 +38,7 @@ import { property, state } from "lit/decorators.js";
 import { DSElement } from "../../base/ds-element.js";
 import { StandardEvents, emitEvent } from "../../events/emit.js";
 import { define } from "../../registry/define.js";
+import { devWarn, hasRequiredChild, Warnings } from "../../utils/dev-warnings.js";
 
 // Import child components to ensure they're registered
 import type { DsDrawerContent } from "./drawer-content.js";
@@ -291,6 +292,11 @@ export class DsDrawer extends DSElement {
     content.setAttribute("role", "dialog");
     content.setAttribute("aria-modal", contentProps["aria-modal"]);
 
+    // Dev warning: Check for required drawer title
+    if (!hasRequiredChild(this, "ds-drawer-title") && !this.getAttribute("aria-label")) {
+      devWarn(Warnings.dialogMissingTitle("ds-drawer"));
+    }
+
     // Connect title via aria-labelledby
     const title = this.querySelector("ds-drawer-title");
     if (title) {
@@ -311,6 +317,10 @@ export class DsDrawer extends DSElement {
       content.setAttribute("aria-describedby", description.id);
       this.dialogBehavior.setHasDescription(true);
     } else {
+      // Dev warning: Title without description
+      if (title) {
+        devWarn(Warnings.dialogMissingDescription("ds-drawer"));
+      }
       this.dialogBehavior.setHasDescription(false);
     }
   }

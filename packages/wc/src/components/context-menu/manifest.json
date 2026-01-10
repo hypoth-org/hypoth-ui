@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "context-menu",
+  "name": "ContextMenu",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Right-click menu that appears at pointer position with support for touch long-press",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "menu",
+    "keyboard": ["ArrowUp", "ArrowDown", "Enter", "Space", "Escape", "Home", "End"],
+    "screenReader": "Menu items are announced with role=menuitem. Navigation follows roving tabindex pattern. Type-ahead allows quick item selection by typing. Escape dismisses the menu.",
+    "ariaPatterns": ["role=menu", "role=menuitem", "aria-disabled"],
+    "knownLimitations": ["Touch users may not discover long-press trigger without visual cue"]
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.text.default",
+    "spacing.sm",
+    "radius.md",
+    "shadow.lg"
+  ],
+  "recommendedUsage": "Use for contextual actions on right-click (desktop) or long-press (mobile). Provide actions relevant to the clicked element. Include keyboard shortcuts in menu items when applicable.",
+  "antiPatterns": "Do not use for primary actions that should be visible by default. Avoid hiding critical functionality only in context menus. Do not use as the only way to access features.",
+  "platforms": ["wc", "react"]
+}

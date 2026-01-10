@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "alert",
+  "name": "Alert",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Contextual feedback messages for informing users about important information, warnings, errors, or success states",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "alert",
+    "keyboard": ["Escape"],
+    "screenReader": "Error and warning variants use role=alert with aria-live=assertive for immediate announcement. Info and success variants use role=status with aria-live=polite. Closable alerts have an accessible dismiss button.",
+    "ariaPatterns": ["role=alert", "role=status", "aria-live=assertive", "aria-live=polite"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.semantic.info",
+    "color.semantic.success",
+    "color.semantic.warning",
+    "color.semantic.error",
+    "spacing.md",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use to communicate important contextual information to users. Choose variant based on message severity: info for neutral messages, success for confirmations, warning for potential issues, error for failures.",
+  "antiPatterns": "Do not use for transient notifications - use Toast instead. Avoid using alerts for routine status updates that would cause announcement fatigue.",
+  "platforms": ["wc", "react"]
+}

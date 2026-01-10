@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "pagination",
+  "name": "Pagination",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Page navigation controls for paginated content with configurable sibling and boundary pages",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "navigation",
+    "keyboard": ["Tab", "Enter", "Space"],
+    "screenReader": "Root has role=navigation with 'Pagination' label. Current page uses aria-current=page. Previous/Next buttons are labeled. Disabled states are announced. Ellipsis elements are hidden from screen readers.",
+    "ariaPatterns": ["role=navigation", "aria-label=Pagination", "aria-current=page", "aria-disabled"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.primary",
+    "color.text.default",
+    "color.text.muted",
+    "spacing.sm",
+    "radius.md"
+  ],
+  "recommendedUsage": "Use for navigating through paginated lists, search results, or table data. Configure siblingCount and boundaryCount to balance visibility and compactness.",
+  "antiPatterns": "Do not use for infinite scroll interfaces. Avoid hiding pagination when there's only one page. Consider virtual scrolling for very long lists instead of many pages.",
+  "platforms": ["wc", "react"]
+}

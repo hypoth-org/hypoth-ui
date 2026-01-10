@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../docs-core/src/schemas/component-manifest.schema.json",
+  "id": "list",
+  "name": "List",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Collection display component with optional selection, orientation, and styling variants",
+  "editions": ["core"],
+  "accessibility": {
+    "apgPattern": "listbox",
+    "keyboard": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Home", "End"],
+    "screenReader": "Uses role=listbox with accessible label. Items use role=option. Selection mode announced via aria-multiselectable. Selected items announced with aria-selected. Orientation affects arrow key navigation direction.",
+    "ariaPatterns": ["role=listbox", "role=option", "aria-label", "aria-multiselectable", "aria-selected", "aria-orientation"],
+    "knownLimitations": []
+  },
+  "tokensUsed": [
+    "color.background.surface",
+    "color.border.default",
+    "color.primary",
+    "spacing.sm",
+    "spacing.md"
+  ],
+  "recommendedUsage": "Use for displaying collections of items with optional selection. Configure selection mode (single, multiple, none) based on use case. Use bordered variant for visual grouping.",
+  "antiPatterns": "Do not use for navigation - use NavigationMenu or Breadcrumb. For complex data, use DataTable. Avoid using without proper labeling.",
+  "platforms": ["wc", "react"]
+}
