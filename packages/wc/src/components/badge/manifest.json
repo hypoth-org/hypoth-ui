@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "status",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Announces as a status element. Dot badges announce as 'Notification indicator'. Count badges announce the count with context (e.g., '5 notifications'). Max overflow is announced (e.g., '99+ notifications').",
     "ariaPatterns": ["role=status", "aria-label"],
     "knownLimitations": []

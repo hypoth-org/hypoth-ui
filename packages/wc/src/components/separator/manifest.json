@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "separator",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Uses role=separator with aria-orientation for semantic separators. Decorative separators use role=none to be ignored by assistive technology. Non-decorative separators create logical content boundaries.",
     "ariaPatterns": ["role=separator", "role=none", "aria-orientation"],
     "knownLimitations": []

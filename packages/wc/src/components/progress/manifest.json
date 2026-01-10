@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "progressbar",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Uses role=progressbar with aria-valuenow, aria-valuemin, and aria-valuemax. Provides aria-valuetext for human-readable progress. Indeterminate state uses aria-busy. Accessible label can be provided.",
     "ariaPatterns": ["role=progressbar", "aria-valuenow", "aria-valuemin", "aria-valuemax", "aria-valuetext", "aria-busy", "aria-label"],
     "knownLimitations": []

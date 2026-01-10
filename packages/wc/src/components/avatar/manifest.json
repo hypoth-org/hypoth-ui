@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "img",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Announces as an image with role=img and aria-label describing the user (alt text, name, or 'Avatar'). Status indicator includes an accessible label when present.",
     "ariaPatterns": ["role=img", "aria-label"],
     "knownLimitations": []

@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "none",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "No specific screen reader behavior. Content within the aspect ratio container should have appropriate alt text or labels.",
     "ariaPatterns": [],
     "knownLimitations": []

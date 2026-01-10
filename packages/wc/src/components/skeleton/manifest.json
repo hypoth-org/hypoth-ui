@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "status",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "Uses role=status with aria-busy=true to announce loading state. Provides accessible label (default 'Loading...'). Screen readers announce the loading status without repeated announcements.",
     "ariaPatterns": ["role=status", "aria-busy", "aria-label"],
     "knownLimitations": []

@@ -8,7 +8,7 @@
   "editions": ["core"],
   "accessibility": {
     "apgPattern": "none",
-    "keyboard": [],
+    "keyboard": ["N/A (non-interactive)"],
     "screenReader": "No specific semantics by default. Content within cards should use appropriate heading levels and landmarks. If card is interactive, ensure proper button/link semantics.",
     "ariaPatterns": [],
     "knownLimitations": []
