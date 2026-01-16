@@ -1,9 +1,14 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
+  # Manual trigger only until NPM publishing is configured
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no actual publish)'
+        required: false
+        type: boolean
+        default: false
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -39,7 +44,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm release
+          publish: ${{ inputs.dry_run && 'echo Dry run - skipping publish' || 'pnpm release' }}
           version: pnpm version-packages
           title: 'chore: version packages'
           commit: 'chore: version packages'
