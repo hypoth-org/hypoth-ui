@@ -1,0 +1,56 @@
+---
+title: Table
+description: Data table with sorting, selection, and sticky headers
+component: table
+status: stable
+category: data-display
+order: 5
+---
+
+# Table
+
+Data table with sorting, selection, and sticky headers
+
+## Usage
+
+### Web Component
+
+```html
+<ds-table>Content</ds-table>
+```
+
+### React
+
+```tsx
+import { Table } from "@ds/react";
+
+function Example() {
+  return <Table>Content</Table>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, ArrowUp, ArrowDown, ArrowLeft, ArrowRight
+- **ARIA**: role=grid, role=gridcell, role=columnheader, role=rowheader
+- **Screen reader**: Uses role=grid for interactive tables. Caption provides accessible table description. Column and row headers use appropriate th elements. Screen readers can navigate cell by cell.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

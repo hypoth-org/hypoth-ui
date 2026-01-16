@@ -209,6 +209,86 @@ describe("ds-button", () => {
     });
   });
 
+  describe("single event emission (regression tests)", () => {
+    it("should emit exactly one ds:press event on mouse click", async () => {
+      await button.updateComplete;
+
+      let eventCount = 0;
+      button.addEventListener("ds:press", () => eventCount++);
+
+      const innerButton = button.querySelector("button");
+      innerButton?.click();
+
+      expect(eventCount).toBe(1);
+    });
+
+    it("should emit exactly one ds:press event on Enter key", async () => {
+      await button.updateComplete;
+
+      let eventCount = 0;
+      button.addEventListener("ds:press", () => eventCount++);
+
+      const innerButton = button.querySelector("button");
+      const event = new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+      });
+      innerButton?.dispatchEvent(event);
+
+      expect(eventCount).toBe(1);
+    });
+
+    it("should emit exactly one ds:press event on Space key", async () => {
+      await button.updateComplete;
+
+      let eventCount = 0;
+      button.addEventListener("ds:press", () => eventCount++);
+
+      const innerButton = button.querySelector("button");
+      const event = new KeyboardEvent("keydown", {
+        key: " ",
+        bubbles: true,
+      });
+      innerButton?.dispatchEvent(event);
+
+      expect(eventCount).toBe(1);
+    });
+
+    it("should include isKeyboard:true for keyboard activation", async () => {
+      await button.updateComplete;
+
+      let capturedDetail: { isKeyboard: boolean } | null = null;
+      button.addEventListener("ds:press", ((e: CustomEvent) => {
+        capturedDetail = e.detail;
+      }) as EventListener);
+
+      const innerButton = button.querySelector("button");
+      const event = new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+      });
+      innerButton?.dispatchEvent(event);
+
+      expect(capturedDetail).not.toBeNull();
+      expect(capturedDetail?.isKeyboard).toBe(true);
+    });
+
+    it("should include isKeyboard:false for mouse click", async () => {
+      await button.updateComplete;
+
+      let capturedDetail: { isKeyboard: boolean } | null = null;
+      button.addEventListener("ds:press", ((e: CustomEvent) => {
+        capturedDetail = e.detail;
+      }) as EventListener);
+
+      const innerButton = button.querySelector("button");
+      innerButton?.click();
+
+      expect(capturedDetail).not.toBeNull();
+      expect(capturedDetail?.isKeyboard).toBe(false);
+    });
+  });
+
   describe("variants", () => {
     const variants = ["primary", "secondary", "ghost", "destructive"] as const;
 

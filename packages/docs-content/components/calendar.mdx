@@ -1,0 +1,56 @@
+---
+title: Calendar
+description: Calendar widget for date selection
+component: calendar
+status: stable
+category: forms
+order: 20
+---
+
+# Calendar
+
+Calendar widget for date selection
+
+## Usage
+
+### Web Component
+
+```html
+<ds-calendar>Content</ds-calendar>
+```
+
+### React
+
+```tsx
+import { Calendar } from "@ds/react";
+
+function Example() {
+  return <Calendar>Content</Calendar>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Enter, Space, Home, End, PageUp, PageDown
+- **ARIA**: role=application, role=grid, role=gridcell, role=columnheader, aria-selected, aria-disabled, aria-live=polite
+- **Screen reader**: Announces as an application with 'Calendar' label. Month/year heading uses aria-live for navigation changes. Day cells use role=gridcell with aria-selected state. Disabled dates announce as disabled.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

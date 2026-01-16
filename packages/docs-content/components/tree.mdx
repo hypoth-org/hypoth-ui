@@ -1,0 +1,56 @@
+---
+title: Tree
+description: Hierarchical tree view with expand/collapse and selection
+component: tree
+status: stable
+category: data-display
+order: 6
+---
+
+# Tree
+
+Hierarchical tree view with expand/collapse and selection
+
+## Usage
+
+### Web Component
+
+```html
+<ds-tree>Content</ds-tree>
+```
+
+### React
+
+```tsx
+import { Tree } from "@ds/react";
+
+function Example() {
+  return <Tree>Content</Tree>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Enter, Space, Home, End, *
+- **ARIA**: role=tree, role=treeitem, role=group, aria-expanded, aria-selected, aria-multiselectable, aria-busy, aria-label
+- **Screen reader**: Root uses role=tree with accessible label. Items use role=treeitem. Nested groups use role=group. aria-expanded indicates node state. aria-selected for selection. aria-multiselectable for multiple selection mode.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

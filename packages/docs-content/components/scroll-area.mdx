@@ -1,0 +1,56 @@
+---
+title: Scroll Area
+description: Custom scrollbar container with multiple visibility modes
+component: scroll-area
+status: stable
+category: utilities
+order: 2
+---
+
+# Scroll Area
+
+Custom scrollbar container with multiple visibility modes
+
+## Usage
+
+### Web Component
+
+```html
+<ds-scroll-area>Content</ds-scroll-area>
+```
+
+### React
+
+```tsx
+import { ScrollArea } from "@ds/react";
+
+function Example() {
+  return <ScrollArea>Content</ScrollArea>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, ArrowLeft, ArrowRight, PageUp, PageDown, Home, End, Space
+- **ARIA**: 
+- **Screen reader**: Native scroll behavior is preserved. Content remains accessible. Custom scrollbars do not interfere with assistive technology. Focus management within scrollable area works as expected.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

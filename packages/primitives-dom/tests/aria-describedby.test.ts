@@ -7,20 +7,17 @@ import {
   connectAriaDescribedBy,
   connectSingleDescriber,
 } from "../src/aria/describedby.js";
-import { resetAriaIdCounter } from "../src/aria/id-generator.js";
 
 describe("connectAriaDescribedBy", () => {
   let container: HTMLElement;
 
   beforeEach(() => {
-    resetAriaIdCounter();
     container = document.createElement("div");
     document.body.appendChild(container);
   });
 
   afterEach(() => {
     container.remove();
-    resetAriaIdCounter();
   });
 
   it("should connect element to single describer", () => {
@@ -32,8 +29,9 @@ describe("connectAriaDescribedBy", () => {
 
     const cleanup = connectAriaDescribedBy(input, [helpText]);
 
-    expect(input.getAttribute("aria-describedby")).toBe("desc-1");
-    expect(helpText.id).toBe("desc-1");
+    // ID should be generated and connected
+    expect(helpText.id).toMatch(/^desc-[a-f0-9]{8}$/);
+    expect(input.getAttribute("aria-describedby")).toBe(helpText.id);
 
     cleanup();
 
@@ -51,9 +49,15 @@ describe("connectAriaDescribedBy", () => {
 
     const cleanup = connectAriaDescribedBy(input, [helpText, errorMsg]);
 
-    expect(input.getAttribute("aria-describedby")).toBe("desc-1 desc-2");
-    expect(helpText.id).toBe("desc-1");
-    expect(errorMsg.id).toBe("desc-2");
+    // Both should have IDs
+    expect(helpText.id).toMatch(/^desc-[a-f0-9]{8}$/);
+    expect(errorMsg.id).toMatch(/^desc-[a-f0-9]{8}$/);
+    expect(helpText.id).not.toBe(errorMsg.id);
+
+    // aria-describedby should reference both
+    expect(input.getAttribute("aria-describedby")).toBe(
+      `${helpText.id} ${errorMsg.id}`
+    );
 
     cleanup();
 
@@ -87,7 +91,9 @@ describe("connectAriaDescribedBy", () => {
 
     const cleanup = connectAriaDescribedBy(input, [helpText]);
 
-    expect(input.getAttribute("aria-describedby")).toBe("original-id desc-1");
+    expect(input.getAttribute("aria-describedby")).toMatch(
+      /^original-id desc-[a-f0-9]{8}$/
+    );
 
     cleanup();
 
@@ -109,14 +115,12 @@ describe("connectSingleDescriber", () => {
   let container: HTMLElement;
 
   beforeEach(() => {
-    resetAriaIdCounter();
     container = document.createElement("div");
     document.body.appendChild(container);
   });
 
   afterEach(() => {
     container.remove();
-    resetAriaIdCounter();
   });
 
   it("should connect single describer", () => {
@@ -127,8 +131,8 @@ describe("connectSingleDescriber", () => {
 
     const cleanup = connectSingleDescriber(button, tooltip);
 
-    expect(button.getAttribute("aria-describedby")).toBe("desc-1");
-    expect(tooltip.id).toBe("desc-1");
+    expect(tooltip.id).toMatch(/^desc-[a-f0-9]{8}$/);
+    expect(button.getAttribute("aria-describedby")).toBe(tooltip.id);
 
     cleanup();
 
@@ -140,14 +144,12 @@ describe("addAriaDescriber", () => {
   let container: HTMLElement;
 
   beforeEach(() => {
-    resetAriaIdCounter();
     container = document.createElement("div");
     document.body.appendChild(container);
   });
 
   afterEach(() => {
     container.remove();
-    resetAriaIdCounter();
   });
 
   it("should add describer to element without existing describedby", () => {
@@ -158,7 +160,8 @@ describe("addAriaDescriber", () => {
 
     const cleanup = addAriaDescriber(input, helpText);
 
-    expect(input.getAttribute("aria-describedby")).toBe("desc-1");
+    expect(helpText.id).toMatch(/^desc-[a-f0-9]{8}$/);
+    expect(input.getAttribute("aria-describedby")).toBe(helpText.id);
 
     cleanup();
 
@@ -174,7 +177,9 @@ describe("addAriaDescriber", () => {
 
     const cleanup = addAriaDescriber(input, helpText);
 
-    expect(input.getAttribute("aria-describedby")).toBe("existing-id desc-1");
+    expect(input.getAttribute("aria-describedby")).toMatch(
+      /^existing-id desc-[a-f0-9]{8}$/
+    );
 
     cleanup();
 
@@ -208,11 +213,14 @@ describe("addAriaDescriber", () => {
     const cleanup1 = addAriaDescriber(input, helpText);
     const cleanup2 = addAriaDescriber(input, errorMsg);
 
-    expect(input.getAttribute("aria-describedby")).toBe("desc-1 desc-2");
+    // Both IDs should be in describedby
+    const describedBy = input.getAttribute("aria-describedby") ?? "";
+    expect(describedBy).toContain(helpText.id);
+    expect(describedBy).toContain(errorMsg.id);
 
     // Remove only the second describer
     cleanup2();
-    expect(input.getAttribute("aria-describedby")).toBe("desc-1");
+    expect(input.getAttribute("aria-describedby")).toBe(helpText.id);
 
     // Remove the first describer
     cleanup1();

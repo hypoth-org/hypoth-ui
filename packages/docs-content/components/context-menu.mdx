@@ -1,0 +1,56 @@
+---
+title: Context Menu
+description: Right-click context menu with keyboard navigation
+component: context-menu
+status: stable
+category: overlays
+order: 4
+---
+
+# Context Menu
+
+Right-click context menu with keyboard navigation
+
+## Usage
+
+### Web Component
+
+```html
+<ds-context-menu>Content</ds-context-menu>
+```
+
+### React
+
+```tsx
+import { ContextMenu } from "@ds/react";
+
+function Example() {
+  return <ContextMenu>Content</ContextMenu>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, Enter, Space, Escape, Home, End
+- **ARIA**: role=menu, role=menuitem, aria-disabled
+- **Screen reader**: Menu items are announced with role=menuitem. Navigation follows roving tabindex pattern. Type-ahead allows quick item selection by typing. Escape dismisses the menu.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

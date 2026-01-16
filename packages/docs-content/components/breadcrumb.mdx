@@ -1,0 +1,56 @@
+---
+title: Breadcrumb
+description: Navigation trail showing current location in hierarchy
+component: breadcrumb
+status: stable
+category: navigation
+order: 1
+---
+
+# Breadcrumb
+
+Navigation trail showing current location in hierarchy
+
+## Usage
+
+### Web Component
+
+```html
+<ds-breadcrumb>Content</ds-breadcrumb>
+```
+
+### React
+
+```tsx
+import { Breadcrumb } from "@ds/react";
+
+function Example() {
+  return <Breadcrumb>Content</Breadcrumb>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Enter
+- **ARIA**: role=navigation, aria-label=Breadcrumb, aria-current=page
+- **Screen reader**: Announces as navigation with 'Breadcrumb' label. Current page is indicated with aria-current='page'. Links are navigable via keyboard. Separator elements are hidden from assistive technology.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

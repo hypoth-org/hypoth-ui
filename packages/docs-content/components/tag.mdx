@@ -1,0 +1,56 @@
+---
+title: Tag
+description: Removable tag/chip for categories and selections
+component: tag
+status: stable
+category: feedback
+order: 5
+---
+
+# Tag
+
+Removable tag/chip for categories and selections
+
+## Usage
+
+### Web Component
+
+```html
+<ds-tag>Content</ds-tag>
+```
+
+### React
+
+```tsx
+import { Tag } from "@ds/react";
+
+function Example() {
+  return <Tag>Content</Tag>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Enter, Space, Backspace, Delete
+- **ARIA**: role=status, role=button, aria-disabled, aria-label
+- **Screen reader**: Non-clickable tags use role=status. Clickable tags use role=button with keyboard activation. Remove button has accessible 'Remove' label. Disabled state announced via aria-disabled.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

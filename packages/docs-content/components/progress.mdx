@@ -1,0 +1,56 @@
+---
+title: Progress
+description: Linear and circular progress indicators
+component: progress
+status: stable
+category: feedback
+order: 3
+---
+
+# Progress
+
+Linear and circular progress indicators
+
+## Usage
+
+### Web Component
+
+```html
+<ds-progress>Content</ds-progress>
+```
+
+### React
+
+```tsx
+import { Progress } from "@ds/react";
+
+function Example() {
+  return <Progress>Content</Progress>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: role=progressbar, aria-valuenow, aria-valuemin, aria-valuemax, aria-valuetext, aria-busy, aria-label
+- **Screen reader**: Uses role=progressbar with aria-valuenow, aria-valuemin, and aria-valuemax. Provides aria-valuetext for human-readable progress. Indeterminate state uses aria-busy. Accessible label can be provided.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

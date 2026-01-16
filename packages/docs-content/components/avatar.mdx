@@ -1,0 +1,56 @@
+---
+title: Avatar
+description: User avatar with image, initials, or fallback icon
+component: avatar
+status: stable
+category: data-display
+order: 1
+---
+
+# Avatar
+
+User avatar with image, initials, or fallback icon
+
+## Usage
+
+### Web Component
+
+```html
+<ds-avatar>Content</ds-avatar>
+```
+
+### React
+
+```tsx
+import { Avatar } from "@ds/react";
+
+function Example() {
+  return <Avatar>Content</Avatar>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: role=img, aria-label
+- **Screen reader**: Announces as an image with role=img and aria-label describing the user (alt text, name, or 'Avatar'). Status indicator includes an accessible label when present.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

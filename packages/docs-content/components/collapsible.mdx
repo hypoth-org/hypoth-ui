@@ -1,0 +1,56 @@
+---
+title: Collapsible
+description: Expandable/collapsible content section with animated transitions
+component: collapsible
+status: stable
+category: utilities
+order: 1
+---
+
+# Collapsible
+
+Expandable/collapsible content section with animated transitions
+
+## Usage
+
+### Web Component
+
+```html
+<ds-collapsible>Content</ds-collapsible>
+```
+
+### React
+
+```tsx
+import { Collapsible } from "@ds/react";
+
+function Example() {
+  return <Collapsible>Content</Collapsible>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Enter, Space
+- **ARIA**: aria-expanded, aria-controls, aria-disabled
+- **Screen reader**: Trigger announces with aria-expanded state (true/false) and aria-controls pointing to content region. Disabled state is announced via aria-disabled. Content region has unique ID for association.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

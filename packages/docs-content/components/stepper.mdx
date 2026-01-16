@@ -1,0 +1,56 @@
+---
+title: Stepper
+description: Step-by-step progress indicator for multi-step processes
+component: stepper
+status: stable
+category: navigation
+order: 4
+---
+
+# Stepper
+
+Step-by-step progress indicator for multi-step processes
+
+## Usage
+
+### Web Component
+
+```html
+<ds-stepper>Content</ds-stepper>
+```
+
+### React
+
+```tsx
+import { Stepper } from "@ds/react";
+
+function Example() {
+  return <Stepper>Content</Stepper>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Enter, Space
+- **ARIA**: role=list, role=listitem, aria-current=step, aria-label
+- **Screen reader**: Uses role=list with accessible label describing the progress steps. Each step item is a list item with active step indicated by aria-current=step. Completed and pending states are conveyed through data attributes.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -1,0 +1,56 @@
+---
+title: Aspect Ratio
+description: Container that maintains a specified aspect ratio for responsive media
+component: aspect-ratio
+status: stable
+category: layout
+order: 1
+---
+
+# Aspect Ratio
+
+Container that maintains a specified aspect ratio for responsive media
+
+## Usage
+
+### Web Component
+
+```html
+<ds-aspect-ratio>Content</ds-aspect-ratio>
+```
+
+### React
+
+```tsx
+import { AspectRatio } from "@ds/react";
+
+function Example() {
+  return <AspectRatio>Content</AspectRatio>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: 
+- **Screen reader**: No specific screen reader behavior. Content within the aspect ratio container should have appropriate alt text or labels.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

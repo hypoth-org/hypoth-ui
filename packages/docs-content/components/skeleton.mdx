@@ -1,0 +1,56 @@
+---
+title: Skeleton
+description: Loading placeholder with shimmer animation
+component: skeleton
+status: stable
+category: feedback
+order: 4
+---
+
+# Skeleton
+
+Loading placeholder with shimmer animation
+
+## Usage
+
+### Web Component
+
+```html
+<ds-skeleton>Content</ds-skeleton>
+```
+
+### React
+
+```tsx
+import { Skeleton } from "@ds/react";
+
+function Example() {
+  return <Skeleton>Content</Skeleton>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: role=status, aria-busy, aria-label
+- **Screen reader**: Uses role=status with aria-busy=true to announce loading state. Provides accessible label (default 'Loading...'). Screen readers announce the loading status without repeated announcements.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

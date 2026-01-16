@@ -37,6 +37,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives) (021-ds-audit-remediation)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing) (022-ds-quality-overhaul)
 - N/A (stateless UI components; file-based docs/manifests) (022-ds-quality-overhaul)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI) (024-arch-review-fixes)
+- File-based (JSON registry, bundled templates, MDX files) (024-arch-review-fixes)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -102,9 +104,9 @@ pnpm --filter @hypoth-ui/cli sync:templates # Sync component templates from sour
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 024-arch-review-fixes: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI)
 - 022-ds-quality-overhaul: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing)
 - 021-ds-audit-remediation: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives)
-- 020-layout-primitives: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency)
 
 
 <!-- MANUAL ADDITIONS START -->

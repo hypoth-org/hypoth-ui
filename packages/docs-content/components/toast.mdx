@@ -1,0 +1,56 @@
+---
+title: Toast
+description: Non-blocking notification with auto-dismiss and positioning
+component: toast
+status: stable
+category: feedback
+order: 6
+---
+
+# Toast
+
+Non-blocking notification with auto-dismiss and positioning
+
+## Usage
+
+### Web Component
+
+```html
+<ds-toast>Content</ds-toast>
+```
+
+### React
+
+```tsx
+import { Toast } from "@ds/react";
+
+function Example() {
+  return <Toast>Content</Toast>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Escape
+- **ARIA**: role=status, aria-live=polite, aria-atomic
+- **Screen reader**: Uses role=status with aria-live=polite for non-intrusive announcements. aria-atomic ensures complete message is announced. Dismiss button has accessible label. Progress bar is decorative.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

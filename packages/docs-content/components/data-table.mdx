@@ -1,0 +1,56 @@
+---
+title: Data Table
+description: Advanced data table with pagination, virtualization, and filtering
+component: data-table
+status: stable
+category: data-display
+order: 3
+---
+
+# Data Table
+
+Advanced data table with pagination, virtualization, and filtering
+
+## Usage
+
+### Web Component
+
+```html
+<ds-data-table>Content</ds-data-table>
+```
+
+### React
+
+```tsx
+import { DataTable } from "@ds/react";
+
+function Example() {
+  return <DataTable>Content</DataTable>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Enter, Space, Home, End, PageUp, PageDown
+- **ARIA**: role=region, role=grid, role=gridcell, aria-sort, aria-selected, aria-busy, aria-current=page, aria-live=polite
+- **Screen reader**: Uses role=region with 'Data table' label. Sortable columns announce sort state changes via live region. Row selection is announced. Loading state uses aria-busy. Pagination controls have accessible labels.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context
