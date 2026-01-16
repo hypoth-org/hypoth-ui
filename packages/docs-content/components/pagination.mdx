@@ -1,0 +1,56 @@
+---
+title: Pagination
+description: Page navigation with previous/next and page number buttons
+component: pagination
+status: stable
+category: navigation
+order: 3
+---
+
+# Pagination
+
+Page navigation with previous/next and page number buttons
+
+## Usage
+
+### Web Component
+
+```html
+<ds-pagination>Content</ds-pagination>
+```
+
+### React
+
+```tsx
+import { Pagination } from "@ds/react";
+
+function Example() {
+  return <Pagination>Content</Pagination>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Enter, Space
+- **ARIA**: role=navigation, aria-label=Pagination, aria-current=page, aria-disabled
+- **Screen reader**: Root has role=navigation with 'Pagination' label. Current page uses aria-current=page. Previous/Next buttons are labeled. Disabled states are announced. Ellipsis elements are hidden from screen readers.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

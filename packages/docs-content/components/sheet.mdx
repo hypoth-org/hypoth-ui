@@ -1,0 +1,56 @@
+---
+title: Sheet
+description: Slide-in panel overlay for secondary content and forms
+component: sheet
+status: stable
+category: overlays
+order: 8
+---
+
+# Sheet
+
+Slide-in panel overlay for secondary content and forms
+
+## Usage
+
+### Web Component
+
+```html
+<ds-sheet>Content</ds-sheet>
+```
+
+### React
+
+```tsx
+import { Sheet } from "@ds/react";
+
+function Example() {
+  return <Sheet>Content</Sheet>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Shift+Tab, Escape
+- **ARIA**: role=dialog, aria-modal, aria-labelledby, aria-describedby
+- **Screen reader**: Announces as a dialog with role=dialog and aria-modal. Title linked via aria-labelledby. Description via aria-describedby. Focus trapped within sheet. Focus returns to trigger on close.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -8,8 +8,13 @@
       "description": "Accessible button with loading and disabled states",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -17,17 +22,14 @@
           "target": "button.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "button/button.ts",
-          "target": "button.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "button",
-        "keyboardSupport": ["Enter", "Space"]
+        "keyboardSupport": [
+          "Enter",
+          "Space"
+        ]
       }
     },
     {
@@ -36,44 +38,31 @@
       "description": "Modal dialog with focus management and keyboard navigation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
-          "path": "dialog/dialog.tsx",
-          "target": "dialog.tsx",
+          "path": "dialog/dialog-root.tsx",
+          "target": "dialog-root.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "dialog/dialog.ts",
-          "target": "dialog.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dialog/dialog-content.ts",
-          "target": "dialog-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dialog/dialog-title.ts",
-          "target": "dialog-title.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dialog/dialog-description.ts",
-          "target": "dialog-description.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "dialog-modal",
-        "keyboardSupport": ["Escape", "Tab"]
+        "keyboardSupport": [
+          "Escape",
+          "Tab"
+        ]
       }
     },
     {
@@ -82,38 +71,64 @@
       "description": "Dropdown menu with keyboard navigation and submenus",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
-          "path": "menu/menu.tsx",
-          "target": "menu.tsx",
+          "path": "menu/menu-content.tsx",
+          "target": "menu-content.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "menu/menu.ts",
-          "target": "menu.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "menu/menu-item.tsx",
+          "target": "menu-item.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "menu/menu-content.ts",
-          "target": "menu-content.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "menu/menu-label.tsx",
+          "target": "menu-label.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "menu/menu-item.ts",
-          "target": "menu-item.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "menu/menu-root.tsx",
+          "target": "menu-root.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "menu/menu-separator.tsx",
+          "target": "menu-separator.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "menu/menu-trigger.tsx",
+          "target": "menu-trigger.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
         "apgPattern": "menu-button",
-        "keyboardSupport": ["Enter", "Space", "ArrowUp", "ArrowDown", "Escape"]
+        "keyboardSupport": [
+          "Enter",
+          "Space",
+          "ArrowUp",
+          "ArrowDown",
+          "Escape"
+        ]
       }
     },
     {
@@ -122,8 +137,14 @@
       "description": "Non-modal overlay positioned relative to trigger",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -131,23 +152,14 @@
           "target": "popover.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "popover/popover.ts",
-          "target": "popover.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "popover/popover-content.ts",
-          "target": "popover-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "dialog-non-modal",
-        "keyboardSupport": ["Escape", "Tab"]
+        "keyboardSupport": [
+          "Escape",
+          "Tab"
+        ]
       }
     },
     {
@@ -156,8 +168,14 @@
       "description": "Informational overlay on hover/focus",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -165,23 +183,13 @@
           "target": "tooltip.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "tooltip/tooltip.ts",
-          "target": "tooltip.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "tooltip/tooltip-content.ts",
-          "target": "tooltip-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "tooltip",
-        "keyboardSupport": ["Escape"]
+        "keyboardSupport": [
+          "Escape"
+        ]
       }
     },
     {
@@ -190,26 +198,29 @@
       "description": "Accessible text input with validation states",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
           "path": "input/input.tsx",
           "target": "input.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "input/input.ts",
-          "target": "input.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "textbox",
-        "keyboardSupport": ["Tab"]
+        "keyboardSupport": [
+          "Tab"
+        ]
       }
     },
     {
@@ -218,26 +229,29 @@
       "description": "Multi-line text input with auto-resize",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
           "path": "textarea/textarea.tsx",
           "target": "textarea.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "textarea/textarea.ts",
-          "target": "textarea.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "textbox-multiline",
-        "keyboardSupport": ["Tab"]
+        "keyboardSupport": [
+          "Tab"
+        ]
       }
     },
     {
@@ -246,26 +260,29 @@
       "description": "Tri-state checkbox with indeterminate support",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
           "path": "checkbox/checkbox.tsx",
           "target": "checkbox.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "checkbox/checkbox.ts",
-          "target": "checkbox.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "checkbox",
-        "keyboardSupport": ["Space"]
+        "keyboardSupport": [
+          "Space"
+        ]
       }
     },
     {
@@ -274,9 +291,17 @@
       "description": "Radio button group with keyboard navigation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
           "path": "radio/radio-group.tsx",
@@ -299,7 +324,12 @@
       ],
       "a11y": {
         "apgPattern": "radio-group",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight"
+        ]
       }
     },
     {
@@ -308,26 +338,29 @@
       "description": "Toggle switch for boolean settings",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
           "path": "switch/switch.tsx",
           "target": "switch.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "switch/switch.ts",
-          "target": "switch.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "switch",
-        "keyboardSupport": ["Space"]
+        "keyboardSupport": [
+          "Space"
+        ]
       }
     },
     {
@@ -336,8 +369,13 @@
       "description": "Form field wrapper with label, description, and error states",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -345,30 +383,6 @@
           "target": "field.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "field/field.ts",
-          "target": "field.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "field/label.ts",
-          "target": "label.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "field/field-description.ts",
-          "target": "field-description.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "field/field-error.ts",
-          "target": "field-error.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -382,8 +396,13 @@
       "description": "SVG icon with size and accessibility handling",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -391,18 +410,6 @@
           "target": "icon.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "icon/icon.ts",
-          "target": "icon.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "icon/icon-adapter.ts",
-          "target": "icon-adapter.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -416,8 +423,13 @@
       "description": "Accessible anchor with external link handling",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -425,17 +437,13 @@
           "target": "link.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "link/link.ts",
-          "target": "link.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "link",
-        "keyboardSupport": ["Enter"]
+        "keyboardSupport": [
+          "Enter"
+        ]
       }
     },
     {
@@ -444,8 +452,13 @@
       "description": "Loading spinner with accessibility announcements",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -453,12 +466,6 @@
           "target": "spinner.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "spinner/spinner.ts",
-          "target": "spinner.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -472,8 +479,13 @@
       "description": "Typography component with semantic variants",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -481,12 +493,6 @@
           "target": "text.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "text/text.ts",
-          "target": "text.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -500,8 +506,13 @@
       "description": "Hide content visually while keeping it accessible",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -509,12 +520,6 @@
           "target": "visually-hidden.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "visually-hidden/visually-hidden.ts",
-          "target": "visually-hidden.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -528,68 +533,37 @@
       "description": "Accessible select dropdown with search, virtualization, and keyboard navigation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field", "popover"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field",
+        "popover"
+      ],
       "files": [
         {
-          "path": "select/index.tsx",
-          "target": "select/index.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
           "path": "select/select-root.tsx",
-          "target": "select/select-root.tsx",
+          "target": "select-root.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "select/select-trigger.tsx",
-          "target": "select/select-trigger.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "select/select-content.tsx",
-          "target": "select/select-content.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "select/select-option.tsx",
-          "target": "select/select-option.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "select/select.ts",
-          "target": "select/select.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "select/select-trigger.ts",
-          "target": "select/select-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "select/select-content.ts",
-          "target": "select/select-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "select/select-option.ts",
-          "target": "select/select-option.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "listbox",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "Home", "End", "Enter", "Space", "Escape"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "Home",
+          "End",
+          "Enter",
+          "Space",
+          "Escape"
+        ]
       }
     },
     {
@@ -598,80 +572,71 @@
       "description": "Autocomplete input with async search, multi-select tags, and creatable options",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field", "popover"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field",
+        "popover"
+      ],
       "files": [
         {
-          "path": "combobox/index.tsx",
-          "target": "combobox/index.tsx",
+          "path": "combobox/combobox-content.tsx",
+          "target": "combobox-content.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "combobox/combobox-root.tsx",
-          "target": "combobox/combobox-root.tsx",
+          "path": "combobox/combobox-empty.tsx",
+          "target": "combobox-empty.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "combobox/combobox-input.tsx",
-          "target": "combobox/combobox-input.tsx",
+          "target": "combobox-input.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "combobox/combobox-content.tsx",
-          "target": "combobox/combobox-content.tsx",
+          "path": "combobox/combobox-loading.tsx",
+          "target": "combobox-loading.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "combobox/combobox-option.tsx",
-          "target": "combobox/combobox-option.tsx",
+          "target": "combobox-option.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "combobox/combobox-root.tsx",
+          "target": "combobox-root.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "combobox/combobox-tag.tsx",
-          "target": "combobox/combobox-tag.tsx",
+          "target": "combobox-tag.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "combobox/combobox.ts",
-          "target": "combobox/combobox.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "combobox/combobox-input.ts",
-          "target": "combobox/combobox-input.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "combobox/combobox-content.ts",
-          "target": "combobox/combobox-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "combobox/combobox-option.ts",
-          "target": "combobox/combobox-option.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "combobox/combobox-tag.ts",
-          "target": "combobox/combobox-tag.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "combobox",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "Enter", "Escape", "Backspace"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "Enter",
+          "Escape",
+          "Backspace"
+        ]
       }
     },
     {
@@ -680,51 +645,44 @@
       "description": "Calendar date picker with single/range selection, min/max constraints, and locale support",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom", "date-fns"],
-      "registryDependencies": ["field", "popover", "button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom",
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "field",
+        "popover",
+        "button"
+      ],
       "files": [
         {
-          "path": "date-picker/index.tsx",
-          "target": "date-picker/index.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "date-picker/date-picker-root.tsx",
-          "target": "date-picker/date-picker-root.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "date-picker/date-picker-trigger.tsx",
-          "target": "date-picker/date-picker-trigger.tsx",
+          "path": "date-picker/date-picker-calendar.tsx",
+          "target": "date-picker-calendar.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "date-picker/date-picker-content.tsx",
-          "target": "date-picker/date-picker-content.tsx",
+          "target": "date-picker-content.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "date-picker/date-picker-calendar.tsx",
-          "target": "date-picker/date-picker-calendar.tsx",
+          "path": "date-picker/date-picker-root.tsx",
+          "target": "date-picker-root.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "date-picker/date-picker.ts",
-          "target": "date-picker/date-picker.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "date-picker/date-picker-calendar.ts",
-          "target": "date-picker/date-picker-calendar.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "date-picker/date-picker-trigger.tsx",
+          "target": "date-picker-trigger.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
@@ -749,45 +707,41 @@
       "description": "Range slider with single/dual thumbs, step snapping, and keyboard control",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
-          "path": "slider/index.tsx",
-          "target": "slider/index.tsx",
+          "path": "slider/slider-range.tsx",
+          "target": "slider-range.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "slider/slider-root.tsx",
-          "target": "slider/slider-root.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "slider/slider-track.tsx",
-          "target": "slider/slider-track.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "slider/slider-range.tsx",
-          "target": "slider/slider-range.tsx",
+          "target": "slider-root.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "slider/slider-thumb.tsx",
-          "target": "slider/slider-thumb.tsx",
+          "target": "slider-thumb.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "slider/slider.ts",
-          "target": "slider/slider.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "slider/slider-track.tsx",
+          "target": "slider-track.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
@@ -810,50 +764,54 @@
       "description": "Numeric input with increment/decrement buttons, step, min/max validation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field", "button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field",
+        "button"
+      ],
       "files": [
         {
-          "path": "number-input/index.tsx",
-          "target": "number-input/index.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "number-input/number-input-root.tsx",
-          "target": "number-input/number-input-root.tsx",
+          "path": "number-input/number-input-decrement.tsx",
+          "target": "number-input-decrement.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "number-input/number-input-field.tsx",
-          "target": "number-input/number-input-field.tsx",
+          "target": "number-input-field.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "number-input/number-input-increment.tsx",
-          "target": "number-input/number-input-increment.tsx",
+          "target": "number-input-increment.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "number-input/number-input-decrement.tsx",
-          "target": "number-input/number-input-decrement.tsx",
+          "path": "number-input/number-input-root.tsx",
+          "target": "number-input-root.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "number-input/number-input.ts",
-          "target": "number-input/number-input.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "spinbutton",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End"
+        ]
       }
     },
     {
@@ -862,50 +820,50 @@
       "description": "Drag-and-drop file upload with validation, progress tracking, and preview",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field", "button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field",
+        "button"
+      ],
       "files": [
         {
-          "path": "file-upload/index.tsx",
-          "target": "file-upload/index.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "file-upload/file-upload-root.tsx",
-          "target": "file-upload/file-upload-root.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
           "path": "file-upload/file-upload-dropzone.tsx",
-          "target": "file-upload/file-upload-dropzone.tsx",
+          "target": "file-upload-dropzone.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "file-upload/file-upload-input.tsx",
-          "target": "file-upload/file-upload-input.tsx",
+          "target": "file-upload-input.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "file-upload/file-upload-item.tsx",
-          "target": "file-upload/file-upload-item.tsx",
+          "target": "file-upload-item.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "file-upload/file-upload.ts",
-          "target": "file-upload/file-upload.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "file-upload/file-upload-root.tsx",
+          "target": "file-upload-root.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
         "apgPattern": "button",
-        "keyboardSupport": ["Enter", "Space"]
+        "keyboardSupport": [
+          "Enter",
+          "Space"
+        ]
       }
     },
     {
@@ -914,38 +872,40 @@
       "description": "Time input with 12/24 hour format, minute intervals, and segmented fields",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
-          "path": "time-picker/index.tsx",
-          "target": "time-picker/index.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
           "path": "time-picker/time-picker-root.tsx",
-          "target": "time-picker/time-picker-root.tsx",
+          "target": "time-picker-root.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "time-picker/time-picker-segment.tsx",
-          "target": "time-picker/time-picker-segment.tsx",
+          "target": "time-picker-segment.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "time-picker/time-picker.ts",
-          "target": "time-picker/time-picker.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "spinbutton",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "Tab"
+        ]
       }
     },
     {
@@ -954,38 +914,39 @@
       "description": "OTP/PIN entry with auto-advance, paste support, and masking",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["field"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
       "files": [
         {
-          "path": "pin-input/index.tsx",
-          "target": "pin-input/index.tsx",
+          "path": "pin-input/pin-input-field.tsx",
+          "target": "pin-input-field.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
           "path": "pin-input/pin-input-root.tsx",
-          "target": "pin-input/pin-input-root.tsx",
+          "target": "pin-input-root.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "pin-input/pin-input-field.tsx",
-          "target": "pin-input/pin-input-field.tsx",
-          "type": "tsx",
-          "framework": "react"
-        },
-        {
-          "path": "pin-input/pin-input.ts",
-          "target": "pin-input/pin-input.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "textbox",
-        "keyboardSupport": ["ArrowLeft", "ArrowRight", "Backspace", "Delete"]
+        "keyboardSupport": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Backspace",
+          "Delete"
+        ]
       }
     },
     {
@@ -994,39 +955,20 @@
       "description": "Container component for grouping related content with header, content, and footer sections",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "card/index.tsx",
-          "target": "card/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "card/card.ts",
-          "target": "card/card.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "card/card-header.ts",
-          "target": "card/card-header.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "card/card-content.ts",
-          "target": "card/card-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "card/card-footer.ts",
-          "target": "card/card-footer.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -1040,21 +982,20 @@
       "description": "Visual divider between content sections with horizontal or vertical orientation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "separator/index.tsx",
-          "target": "separator/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "separator/separator.ts",
-          "target": "separator/separator.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -1068,21 +1009,20 @@
       "description": "Container that maintains a specified aspect ratio for responsive media",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "aspect-ratio/index.tsx",
-          "target": "aspect-ratio/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "aspect-ratio/aspect-ratio.ts",
-          "target": "aspect-ratio/aspect-ratio.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -1096,38 +1036,29 @@
       "description": "Expandable/collapsible content section with animated transitions",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "collapsible/index.tsx",
-          "target": "collapsible/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "collapsible/collapsible.ts",
-          "target": "collapsible/collapsible.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "collapsible/collapsible-trigger.ts",
-          "target": "collapsible/collapsible-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "collapsible/collapsible-content.ts",
-          "target": "collapsible/collapsible-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "disclosure",
-        "keyboardSupport": ["Enter", "Space"]
+        "keyboardSupport": [
+          "Enter",
+          "Space"
+        ]
       }
     },
     {
@@ -1136,44 +1067,31 @@
       "description": "Tabbed interface for organizing content into switchable panels",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "tabs/index.tsx",
-          "target": "tabs/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "tabs/tabs.ts",
-          "target": "tabs/tabs.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "tabs/tabs-list.ts",
-          "target": "tabs/tabs-list.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "tabs/tabs-trigger.ts",
-          "target": "tabs/tabs-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "tabs/tabs-content.ts",
-          "target": "tabs/tabs-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "tabs",
-        "keyboardSupport": ["ArrowLeft", "ArrowRight", "Home", "End"]
+        "keyboardSupport": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End"
+        ]
       }
     },
     {
@@ -1182,44 +1100,35 @@
       "description": "Vertically stacked expandable sections for organizing dense content",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["collapsible"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "collapsible"
+      ],
       "files": [
         {
           "path": "accordion/index.tsx",
-          "target": "accordion/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "accordion/accordion.ts",
-          "target": "accordion/accordion.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "accordion/accordion-item.ts",
-          "target": "accordion/accordion-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "accordion/accordion-trigger.ts",
-          "target": "accordion/accordion-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "accordion/accordion-content.ts",
-          "target": "accordion/accordion-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "accordion",
-        "keyboardSupport": ["Enter", "Space", "ArrowUp", "ArrowDown", "Home", "End"]
+        "keyboardSupport": [
+          "Enter",
+          "Space",
+          "ArrowUp",
+          "ArrowDown",
+          "Home",
+          "End"
+        ]
       }
     },
     {
@@ -1228,74 +1137,31 @@
       "description": "Modal dialog for confirmations requiring explicit user action",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "alert-dialog/index.tsx",
-          "target": "alert-dialog/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "alert-dialog/alert-dialog.ts",
-          "target": "alert-dialog/alert-dialog.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-trigger.ts",
-          "target": "alert-dialog/alert-dialog-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-content.ts",
-          "target": "alert-dialog/alert-dialog-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-header.ts",
-          "target": "alert-dialog/alert-dialog-header.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-footer.ts",
-          "target": "alert-dialog/alert-dialog-footer.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-title.ts",
-          "target": "alert-dialog/alert-dialog-title.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-description.ts",
-          "target": "alert-dialog/alert-dialog-description.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-action.ts",
-          "target": "alert-dialog/alert-dialog-action.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "alert-dialog/alert-dialog-cancel.ts",
-          "target": "alert-dialog/alert-dialog-cancel.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "alertdialog",
-        "keyboardSupport": ["Escape", "Tab"]
+        "keyboardSupport": [
+          "Escape",
+          "Tab"
+        ]
       }
     },
     {
@@ -1304,74 +1170,31 @@
       "description": "Slide-in panel overlay for secondary content and forms",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "sheet/index.tsx",
-          "target": "sheet/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "sheet/sheet.ts",
-          "target": "sheet/sheet.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-trigger.ts",
-          "target": "sheet/sheet-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-content.ts",
-          "target": "sheet/sheet-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-overlay.ts",
-          "target": "sheet/sheet-overlay.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-header.ts",
-          "target": "sheet/sheet-header.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-footer.ts",
-          "target": "sheet/sheet-footer.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-title.ts",
-          "target": "sheet/sheet-title.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-description.ts",
-          "target": "sheet/sheet-description.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "sheet/sheet-close.ts",
-          "target": "sheet/sheet-close.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "dialog-modal",
-        "keyboardSupport": ["Escape", "Tab"]
+        "keyboardSupport": [
+          "Escape",
+          "Tab"
+        ]
       }
     },
     {
@@ -1380,56 +1203,31 @@
       "description": "Mobile-friendly slide-in panel with swipe-to-dismiss gesture support",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["sheet"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "sheet"
+      ],
       "files": [
         {
           "path": "drawer/index.tsx",
-          "target": "drawer/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "drawer/drawer.ts",
-          "target": "drawer/drawer.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "drawer/drawer-content.ts",
-          "target": "drawer/drawer-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "drawer/drawer-header.ts",
-          "target": "drawer/drawer-header.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "drawer/drawer-footer.ts",
-          "target": "drawer/drawer-footer.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "drawer/drawer-title.ts",
-          "target": "drawer/drawer-title.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "drawer/drawer-description.ts",
-          "target": "drawer/drawer-description.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "dialog-modal",
-        "keyboardSupport": ["Escape", "Tab"]
+        "keyboardSupport": [
+          "Escape",
+          "Tab"
+        ]
       }
     },
     {
@@ -1438,68 +1236,34 @@
       "description": "Action menu with checkbox items, radio groups, and keyboard navigation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "dropdown-menu/index.tsx",
-          "target": "dropdown-menu/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu.ts",
-          "target": "dropdown-menu/dropdown-menu.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-content.ts",
-          "target": "dropdown-menu/dropdown-menu-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-item.ts",
-          "target": "dropdown-menu/dropdown-menu-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-separator.ts",
-          "target": "dropdown-menu/dropdown-menu-separator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-label.ts",
-          "target": "dropdown-menu/dropdown-menu-label.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-checkbox-item.ts",
-          "target": "dropdown-menu/dropdown-menu-checkbox-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-radio-group.ts",
-          "target": "dropdown-menu/dropdown-menu-radio-group.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "dropdown-menu/dropdown-menu-radio-item.ts",
-          "target": "dropdown-menu/dropdown-menu-radio-item.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "menu-button",
-        "keyboardSupport": ["Enter", "Space", "ArrowUp", "ArrowDown", "Escape"]
+        "keyboardSupport": [
+          "Enter",
+          "Space",
+          "ArrowUp",
+          "ArrowDown",
+          "Escape"
+        ]
       }
     },
     {
@@ -1508,50 +1272,32 @@
       "description": "Right-click context menu with keyboard navigation and long-press support",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "context-menu/index.tsx",
-          "target": "context-menu/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "context-menu/context-menu.ts",
-          "target": "context-menu/context-menu.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "context-menu/context-menu-content.ts",
-          "target": "context-menu/context-menu-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "context-menu/context-menu-item.ts",
-          "target": "context-menu/context-menu-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "context-menu/context-menu-separator.ts",
-          "target": "context-menu/context-menu-separator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "context-menu/context-menu-label.ts",
-          "target": "context-menu/context-menu-label.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "menu",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "Enter", "Space", "Escape"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "Enter",
+          "Space",
+          "Escape"
+        ]
       }
     },
     {
@@ -1560,32 +1306,28 @@
       "description": "Preview card that appears on hover with configurable delays",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "hover-card/index.tsx",
-          "target": "hover-card/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "hover-card/hover-card.ts",
-          "target": "hover-card/hover-card.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "hover-card/hover-card-content.ts",
-          "target": "hover-card/hover-card-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "tooltip",
-        "keyboardSupport": ["Escape"]
+        "keyboardSupport": [
+          "Escape"
+        ]
       }
     },
     {
@@ -1594,68 +1336,33 @@
       "description": "Mega-menu style navigation with viewport transitions",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "navigation-menu/index.tsx",
-          "target": "navigation-menu/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "navigation-menu/navigation-menu.ts",
-          "target": "navigation-menu/navigation-menu.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-list.ts",
-          "target": "navigation-menu/navigation-menu-list.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-item.ts",
-          "target": "navigation-menu/navigation-menu-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-trigger.ts",
-          "target": "navigation-menu/navigation-menu-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-content.ts",
-          "target": "navigation-menu/navigation-menu-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-link.ts",
-          "target": "navigation-menu/navigation-menu-link.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-indicator.ts",
-          "target": "navigation-menu/navigation-menu-indicator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "navigation-menu/navigation-menu-viewport.ts",
-          "target": "navigation-menu/navigation-menu-viewport.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "menubar",
-        "keyboardSupport": ["ArrowLeft", "ArrowRight", "ArrowDown", "Enter", "Space", "Escape"]
+        "keyboardSupport": [
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowDown",
+          "Enter",
+          "Space",
+          "Escape"
+        ]
       }
     },
     {
@@ -1664,44 +1371,32 @@
       "description": "Custom scrollbar container with multiple visibility modes",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "scroll-area/index.tsx",
-          "target": "scroll-area/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "scroll-area/scroll-area.ts",
-          "target": "scroll-area/scroll-area.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "scroll-area/scroll-area-viewport.ts",
-          "target": "scroll-area/scroll-area-viewport.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "scroll-area/scroll-area-scrollbar.ts",
-          "target": "scroll-area/scroll-area-scrollbar.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "scroll-area/scroll-area-thumb.ts",
-          "target": "scroll-area/scroll-area-thumb.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "none",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End"
+        ]
       }
     },
     {
@@ -1710,51 +1405,22 @@
       "description": "Navigation trail showing current location in hierarchy",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["link"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "link"
+      ],
       "files": [
         {
           "path": "breadcrumb/index.tsx",
-          "target": "breadcrumb/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "breadcrumb/breadcrumb.ts",
-          "target": "breadcrumb/breadcrumb.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "breadcrumb/breadcrumb-list.ts",
-          "target": "breadcrumb/breadcrumb-list.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "breadcrumb/breadcrumb-item.ts",
-          "target": "breadcrumb/breadcrumb-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "breadcrumb/breadcrumb-link.ts",
-          "target": "breadcrumb/breadcrumb-link.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "breadcrumb/breadcrumb-page.ts",
-          "target": "breadcrumb/breadcrumb-page.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "breadcrumb/breadcrumb-separator.ts",
-          "target": "breadcrumb/breadcrumb-separator.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -1768,57 +1434,22 @@
       "description": "Page navigation with previous/next and page number buttons",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
-      "registryDependencies": ["button"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "pagination/index.tsx",
-          "target": "pagination/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "pagination/pagination.ts",
-          "target": "pagination/pagination.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-content.ts",
-          "target": "pagination/pagination-content.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-item.ts",
-          "target": "pagination/pagination-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-link.ts",
-          "target": "pagination/pagination-link.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-previous.ts",
-          "target": "pagination/pagination-previous.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-next.ts",
-          "target": "pagination/pagination-next.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "pagination/pagination-ellipsis.ts",
-          "target": "pagination/pagination-ellipsis.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -1832,68 +1463,28 @@
       "description": "Step-by-step progress indicator for multi-step processes",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "stepper/index.tsx",
-          "target": "stepper/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "stepper/stepper.ts",
-          "target": "stepper/stepper.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-item.ts",
-          "target": "stepper/stepper-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-trigger.ts",
-          "target": "stepper/stepper-trigger.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-indicator.ts",
-          "target": "stepper/stepper-indicator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-title.ts",
-          "target": "stepper/stepper-title.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-description.ts",
-          "target": "stepper/stepper-description.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-separator.ts",
-          "target": "stepper/stepper-separator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "stepper/stepper-content.ts",
-          "target": "stepper/stepper-content.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "none",
-        "keyboardSupport": ["Enter", "Space"]
+        "keyboardSupport": [
+          "Enter",
+          "Space"
+        ]
       }
     },
     {
@@ -1902,68 +1493,31 @@
       "description": "Command palette with fuzzy search, keyboard navigation, and grouping",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "command/index.tsx",
-          "target": "command/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "command/command.ts",
-          "target": "command/command.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-input.ts",
-          "target": "command/command-input.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-list.ts",
-          "target": "command/command-list.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-item.ts",
-          "target": "command/command-item.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-group.ts",
-          "target": "command/command-group.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-separator.ts",
-          "target": "command/command-separator.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-empty.ts",
-          "target": "command/command-empty.ts",
-          "type": "ts",
-          "framework": "wc"
-        },
-        {
-          "path": "command/command-loading.ts",
-          "target": "command/command-loading.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "listbox",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "Enter", "Escape"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "Enter",
+          "Escape"
+        ]
       }
     },
     {
@@ -1972,21 +1526,20 @@
       "description": "Contextual feedback message with status variants",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "alert/index.tsx",
-          "target": "alert/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "alert/alert.ts",
-          "target": "alert/alert.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -2000,32 +1553,40 @@
       "description": "Non-blocking notification with auto-dismiss and positioning",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "toast/index.tsx",
-          "target": "toast/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "toast/toast.ts",
-          "target": "toast/toast.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "toast/provider.tsx",
+          "target": "provider.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "toast/toast-provider.ts",
-          "target": "toast/toast-provider.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "toast/toast.tsx",
+          "target": "toast.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
         "apgPattern": "alert",
-        "keyboardSupport": ["Escape"]
+        "keyboardSupport": [
+          "Escape"
+        ]
       }
     },
     {
@@ -2034,21 +1595,20 @@
       "description": "Linear and circular progress indicators",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "progress/index.tsx",
-          "target": "progress/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "progress/progress.ts",
-          "target": "progress/progress.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -2062,27 +1622,32 @@
       "description": "User avatar with image, initials, or fallback icon",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "avatar/index.tsx",
-          "target": "avatar/index.tsx",
+          "path": "avatar/avatar-group.tsx",
+          "target": "avatar-group.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "avatar/avatar.ts",
-          "target": "avatar/avatar.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "avatar/avatar.tsx",
+          "target": "avatar.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "avatar/avatar-group.ts",
-          "target": "avatar/avatar-group.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "avatar/index.tsx",
+          "target": "index.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
@@ -2096,56 +1661,67 @@
       "description": "Data table with sorting, selection, and sticky headers",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "table/index.tsx",
-          "target": "table/index.tsx",
+          "path": "table/body.tsx",
+          "target": "body.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "table/table.ts",
-          "target": "table/table.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/cell.tsx",
+          "target": "cell.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "table/table-header.ts",
-          "target": "table/table-header.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/head.tsx",
+          "target": "head.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "table/table-body.ts",
-          "target": "table/table-body.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/header.tsx",
+          "target": "header.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "table/table-row.ts",
-          "target": "table/table-row.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/index.tsx",
+          "target": "index.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "table/table-head.ts",
-          "target": "table/table-head.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/root.tsx",
+          "target": "root.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "table/table-cell.ts",
-          "target": "table/table-cell.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "table/row.tsx",
+          "target": "row.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
         "apgPattern": "table",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight"
+        ]
       }
     },
     {
@@ -2154,26 +1730,35 @@
       "description": "Advanced data table with pagination, virtualization, and filtering",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
-      "registryDependencies": ["table"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
+      "registryDependencies": [
+        "table"
+      ],
       "files": [
         {
           "path": "data-table/index.tsx",
-          "target": "data-table/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "data-table/data-table.ts",
-          "target": "data-table/data-table.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "grid",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End"
+        ]
       }
     },
     {
@@ -2182,21 +1767,20 @@
       "description": "Loading placeholder with shimmer animation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "skeleton/index.tsx",
-          "target": "skeleton/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "skeleton/skeleton.ts",
-          "target": "skeleton/skeleton.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -2210,21 +1794,20 @@
       "description": "Status indicator with variants and dot mode",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "badge/index.tsx",
-          "target": "badge/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "badge/badge.ts",
-          "target": "badge/badge.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -2238,26 +1821,30 @@
       "description": "Removable tag/chip for categories and selections",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "tag/index.tsx",
-          "target": "tag/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "tag/tag.ts",
-          "target": "tag/tag.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
         "apgPattern": "button",
-        "keyboardSupport": ["Enter", "Space", "Backspace", "Delete"]
+        "keyboardSupport": [
+          "Enter",
+          "Space",
+          "Backspace",
+          "Delete"
+        ]
       }
     },
     {
@@ -2266,27 +1853,33 @@
       "description": "Hierarchical tree view with expand/collapse and selection",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "tree/index.tsx",
-          "target": "tree/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "tree/tree.ts",
-          "target": "tree/tree.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "tree/tree-item.tsx",
+          "target": "tree-item.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "tree/tree-item.ts",
-          "target": "tree/tree-item.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "tree/tree.tsx",
+          "target": "tree.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
@@ -2309,32 +1902,45 @@
       "description": "Selectable list with keyboard navigation",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens", "@hypoth-ui/primitives-dom"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens",
+        "@hypoth-ui/primitives-dom"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "list/index.tsx",
-          "target": "list/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
         },
         {
-          "path": "list/list.ts",
-          "target": "list/list.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "list/list-item.tsx",
+          "target": "list-item.tsx",
+          "type": "tsx",
+          "framework": "react"
         },
         {
-          "path": "list/list-item.ts",
-          "target": "list/list-item.ts",
-          "type": "ts",
-          "framework": "wc"
+          "path": "list/list.tsx",
+          "target": "list.tsx",
+          "type": "tsx",
+          "framework": "react"
         }
       ],
       "a11y": {
         "apgPattern": "listbox",
-        "keyboardSupport": ["ArrowUp", "ArrowDown", "Home", "End", "Enter", "Space"]
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "Home",
+          "End",
+          "Enter",
+          "Space"
+        ]
       }
     },
     {
@@ -2343,21 +1949,20 @@
       "description": "Calendar widget for date selection",
       "version": "1.0.0",
       "status": "stable",
-      "frameworks": ["react", "wc"],
-      "dependencies": ["@hypoth-ui/tokens"],
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
       "registryDependencies": [],
       "files": [
         {
           "path": "calendar/index.tsx",
-          "target": "calendar/index.tsx",
+          "target": "index.tsx",
           "type": "tsx",
           "framework": "react"
-        },
-        {
-          "path": "calendar/calendar.ts",
-          "target": "calendar/calendar.ts",
-          "type": "ts",
-          "framework": "wc"
         }
       ],
       "a11y": {
@@ -2372,6 +1977,142 @@
           "Home",
           "End",
           "Enter",
+          "Space"
+        ]
+      }
+    },
+    {
+      "name": "layout",
+      "displayName": "Layout Primitives",
+      "description": "Framework-agnostic layout primitives for page composition including Flow, Container, Grid, Box, Page, Section, AppShell, and more",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "layout/app-shell.tsx",
+          "target": "app-shell.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/box.tsx",
+          "target": "box.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/center.tsx",
+          "target": "center.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/container.tsx",
+          "target": "container.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/flow.tsx",
+          "target": "flow.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/grid.tsx",
+          "target": "grid.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/inline.tsx",
+          "target": "inline.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/page.tsx",
+          "target": "page.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/section.tsx",
+          "target": "section.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/spacer.tsx",
+          "target": "spacer.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/split.tsx",
+          "target": "split.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/stack.tsx",
+          "target": "stack.tsx",
+          "type": "tsx",
+          "framework": "react"
+        },
+        {
+          "path": "layout/wrap.tsx",
+          "target": "wrap.tsx",
+          "type": "tsx",
+          "framework": "react"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [
+          "Tab"
+        ]
+      }
+    },
+    {
+      "name": "radio",
+      "displayName": "Radio",
+      "description": "Individual radio button input for use within radio groups",
+      "version": "1.0.0",
+      "status": "stable",
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [
+        "radio-group"
+      ],
+      "files": [
+        {
+          "path": "radio/radio.tsx",
+          "target": "radio.tsx",
+          "type": "tsx",
+          "framework": "react"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "radio-group",
+        "keyboardSupport": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
           "Space"
         ]
       }

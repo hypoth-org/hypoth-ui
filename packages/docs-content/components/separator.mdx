@@ -1,0 +1,56 @@
+---
+title: Separator
+description: Visual divider between content sections
+component: separator
+status: stable
+category: layout
+order: 3
+---
+
+# Separator
+
+Visual divider between content sections
+
+## Usage
+
+### Web Component
+
+```html
+<ds-separator>Content</ds-separator>
+```
+
+### React
+
+```tsx
+import { Separator } from "@ds/react";
+
+function Example() {
+  return <Separator>Content</Separator>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: role=separator, role=none, aria-orientation
+- **Screen reader**: Uses role=separator with aria-orientation for semantic separators. Decorative separators use role=none to be ignored by assistive technology. Non-decorative separators create logical content boundaries.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -73,12 +73,6 @@ export {
 } from "./aria/live-region.js";
 
 export {
-  generateAriaId,
-  resetAriaIdCounter,
-  getAriaIdCounter,
-} from "./aria/id-generator.js";
-
-export {
   connectAriaDescribedBy,
   connectSingleDescriber,
   addAriaDescriber,

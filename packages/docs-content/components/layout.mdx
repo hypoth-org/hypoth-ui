@@ -1,0 +1,56 @@
+---
+title: Layout
+description: Framework-agnostic layout primitives for page composition
+component: layout
+status: stable
+category: layout
+order: 2
+---
+
+# Layout
+
+Framework-agnostic layout primitives for page composition
+
+## Usage
+
+### Web Component
+
+```html
+<ds-layout>Content</ds-layout>
+```
+
+### React
+
+```tsx
+import { Layout } from "@ds/react";
+
+function Example() {
+  return <Layout>Content</Layout>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab
+- **ARIA**: role=banner (Header), role=main (Main), role=contentinfo (Footer)
+- **Screen reader**: Layout components use semantic HTML elements where appropriate. AppShell regions include ARIA landmark roles (banner, main, contentinfo).
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

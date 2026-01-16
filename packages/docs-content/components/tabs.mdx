@@ -1,0 +1,56 @@
+---
+title: Tabs
+description: Tabbed interface for organizing content into switchable panels
+component: tabs
+status: stable
+category: navigation
+order: 5
+---
+
+# Tabs
+
+Tabbed interface for organizing content into switchable panels
+
+## Usage
+
+### Web Component
+
+```html
+<ds-tabs>Content</ds-tabs>
+```
+
+### React
+
+```tsx
+import { Tabs } from "@ds/react";
+
+function Example() {
+  return <Tabs>Content</Tabs>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Home, End, Enter, Space
+- **ARIA**: role=tablist, role=tab, role=tabpanel, aria-selected, aria-controls, aria-labelledby
+- **Screen reader**: Tab list uses role=tablist. Tabs use role=tab with aria-selected. Panels use role=tabpanel with aria-labelledby linking to tab. Automatic activation announces panel content on arrow key navigation.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

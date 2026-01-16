@@ -1,0 +1,56 @@
+---
+title: Alert Dialog
+description: Modal dialog for confirmations requiring explicit user action
+component: alert-dialog
+status: stable
+category: overlays
+order: 2
+---
+
+# Alert Dialog
+
+Modal dialog for confirmations requiring explicit user action
+
+## Usage
+
+### Web Component
+
+```html
+<ds-alert-dialog>Content</ds-alert-dialog>
+```
+
+### React
+
+```tsx
+import { AlertDialog } from "@ds/react";
+
+function Example() {
+  return <AlertDialog>Content</AlertDialog>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Tab, Shift+Tab
+- **ARIA**: role=alertdialog, aria-modal, aria-labelledby, aria-describedby
+- **Screen reader**: Announces as an alert dialog with role=alertdialog. Title and description are announced via aria-labelledby and aria-describedby. Focus is trapped within the dialog until dismissed.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

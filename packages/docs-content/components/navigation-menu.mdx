@@ -1,0 +1,56 @@
+---
+title: Navigation Menu
+description: Mega-menu style navigation with viewport transitions
+component: navigation-menu
+status: stable
+category: navigation
+order: 2
+---
+
+# Navigation Menu
+
+Mega-menu style navigation with viewport transitions
+
+## Usage
+
+### Web Component
+
+```html
+<ds-navigation-menu>Content</ds-navigation-menu>
+```
+
+### React
+
+```tsx
+import { NavigationMenu } from "@ds/react";
+
+function Example() {
+  return <NavigationMenu>Content</NavigationMenu>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Enter, Space, Escape, Tab
+- **ARIA**: role=navigation, aria-label, aria-expanded, data-state
+- **Screen reader**: Root has role=navigation with 'Main' label. Triggers use roving tabindex for horizontal navigation. Dropdowns are announced when expanded. Links within content are focusable.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -1,0 +1,56 @@
+---
+title: Alert
+description: Contextual feedback message with status variants
+component: alert
+status: stable
+category: feedback
+order: 1
+---
+
+# Alert
+
+Contextual feedback message with status variants
+
+## Usage
+
+### Web Component
+
+```html
+<ds-alert>Content</ds-alert>
+```
+
+### React
+
+```tsx
+import { Alert } from "@ds/react";
+
+function Example() {
+  return <Alert>Content</Alert>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Escape
+- **ARIA**: role=alert, role=status, aria-live=assertive, aria-live=polite
+- **Screen reader**: Error and warning variants use role=alert with aria-live=assertive for immediate announcement. Info and success variants use role=status with aria-live=polite. Closable alerts have an accessible dismiss button.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -66,7 +66,6 @@ export class DsButton extends DSElement {
       disabled: this.disabled,
       loading: this.loading,
       type: this.type,
-      onActivate: () => this.handleActivate(),
     });
 
     // Dev warnings: Validate variant and size
@@ -88,11 +87,6 @@ export class DsButton extends DSElement {
         type: this.type,
       });
     }
-  }
-
-  private handleActivate(): void {
-    // Trigger native click for keyboard activation
-    this.click();
   }
 
   private handleClick(event: MouseEvent): void {
@@ -119,6 +113,7 @@ export class DsButton extends DSElement {
       event.preventDefault();
       if (!this.disabled && !this.loading) {
         // Dispatch ds:press event with keyboard flag
+        // Note: We do NOT call this.click() to avoid double event emission
         emitEvent(this, StandardEvents.PRESS, {
           detail: {
             originalEvent: event,
@@ -126,8 +121,6 @@ export class DsButton extends DSElement {
             isKeyboard: true,
           },
         });
-        // Also trigger native click for backward compatibility
-        this.click();
       }
     }
   }

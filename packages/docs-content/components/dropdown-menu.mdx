@@ -1,0 +1,56 @@
+---
+title: Dropdown Menu
+description: Action menu with checkbox items, radio groups, and keyboard navigation
+component: dropdown-menu
+status: stable
+category: overlays
+order: 6
+---
+
+# Dropdown Menu
+
+Action menu with checkbox items, radio groups, and keyboard navigation
+
+## Usage
+
+### Web Component
+
+```html
+<ds-dropdown-menu>Content</ds-dropdown-menu>
+```
+
+### React
+
+```tsx
+import { DropdownMenu } from "@ds/react";
+
+function Example() {
+  return <DropdownMenu>Content</DropdownMenu>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Enter, Space, ArrowUp, ArrowDown, ArrowRight, ArrowLeft, Escape, Home, End
+- **ARIA**: role=menu, role=menuitem, role=menuitemcheckbox, role=menuitemradio, aria-haspopup=menu, aria-expanded, aria-checked
+- **Screen reader**: Trigger announces with aria-haspopup=menu and aria-expanded. Menu uses role=menu. Items use role=menuitem, menuitemcheckbox, or menuitemradio. Type-ahead navigation supported. Submenus expand with ArrowRight.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

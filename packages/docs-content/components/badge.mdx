@@ -1,0 +1,56 @@
+---
+title: Badge
+description: Status indicator with variants and dot mode
+component: badge
+status: stable
+category: feedback
+order: 2
+---
+
+# Badge
+
+Status indicator with variants and dot mode
+
+## Usage
+
+### Web Component
+
+```html
+<ds-badge>Content</ds-badge>
+```
+
+### React
+
+```tsx
+import { Badge } from "@ds/react";
+
+function Example() {
+  return <Badge>Content</Badge>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: role=status, aria-label
+- **Screen reader**: Announces as a status element. Dot badges announce as 'Notification indicator'. Count badges announce the count with context (e.g., '5 notifications'). Max overflow is announced (e.g., '99+ notifications').
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -1,0 +1,56 @@
+---
+title: Hover Card
+description: Preview card that appears on hover with configurable delays
+component: hover-card
+status: stable
+category: overlays
+order: 7
+---
+
+# Hover Card
+
+Preview card that appears on hover with configurable delays
+
+## Usage
+
+### Web Component
+
+```html
+<ds-hover-card>Content</ds-hover-card>
+```
+
+### React
+
+```tsx
+import { HoverCard } from "@ds/react";
+
+function Example() {
+  return <HoverCard>Content</HoverCard>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: Escape
+- **ARIA**: aria-haspopup, aria-expanded, aria-controls
+- **Screen reader**: Trigger has aria-haspopup and aria-expanded. Opens on focus for keyboard users. Content is accessible while open. Escape dismisses the card. Non-modal - doesn't trap focus.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

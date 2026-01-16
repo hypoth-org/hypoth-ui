@@ -1,0 +1,56 @@
+---
+title: List
+description: Selectable list with keyboard navigation
+component: list
+status: stable
+category: data-display
+order: 4
+---
+
+# List
+
+Selectable list with keyboard navigation
+
+## Usage
+
+### Web Component
+
+```html
+<ds-list>Content</ds-list>
+```
+
+### React
+
+```tsx
+import { List } from "@ds/react";
+
+function Example() {
+  return <List>Content</List>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Enter, Space, Home, End
+- **ARIA**: role=listbox, role=option, aria-label, aria-multiselectable, aria-selected, aria-orientation
+- **Screen reader**: Uses role=listbox with accessible label. Items use role=option. Selection mode announced via aria-multiselectable. Selected items announced with aria-selected. Orientation affects arrow key navigation direction.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

@@ -7,7 +7,13 @@
  * @packageDocumentation
  */
 
-import { generateAriaId } from "./id-generator.js";
+/**
+ * Generate a unique ID using crypto.randomUUID().
+ * Uses first 8 characters for brevity while maintaining uniqueness.
+ */
+function generateUniqueId(prefix = "desc"): string {
+  return `${prefix}-${crypto.randomUUID().slice(0, 8)}`;
+}
 
 /**
  * Connect an element to one or more describers via aria-describedby.
@@ -57,7 +63,7 @@ export function connectAriaDescribedBy(
   // Ensure each describer has an ID
   const ids = describers.map((describer) => {
     if (!describer.id) {
-      const id = generateAriaId("desc");
+      const id = generateUniqueId("desc");
       describer.id = id;
       generatedIds.push(id);
     }
@@ -124,7 +130,7 @@ export function addAriaDescriber(
   // Ensure describer has an ID
   let generatedId: string | null = null;
   if (!describer.id) {
-    generatedId = generateAriaId("desc");
+    generatedId = generateUniqueId("desc");
     describer.id = generatedId;
   }
 

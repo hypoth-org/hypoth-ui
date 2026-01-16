@@ -1,0 +1,56 @@
+---
+title: Command
+description: Command palette with fuzzy search, keyboard navigation, and grouping
+component: command
+status: stable
+category: overlays
+order: 3
+---
+
+# Command
+
+Command palette with fuzzy search, keyboard navigation, and grouping
+
+## Usage
+
+### Web Component
+
+```html
+<ds-command>Content</ds-command>
+```
+
+### React
+
+```tsx
+import { Command } from "@ds/react";
+
+function Example() {
+  return <Command>Content</Command>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: ArrowUp, ArrowDown, Enter, Escape, Home, End
+- **ARIA**: role=search, role=listbox, role=option, aria-label, aria-selected
+- **Screen reader**: Root container uses role=search with accessible label. Input announces as a combobox. Items are navigable with arrow keys and announced with their text. Empty state is announced when no results match.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context

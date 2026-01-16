@@ -1,0 +1,56 @@
+---
+title: Card
+description: Container for grouping related content with header, content, and footer
+component: card
+status: stable
+category: data-display
+order: 2
+---
+
+# Card
+
+Container for grouping related content with header, content, and footer
+
+## Usage
+
+### Web Component
+
+```html
+<ds-card>Content</ds-card>
+```
+
+### React
+
+```tsx
+import { Card } from "@ds/react";
+
+function Example() {
+  return <Card>Content</Card>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Content to display |
+
+## Accessibility
+
+- **Keyboard**: N/A (non-interactive)
+- **ARIA**: 
+- **Screen reader**: No specific semantics by default. Content within cards should use appropriate heading levels and landmarks. If card is interactive, ensure proper button/link semantics.
+
+## Best Practices
+
+### Do
+
+- Follow component-specific guidelines from the design system
+- Use semantic markup when possible
+- Test with keyboard navigation
+
+### Don't
+
+- Avoid using non-semantic elements where semantic ones exist
+- Don't override core accessibility features
+- Don't use this component outside its intended context
