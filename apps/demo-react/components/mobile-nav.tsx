@@ -33,7 +33,7 @@ export function MobileNav() {
   }, []);
 
   return (
-    <>
+    <div className="mobile-nav-wrapper">
       {/* Hamburger trigger button */}
       <button
         type="button"
@@ -110,7 +110,7 @@ export function MobileNav() {
           </nav>
         </Sheet.Content>
       </Sheet.Root>
-    </>
+    </div>
   );
 }
 

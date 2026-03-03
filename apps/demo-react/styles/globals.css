@@ -197,6 +197,11 @@
     margin: 0 auto;
   }
 
+  /* Mobile nav wrapper (hidden at desktop, contents at mobile) */
+  .mobile-nav-wrapper {
+    display: none;
+  }
+
   /* Mobile nav trigger (hidden by default) */
   .mobile-nav-trigger {
     display: none;
@@ -349,6 +354,10 @@
 
     .main-content {
       margin-left: 0;
+    }
+
+    .mobile-nav-wrapper {
+      display: contents;
     }
 
     .mobile-nav-trigger {

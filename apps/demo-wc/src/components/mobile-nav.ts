@@ -19,7 +19,13 @@ export class DemoMobileNav extends LitElement {
 
   static styles = css`
     :host {
-      display: contents;
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      :host {
+        display: contents;
+      }
     }
 
     .mobile-nav-trigger {
@@ -88,12 +94,6 @@ export class DemoMobileNav extends LitElement {
       font-size: 18px;
     }
 
-    /* Hide trigger on desktop */
-    @media (min-width: 768px) {
-      .mobile-nav-trigger {
-        display: none;
-      }
-    }
   `;
 
   private _getIcon(iconName: string): string {
