@@ -54,11 +54,14 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
 
-  apps/demo:
+  apps/demo-react:
     dependencies:
       '@ds/css':
         specifier: workspace:*
         version: link:../../packages/css
+      '@ds/demo-shared':
+        specifier: workspace:*
+        version: link:../../packages/demo-shared
       '@ds/next':
         specifier: workspace:*
         version: link:../../packages/next
@@ -96,6 +99,34 @@ importers:
       typescript:
         specifier: ^5.3.0
         version: 5.9.3
+
+  apps/demo-wc:
+    dependencies:
+      '@ds/css':
+        specifier: workspace:*
+        version: link:../../packages/css
+      '@ds/demo-shared':
+        specifier: workspace:*
+        version: link:../../packages/demo-shared
+      '@ds/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
+      '@ds/wc':
+        specifier: workspace:*
+        version: link:../../packages/wc
+      lit:
+        specifier: ^3.1.0
+        version: 3.3.2
+    devDependencies:
+      '@types/node':
+        specifier: ^20.10.0
+        version: 20.19.27
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
+      vite:
+        specifier: ^5.0.0
+        version: 5.4.21(@types/node@20.19.27)
 
   apps/docs:
     dependencies:
@@ -226,6 +257,15 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.27)(happy-dom@13.10.1)
+
+  packages/demo-shared:
+    devDependencies:
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
 
   packages/docs-content:
     dependencies:
