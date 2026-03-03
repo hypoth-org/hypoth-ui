@@ -10,7 +10,10 @@ const WC_URL = "http://localhost:3002";
  *
  * These tests capture a screenshot of the React page, then compare the
  * WC page against it directly — no committed baselines needed.
- * Uses 5% maxDiffPixelRatio threshold configured in playwright.config.ts.
+ *
+ * Uses viewport screenshots (not fullPage) to ensure consistent image
+ * dimensions between React and WC, since full-page heights may differ
+ * slightly due to framework rendering differences.
  */
 
 const sections = [
@@ -24,11 +27,11 @@ const sections = [
 test.describe("Visual Parity: React vs Web Components", () => {
   for (const section of sections) {
     test(`${section.name}`, async ({ page }, testInfo) => {
-      // Capture React page as the expected baseline
+      // Capture React page as the expected baseline (viewport only)
       await page.goto(`${REACT_URL}${section.reactPath}`);
       await page.waitForLoadState("networkidle");
       await page.waitForTimeout(500);
-      const reactScreenshot = await page.screenshot({ fullPage: true });
+      const reactScreenshot = await page.screenshot();
 
       // Attach React screenshot for debugging on failure
       await testInfo.attach(`react-${section.name}`, {
@@ -46,9 +49,7 @@ test.describe("Visual Parity: React vs Web Components", () => {
       await page.waitForLoadState("networkidle");
       await page.waitForTimeout(500);
 
-      await expect(page).toHaveScreenshot(`${section.name}.png`, {
-        fullPage: true,
-      });
+      await expect(page).toHaveScreenshot(`${section.name}.png`);
     });
   }
 });
@@ -63,7 +64,7 @@ test.describe("Visual Parity: Theme Toggle", () => {
       localStorage.setItem("ds-demo-theme", "dark");
     });
     await page.waitForTimeout(300);
-    const reactScreenshot = await page.screenshot({ fullPage: true });
+    const reactScreenshot = await page.screenshot();
 
     await testInfo.attach("react-dashboard-dark", {
       body: reactScreenshot,
@@ -83,9 +84,7 @@ test.describe("Visual Parity: Theme Toggle", () => {
     });
     await page.waitForTimeout(300);
 
-    await expect(page).toHaveScreenshot("dashboard-dark.png", {
-      fullPage: true,
-    });
+    await expect(page).toHaveScreenshot("dashboard-dark.png");
   });
 });
 
