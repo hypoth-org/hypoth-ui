@@ -1,11 +1,15 @@
 import { expect, test } from "@playwright/test";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 
 const REACT_URL = "http://localhost:3001";
 const WC_URL = "http://localhost:3002";
 
 /**
  * Visual parity tests comparing React and Web Component demos.
- * Captures screenshots at each breakpoint and compares layout structure.
+ *
+ * These tests capture a screenshot of the React page, then compare the
+ * WC page against it directly — no committed baselines needed.
  * Uses 5% maxDiffPixelRatio threshold configured in playwright.config.ts.
  */
 
@@ -19,22 +23,30 @@ const sections = [
 
 test.describe("Visual Parity: React vs Web Components", () => {
   for (const section of sections) {
-    test(`${section.name} - React screenshot`, async ({ page }) => {
+    test(`${section.name}`, async ({ page }, testInfo) => {
+      // Capture React page as the expected baseline
       await page.goto(`${REACT_URL}${section.reactPath}`);
       await page.waitForLoadState("networkidle");
-      // Allow components to render
       await page.waitForTimeout(500);
-      await expect(page).toHaveScreenshot(`react-${section.name}.png`, {
-        fullPage: true,
-      });
-    });
+      const reactScreenshot = await page.screenshot({ fullPage: true });
 
-    test(`${section.name} - WC screenshot`, async ({ page }) => {
+      // Attach React screenshot for debugging on failure
+      await testInfo.attach(`react-${section.name}`, {
+        body: reactScreenshot,
+        contentType: "image/png",
+      });
+
+      // Write React screenshot as the expected snapshot baseline
+      const snapshotPath = testInfo.snapshotPath(`${section.name}.png`);
+      mkdirSync(dirname(snapshotPath), { recursive: true });
+      writeFileSync(snapshotPath, reactScreenshot);
+
+      // Navigate to WC version and compare against React baseline
       await page.goto(`${WC_URL}/${section.wcHash}`);
       await page.waitForLoadState("networkidle");
-      // Allow components to render
       await page.waitForTimeout(500);
-      await expect(page).toHaveScreenshot(`wc-${section.name}.png`, {
+
+      await expect(page).toHaveScreenshot(`${section.name}.png`, {
         fullPage: true,
       });
     });
@@ -42,34 +54,36 @@ test.describe("Visual Parity: React vs Web Components", () => {
 });
 
 test.describe("Visual Parity: Theme Toggle", () => {
-  test("React - dark theme screenshot", async ({ page }) => {
+  test("dark theme", async ({ page }, testInfo) => {
+    // Capture React dark theme as baseline
     await page.goto(REACT_URL);
     await page.waitForLoadState("networkidle");
-
-    // Toggle to dark theme
     await page.evaluate(() => {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("ds-demo-theme", "dark");
     });
     await page.waitForTimeout(300);
+    const reactScreenshot = await page.screenshot({ fullPage: true });
 
-    await expect(page).toHaveScreenshot("react-dashboard-dark.png", {
-      fullPage: true,
+    await testInfo.attach("react-dashboard-dark", {
+      body: reactScreenshot,
+      contentType: "image/png",
     });
-  });
 
-  test("WC - dark theme screenshot", async ({ page }) => {
+    const snapshotPath = testInfo.snapshotPath("dashboard-dark.png");
+    mkdirSync(dirname(snapshotPath), { recursive: true });
+    writeFileSync(snapshotPath, reactScreenshot);
+
+    // Compare WC dark theme against React
     await page.goto(`${WC_URL}/#dashboard`);
     await page.waitForLoadState("networkidle");
-
-    // Toggle to dark theme
     await page.evaluate(() => {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("ds-demo-theme", "dark");
     });
     await page.waitForTimeout(300);
 
-    await expect(page).toHaveScreenshot("wc-dashboard-dark.png", {
+    await expect(page).toHaveScreenshot("dashboard-dark.png", {
       fullPage: true,
     });
   });

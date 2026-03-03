@@ -23,9 +23,6 @@ export default defineConfig({
   // Reporter to use
   reporter: process.env.CI ? "github" : "html",
 
-  // Write missing snapshots without failing; compare existing ones
-  updateSnapshots: "missing",
-
   // Visual snapshot settings
   expect: {
     toHaveScreenshot: {
