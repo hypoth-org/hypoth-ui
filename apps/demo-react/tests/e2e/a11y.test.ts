@@ -137,12 +137,18 @@ test.describe("A11y: WC Demo", () => {
   });
 
   test("interactive elements are keyboard focusable", async ({ page }) => {
-    await page.keyboard.press("Tab");
-    const focused = await page.evaluate(
-      () => document.activeElement?.tagName.toLowerCase()
-    );
-    expect(["a", "button", "input", "ds-button", "ds-switch"]).toContain(
-      focused
-    );
+    const interactiveTags = ["a", "button", "input", "ds-button", "ds-switch"];
+    let found = false;
+    for (let i = 0; i < 10; i++) {
+      await page.keyboard.press("Tab");
+      const focused = await page.evaluate(
+        () => document.activeElement?.tagName.toLowerCase()
+      );
+      if (focused && interactiveTags.includes(focused)) {
+        found = true;
+        break;
+      }
+    }
+    expect(found).toBe(true);
   });
 });

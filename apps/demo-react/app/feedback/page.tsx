@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, Progress, Spinner, Skeleton, Toast, useToast, LegacyButton as Button } from '@ds/react';
+import { Alert, Progress, Spinner, Skeleton, useToast, LegacyButton as Button } from '@ds/react';
 import { feedbackSectionContent } from '@ds/demo-shared';
 import { SidebarNav } from '../../components/sidebar-nav';
 import { AppShell } from '../../components/app-shell';

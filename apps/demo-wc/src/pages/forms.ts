@@ -54,7 +54,7 @@ export class DemoPageForms extends LitElement {
                 id="default-input"
                 placeholder="Enter text..."
                 .value=${this.inputValue}
-                @ds:change=${(e: CustomEvent) => (this.inputValue = e.detail.value)}
+                @ds:change=${(e: CustomEvent) => { this.inputValue = e.detail.value; }}
               ></ds-input>
             </div>
             <div class="form-field">
@@ -80,7 +80,7 @@ export class DemoPageForms extends LitElement {
                 placeholder="Enter your message..."
                 .value=${this.textareaValue}
                 rows="4"
-                @ds:change=${(e: CustomEvent) => (this.textareaValue = e.detail.value)}
+                @ds:change=${(e: CustomEvent) => { this.textareaValue = e.detail.value; }}
               ></ds-textarea>
             </div>
           </div>
@@ -97,7 +97,7 @@ export class DemoPageForms extends LitElement {
           <div class="checkbox-group">
             <ds-checkbox
               ?checked=${this.checkboxChecked}
-              @ds:change=${(e: CustomEvent) => (this.checkboxChecked = e.detail.checked)}
+              @ds:change=${(e: CustomEvent) => { this.checkboxChecked = e.detail.checked; }}
             >
               Accept terms and conditions
             </ds-checkbox>
@@ -132,7 +132,7 @@ export class DemoPageForms extends LitElement {
           <div class="switch-group">
             <ds-switch
               ?checked=${this.switchChecked}
-              @ds:change=${(e: CustomEvent) => (this.switchChecked = e.detail.checked)}
+              @ds:change=${(e: CustomEvent) => { this.switchChecked = e.detail.checked; }}
             >
               Enable notifications
             </ds-switch>

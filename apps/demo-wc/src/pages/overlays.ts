@@ -101,10 +101,10 @@ export class DemoPageOverlays extends LitElement {
                 </div>
               </div>
               <div class="dialog-actions">
-                <ds-button variant="outline" @click=${() => (this.dialogOpen = false)}>
+                <ds-button variant="outline" @click=${() => { this.dialogOpen = false; }}>
                   Cancel
                 </ds-button>
-                <ds-button @click=${() => (this.dialogOpen = false)}>
+                <ds-button @click=${() => { this.dialogOpen = false; }}>
                   Save changes
                 </ds-button>
               </div>
@@ -132,10 +132,10 @@ export class DemoPageOverlays extends LitElement {
                 and remove your data from our servers.
               </ds-dialog-description>
               <div class="dialog-actions">
-                <ds-button variant="outline" @click=${() => (this.alertDialogOpen = false)}>
+                <ds-button variant="outline" @click=${() => { this.alertDialogOpen = false; }}>
                   Cancel
                 </ds-button>
-                <ds-button variant="destructive" @click=${() => (this.alertDialogOpen = false)}>
+                <ds-button variant="destructive" @click=${() => { this.alertDialogOpen = false; }}>
                   Yes, delete account
                 </ds-button>
               </div>
@@ -208,7 +208,7 @@ export class DemoPageOverlays extends LitElement {
                 <ds-sheet-close>
                   <ds-button variant="outline">Cancel</ds-button>
                 </ds-sheet-close>
-                <ds-button @click=${() => (this.sheetOpen = false)}>Save changes</ds-button>
+                <ds-button @click=${() => { this.sheetOpen = false; }}>Save changes</ds-button>
               </ds-sheet-footer>
             </ds-sheet-content>
           </ds-sheet>

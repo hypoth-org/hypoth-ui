@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { Sheet, LegacyButton as Button } from '@ds/react';
+import { Sheet } from '@ds/react';
 import { navigation } from '@ds/demo-shared';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,6 +16,7 @@ export function MobileNav() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Close sheet when route changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: setOpen is stable from useState
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -35,6 +36,7 @@ export function MobileNav() {
     <>
       {/* Hamburger trigger button */}
       <button
+        type="button"
         ref={triggerRef}
         className="mobile-nav-trigger"
         onClick={() => setOpen(true)}
@@ -51,6 +53,7 @@ export function MobileNav() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          aria-hidden="true"
         >
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="6" x2="21" y2="6" />

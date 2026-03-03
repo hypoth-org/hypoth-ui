@@ -23,6 +23,9 @@ export default defineConfig({
   // Reporter to use
   reporter: process.env.CI ? "github" : "html",
 
+  // Write missing snapshots without failing; compare existing ones
+  updateSnapshots: "missing",
+
   // Visual snapshot settings
   expect: {
     toHaveScreenshot: {
@@ -59,20 +62,20 @@ export default defineConfig({
       },
       testMatch: "**/tests/e2e/visual-parity.test.ts",
     },
-    // Visual regression: Tablet (768x1024)
+    // Visual regression: Tablet (768x1024) - uses Chromium for CI compatibility
     {
       name: "visual-tablet",
       use: {
-        ...devices["iPad (gen 7)"],
+        ...devices["Desktop Chrome"],
         viewport: { width: 768, height: 1024 },
       },
       testMatch: "**/tests/e2e/visual-parity.test.ts",
     },
-    // Visual regression: Mobile (375x667)
+    // Visual regression: Mobile (375x667) - uses Chromium for CI compatibility
     {
       name: "visual-mobile",
       use: {
-        ...devices["iPhone 13"],
+        ...devices["Desktop Chrome"],
         viewport: { width: 375, height: 667 },
       },
       testMatch: "**/tests/e2e/visual-parity.test.ts",

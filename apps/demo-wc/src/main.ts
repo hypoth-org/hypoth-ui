@@ -80,5 +80,3 @@ window.addEventListener('hashchange', () => {
   renderApp(getRouteFromHash());
 });
 
-// Export for type checking
-export {};
