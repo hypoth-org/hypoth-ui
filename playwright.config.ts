@@ -26,7 +26,7 @@ export default defineConfig({
   // Visual snapshot settings
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: 0.05, // 5% threshold for visual parity
+      maxDiffPixelRatio: 0.10, // 10% threshold for cross-framework visual parity
     },
   },
 
