@@ -58,12 +58,10 @@ function renderApp(route: Route) {
   app.innerHTML = `
     <demo-app-shell>
       <demo-sidebar-nav slot="sidebar" currentRoute="${route}"></demo-sidebar-nav>
-      <div slot="header">
+      <div slot="header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
         <demo-mobile-nav currentRoute="${route}"></demo-mobile-nav>
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex: 1;">
-          <h1 style="font-size: 18px; font-weight: 600;">Demo - Web Components</h1>
-          <demo-theme-toggle></demo-theme-toggle>
-        </div>
+        <h1 style="font-size: 18px; font-weight: 600;">Demo - Web Components</h1>
+        <demo-theme-toggle></demo-theme-toggle>
       </div>
       <div id="page-content">
         ${getPageContent(route)}
