@@ -24,7 +24,7 @@ export class DemoMobileNav extends LitElement {
 
     @media (max-width: 767px) {
       :host {
-        display: contents;
+        display: block;
       }
     }
 

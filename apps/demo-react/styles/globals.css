@@ -357,7 +357,7 @@
     }
 
     .mobile-nav-wrapper {
-      display: contents;
+      display: block;
     }
 
     .mobile-nav-trigger {
