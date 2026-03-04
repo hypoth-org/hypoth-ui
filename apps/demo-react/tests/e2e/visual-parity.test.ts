@@ -78,11 +78,17 @@ test.describe("Visual Parity: Theme Toggle", () => {
     // Compare WC dark theme against React
     await page.goto(`${WC_URL}/#dashboard`);
     await page.waitForLoadState("networkidle");
+    // Wait for WC custom elements to upgrade and connect
+    await page.waitForSelector("demo-app-shell");
+    await page.waitForTimeout(200);
     await page.evaluate(() => {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("ds-demo-theme", "dark");
+      // Dispatch theme change event for any listeners
+      window.dispatchEvent(new CustomEvent("ds:theme-change", { detail: { theme: "dark" } }));
     });
-    await page.waitForTimeout(300);
+    // Allow extra time for MutationObserver + Lit re-render cycle
+    await page.waitForTimeout(500);
 
     await expect(page).toHaveScreenshot("dashboard-dark.png");
   });
