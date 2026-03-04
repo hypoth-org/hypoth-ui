@@ -1,0 +1,68 @@
+import type { MockUser } from '../types';
+
+export const mockUsers: MockUser[] = [
+  {
+    id: 'user-1',
+    name: 'Sarah Chen',
+    email: 'sarah.chen@example.com',
+    avatar: null,
+    role: 'Admin',
+    status: 'active',
+  },
+  {
+    id: 'user-2',
+    name: 'Marcus Johnson',
+    email: 'marcus.j@example.com',
+    avatar: null,
+    role: 'Developer',
+    status: 'active',
+  },
+  {
+    id: 'user-3',
+    name: 'Emily Rodriguez',
+    email: 'e.rodriguez@example.com',
+    avatar: null,
+    role: 'Designer',
+    status: 'active',
+  },
+  {
+    id: 'user-4',
+    name: 'James Wilson',
+    email: 'j.wilson@example.com',
+    avatar: null,
+    role: 'Developer',
+    status: 'inactive',
+  },
+  {
+    id: 'user-5',
+    name: 'Aisha Patel',
+    email: 'aisha.p@example.com',
+    avatar: null,
+    role: 'Product Manager',
+    status: 'pending',
+  },
+  {
+    id: 'user-6',
+    name: 'David Kim',
+    email: 'd.kim@example.com',
+    avatar: null,
+    role: 'Developer',
+    status: 'active',
+  },
+  {
+    id: 'user-7',
+    name: 'Lisa Thompson',
+    email: 'l.thompson@example.com',
+    avatar: null,
+    role: 'QA Engineer',
+    status: 'active',
+  },
+  {
+    id: 'user-8',
+    name: 'Michael Brown',
+    email: 'm.brown@example.com',
+    avatar: null,
+    role: 'DevOps',
+    status: 'active',
+  },
+];

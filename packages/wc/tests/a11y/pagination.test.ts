@@ -135,7 +135,7 @@ describe("Pagination Accessibility", () => {
       await new Promise((resolve) => setTimeout(resolve, 100));
       const activeLink = container.querySelector("ds-pagination-link[active]");
       if (activeLink) {
-        await (activeLink as any).updateComplete;
+        await (activeLink as unknown as { updateComplete: Promise<boolean> }).updateComplete;
       }
 
       const currentPage = container.querySelector("[aria-current='page']");

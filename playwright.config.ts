@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Playwright configuration for E2E tests
+ * Playwright configuration for E2E and visual regression tests
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
@@ -23,11 +23,15 @@ export default defineConfig({
   // Reporter to use
   reporter: process.env.CI ? "github" : "html",
 
+  // Visual snapshot settings
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.10, // 10% threshold for cross-framework visual parity
+    },
+  },
+
   // Shared settings for all projects
   use: {
-    // Base URL to use in actions like `await page.goto('/')`
-    baseURL: "http://localhost:3000",
-
     // Collect trace when retrying the failed test
     trace: "on-first-retry",
 
@@ -37,31 +41,61 @@ export default defineConfig({
 
   // Configure projects for major browsers
   projects: [
+    // E2E tests for React demo
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "demo-react",
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://localhost:3001",
+      },
+      testMatch: "**/demo-react/tests/e2e/**/*.test.ts",
     },
-    // Uncomment for additional browsers
-    // {
-    //   name: "firefox",
-    //   use: { ...devices["Desktop Firefox"] },
-    // },
-    // {
-    //   name: "webkit",
-    //   use: { ...devices["Desktop Safari"] },
-    // },
+    // Visual regression: Desktop (1280x720)
+    {
+      name: "visual-desktop",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1280, height: 720 },
+      },
+      testMatch: "**/tests/e2e/visual-parity.test.ts",
+    },
+    // Visual regression: Tablet (768x1024) - uses Chromium for CI compatibility
+    {
+      name: "visual-tablet",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 768, height: 1024 },
+      },
+      testMatch: "**/tests/e2e/visual-parity.test.ts",
+    },
+    // Visual regression: Mobile (375x667) - uses Chromium for CI compatibility
+    // Higher threshold for mobile due to inherent framework rendering differences
+    // (mobile nav, responsive layout, touch targets differ between React and WC)
+    {
+      name: "visual-mobile",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 375, height: 667 },
+      },
+      expect: {
+        toHaveScreenshot: {
+          maxDiffPixelRatio: 0.15,
+        },
+      },
+      testMatch: "**/tests/e2e/visual-parity.test.ts",
+    },
   ],
 
-  // Run local dev server before starting tests
+  // Run local dev servers before starting tests
   webServer: [
     {
-      command: "pnpm --filter @ds/demo run dev",
+      command: "pnpm --filter @ds/demo-react run dev",
       url: "http://localhost:3001",
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
     {
-      command: "pnpm --filter @ds/docs-app run dev",
+      command: "pnpm --filter @ds/demo-wc run dev",
       url: "http://localhost:3002",
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
