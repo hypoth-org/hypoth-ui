@@ -77,7 +77,7 @@ tests/
 └── packages/cli/tests/                    # CLI copy mode tests
 ```
 
-**Structure Decision**: Existing monorepo structure maintained. Changes touch 4 packages: `@ds/wc` (button fix), `@hypoth-ui/cli` (registry + templates), `@ds/docs-content` (MDX docs).
+**Structure Decision**: Existing monorepo structure maintained. Changes touch 4 packages: `@hypoth-ui/wc` (button fix), `@hypoth-ui/cli` (registry + templates), `@hypoth-ui/docs-content` (MDX docs).
 
 ## Complexity Tracking
 

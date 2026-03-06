@@ -1,4 +1,4 @@
-# @ds/demo-wc
+# @hypoth-ui/demo-wc
 
 Web Components demo application showcasing the Hypoth UI design system using Lit and Vite.
 
@@ -23,7 +23,7 @@ pnpm build          # Build all packages first
 pnpm dev:demo-wc
 
 # Or directly
-pnpm --filter @ds/demo-wc dev
+pnpm --filter @hypoth-ui/demo-wc dev
 ```
 
 The app runs at **http://localhost:3002**.
@@ -59,7 +59,7 @@ The app runs at **http://localhost:3002**.
 ## Build
 
 ```bash
-pnpm --filter @ds/demo-wc build
+pnpm --filter @hypoth-ui/demo-wc build
 ```
 
 Output is generated in `dist/`.

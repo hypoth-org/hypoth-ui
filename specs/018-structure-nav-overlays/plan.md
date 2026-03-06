@@ -5,16 +5,16 @@
 
 ## Summary
 
-Implement 18 UI components organized into structure primitives (Card, Tabs, Accordion), confirmation dialogs (AlertDialog), overlay panels (Sheet, Drawer), menu systems (DropdownMenu, ContextMenu, HoverCard, NavigationMenu), utility components (Collapsible, Separator, AspectRatio, ScrollArea), and navigation patterns (Breadcrumb, Pagination, Stepper, Command). All components use the compound component pattern with shared primitives from `@ds/primitives-dom`, targeting both Web Components (Lit) and React implementations with API parity.
+Implement 18 UI components organized into structure primitives (Card, Tabs, Accordion), confirmation dialogs (AlertDialog), overlay panels (Sheet, Drawer), menu systems (DropdownMenu, ContextMenu, HoverCard, NavigationMenu), utility components (Collapsible, Separator, AspectRatio, ScrollArea), and navigation patterns (Breadcrumb, Pagination, Stepper, Command). All components use the compound component pattern with shared primitives from `@hypoth-ui/primitives-dom`, targeting both Web Components (Lit) and React implementations with API parity.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
+**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@hypoth-ui/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
 **Storage**: N/A (stateless UI components)
 **Testing**: Vitest (unit), axe-core (a11y), Playwright (e2e)
 **Target Platform**: Browser (modern evergreen), SSR/RSC compatible via Next.js App Router
-**Project Type**: Monorepo packages (`@ds/wc`, `@ds/react`)
+**Project Type**: Monorepo packages (`@hypoth-ui/wc`, `@hypoth-ui/react`)
 **Performance Goals**: <40KB gzipped total for all new components; animations <300ms
 **Constraints**: Light DOM only; no Shadow DOM; CSS custom properties for theming; `--ds-z-overlay` for z-index management
 **Scale/Scope**: 18 components, ~53 functional requirements, 4 priority tiers
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly (Light DOM + CSS vars)
 - [x] **Accessibility**: WCAG 2.1 AA plan; APG patterns identified (tabs, accordion, menu, dialog, listbox); a11y testing via axe-core + manual checklist
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; `--ds-z-overlay` custom property for z-index
-- [x] **Zero-dep Core**: Core packages remain zero-dep; `@ds/wc` depends only on Lit
+- [x] **Zero-dep Core**: Core packages remain zero-dep; `@hypoth-ui/wc` depends only on Lit
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
 - [x] **Dependency Management**: pnpm used; bundle impact assessed (<40KB target)
 
@@ -125,7 +125,7 @@ packages/
             └── command.css
 ```
 
-**Structure Decision**: Monorepo with separate packages for Web Components (`@ds/wc`), React adapters (`@ds/react`), and CSS (`@ds/css`). Each component follows compound component pattern with Root/Trigger/Content sub-components. Drawer composes Sheet internally per clarification decision.
+**Structure Decision**: Monorepo with separate packages for Web Components (`@hypoth-ui/wc`), React adapters (`@hypoth-ui/react`), and CSS (`@hypoth-ui/css`). Each component follows compound component pattern with Root/Trigger/Content sub-components. Drawer composes Sheet internally per clarification decision.
 
 ## Complexity Tracking
 
@@ -134,6 +134,6 @@ No constitution violations identified. All requirements align with established p
 | Aspect | Status | Notes |
 |--------|--------|-------|
 | Light DOM | Compliant | All components use Light DOM per constitution |
-| Zero-dep Core | Compliant | `@ds/wc` depends only on Lit; no new runtime deps |
+| Zero-dep Core | Compliant | `@hypoth-ui/wc` depends only on Lit; no new runtime deps |
 | Bundle Size | Target: <40KB | Must verify during implementation |
 | A11y Patterns | Identified | tabs, accordion, menu, dialog, listbox APG patterns |

@@ -8,13 +8,13 @@ import {
   useEffect,
   useRef,
 } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 import {
   type ResponsiveProp,
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "@/lib/primitives/responsive.js";
+} from "../../primitives/responsive.js";
 
 export type TagVariant =
   | "neutral"

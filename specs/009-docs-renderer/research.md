@@ -6,11 +6,11 @@
 
 ## Executive Summary
 
-This research document captures the analysis of existing codebase infrastructure, external patterns, and technical approaches for implementing the docs renderer with white-label overlay support. The research confirms that significant foundation already exists in `@ds/docs-core` and `@ds/docs-renderer-next`, and the implementation should extend rather than rebuild.
+This research document captures the analysis of existing codebase infrastructure, external patterns, and technical approaches for implementing the docs renderer with white-label overlay support. The research confirms that significant foundation already exists in `@hypoth-ui/docs-core` and `@hypoth-ui/docs-renderer-next`, and the implementation should extend rather than rebuild.
 
 ## Existing Infrastructure Analysis
 
-### 1. @ds/docs-core Package
+### 1. @hypoth-ui/docs-core Package
 
 The headless documentation engine already provides:
 
@@ -44,7 +44,7 @@ The headless documentation engine already provides:
 
 **Gap Analysis**: Two `EditionConfig` types exist (filter vs types/manifest). Need to consolidate or document relationship.
 
-### 2. @ds/docs-renderer-next Package
+### 2. @hypoth-ui/docs-renderer-next Package
 
 #### Current Layout (packages/docs-renderer-next/app/layout.tsx)
 - Basic layout with header, sidebar, main content
@@ -56,7 +56,7 @@ The headless documentation engine already provides:
 - `generateStaticParams()` for SSG
 - `generateMetadata()` for SEO
 - `getCurrentEdition()` from env/config
-- `loadContractManifests()` from @ds/wc
+- `loadContractManifests()` from @hypoth-ui/wc
 - Edition-based access control with upgrade redirect
 - MDX content loading with fallback to auto-generated docs
 - EditionProvider context for child components
@@ -66,7 +66,7 @@ The headless documentation engine already provides:
 - Multiple manifest loaders (contract + legacy)
 - MDX rendering with MdxRenderer component
 
-### 3. @ds/docs-content Package
+### 3. @hypoth-ui/docs-content Package
 
 #### Structure
 - `manifests/` - JSON component manifests (button.json, input.json)
@@ -251,7 +251,7 @@ Large content sets may produce large indices.
 2. **Single EditionConfig** - Consolidate type definitions
 3. **Content pack protocol** - Define npm package convention for content packs
 4. **Stub search** - Implement index generation without UI, add UI in future iteration
-5. **Example tenant pack** - Create @ds/docs-content-tenant-example to validate workflow
+5. **Example tenant pack** - Create @hypoth-ui/docs-content-tenant-example to validate workflow
 
 ## References
 

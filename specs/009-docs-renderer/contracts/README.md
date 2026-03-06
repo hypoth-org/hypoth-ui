@@ -38,7 +38,7 @@ Schema for content pack package.json configuration:
 These schemas can be used with Ajv for runtime validation:
 
 ```typescript
-import { getEditionConfigValidator } from '@ds/docs-core';
+import { getEditionConfigValidator } from '@hypoth-ui/docs-core';
 
 const validate = getEditionConfigValidator();
 const isValid = validate(config);
@@ -53,7 +53,7 @@ Add `$schema` property to your configuration files for IDE auto-completion:
 
 ```json
 {
-  "$schema": "./node_modules/@ds/docs-core/schemas/edition-config-extended.schema.json",
+  "$schema": "./node_modules/@hypoth-ui/docs-core/schemas/edition-config-extended.schema.json",
   "id": "my-tenant",
   "name": "My Tenant",
   "edition": "pro"

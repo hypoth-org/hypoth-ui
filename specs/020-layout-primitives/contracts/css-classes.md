@@ -10,7 +10,7 @@ This document defines the CSS class naming conventions and structure for layout 
 ## Layer Integration
 
 ```css
-/* In @ds/css */
+/* In @hypoth-ui/css */
 @layer reset, tokens, base, components, animations, utilities, overrides;
 
 /* Layout component styles go in components layer */

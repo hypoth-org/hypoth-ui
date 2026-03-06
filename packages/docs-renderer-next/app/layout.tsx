@@ -1,4 +1,4 @@
-import { applyDefaultFeatures } from "@ds/docs-core";
+import { applyDefaultFeatures } from "@hypoth-ui/docs-core";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { BrandedHeader } from "../components/branding/header";

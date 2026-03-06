@@ -5,7 +5,7 @@ export default defineConfig({
   format: ["esm"],
   dts: true,
   clean: true,
-  external: ["react", "react-dom", "next", "@ds/wc", "@ds/react"],
+  external: ["react", "react-dom", "next", "@hypoth-ui/wc", "@hypoth-ui/react"],
   sourcemap: true,
   banner: {
     // Preserve "use client" directive for Next.js App Router

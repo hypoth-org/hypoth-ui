@@ -19,7 +19,7 @@ Complete remediation of audit findings (P0-P2) focusing on:
 **Target Platform**: Browser (ESM), Next.js 14+ (SSR/RSC compatible)
 **Project Type**: Monorepo (packages/wc, packages/react, packages/primitives-dom)
 **Performance Goals**: 60fps scroll, <100ms component render, tree-shakeable exports
-**Constraints**: Zero runtime deps for @ds/primitives-dom; Lit-only for @ds/wc
+**Constraints**: Zero runtime deps for @hypoth-ui/primitives-dom; Lit-only for @hypoth-ui/wc
 **Scale/Scope**: 55 WC components, ~40 React adapters, 37 existing primitives
 
 ## Constitution Check
@@ -39,8 +39,8 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
   - Components consume tokens via CSS custom properties
   - No changes to styling strategy required
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - New composites add zero dependencies to @ds/primitives-dom
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - New composites add zero dependencies to @hypoth-ui/primitives-dom
   - ARIA utilities are pure functions
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - No changes to Light DOM strategy

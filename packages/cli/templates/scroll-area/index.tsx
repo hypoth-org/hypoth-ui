@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { ScrollArea } from "@ds/react";
+ * import { ScrollArea } from "@/components/ui";
  *
  * <ScrollArea.Root style={{ height: "200px" }}>
  *   <ScrollArea.Viewport>

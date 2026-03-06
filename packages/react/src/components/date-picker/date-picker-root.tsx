@@ -2,7 +2,7 @@
  * DatePicker Root component - provides context to all DatePicker compound components.
  */
 
-import { type DateRange, type Placement, createDatePickerBehavior } from "@ds/primitives-dom";
+import { type DateRange, type Placement, createDatePickerBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { type DatePickerMode, DatePickerProvider } from "./date-picker-context.js";
 

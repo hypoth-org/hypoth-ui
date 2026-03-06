@@ -2,7 +2,7 @@
  * Menu Root component - provides context to all Menu compound components.
  */
 
-import { type Placement, createMenuBehavior } from "@ds/primitives-dom";
+import { type Placement, createMenuBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { useStableId } from "../../hooks/use-stable-id.js";
 import { MenuProvider } from "./menu-context.js";

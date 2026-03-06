@@ -10,7 +10,7 @@ Implement React wrapper components for the design system Web Components, providi
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode)
-**Primary Dependencies**: React 18+ (peer), @ds/wc (peer), @ds/css (tokens/classes)
+**Primary Dependencies**: React 18+ (peer), @hypoth-ui/wc (peer), @hypoth-ui/css (tokens/classes)
 **Storage**: N/A (no persistence layer)
 **Testing**: Vitest 1.x, @testing-library/react 14.x
 **Target Platform**: Browser (Next.js App Router primary target)
@@ -34,11 +34,11 @@ Verify compliance with Hypoth UI Design System Constitution:
   - Ref forwarding enables focus management
   - axe-core tests already in place for WC layer
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
-  - Box component applies CSS classes from @ds/css
+  - Box component applies CSS classes from @hypoth-ui/css
   - No inline styles in wrappers
   - className merging supported
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - N/A - @ds/react is an adapter package with React as peer dep
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - N/A - @hypoth-ui/react is an adapter package with React as peer dep
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - Wrappers consume existing WC implementations
   - No Shadow DOM changes introduced
@@ -135,7 +135,7 @@ See [research.md](./research.md) for detailed analysis.
 4. **Next.js Compatibility**: Dual entry points (`index.ts` for types, `client.ts` for components) to minimize client boundary surface.
 
 ### Open Questions Resolved
-- Box is React-only, applies CSS classes from @ds/css (no WC dependency)
+- Box is React-only, applies CSS classes from @hypoth-ui/css (no WC dependency)
 - cloneElement deprecation: Not blocking - no removal timeline announced
 
 ## Phase 1: Design Artifacts

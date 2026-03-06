@@ -179,9 +179,9 @@
 
 **Purpose**: Final validation, documentation, and cleanup
 
-- [x] T047 Run all tests and verify >90% coverage with pnpm --filter @ds/react test
-- [x] T048 Run typecheck and verify zero TypeScript errors with pnpm --filter @ds/react typecheck
-- [x] T049 Build package and verify bundle size <1KB per component with pnpm --filter @ds/react build
+- [x] T047 Run all tests and verify >90% coverage with pnpm --filter @hypoth-ui/react test
+- [x] T048 Run typecheck and verify zero TypeScript errors with pnpm --filter @hypoth-ui/react typecheck
+- [x] T049 Build package and verify bundle size <1KB per component with pnpm --filter @hypoth-ui/react build
 - [x] T050 Update primitives barrel export in packages/react/src/primitives/index.ts
 - [x] T051 Validate quickstart.md examples work correctly
 - [x] T052 Run full monorepo build to verify integration with pnpm build

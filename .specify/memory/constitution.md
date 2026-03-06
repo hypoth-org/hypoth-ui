@@ -82,13 +82,13 @@ Token-driven theming enables multi-brand, multi-mode support without forks.
 
 | Package | Purpose | Runtime Deps |
 |---------|---------|--------------|
-| `@ds/tokens` | Design tokens (CSS vars, TS constants) | **0** |
-| `@ds/css` | Base styles, reset, utilities | **0** |
-| `@ds/primitives-dom` | Vanilla DOM primitives | **0** |
-| `@ds/wc` | Web Components (Lit-based) | Lit only |
-| `@ds/react` | React adapters over custom elements | React peer |
+| `@hypoth-ui/tokens` | Design tokens (CSS vars, TS constants) | **0** |
+| `@hypoth-ui/css` | Base styles, reset, utilities | **0** |
+| `@hypoth-ui/primitives-dom` | Vanilla DOM primitives | **0** |
+| `@hypoth-ui/wc` | Web Components (Lit-based) | Lit only |
+| `@hypoth-ui/react` | React adapters over custom elements | React peer |
 
-### Web Components Strategy (`@ds/wc`)
+### Web Components Strategy (`@hypoth-ui/wc`)
 
 - **Light DOM everywhere**: Shadow DOM MUST NOT be default; explicit opt-in only with documented justification
 - **Lit framework**: Standardized on Lit for Web Component authoring
@@ -101,7 +101,7 @@ Token-driven theming enables multi-brand, multi-mode support without forks.
 - **Predictable hydration**: Custom elements defined once at app root, consumed everywhere
 - **Server Component friendly**: Components render as custom element tags; hydration happens client-side
 
-### React Adapter Strategy (`@ds/react`)
+### React Adapter Strategy (`@hypoth-ui/react`)
 
 - **Thin wrappers**: React components wrap custom elements, forwarding props/events
 - **No polymorphism by default**: `as` prop MUST NOT exist; composition over polymorphism

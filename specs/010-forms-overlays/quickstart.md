@@ -23,24 +23,24 @@ pnpm build:tokens
 pnpm build:css
 
 # Build primitives-dom (behavior utilities)
-pnpm --filter @ds/primitives-dom build
+pnpm --filter @hypoth-ui/primitives-dom build
 ```
 
 ### 2. Run Component Development
 
 ```bash
 # Start component development with hot reload
-pnpm --filter @ds/wc dev
+pnpm --filter @hypoth-ui/wc dev
 
 # Or run tests in watch mode
-pnpm --filter @ds/wc test -- --watch
+pnpm --filter @hypoth-ui/wc test -- --watch
 ```
 
 ### 3. Run Accessibility Tests
 
 ```bash
 # Run a11y automation tests
-pnpm --filter @ds/wc test:a11y
+pnpm --filter @hypoth-ui/wc test:a11y
 ```
 
 ## Component Usage Examples
@@ -166,7 +166,7 @@ document.querySelector('ds-menu').addEventListener('ds:select', (e) => {
 ## React Usage
 
 ```tsx
-import { Field, Label, Input, Dialog, DialogContent, DialogTitle, Menu, MenuContent, MenuItem } from '@ds/react';
+import { Field, Label, Input, Dialog, DialogContent, DialogTitle, Menu, MenuContent, MenuItem } from '@hypoth-ui/react';
 import { useState } from 'react';
 
 function ContactForm() {
@@ -253,9 +253,9 @@ Each component must have:
 Ensure custom elements are registered:
 
 ```javascript
-import '@ds/wc';
+import '@hypoth-ui/wc';
 // or
-import { defineAll } from '@ds/wc';
+import { defineAll } from '@hypoth-ui/wc';
 defineAll();
 ```
 

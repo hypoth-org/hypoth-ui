@@ -2,7 +2,7 @@
  * Slider Root component - provides context to all Slider compound components.
  */
 
-import { createSliderBehavior } from "@ds/primitives-dom";
+import { createSliderBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { SliderProvider } from "./slider-context.js";
 

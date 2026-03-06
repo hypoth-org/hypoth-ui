@@ -14,7 +14,7 @@
 - First-class pnpm workspace compatibility (no additional plugins needed)
 - Version PR workflow enables manual changelog enhancement before publish
 - Actively maintained by Atlassian with large community
-- Supports "fixed" versioning mode for single version across all @ds/* packages
+- Supports "fixed" versioning mode for single version across all @hypoth-ui/* packages
 
 **Alternatives considered**:
 - **semantic-release**: Rejected because monorepo plugin (semantic-release-monorepo) is unmaintained since 2022, requires additional pnpm plugin, and tightly couples commits to publishing without manual review step
@@ -101,7 +101,7 @@
 ```markdown
 <!-- .changeset/happy-dog.md -->
 ---
-"@ds/wc": minor
+"@hypoth-ui/wc": minor
 editions: [core, pro, enterprise]
 security: false
 ---
@@ -118,7 +118,7 @@ Added new DatePicker component with full keyboard support.
 **Decision**: MDX with frontmatter metadata, following existing docs-content patterns
 
 **Rationale**:
-- Consistent with existing @ds/docs-content structure
+- Consistent with existing @hypoth-ui/docs-content structure
 - Enables component embedding in guides
 - Frontmatter supports edition filtering and navigation ordering
 - Portable format per constitution

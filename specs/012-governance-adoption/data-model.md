@@ -56,14 +56,14 @@ Represents a single change to be included in a future release.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | id | string | Yes | Auto-generated unique ID (e.g., `happy-dog-123`) |
-| packages | string[] | Yes | Affected packages (e.g., `["@ds/wc", "@ds/react"]`) |
+| packages | string[] | Yes | Affected packages (e.g., `["@hypoth-ui/wc", "@hypoth-ui/react"]`) |
 | type | enum | Yes | `major` \| `minor` \| `patch` |
 | editions | string[] | Yes | Affected editions: `core`, `pro`, `enterprise` |
 | security | boolean | No | True if security-related change (default: false) |
 | summary | string | Yes | Human-readable change description (markdown) |
 
 **Validation Rules**:
-- `packages` must reference valid @ds/* packages
+- `packages` must reference valid @hypoth-ui/* packages
 - `editions` must contain at least one valid edition
 - `summary` must be non-empty, max 500 characters
 

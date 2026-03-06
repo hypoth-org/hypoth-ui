@@ -1,13 +1,13 @@
 "use client";
 
 import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 import {
   type ResponsiveProp,
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "@/lib/primitives/responsive.js";
+} from "../../primitives/responsive.js";
 import type { AvatarSize } from "./avatar.js";
 
 export interface AvatarGroupProps extends HTMLAttributes<HTMLElement> {

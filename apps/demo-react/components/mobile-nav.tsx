@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { Sheet } from '@ds/react';
-import { navigation } from '@ds/demo-shared';
+import { Sheet } from '@hypoth-ui/react';
+import { navigation } from '@hypoth-ui/demo-shared';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

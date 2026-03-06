@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [
-    "@ds/docs-renderer-next",
-    "@ds/docs-content",
-    "@ds/docs-core",
-    "@ds/wc",
-    "@ds/next",
+    "@hypoth-ui/docs-renderer-next",
+    "@hypoth-ui/docs-content",
+    "@hypoth-ui/docs-core",
+    "@hypoth-ui/wc",
+    "@hypoth-ui/next",
   ],
 };
 

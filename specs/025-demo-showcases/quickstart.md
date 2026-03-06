@@ -26,10 +26,10 @@ This starts:
 
 ```bash
 # React demo only
-pnpm --filter @ds/demo-react dev
+pnpm --filter @hypoth-ui/demo-react dev
 
 # Web Component demo only
-pnpm --filter @ds/demo-wc dev
+pnpm --filter @hypoth-ui/demo-wc dev
 ```
 
 ### Building
@@ -39,8 +39,8 @@ pnpm --filter @ds/demo-wc dev
 pnpm build
 
 # Build specific demo
-pnpm --filter @ds/demo-react build
-pnpm --filter @ds/demo-wc build
+pnpm --filter @hypoth-ui/demo-react build
+pnpm --filter @hypoth-ui/demo-wc build
 ```
 
 ## Project Structure
@@ -85,7 +85,7 @@ packages/
 ### Unit Tests
 
 ```bash
-pnpm --filter @ds/demo-shared test
+pnpm --filter @hypoth-ui/demo-shared test
 ```
 
 ### E2E Tests
@@ -101,8 +101,8 @@ pnpm test:e2e --project=visual-regression
 ### Accessibility Tests
 
 ```bash
-pnpm --filter @ds/demo-react test:a11y
-pnpm --filter @ds/demo-wc test:a11y
+pnpm --filter @hypoth-ui/demo-react test:a11y
+pnpm --filter @hypoth-ui/demo-wc test:a11y
 ```
 
 ## Common Tasks
@@ -145,9 +145,9 @@ After making changes, verify:
 
 ```bash
 # Rebuild dependencies
-pnpm --filter @ds/demo-shared build
-pnpm --filter @ds/wc build
-pnpm --filter @ds/react build
+pnpm --filter @hypoth-ui/demo-shared build
+pnpm --filter @hypoth-ui/wc build
+pnpm --filter @hypoth-ui/react build
 ```
 
 ### Theme not persisting

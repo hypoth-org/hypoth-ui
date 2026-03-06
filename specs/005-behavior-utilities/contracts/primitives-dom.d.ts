@@ -1,8 +1,8 @@
 /**
- * @ds/primitives-dom API Contract
+ * @hypoth-ui/primitives-dom API Contract
  *
  * This file defines the complete public API for the primitives-dom package.
- * All exports from @ds/primitives-dom must conform to these type definitions.
+ * All exports from @hypoth-ui/primitives-dom must conform to these type definitions.
  *
  * @version 0.2.0
  * @feature 005-behavior-utilities

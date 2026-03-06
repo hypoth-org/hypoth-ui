@@ -2,7 +2,7 @@
  * Event Utilities API Contract
  * Standardized event emission for design system components
  *
- * @package @ds/wc
+ * @package @hypoth-ui/wc
  * @path packages/wc/src/events/emit.ts
  */
 

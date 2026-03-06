@@ -34,4 +34,4 @@
 - Specification is complete and ready for `/speckit.clarify` or `/speckit.plan`
 - 4 user stories covering component authoring, Next.js integration, documentation, and CI enforcement
 - Approach analysis recommends centralized registry with lazy registration
-- Key deliverables: DSElement base class, component registry, @ds/next loader, enforcement tooling
+- Key deliverables: DSElement base class, component registry, @hypoth-ui/next loader, enforcement tooling

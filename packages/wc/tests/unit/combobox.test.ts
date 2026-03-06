@@ -1,4 +1,4 @@
-import type { Option } from "@ds/primitives-dom";
+import type { Option } from "@hypoth-ui/primitives-dom";
 import { html, render } from "lit";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "../../src/components/combobox/index.js";

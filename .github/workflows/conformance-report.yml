@@ -33,13 +33,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build @ds/a11y-audit
-        run: pnpm --filter @ds/a11y-audit build
+      - name: Build @hypoth-ui/a11y-audit
+        run: pnpm --filter @hypoth-ui/a11y-audit build
 
       - name: Generate conformance report
         id: report
         run: |
-          pnpm --filter @ds/a11y-audit report --version ${{ inputs.version }}
+          pnpm --filter @hypoth-ui/a11y-audit report --version ${{ inputs.version }}
 
           # Parse summary for gate check
           REPORT_PATH="a11y-audits/reports/${{ inputs.version }}/report.json"

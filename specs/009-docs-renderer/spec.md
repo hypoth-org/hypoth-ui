@@ -3,21 +3,21 @@
 **Feature Branch**: `009-docs-renderer`
 **Created**: 2026-01-03
 **Status**: Draft
-**Input**: User description: "Docs renderer v1 (Next.js) + white-label overlay workflow - Build a customizable docs site renderer that consumes docs content packs + manifests, supports tenant editions (filtering + branding), allows tenants to add/override pages and selectively hide components/docs. Define the white-label workflow with base content pack (@ds/docs-content), tenant overlay pack (@tenant/docs-content), edition config file drives filtering + branding, nav generated from manifests/frontmatter. Implement Next docs renderer consuming docs-core, tenant overlay example, branding hooks (logo/name/colors via tokens), and search indexing strategy stub."
+**Input**: User description: "Docs renderer v1 (Next.js) + white-label overlay workflow - Build a customizable docs site renderer that consumes docs content packs + manifests, supports tenant editions (filtering + branding), allows tenants to add/override pages and selectively hide components/docs. Define the white-label workflow with base content pack (@hypoth-ui/docs-content), tenant overlay pack (@tenant/docs-content), edition config file drives filtering + branding, nav generated from manifests/frontmatter. Implement Next docs renderer consuming docs-core, tenant overlay example, branding hooks (logo/name/colors via tokens), and search indexing strategy stub."
 
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Render Documentation from Content Packs (Priority: P1)
 
-A documentation site administrator wants to deploy a docs site that automatically renders component documentation and guides from content packs (manifests + MDX files). The system loads content from `@ds/docs-content`, generates navigation from manifests and frontmatter metadata, and renders pages without manual nav file maintenance.
+A documentation site administrator wants to deploy a docs site that automatically renders component documentation and guides from content packs (manifests + MDX files). The system loads content from `@hypoth-ui/docs-content`, generates navigation from manifests and frontmatter metadata, and renders pages without manual nav file maintenance.
 
 **Why this priority**: This is the core functionality - without content rendering, no other features matter. Establishes the foundation for all overlay and customization features.
 
-**Independent Test**: Deploy a docs site with `@ds/docs-content`, navigate to component and guide pages, verify content renders correctly and navigation reflects all available content.
+**Independent Test**: Deploy a docs site with `@hypoth-ui/docs-content`, navigate to component and guide pages, verify content renders correctly and navigation reflects all available content.
 
 **Acceptance Scenarios**:
 
-1. **Given** a Next.js app configured with `@ds/docs-renderer-next`, **When** the site builds, **Then** all component docs from manifests are available at `/components/[id]` routes
+1. **Given** a Next.js app configured with `@hypoth-ui/docs-renderer-next`, **When** the site builds, **Then** all component docs from manifests are available at `/components/[id]` routes
 2. **Given** guide MDX files with frontmatter, **When** the site builds, **Then** guides are available at `/guides/[id]` routes with correct metadata
 3. **Given** manifests with status and edition metadata, **When** navigation renders, **Then** nav items are automatically generated and grouped by category from frontmatter
 4. **Given** a component manifest with accessibility info, **When** viewing the component page, **Then** accessibility section displays APG pattern, keyboard interactions, and screen reader notes
@@ -138,7 +138,7 @@ A tenant wants to enable or disable specific documentation features like dark mo
 
 ### Key Entities
 
-- **Content Pack**: A package containing manifests, MDX docs, and assets. Base pack is `@ds/docs-content`, tenant packs overlay it.
+- **Content Pack**: A package containing manifests, MDX docs, and assets. Base pack is `@hypoth-ui/docs-content`, tenant packs overlay it.
 - **Edition Config**: JSON configuration file defining edition tier, branding, hidden components, feature toggles, and upgrade URL.
 - **Component Manifest**: JSON metadata about a component including id, name, status, editions, accessibility info.
 - **Navigation Tree**: Generated structure of nav items with categories, ordering, and edition filtering applied.

@@ -9,7 +9,7 @@
 Extend `LitElement` with `createRenderRoot() { return this; }` to enable Light DOM rendering. Name the class `DSElement` for clarity.
 
 ### Rationale
-- Light DOM allows external CSS (from @ds/css and consumer stylesheets) to style component internals directly
+- Light DOM allows external CSS (from @hypoth-ui/css and consumer stylesheets) to style component internals directly
 - Enables form integration (autocomplete, form association) which doesn't work in Shadow DOM
 - Simplifies testing with standard DOM APIs (querySelector works from any scope)
 - Events bubble naturally without needing `composed: true` workarounds
@@ -22,7 +22,7 @@ Extend `LitElement` with `createRenderRoot() { return this; }` to enable Light D
 
 ### Key Implementation Notes
 - Light DOM means no `<slot>` elements—use direct DOM composition instead
-- CSS from @ds/css applies directly to component internals
+- CSS from @hypoth-ui/css applies directly to component internals
 - Reactive properties work the same; use `reflect: true` when CSS needs to target attribute selectors
 - Custom events can use `bubbles: true, composed: true` for maximum interoperability
 
@@ -46,7 +46,7 @@ export const componentRegistry = {
 - Enables tree-shaking when combined with proper entry points
 - Type-safe: TypeScript validates registry entries
 - Simple to maintain and understand
-- Works with existing @ds/wc export patterns
+- Works with existing @hypoth-ui/wc export patterns
 
 ### Alternatives Considered
 1. **JSON manifest file**: Requires build-time processing to resolve module paths; harder to tree-shake
@@ -54,7 +54,7 @@ export const componentRegistry = {
 3. **Decorator-based**: Requires experimental TypeScript features or build plugins
 
 ### Key Implementation Notes
-- Registry lives in `@ds/wc/src/registry/registry.ts`
+- Registry lives in `@hypoth-ui/wc/src/registry/registry.ts`
 - Each component exports its class without self-registering
 - Loader imports registry and calls `define()` for each entry
 - Adding a component = export class + add to registry
@@ -99,7 +99,7 @@ Use a single `'use client'` component (DsLoader) that registers all components v
 - Clean separation: server knows nothing about component internals
 
 ### Current Implementation Analysis
-Existing code in `@ds/next` follows this pattern:
+Existing code in `@hypoth-ui/next` follows this pattern:
 - `element-loader.tsx`: Client component with useEffect-based registration
 - `register.ts`: Guards with `typeof window === "undefined"` check
 

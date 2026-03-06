@@ -3,7 +3,7 @@
 **Feature Branch**: `004-css-layers`
 **Created**: 2026-01-01
 **Status**: Draft
-**Input**: User description: "Provide consistent baseline styling that works across Web Components (Light DOM), plain HTML recipes, and Next.js apps. Easily overridable without specificity wars. Define CSS layer order and files: reset, tokens, base, components, utilities, overrides. Define override guidance for tenants and apps, and ensure compatibility with docs renderer styling. Implement @ds/css layered output, create docs styling guidelines page, create demo showing tenant override layer working."
+**Input**: User description: "Provide consistent baseline styling that works across Web Components (Light DOM), plain HTML recipes, and Next.js apps. Easily overridable without specificity wars. Define CSS layer order and files: reset, tokens, base, components, utilities, overrides. Define override guidance for tenants and apps, and ensure compatibility with docs renderer styling. Implement @hypoth-ui/css layered output, create docs styling guidelines page, create demo showing tenant override layer working."
 
 ## Clarifications
 
@@ -24,11 +24,11 @@ A developer using the design system wants consistent baseline styling whether th
 
 **Acceptance Scenarios**:
 
-1. **Given** a vanilla HTML page imports `@ds/css`, **When** the page renders with basic elements (headings, paragraphs, lists, buttons), **Then** all elements have consistent typography, spacing, and colors matching design tokens.
+1. **Given** a vanilla HTML page imports `@hypoth-ui/css`, **When** the page renders with basic elements (headings, paragraphs, lists, buttons), **Then** all elements have consistent typography, spacing, and colors matching design tokens.
 
 2. **Given** a Light DOM Web Component uses design system base styles, **When** the component renders inside a host page, **Then** the component inherits baseline styles correctly without requiring Shadow DOM encapsulation.
 
-3. **Given** a Next.js app imports `@ds/css` in its root layout, **When** pages render via SSR, **Then** styles are applied immediately without flash of unstyled content (FOUC).
+3. **Given** a Next.js app imports `@hypoth-ui/css` in its root layout, **When** pages render via SSR, **Then** styles are applied immediately without flash of unstyled content (FOUC).
 
 ---
 
@@ -78,7 +78,7 @@ A documentation author wants the docs site to use the design system's CSS layers
 
 **Acceptance Scenarios**:
 
-1. **Given** the docs renderer imports `@ds/css`, **When** a component demo renders on the page, **Then** the demo component uses the same styles it would in a consumer application.
+1. **Given** the docs renderer imports `@hypoth-ui/css`, **When** a component demo renders on the page, **Then** the demo component uses the same styles it would in a consumer application.
 
 2. **Given** the docs site needs custom layout styles, **When** docs-specific CSS is placed in the `overrides` layer, **Then** layout works correctly without affecting component demos.
 
@@ -106,7 +106,7 @@ A developer onboarding to the design system wants to understand how to properly 
 
 ### Edge Cases
 
-- What happens when a developer imports `@ds/css` multiple times (e.g., in both a component and the app root)?
+- What happens when a developer imports `@hypoth-ui/css` multiple times (e.g., in both a component and the app root)?
   - Layer declarations are idempotent; duplicate imports are harmless and the layer order is maintained.
 
 - How does the system handle CSS loaded from a CDN vs. bundled with the application?
@@ -125,13 +125,13 @@ A developer onboarding to the design system wants to understand how to properly 
 **Layer Structure**
 
 - **FR-001**: System MUST define CSS layer order as: `reset, tokens, base, components, utilities, overrides` (lowest to highest precedence).
-- **FR-002**: System MUST provide a single entry point CSS file (`@ds/css`) that imports all layer definitions in correct order.
-- **FR-003**: Each layer MUST be importable independently for advanced use cases (e.g., `@ds/css/layers/reset`).
+- **FR-002**: System MUST provide a single entry point CSS file (`@hypoth-ui/css`) that imports all layer definitions in correct order.
+- **FR-003**: Each layer MUST be importable independently for advanced use cases (e.g., `@hypoth-ui/css/layers/reset`).
 
 **Layer Contents**
 
 - **FR-004**: The `reset` layer MUST contain CSS reset rules that normalize browser defaults (box-sizing, margin reset, reduced-motion handling).
-- **FR-005**: The `tokens` layer MUST import compiled design token CSS custom properties from `@ds/tokens`.
+- **FR-005**: The `tokens` layer MUST import compiled design token CSS custom properties from `@hypoth-ui/tokens`.
 - **FR-006**: The `base` layer MUST contain semantic HTML element styles (typography, links, lists, code blocks) that consume design tokens.
 - **FR-007**: The `components` layer MUST contain design system component styles (button, input, card, etc.) with class-based selectors.
 - **FR-008**: The `utilities` layer MUST contain a minimal set of token-based utility classes limited to: spacing (margin/padding using token values), colors (text/background using token values), display (block, flex, grid, hidden), and text-align (left, center, right).
@@ -153,7 +153,7 @@ A developer onboarding to the design system wants to understand how to properly 
 
 **Documentation Integration**
 
-- **FR-017**: The docs renderer MUST import `@ds/css` as its base styling.
+- **FR-017**: The docs renderer MUST import `@hypoth-ui/css` as its base styling.
 - **FR-018**: Docs-specific styles MUST be placed in the `overrides` layer to avoid demo conflicts.
 - **FR-019**: Component demos in docs MUST render identically to how they would in a consumer app.
 

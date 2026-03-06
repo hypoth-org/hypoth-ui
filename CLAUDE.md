@@ -15,31 +15,33 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - N/A (no persistence layer) (006-wc-platform)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), External icon library (Lucide or Heroicons) with adapter (007-baseline-components)
 - N/A (stateless UI components) (007-baseline-components)
-- TypeScript 5.3+ (strict mode) + Next.js 14+ (App Router), @ds/docs-core, @ds/docs-content, @mdx-js/mdx 3.x, gray-matter 4.x (009-docs-renderer)
+- TypeScript 5.3+ (strict mode) + Next.js 14+ (App Router), @hypoth-ui/docs-core, @hypoth-ui/docs-content, @mdx-js/mdx 3.x, gray-matter 4.x (009-docs-renderer)
 - File-based (content packs as npm packages, edition-config.json per deployment) (009-docs-renderer)
-- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (010-forms-overlays)
-- TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration) (011-a11y-audit)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), `@hypoth-ui/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (010-forms-overlays)
+- TypeScript 5.3+ (strict mode, ES2022 target) + axe-core (automated testing), Vitest (test runner), @hypoth-ui/docs-core (documentation integration) (011-a11y-audit)
 - File-based (JSON artifacts in repository, 5-year retention) (011-a11y-audit)
-- TypeScript 5.3+ (strict mode) + @changesets/cli (versioning), conventional-commits (commit format), @ds/docs-core (docs integration) (012-governance-adoption)
+- TypeScript 5.3+ (strict mode) + @changesets/cli (versioning), conventional-commits (commit format), @hypoth-ui/docs-core (docs integration) (012-governance-adoption)
 - File-based (JSON deprecation registry, markdown templates, changelog files) (012-governance-adoption)
-- TypeScript 5.3+ (existing monorepo standard) + None added; removing @ds/governance from active workspace (013-defer-governance)
+- TypeScript 5.3+ (existing monorepo standard) + None added; removing @hypoth-ui/governance from active workspace (013-defer-governance)
 - N/A (file moves only) (013-defer-governance)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (React adapter peer dependency) (014-shared-a11y-api)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Commander.js (CLI framework), prompts (interactive prompts), picocolors (terminal colors), execa (subprocess execution) (015-cli-tool)
 - File-based (ds.config.json local config, remote JSON registry) (015-cli-tool)
-- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (adapter peer dependency), existing `@ds/primitives-dom` (016-motion-system)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC only), React 18+ (adapter peer dependency), existing `@hypoth-ui/primitives-dom` (016-motion-system)
 - N/A (stateless animation system) (016-motion-system)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), date-fns 3.x (DatePicker/TimePicker only) (017-advanced-form-controls)
-- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (018-structure-nav-overlays)
-- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead) (019-feedback-data-utilities)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@hypoth-ui/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead) (018-structure-nav-overlays)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@hypoth-ui/primitives-dom` (focus-trap, roving-focus, type-ahead) (019-feedback-data-utilities)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (Web Components), React 18+ (adapter peer dependency) (020-layout-primitives)
 - N/A (stateless layout components) (020-layout-primitives)
-- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives) (021-ds-audit-remediation)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapter peer), @hypoth-ui/primitives-dom (behavior primitives) (021-ds-audit-remediation)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing) (022-ds-quality-overhaul)
 - N/A (stateless UI components; file-based docs/manifests) (022-ds-quality-overhaul)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI) (024-arch-review-fixes)
 - File-based (JSON registry, bundled templates, MDX files) (024-arch-review-fixes)
 - localStorage (theme persistence only) (025-demo-showcases)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI), @changesets/cli (versioning) (026-publish-cli-readiness)
+- File-based (package.json, registry JSON, markdown templates) (026-publish-cli-readiness)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -60,32 +62,32 @@ pnpm lint            # Run Biome linter
 pnpm typecheck       # Run TypeScript type checking
 
 # Contract Validation
-pnpm --filter @ds/docs-core validate              # Validate manifests + docs
-pnpm --filter @ds/docs-core validate --strict     # Strict mode (for CI)
-pnpm --filter @ds/docs-core validate --watch      # Watch mode for development
-pnpm --filter @ds/docs-core validate:manifests    # Validate manifests only
+pnpm --filter @hypoth-ui/docs-core validate              # Validate manifests + docs
+pnpm --filter @hypoth-ui/docs-core validate --strict     # Strict mode (for CI)
+pnpm --filter @hypoth-ui/docs-core validate --watch      # Watch mode for development
+pnpm --filter @hypoth-ui/docs-core validate:manifests    # Validate manifests only
 
 # Audit & Reports
-pnpm --filter @ds/docs-core audit:components              # Table format
-pnpm --filter @ds/docs-core audit:components --json       # JSON format
-pnpm --filter @ds/docs-core audit:components --markdown   # Markdown format
-pnpm --filter @ds/docs-core audit:components --status stable --edition core  # Filter
+pnpm --filter @hypoth-ui/docs-core audit:components              # Table format
+pnpm --filter @hypoth-ui/docs-core audit:components --json       # JSON format
+pnpm --filter @hypoth-ui/docs-core audit:components --markdown   # Markdown format
+pnpm --filter @hypoth-ui/docs-core audit:components --status stable --edition core  # Filter
 
 # Edition-specific Development
-pnpm --filter @ds/docs-app dev:core        # Run docs with core edition
-pnpm --filter @ds/docs-app dev:pro         # Run docs with pro edition
-pnpm --filter @ds/docs-app dev:enterprise  # Run docs with enterprise edition
-pnpm --filter @ds/docs-app build:edition-map  # Generate edition map
+pnpm --filter @hypoth-ui/docs-app dev:core        # Run docs with core edition
+pnpm --filter @hypoth-ui/docs-app dev:pro         # Run docs with pro edition
+pnpm --filter @hypoth-ui/docs-app dev:enterprise  # Run docs with enterprise edition
+pnpm --filter @hypoth-ui/docs-app build:edition-map  # Generate edition map
 
 # Token Commands
-pnpm --filter @ds/tokens build              # Build token outputs (CSS, JSON, TS)
-pnpm --filter @ds/tokens clean              # Clean dist directory
-pnpm --filter @ds/docs-core validate:tokens # Validate tokensUsed references
-pnpm --filter @ds/docs-core build:token-docs # Generate token documentation
+pnpm --filter @hypoth-ui/tokens build              # Build token outputs (CSS, JSON, TS)
+pnpm --filter @hypoth-ui/tokens clean              # Clean dist directory
+pnpm --filter @hypoth-ui/docs-core validate:tokens # Validate tokensUsed references
+pnpm --filter @hypoth-ui/docs-core build:token-docs # Generate token documentation
 
 # Accessibility Commands
 pnpm test:a11y                              # Run all accessibility tests
-pnpm --filter @ds/wc test:a11y              # Run WC accessibility tests only
+pnpm --filter @hypoth-ui/wc test:a11y              # Run WC accessibility tests only
 pnpm a11y:audit -- -c ds-button --category form-controls  # Start manual audit
 pnpm a11y:report -- -v 1.0.0                # Generate conformance report
 pnpm a11y:validate                          # Validate audit records
@@ -105,9 +107,9 @@ pnpm --filter @hypoth-ui/cli sync:templates # Sync component templates from sour
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 026-publish-cli-readiness: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI), @changesets/cli (versioning)
 - 025-demo-showcases: Added TypeScript 5.3+ (strict mode, ES2022 target)
 - 024-arch-review-fixes: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI)
-- 022-ds-quality-overhaul: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Next.js 14+ (SSR/RSC testing)
 
 
 <!-- MANUAL ADDITIONS START -->

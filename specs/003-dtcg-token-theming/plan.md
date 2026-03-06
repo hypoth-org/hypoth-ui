@@ -16,7 +16,7 @@ Implement a DTCG-compliant design token pipeline that enables multi-brand and mu
 **Storage**: File-based (DTCG JSON tokens → compiled CSS/JSON/TS outputs)
 **Testing**: Vitest (consistent with existing packages)
 **Target Platform**: Node.js build tool + Browser runtime (CSS custom properties)
-**Project Type**: Monorepo package (`@ds/tokens` enhancement + new compiler in `@ds/docs-core`)
+**Project Type**: Monorepo package (`@hypoth-ui/tokens` enhancement + new compiler in `@hypoth-ui/docs-core`)
 **Performance Goals**: 500 tokens × 3 brands × 4 modes compiled in <5 seconds (SC-001)
 **Constraints**: Zero runtime dependencies for token consumption; runtime mode switching <100ms (SC-002)
 **Scale/Scope**: 12 token categories, 4 modes (light/dark/high-contrast/reduced-motion), unlimited brands
@@ -30,7 +30,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; tokens compile to static CSS; zero runtime dependency for consumption
 - [x] **Accessibility**: High-contrast mode and reduced-motion as first-class modes; respects `prefers-*` media queries
 - [x] **Customizability**: Native DTCG format; CSS layers for overrides; no inline styles; brand switching via `data-brand` attribute
-- [x] **Zero-dep Core**: `@ds/tokens` outputs have zero runtime deps; compiler is build-time only
+- [x] **Zero-dep Core**: `@hypoth-ui/tokens` outputs have zero runtime deps; compiler is build-time only
 - [x] **Web Components**: Components consume tokens via CSS custom properties (Light DOM compatible)
 - [x] **Dependency Management**: No new runtime deps; build deps (tsx, Ajv) already in use
 
@@ -52,7 +52,7 @@ specs/003-dtcg-token-theming/
 
 ```text
 packages/
-├── tokens/                          # @ds/tokens - Token definitions and compiler
+├── tokens/                          # @hypoth-ui/tokens - Token definitions and compiler
 │   ├── src/
 │   │   ├── tokens/                  # DTCG source files
 │   │   │   ├── global/              # Global tokens (primitives + base semantics)
@@ -94,7 +94,7 @@ packages/
 │       ├── compiler/
 │       └── integration/
 │
-├── docs-core/                       # @ds/docs-core - Validation & docs generation
+├── docs-core/                       # @hypoth-ui/docs-core - Validation & docs generation
 │   ├── src/
 │   │   ├── schemas/
 │   │   │   └── tokens-used.schema.json  # Schema for tokensUsed in manifests
@@ -104,7 +104,7 @@ packages/
 │   │       └── token-docs.ts            # Generate token reference docs
 │   └── tests/
 │
-├── wc/                              # @ds/wc - Web Components
+├── wc/                              # @hypoth-ui/wc - Web Components
 │   └── src/components/*/manifest.json   # Add tokensUsed field
 │
 └── docs-content/                    # Documentation content
@@ -112,7 +112,7 @@ packages/
         └── [category].mdx           # Per-category token docs
 ```
 
-**Structure Decision**: Extends existing `@ds/tokens` package with custom DTCG compiler (replacing Style Dictionary). Token validation and docs generation integrate with `@ds/docs-core`. Component manifests in `@ds/wc` add `tokensUsed` declarations.
+**Structure Decision**: Extends existing `@hypoth-ui/tokens` package with custom DTCG compiler (replacing Style Dictionary). Token validation and docs generation integrate with `@hypoth-ui/docs-core`. Component manifests in `@hypoth-ui/wc` add `tokensUsed` declarations.
 
 ## Complexity Tracking
 

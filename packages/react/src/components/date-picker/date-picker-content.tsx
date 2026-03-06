@@ -7,7 +7,7 @@ import {
   type DismissableLayer,
   createAnchorPosition,
   createDismissableLayer,
-} from "@ds/primitives-dom";
+} from "@hypoth-ui/primitives-dom";
 import {
   type HTMLAttributes,
   type ReactNode,

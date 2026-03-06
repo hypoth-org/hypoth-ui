@@ -1,6 +1,6 @@
 "use client";
 
-import { type Direction, createRovingFocus } from "@ds/primitives-dom";
+import { type Direction, createRovingFocus } from "@hypoth-ui/primitives-dom";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

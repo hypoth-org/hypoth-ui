@@ -34,7 +34,7 @@ type TextVariant = 'default' | 'muted' | 'success' | 'warning' | 'error';
 
 ### CSS Class Mapping
 
-Props map to CSS classes from `@ds/css`:
+Props map to CSS classes from `@hypoth-ui/css`:
 
 | Prop | Value | CSS Class |
 |------|-------|-----------|
@@ -158,7 +158,7 @@ const h1Ref = useRef<HTMLHeadingElement>(null);
 | `as` prop | Yes (renders different tags) | No (use asChild) |
 | asChild | No | Yes |
 | Runtime | Lit | None (CSS classes only) |
-| Bundle | Included in @ds/wc | Minimal React code |
+| Bundle | Included in @hypoth-ui/wc | Minimal React code |
 
 **Rationale**: The ds-text WC uses `unsafeStatic` for dynamic tag rendering, which is complex. React's asChild pattern achieves the same goal more elegantly with `cloneElement`.
 
@@ -166,9 +166,9 @@ const h1Ref = useRef<HTMLHeadingElement>(null);
 
 - React 18+ (forwardRef)
 - Slot component (internal)
-- @ds/css typography classes
+- @hypoth-ui/css typography classes
 
 ## Bundle Impact
 
 - Target: <600 bytes minified
-- CSS classes come from @ds/css (external)
+- CSS classes come from @hypoth-ui/css (external)

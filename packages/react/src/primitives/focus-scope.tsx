@@ -7,7 +7,7 @@
  * and focus restoration. Essential for accessible modal dialogs and overlays.
  */
 
-import { type FocusScopeOptions, createFocusScope } from "@ds/primitives-dom";
+import { type FocusScopeOptions, createFocusScope } from "@hypoth-ui/primitives-dom";
 import {
   type ReactNode,
   type RefObject,

@@ -1,5 +1,5 @@
 /* Import design system CSS layers */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 
 /* Docs site styles - placed in overrides layer to avoid affecting component demos */
 @layer overrides {

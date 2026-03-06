@@ -9,13 +9,13 @@
  * @example
  * ```tsx
  * "use client";
- * import { Button, Input, Link } from "@ds/react/client";
+ * import { Button, Input, Link } from "@hypoth-ui/react/client";
  * ```
  *
  * For type-only imports in server components, use the main entry point:
  * @example
  * ```tsx
- * import type { ButtonProps, InputProps } from "@ds/react";
+ * import type { ButtonProps, InputProps } from "@hypoth-ui/react";
  * ```
  */
 

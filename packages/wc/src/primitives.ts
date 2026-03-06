@@ -1,6 +1,6 @@
 /**
  * Primitive components barrel file.
- * Import from '@ds/wc/primitives' for tree-shaking.
+ * Import from '@hypoth-ui/wc/primitives' for tree-shaking.
  */
 
 // Button component

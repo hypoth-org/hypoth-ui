@@ -3,7 +3,7 @@
 **Feature Branch**: `006-wc-platform`
 **Created**: 2026-01-02
 **Status**: Draft
-**Input**: User description: "Establish the default Web Components platform behavior so all components share: Light DOM rendering, consistent event + attribute conventions, predictable registration in Next.js with a single root loader, Lit base class pattern for Light DOM, naming conventions for tags/attributes/events, @ds/next loader responsibilities and the define once rule, how docs renderer and demo apps ensure elements are defined, create a wc base class/utilities module, implement the @ds/next root loader, add docs page Using components in Next.js App Router, add enforcement check to avoid accidental side-effect auto-definitions"
+**Input**: User description: "Establish the default Web Components platform behavior so all components share: Light DOM rendering, consistent event + attribute conventions, predictable registration in Next.js with a single root loader, Lit base class pattern for Light DOM, naming conventions for tags/attributes/events, @hypoth-ui/next loader responsibilities and the define once rule, how docs renderer and demo apps ensure elements are defined, create a wc base class/utilities module, implement the @hypoth-ui/next root loader, add docs page Using components in Next.js App Router, add enforcement check to avoid accidental side-effect auto-definitions"
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -87,7 +87,7 @@ The development team wants to prevent components from self-registering on import
 - **FR-002**: System MUST define tag naming convention as `ds-{component-name}` (e.g., `ds-button`, `ds-card`)
 - **FR-003**: System MUST define attribute naming convention as lowercase with hyphens for multi-word attributes (e.g., `is-disabled`, `aria-label`)
 - **FR-004**: System MUST define event naming convention as `ds:{event-name}` for custom events (e.g., `ds:click`, `ds:change`) with `bubbles: true` and `composed: true` by default
-- **FR-005**: System MUST provide an `@ds/next` package with a root loader component for Next.js App Router
+- **FR-005**: System MUST provide an `@hypoth-ui/next` package with a root loader component for Next.js App Router
 - **FR-006**: System MUST ensure each custom element is registered only once across the application lifecycle
 - **FR-007**: System MUST provide utilities for component authors to export component classes without self-registration
 - **FR-008**: System MUST support SSR in Next.js with proper hydration of custom elements
@@ -185,7 +185,7 @@ The trade-off of maintaining a registry is acceptable because it can be automate
 - The design system uses Lit 3.x as the base for web components
 - Next.js App Router (v14+) is the primary framework target
 - Components will be published as ES modules
-- The existing `@ds/wc` package contains component implementations
+- The existing `@hypoth-ui/wc` package contains component implementations
 - Light DOM is the established pattern for better CSS integration and accessibility
 - Custom events should bubble and be composed by default to enable event delegation patterns and cross-shadow-boundary propagation
 

@@ -8,7 +8,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 
 export type ListSelectionMode = "single" | "multiple" | "none";
 export type ListOrientation = "vertical" | "horizontal";

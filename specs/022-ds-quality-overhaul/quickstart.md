@@ -15,7 +15,7 @@ Style props enable Chakra-like inline styling with design token integration.
 ### Basic Usage
 
 ```tsx
-import { Box, Flex, Text } from "@ds/react";
+import { Box, Flex, Text } from "@hypoth-ui/react";
 
 function Card() {
   return (
@@ -151,7 +151,7 @@ The `ThemeProvider` is the root wrapper that manages both color mode (light/dark
 // app/providers.tsx
 "use client";
 
-import { ThemeProvider } from "@ds/react";
+import { ThemeProvider } from "@hypoth-ui/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -186,7 +186,7 @@ For SSR, use cookies to avoid hydration mismatch:
 ```tsx
 // app/layout.tsx
 import { cookies } from "next/headers";
-import { ThemeProvider, parseThemeCookie, getThemeScript } from "@ds/react";
+import { ThemeProvider, parseThemeCookie, getThemeScript } from "@hypoth-ui/react";
 
 export default function RootLayout({ children }) {
   const cookieStore = cookies();
@@ -218,7 +218,7 @@ export default function RootLayout({ children }) {
 ### Theme Toggle Component
 
 ```tsx
-import { useTheme } from "@ds/react";
+import { useTheme } from "@hypoth-ui/react";
 
 function ThemeToggle() {
   const { colorMode, setColorMode, density, setDensity } = useTheme();
@@ -258,7 +258,7 @@ function ThemeToggle() {
 Use `DensityProvider` for local overrides within a section:
 
 ```tsx
-import { ThemeProvider, DensityProvider } from "@ds/react";
+import { ThemeProvider, DensityProvider } from "@hypoth-ui/react";
 
 function App() {
   return (
@@ -324,7 +324,7 @@ If you're already using `next-themes` for color mode, use `disableColorMode` to 
 "use client";
 
 import { ThemeProvider as NextThemeProvider } from "next-themes";
-import { ThemeProvider as DSProvider } from "@ds/react";
+import { ThemeProvider as DSProvider } from "@hypoth-ui/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -345,7 +345,7 @@ Use both hooks together in settings:
 
 ```tsx
 import { useTheme as useNextTheme } from "next-themes";
-import { useTheme as useDSTheme } from "@ds/react";
+import { useTheme as useDSTheme } from "@hypoth-ui/react";
 
 function Settings() {
   const { theme, setTheme } = useNextTheme();       // Color mode
@@ -424,7 +424,7 @@ Use the `useStableId` hook for hydration-safe ID generation.
 ### Basic Usage
 
 ```tsx
-import { useStableId } from "@ds/react";
+import { useStableId } from "@hypoth-ui/react";
 
 function FormField({ label, children }) {
   const id = useStableId();
@@ -441,7 +441,7 @@ function FormField({ label, children }) {
 ### Multiple Related IDs
 
 ```tsx
-import { useStableIds } from "@ds/react";
+import { useStableIds } from "@hypoth-ui/react";
 
 function CustomDialog({ title, description, children }) {
   const ids = useStableIds(["title", "description", "content"]);
@@ -557,7 +557,7 @@ Copy component source code into your project for full customization.
 ### Initialize Config
 
 ```bash
-npx @ds/cli init
+npx @hypoth-ui/cli init
 
 # Creates ds.config.json:
 # {
@@ -573,14 +573,14 @@ npx @ds/cli init
 
 ```bash
 # Copy a single component
-npx @ds/cli copy button
+npx @hypoth-ui/cli copy button
 
 # Output:
 # ✓ Created components/ui/button.tsx
 # ✓ Created components/ui/button.css
 
 # Copy with dependencies
-npx @ds/cli copy dialog
+npx @hypoth-ui/cli copy dialog
 # Dialog requires: Button, Portal. Copy all? (Y/n)
 # ✓ Created components/ui/dialog.tsx
 # ✓ Created components/ui/dialog.css
@@ -592,7 +592,7 @@ npx @ds/cli copy dialog
 ### List Available Components
 
 ```bash
-npx @ds/cli list
+npx @hypoth-ui/cli list
 
 # Output:
 # Actions:
@@ -608,7 +608,7 @@ npx @ds/cli list
 ### Use Copied Components
 
 ```tsx
-// Import from your local path (not @ds/react)
+// Import from your local path (not @hypoth-ui/react)
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 
@@ -662,8 +662,8 @@ Warnings are automatically stripped in production builds via dead code eliminati
 
 When upgrading to use these new features:
 
-- [ ] Install updated packages (`pnpm update @ds/react @ds/tokens`)
-- [ ] Import new CSS (`@ds/tokens/density.css` for density support)
+- [ ] Install updated packages (`pnpm update @hypoth-ui/react @hypoth-ui/tokens`)
+- [ ] Import new CSS (`@hypoth-ui/tokens/density.css` for density support)
 - [ ] Update event handlers to new naming (e.g., `onClick` → `onPress`)
 - [ ] Consider wrapping app in `<DensityProvider>` if using density
 - [ ] Run `pnpm build` to compile style props (if using Panda CSS)

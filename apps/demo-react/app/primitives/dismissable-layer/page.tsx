@@ -1,6 +1,6 @@
 "use client";
 
-import { type DismissReason, createDismissableLayer } from "@ds/primitives-dom";
+import { type DismissReason, createDismissableLayer } from "@hypoth-ui/primitives-dom";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 

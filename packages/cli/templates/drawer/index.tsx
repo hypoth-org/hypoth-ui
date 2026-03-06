@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { Drawer } from "@ds/react";
+ * import { Drawer } from "@/components/ui";
  *
  * <Drawer.Root>
  *   <Drawer.Trigger>

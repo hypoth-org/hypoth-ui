@@ -106,7 +106,7 @@ interface ColumnDef<TData> {
 - **APG compliance**: Follow ARIA Authoring Practices Guide tree pattern exactly
 - **Keyboard navigation**: Arrow keys for navigation, Enter/Space for expand, Home/End for first/last
 - **Roving tabindex**: Only one item tabbable at a time (tabindex="0"), others are tabindex="-1"
-- **Typeahead**: Existing `@ds/primitives-dom` type-ahead utility
+- **Typeahead**: Existing `@hypoth-ui/primitives-dom` type-ahead utility
 
 ### Key ARIA Attributes
 ```html
@@ -134,13 +134,13 @@ interface ColumnDef<TData> {
 
 ### Implementation Pattern
 ```typescript
-// @ds/primitives-dom
+// @hypoth-ui/primitives-dom
 export function createPortal(content: Element, container = document.body): () => void {
   container.appendChild(content);
   return () => container.removeChild(content);
 }
 
-// @ds/react Portal component
+// @hypoth-ui/react Portal component
 function Portal({ children, container }) {
   return typeof document !== 'undefined'
     ? ReactDOM.createPortal(children, container ?? document.body)
@@ -155,7 +155,7 @@ function Portal({ children, container }) {
 ### Decision: Extend existing focus-trap with scope semantics
 
 ### Rationale
-- **Reuse**: Build on existing `@ds/primitives-dom/focus/focus-trap.ts`
+- **Reuse**: Build on existing `@hypoth-ui/primitives-dom/focus/focus-trap.ts`
 - **Trap vs Scope**: FocusScope = trap + restore focus on unmount + handle dynamic content
 - **MutationObserver**: Watch for DOM changes to update focusable element list
 
@@ -330,7 +330,7 @@ const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
 
 ## 13. Existing Primitives Audit
 
-### Available from `@ds/primitives-dom`
+### Available from `@hypoth-ui/primitives-dom`
 
 | Primitive | Location | Usage in This Spec |
 |-----------|----------|-------------------|

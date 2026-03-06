@@ -5,7 +5,7 @@
 
 ## Summary
 
-Create a shared behavior primitive layer in `@ds/primitives-dom` that provides headless state machines, ARIA computation, and keyboard handlers for Button, Dialog, and Menu components. Both `@ds/react` (native React components with compound patterns and asChild) and `@ds/wc` (Lit-based Web Components) consume these primitives, ensuring identical accessibility behavior across frameworks.
+Create a shared behavior primitive layer in `@hypoth-ui/primitives-dom` that provides headless state machines, ARIA computation, and keyboard handlers for Button, Dialog, and Menu components. Both `@hypoth-ui/react` (native React components with compound patterns and asChild) and `@hypoth-ui/wc` (Lit-based Web Components) consume these primitives, ensuring identical accessibility behavior across frameworks.
 
 ## Technical Context
 
@@ -16,7 +16,7 @@ Create a shared behavior primitive layer in `@ds/primitives-dom` that provides h
 **Target Platform**: Browser (modern evergreen), SSR-compatible (Next.js 14+ App Router)
 **Project Type**: Monorepo with multiple packages
 **Performance Goals**: ≤3KB gzipped per behavior primitive module; no bundle size increase for WC-only consumers
-**Constraints**: Zero runtime dependencies for `@ds/primitives-dom`; Light DOM only for WC
+**Constraints**: Zero runtime dependencies for `@hypoth-ui/primitives-dom`; Light DOM only for WC
 **Scale/Scope**: 3 components (Button, Dialog, Menu) as proof-of-concept; 14 remaining components deferred
 
 ## Constitution Check
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; behavior primitives are pure JS with no styling; SSR-friendly (framework-agnostic core)
 - [x] **Accessibility**: WCAG 2.1 AA plan via shared ARIA computation; APG patterns (Dialog Modal, Menu Button) identified; axe-core + manual keyboard testing strategy defined
 - [x] **Customizability**: Styling remains via DTCG tokens and CSS layers; behavior primitives are headless (no style opinions)
-- [x] **Zero-dep Core**: `@ds/primitives-dom` remains zero runtime dependencies; behavior primitives are pure TypeScript
+- [x] **Zero-dep Core**: `@hypoth-ui/primitives-dom` remains zero runtime dependencies; behavior primitives are pure TypeScript
 - [x] **Web Components**: Light DOM default maintained; Lit-based; WC consumes same primitives as React
 - [x] **Dependency Management**: No new runtime dependencies; pnpm workspace protocol for internal deps
 
@@ -83,7 +83,7 @@ packages/
 └── [other packages unchanged]
 ```
 
-**Structure Decision**: Monorepo with behavior primitives in `@ds/primitives-dom`, consumed by both `@ds/react` (native React) and `@ds/wc` (Lit WC). This follows the recommended "Behavior Hooks + Adapters" approach from the spec.
+**Structure Decision**: Monorepo with behavior primitives in `@hypoth-ui/primitives-dom`, consumed by both `@hypoth-ui/react` (native React) and `@hypoth-ui/wc` (Lit WC). This follows the recommended "Behavior Hooks + Adapters" approach from the spec.
 
 ## Complexity Tracking
 

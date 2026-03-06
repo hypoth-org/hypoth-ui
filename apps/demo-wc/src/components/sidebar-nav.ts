@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { getWCNavigation } from '@ds/demo-shared';
+import { getWCNavigation } from '@hypoth-ui/demo-shared';
 
 /**
  * Sidebar navigation component for the WC demo

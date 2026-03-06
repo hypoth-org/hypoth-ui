@@ -357,7 +357,7 @@ All components render semantic HTML that is functional before JavaScript hydrati
 ### Evaluation Criteria
 
 - **APG Compliance**: Strict adherence to WAI-ARIA Authoring Practices Guide patterns
-- **Primitive Reuse**: Maximum leverage of existing `@ds/primitives-dom` utilities
+- **Primitive Reuse**: Maximum leverage of existing `@hypoth-ui/primitives-dom` utilities
 - **SSR Compatibility**: Components must render meaningful HTML without JavaScript
 - **Testing Evidence**: Each component must have unit tests, a11y tests, and manifest validation
 
@@ -436,7 +436,7 @@ The trade-off of less flexibility is acceptable because:
 
 ## Assumptions
 
-1. The existing `@ds/primitives-dom` utilities (focus-trap, dismissable-layer, roving-focus, type-ahead) are production-ready
+1. The existing `@hypoth-ui/primitives-dom` utilities (focus-trap, dismissable-layer, roving-focus, type-ahead) are production-ready
 2. Field pattern components (Field, Label, FieldDescription, FieldError) are new additions
 3. Positioning for Popover/Tooltip will use CSS anchor positioning with a JS fallback for browsers without anchor positioning support (not Floating UI)
 4. Portal rendering for Dialog uses standard DOM manipulation, not framework-specific portals

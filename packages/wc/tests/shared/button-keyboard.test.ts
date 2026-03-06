@@ -1,7 +1,7 @@
 /**
  * Shared button keyboard tests for WC implementation.
  *
- * Uses @ds/test-utils shared test definitions to ensure consistent
+ * Uses @hypoth-ui/test-utils shared test definitions to ensure consistent
  * behavior across WC and React implementations.
  *
  * Note: WC buttons emit ds:press events, not native click events, on keyboard activation.
@@ -10,7 +10,7 @@
  */
 
 import { describe, expect, it, vi } from "vitest";
-import { runButtonKeyboardTests, createWCButtonTestContext } from "@ds/test-utils";
+import { runButtonKeyboardTests, createWCButtonTestContext } from "@hypoth-ui/test-utils";
 
 // Import the component to register it
 import "../../src/components/button/button.js";

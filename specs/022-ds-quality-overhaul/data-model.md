@@ -129,10 +129,10 @@ interface GridProps extends StyleProps {
 ### Build-Time Compilation
 
 ```typescript
-// panda.config.ts (conceptual - actual config in @ds/react)
+// panda.config.ts (conceptual - actual config in @hypoth-ui/react)
 
 import { defineConfig } from '@pandacss/dev';
-import { tokens } from '@ds/tokens';
+import { tokens } from '@hypoth-ui/tokens';
 
 export default defineConfig({
   // Use our DTCG tokens
@@ -769,8 +769,8 @@ export const componentRegistry: Record<string, ComponentEntry> = {
     ],
     dependencies: [],
     devDependencies: [],
-    peerDependencies: ['react', '@ds/tokens'],
-    cssImports: ['@ds/css/reset.css', '@ds/tokens/variables.css'],
+    peerDependencies: ['react', '@hypoth-ui/tokens'],
+    cssImports: ['@hypoth-ui/css/reset.css', '@hypoth-ui/tokens/variables.css'],
   },
   dialog: {
     name: 'Dialog',
@@ -785,8 +785,8 @@ export const componentRegistry: Record<string, ComponentEntry> = {
     ],
     dependencies: ['button', 'portal'], // Internal deps
     devDependencies: [],
-    peerDependencies: ['react', '@ds/tokens', '@ds/primitives-dom'],
-    cssImports: ['@ds/css/reset.css', '@ds/tokens/variables.css'],
+    peerDependencies: ['react', '@hypoth-ui/tokens', '@hypoth-ui/primitives-dom'],
+    cssImports: ['@hypoth-ui/css/reset.css', '@hypoth-ui/tokens/variables.css'],
   },
   // ... more components
 };

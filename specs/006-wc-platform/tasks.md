@@ -16,8 +16,8 @@
 ## Path Conventions
 
 This is a monorepo with multiple packages:
-- **@ds/wc**: `packages/wc/src/`
-- **@ds/next**: `packages/next/src/`
+- **@hypoth-ui/wc**: `packages/wc/src/`
+- **@hypoth-ui/next**: `packages/next/src/`
 - **Tooling**: `tooling/scripts/`
 - **Docs**: `apps/docs/content/`
 - **Demo**: `apps/demo/`
@@ -69,7 +69,7 @@ This is a monorepo with multiple packages:
 - [x] T017 [US1] Update DsInput to use emitEvent for ds:change in packages/wc/src/components/input/input.ts
 - [x] T018 [US1] Add DsButton and DsInput to componentRegistry in packages/wc/src/registry/registry.ts
 - [x] T019 [US1] Update packages/wc/src/index.ts imports to use new DSElement path
-- [x] T020 [US1] Run existing unit tests to verify components still work (pnpm --filter @ds/wc test)
+- [x] T020 [US1] Run existing unit tests to verify components still work (pnpm --filter @hypoth-ui/wc test)
 - [x] T021 [US1] Add Light DOM verification test in packages/wc/tests/components/light-dom.test.ts
 - [x] T022 [US1] Add event emission test for ds:* events in packages/wc/tests/components/events.test.ts
 

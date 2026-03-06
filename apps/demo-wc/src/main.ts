@@ -4,8 +4,8 @@
  */
 
 // Import design system styles
-import '@ds/tokens/css';
-import '@ds/css';
+import '@hypoth-ui/tokens/css';
+import '@hypoth-ui/css';
 import '../styles/globals.css';
 
 // Import theme utilities

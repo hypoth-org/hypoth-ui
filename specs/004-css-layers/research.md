@@ -5,7 +5,7 @@
 
 ## Overview
 
-Research findings for implementing CSS layers in `@ds/css`. All technical context items were resolved during specification; this document captures best practices research and implementation decisions.
+Research findings for implementing CSS layers in `@hypoth-ui/css`. All technical context items were resolved during specification; this document captures best practices research and implementation decisions.
 
 ---
 
@@ -42,10 +42,10 @@ Use native CSS `@layer` with explicit layer order declaration at the top of the 
 ## 2. Token Layer Integration
 
 ### Decision
-The `tokens` layer imports the CSS output from `@ds/tokens/css` using a relative path that PostCSS resolves at build time.
+The `tokens` layer imports the CSS output from `@hypoth-ui/tokens/css` using a relative path that PostCSS resolves at build time.
 
 ### Rationale
-- `@ds/tokens` already outputs `dist/css/tokens.css` with all CSS custom properties
+- `@hypoth-ui/tokens` already outputs `dist/css/tokens.css` with all CSS custom properties
 - No duplication of token definitions
 - Changes in tokens package automatically flow to CSS package on rebuild
 
@@ -59,7 +59,7 @@ The `tokens` layer imports the CSS output from `@ds/tokens/css` using a relative
 ### Implementation Pattern
 ```css
 /* tokens.css */
-@import "@ds/tokens/css";
+@import "@hypoth-ui/tokens/css";
 ```
 
 PostCSS with `postcss-import` resolves this during build.
@@ -69,25 +69,25 @@ PostCSS with `postcss-import` resolves this during build.
 ## 3. Component Layer Strategy
 
 ### Decision
-The `components` layer aggregates component styles from `@ds/wc` package, organized by component.
+The `components` layer aggregates component styles from `@hypoth-ui/wc` package, organized by component.
 
 ### Rationale
-- Component styles already exist in `@ds/wc/src/components/*/component.css`
+- Component styles already exist in `@hypoth-ui/wc/src/components/*/component.css`
 - Each component file already declares `@layer components` internally
 - CSS package provides a single import point for all component styles
 
 ### Alternatives Considered
 | Alternative | Why Rejected |
 |-------------|--------------|
-| Duplicate styles in @ds/css | Sync issues; maintenance burden |
+| Duplicate styles in @hypoth-ui/css | Sync issues; maintenance burden |
 | No component layer | Components would need to be imported separately |
 | Dynamic component loading | Runtime overhead; SSR complications |
 
 ### Implementation Pattern
 ```css
 /* components.css */
-@import "@ds/wc/button/button.css";
-@import "@ds/wc/input/input.css";
+@import "@hypoth-ui/wc/button/button.css";
+@import "@hypoth-ui/wc/input/input.css";
 /* etc. */
 ```
 
@@ -175,7 +175,7 @@ Tenants create a stylesheet that declares styles in the `overrides` layer, loade
 ## 6. Docs Renderer Integration
 
 ### Decision
-Docs renderer imports `@ds/css` as base styling, then adds docs-specific styles in the `overrides` layer.
+Docs renderer imports `@hypoth-ui/css` as base styling, then adds docs-specific styles in the `overrides` layer.
 
 ### Rationale
 - Component demos render with same styles as production
@@ -192,7 +192,7 @@ Docs renderer imports `@ds/css` as base styling, then adds docs-specific styles 
 ### Implementation Pattern
 ```css
 /* docs-renderer-next/styles/globals.css */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 
 @layer overrides {
   .docs-layout { /* docs-specific layout */ }
@@ -241,8 +241,8 @@ All research items resolved. Key decisions:
 | Area | Decision |
 |------|----------|
 | Layer syntax | Native CSS `@layer` with explicit order |
-| Token integration | Import from `@ds/tokens/css` |
-| Component styles | Aggregate from `@ds/wc` |
+| Token integration | Import from `@hypoth-ui/tokens/css` |
+| Component styles | Aggregate from `@hypoth-ui/wc` |
 | Utility naming | `ds-{property}-{value}` pattern |
 | Tenant overrides | Stylesheet with `@layer overrides` |
 | Docs integration | Import base, add docs styles in overrides |

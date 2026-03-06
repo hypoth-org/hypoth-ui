@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial design system infrastructure
-- Web Components package (`@ds/wc`) with baseline components
-- React adapter package (`@ds/react`)
-- Token system (`@ds/tokens`) with DTCG format
-- Documentation system (`@ds/docs-core`, `@ds/docs-app`, `@ds/docs-content`)
-- Accessibility audit program (`@ds/a11y-audits`)
-- Governance package (`@ds/governance`) for versioning and contribution gates
+- Web Components package (`@hypoth-ui/wc`) with baseline components
+- React adapter package (`@hypoth-ui/react`)
+- Token system (`@hypoth-ui/tokens`) with DTCG format
+- Documentation system (`@hypoth-ui/docs-core`, `@hypoth-ui/docs-app`, `@hypoth-ui/docs-content`)
+- Accessibility audit program (`@hypoth-ui/a11y-audits`)
+- Governance package (`@hypoth-ui/governance`) for versioning and contribution gates
 
 ### Security
 

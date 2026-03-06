@@ -21,7 +21,7 @@
 - **Rollup**: More configuration required; Vite uses Rollup under the hood anyway
 
 **Configuration notes**:
-- Use `vite-plugin-static-copy` for shared assets from @ds/demo-shared
+- Use `vite-plugin-static-copy` for shared assets from @hypoth-ui/demo-shared
 - Configure `resolve.alias` to map workspace packages
 
 ### 2. Theme Persistence Strategy
@@ -55,7 +55,7 @@ document.documentElement.setAttribute('data-theme', theme);
 **Rationale**:
 - CSS media queries handle breakpoint detection (no JS resize listeners)
 - Single `expanded` state controls sidebar visibility
-- Mobile drawer uses existing `@ds/wc` Sheet component
+- Mobile drawer uses existing `@hypoth-ui/wc` Sheet component
 - Follows shadcn sidebar-07 reference pattern
 
 **Alternatives considered**:
@@ -132,7 +132,7 @@ test('dashboard layout matches between demos', async ({ page }) => {
 
 **Package structure**:
 ```typescript
-// @ds/demo-shared exports
+// @hypoth-ui/demo-shared exports
 export { navigation } from './navigation';
 export { mockUsers, mockProducts, mockNotifications } from './mock-data';
 export { dashboardContent, formsContent, ... } from './content';

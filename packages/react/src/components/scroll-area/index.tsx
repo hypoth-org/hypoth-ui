@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { ScrollArea } from "@ds/react";
+ * import { ScrollArea } from "@hypoth-ui/react";
  *
  * <ScrollArea.Root style={{ height: "200px" }}>
  *   <ScrollArea.Viewport>

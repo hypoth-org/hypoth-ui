@@ -1,6 +1,6 @@
 # Tenant Override Contract
 
-**Package**: `@ds/css`
+**Package**: `@hypoth-ui/css`
 **Version**: 0.1.0
 **Date**: 2026-01-01
 
@@ -19,7 +19,7 @@ This document defines the contract for tenant (white-label) override stylesheets
  * Tenant Override Stylesheet
  * Tenant: [TENANT_NAME]
  * Version: [VERSION]
- * Based on: @ds/css [BASE_VERSION]
+ * Based on: @hypoth-ui/css [BASE_VERSION]
  */
 
 @layer overrides {
@@ -113,7 +113,7 @@ Override component styles only when:
 ### Required Order
 
 ```
-1. @ds/css (base package)
+1. @hypoth-ui/css (base package)
 2. tenant-[name].css (tenant overrides)
 3. app-specific.css (optional app overrides)
 ```
@@ -121,7 +121,7 @@ Override component styles only when:
 ### In CSS
 
 ```css
-@import "@ds/css";
+@import "@hypoth-ui/css";
 @import "./tenant-acme.css";
 ```
 
@@ -136,7 +136,7 @@ Override component styles only when:
 
 ```typescript
 // app/layout.tsx
-import "@ds/css";
+import "@hypoth-ui/css";
 import "./tenant-acme.css";
 ```
 
@@ -151,7 +151,7 @@ Complete example tenant stylesheet:
  * Tenant Override Stylesheet
  * Tenant: Acme Corporation
  * Version: 1.0.0
- * Based on: @ds/css 0.1.0
+ * Based on: @hypoth-ui/css 0.1.0
  */
 
 @layer overrides {
@@ -206,7 +206,7 @@ Before deploying a tenant stylesheet:
 
 ### Upgrade Path
 
-When upgrading `@ds/css`:
+When upgrading `@hypoth-ui/css`:
 
 1. Review changelog for token or class changes
 2. Update tenant stylesheet if needed

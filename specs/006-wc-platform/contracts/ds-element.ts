@@ -2,7 +2,7 @@
  * DSElement API Contract
  * Base class for all design system Web Components
  *
- * @package @ds/wc
+ * @package @hypoth-ui/wc
  * @path packages/wc/src/base/ds-element.ts
  */
 
@@ -14,7 +14,7 @@ import type { LitElement } from "lit";
  *
  * All design system components MUST extend this class.
  * Components render into the Light DOM, enabling:
- * - Direct CSS styling from @ds/css and consumer stylesheets
+ * - Direct CSS styling from @hypoth-ui/css and consumer stylesheets
  * - Form integration (autocomplete, form association)
  * - Standard DOM API access (querySelector from any scope)
  */
@@ -34,7 +34,7 @@ export declare class DSElement extends LitElement {
  * ```typescript
  * import { html } from 'lit';
  * import { property } from 'lit/decorators.js';
- * import { DSElement } from '@ds/wc';
+ * import { DSElement } from '@hypoth-ui/wc';
  *
  * export class DsButton extends DSElement {
  *   @property({ reflect: true })

@@ -30,7 +30,7 @@ Based on plan.md structure:
 
 - [x] T001 Verify postcss.config.js includes postcss-import plugin in packages/css/postcss.config.js
 - [x] T002 [P] Update package.json exports to include layer entry points in packages/css/package.json
-- [x] T003 [P] Ensure @ds/tokens is listed as dependency in packages/css/package.json
+- [x] T003 [P] Ensure @hypoth-ui/tokens is listed as dependency in packages/css/package.json
 
 ---
 
@@ -40,12 +40,12 @@ Based on plan.md structure:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [x] T004 Create tokens.css layer file that imports @ds/tokens/css in packages/css/src/layers/tokens.css
-- [x] T005 [P] Create components.css layer file that aggregates @ds/wc component styles in packages/css/src/layers/components.css
+- [x] T004 Create tokens.css layer file that imports @hypoth-ui/tokens/css in packages/css/src/layers/tokens.css
+- [x] T005 [P] Create components.css layer file that aggregates @hypoth-ui/wc component styles in packages/css/src/layers/components.css
 - [x] T006 [P] Create empty overrides.css placeholder file in packages/css/src/layers/overrides.css
 - [x] T007 Update layers/index.css to declare all 6 layers and import each layer file in packages/css/src/layers/index.css
 - [x] T008 Update src/index.css entry point to import layers/index.css in packages/css/src/index.css
-- [x] T009 Run build and verify dist/index.css contains all layers in correct order with pnpm --filter @ds/css build
+- [x] T009 Run build and verify dist/index.css contains all layers in correct order with pnpm --filter @hypoth-ui/css build
 
 **Checkpoint**: Foundation ready - layer structure complete, user story implementation can begin
 
@@ -55,15 +55,15 @@ Based on plan.md structure:
 
 **Goal**: Provide consistent baseline styling across vanilla HTML, Web Components, and Next.js
 
-**Independent Test**: Import @ds/css in demo app and verify elements render with token-based styling
+**Independent Test**: Import @hypoth-ui/css in demo app and verify elements render with token-based styling
 
 ### Implementation for User Story 1
 
 - [x] T010 [US1] Verify reset.css includes prefers-reduced-motion media query in packages/css/src/layers/reset.css
 - [x] T011 [US1] Verify base.css styles semantic HTML elements using token variables in packages/css/src/layers/base.css
-- [x] T012 [US1] Verify demo app layout.tsx imports @ds/css correctly in apps/demo/app/layout.tsx
+- [x] T012 [US1] Verify demo app layout.tsx imports @hypoth-ui/css correctly in apps/demo/app/layout.tsx
 - [x] T013 [US1] Add demo page content showing headings, paragraphs, lists, code blocks in apps/demo/app/page.tsx
-- [x] T014 [US1] Build and verify bundle size is under 20KB gzipped with pnpm --filter @ds/css build
+- [x] T014 [US1] Build and verify bundle size is under 20KB gzipped with pnpm --filter @hypoth-ui/css build
 
 **Checkpoint**: User Story 1 complete - baseline styling works across platforms
 
@@ -91,7 +91,7 @@ Based on plan.md structure:
 
 **Goal**: Enable white-label branding via tenant override stylesheets
 
-**Independent Test**: Load tenant-acme.css after @ds/css and verify brand colors appear
+**Independent Test**: Load tenant-acme.css after @hypoth-ui/css and verify brand colors appear
 
 ### Implementation for User Story 3
 
@@ -107,13 +107,13 @@ Based on plan.md structure:
 
 ## Phase 6: User Story 4 - Documentation Rendering Integration (Priority: P2)
 
-**Goal**: Docs site uses @ds/css layers for consistent styling with component demos
+**Goal**: Docs site uses @hypoth-ui/css layers for consistent styling with component demos
 
 **Independent Test**: Run docs site and verify component demos match standalone rendering
 
 ### Implementation for User Story 4
 
-- [x] T025 [US4] Update docs-renderer-next globals.css to import @ds/css in packages/docs-renderer-next/styles/globals.css
+- [x] T025 [US4] Update docs-renderer-next globals.css to import @hypoth-ui/css in packages/docs-renderer-next/styles/globals.css
 - [x] T026 [US4] Move existing docs styles into @layer overrides wrapper in packages/docs-renderer-next/styles/globals.css
 - [x] T027 [US4] Verify docs navigation and layout styles don't affect component demos
 - [x] T028 [US4] Ensure dark mode toggle in docs works with layered styles
@@ -145,7 +145,7 @@ Based on plan.md structure:
 **Purpose**: Final validation and cleanup
 
 - [x] T034 Run full build across all packages with pnpm build
-- [x] T035 [P] Verify demo app E2E tests still pass with pnpm --filter @ds/demo test:e2e
+- [x] T035 [P] Verify demo app E2E tests still pass with pnpm --filter @hypoth-ui/demo test:e2e
 - [x] T036 [P] Verify CSS bundle size is under 20KB gzipped
 - [x] T037 Validate layer order in DevTools by inspecting demo app elements
 - [x] T038 Run quickstart.md validation - follow steps and verify they work

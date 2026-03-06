@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { AspectRatio } from "@ds/react";
+ * import { AspectRatio } from "@hypoth-ui/react";
  *
  * <AspectRatio ratio="16/9">
  *   <img src="image.jpg" alt="..." />

@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { NavigationMenu } from "@ds/react";
+ * import { NavigationMenu } from "@hypoth-ui/react";
  *
  * <NavigationMenu.Root>
  *   <NavigationMenu.List>

@@ -221,4 +221,4 @@ useEffect(() => {
 ## See Also
 
 - [event-names.ts](./event-names.ts) - Type definitions and helpers
-- [@ds/wc/src/events/emit.ts](../../wc/src/events/emit.ts) - WC event emission utilities
+- [@hypoth-ui/wc/src/events/emit.ts](../../wc/src/events/emit.ts) - WC event emission utilities

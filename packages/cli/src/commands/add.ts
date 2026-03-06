@@ -138,9 +138,26 @@ export async function addCommand(componentArgs: string[], options: AddOptions = 
   }
 
   // Install components based on mode
+  // --copy flag overrides config.style for this invocation
+  const useCopyMode = options.copy || config.style === "copy";
   const spinner = p.spinner();
 
-  if (config.style === "copy") {
+  if (useCopyMode) {
+    // Check that all components have template files available
+    const noTemplates = finalComponents.filter((c) => c.files.length === 0);
+    if (noTemplates.length > 0) {
+      const withTemplates = finalComponents.filter((c) => c.files.length > 0);
+      p.log.error(
+        `No template files available for: ${noTemplates.map((c) => pc.yellow(c.name)).join(", ")}`
+      );
+      p.log.info(
+        `Copy mode supports: ${withTemplates.length > 0 ? withTemplates.map((c) => c.name).join(", ") : "run 'pnpm sync:templates' to generate templates"}`
+      );
+      if (withTemplates.length === 0) {
+        process.exit(1);
+      }
+    }
+
     ensureComponentsDir(config, cwd);
 
     for (const component of finalComponents) {
@@ -192,7 +209,7 @@ export async function addCommand(componentArgs: string[], options: AddOptions = 
   p.outro(pc.green(`Added ${installed.length} component(s): ${installed.join(", ")}`));
 
   // Usage hint
-  if (config.style === "copy") {
+  if (useCopyMode) {
     console.log("");
     console.log(`Components copied to: ${pc.dim(config.paths.components)}`);
   }

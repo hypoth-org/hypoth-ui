@@ -20,7 +20,7 @@ import {
   mergeManifests,
   resolveAllContent,
   resolveContent,
-} from "@ds/docs-core";
+} from "@hypoth-ui/docs-core";
 
 /**
  * Cached content packs (initialized once per build)
@@ -59,7 +59,7 @@ export async function getContentPacks(): Promise<ContentPack[]> {
   // Check for local development path first, then node_modules
   let basePackRoot = join(process.cwd(), "..", "docs-content");
   if (!existsSync(basePackRoot)) {
-    basePackRoot = join(process.cwd(), "node_modules/@ds/docs-content");
+    basePackRoot = join(process.cwd(), "node_modules/@hypoth-ui/docs-content");
   }
 
   // Initialize content packs from config
@@ -73,7 +73,7 @@ export async function getContentPacks(): Promise<ContentPack[]> {
         return nodeModulesPath;
       }
       // Try sibling package in monorepo
-      const siblingPath = join(process.cwd(), "..", packageName.replace("@ds/", ""));
+      const siblingPath = join(process.cwd(), "..", packageName.replace("@hypoth-ui/", ""));
       if (existsSync(siblingPath)) {
         return siblingPath;
       }

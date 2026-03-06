@@ -1,8 +1,16 @@
 {
-  "name": "@ds/docs-content",
+  "name": "@hypoth-ui/docs-content",
   "version": "0.0.0",
   "type": "module",
-  "description": "Base documentation content pack",
+  "description": "Documentation content packs for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/docs-content"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["documentation", "content", "design-system", "mdx", "hypoth-ui"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,7 +29,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ds/docs-core": "workspace:*"
+    "@hypoth-ui/docs-core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

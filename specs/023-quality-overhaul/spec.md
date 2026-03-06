@@ -106,7 +106,7 @@ As a documentation system, I need manifest.json files for all 55 components so t
 
 **Why this priority**: The docs system requires manifest files to generate API docs. Many components are missing manifests, blocking automated documentation.
 
-**Independent Test**: Can be tested by running `pnpm --filter @ds/docs-core validate:manifests` and seeing all 60 components pass.
+**Independent Test**: Can be tested by running `pnpm --filter @hypoth-ui/docs-core validate:manifests` and seeing all 60 components pass.
 
 **Acceptance Scenarios**:
 
@@ -297,7 +297,7 @@ The phased approach allows shipping P0 a11y coverage quickly (highest value) whi
 - **SC-002**: Zero code duplication for overlay patterns (Dialog, Sheet, Popover, DropdownMenu all use composites)
 - **SC-003**: scroll-area maintains 60fps during scrolling (no layout thrashing in DevTools)
 - **SC-004**: All React adapter handlers maintain referential equality across re-renders
-- **SC-005**: `pnpm --filter @ds/docs-core validate:manifests` passes for all 55 components
+- **SC-005**: `pnpm --filter @hypoth-ui/docs-core validate:manifests` passes for all 55 components
 - **SC-006**: CI pipeline includes a11y test gate that blocks PRs with violations
 - **SC-007**: New components can be built 40% faster using composites (measured by LOC reduction)
 

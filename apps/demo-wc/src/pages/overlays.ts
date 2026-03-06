@@ -1,11 +1,11 @@
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { overlaysSectionContent } from '@ds/demo-shared';
+import { overlaysSectionContent } from '@hypoth-ui/demo-shared';
 
 // Import WC components (bundled exports)
-import '@ds/wc/overlays';
-import '@ds/wc/core';
-import '@ds/wc/form-controls';
+import '@hypoth-ui/wc/overlays';
+import '@hypoth-ui/wc/core';
+import '@hypoth-ui/wc/form-controls';
 
 /**
  * Overlays page component showcasing dialog, sheet, drawer demos

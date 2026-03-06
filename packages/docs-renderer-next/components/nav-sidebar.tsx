@@ -1,6 +1,6 @@
 "use client";
 
-import type { Edition, NavItem } from "@ds/docs-core";
+import type { Edition, NavItem } from "@hypoth-ui/docs-core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

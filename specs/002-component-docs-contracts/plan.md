@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: JSON Schema validation is build-time only; no runtime overhead. Edition filtering via static SSR, no client JS required for filtering.
 - [x] **Accessibility**: Manifest schema includes structured a11y metadata (keyboard, screenReader, ariaPatterns); a11y section required in manifest.
 - [x] **Customizability**: Manifests use DTCG-aligned patterns; edition config is external; no hard-coded filtering logic.
-- [x] **Zero-dep Core**: Validation tooling is build-time only in `@ds/docs-core`; manifest.json files have no runtime deps.
+- [x] **Zero-dep Core**: Validation tooling is build-time only in `@hypoth-ui/docs-core`; manifest.json files have no runtime deps.
 - [x] **Web Components**: Manifests live alongside WC source; Light DOM pattern unaffected.
 - [x] **Dependency Management**: Ajv is build-time only; gray-matter already in docs-core; no new runtime deps.
 
@@ -92,7 +92,7 @@ apps/
     └── edition.config.json           # NEW: Tenant edition config
 ```
 
-**Structure Decision**: Extends existing monorepo structure. Schemas and validation live in `@ds/docs-core` (build-time package). Manifests co-located with component source in `@ds/wc`. Edition config at app level for tenant customization.
+**Structure Decision**: Extends existing monorepo structure. Schemas and validation live in `@hypoth-ui/docs-core` (build-time package). Manifests co-located with component source in `@hypoth-ui/wc`. Edition config at app level for tenant customization.
 
 ## Complexity Tracking
 

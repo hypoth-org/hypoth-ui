@@ -4,8 +4,8 @@
 
 import { type DialogRole, createDialogBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
-import { useStableId } from "@/lib/hooks/use-stable-id";
-import { DialogProvider } from "./dialog-context";
+import { useStableId } from "../../hooks/use-stable-id.js";
+import { DialogProvider } from "./dialog-context.js";
 
 export interface DialogRootProps {
   /** Dialog content */

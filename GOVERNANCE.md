@@ -6,7 +6,7 @@
 
 ## Deferral Rationale
 
-The `@ds/governance` package has been deferred because it is **premature for a 17-component library**. Governance tooling (deprecation tracking, contribution gates, tenant diffing) provides significant value for mature design systems with:
+The `@hypoth-ui/governance` package has been deferred because it is **premature for a 17-component library**. Governance tooling (deprecation tracking, contribution gates, tenant diffing) provides significant value for mature design systems with:
 
 - Large component catalogs (40+ components)
 - Multiple breaking change cycles
@@ -17,7 +17,7 @@ At the current scale (17 components), the governance overhead exceeds its benefi
 
 ## Contents Inventory
 
-The archived `@ds/governance` package includes:
+The archived `@hypoth-ui/governance` package includes:
 
 | Directory/File | Purpose |
 |----------------|---------|
@@ -57,20 +57,20 @@ Add the following to `package.json` scripts section:
 ```json
 {
   "scripts": {
-    "ds-deprecate": "pnpm --filter @ds/governance deprecate",
-    "ds-check-gates": "pnpm --filter @ds/governance check-gates",
-    "ds-tenant-diff": "pnpm --filter @ds/governance tenant-diff"
+    "ds-deprecate": "pnpm --filter @hypoth-ui/governance deprecate",
+    "ds-check-gates": "pnpm --filter @hypoth-ui/governance check-gates",
+    "ds-tenant-diff": "pnpm --filter @hypoth-ui/governance tenant-diff"
   }
 }
 ```
 
 ### Step 3: Update Changeset Configuration
 
-Add `@ds/governance` to the ignore array in `.changeset/config.json`:
+Add `@hypoth-ui/governance` to the ignore array in `.changeset/config.json`:
 
 ```json
 {
-  "ignore": ["@ds/governance"]
+  "ignore": ["@hypoth-ui/governance"]
 }
 ```
 

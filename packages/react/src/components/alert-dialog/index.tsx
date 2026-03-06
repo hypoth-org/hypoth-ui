@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { AlertDialog } from "@ds/react";
+ * import { AlertDialog } from "@hypoth-ui/react";
  *
  * <AlertDialog.Root>
  *   <AlertDialog.Trigger>

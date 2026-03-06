@@ -41,15 +41,15 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [x] T008 [P] Scaffold @ds/tokens package structure in packages/tokens/
-- [x] T009 [P] Scaffold @ds/css package structure in packages/css/
-- [x] T010 [P] Scaffold @ds/primitives-dom package structure in packages/primitives-dom/
-- [x] T011 [P] Scaffold @ds/wc package structure in packages/wc/
-- [x] T012 [P] Scaffold @ds/react package structure in packages/react/
-- [x] T013 [P] Scaffold @ds/next package structure in packages/next/
-- [x] T014 [P] Scaffold @ds/docs-core package structure in packages/docs-core/
-- [x] T015 [P] Scaffold @ds/docs-content package structure in packages/docs-content/
-- [x] T016 [P] Scaffold @ds/docs-renderer-next package structure in packages/docs-renderer-next/
+- [x] T008 [P] Scaffold @hypoth-ui/tokens package structure in packages/tokens/
+- [x] T009 [P] Scaffold @hypoth-ui/css package structure in packages/css/
+- [x] T010 [P] Scaffold @hypoth-ui/primitives-dom package structure in packages/primitives-dom/
+- [x] T011 [P] Scaffold @hypoth-ui/wc package structure in packages/wc/
+- [x] T012 [P] Scaffold @hypoth-ui/react package structure in packages/react/
+- [x] T013 [P] Scaffold @hypoth-ui/next package structure in packages/next/
+- [x] T014 [P] Scaffold @hypoth-ui/docs-core package structure in packages/docs-core/
+- [x] T015 [P] Scaffold @hypoth-ui/docs-content package structure in packages/docs-content/
+- [x] T016 [P] Scaffold @hypoth-ui/docs-renderer-next package structure in packages/docs-renderer-next/
 - [x] T017 [P] Scaffold demo app structure in apps/demo/
 - [x] T018 [P] Scaffold docs app structure in apps/docs/
 - [x] T019 Configure package.json exports field pattern for all packages (template in packages/tokens/package.json)
@@ -90,7 +90,7 @@
 - [x] T041 [US1] Add unit tests for CSS layer output in packages/css/tests/layers.test.ts
 - [x] T042 [US1] Verify token CSS variables are present in compiled output (integration test)
 
-**Checkpoint**: `pnpm build` produces @ds/tokens CSS + TS outputs and @ds/css layered stylesheet; custom tokens override defaults ✅
+**Checkpoint**: `pnpm build` produces @hypoth-ui/tokens CSS + TS outputs and @hypoth-ui/css layered stylesheet; custom tokens override defaults ✅
 
 ---
 

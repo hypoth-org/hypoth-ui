@@ -262,7 +262,7 @@ Task: "T033 [US2] Implement TypeScript types emitter..."
 2. Complete Phase 2: Foundational (CRITICAL - blocks all stories)
 3. Complete Phase 3: User Story 1 (Token Consumption)
 4. Complete Phase 4: User Story 2 (Token Compilation)
-5. **STOP and VALIDATE**: Run `pnpm --filter @ds/tokens build`, verify CSS/JSON/TS outputs
+5. **STOP and VALIDATE**: Run `pnpm --filter @hypoth-ui/tokens build`, verify CSS/JSON/TS outputs
 6. Deploy/demo if ready - basic token pipeline working
 
 ### Incremental Delivery

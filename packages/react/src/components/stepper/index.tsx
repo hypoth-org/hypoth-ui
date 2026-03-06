@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Stepper } from "@ds/react";
+ * import { Stepper } from "@hypoth-ui/react";
  *
  * <Stepper.Root value={2} onStepChange={(step) => console.log(step)}>
  *   <Stepper.Item step={1} completed>

@@ -9,7 +9,7 @@ Layout primitives are included in the core design system packages.
 
 ```bash
 # If not already installed
-pnpm add @ds/css @ds/wc @ds/react
+pnpm add @hypoth-ui/css @hypoth-ui/wc @hypoth-ui/react
 ```
 
 ## Setup
@@ -20,7 +20,7 @@ Include layout styles in your application:
 
 ```css
 /* In your global CSS */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 ```
 
 ### 2. Register Web Components (Optional)
@@ -29,7 +29,7 @@ If using Web Components directly:
 
 ```typescript
 // In your app entry point
-import "@ds/wc/layout";
+import "@hypoth-ui/wc/layout";
 ```
 
 ### 3. Import React Components (Optional)
@@ -37,7 +37,7 @@ import "@ds/wc/layout";
 If using React:
 
 ```tsx
-import { Flow, Container, Grid, Box } from "@ds/react/layout";
+import { Flow, Container, Grid, Box } from "@hypoth-ui/react/layout";
 ```
 
 ## Basic Usage
@@ -155,7 +155,7 @@ import {
   AppShell,
   Container,
   Flow
-} from "@ds/react/layout";
+} from "@hypoth-ui/react/layout";
 
 function App() {
   return (
@@ -290,7 +290,7 @@ function App() {
 For discoverability, React provides these aliases:
 
 ```tsx
-import { Stack, Inline } from "@ds/react/layout";
+import { Stack, Inline } from "@hypoth-ui/react/layout";
 
 // Stack = Flow direction="column"
 <Stack gap="md">...</Stack>

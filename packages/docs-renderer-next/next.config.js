@@ -5,13 +5,13 @@ const nextConfig = {
 
   // Transpile design system packages
   transpilePackages: [
-    "@ds/docs-core",
-    "@ds/docs-content",
-    "@ds/wc",
-    "@ds/next",
-    "@ds/react",
-    "@ds/tokens",
-    "@ds/css",
+    "@hypoth-ui/docs-core",
+    "@hypoth-ui/docs-content",
+    "@hypoth-ui/wc",
+    "@hypoth-ui/next",
+    "@hypoth-ui/react",
+    "@hypoth-ui/tokens",
+    "@hypoth-ui/css",
   ],
 
   // Configure MDX support

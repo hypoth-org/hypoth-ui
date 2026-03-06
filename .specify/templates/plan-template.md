@@ -36,7 +36,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [ ] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly
 - [ ] **Accessibility**: WCAG 2.1 AA plan; APG patterns identified; a11y testing strategy defined
 - [ ] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
-- [ ] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
+- [ ] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
 - [ ] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
 - [ ] **Dependency Management**: Latest stable versions verified; pnpm used; bundle impact assessed
 

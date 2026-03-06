@@ -4,7 +4,7 @@ import {
   type LogicalDirection,
   createActivationHandler,
   createArrowKeyHandler,
-} from "@ds/primitives-dom";
+} from "@hypoth-ui/primitives-dom";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

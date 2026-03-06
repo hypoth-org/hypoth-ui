@@ -2,7 +2,7 @@
  * Next.js Loader API Contract
  * Client-side component registration for Next.js App Router
  *
- * @package @ds/next
+ * @package @hypoth-ui/next
  * @path packages/next/src/loader/
  */
 
@@ -26,7 +26,7 @@ export interface DsLoaderProps {
  * @example
  * ```tsx
  * // app/layout.tsx
- * import { DsLoader } from '@ds/next/loader';
+ * import { DsLoader } from '@hypoth-ui/next/loader';
  *
  * export default function RootLayout({ children }) {
  *   return (
@@ -58,7 +58,7 @@ export declare function DsLoader(props: DsLoaderProps): null;
  * @example
  * ```typescript
  * // Manual registration (non-React)
- * import { registerAllElements } from '@ds/next/loader';
+ * import { registerAllElements } from '@hypoth-ui/next/loader';
  *
  * await registerAllElements();
  * // All ds-* elements are now available

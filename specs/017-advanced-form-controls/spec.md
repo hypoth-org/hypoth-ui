@@ -293,7 +293,7 @@ A developer building a two-factor authentication flow needs a PIN/OTP input that
 ### Evaluation Criteria
 
 - **APG Compliance**: Strict adherence to WAI-ARIA Authoring Practices Guide patterns for listbox, combobox, grid, slider, spinbutton
-- **Primitive Reuse**: Leverage existing `@ds/primitives-dom` utilities (roving-focus, type-ahead, dismissable-layer, focus-trap)
+- **Primitive Reuse**: Leverage existing `@hypoth-ui/primitives-dom` utilities (roving-focus, type-ahead, dismissable-layer, focus-trap)
 - **SSR Compatibility**: Components must render semantic HTML without JavaScript; progressive enhancement for interactivity
 - **Performance**: Virtualization support for large option sets; efficient DOM updates
 - **Customizability**: Token-based styling; consistent with existing design system patterns
@@ -419,7 +419,7 @@ For each component ticket:
 
 ## Assumptions
 
-1. The existing `@ds/primitives-dom` utilities (roving-focus, type-ahead, dismissable-layer) are production-ready and sufficient
+1. The existing `@hypoth-ui/primitives-dom` utilities (roving-focus, type-ahead, dismissable-layer) are production-ready and sufficient
 2. date-fns is an acceptable dependency for DatePicker/TimePicker; no other date library is required
 3. Virtualization for large option sets (>100 options) will use intersection observer pattern, not a third-party virtualization library; activates automatically at threshold
 4. FileUpload does not handle actual upload—it provides hooks for consumers to integrate their upload logic

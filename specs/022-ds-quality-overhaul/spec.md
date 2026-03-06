@@ -24,9 +24,9 @@ As a React developer adopting Hypoth-UI, I need all 55 components to have React 
 
 **Acceptance Scenarios**:
 
-1. **Given** a React application, **When** I import any of the 55 components from `@ds/react`, **Then** each component renders correctly with full prop support
+1. **Given** a React application, **When** I import any of the 55 components from `@hypoth-ui/react`, **Then** each component renders correctly with full prop support
 2. **Given** a React component and its WC counterpart, **When** I use identical props/attributes, **Then** both produce functionally identical behavior
-3. **Given** the missing components list (Accordion, AlertDialog, Breadcrumb, Command, DataTable, NavigationMenu, Pagination, Progress, ScrollArea, Skeleton, Stepper, Table, Toast, Tree, etc.), **When** I import each from `@ds/react`, **Then** TypeScript provides complete type definitions
+3. **Given** the missing components list (Accordion, AlertDialog, Breadcrumb, Command, DataTable, NavigationMenu, Pagination, Progress, ScrollArea, Skeleton, Stepper, Table, Toast, Tree, etc.), **When** I import each from `@hypoth-ui/react`, **Then** TypeScript provides complete type definitions
 
 ---
 
@@ -195,7 +195,7 @@ As a developer who prefers owning component code, I need a CLI command to copy c
 
 **Acceptance Scenarios**:
 
-1. **Given** the CLI installed, **When** I run `npx @ds/cli copy button`, **Then** Button source files are copied to my project's component directory
+1. **Given** the CLI installed, **When** I run `npx @hypoth-ui/cli copy button`, **Then** Button source files are copied to my project's component directory
 2. **Given** a copied component, **When** I import it from my local path, **Then** it works identically to the library version
 3. **Given** a copied component, **When** I modify its source, **Then** library updates don't override my changes
 4. **Given** dependencies between components, **When** I copy one, **Then** CLI prompts to copy required dependencies

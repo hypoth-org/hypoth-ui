@@ -11,13 +11,13 @@ This guide covers implementing the animation system for component enter/exit tra
 
 - Node.js 18+
 - pnpm 8+
-- Familiarity with existing packages: `@ds/tokens`, `@ds/css`, `@ds/primitives-dom`, `@ds/wc`, `@ds/react`
+- Familiarity with existing packages: `@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`, `@hypoth-ui/wc`, `@hypoth-ui/react`
 
 ## Implementation Order
 
 ### Phase 1: CSS Animations
 
-1. **Create animation keyframes** in `@ds/css`
+1. **Create animation keyframes** in `@hypoth-ui/css`
    - Add `src/layers/animations.css` with keyframe definitions
    - Add animation utility classes
    - Import in `src/index.css`
@@ -28,7 +28,7 @@ This guide covers implementing the animation system for component enter/exit tra
 
 ### Phase 2: Presence Utility
 
-3. **Create presence utility** in `@ds/primitives-dom`
+3. **Create presence utility** in `@hypoth-ui/primitives-dom`
    - Add `src/animation/presence.ts`
    - Implement `createPresence()` function
    - Export from `src/index.ts`
@@ -43,14 +43,14 @@ This guide covers implementing the animation system for component enter/exit tra
    - Add animation state tracking to dialog behavior
    - Integrate presence utility for exit animation timing
 
-6. **Update overlay components** in `@ds/wc`
+6. **Update overlay components** in `@hypoth-ui/wc`
    - Add `data-state` attribute to content components
    - Apply CSS animations via attribute selectors
    - Wire up animation completion for close timing
 
 ### Phase 4: React Presence
 
-7. **Create React Presence component** in `@ds/react`
+7. **Create React Presence component** in `@hypoth-ui/react`
    - Implement `Presence` component
    - Handle ref forwarding and animation detection
    - Add to exports
@@ -72,10 +72,10 @@ This guide covers implementing the animation system for component enter/exit tra
 
 | Package | File | Purpose |
 |---------|------|---------|
-| `@ds/css` | `src/layers/animations.css` | Keyframes and utility classes |
-| `@ds/primitives-dom` | `src/animation/presence.ts` | Exit animation coordination |
-| `@ds/wc` | `src/components/dialog/dialog.ts` | Animation integration example |
-| `@ds/react` | `src/primitives/Presence.tsx` | React presence component |
+| `@hypoth-ui/css` | `src/layers/animations.css` | Keyframes and utility classes |
+| `@hypoth-ui/primitives-dom` | `src/animation/presence.ts` | Exit animation coordination |
+| `@hypoth-ui/wc` | `src/components/dialog/dialog.ts` | Animation integration example |
+| `@hypoth-ui/react` | `src/primitives/Presence.tsx` | React presence component |
 
 ---
 
@@ -110,7 +110,7 @@ This guide covers implementing the animation system for component enter/exit tra
 ### React
 
 ```tsx
-import { Presence } from '@ds/react';
+import { Presence } from '@hypoth-ui/react';
 
 function AnimatedDialog({ isOpen, onClose }) {
   return (
@@ -155,16 +155,16 @@ ds-dialog-content {
 
 ```bash
 # Run animation-related tests
-pnpm --filter @ds/primitives-dom test:unit
-pnpm --filter @ds/wc test:unit
-pnpm --filter @ds/react test:unit
+pnpm --filter @hypoth-ui/primitives-dom test:unit
+pnpm --filter @hypoth-ui/wc test:unit
+pnpm --filter @hypoth-ui/react test:unit
 
 # Typecheck
-pnpm --filter @ds/primitives-dom typecheck
-pnpm --filter @ds/react typecheck
+pnpm --filter @hypoth-ui/primitives-dom typecheck
+pnpm --filter @hypoth-ui/react typecheck
 
 # Build and verify CSS
-pnpm --filter @ds/css build
+pnpm --filter @hypoth-ui/css build
 ```
 
 ---

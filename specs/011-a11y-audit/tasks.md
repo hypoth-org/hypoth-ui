@@ -26,12 +26,12 @@ Based on plan.md monorepo structure:
 
 ## Phase 1: Setup (Shared Infrastructure) ✅
 
-**Purpose**: Create new @ds/a11y-audit package and establish project structure
+**Purpose**: Create new @hypoth-ui/a11y-audit package and establish project structure
 
 - [x] T001 Create packages/a11y-audit/ directory structure per plan.md
-- [x] T002 Initialize package.json for @ds/a11y-audit with TypeScript, commander, Ajv dependencies
-- [x] T003 [P] Configure tsconfig.json for @ds/a11y-audit in packages/a11y-audit/tsconfig.json
-- [x] T004 [P] Add @ds/a11y-audit to pnpm workspace in pnpm-workspace.yaml (already included via packages/*)
+- [x] T002 Initialize package.json for @hypoth-ui/a11y-audit with TypeScript, commander, Ajv dependencies
+- [x] T003 [P] Configure tsconfig.json for @hypoth-ui/a11y-audit in packages/a11y-audit/tsconfig.json
+- [x] T004 [P] Add @hypoth-ui/a11y-audit to pnpm workspace in pnpm-workspace.yaml (already included via packages/*)
 - [x] T005 [P] Create a11y-audits/ directory structure at repository root (records/, reports/)
 - [x] T006 Copy JSON schemas from specs/011-a11y-audit/contracts/ to packages/a11y-audit/src/schemas/
 
@@ -148,7 +148,7 @@ Based on plan.md monorepo structure:
 - [x] T053 [US4] Create component detail page template in packages/docs-renderer-next/app/accessibility/[component]/page.tsx
 - [x] T054 [US4] Implement tenant extension configuration in packages/docs-core/src/conformance/tenant-config.ts
 - [x] T055 [US4] Add navigation link to Accessibility section in packages/docs-renderer-next/app/layout.tsx (pending manual integration)
-- [x] T056 [US4] Export conformance utilities from @ds/docs-core in packages/docs-core/src/index.ts
+- [x] T056 [US4] Export conformance utilities from @hypoth-ui/docs-core in packages/docs-core/src/index.ts
 
 **Checkpoint**: Docs site displays live conformance data with filtering and tenant extension ✅
 
@@ -159,10 +159,10 @@ Based on plan.md monorepo structure:
 **Purpose**: Final integration, documentation, and cleanup
 
 - [x] T057 [P] Update specs/011-a11y-audit/quickstart.md with actual CLI commands and examples (already accurate)
-- [x] T058 [P] Add README.md for @ds/a11y-audit package in packages/a11y-audit/README.md
+- [x] T058 [P] Add README.md for @hypoth-ui/a11y-audit package in packages/a11y-audit/README.md
 - [x] T059 [P] Create sample audit record for ds-button in a11y-audits/records/ds-button/1.0.0.json
 - [x] T060 [P] Create sample conformance report in a11y-audits/reports/1.0.0/report.json
-- [x] T061 Add @ds/a11y-audit to root package.json scripts (a11y:audit, a11y:report, a11y:validate)
+- [x] T061 Add @hypoth-ui/a11y-audit to root package.json scripts (a11y:audit, a11y:report, a11y:validate)
 - [ ] T062 Run all a11y tests and verify CI workflow in .github/workflows/a11y-check.yml
 - [ ] T063 Validate JSON schemas with Ajv in packages/a11y-audit/tests/unit/schemas.test.ts
 - [x] T064 Update CLAUDE.md with a11y-audit commands if not already present
@@ -265,7 +265,7 @@ Task: "Create a11y test for ds-menu in packages/wc/tests/a11y/menu.a11y.test.ts"
 1. Complete Phase 1: Setup ✅
 2. Complete Phase 2: Foundational (CRITICAL - blocks all stories) ✅
 3. Complete Phase 3: User Story 1 (Automated CI) ✅
-4. **STOP and VALIDATE**: Run `pnpm --filter @ds/wc test:a11y` and verify CI workflow
+4. **STOP and VALIDATE**: Run `pnpm --filter @hypoth-ui/wc test:a11y` and verify CI workflow
 5. Deploy/demo if ready - automated a11y checks are live!
 
 ### Incremental Delivery

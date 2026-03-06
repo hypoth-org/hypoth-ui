@@ -27,7 +27,7 @@ Create `.changeset/config.json`:
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": ["@changesets/changelog-github", { "repo": "org/hypoth-ui" }],
   "commit": false,
-  "fixed": [["@ds/*"]],
+  "fixed": [["@hypoth-ui/*"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
@@ -69,7 +69,7 @@ Create `packages/governance/package.json`:
 
 ```json
 {
-  "name": "@ds/governance",
+  "name": "@hypoth-ui/governance",
   "version": "0.0.0",
   "type": "module",
   "description": "Governance tooling for the design system",
@@ -244,21 +244,21 @@ Get the design system running in your project in under 30 minutes.
 ## Step 1: Install Packages
 
 \`\`\`bash
-pnpm add @ds/tokens @ds/css @ds/wc
+pnpm add @hypoth-ui/tokens @hypoth-ui/css @hypoth-ui/wc
 \`\`\`
 
 ## Step 2: Import Styles
 
 \`\`\`css
 /* Import in your global CSS */
-@import '@ds/css';
+@import '@hypoth-ui/css';
 \`\`\`
 
 ## Step 3: Register Components
 
 \`\`\`typescript
 // In your app entry point
-import '@ds/wc/auto-define';
+import '@hypoth-ui/wc/auto-define';
 \`\`\`
 
 ## Step 4: Use Components
@@ -367,7 +367,7 @@ Create `.github/PULL_REQUEST_TEMPLATE.md`:
 After completing all phases:
 
 - [ ] `pnpm changeset init` runs without errors
-- [ ] `.changeset/config.json` has fixed versioning for `@ds/*`
+- [ ] `.changeset/config.json` has fixed versioning for `@hypoth-ui/*`
 - [ ] `packages/governance` builds successfully
 - [ ] GitHub Actions workflow runs on PRs
 - [ ] `CONTRIBUTING.md` is accessible at repo root

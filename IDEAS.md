@@ -226,7 +226,7 @@ Add a `defineComponentTokens()` API that generates component-scoped CSS custom p
 
 ```typescript
 // packages/tokens/components/button.tokens.ts
-import { defineComponentTokens } from '@ds/tokens';
+import { defineComponentTokens } from '@hypoth-ui/tokens';
 
 export const buttonTokens = defineComponentTokens('button', {
   // Reference semantic tokens (default behavior)

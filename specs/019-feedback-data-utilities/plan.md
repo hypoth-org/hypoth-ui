@@ -5,16 +5,16 @@
 
 ## Summary
 
-Implement 17 UI components organized into feedback (Alert, Toast, Progress, Badge), data display (Avatar/AvatarGroup, Table, DataTable, Skeleton, Tag, List, Tree, Calendar), and utility primitives (Portal, FocusScope, ClientOnly, Slot). All components use the compound component pattern with shared primitives from `@ds/primitives-dom`, targeting both Web Components (Lit) and React implementations with API parity. Toast system provides imperative API for both platforms. DataTable uses column definitions as data (TanStack-inspired) with internal virtualization.
+Implement 17 UI components organized into feedback (Alert, Toast, Progress, Badge), data display (Avatar/AvatarGroup, Table, DataTable, Skeleton, Tag, List, Tree, Calendar), and utility primitives (Portal, FocusScope, ClientOnly, Slot). All components use the compound component pattern with shared primitives from `@hypoth-ui/primitives-dom`, targeting both Web Components (Lit) and React implementations with API parity. Toast system provides imperative API for both platforms. DataTable uses column definitions as data (TanStack-inspired) with internal virtualization.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@ds/primitives-dom` (focus-trap, roving-focus, type-ahead)
+**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer dependency), `@hypoth-ui/primitives-dom` (focus-trap, roving-focus, type-ahead)
 **Storage**: N/A (stateless UI components)
 **Testing**: Vitest (unit), axe-core (a11y), Playwright (e2e)
 **Target Platform**: Browser (modern evergreen), SSR/RSC compatible via Next.js App Router
-**Project Type**: Monorepo packages (`@ds/wc`, `@ds/react`, `@ds/primitives-dom`)
+**Project Type**: Monorepo packages (`@hypoth-ui/wc`, `@hypoth-ui/react`, `@hypoth-ui/primitives-dom`)
 **Performance Goals**: <45KB gzipped total for all new components; DataTable 100k rows @ 60fps; animations <300ms
 **Constraints**: Light DOM only; no Shadow DOM; CSS custom properties for theming; status tokens (info, success, warning, danger)
 **Scale/Scope**: 17 components, ~80 functional requirements, 3 priority tiers
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly (Light DOM + CSS vars); virtualization for DataTable
 - [x] **Accessibility**: WCAG 2.1 AA plan; APG patterns identified (alert, progressbar, listbox, tree, grid); a11y testing via axe-core + manual checklist
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; semantic status tokens for consistent feedback styling
-- [x] **Zero-dep Core**: Core packages remain zero-dep; `@ds/wc` depends only on Lit; utilities (Portal, FocusScope) in primitives-dom
+- [x] **Zero-dep Core**: Core packages remain zero-dep; `@hypoth-ui/wc` depends only on Lit; utilities (Portal, FocusScope) in primitives-dom
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
 - [x] **Dependency Management**: pnpm used; bundle impact assessed (<45KB target)
 
@@ -119,7 +119,7 @@ packages/
             └── calendar.css
 ```
 
-**Structure Decision**: Monorepo with separate packages for Web Components (`@ds/wc`), React adapters (`@ds/react`), CSS (`@ds/css`), and behavior primitives (`@ds/primitives-dom`). Utility primitives (Portal, FocusScope, ClientOnly) live in primitives-dom for sharing. Each component follows compound component pattern except for simpler components (Alert, Badge, Progress, Skeleton, Tag) which are single elements.
+**Structure Decision**: Monorepo with separate packages for Web Components (`@hypoth-ui/wc`), React adapters (`@hypoth-ui/react`), CSS (`@hypoth-ui/css`), and behavior primitives (`@hypoth-ui/primitives-dom`). Utility primitives (Portal, FocusScope, ClientOnly) live in primitives-dom for sharing. Each component follows compound component pattern except for simpler components (Alert, Badge, Progress, Skeleton, Tag) which are single elements.
 
 ## Complexity Tracking
 
@@ -128,7 +128,7 @@ No constitution violations identified. All requirements align with established p
 | Aspect | Status | Notes |
 |--------|--------|-------|
 | Light DOM | Compliant | All components use Light DOM per constitution |
-| Zero-dep Core | Compliant | `@ds/wc` depends only on Lit; no new runtime deps |
+| Zero-dep Core | Compliant | `@hypoth-ui/wc` depends only on Lit; no new runtime deps |
 | Bundle Size | Target: <45KB | DataTable virtualization adds complexity; must verify |
 | A11y Patterns | Identified | alert, progressbar, listbox, tree, grid APG patterns |
 | Toast Imperative API | Design Decision | Both React hook and WC global/controller export |

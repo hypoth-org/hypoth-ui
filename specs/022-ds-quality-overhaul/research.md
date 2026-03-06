@@ -113,7 +113,7 @@ const sprinkles = createSprinkles(responsiveProperties);
 5. **Tokens**: Native support for CSS variable tokens
 
 **Integration plan**:
-- Add `@pandacss/dev` as devDependency to `@ds/react`
+- Add `@pandacss/dev` as devDependency to `@hypoth-ui/react`
 - Configure `panda.config.ts` to use our DTCG tokens
 - Style props only available in React (WC uses CSS classes directly)
 
@@ -204,13 +204,13 @@ export function generateId(prefix: string) {
 
 **Implementation**:
 ```typescript
-// @ds/react/hooks/use-stable-id.ts
+// @hypoth-ui/react/hooks/use-stable-id.ts
 export function useStableId(prefix?: string) {
   const id = useId();
   return prefix ? `${prefix}-${id}` : id;
 }
 
-// @ds/primitives-dom - behavior accepts optional ID generator
+// @hypoth-ui/primitives-dom - behavior accepts optional ID generator
 interface BehaviorOptions {
   generateId?: () => string;
 }
@@ -423,7 +423,7 @@ Provide shadcn/ui-style component copying so developers can own source code with
 
 **How it works**:
 ```bash
-npx @ds/cli copy button
+npx @hypoth-ui/cli copy button
 
 # Creates in user's project:
 # components/ui/button.tsx
@@ -452,7 +452,7 @@ npx @ds/cli copy button
 
 **How it works**:
 ```bash
-npx @ds/cli eject button
+npx @hypoth-ui/cli eject button
 # Copies to project and updates import map
 ```
 
@@ -474,17 +474,17 @@ npx @ds/cli eject button
 **CLI command design**:
 ```bash
 # Copy single component
-npx @ds/cli copy button
+npx @hypoth-ui/cli copy button
 
 # Copy with dependencies
-npx @ds/cli copy dialog
+npx @hypoth-ui/cli copy dialog
 # Prompts: "Dialog requires: Button, Portal. Copy all? (Y/n)"
 
 # List available components
-npx @ds/cli list
+npx @hypoth-ui/cli list
 
 # Configure output directory
-npx @ds/cli init
+npx @hypoth-ui/cli init
 # Creates ds.config.json with outputDir, tsconfig paths
 ```
 

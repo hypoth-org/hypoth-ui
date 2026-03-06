@@ -1,6 +1,6 @@
 "use client";
 
-import type { ConformanceStatus } from "@ds/docs-core";
+import type { ConformanceStatus } from "@hypoth-ui/docs-core";
 
 interface StatusBadgeProps {
   status: ConformanceStatus;

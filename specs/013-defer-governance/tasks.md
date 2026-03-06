@@ -34,7 +34,7 @@ This is a repository-level infrastructure refactoring affecting:
 
 ## Phase 2: User Story 1 - Build Without Governance (Priority: P1) 🎯 MVP
 
-**Goal**: Monorepo builds and tests pass without @ds/governance package in active workspace
+**Goal**: Monorepo builds and tests pass without @hypoth-ui/governance package in active workspace
 
 **Independent Test**: Run `pnpm install && pnpm build && pnpm test` - all commands succeed
 
@@ -42,7 +42,7 @@ This is a repository-level infrastructure refactoring affecting:
 
 - [x] T003 [US1] Move `packages/governance/` to `.archive/governance/` using git mv
 - [x] T004 [US1] Remove governance scripts from `package.json` (ds-deprecate, ds-check-gates, ds-tenant-diff on lines 34-36)
-- [x] T005 [US1] Update `.changeset/config.json` to remove @ds/governance from ignore array
+- [x] T005 [US1] Update `.changeset/config.json` to remove @hypoth-ui/governance from ignore array
 - [x] T006 [US1] Run `pnpm install` to verify workspace resolves without governance
 - [x] T007 [US1] Run `pnpm build` to verify all active packages build successfully
 - [x] T008 [US1] Run `pnpm test` to verify all tests pass
@@ -74,14 +74,14 @@ This is a repository-level infrastructure refactoring affecting:
 
 **Goal**: CI/CD pipelines pass without governance-related jobs or steps
 
-**Independent Test**: Review CI workflow files and confirm no references to @ds/governance
+**Independent Test**: Review CI workflow files and confirm no references to @hypoth-ui/governance
 
 ### Implementation for User Story 3
 
 - [x] T011 [P] [US3] Remove `governance-gates` job (lines 307-341) from `.github/workflows/ci.yml`
 - [x] T012 [P] [US3] Remove governance check step (line 40-41) from `.github/workflows/release.yml`
 - [x] T013 [P] [US3] Remove edition changelog generation step (lines 55-61) from `.github/workflows/release.yml`
-- [x] T014 [US3] Verify no remaining @ds/governance references in `.github/workflows/` using grep
+- [x] T014 [US3] Verify no remaining @hypoth-ui/governance references in `.github/workflows/` using grep
 
 **Checkpoint**: At this point, CI/CD workflows are clean of governance references
 
@@ -89,14 +89,14 @@ This is a repository-level infrastructure refactoring affecting:
 
 ## Phase 5: User Story 4 - Manifest Validation Works (Priority: P3)
 
-**Goal**: Developers can still validate manifests using @ds/docs-core (not governance)
+**Goal**: Developers can still validate manifests using @hypoth-ui/docs-core (not governance)
 
 **Independent Test**: Run `pnpm validate:manifests` and confirm it works
 
 ### Implementation for User Story 4
 
-- [x] T015 [US4] Verify `pnpm validate:manifests` command works (uses @ds/docs-core, not governance)
-- [x] T016 [US4] Verify @ds/docs-core has no imports from @ds/governance using grep
+- [x] T015 [US4] Verify `pnpm validate:manifests` command works (uses @hypoth-ui/docs-core, not governance)
+- [x] T016 [US4] Verify @hypoth-ui/docs-core has no imports from @hypoth-ui/governance using grep
 
 **Checkpoint**: At this point, manifest validation is confirmed independent of governance
 
@@ -107,7 +107,7 @@ This is a repository-level infrastructure refactoring affecting:
 **Purpose**: Documentation updates and final validation
 
 - [x] T017 Update `CLAUDE.md` to remove governance commands section (references to ds-deprecate, ds-check-gates, ds-tenant-diff)
-- [x] T018 Verify no remaining @ds/governance references in active packages using `grep -r "@ds/governance" packages/`
+- [x] T018 Verify no remaining @hypoth-ui/governance references in active packages using `grep -r "@hypoth-ui/governance" packages/`
 - [x] T019 Run full validation: `pnpm install && pnpm build && pnpm test && pnpm typecheck`
 - [x] T020 Run quickstart.md verification checklist
 

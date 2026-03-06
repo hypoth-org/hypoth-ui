@@ -1,10 +1,10 @@
-import "@ds/tokens/css";
-import "@ds/css";
-import { NavSidebar } from "@ds/docs-renderer-next/components/nav-sidebar";
-import { DsLoader } from "@ds/next";
+import "@hypoth-ui/tokens/css";
+import "@hypoth-ui/css";
+import { NavSidebar } from "@hypoth-ui/docs-renderer-next/components/nav-sidebar";
+import { DsLoader } from "@hypoth-ui/next";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import "@ds/docs-renderer-next/styles/globals.css";
+import "@hypoth-ui/docs-renderer-next/styles/globals.css";
 
 export const metadata: Metadata = {
   title: {

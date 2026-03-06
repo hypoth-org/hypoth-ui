@@ -236,7 +236,7 @@ export interface DocsFrontmatter {
  * Metadata for a documentation content pack
  */
 export interface ContentPack {
-  /** Package identifier (e.g., "@ds/docs-content") */
+  /** Package identifier (e.g., "@hypoth-ui/docs-content") */
   id: string;
   /** Absolute path to package root */
   root: string;

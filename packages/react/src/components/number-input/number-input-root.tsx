@@ -2,7 +2,7 @@
  * NumberInput Root component - provides context to all NumberInput compound components.
  */
 
-import { createNumberInputBehavior } from "@ds/primitives-dom";
+import { createNumberInputBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { type NumberInputFormat, NumberInputProvider } from "./number-input-context.js";
 

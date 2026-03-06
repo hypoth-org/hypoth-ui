@@ -34,6 +34,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate NPM_TOKEN
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "Error: NPM_TOKEN secret is not configured in repository settings"
+            echo "Please add your npm token at: Settings > Secrets and variables > Actions"
+            exit 1
+          fi
+
       - name: Build packages
         run: pnpm build
 

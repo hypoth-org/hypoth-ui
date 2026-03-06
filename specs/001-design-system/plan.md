@@ -31,7 +31,7 @@ Verify compliance with Hypoth UI Design System Constitution:
   - axe-core automation; APG pattern compliance per component; manual checklist requirement
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
   - DTCG format source of truth; 6-layer CSS architecture; Light DOM for full CSS access
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
   - Build-time only tooling; zero runtime dependencies in foundation layer
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - Lit 3.x with `createRenderRoot() { return this; }` pattern; CSS custom properties
@@ -56,7 +56,7 @@ specs/001-design-system/
 
 ```text
 packages/
-├── tokens/              # @ds/tokens - DTCG tokens + compiler
+├── tokens/              # @hypoth-ui/tokens - DTCG tokens + compiler
 │   ├── src/
 │   │   ├── tokens/      # DTCG JSON source files
 │   │   └── build/       # Token compiler scripts
@@ -65,14 +65,14 @@ packages/
 │   │   └── ts/          # TypeScript constants output
 │   └── package.json
 │
-├── css/                 # @ds/css - CSS layers + base styles
+├── css/                 # @hypoth-ui/css - CSS layers + base styles
 │   ├── src/
 │   │   ├── layers/      # @layer definitions (reset, tokens, base, etc.)
 │   │   └── base/        # Base element styles
 │   ├── dist/
 │   └── package.json
 │
-├── primitives-dom/      # @ds/primitives-dom - A11y/behavior utilities
+├── primitives-dom/      # @hypoth-ui/primitives-dom - A11y/behavior utilities
 │   ├── src/
 │   │   ├── focus/       # Focus management
 │   │   ├── keyboard/    # Keyboard navigation
@@ -80,7 +80,7 @@ packages/
 │   ├── dist/
 │   └── package.json
 │
-├── wc/                  # @ds/wc - Lit Web Components
+├── wc/                  # @hypoth-ui/wc - Lit Web Components
 │   ├── src/
 │   │   ├── components/  # Individual components
 │   │   ├── base/        # Base component class
@@ -88,7 +88,7 @@ packages/
 │   ├── dist/
 │   └── package.json
 │
-├── react/               # @ds/react - React adapters
+├── react/               # @hypoth-ui/react - React adapters
 │   ├── src/
 │   │   ├── components/  # Wrapped components
 │   │   ├── primitives/  # React-only primitives (Slot, Presence)
@@ -96,14 +96,14 @@ packages/
 │   ├── dist/
 │   └── package.json
 │
-├── next/                # @ds/next - Next.js integration
+├── next/                # @hypoth-ui/next - Next.js integration
 │   ├── src/
 │   │   ├── loader/      # Client-side element loader
 │   │   └── utils/       # SSR helpers
 │   ├── dist/
 │   └── package.json
 │
-├── docs-core/           # @ds/docs-core - Headless docs engine
+├── docs-core/           # @hypoth-ui/docs-core - Headless docs engine
 │   ├── src/
 │   │   ├── manifest/    # Manifest ingestion + validation
 │   │   ├── content/     # MDX/frontmatter parsing
@@ -112,13 +112,13 @@ packages/
 │   ├── dist/
 │   └── package.json
 │
-├── docs-content/        # @ds/docs-content - Base content pack
+├── docs-content/        # @hypoth-ui/docs-content - Base content pack
 │   ├── components/      # Component MDX docs
 │   ├── guides/          # Usage guides
 │   ├── manifests/       # Component manifests
 │   └── package.json
 │
-└── docs-renderer-next/  # @ds/docs-renderer-next - Next.js docs site
+└── docs-renderer-next/  # @hypoth-ui/docs-renderer-next - Next.js docs site
     ├── app/             # Next.js App Router
     ├── components/      # Docs UI components
     └── package.json
@@ -147,22 +147,22 @@ No constitution violations requiring justification. Architecture follows all con
 
 ```text
 Foundation (0 runtime deps):
-  @ds/tokens ────────────────────────────────────┐
-  @ds/css ──────────────────────────────────────>│
-  @ds/primitives-dom ───────────────────────────>│
+  @hypoth-ui/tokens ────────────────────────────────────┐
+  @hypoth-ui/css ──────────────────────────────────────>│
+  @hypoth-ui/primitives-dom ───────────────────────────>│
                                                  │
 Components:                                      │
-  @ds/wc ───────> [Lit] + @ds/css + @ds/tokens ──┤
+  @hypoth-ui/wc ───────> [Lit] + @hypoth-ui/css + @hypoth-ui/tokens ──┤
                                                  │
 Adapters:                                        │
-  @ds/react ────> [React peer] + @ds/wc ─────────┤
-  @ds/next ─────> [Next.js peer] + @ds/react ────┤
+  @hypoth-ui/react ────> [React peer] + @hypoth-ui/wc ─────────┤
+  @hypoth-ui/next ─────> [Next.js peer] + @hypoth-ui/react ────┤
                                                  │
 Docs:                                            │
-  @ds/docs-core ─> (no runtime deps) ────────────┤
-  @ds/docs-content ─> @ds/docs-core ─────────────┤
-  @ds/docs-renderer-next ─> @ds/docs-core ───────┘
-                          + @ds/docs-content
+  @hypoth-ui/docs-core ─> (no runtime deps) ────────────┤
+  @hypoth-ui/docs-content ─> @hypoth-ui/docs-core ─────────────┤
+  @hypoth-ui/docs-renderer-next ─> @hypoth-ui/docs-core ───────┘
+                          + @hypoth-ui/docs-content
                           + Next.js
 ```
 
@@ -196,14 +196,14 @@ Source (DTCG JSON, TS, CSS)
     ▼
 ┌─────────────────────────────────────────────────┐
 │  Build: pnpm -r build                           │
-│  ├─ @ds/tokens: style-dictionary → CSS + TS    │
-│  ├─ @ds/css: PostCSS (layers, minify)          │
-│  ├─ @ds/primitives-dom: tsup → ESM             │
-│  ├─ @ds/wc: tsup → ESM (Lit external)          │
-│  ├─ @ds/react: tsup → ESM (React external)     │
-│  ├─ @ds/next: tsup → ESM (Next.js external)    │
-│  ├─ @ds/docs-core: tsup → ESM                  │
-│  └─ @ds/docs-renderer-next: next build         │
+│  ├─ @hypoth-ui/tokens: style-dictionary → CSS + TS    │
+│  ├─ @hypoth-ui/css: PostCSS (layers, minify)          │
+│  ├─ @hypoth-ui/primitives-dom: tsup → ESM             │
+│  ├─ @hypoth-ui/wc: tsup → ESM (Lit external)          │
+│  ├─ @hypoth-ui/react: tsup → ESM (React external)     │
+│  ├─ @hypoth-ui/next: tsup → ESM (Next.js external)    │
+│  ├─ @hypoth-ui/docs-core: tsup → ESM                  │
+│  └─ @hypoth-ui/docs-renderer-next: next build         │
 └─────────────────────────────────────────────────┘
     │
     ▼
@@ -214,14 +214,14 @@ Dist (ESM + CSS + Types)
 
 | Package | Unit | Integration | E2E | A11y |
 |---------|------|-------------|-----|------|
-| @ds/tokens | ✓ | - | - | - |
-| @ds/css | ✓ | - | - | - |
-| @ds/primitives-dom | ✓ | ✓ | - | ✓ |
-| @ds/wc | ✓ | ✓ | - | ✓ |
-| @ds/react | ✓ | ✓ | - | ✓ |
-| @ds/next | - | ✓ | ✓ | - |
-| @ds/docs-core | ✓ | ✓ | - | - |
-| @ds/docs-renderer-next | - | - | ✓ | ✓ |
+| @hypoth-ui/tokens | ✓ | - | - | - |
+| @hypoth-ui/css | ✓ | - | - | - |
+| @hypoth-ui/primitives-dom | ✓ | ✓ | - | ✓ |
+| @hypoth-ui/wc | ✓ | ✓ | - | ✓ |
+| @hypoth-ui/react | ✓ | ✓ | - | ✓ |
+| @hypoth-ui/next | - | ✓ | ✓ | - |
+| @hypoth-ui/docs-core | ✓ | ✓ | - | - |
+| @hypoth-ui/docs-renderer-next | - | - | ✓ | ✓ |
 
 - **Unit**: Vitest
 - **Integration**: Vitest + happy-dom/jsdom
@@ -267,7 +267,7 @@ packages/docs-content/manifests/
 ```
 
 **Validation**:
-1. JSON Schema validation at build time via `@ds/docs-core`
+1. JSON Schema validation at build time via `@hypoth-ui/docs-core`
 2. Schema defined in `specs/001-design-system/contracts/component-manifest.schema.json`
 3. Build fails if any manifest is invalid
 4. CI gate: `pnpm validate:manifests`
@@ -291,7 +291,7 @@ packages/docs-content/manifests/
 }
 ```
 
-**Filtering Logic** (in `@ds/docs-core`):
+**Filtering Logic** (in `@hypoth-ui/docs-core`):
 1. Load base component manifests
 2. Filter by `availabilityFilter` tags (intersection)
 3. Exclude explicitly listed components

@@ -2,7 +2,7 @@
  * Presence API Contract
  *
  * TypeScript interfaces for the animation presence system.
- * These types define the public API surface for @ds/primitives-dom and @ds/react.
+ * These types define the public API surface for @hypoth-ui/primitives-dom and @hypoth-ui/react.
  */
 
 // =============================================================================
@@ -15,7 +15,7 @@
 export type AnimationState = "idle" | "animating-in" | "animating-out" | "exited";
 
 // =============================================================================
-// Presence Utility (@ds/primitives-dom)
+// Presence Utility (@hypoth-ui/primitives-dom)
 // =============================================================================
 
 /**
@@ -82,7 +82,7 @@ export interface Presence {
 export declare function createPresence(options?: PresenceOptions): Presence;
 
 // =============================================================================
-// React Presence Component (@ds/react)
+// React Presence Component (@hypoth-ui/react)
 // =============================================================================
 
 /**

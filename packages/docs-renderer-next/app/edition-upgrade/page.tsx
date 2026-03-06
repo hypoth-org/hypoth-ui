@@ -1,4 +1,4 @@
-import type { Edition } from "@ds/docs-core";
+import type { Edition } from "@hypoth-ui/docs-core";
 import Link from "next/link";
 import { UpgradePrompt } from "../../components/upgrade/upgrade-prompt";
 import { getEditionConfig } from "../../lib/content-resolver";

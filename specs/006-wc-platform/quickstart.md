@@ -71,7 +71,7 @@ export const componentRegistry = {
 
 ```tsx
 // app/layout.tsx
-import { DsLoader } from '@ds/next/loader';
+import { DsLoader } from '@hypoth-ui/next/loader';
 
 export default function RootLayout({ children }) {
   return (
@@ -211,7 +211,7 @@ if (!event.defaultPrevented) {
 
 ### Styles not applying
 - Light DOM means global CSS applies - check specificity
-- Verify @ds/css is imported in your app
+- Verify @hypoth-ui/css is imported in your app
 
 ### CI failing on auto-define check
 - Remove `customElements.define()` calls from component files

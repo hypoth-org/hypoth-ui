@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Textarea, Switch, Checkbox, RadioGroup, Radio, Select } from '@ds/react';
-import { formsSectionContent } from '@ds/demo-shared';
+import { Input, Textarea, Switch, Checkbox, RadioGroup, Radio, Select } from '@hypoth-ui/react';
+import { formsSectionContent } from '@hypoth-ui/demo-shared';
 import { SidebarNav } from '../../components/sidebar-nav';
 import { AppShell } from '../../components/app-shell';
 import { ThemeToggle } from '../../components/theme-toggle';

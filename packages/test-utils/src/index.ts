@@ -1,11 +1,11 @@
 /**
- * @ds/test-utils - Framework-agnostic test utilities
+ * @hypoth-ui/test-utils - Framework-agnostic test utilities
  *
  * Provides shared testing helpers for Web Component and React component testing.
  *
  * @example
  * ```ts
- * import { pressKey, Keys, hasRole, createComponent } from '@ds/test-utils';
+ * import { pressKey, Keys, hasRole, createComponent } from '@hypoth-ui/test-utils';
  *
  * // Keyboard simulation
  * pressKey(button, 'Enter');

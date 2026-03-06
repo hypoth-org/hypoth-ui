@@ -1,8 +1,16 @@
 {
-  "name": "@ds/react",
+  "name": "@hypoth-ui/react",
   "version": "0.0.0",
   "type": "module",
-  "description": "React adapters for design system Web Components",
+  "description": "React adapter components for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["react", "design-system", "components", "web-components", "hypoth-ui"],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -17,7 +25,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup src/index.ts src/client.ts --format esm --dts --external react --external @ds/primitives-dom",
+    "build": "tsup src/index.ts src/client.ts --format esm --dts --external react --external @hypoth-ui/primitives-dom",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -25,17 +33,17 @@
     "test:a11y": "vitest run --config vitest.a11y.config.ts"
   },
   "dependencies": {
-    "@ds/primitives-dom": "workspace:*"
+    "@hypoth-ui/primitives-dom": "workspace:*"
   },
   "peerDependencies": {
-    "@ds/wc": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@ds/test-utils": "workspace:*",
-    "@ds/tokens": "workspace:*",
-    "@ds/wc": "workspace:*",
+    "@hypoth-ui/test-utils": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "14.6.1",

@@ -156,6 +156,7 @@ export interface InitOptions {
 }
 
 export interface AddOptions {
+  copy?: boolean;
   overwrite?: boolean;
   all?: boolean;
 }

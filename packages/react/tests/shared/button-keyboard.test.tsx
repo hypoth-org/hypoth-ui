@@ -1,14 +1,14 @@
 /**
  * Shared button keyboard tests for React native button implementation.
  *
- * Uses @ds/test-utils shared test definitions to ensure consistent
+ * Uses @hypoth-ui/test-utils shared test definitions to ensure consistent
  * behavior across WC and React implementations.
  */
 
 import { cleanup, render } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { runButtonKeyboardTests } from "@ds/test-utils";
+import { runButtonKeyboardTests } from "@hypoth-ui/test-utils";
 import { Button } from "../../src/components/button/button";
 
 describe("React Button shared keyboard tests", () => {

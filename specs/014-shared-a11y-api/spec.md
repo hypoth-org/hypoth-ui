@@ -10,7 +10,7 @@
 ### Session 2026-01-05
 
 - Q: What is the bundle size target for behavior primitives? → A: ≤3KB gzipped per component behavior module (fine-grained imports)
-- Q: Should behavior primitives be a new package or expand primitives-dom? → A: Expand `@ds/primitives-dom` (no external consumers, simpler architecture)
+- Q: Should behavior primitives be a new package or expand primitives-dom? → A: Expand `@hypoth-ui/primitives-dom` (no external consumers, simpler architecture)
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -20,11 +20,11 @@ A React developer using the design system wants to implement a Dialog in their N
 
 **Why this priority**: React is the primary consumer framework. Native React components eliminate the friction of WC wrappers, enable proper React tooling (DevTools, testing libraries), and follow React idioms that developers expect.
 
-**Independent Test**: Can be fully tested by importing `Dialog` from `@ds/react`, composing it using `Dialog.Root`, `Dialog.Trigger`, `Dialog.Content` pattern, and verifying it renders as native React elements without any `ds-*` custom elements in the DOM.
+**Independent Test**: Can be fully tested by importing `Dialog` from `@hypoth-ui/react`, composing it using `Dialog.Root`, `Dialog.Trigger`, `Dialog.Content` pattern, and verifying it renders as native React elements without any `ds-*` custom elements in the DOM.
 
 **Acceptance Scenarios**:
 
-1. **Given** a React application with `@ds/react` installed, **When** the developer imports `Dialog` and renders `<Dialog.Root><Dialog.Trigger asChild><button>Open</button></Dialog.Trigger><Dialog.Content>...</Dialog.Content></Dialog.Root>`, **Then** the rendered output uses native HTML elements with appropriate ARIA attributes.
+1. **Given** a React application with `@hypoth-ui/react` installed, **When** the developer imports `Dialog` and renders `<Dialog.Root><Dialog.Trigger asChild><button>Open</button></Dialog.Trigger><Dialog.Content>...</Dialog.Content></Dialog.Root>`, **Then** the rendered output uses native HTML elements with appropriate ARIA attributes.
 
 2. **Given** an open Dialog rendered with React, **When** the developer inspects the component tree in React DevTools, **Then** they see native React components (not custom element wrappers) with proper displayNames.
 
@@ -38,7 +38,7 @@ A QA engineer needs to verify that both React and Web Component implementations 
 
 **Why this priority**: Accessibility is foundational. If the shared behavior layer works correctly, both implementations should produce identical accessible output. This validates the entire architecture.
 
-**Independent Test**: Run the same axe-core test suite against both `@ds/react Dialog` and `@ds/wc ds-dialog` and compare ARIA attributes, keyboard interactions, and focus behavior.
+**Independent Test**: Run the same axe-core test suite against both `@hypoth-ui/react Dialog` and `@hypoth-ui/wc ds-dialog` and compare ARIA attributes, keyboard interactions, and focus behavior.
 
 **Acceptance Scenarios**:
 
@@ -56,11 +56,11 @@ A Vue.js developer using the design system wants to use the Menu component in th
 
 **Why this priority**: Web Components provide framework-agnostic usage. While React is primary, maintaining WC support ensures the design system serves all consumers.
 
-**Independent Test**: Import `@ds/wc` in a Vue 3 application, render `<ds-menu>` with trigger and items, verify roving focus and type-ahead work correctly.
+**Independent Test**: Import `@hypoth-ui/wc` in a Vue 3 application, render `<ds-menu>` with trigger and items, verify roving focus and type-ahead work correctly.
 
 **Acceptance Scenarios**:
 
-1. **Given** a Vue 3 application with `@ds/wc` installed, **When** the developer renders `<ds-menu><button slot="trigger">Actions</button><ds-menu-content>...</ds-menu-content></ds-menu>`, **Then** the menu opens, navigates with arrow keys, and supports type-ahead search.
+1. **Given** a Vue 3 application with `@hypoth-ui/wc` installed, **When** the developer renders `<ds-menu><button slot="trigger">Actions</button><ds-menu-content>...</ds-menu-content></ds-menu>`, **Then** the menu opens, navigates with arrow keys, and supports type-ahead search.
 
 2. **Given** a Menu component in Web Component form, **When** updated to use the new behavior primitives, **Then** all existing tests continue to pass.
 
@@ -113,18 +113,18 @@ A developer wants their existing styled button to serve as a Dialog trigger with
 
 ### Functional Requirements
 
-- **FR-001**: System MUST expand `@ds/primitives-dom` to include headless behavior primitives (state machines, ARIA computation, keyboard handlers) for Button, Dialog, and Menu components.
+- **FR-001**: System MUST expand `@hypoth-ui/primitives-dom` to include headless behavior primitives (state machines, ARIA computation, keyboard handlers) for Button, Dialog, and Menu components.
 - **FR-002**: Behavior primitives MUST compute ARIA attributes automatically based on component state.
 - **FR-003**: Behavior primitives MUST provide keyboard interaction handlers following WAI-ARIA patterns.
 - **FR-004**: Behavior primitives MUST integrate with existing focus management utilities (focus-trap, roving-focus).
-- **FR-005**: `@ds/react` MUST provide native React components (not WC wrappers) for Button, Dialog, and Menu.
+- **FR-005**: `@hypoth-ui/react` MUST provide native React components (not WC wrappers) for Button, Dialog, and Menu.
 - **FR-006**: React components MUST support compound component patterns (Root, Trigger, Content, etc.).
 - **FR-007**: React components MUST support the `asChild` polymorphism pattern for triggers.
 - **FR-008**: React components MUST work with React context, refs, and Suspense.
-- **FR-009**: `@ds/wc` MUST be updated to consume the same behavior primitives as `@ds/react`.
+- **FR-009**: `@hypoth-ui/wc` MUST be updated to consume the same behavior primitives as `@hypoth-ui/react`.
 - **FR-010**: Both React and WC implementations MUST pass identical accessibility test suites.
 - **FR-011**: Both implementations MUST emit equivalent events (React: callbacks, WC: CustomEvents).
-- **FR-012**: Both implementations MUST use the same token-based styling via `@ds/tokens` and `@ds/css`.
+- **FR-012**: Both implementations MUST use the same token-based styling via `@hypoth-ui/tokens` and `@hypoth-ui/css`.
 - **FR-013**: Initial implementation MUST cover Button, Dialog, and Menu as proof-of-concept.
 - **FR-014**: System MUST NOT remove or break existing Web Component functionality.
 
@@ -216,12 +216,12 @@ Trade-offs acknowledged:
 - **SC-005**: React trigger components support `asChild` prop with ref forwarding.
 - **SC-006**: No increase in bundle size for WC-only consumers (behavior primitives tree-shake when unused).
 - **SC-009**: Each behavior primitive module (Button, Dialog, Menu) is ≤3KB gzipped, enabling fine-grained imports.
-- **SC-007**: Existing `@ds/wc` tests continue to pass after refactoring to use behavior primitives.
+- **SC-007**: Existing `@hypoth-ui/wc` tests continue to pass after refactoring to use behavior primitives.
 - **SC-008**: Documentation demonstrates identical usage patterns for accessibility (ARIA, keyboard) across both frameworks.
 
 ## Assumptions
 
-- The existing `@ds/primitives-dom` package provides a foundation that can be extended or a sibling package can be created.
+- The existing `@hypoth-ui/primitives-dom` package provides a foundation that can be extended or a sibling package can be created.
 - React 18+ is the minimum supported React version (for concurrent features compatibility).
 - The design system constitution's zero-dependency principle applies to runtime dependencies; build-time tooling is acceptable.
 - Compound component context isolation follows standard React patterns (React.createContext per component family).

@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Pagination } from "@ds/react";
+ * import { Pagination } from "@hypoth-ui/react";
  *
  * <Pagination.Root page={1} totalPages={10} onPageChange={(page) => console.log(page)}>
  *   <Pagination.Content>

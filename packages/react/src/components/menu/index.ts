@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Menu } from "@ds/react";
+ * import { Menu } from "@hypoth-ui/react";
  *
  * <Menu.Root onSelect={(value) => console.log(value)}>
  *   <Menu.Trigger>Actions</Menu.Trigger>
@@ -46,4 +46,4 @@ export type {
 };
 
 // Re-export Placement from primitives-dom
-export type { Placement } from "@ds/primitives-dom";
+export type { Placement } from "@hypoth-ui/primitives-dom";

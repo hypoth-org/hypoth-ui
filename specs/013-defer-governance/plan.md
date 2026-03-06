@@ -5,14 +5,14 @@
 
 ## Summary
 
-This feature defers the governance infrastructure (@ds/governance package) to reduce monorepo complexity and focus development effort on component expansion. The governance package (deprecation registry, contribution gates, tenant diff CLI) is moved to an archive directory, removed from the active workspace, and documented for future reactivation when the component library reaches maturity (40+ components).
+This feature defers the governance infrastructure (@hypoth-ui/governance package) to reduce monorepo complexity and focus development effort on component expansion. The governance package (deprecation registry, contribution gates, tenant diff CLI) is moved to an archive directory, removed from the active workspace, and documented for future reactivation when the component library reaches maturity (40+ components).
 
 **Technical Approach**: Move packages/governance to .archive/governance/, remove governance-related scripts and CI jobs, create GOVERNANCE.md with reactivation instructions.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (existing monorepo standard)
-**Primary Dependencies**: None added; removing @ds/governance from active workspace
+**Primary Dependencies**: None added; removing @hypoth-ui/governance from active workspace
 **Storage**: N/A (file moves only)
 **Testing**: Existing pnpm test suite validates no regressions
 **Target Platform**: Node.js development environment (pnpm workspace)
@@ -31,7 +31,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Accessibility**: No impact - a11y-audit package explicitly preserved (FR-010)
 - [x] **Customizability**: No impact - token and styling packages unaffected
 - [x] **Zero-dep Core**: Improves compliance - removing a package from workspace reduces complexity
-- [x] **Web Components**: No impact - @ds/wc package unaffected
+- [x] **Web Components**: No impact - @hypoth-ui/wc package unaffected
 - [x] **Dependency Management**: Compliant - using pnpm workspace; governance was already in ignore list
 
 **Assessment**: This feature improves constitution compliance by reducing workspace complexity. No violations.
@@ -61,7 +61,7 @@ GOVERNANCE.md                  # Reactivation documentation
 
 # Files to MODIFY
 package.json                   # Remove governance scripts (lines 34-36)
-.changeset/config.json         # Remove @ds/governance from ignore list
+.changeset/config.json         # Remove @hypoth-ui/governance from ignore list
 .github/workflows/ci.yml       # Remove governance build/check jobs
 .github/workflows/release.yml  # Remove governance gate steps
 CLAUDE.md                      # Remove governance commands section

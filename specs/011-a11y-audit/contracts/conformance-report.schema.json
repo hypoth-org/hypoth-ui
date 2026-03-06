@@ -225,7 +225,7 @@
         "toolVersion": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+$",
-          "description": "@ds/a11y-audit version"
+          "description": "@hypoth-ui/a11y-audit version"
         },
         "axeCoreVersion": {
           "type": "string",

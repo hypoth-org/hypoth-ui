@@ -55,7 +55,7 @@ type JustifyValue = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
 
 ### CSS Class Mapping
 
-Props map to CSS utility classes from `@ds/css`:
+Props map to CSS utility classes from `@hypoth-ui/css`:
 
 | Prop | Value | CSS Class |
 |------|-------|-----------|
@@ -152,9 +152,9 @@ const mainRef = useRef<HTMLElement>(null);
 
 - React 18+ (forwardRef)
 - Slot component (internal)
-- @ds/css utility classes
+- @hypoth-ui/css utility classes
 
 ## Bundle Impact
 
 - Target: <800 bytes minified
-- CSS classes come from @ds/css (external)
+- CSS classes come from @hypoth-ui/css (external)

@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { AspectRatio } from "@ds/react";
+ * import { AspectRatio } from "@/components/ui";
  *
  * <AspectRatio ratio="16/9">
  *   <img src="image.jpg" alt="..." />

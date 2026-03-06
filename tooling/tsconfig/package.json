@@ -1,5 +1,5 @@
 {
-  "name": "@ds/tsconfig",
+  "name": "@hypoth-ui/tsconfig",
   "version": "0.0.0",
   "private": true,
   "exports": {

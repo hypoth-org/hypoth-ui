@@ -1,6 +1,6 @@
 "use client";
 
-import type { Edition as EditionType } from "@ds/docs-core";
+import type { Edition as EditionType } from "@hypoth-ui/docs-core";
 import { type ReactNode, createContext, useContext } from "react";
 
 /**

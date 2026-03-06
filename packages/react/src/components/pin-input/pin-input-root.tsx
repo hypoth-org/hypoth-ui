@@ -2,7 +2,7 @@
  * PinInput Root component - provides context to all PinInput compound components.
  */
 
-import { createPinInputBehavior } from "@ds/primitives-dom";
+import { createPinInputBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useRef, useState } from "react";
 import { PinInputProvider } from "./pin-input-context.js";
 

@@ -14,9 +14,9 @@ Implement 8 advanced form control components (Select, Combobox, DatePicker, Slid
 **Storage**: N/A (stateless UI components)
 **Testing**: Vitest 1.x, happy-dom, axe-core, Playwright (e2e a11y)
 **Target Platform**: Web (SSR-friendly, Next.js App Router compatible)
-**Project Type**: Monorepo (existing packages: @ds/primitives-dom, @ds/wc, @ds/react, @ds/css)
+**Project Type**: Monorepo (existing packages: @hypoth-ui/primitives-dom, @hypoth-ui/wc, @hypoth-ui/react, @hypoth-ui/css)
 **Performance Goals**: <100ms filter response for 1000+ options; <10KB gzipped per component
-**Constraints**: Zero runtime deps for core packages; Lit-only for @ds/wc; date-fns isolated to date components
+**Constraints**: Zero runtime deps for core packages; Lit-only for @hypoth-ui/wc; date-fns isolated to date components
 **Scale/Scope**: 8 components × 2 platforms (WC + React) = 16 component implementations
 
 ## Constitution Check
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly (Light DOM, progressive enhancement)
 - [x] **Accessibility**: WCAG 2.1 AA plan (APG patterns: listbox, combobox, grid, slider, spinbutton); axe-core + manual testing
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
-- [x] **Zero-dep Core**: @ds/primitives-dom has 0 deps; date-fns only in @ds/wc for DatePicker/TimePicker
+- [x] **Zero-dep Core**: @hypoth-ui/primitives-dom has 0 deps; date-fns only in @hypoth-ui/wc for DatePicker/TimePicker
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
 - [x] **Dependency Management**: date-fns 3.x (latest stable, tree-shakable); pnpm workspace
 
@@ -125,7 +125,7 @@ packages/
     └── components/             # Component-specific tokens (if needed)
 ```
 
-**Structure Decision**: Extends existing monorepo structure. New components follow established patterns from Dialog/Menu. Behavior primitives go in @ds/primitives-dom; WC implementations in @ds/wc; React adapters in @ds/react; styles in @ds/css.
+**Structure Decision**: Extends existing monorepo structure. New components follow established patterns from Dialog/Menu. Behavior primitives go in @hypoth-ui/primitives-dom; WC implementations in @hypoth-ui/wc; React adapters in @hypoth-ui/react; styles in @hypoth-ui/css.
 
 ## Complexity Tracking
 
@@ -133,13 +133,13 @@ packages/
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| date-fns in @ds/wc | DatePicker/TimePicker require complex date math (timezones, locales, leap years) | Hand-rolling date logic is error-prone; date-fns is tree-shakable |
+| date-fns in @hypoth-ui/wc | DatePicker/TimePicker require complex date math (timezones, locales, leap years) | Hand-rolling date logic is error-prone; date-fns is tree-shakable |
 
 ## New Primitives Required
 
 Based on existing primitives analysis, these new behavior primitives are needed:
 
-### @ds/primitives-dom additions
+### @hypoth-ui/primitives-dom additions
 
 1. **createSelectBehavior** - Manages select open/close, value selection, typeahead filtering
    - Reuses: createDismissableLayer, createTypeAhead, createRovingFocus

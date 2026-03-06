@@ -1,6 +1,6 @@
 "use client";
 
-import { createFocusTrap } from "@ds/primitives-dom";
+import { createFocusTrap } from "@hypoth-ui/primitives-dom";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

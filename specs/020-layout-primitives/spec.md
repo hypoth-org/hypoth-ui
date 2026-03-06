@@ -358,8 +358,8 @@ Trade-off acknowledged: CSS file will be larger than runtime approaches, but thi
 ## Assumptions
 
 - **Breakpoints are predefined**: Using tokenized breakpoints (sm, md, lg, xl) rather than arbitrary pixel values
-- **Token system exists**: The @ds/tokens package provides spacing, layout, and surface tokens referenced by these components
+- **Token system exists**: The @hypoth-ui/tokens package provides spacing, layout, and surface tokens referenced by these components
 - **Light DOM is required**: Based on constitution's theming and SSR requirements, Shadow DOM is not used for layout components
 - **No behavior logic**: Layout components are purely structural - no collapsible sidebars, drawer logic, or navigation behavior
 - **No built-in dividers**: Flow does not include a divider prop; users compose with a separate Divider component for visual separators
-- **CSS layers are used**: Components integrate with the existing @ds/css layer system for predictable cascade
+- **CSS layers are used**: Components integrate with the existing @hypoth-ui/css layer system for predictable cascade

@@ -5,7 +5,7 @@
  * to access premium content and features.
  */
 
-import type { Edition, UpgradeConfig } from "@ds/docs-core";
+import type { Edition, UpgradeConfig } from "@hypoth-ui/docs-core";
 
 export interface UpgradePromptProps {
   /** Current user edition */

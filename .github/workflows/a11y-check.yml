@@ -35,13 +35,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build dependencies
-        run: pnpm --filter @ds/wc... build
+        run: pnpm --filter @hypoth-ui/wc... build
 
       - name: Run accessibility tests
         id: a11y-test
         run: |
           mkdir -p a11y-reports
-          pnpm --filter @ds/wc test:a11y --reporter=json --reporter=default --outputFile=a11y-reports/results.json 2>&1 | tee a11y-reports/output.txt
+          pnpm --filter @hypoth-ui/wc test:a11y --reporter=json --reporter=default --outputFile=a11y-reports/results.json 2>&1 | tee a11y-reports/output.txt
         env:
           A11Y_SEVERITY: critical,serious
 
@@ -85,7 +85,7 @@ jobs:
             let body = '## ❌ Accessibility Check Failed\n\n';
             body += 'This PR introduces accessibility violations that must be fixed before merging.\n\n';
             body += '### How to fix:\n';
-            body += '1. Run `pnpm --filter @ds/wc test:a11y` locally to see detailed violations\n';
+            body += '1. Run `pnpm --filter @hypoth-ui/wc test:a11y` locally to see detailed violations\n';
             body += '2. Review the remediation guidance in the test output\n';
             body += '3. Fix the violations and push your changes\n\n';
             body += '### Severity threshold\n';

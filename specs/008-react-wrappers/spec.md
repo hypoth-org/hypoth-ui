@@ -23,7 +23,7 @@ A React developer uses design system components with full TypeScript support. Th
 
 **Acceptance Scenarios**:
 
-1. **Given** a developer imports `Button` from `@ds/react`, **When** they pass an invalid `variant` value, **Then** TypeScript shows a compile-time error with valid options
+1. **Given** a developer imports `Button` from `@hypoth-ui/react`, **When** they pass an invalid `variant` value, **Then** TypeScript shows a compile-time error with valid options
 2. **Given** a developer uses `onClick` on a wrapped component, **When** the event fires, **Then** the event object has the correct type (including custom event details for `onNavigate`)
 3. **Given** a developer passes a `ref` to a wrapped component, **When** the component mounts, **Then** the ref resolves to the underlying DOM element with correct type
 

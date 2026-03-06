@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Breadcrumb } from "@ds/react";
+ * import { Breadcrumb } from "@/components/ui";
  *
  * <Breadcrumb.Root>
  *   <Breadcrumb.List>

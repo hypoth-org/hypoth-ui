@@ -5,7 +5,7 @@
 
 ## Overview
 
-This feature introduces a shared behavior layer in `@ds/primitives-dom` that powers both React and Web Component implementations. After implementation:
+This feature introduces a shared behavior layer in `@hypoth-ui/primitives-dom` that powers both React and Web Component implementations. After implementation:
 
 - **React developers**: Use native React components with compound patterns (`Dialog.Root`, `Dialog.Trigger`, etc.)
 - **Web Component users**: Continue using `<ds-dialog>`, `<ds-menu>` with unchanged API
@@ -35,20 +35,20 @@ pnpm test:a11y
 
 ```bash
 # Start docs app to test React components
-pnpm --filter @ds/docs-app dev
+pnpm --filter @hypoth-ui/docs-app dev
 
 # Run React component tests
-pnpm --filter @ds/react test
+pnpm --filter @hypoth-ui/react test
 ```
 
 ### Verify Web Components
 
 ```bash
 # Run WC tests (ensure existing tests still pass)
-pnpm --filter @ds/wc test
+pnpm --filter @hypoth-ui/wc test
 
 # Run WC a11y tests
-pnpm --filter @ds/wc test:a11y
+pnpm --filter @hypoth-ui/wc test:a11y
 ```
 
 ---
@@ -58,7 +58,7 @@ pnpm --filter @ds/wc test:a11y
 ### React: Dialog with Compound Components
 
 ```tsx
-import { Dialog } from '@ds/react';
+import { Dialog } from '@hypoth-ui/react';
 
 function MyDialog() {
   const [open, setOpen] = useState(false);
@@ -86,7 +86,7 @@ function MyDialog() {
 ### React: Menu with asChild
 
 ```tsx
-import { Menu } from '@ds/react';
+import { Menu } from '@hypoth-ui/react';
 
 function MyMenu() {
   return (
@@ -133,15 +133,15 @@ function MyMenu() {
 
 ## Verification Checklist
 
-### Behavior Primitives (`@ds/primitives-dom`)
+### Behavior Primitives (`@hypoth-ui/primitives-dom`)
 
 - [ ] `createDialogBehavior` exported from package
 - [ ] `createMenuBehavior` exported from package
 - [ ] Each primitive is ≤3KB gzipped
 - [ ] Zero runtime dependencies (check `package.json`)
-- [ ] Unit tests pass: `pnpm --filter @ds/primitives-dom test`
+- [ ] Unit tests pass: `pnpm --filter @hypoth-ui/primitives-dom test`
 
-### React Components (`@ds/react`)
+### React Components (`@hypoth-ui/react`)
 
 - [ ] `Dialog` compound components work (`Dialog.Root`, `.Trigger`, `.Content`, `.Title`, `.Description`)
 - [ ] `Menu` compound components work (`Menu.Root`, `.Trigger`, `.Content`, `.Item`)
@@ -149,15 +149,15 @@ function MyMenu() {
 - [ ] No `ds-*` custom elements in rendered output
 - [ ] React DevTools shows React components (not WC wrappers)
 - [ ] Refs work correctly on all parts
-- [ ] Unit tests pass: `pnpm --filter @ds/react test`
-- [ ] A11y tests pass: `pnpm --filter @ds/react test:a11y`
+- [ ] Unit tests pass: `pnpm --filter @hypoth-ui/react test`
+- [ ] A11y tests pass: `pnpm --filter @hypoth-ui/react test:a11y`
 
-### Web Components (`@ds/wc`)
+### Web Components (`@hypoth-ui/wc`)
 
 - [ ] `<ds-dialog>` works with same API as before
 - [ ] `<ds-menu>` works with same API as before
-- [ ] All existing tests pass: `pnpm --filter @ds/wc test`
-- [ ] A11y tests pass: `pnpm --filter @ds/wc test:a11y`
+- [ ] All existing tests pass: `pnpm --filter @hypoth-ui/wc test`
+- [ ] A11y tests pass: `pnpm --filter @hypoth-ui/wc test:a11y`
 - [ ] No regressions in keyboard navigation
 - [ ] No regressions in screen reader announcements
 

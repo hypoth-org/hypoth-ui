@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Breadcrumb } from "@ds/react";
+ * import { Breadcrumb } from "@hypoth-ui/react";
  *
  * <Breadcrumb.Root>
  *   <Breadcrumb.List>

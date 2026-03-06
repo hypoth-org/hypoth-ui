@@ -149,7 +149,7 @@ A design system contributor wants to add a new component to the library. They cr
 - **Component Manifest**: Machine-readable metadata for a component including identity, status, availability, platform support, accessibility details, and usage guidance.
 - **Tenant/Edition Config**: Configuration defining which components and documentation sections are visible for a specific deployment or customer.
 - **Content Pack**: A collection of MDX documentation files with frontmatter metadata, organized by component and topic, independent of rendering framework.
-- **Package Scope**: All packages use the `@ds` npm scope (e.g., `@ds/tokens`, `@ds/wc`). This generic scope is intentional to support white-labeling—adopting organizations can republish under their own scope without source changes.
+- **Package Scope**: All packages use the `@ds` npm scope (e.g., `@hypoth-ui/tokens`, `@hypoth-ui/wc`). This generic scope is intentional to support white-labeling—adopting organizations can republish under their own scope without source changes.
 
 ## Approach Analysis *(mandatory)*
 
@@ -232,4 +232,4 @@ The trade-off of requiring CSS discipline is acceptable because:
 - **SC-005**: Tenant-filtered documentation correctly hides/shows components based on configuration with 100% accuracy (no leakage of restricted components)
 - **SC-006**: New component addition (from creation to appearing in docs) can be completed by a developer in under 2 hours following the documented workflow
 - **SC-007**: All components pass automated accessibility testing (axe-core) with zero violations at WCAG 2.1 AA level
-- **SC-008**: The combined size of foundation packages (@ds/tokens + @ds/css + @ds/primitives-dom) is under 15KB gzipped
+- **SC-008**: The combined size of foundation packages (@hypoth-ui/tokens + @hypoth-ui/css + @hypoth-ui/primitives-dom) is under 15KB gzipped

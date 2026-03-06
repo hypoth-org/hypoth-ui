@@ -18,7 +18,7 @@ pnpm install
 ### 1. Build the Package
 
 ```bash
-pnpm --filter @ds/primitives-dom build
+pnpm --filter @hypoth-ui/primitives-dom build
 ```
 
 Expected output:
@@ -32,7 +32,7 @@ CLI ⚡ Build success in Xms
 ### 2. Run Tests
 
 ```bash
-pnpm --filter @ds/primitives-dom test
+pnpm --filter @hypoth-ui/primitives-dom test
 ```
 
 Expected output:
@@ -48,7 +48,7 @@ Expected output:
 ### 3. Start Demo App
 
 ```bash
-pnpm --filter @ds/demo dev
+pnpm --filter @hypoth-ui/demo dev
 ```
 
 Navigate to:
@@ -62,7 +62,7 @@ Navigate to:
 ### 4. Run E2E Tests
 
 ```bash
-pnpm --filter @ds/demo test:e2e
+pnpm --filter @hypoth-ui/demo test:e2e
 ```
 
 ## Usage Examples
@@ -70,7 +70,7 @@ pnpm --filter @ds/demo test:e2e
 ### Focus Trap
 
 ```typescript
-import { createFocusTrap } from "@ds/primitives-dom";
+import { createFocusTrap } from "@hypoth-ui/primitives-dom";
 
 const modal = document.getElementById("modal");
 const trap = createFocusTrap({
@@ -89,7 +89,7 @@ trap.deactivate();
 ### Roving Focus
 
 ```typescript
-import { createRovingFocus } from "@ds/primitives-dom";
+import { createRovingFocus } from "@hypoth-ui/primitives-dom";
 
 const toolbar = document.getElementById("toolbar");
 const roving = createRovingFocus({
@@ -108,7 +108,7 @@ roving.destroy();
 ### Dismissable Layer
 
 ```typescript
-import { createDismissableLayer } from "@ds/primitives-dom";
+import { createDismissableLayer } from "@hypoth-ui/primitives-dom";
 
 const dropdown = document.getElementById("dropdown");
 const trigger = document.getElementById("dropdown-trigger");
@@ -130,7 +130,7 @@ layer.activate();
 ### Keyboard Activation
 
 ```typescript
-import { createActivationHandler } from "@ds/primitives-dom";
+import { createActivationHandler } from "@hypoth-ui/primitives-dom";
 
 const customButton = document.getElementById("custom-button");
 
@@ -149,7 +149,7 @@ customButton.addEventListener("keydown", handler);
 ### Arrow Key Navigation
 
 ```typescript
-import { createArrowKeyHandler } from "@ds/primitives-dom";
+import { createArrowKeyHandler } from "@hypoth-ui/primitives-dom";
 
 const handler = createArrowKeyHandler({
   orientation: "horizontal",
@@ -178,7 +178,7 @@ container.addEventListener("keydown", handler);
 ### Type-Ahead Search
 
 ```typescript
-import { createTypeAhead } from "@ds/primitives-dom";
+import { createTypeAhead } from "@hypoth-ui/primitives-dom";
 
 const typeAhead = createTypeAhead({
   items: () => Array.from(listbox.querySelectorAll('[role="option"]')),
@@ -200,7 +200,7 @@ typeAhead.reset();
 
 ```typescript
 import { LitElement, html } from "lit";
-import { createFocusTrap } from "@ds/primitives-dom";
+import { createFocusTrap } from "@hypoth-ui/primitives-dom";
 
 class MyModal extends LitElement {
   private trap?: ReturnType<typeof createFocusTrap>;

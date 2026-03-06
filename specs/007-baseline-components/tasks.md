@@ -27,7 +27,7 @@ Monorepo structure per plan.md:
 
 **Purpose**: Dependencies and shared infrastructure before component work
 
-- [x] T001 Install Lucide icon library: `pnpm --filter @ds/wc add lucide@^0.468.0`
+- [x] T001 Install Lucide icon library: `pnpm --filter @hypoth-ui/wc add lucide@^0.468.0`
 - [x] T002 [P] Verify token paths exist in `packages/tokens/` for link, icon, spinner sizes
 - [x] T003 [P] Add missing tokens to `packages/tokens/src/` if needed (sizing.icon.*, sizing.spinner.*, color.link.*, motion.*)
 - [x] T004 Update component registry types in `packages/wc/src/registry/registry.ts` for new components
@@ -236,9 +236,9 @@ Monorepo structure per plan.md:
 
 **Purpose**: Final validation and integration
 
-- [x] T052 [P] Run manifest validation: `pnpm --filter @ds/docs-core validate --strict`
-- [x] T053 [P] Run all component tests: `pnpm --filter @ds/wc test` (292 tests passing)
-- [x] T054 [P] Run type checking: `pnpm --filter @ds/wc typecheck`
+- [x] T052 [P] Run manifest validation: `pnpm --filter @hypoth-ui/docs-core validate --strict`
+- [x] T053 [P] Run all component tests: `pnpm --filter @hypoth-ui/wc test` (292 tests passing)
+- [x] T054 [P] Run type checking: `pnpm --filter @hypoth-ui/wc typecheck`
 - [x] T055 [P] Verify tree-shaking by building and checking bundle sizes (each component in separate chunk)
 - [x] T056 Verify SSR rendering in Next.js test app (Light DOM ensures SSR compatibility)
 - [x] T057 Verify token theming (brand/mode switching) on all components (CSS custom properties used throughout)
@@ -367,4 +367,4 @@ Per quickstart.md recommendation:
 - [Story] label maps task to specific user story
 - Tests required per FR-039
 - Commit after each task or logical group
-- Run `pnpm --filter @ds/docs-core validate --strict` frequently
+- Run `pnpm --filter @hypoth-ui/docs-core validate --strict` frequently

@@ -33,5 +33,5 @@
 
 - All items pass validation
 - Spec is ready for `/speckit.clarify` or `/speckit.plan`
-- The spec builds on existing @ds/css package structure (already has reset, base, utilities layers defined)
-- Integrates with existing @ds/tokens DTCG output from feature 003
+- The spec builds on existing @hypoth-ui/css package structure (already has reset, base, utilities layers defined)
+- Integrates with existing @hypoth-ui/tokens DTCG output from feature 003

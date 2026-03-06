@@ -60,7 +60,7 @@ export function getThemeScriptContent(options: ThemeScriptOptions = {}): string 
  * @example
  * ```tsx
  * // In Next.js App Router layout.tsx
- * import { getThemeScriptTag } from '@ds/react/theme';
+ * import { getThemeScriptTag } from '@hypoth-ui/react/theme';
  *
  * export default function RootLayout({ children }) {
  *   return (
@@ -91,7 +91,7 @@ export interface ThemeScriptProps extends ThemeScriptOptions {
  *
  * @example
  * ```tsx
- * import { getThemeScriptProps } from '@ds/react/theme';
+ * import { getThemeScriptProps } from '@hypoth-ui/react/theme';
  *
  * function Head() {
  *   const scriptProps = getThemeScriptProps({ nonce: 'abc123' });

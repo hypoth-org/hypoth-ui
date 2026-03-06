@@ -55,7 +55,7 @@ This is a straightforward infrastructure refactoring task with minimal research 
 
 ### 4. Changeset Config Update
 
-**Decision**: Remove `@ds/governance` from ignore list
+**Decision**: Remove `@hypoth-ui/governance` from ignore list
 
 **Rationale**:
 - Package no longer exists in workspace, ignore entry is unnecessary
@@ -93,9 +93,9 @@ packages/governance/
 
 ## Dependencies Verified
 
-- **No runtime dependencies** from other packages on @ds/governance (confirmed via grep)
-- **@ds/docs-core** has independent manifest validation (no governance import)
-- **@ds/a11y-audit** is completely separate package (no governance import)
+- **No runtime dependencies** from other packages on @hypoth-ui/governance (confirmed via grep)
+- **@hypoth-ui/docs-core** has independent manifest validation (no governance import)
+- **@hypoth-ui/a11y-audit** is completely separate package (no governance import)
 
 ## Conclusion
 

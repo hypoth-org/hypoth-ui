@@ -405,7 +405,7 @@ Provide behavior utilities (useTable, useTree) as headless hooks, with styled co
 
 ### Approach B: Compound Component Pattern (Consistent with Existing Specs)
 
-Build all components as compound components (Root/Item/Content pattern) using shared primitives from `@ds/primitives-dom`. Table and DataTable use declarative column definitions rather than hooks.
+Build all components as compound components (Root/Item/Content pattern) using shared primitives from `@hypoth-ui/primitives-dom`. Table and DataTable use declarative column definitions rather than hooks.
 
 **Pros**:
 - Consistent with existing specs (017, 018) compound component pattern
@@ -437,7 +437,7 @@ Each component is a single export configured entirely via props.
 This approach:
 1. Maintains API consistency with existing specs (consistency accelerates adoption)
 2. Achieves good bundle size through tree-shaking without hooks overhead
-3. Leverages existing `@ds/primitives-dom` investments
+3. Leverages existing `@hypoth-ui/primitives-dom` investments
 4. Aligns with constitution principle hierarchy (Performance > Accessibility > Customizability)
 
 For DataTable specifically:
@@ -467,8 +467,8 @@ The trade-off (less flexibility than headless) is acceptable because:
 
 ## Assumptions
 
-- Existing `@ds/primitives-dom` package provides required behavior utilities (focus-trap, roving-focus, type-ahead)
-- Token system from `@ds/tokens` includes semantic status colors (info, success, warning, danger)
+- Existing `@hypoth-ui/primitives-dom` package provides required behavior utilities (focus-trap, roving-focus, type-ahead)
+- Token system from `@hypoth-ui/tokens` includes semantic status colors (info, success, warning, danger)
 - Animation utilities from spec-016 (motion-system) are available for transitions
 - Portal implementation will be shared across Toast, Popover, and other overlay components
 - React 18+ and Lit 3.1+ are the target platforms per existing patterns

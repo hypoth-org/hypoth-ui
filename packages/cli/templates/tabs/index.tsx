@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Tabs } from "@ds/react";
+ * import { Tabs } from "@/components/ui";
  *
  * <Tabs.Root defaultValue="tab1">
  *   <Tabs.List>

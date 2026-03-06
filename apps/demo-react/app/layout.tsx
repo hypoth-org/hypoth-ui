@@ -1,7 +1,7 @@
-import '@ds/tokens/css';
-import '@ds/css';
+import '@hypoth-ui/tokens/css';
+import '@hypoth-ui/css';
 import '../styles/globals.css';
-import { DsLoader } from '@ds/next';
+import { DsLoader } from '@hypoth-ui/next';
 import type { ReactNode } from 'react';
 import { Providers } from '../components/providers';
 

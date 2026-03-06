@@ -12,9 +12,9 @@ This guide provides quick examples for implementing each advanced form control c
 Ensure the design system packages are installed:
 
 ```bash
-pnpm add @ds/wc @ds/css @ds/tokens
+pnpm add @hypoth-ui/wc @hypoth-ui/css @hypoth-ui/tokens
 # For React:
-pnpm add @ds/react
+pnpm add @hypoth-ui/react
 # For DatePicker/TimePicker (peer dependency):
 pnpm add date-fns @date-fns/tz
 ```
@@ -22,7 +22,7 @@ pnpm add date-fns @date-fns/tz
 Import base styles:
 
 ```css
-@import '@ds/css';
+@import '@hypoth-ui/css';
 ```
 
 ---
@@ -60,7 +60,7 @@ Import base styles:
 ### React
 
 ```tsx
-import { Select, Field, Label } from '@ds/react';
+import { Select, Field, Label } from '@hypoth-ui/react';
 
 function CountrySelect() {
   const [value, setValue] = useState<string | null>(null);
@@ -116,7 +116,7 @@ function CountrySelect() {
 ### React
 
 ```tsx
-import { Combobox, Field, Label } from '@ds/react';
+import { Combobox, Field, Label } from '@hypoth-ui/react';
 
 function UserPicker() {
   const [selected, setSelected] = useState<string[]>([]);
@@ -175,7 +175,7 @@ function UserPicker() {
 ### React
 
 ```tsx
-import { DatePicker, Field, Label } from '@ds/react';
+import { DatePicker, Field, Label } from '@hypoth-ui/react';
 
 function BookingDates() {
   const [range, setRange] = useState<{ start: Date | null; end: Date | null }>({
@@ -233,7 +233,7 @@ function BookingDates() {
 ### React
 
 ```tsx
-import { Slider, Field, Label, FieldDescription } from '@ds/react';
+import { Slider, Field, Label, FieldDescription } from '@hypoth-ui/react';
 
 function PriceFilter() {
   const [range, setRange] = useState({ min: 100, max: 500 });
@@ -285,7 +285,7 @@ function PriceFilter() {
 ### React
 
 ```tsx
-import { NumberInput, Field, Label } from '@ds/react';
+import { NumberInput, Field, Label } from '@hypoth-ui/react';
 
 function QuantitySelector() {
   const [qty, setQty] = useState(1);
@@ -341,7 +341,7 @@ function QuantitySelector() {
 ### React
 
 ```tsx
-import { FileUpload, Field, Label } from '@ds/react';
+import { FileUpload, Field, Label } from '@hypoth-ui/react';
 
 function DocumentUploader() {
   const [files, setFiles] = useState<UploadFile[]>([]);
@@ -400,7 +400,7 @@ function DocumentUploader() {
 ### React
 
 ```tsx
-import { TimePicker, Field, Label } from '@ds/react';
+import { TimePicker, Field, Label } from '@hypoth-ui/react';
 
 function AppointmentTime() {
   const [time, setTime] = useState<{ hours: number; minutes: number } | null>(null);
@@ -444,7 +444,7 @@ function AppointmentTime() {
 ### React
 
 ```tsx
-import { PinInput, Field, Label, FieldDescription } from '@ds/react';
+import { PinInput, Field, Label, FieldDescription } from '@hypoth-ui/react';
 
 function OTPVerification() {
   const handleComplete = async (value: string) => {

@@ -1,4 +1,4 @@
-import type { ComponentTag } from "@ds/wc";
+import type { ComponentTag } from "@hypoth-ui/wc";
 
 /**
  * Options for selective component registration.
@@ -49,7 +49,7 @@ export async function registerAllElements(options: RegisterOptions = {}): Promis
   const { include, exclude, debug = false } = options;
 
   // Dynamically import registry utilities to avoid SSR issues
-  const { getRegisteredTags, getComponentClass } = await import("@ds/wc");
+  const { getRegisteredTags, getComponentClass } = await import("@hypoth-ui/wc");
 
   const allTags = getRegisteredTags();
 

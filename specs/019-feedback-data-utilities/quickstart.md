@@ -11,7 +11,7 @@ This document provides integration examples for the components in this feature.
 
 ```bash
 # Install packages
-pnpm add @ds/wc @ds/react @ds/css
+pnpm add @hypoth-ui/wc @hypoth-ui/react @hypoth-ui/css
 ```
 
 ---
@@ -22,7 +22,7 @@ pnpm add @ds/wc @ds/react @ds/css
 
 ```tsx
 // app/layout.tsx
-import { Toast } from "@ds/react/client";
+import { Toast } from "@hypoth-ui/react/client";
 
 export default function RootLayout({ children }) {
   return (
@@ -38,8 +38,8 @@ export default function RootLayout({ children }) {
 
 // components/SaveButton.tsx
 "use client";
-import { useToast } from "@ds/react/client";
-import { Button } from "@ds/react";
+import { useToast } from "@hypoth-ui/react/client";
+import { Button } from "@hypoth-ui/react";
 
 export function SaveButton() {
   const { toast } = useToast();
@@ -95,7 +95,7 @@ export function SaveButton() {
 ### React Usage
 
 ```tsx
-import { Alert } from "@ds/react";
+import { Alert } from "@hypoth-ui/react";
 
 function FormFeedback({ error, success }) {
   if (error) {
@@ -136,7 +136,7 @@ function FormFeedback({ error, success }) {
 ### React Usage
 
 ```tsx
-import { Progress } from "@ds/react";
+import { Progress } from "@hypoth-ui/react";
 
 function FileUpload() {
   const [progress, setProgress] = useState<number | undefined>();
@@ -177,7 +177,7 @@ function FileUpload() {
 ### React Usage
 
 ```tsx
-import { Avatar, AvatarGroup } from "@ds/react";
+import { Avatar, AvatarGroup } from "@hypoth-ui/react";
 
 function UserList({ users }) {
   return (
@@ -215,7 +215,7 @@ function UserList({ users }) {
 ### React Usage
 
 ```tsx
-import { Table } from "@ds/react";
+import { Table } from "@hypoth-ui/react";
 
 interface User {
   id: string;
@@ -281,7 +281,7 @@ function UserTable({ users }) {
 ### React Usage
 
 ```tsx
-import { DataTable } from "@ds/react";
+import { DataTable } from "@hypoth-ui/react";
 
 function LargeDataset({ data, total }) {
   const [page, setPage] = useState(0);
@@ -317,7 +317,7 @@ function LargeDataset({ data, total }) {
 ### React Usage
 
 ```tsx
-import { Skeleton } from "@ds/react";
+import { Skeleton } from "@hypoth-ui/react";
 
 function CardSkeleton() {
   return (
@@ -355,7 +355,7 @@ function ProductGrid({ products, loading }) {
 ### React Usage
 
 ```tsx
-import { Tag } from "@ds/react";
+import { Tag } from "@hypoth-ui/react";
 
 function CategoryTags({ categories, onRemove }) {
   return (
@@ -382,7 +382,7 @@ function CategoryTags({ categories, onRemove }) {
 ### React Usage
 
 ```tsx
-import { Tree, TreeItem } from "@ds/react";
+import { Tree, TreeItem } from "@hypoth-ui/react";
 
 function FileExplorer() {
   return (
@@ -411,7 +411,7 @@ function FileExplorer() {
 ### React Usage
 
 ```tsx
-import { List, ListItem } from "@ds/react";
+import { List, ListItem } from "@hypoth-ui/react";
 
 function ContactList({ contacts }) {
   return (
@@ -438,7 +438,7 @@ function ContactList({ contacts }) {
 ### React Usage
 
 ```tsx
-import { Calendar } from "@ds/react";
+import { Calendar } from "@hypoth-ui/react";
 
 function EventCalendar({ events }) {
   return (
@@ -460,7 +460,7 @@ function EventCalendar({ events }) {
 ### Portal
 
 ```tsx
-import { Portal } from "@ds/react";
+import { Portal } from "@hypoth-ui/react";
 
 function Overlay({ children }) {
   return (
@@ -476,7 +476,7 @@ function Overlay({ children }) {
 ### FocusScope
 
 ```tsx
-import { FocusScope } from "@ds/react";
+import { FocusScope } from "@hypoth-ui/react";
 
 function Modal({ open, children }) {
   if (!open) return null;
@@ -496,7 +496,7 @@ function Modal({ open, children }) {
 ### ClientOnly
 
 ```tsx
-import { ClientOnly } from "@ds/react";
+import { ClientOnly } from "@hypoth-ui/react";
 
 function BrowserOnlyChart({ data }) {
   return (
@@ -512,7 +512,7 @@ function BrowserOnlyChart({ data }) {
 ## Badge on Icons
 
 ```tsx
-import { Badge, Icon, Button } from "@ds/react";
+import { Badge, Icon, Button } from "@hypoth-ui/react";
 
 function NotificationButton({ count }) {
   return (
@@ -533,7 +533,7 @@ function NotificationButton({ count }) {
 // app/providers.tsx
 "use client";
 
-import { Toast } from "@ds/react/client";
+import { Toast } from "@hypoth-ui/react/client";
 
 export function Providers({ children }) {
   return (
@@ -545,7 +545,7 @@ export function Providers({ children }) {
 
 // app/layout.tsx
 import { Providers } from "./providers";
-import "@ds/css";
+import "@hypoth-ui/css";
 
 export default function RootLayout({ children }) {
   return (

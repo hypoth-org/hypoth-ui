@@ -17,7 +17,7 @@
 
 **Purpose**: Project initialization and dependencies
 
-- [x] T001 Add date-fns v4 and @date-fns/tz as dependencies to @ds/wc in `packages/wc/package.json`
+- [x] T001 Add date-fns v4 and @date-fns/tz as dependencies to @hypoth-ui/wc in `packages/wc/package.json`
 - [x] T002 [P] Create component directory structure for all 8 components in `packages/wc/src/components/`
 - [x] T003 [P] Create React adapter directory structure for all 8 components in `packages/react/src/components/`
 - [x] T004 [P] Create CSS layer files for all 8 components in `packages/css/src/layers/components/`
@@ -38,7 +38,7 @@
 - [x] T008 [P] Implement `createPinInputBehavior` in `packages/primitives-dom/src/behavior/pin-input.ts` per contracts/behavior-primitives.md
 - [x] T009 [P] Implement `createVirtualizedList` in `packages/primitives-dom/src/keyboard/virtualized-list.ts` per contracts/behavior-primitives.md
 - [x] T010 Export all new primitives from `packages/primitives-dom/src/index.ts`
-- [x] T011 Build primitives-dom package with `pnpm --filter @ds/primitives-dom build`
+- [x] T011 Build primitives-dom package with `pnpm --filter @hypoth-ui/primitives-dom build`
 
 ### Primitive Unit Tests
 
@@ -416,7 +416,7 @@
 
 ### Manifest & Documentation Validation
 
-- [ ] T193 Run manifest validation with `pnpm --filter @ds/docs-core validate:manifests --strict`
+- [ ] T193 Run manifest validation with `pnpm --filter @hypoth-ui/docs-core validate:manifests --strict`
 - [ ] T194 Validate quickstart.md examples execute without errors
 - [x] T195 [P] Add MDX documentation for Select in `packages/docs-content/components/select.mdx`
 - [x] T196 [P] Add MDX documentation for Combobox in `packages/docs-content/components/combobox.mdx`
@@ -429,7 +429,7 @@
 
 ### Final Verification
 
-- [x] T203 Run full test suite with `pnpm test` (893 tests passing in @ds/wc)
+- [x] T203 Run full test suite with `pnpm test` (893 tests passing in @hypoth-ui/wc)
 - [x] T204 Run accessibility audit with `pnpm test:a11y` (all a11y tests passing)
 - [x] T205 Verify bundle size <10KB gzipped per component (excluding date-fns)
 - [ ] T206 Verify SSR compatibility (components render meaningful HTML without JS)

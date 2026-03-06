@@ -4,7 +4,7 @@
 
 ## Executive Summary
 
-Research confirms that all required primitives and patterns exist in the codebase. No new dependencies needed. Components will follow established compound component pattern using existing `@ds/primitives-dom` utilities.
+Research confirms that all required primitives and patterns exist in the codebase. No new dependencies needed. Components will follow established compound component pattern using existing `@hypoth-ui/primitives-dom` utilities.
 
 ## Codebase Pattern Analysis
 

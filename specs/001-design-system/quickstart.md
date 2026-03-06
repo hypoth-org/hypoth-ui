@@ -22,16 +22,16 @@ This guide covers the essential steps to set up and use the Hypoth UI design sys
 
 ```bash
 # Foundation (always needed)
-pnpm add @ds/tokens @ds/css
+pnpm add @hypoth-ui/tokens @hypoth-ui/css
 
 # Web Components
-pnpm add @ds/wc
+pnpm add @hypoth-ui/wc
 
 # React adapter (optional)
-pnpm add @ds/react
+pnpm add @hypoth-ui/react
 
 # Next.js integration (optional)
-pnpm add @ds/next
+pnpm add @hypoth-ui/next
 ```
 
 ### 2. Import CSS
@@ -40,10 +40,10 @@ Add to your app's entry point (e.g., `app/layout.tsx` or `styles/global.css`):
 
 ```css
 /* Import tokens (CSS custom properties) */
-@import '@ds/tokens/css';
+@import '@hypoth-ui/tokens/css';
 
 /* Import base styles (reset, layers, base element styles) */
-@import '@ds/css';
+@import '@hypoth-ui/css';
 ```
 
 ---
@@ -56,9 +56,9 @@ Add to your app's entry point (e.g., `app/layout.tsx` or `styles/global.css`):
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="node_modules/@ds/tokens/dist/css/tokens.css">
-  <link rel="stylesheet" href="node_modules/@ds/css/dist/index.css">
-  <script type="module" src="node_modules/@ds/wc/dist/index.js"></script>
+  <link rel="stylesheet" href="node_modules/@hypoth-ui/tokens/dist/css/tokens.css">
+  <link rel="stylesheet" href="node_modules/@hypoth-ui/css/dist/index.css">
+  <script type="module" src="node_modules/@hypoth-ui/wc/dist/index.js"></script>
 </head>
 <body>
   <ds-button variant="primary">Click me</ds-button>
@@ -75,7 +75,7 @@ Add to your app's entry point (e.g., `app/layout.tsx` or `styles/global.css`):
 'use client';
 
 import { useEffect } from 'react';
-import { registerAllElements } from '@ds/next/loader';
+import { registerAllElements } from '@hypoth-ui/next/loader';
 
 export function DsLoader() {
   useEffect(() => {
@@ -89,8 +89,8 @@ export function DsLoader() {
 
 ```tsx
 // app/layout.tsx
-import '@ds/tokens/css';
-import '@ds/css';
+import '@hypoth-ui/tokens/css';
+import '@hypoth-ui/css';
 import { DsLoader } from '@/components/ds-loader';
 
 export default function RootLayout({ children }) {
@@ -122,9 +122,9 @@ export default function Page() {
 ### React (without Next.js)
 
 ```tsx
-import '@ds/tokens/css';
-import '@ds/css';
-import { Button, Input } from '@ds/react';
+import '@hypoth-ui/tokens/css';
+import '@hypoth-ui/css';
+import { Button, Input } from '@hypoth-ui/react';
 
 function App() {
   return (
@@ -165,9 +165,9 @@ Create a custom token file in DTCG format:
 Compile and import your custom tokens after the base tokens:
 
 ```css
-@import '@ds/tokens/css';
+@import '@hypoth-ui/tokens/css';
 @import './tokens/brand.css'; /* Your compiled brand tokens */
-@import '@ds/css';
+@import '@hypoth-ui/css';
 ```
 
 ### Dark Mode
@@ -238,7 +238,7 @@ All packages include TypeScript declarations:
 
 ```typescript
 // Type-safe token access
-import { color, spacing } from '@ds/tokens';
+import { color, spacing } from '@hypoth-ui/tokens';
 
 console.log(color.primary); // '#0066CC'
 console.log(spacing.md);    // '16px'
@@ -246,7 +246,7 @@ console.log(spacing.md);    // '16px'
 
 ```typescript
 // React component props are fully typed
-import { Button, type ButtonProps } from '@ds/react';
+import { Button, type ButtonProps } from '@hypoth-ui/react';
 
 const props: ButtonProps = {
   variant: 'primary',

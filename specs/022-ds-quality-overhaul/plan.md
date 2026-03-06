@@ -47,7 +47,7 @@ Verify compliance with Hypoth UI Design System Constitution:
   - 16-step color scales in DTCG format (4 bg levels, 3 interactive, 3 border, 4 solid, 2 text)
   - Density tokens (compact/default/spacious) in tokens package
   - Style props compile to CSS classes using token CSS variables
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
   - Style props build tooling is dev dependency only
   - ID generation hooks are React-only, not in primitives-dom
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
@@ -80,7 +80,7 @@ specs/022-ds-quality-overhaul/
 
 ```text
 packages/
-├── tokens/                    # @ds/tokens - DTCG design tokens
+├── tokens/                    # @hypoth-ui/tokens - DTCG design tokens
 │   └── src/
 │       ├── colors/           # NEW: 16-step color scales
 │       │   ├── primitives.json    # Raw color values (steps 1-16)
@@ -90,7 +90,7 @@ packages/
 │       └── responsive/       # NEW: Breakpoint tokens
 │           └── breakpoints.json
 │
-├── primitives-dom/           # @ds/primitives-dom - Vanilla behaviors
+├── primitives-dom/           # @hypoth-ui/primitives-dom - Vanilla behaviors
 │   └── src/
 │       ├── id/               # NEW: ID generation utilities
 │       │   └── create-id-generator.ts
@@ -99,12 +99,12 @@ packages/
 │       └── events/           # NEW: Event naming constants
 │           └── event-names.ts
 │
-├── css/                      # @ds/css - CSS layers and utilities
+├── css/                      # @hypoth-ui/css - CSS layers and utilities
 │   └── src/
 │       ├── layers/           # Existing 7-layer system
 │       └── density/          # NEW: Density utility classes
 │
-├── wc/                       # @ds/wc - Web Components
+├── wc/                       # @hypoth-ui/wc - Web Components
 │   └── src/
 │       ├── components/       # Existing + updated components
 │       │   ├── tree/         # APG fixes: aria-level, aria-setsize, aria-posinset
@@ -117,7 +117,7 @@ packages/
 │       └── utils/            # NEW: Dev mode warnings
 │           └── dev-warnings.ts
 │
-├── react/                    # @ds/react - React adapters
+├── react/                    # @hypoth-ui/react - React adapters
 │   └── src/
 │       ├── adapters/         # Existing + 24 new adapters
 │       │   ├── accordion.tsx
@@ -149,12 +149,12 @@ packages/
 │           ├── theme-script.ts        # SSR flash prevention script
 │           └── storage.ts             # Persistence utilities
 │
-├── cli/                      # @ds/cli - CLI tool
+├── cli/                      # @hypoth-ui/cli - CLI tool
 │   └── src/
 │       └── commands/
 │           └── copy.ts       # NEW: Component copy command
 │
-├── docs-core/                # @ds/docs-core - Docs engine
+├── docs-core/                # @hypoth-ui/docs-core - Docs engine
 │   └── src/
 │       └── search/           # NEW: Search functionality
 │

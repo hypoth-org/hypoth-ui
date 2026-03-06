@@ -11,13 +11,13 @@
 
 ### Core Value Proposition (2-4 sentences)
 
-hypoth-ui is a **framework-agnostic, white-label design system** built on Lit-based Web Components with React adapters. It provides a zero-runtime-dependency behavior primitives layer (`@ds/primitives-dom`), DTCG-compliant design tokens, and CSS cascade layers for controlled styling. The architecture prioritizes accessibility, form integration via Light DOM, and multi-tenant documentation support for enterprise deployments.
+hypoth-ui is a **framework-agnostic, white-label design system** built on Lit-based Web Components with React adapters. It provides a zero-runtime-dependency behavior primitives layer (`@hypoth-ui/primitives-dom`), DTCG-compliant design tokens, and CSS cascade layers for controlled styling. The architecture prioritizes accessibility, form integration via Light DOM, and multi-tenant documentation support for enterprise deployments.
 
 ### Key Strengths
 
 | # | Strength | Evidence |
 |---|----------|----------|
-| 1 | **Zero-runtime behavior primitives** | `@ds/primitives-dom` has 0 external dependencies, 138KB compiled, provides focus-trap, roving-focus, type-ahead, dismissable-layer as pure functions. All overlay components share identical behavior. |
+| 1 | **Zero-runtime behavior primitives** | `@hypoth-ui/primitives-dom` has 0 external dependencies, 138KB compiled, provides focus-trap, roving-focus, type-ahead, dismissable-layer as pure functions. All overlay components share identical behavior. |
 | 2 | **Light DOM architecture for form integration** | All form controls use `createRenderRoot()` returning `this` for Light DOM. Enables native form submission via ElementInternals (Select, Combobox, Checkbox, Switch, Radio implement `FormAssociatedMixin`). |
 | 3 | **DTCG-compliant token system with multi-mode support** | 139 tokens compiled via Style Dictionary 4.0. Supports light/dark/high-contrast/reduced-motion modes. CSS custom properties with `--ds-` prefix. Runtime theme controller with localStorage persistence. |
 | 4 | **CSS Layers for controlled cascade** | 7-layer architecture: reset → tokens → base → components → animations → utilities → overrides. Eliminates specificity wars, allows user overrides without `!important`. |
@@ -101,12 +101,12 @@ hypoth-ui/
 ┌─────────────────────────────────────────────────────────────┐
 │                     LAYER ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────┤
-│  7. Docs/Theming   │ @ds/docs-*, theme-controller, editions │
-│  6. Adapters       │ @ds/react, @ds/next                    │
-│  5. Components     │ @ds/wc (55 Lit components)             │
-│  4. Styling        │ @ds/css (7 CSS layers)                 │
-│  3. Behavior       │ @ds/primitives-dom (zero-dep)          │
-│  2. Tokens         │ @ds/tokens (DTCG → CSS vars)           │
+│  7. Docs/Theming   │ @hypoth-ui/docs-*, theme-controller, editions │
+│  6. Adapters       │ @hypoth-ui/react, @hypoth-ui/next                    │
+│  5. Components     │ @hypoth-ui/wc (55 Lit components)             │
+│  4. Styling        │ @hypoth-ui/css (7 CSS layers)                 │
+│  3. Behavior       │ @hypoth-ui/primitives-dom (zero-dep)          │
+│  2. Tokens         │ @hypoth-ui/tokens (DTCG → CSS vars)           │
 │  1. Foundation     │ TypeScript 5.3, Lit 3.1, ES2022        │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -281,7 +281,7 @@ function Button({ asChild, children, ...props }: ButtonProps) {
 
 **Runtime switching:**
 ```typescript
-import { setMode, setBrand } from '@ds/tokens/runtime';
+import { setMode, setBrand } from '@hypoth-ui/tokens/runtime';
 setMode('dark');
 setBrand('acme');
 ```
@@ -453,14 +453,14 @@ The docs-content manifests are a secondary system for richer API documentation g
 
 | Package | Size (ESM) | Tree-shakeable | sideEffects |
 |---------|------------|----------------|-------------|
-| @ds/primitives-dom | 138KB | Yes | `false` |
-| @ds/wc | ~400KB (all) | Partial | `true` (custom elements) |
-| @ds/react | ~50KB | Yes | `false` |
-| @ds/tokens/css | 8KB | N/A (CSS) | N/A |
+| @hypoth-ui/primitives-dom | 138KB | Yes | `false` |
+| @hypoth-ui/wc | ~400KB (all) | Partial | `true` (custom elements) |
+| @hypoth-ui/react | ~50KB | Yes | `false` |
+| @hypoth-ui/tokens/css | 8KB | N/A (CSS) | N/A |
 
 **Tree-shaking Issues:**
 - WC package has `sideEffects: true` due to custom element registration
-- Individual component imports not supported: `import { Button } from '@ds/wc/button'`
+- Individual component imports not supported: `import { Button } from '@hypoth-ui/wc/button'`
 - All 55 components bundled even if using 1
 
 **Recommended Fix:**
@@ -482,7 +482,7 @@ The docs-content manifests are a secondary system for richer API documentation g
 
 | Concern | Status | Notes |
 |---------|--------|-------|
-| Style injection | None | Static CSS via `@ds/css` |
+| Style injection | None | Static CSS via `@hypoth-ui/css` |
 | Event listeners | Low | Delegated where possible, cleanup on disconnect |
 | Portals | Minimal | Used for dialogs, tooltips - render to body |
 | Layout thrash | Low | CSS-based animations, no JS layout reads |

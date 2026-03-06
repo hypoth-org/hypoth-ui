@@ -3,7 +3,7 @@
  * Provides accessible button with loading and disabled states.
  */
 
-import { type ButtonBehaviorOptions, createButtonBehavior } from "@ds/primitives-dom";
+import { type ButtonBehaviorOptions, createButtonBehavior } from "@hypoth-ui/primitives-dom";
 import {
   type ButtonHTMLAttributes,
   type ReactNode,

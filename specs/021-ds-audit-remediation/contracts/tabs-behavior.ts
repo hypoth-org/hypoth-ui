@@ -2,7 +2,7 @@
  * Tabs Behavior Primitive Contract
  *
  * This file defines the API contract for createTabsBehavior.
- * Implementation should be placed in @ds/primitives-dom/src/behavior/tabs.ts
+ * Implementation should be placed in @hypoth-ui/primitives-dom/src/behavior/tabs.ts
  */
 
 // =============================================================================

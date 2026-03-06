@@ -10,7 +10,7 @@
 ### Session 2026-01-04
 
 - Q: What minimum test coverage threshold should be required for new component contributions? → A: 80% minimum coverage
-- Q: How should consumers opt-in to experimental/unstable APIs? → A: Import path prefix (e.g., `@ds/wc/experimental/...`)
+- Q: How should consumers opt-in to experimental/unstable APIs? → A: Import path prefix (e.g., `@hypoth-ui/wc/experimental/...`)
 - Q: Where should governance documentation be published? → A: Both repo files (for contributors) and docs site (for adopters)
 
 ## User Scenarios & Testing *(mandatory)*
@@ -122,7 +122,7 @@ A design system maintainer wants to release a new version. They follow a documen
 - What happens when a team is multiple major versions behind? Migration guides support multi-version jumps with aggregated breaking changes and recommended upgrade path.
 - How does the system handle emergency security releases? Security releases bypass normal deprecation windows with clear justification and immediate action guidance.
 - What happens when a tenant's overlay conflicts with a required base update? Conflict detection warns tenants during update preview, not after applying the update.
-- How does the system handle experimental/unstable APIs? Experimental features are exported via `/experimental/` import path prefix (e.g., `@ds/wc/experimental/DataGrid`), excluded from semver guarantees, and may change or be removed in any release.
+- How does the system handle experimental/unstable APIs? Experimental features are exported via `/experimental/` import path prefix (e.g., `@hypoth-ui/wc/experimental/DataGrid`), excluded from semver guarantees, and may change or be removed in any release.
 
 ## Requirements *(mandatory)*
 
@@ -263,6 +263,6 @@ The trade-off of requiring some manual effort is acceptable because:
 
 - Teams adopting the design system have basic familiarity with npm/pnpm package management
 - Contributors can follow conventional commit message format with minimal training
-- The design system uses a monorepo structure where packages are versioned together (single version across all @ds/* packages)
+- The design system uses a monorepo structure where packages are versioned together (single version across all @hypoth-ui/* packages)
 - Security updates may bypass normal deprecation windows with explicit justification
 - Tenants have development environments capable of tracking version updates

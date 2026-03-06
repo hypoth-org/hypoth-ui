@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypoth-ui.dev/schemas/content-pack.schema.json",
-  "name": "@ds/docs-content-tenant-example",
+  "name": "@hypoth-ui/docs-content-tenant-example",
   "version": "0.0.1",
   "description": "Example tenant content pack demonstrating overlay functionality",
   "type": "module",
@@ -8,7 +8,7 @@
   "docsContent": {
     "type": "overlay",
     "priority": 10,
-    "extends": "@ds/docs-content"
+    "extends": "@hypoth-ui/docs-content"
   },
   "exports": {
     "./*": "./*"

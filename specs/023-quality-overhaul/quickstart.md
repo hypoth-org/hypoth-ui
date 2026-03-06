@@ -20,7 +20,7 @@ pnpm test:a11y
 
 ### Run a11y tests for a specific component
 ```bash
-pnpm --filter @ds/wc test -- --grep "Dialog accessibility"
+pnpm --filter @hypoth-ui/wc test -- --grep "Dialog accessibility"
 ```
 
 ### Writing a new a11y test
@@ -80,7 +80,7 @@ describe("[ComponentName] accessibility", () => {
 ### Modal Overlay
 
 ```typescript
-import { createModalOverlay } from "@ds/primitives-dom";
+import { createModalOverlay } from "@hypoth-ui/primitives-dom";
 
 // Create overlay
 const modal = createModalOverlay({
@@ -108,7 +108,7 @@ closeButton.addEventListener("click", () => modal.close());
 ### Popover Overlay
 
 ```typescript
-import { createPopoverOverlay } from "@ds/primitives-dom";
+import { createPopoverOverlay } from "@hypoth-ui/primitives-dom";
 
 const popover = createPopoverOverlay({
   trigger: buttonElement,
@@ -134,7 +134,7 @@ buttonElement.addEventListener("click", () => popover.toggle());
 ### Selectable List
 
 ```typescript
-import { createSelectableList } from "@ds/primitives-dom";
+import { createSelectableList } from "@hypoth-ui/primitives-dom";
 
 const list = createSelectableList({
   items: users,
@@ -169,7 +169,7 @@ html`
 ### Generate unique IDs
 
 ```typescript
-import { generateAriaId } from "@ds/primitives-dom";
+import { generateAriaId } from "@hypoth-ui/primitives-dom";
 
 const titleId = generateAriaId("dialog-title");    // "dialog-title-1"
 const descId = generateAriaId("dialog-desc");      // "dialog-desc-2"
@@ -181,7 +181,7 @@ dialogContent.setAttribute("aria-describedby", descId);
 ### Connect aria-describedby
 
 ```typescript
-import { connectAriaDescribedBy } from "@ds/primitives-dom";
+import { connectAriaDescribedBy } from "@hypoth-ui/primitives-dom";
 
 const cleanup = connectAriaDescribedBy(inputElement, [
   helpText,
@@ -195,7 +195,7 @@ cleanup();
 ### Announce to screen readers
 
 ```typescript
-import { announce } from "@ds/primitives-dom";
+import { announce } from "@hypoth-ui/primitives-dom";
 
 // Polite (default) - waits for idle
 announce("Form saved successfully");
@@ -229,7 +229,7 @@ Dev warnings appear in development mode only:
 
 ```typescript
 // In component
-import { suppressWarning } from "@ds/wc/utils/dev-warnings";
+import { suppressWarning } from "@hypoth-ui/wc/utils/dev-warnings";
 
 suppressWarning("DS003"); // Suppress specific warning
 ```
@@ -340,7 +340,7 @@ High contrast styles are in `@layer high-contrast` which takes precedence over c
 After implementation, verify:
 
 - [ ] `pnpm test:a11y` passes for all 55 components
-- [ ] `pnpm --filter @ds/docs-core validate:manifests` passes
+- [ ] `pnpm --filter @hypoth-ui/docs-core validate:manifests` passes
 - [ ] DevTools Performance shows 60fps scroll in scroll-area
 - [ ] React DevTools shows stable handler references
 - [ ] Dev warnings appear in dev mode, absent in production build

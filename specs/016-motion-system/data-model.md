@@ -7,7 +7,7 @@
 
 ### 1. Motion Token (Existing - Extended)
 
-Motion tokens are already defined in `@ds/tokens`. This feature uses them without modification.
+Motion tokens are already defined in `@hypoth-ui/tokens`. This feature uses them without modification.
 
 **Location**: `packages/tokens/src/tokens/global/motion.json`
 

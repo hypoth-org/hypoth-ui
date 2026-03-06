@@ -41,7 +41,7 @@ All layout components are registered with the `ds-` prefix:
 ### Named Exports
 
 ```typescript
-// From @ds/react
+// From @hypoth-ui/react
 export {
   Flow,
   Container,
@@ -60,7 +60,7 @@ export {
   // Aliases
   Stack,  // Flow with direction="column"
   Inline, // Flow with direction="row"
-} from "@ds/react/layout";
+} from "@hypoth-ui/react/layout";
 ```
 
 ### Compound Component Pattern (AppShell)
@@ -198,7 +198,7 @@ Layout components do not manage focus. They render focusable content in Light DO
 
 | Package | Minimum Version |
 |---------|-----------------|
-| `@ds/wc` | 1.x |
-| `@ds/react` | 1.x |
-| `@ds/css` | 1.x |
-| `@ds/tokens` | 1.x |
+| `@hypoth-ui/wc` | 1.x |
+| `@hypoth-ui/react` | 1.x |
+| `@hypoth-ui/css` | 1.x |
+| `@hypoth-ui/tokens` | 1.x |

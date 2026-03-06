@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { NavigationMenu } from "@ds/react";
+ * import { NavigationMenu } from "@/components/ui";
  *
  * <NavigationMenu.Root>
  *   <NavigationMenu.List>

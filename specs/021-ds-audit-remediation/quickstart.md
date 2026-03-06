@@ -116,7 +116,7 @@ reportValidity(): boolean {
 
 ```typescript
 // packages/wc/src/components/dialog/dialog.ts
-import { createDialogBehavior, type DialogBehavior } from '@ds/primitives-dom';
+import { createDialogBehavior, type DialogBehavior } from '@hypoth-ui/primitives-dom';
 ```
 
 ### Step 2: Replace manual setup with behavior
@@ -305,10 +305,10 @@ pnpm typecheck
 pnpm test
 
 # Test form association
-pnpm --filter @ds/wc test -- --grep "form"
+pnpm --filter @hypoth-ui/wc test -- --grep "form"
 
 # Verify bundle size
-pnpm --filter @ds/wc build && ls -la packages/wc/dist/
+pnpm --filter @hypoth-ui/wc build && ls -la packages/wc/dist/
 
 # Test tree-shaking (manual)
 # Create test file importing single component, build with Vite, check bundle
@@ -328,7 +328,7 @@ For each form control:
 - [ ] Add tests for form submission
 
 For each overlay component:
-- [ ] Import behavior primitive from @ds/primitives-dom
+- [ ] Import behavior primitive from @hypoth-ui/primitives-dom
 - [ ] Create behavior in `connectedCallback()`
 - [ ] Delegate open/close to behavior
 - [ ] Apply ARIA props from behavior getters

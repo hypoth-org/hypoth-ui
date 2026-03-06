@@ -2,7 +2,7 @@
  * FileUpload Root component - provides context to all FileUpload compound components.
  */
 
-import { type FileInfo, type FileUploadError, createFileUploadBehavior } from "@ds/primitives-dom";
+import { type FileInfo, type FileUploadError, createFileUploadBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useRef, useState } from "react";
 import { FileUploadProvider } from "./file-upload-context.js";
 

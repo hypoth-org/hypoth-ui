@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Accordion } from "@ds/react";
+ * import { Accordion } from "@/components/ui";
  *
  * // Single expand mode
  * <Accordion.Root type="single" defaultValue="item-1" collapsible>

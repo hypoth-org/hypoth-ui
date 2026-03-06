@@ -7,7 +7,7 @@ import { LitElement } from "lit";
  * consistent Light DOM rendering behavior.
  *
  * Light DOM rendering enables:
- * - Direct CSS styling from @ds/css and consumer stylesheets
+ * - Direct CSS styling from @hypoth-ui/css and consumer stylesheets
  * - Form integration (autocomplete, form association)
  * - Standard DOM API access (querySelector from any scope)
  * - Natural event bubbling without shadow boundary issues
@@ -16,7 +16,7 @@ import { LitElement } from "lit";
  * ```typescript
  * import { html } from 'lit';
  * import { property } from 'lit/decorators.js';
- * import { DSElement } from '@ds/wc';
+ * import { DSElement } from '@hypoth-ui/wc';
  *
  * export class DsCard extends DSElement {
  *   @property({ reflect: true })

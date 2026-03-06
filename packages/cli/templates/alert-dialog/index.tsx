@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { AlertDialog } from "@ds/react";
+ * import { AlertDialog } from "@/components/ui";
  *
  * <AlertDialog.Root>
  *   <AlertDialog.Trigger>

@@ -2,7 +2,7 @@
  * TypeScript contracts for composite primitives.
  *
  * These interfaces define the API for new composite primitives
- * to be implemented in @ds/primitives-dom/src/composites/
+ * to be implemented in @hypoth-ui/primitives-dom/src/composites/
  */
 
 import type { DismissReason } from "../layer/dismissable-layer.js";

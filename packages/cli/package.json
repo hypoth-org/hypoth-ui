@@ -1,7 +1,8 @@
 {
   "name": "@hypoth-ui/cli",
   "version": "0.0.1",
-  "description": "CLI tool for adding hypoth-ui components to your project",
+  "description": "CLI tool for adding hypoth-ui components to your project (Alpha)",
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
   "type": "module",
   "bin": {
     "hypoth-ui": "./dist/index.js"
