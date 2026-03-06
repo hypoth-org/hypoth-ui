@@ -14,13 +14,13 @@
 ## Path Conventions
 
 This is a monorepo with multiple packages:
-- `packages/tokens/` - DTCG design tokens (@ds/tokens)
-- `packages/css/` - CSS layers and utilities (@ds/css)
-- `packages/primitives-dom/` - Vanilla JS behaviors (@ds/primitives-dom)
-- `packages/wc/` - Lit Web Components (@ds/wc)
-- `packages/react/` - React adapters (@ds/react)
-- `packages/cli/` - CLI tool (@ds/cli)
-- `packages/docs-core/` - Docs engine (@ds/docs-core)
+- `packages/tokens/` - DTCG design tokens (@hypoth-ui/tokens)
+- `packages/css/` - CSS layers and utilities (@hypoth-ui/css)
+- `packages/primitives-dom/` - Vanilla JS behaviors (@hypoth-ui/primitives-dom)
+- `packages/wc/` - Lit Web Components (@hypoth-ui/wc)
+- `packages/react/` - React adapters (@hypoth-ui/react)
+- `packages/cli/` - CLI tool (@hypoth-ui/cli)
+- `packages/docs-core/` - Docs engine (@hypoth-ui/docs-core)
 - `packages/docs-renderer-next/` - Documentation site
 
 ---

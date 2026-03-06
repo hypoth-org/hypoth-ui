@@ -1,66 +1,138 @@
-# Hypoth UI - White-Label Design System
+# hypoth-ui
 
-A production-ready, white-label design system monorepo built with Web Components and React adapters.
+**A modern, accessible design system with Web Components and React adapters.**
 
-## Features
+![Alpha](https://img.shields.io/badge/status-alpha-orange)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
-- 🎨 **Token-Driven Theming** - DTCG-compliant design tokens with CSS custom properties
-- 🧩 **Web Components** - Lit-based Light DOM components for any framework
-- ⚛️ **React Integration** - Type-safe React wrapper components
-- 📱 **Next.js Support** - Single client loader pattern for App Router
-- 📚 **Tenant Documentation** - Edition-filtered docs with white-label branding
-- ♿ **Accessible** - WCAG 2.1 AA compliant components
+---
 
-## Quick Start
+## Core Packages
 
-### Installation
+| Package | Install | Description |
+|---------|---------|-------------|
+| `@hypoth-ui/react` | `npm install @hypoth-ui/react` | React adapter components |
+| `@hypoth-ui/wc` | `npm install @hypoth-ui/wc` | Web Components (Lit) |
+| `@hypoth-ui/tokens` | `npm install @hypoth-ui/tokens` | Design tokens -- CSS custom properties |
+| `@hypoth-ui/css` | `npm install @hypoth-ui/css` | Base styles and CSS layers |
+| `@hypoth-ui/next` | `npm install @hypoth-ui/next` | Next.js App Router integration |
+| `@hypoth-ui/cli` | `npx @hypoth-ui/cli` | CLI for adding components |
+
+---
+
+## Getting Started -- Package Mode
+
+**1. Install packages:**
 
 ```bash
-# Install design system packages
-pnpm add @ds/wc @ds/css @ds/tokens
-
-# For React projects
-pnpm add @ds/react
-
-# For Next.js projects
-pnpm add @ds/next
+npm install @hypoth-ui/react @hypoth-ui/tokens @hypoth-ui/css
 ```
 
-### Basic Usage
+**2. Import the base CSS in your app entry point:**
 
-```html
-<!-- Import CSS -->
-<link rel="stylesheet" href="node_modules/@ds/css/dist/index.css">
-
-<!-- Use components -->
-<script type="module">
-  import '@ds/wc';
-</script>
-
-<ds-button variant="primary">Click me</ds-button>
+```ts
+import '@hypoth-ui/css';
 ```
 
-### React Usage
+**3. Import and use a component:**
 
 ```tsx
-import '@ds/css';
-import { Button } from '@ds/react';
+import { Button } from '@hypoth-ui/react';
 
-function App() {
-  return <Button variant="primary" onClick={() => alert('Clicked!')}>Click me</Button>;
+export default function App() {
+  return <Button variant="primary">Click me</Button>;
 }
 ```
 
-### Next.js Usage
+---
+
+## Getting Started -- Copy Mode
+
+Copy component source files directly into your project for full customization control.
+
+**1. Initialize configuration:**
+
+```bash
+npx @hypoth-ui/cli init
+```
+
+**2. Add components:**
+
+```bash
+npx @hypoth-ui/cli add button dialog
+```
+
+**3. Use the `--copy` flag to copy source files into your components directory:**
+
+```bash
+npx @hypoth-ui/cli add button --copy
+```
+
+Files are copied to your configured components directory with transformed imports, giving you full ownership of the source code.
+
+---
+
+## Package Mode vs Copy Mode
+
+|  | Package Mode | Copy Mode |
+|---|---|---|
+| Updates | npm update | Manual re-copy |
+| Customization | CSS tokens & layers | Full source control |
+| Setup | npm install | CLI init + add |
+| Best for | Most projects | Deep customization |
+
+---
+
+## Framework Quick-Starts
+
+### React
+
+```tsx
+import '@hypoth-ui/css';
+import { Button, Dialog } from '@hypoth-ui/react';
+
+export default function App() {
+  return (
+    <Dialog>
+      <Dialog.Trigger>
+        <Button variant="primary">Open</Button>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <p>Dialog content here.</p>
+      </Dialog.Content>
+    </Dialog>
+  );
+}
+```
+
+### Web Components
+
+```html
+<script type="module">
+  import '@hypoth-ui/wc';
+</script>
+
+<link rel="stylesheet" href="node_modules/@hypoth-ui/css/dist/index.css" />
+
+<ds-button variant="primary">Click me</ds-button>
+<ds-dialog>
+  <ds-button slot="trigger" variant="primary">Open</ds-button>
+  <p>Dialog content here.</p>
+</ds-dialog>
+```
+
+### Next.js (App Router)
+
+Register Web Components once in your root layout using `@hypoth-ui/next`, then use React adapter components in Server Components.
 
 ```tsx
 // app/layout.tsx
-import '@ds/css';
-import { DsLoader } from '@ds/next';
+import '@hypoth-ui/css';
+import { DsLoader } from '@hypoth-ui/next';
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <body>
         <DsLoader />
         {children}
@@ -70,134 +142,42 @@ export default function RootLayout({ children }) {
 }
 ```
 
-## Packages
+```tsx
+// app/page.tsx
+import { Button } from '@hypoth-ui/react';
 
-| Package | Description |
-|---------|-------------|
-| `@ds/tokens` | Design tokens (colors, spacing, typography) |
-| `@ds/css` | CSS layers (reset, tokens, base, utilities) |
-| `@ds/wc` | Web Components (Lit Light DOM) |
-| `@ds/react` | React wrapper components |
-| `@ds/next` | Next.js App Router integration |
-| `@ds/primitives-dom` | DOM utilities (focus, keyboard, ARIA) |
-| `@ds/docs-core` | Documentation engine with filtering |
-| `@ds/docs-content` | Component manifests and content |
-| `@ds/docs-renderer-next` | Next.js docs site renderer |
-
-## Development
-
-### Prerequisites
-
-- Node.js 20+
-- pnpm 8+
-
-### Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/hypoth-org/hypoth-ui.git
-cd hypoth-ui
-
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm build
-
-# Start development
-pnpm dev
-```
-
-### Scripts
-
-```bash
-pnpm build          # Build all packages
-pnpm dev            # Start development servers
-pnpm lint           # Run Biome linter
-pnpm typecheck      # Type check all packages
-pnpm test           # Run unit tests
-pnpm test:e2e       # Run E2E tests
-pnpm new-component  # Generate a new component
-pnpm validate:manifests  # Validate component manifests
-```
-
-### Adding Components
-
-Use the component generator:
-
-```bash
-pnpm new-component card layout "A container for grouping content"
-```
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
-
-## Theming
-
-Override CSS custom properties to customize the theme:
-
-```css
-:root {
-  --ds-color-primary-default: #ff6600;
-  --ds-color-primary-hover: #cc5200;
-  --ds-spacing-md: 1rem;
+export default function Page() {
+  return <Button variant="primary">Click me</Button>;
 }
 ```
 
-### Dark Mode
+---
 
-```html
-<html data-theme="dark">
-```
+## Tooling & Documentation Packages
 
-### High Contrast
-
-```html
-<html data-theme="high-contrast">
-```
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────┐
-│                    Applications                      │
-│  ┌─────────────┐  ┌─────────────┐                   │
-│  │  Demo App   │  │  Docs App   │                   │
-│  └─────────────┘  └─────────────┘                   │
-├─────────────────────────────────────────────────────┤
-│                     Adapters                         │
-│  ┌─────────────┐  ┌─────────────┐                   │
-│  │   @ds/react │  │   @ds/next  │                   │
-│  └─────────────┘  └─────────────┘                   │
-├─────────────────────────────────────────────────────┤
-│                  Core Components                     │
-│  ┌─────────────┐  ┌─────────────┐                   │
-│  │   @ds/wc    │  │ primitives  │                   │
-│  └─────────────┘  └─────────────┘                   │
-├─────────────────────────────────────────────────────┤
-│                    Foundation                        │
-│  ┌─────────────┐  ┌─────────────┐                   │
-│  │ @ds/tokens  │  │   @ds/css   │                   │
-│  └─────────────┘  └─────────────┘                   │
-└─────────────────────────────────────────────────────┘
-```
-
-## Components
-
-| Component | Status | Description |
-|-----------|--------|-------------|
-| Button | Stable | Interactive button for actions |
-| Input | Stable | Text input field |
-
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 90+
-- Safari 15+
-
-## License
-
-MIT © Hypoth
+| Package | Description |
+|---------|-------------|
+| `@hypoth-ui/primitives-dom` | DOM behavior primitives (focus trap, roving focus) |
+| `@hypoth-ui/docs-core` | Documentation engine |
+| `@hypoth-ui/docs-content` | Documentation content packs |
+| `@hypoth-ui/docs-renderer-next` | Next.js docs renderer |
+| `@hypoth-ui/test-utils` | Test utilities |
+| `@hypoth-ui/a11y-audit` | Accessibility audit tools |
 
 ---
 
-Built with ❤️ using [Claude Code](https://claude.com/claude-code)
+## Alpha Notice
+
+> **Alpha:** APIs may change between minor versions before 1.0. Pin your versions for stability.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup, coding standards, and contribution guidelines.
+
+---
+
+## License
+
+[MIT](./LICENSE)

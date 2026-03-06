@@ -1,7 +1,7 @@
 "use client";
 
 import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 
 export interface TableRowProps extends HTMLAttributes<HTMLElement> {
   /**

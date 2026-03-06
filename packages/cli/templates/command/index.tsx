@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Command } from "@ds/react";
+ * import { Command } from "@/components/ui";
  *
  * <Command.Root onSelect={(value) => console.log(value)}>
  *   <Command.Input placeholder="Type a command..." />

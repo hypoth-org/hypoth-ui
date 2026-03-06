@@ -3,7 +3,7 @@
 **Feature Branch**: `005-behavior-utilities`
 **Created**: 2026-01-02
 **Status**: Draft
-**Input**: User description: "Ship framework-agnostic behavior utilities required for accessible components: focus management, roving tabindex, dismissable layer, keyboard helpers. Define stable API signatures and test strategy. Ensure utilities can be used by @ds/wc implementations while preserving Light DOM. Implement primitives + unit tests. Create test harness pages used by docs and e2e. Document usage patterns."
+**Input**: User description: "Ship framework-agnostic behavior utilities required for accessible components: focus management, roving tabindex, dismissable layer, keyboard helpers. Define stable API signatures and test strategy. Ensure utilities can be used by @hypoth-ui/wc implementations while preserving Light DOM. Implement primitives + unit tests. Create test harness pages used by docs and e2e. Document usage patterns."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -108,7 +108,7 @@ Component authors need clear documentation explaining how to integrate behavior 
 1. **Given** documentation for focus-trap exists, **When** a developer reads it, **Then** they understand the API signature, options, and lifecycle methods
 2. **Given** documentation includes code examples, **When** a developer copies the example, **Then** it works without modification in a standard setup
 3. **Given** documentation covers TypeScript types, **When** a developer imports the utility, **Then** they receive full autocomplete and type checking
-4. **Given** documentation explains Light DOM considerations, **When** a developer uses utilities in @ds/wc components, **Then** they understand how to maintain Light DOM compatibility
+4. **Given** documentation explains Light DOM considerations, **When** a developer uses utilities in @hypoth-ui/wc components, **Then** they understand how to maintain Light DOM compatibility
 
 ---
 
@@ -131,7 +131,7 @@ Component authors need clear documentation explaining how to integrate behavior 
 - **FR-005**: System MUST provide a type-ahead search utility for keyboard-driven list navigation
 - **FR-006**: All utilities MUST have zero runtime dependencies beyond native browser APIs
 - **FR-007**: All utilities MUST work with Light DOM components (no Shadow DOM assumptions in selectors)
-- **FR-008**: All utilities MUST be importable as ES modules from `@ds/primitives-dom`
+- **FR-008**: All utilities MUST be importable as ES modules from `@hypoth-ui/primitives-dom`
 - **FR-009**: All utilities MUST provide TypeScript type definitions with full JSDoc documentation
 - **FR-010**: All utilities MUST provide cleanup/deactivation methods to prevent memory leaks
 - **FR-011**: System MUST provide test harness pages for each utility in the demo app
@@ -155,15 +155,15 @@ Component authors need clear documentation explaining how to integrate behavior 
 - **Performance**: Minimal runtime overhead, no unnecessary DOM queries, efficient event delegation
 - **Accessibility**: WCAG 2.1 AA compliance, follows WAI-ARIA APG patterns, tested with axe-core
 - **Customizability**: Configurable options for different component needs, callback hooks for state sync
-- **Light DOM Compatibility**: Works with @ds/wc Light DOM architecture, no Shadow DOM assumptions
+- **Light DOM Compatibility**: Works with @hypoth-ui/wc Light DOM architecture, no Shadow DOM assumptions
 - **API Ergonomics**: Simple factory pattern, clear lifecycle, TypeScript-first
 
 ### Approach A: Factory Functions with Lifecycle Objects
 
-Each utility is a factory function that accepts a configuration object and returns an object with `activate()` and `deactivate()` methods. This matches the existing pattern in `@ds/primitives-dom` for focus-trap, roving-focus, and live-region.
+Each utility is a factory function that accepts a configuration object and returns an object with `activate()` and `deactivate()` methods. This matches the existing pattern in `@hypoth-ui/primitives-dom` for focus-trap, roving-focus, and live-region.
 
 **Pros**:
-- Consistent with existing @ds/primitives-dom patterns (focus-trap.ts, roving-focus.ts already use this)
+- Consistent with existing @hypoth-ui/primitives-dom patterns (focus-trap.ts, roving-focus.ts already use this)
 - Clear lifecycle management—developer explicitly controls when behavior starts/stops
 - Easy to integrate into component lifecycle hooks (connectedCallback/disconnectedCallback)
 - No global state pollution, each instance is independent
@@ -185,7 +185,7 @@ Create class decorators or mixins that extend LitElement to add behavior automat
 - Ties utilities to Lit framework, reduces portability
 - Harder to compose multiple behaviors
 - Less explicit, magic behavior harder to debug
-- Doesn't match existing @ds/primitives-dom patterns
+- Doesn't match existing @hypoth-ui/primitives-dom patterns
 - Limits use in non-Lit contexts (vanilla JS, React wrappers)
 
 ### Approach C: Global Event Registry
@@ -208,7 +208,7 @@ Central registry that components register with, using custom events for communic
 
 This approach:
 1. Scores highest on API ergonomics and customizability—developers have explicit control
-2. Aligns with existing @ds/primitives-dom patterns (focus-trap.ts, roving-focus.ts use this exact pattern)
+2. Aligns with existing @hypoth-ui/primitives-dom patterns (focus-trap.ts, roving-focus.ts use this exact pattern)
 3. Maintains Light DOM compatibility—no framework assumptions in the utilities themselves
 4. Supports Performance requirements—no runtime framework overhead, just native event listeners
 5. Enables Accessibility testing—utilities can be tested independently with jest-axe
@@ -230,9 +230,9 @@ The minor verbosity trade-off (explicit activate/deactivate calls) is acceptable
 
 ## Assumptions
 
-- Utilities will be used in Light DOM Web Components, not Shadow DOM (per existing @ds/wc architecture)
+- Utilities will be used in Light DOM Web Components, not Shadow DOM (per existing @hypoth-ui/wc architecture)
 - Consumers will call deactivate() when components disconnect (standard Lit lifecycle pattern)
 - Test harness pages will be served via the existing demo app at `apps/demo`
 - Documentation will follow existing MDX patterns in `packages/docs-content`
 - Browser support matches design system targets (modern browsers, no IE11)
-- Existing focus-trap.ts and roving-focus.ts in @ds/primitives-dom serve as reference implementations
+- Existing focus-trap.ts and roving-focus.ts in @hypoth-ui/primitives-dom serve as reference implementations

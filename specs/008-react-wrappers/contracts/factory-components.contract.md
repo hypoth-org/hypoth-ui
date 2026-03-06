@@ -177,7 +177,7 @@ All factory-generated components:
 ## Dependencies
 
 - React 18+ (forwardRef, useEffect)
-- @ds/wc components (peer dependency)
+- @hypoth-ui/wc components (peer dependency)
 - createComponent factory utility
 
 ## Bundle Impact

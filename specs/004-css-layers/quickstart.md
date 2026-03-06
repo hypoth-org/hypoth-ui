@@ -15,29 +15,29 @@
 
 ### Install
 
-The `@ds/css` package is included in the monorepo. For external consumers:
+The `@hypoth-ui/css` package is included in the monorepo. For external consumers:
 
 ```bash
-pnpm add @ds/css
+pnpm add @hypoth-ui/css
 ```
 
 ### Import in CSS
 
 ```css
-@import "@ds/css";
+@import "@hypoth-ui/css";
 ```
 
 ### Import in Next.js
 
 ```typescript
 // app/layout.tsx
-import "@ds/css";
+import "@hypoth-ui/css";
 ```
 
 ### Import in HTML
 
 ```html
-<link rel="stylesheet" href="node_modules/@ds/css/dist/index.css">
+<link rel="stylesheet" href="node_modules/@hypoth-ui/css/dist/index.css">
 ```
 
 ---
@@ -104,7 +104,7 @@ Apply utility classes for quick styling:
 ### Import After Base
 
 ```css
-@import "@ds/css";
+@import "@hypoth-ui/css";
 @import "./overrides.css";
 ```
 
@@ -128,7 +128,7 @@ Apply utility classes for quick styling:
 
 ```typescript
 // app/layout.tsx
-import "@ds/css";
+import "@hypoth-ui/css";
 
 // Load tenant stylesheet conditionally
 if (process.env.TENANT === "acme") {
@@ -163,19 +163,19 @@ document.documentElement.dataset.mode = "dark";
 ### Build CSS
 
 ```bash
-pnpm --filter @ds/css build
+pnpm --filter @hypoth-ui/css build
 ```
 
 ### Watch Mode
 
 ```bash
-pnpm --filter @ds/css build --watch
+pnpm --filter @hypoth-ui/css build --watch
 ```
 
 ### Test Layer Structure
 
 ```bash
-pnpm --filter @ds/css test
+pnpm --filter @hypoth-ui/css test
 ```
 
 ---
@@ -231,7 +231,7 @@ pnpm --filter @ds/css test
 
 ### Styles Not Applied
 
-1. Check import order - `@ds/css` must come first
+1. Check import order - `@hypoth-ui/css` must come first
 2. Verify layer wrapper - overrides need `@layer overrides { }`
 3. Check browser support - requires Chrome 99+, Firefox 97+, Safari 15.4+
 
@@ -245,7 +245,7 @@ pnpm --filter @ds/css test
 
 1. Run `pnpm install` to ensure dependencies
 2. Check PostCSS config exists
-3. Verify `@ds/tokens` is built first
+3. Verify `@hypoth-ui/tokens` is built first
 
 ---
 

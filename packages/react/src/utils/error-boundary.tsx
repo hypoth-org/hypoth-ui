@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { ErrorBoundary, withErrorBoundary } from "@ds/react";
+ * import { ErrorBoundary, withErrorBoundary } from "@hypoth-ui/react";
  *
  * // Use as a component wrapper
  * <ErrorBoundary fallback={<div>Component error</div>}>

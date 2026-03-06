@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { Sheet } from "@ds/react";
+ * import { Sheet } from "@hypoth-ui/react";
  *
  * <Sheet.Root>
  *   <Sheet.Trigger>

@@ -1,7 +1,7 @@
 "use client";
 
 import { type HTMLAttributes, type ReactNode, createElement, forwardRef } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 import type { TableAlign } from "./head.js";
 
 export interface TableCellProps extends HTMLAttributes<HTMLElement> {

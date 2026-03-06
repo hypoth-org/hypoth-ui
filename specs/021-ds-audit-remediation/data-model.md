@@ -249,7 +249,7 @@ interface ExportConditions {
 ### DialogBehavior (existing, to be used by WC)
 
 ```typescript
-// From @ds/primitives-dom/src/behavior/dialog.ts
+// From @hypoth-ui/primitives-dom/src/behavior/dialog.ts
 export interface DialogBehaviorOptions {
   defaultOpen?: boolean;
   role?: 'dialog' | 'alertdialog';
@@ -277,7 +277,7 @@ export interface DialogBehavior {
 ### MenuBehavior (existing, to be used by WC)
 
 ```typescript
-// From @ds/primitives-dom/src/behavior/menu.ts
+// From @hypoth-ui/primitives-dom/src/behavior/menu.ts
 export interface MenuBehaviorOptions {
   placement?: Placement;
   onOpenChange?: (open: boolean) => void;
@@ -364,7 +364,7 @@ export interface MenuBehavior {
 │                    COMPONENT RELATIONSHIPS                   │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
-│  @ds/primitives-dom                                         │
+│  @hypoth-ui/primitives-dom                                         │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │ createDialogBehavior ─┬─▶ createFocusTrap           │   │
 │  │                       └─▶ createDismissableLayer    │   │
@@ -380,7 +380,7 @@ export interface MenuBehavior {
 │                            │                                │
 │                            │ imports                        │
 │                            ▼                                │
-│  @ds/wc                                                     │
+│  @hypoth-ui/wc                                                     │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │ DsDialog ────────────▶ createDialogBehavior         │   │
 │  │ DsAlertDialog ────────▶ createDialogBehavior        │   │

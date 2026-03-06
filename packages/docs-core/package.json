@@ -1,8 +1,16 @@
 {
-  "name": "@ds/docs-core",
+  "name": "@hypoth-ui/docs-core",
   "version": "0.0.0",
   "type": "module",
-  "description": "Headless documentation engine with tenant filtering",
+  "description": "Documentation engine and validation tools for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/docs-core"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["documentation", "design-system", "content-pack", "validation", "hypoth-ui"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

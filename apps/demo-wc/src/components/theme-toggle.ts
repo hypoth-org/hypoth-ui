@@ -3,7 +3,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { getTheme, toggleTheme, onThemeChange, type Theme } from '../utils/theme';
 
 // Import WC components (bundled exports)
-import '@ds/wc/form-controls';
+import '@hypoth-ui/wc/form-controls';
 
 /**
  * Theme toggle component using ds-switch

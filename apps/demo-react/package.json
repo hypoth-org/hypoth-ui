@@ -1,5 +1,5 @@
 {
-  "name": "@ds/demo-react",
+  "name": "@hypoth-ui/demo-react",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,13 +13,13 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@ds/wc": "workspace:*",
-    "@ds/react": "workspace:*",
-    "@ds/next": "workspace:*",
-    "@ds/tokens": "workspace:*",
-    "@ds/css": "workspace:*",
-    "@ds/primitives-dom": "workspace:*",
-    "@ds/demo-shared": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
+    "@hypoth-ui/react": "workspace:*",
+    "@hypoth-ui/next": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/css": "workspace:*",
+    "@hypoth-ui/primitives-dom": "workspace:*",
+    "@hypoth-ui/demo-shared": "workspace:*",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

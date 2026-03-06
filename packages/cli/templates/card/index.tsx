@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Card } from "@ds/react";
+ * import { Card } from "@/components/ui";
  *
  * <Card.Root>
  *   <Card.Header>

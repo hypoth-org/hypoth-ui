@@ -1,6 +1,6 @@
 /**
  * Navigation components barrel file.
- * Import from '@ds/wc/navigation' for tree-shaking.
+ * Import from '@hypoth-ui/wc/navigation' for tree-shaking.
  */
 
 // Tabs components

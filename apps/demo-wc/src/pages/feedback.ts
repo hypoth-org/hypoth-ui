@@ -1,11 +1,11 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { feedbackSectionContent } from '@ds/demo-shared';
+import { feedbackSectionContent } from '@hypoth-ui/demo-shared';
 
 // Import WC components (bundled exports)
-import '@ds/wc/feedback';
-import '@ds/wc/core';
-import { dsToast } from '@ds/wc';
+import '@hypoth-ui/wc/feedback';
+import '@hypoth-ui/wc/core';
+import { dsToast } from '@hypoth-ui/wc';
 
 /**
  * Feedback page component showcasing feedback and status components

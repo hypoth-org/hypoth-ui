@@ -1,10 +1,10 @@
 'use client';
 
-import { Switch } from '@ds/react';
+import { Switch } from '@hypoth-ui/react';
 import { useTheme } from './theme-provider';
 
 /**
- * Theme toggle component using Switch from @ds/react
+ * Theme toggle component using Switch from @hypoth-ui/react
  * Allows users to toggle between light and dark themes
  */
 export function ThemeToggle() {

@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Dialog } from "@ds/react";
+ * import { Dialog } from "@hypoth-ui/react";
  *
  * <Dialog.Root>
  *   <Dialog.Trigger>Open Dialog</Dialog.Trigger>
@@ -49,4 +49,4 @@ export type {
 };
 
 // Re-export DialogRole from primitives-dom
-export type { DialogRole } from "@ds/primitives-dom";
+export type { DialogRole } from "@hypoth-ui/primitives-dom";

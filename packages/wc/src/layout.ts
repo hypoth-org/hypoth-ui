@@ -1,6 +1,6 @@
 /**
  * Layout components barrel file.
- * Import from '@ds/wc/layout' for tree-shaking.
+ * Import from '@hypoth-ui/wc/layout' for tree-shaking.
  */
 
 // Layout primitives

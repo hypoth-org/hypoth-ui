@@ -6,7 +6,7 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import type { SearchEntry, SearchIndex } from "@ds/docs-core";
+import type { SearchEntry, SearchIndex } from "@hypoth-ui/docs-core";
 
 // Cache the search index in memory
 let searchIndex: SearchIndex | null = null;

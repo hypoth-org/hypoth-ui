@@ -89,7 +89,7 @@ define("ds-my-component", DsMyComponent);
 
 ### CSS Guidelines
 
-- Use CSS custom properties from `@ds/tokens`
+- Use CSS custom properties from `@hypoth-ui/tokens`
 - Place styles in `@layer components`
 - Follow BEM-like naming: `ds-component`, `ds-component__element`, `ds-component--modifier`
 
@@ -145,7 +145,7 @@ MDX files should include:
 
 ```bash
 pnpm test                 # Run all tests
-pnpm --filter @ds/wc test # Run WC tests only
+pnpm --filter @hypoth-ui/wc test # Run WC tests only
 ```
 
 ### Accessibility Tests

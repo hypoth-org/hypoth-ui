@@ -139,8 +139,8 @@ Templates are React components that use:
 ```bash
 # For each component in packages/react/src/components/
 # 1. Copy the main component file(s)
-# 2. Transform imports from "@ds/react" to relative
-# 3. Transform imports from "@ds/primitives-dom" to "@hypoth-ui/primitives-dom"
+# 2. Transform imports from "@hypoth-ui/react" to relative
+# 3. Transform imports from "@hypoth-ui/primitives-dom" to "@hypoth-ui/primitives-dom"
 # 4. Place in packages/cli/templates/[component]/
 ```
 

@@ -17,7 +17,7 @@
   },
   "contentPacks": [
     {
-      "package": "@ds/docs-content-tenant-example",
+      "package": "@hypoth-ui/docs-content-tenant-example",
       "priority": 10
     }
   ],

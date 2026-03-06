@@ -62,7 +62,7 @@ export class DsCheckbox extends DSElement {
 ## 2. Behavior Primitive Migration
 
 ### Decision
-Refactor WC overlay components (Dialog, AlertDialog, Sheet, Drawer, DropdownMenu, ContextMenu) to use existing behavior primitives from @ds/primitives-dom.
+Refactor WC overlay components (Dialog, AlertDialog, Sheet, Drawer, DropdownMenu, ContextMenu) to use existing behavior primitives from @hypoth-ui/primitives-dom.
 
 ### Rationale
 - Behavior primitives already exist and are tested (createDialogBehavior, createMenuBehavior)
@@ -146,7 +146,7 @@ export class DsDialog extends DSElement {
 ## 3. Tabs Behavior Primitive
 
 ### Decision
-Create new `createTabsBehavior` primitive in @ds/primitives-dom for centralized tabs keyboard navigation and ARIA management.
+Create new `createTabsBehavior` primitive in @hypoth-ui/primitives-dom for centralized tabs keyboard navigation and ARIA management.
 
 ### Rationale
 - Both React and WC Tabs implement similar keyboard navigation separately
@@ -198,12 +198,12 @@ export interface TabsBehaviorState {
 ## 4. Tree-Shaking Optimization
 
 ### Decision
-Add `sideEffects: false` to @ds/wc package.json and implement subpath exports for component categories.
+Add `sideEffects: false` to @hypoth-ui/wc package.json and implement subpath exports for component categories.
 
 ### Rationale
-- @ds/react already has `sideEffects: false` (good pattern)
+- @hypoth-ui/react already has `sideEffects: false` (good pattern)
 - Current barrel file (400+ lines) forces bundlers to include all components
-- Subpath exports enable precise imports like `@ds/wc/button`
+- Subpath exports enable precise imports like `@hypoth-ui/wc/button`
 - No code changes needed for sideEffects flag
 
 ### Package.json Changes

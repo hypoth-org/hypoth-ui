@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { DropdownMenu } from "@ds/react";
+ * import { DropdownMenu } from "@/components/ui";
  *
  * <DropdownMenu.Root>
  *   <DropdownMenu.Trigger>

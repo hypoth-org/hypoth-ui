@@ -8,7 +8,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 
 export type TableAlign = "left" | "center" | "right";
 export type SortDirection = "asc" | "desc" | "none";

@@ -6,10 +6,10 @@
 
 ```bash
 # Web Components
-pnpm add @ds/wc @ds/css
+pnpm add @hypoth-ui/wc @hypoth-ui/css
 
 # React
-pnpm add @ds/react @ds/css
+pnpm add @hypoth-ui/react @hypoth-ui/css
 ```
 
 ## Setup
@@ -18,7 +18,7 @@ pnpm add @ds/react @ds/css
 
 ```css
 /* Import base styles including new components */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 ```
 
 ### Web Components Registration
@@ -27,13 +27,13 @@ pnpm add @ds/react @ds/css
 // app/define-elements.ts (Next.js client boundary)
 "use client";
 
-import "@ds/wc/define";
+import "@hypoth-ui/wc/define";
 ```
 
 ### React Usage
 
 ```tsx
-import { Tabs, Card, Sheet, DropdownMenu } from "@ds/react";
+import { Tabs, Card, Sheet, DropdownMenu } from "@hypoth-ui/react";
 ```
 
 ## Quick Examples

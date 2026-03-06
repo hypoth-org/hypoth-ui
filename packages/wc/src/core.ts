@@ -1,6 +1,6 @@
 /**
  * Core utilities barrel file.
- * Import from '@ds/wc/core' for tree-shaking.
+ * Import from '@hypoth-ui/wc/core' for tree-shaking.
  */
 
 // Base class and mixins

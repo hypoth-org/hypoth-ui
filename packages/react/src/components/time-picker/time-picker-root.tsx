@@ -2,7 +2,7 @@
  * TimePicker Root component - provides context to all TimePicker compound components.
  */
 
-import { type TimeSegment, type TimeValue, createTimePickerBehavior } from "@ds/primitives-dom";
+import { type TimeSegment, type TimeValue, createTimePickerBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { TimePickerProvider } from "./time-picker-context.js";
 

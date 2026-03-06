@@ -34,8 +34,8 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
   - All components consume tokens via CSS custom properties
   - Styles wrapped in `@layer components`
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - Components live in `@ds/wc` which has only Lit as runtime dep (per constitution)
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - Components live in `@hypoth-ui/wc` which has only Lit as runtime dep (per constitution)
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - All components extend `DSElement` which uses Light DOM
 - [x] **Dependency Management**: Latest stable versions verified; pnpm used; bundle impact assessed
@@ -133,7 +133,7 @@ tests/
         └── visually-hidden.a11y.test.ts
 ```
 
-**Structure Decision**: Follows established monorepo pattern with `@ds/wc` for components, `@ds/css` for styles, and `@ds/docs-content` for MDX documentation. Each component has co-located manifest.json for validation.
+**Structure Decision**: Follows established monorepo pattern with `@hypoth-ui/wc` for components, `@hypoth-ui/css` for styles, and `@hypoth-ui/docs-content` for MDX documentation. Each component has co-located manifest.json for validation.
 
 ## Complexity Tracking
 

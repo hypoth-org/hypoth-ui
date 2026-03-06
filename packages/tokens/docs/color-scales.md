@@ -101,7 +101,7 @@ Each color in the design system has 16 steps, ranging from very light (step 1) t
 ### React/TypeScript
 
 ```tsx
-import { tokens } from '@ds/tokens';
+import { tokens } from '@hypoth-ui/tokens';
 
 // Access color values programmatically
 const primaryColor = tokens.colors.blue[11];

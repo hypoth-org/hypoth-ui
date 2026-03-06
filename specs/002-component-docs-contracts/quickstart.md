@@ -60,16 +60,16 @@ For tenant-specific filtering, create `apps/docs/edition.config.json`:
 
 ```bash
 # Validate all manifests and docs
-pnpm --filter @ds/docs-core validate -- --root-dir .
+pnpm --filter @hypoth-ui/docs-core validate -- --root-dir .
 
 # Watch mode for development
-pnpm --filter @ds/docs-core validate -- --root-dir . --watch
+pnpm --filter @hypoth-ui/docs-core validate -- --root-dir . --watch
 
 # Validate with strictness mode (CI mode - warnings treated as errors)
-pnpm --filter @ds/docs-core validate -- --root-dir . --strict
+pnpm --filter @hypoth-ui/docs-core validate -- --root-dir . --strict
 
 # Generate audit report
-pnpm --filter @ds/docs-core audit:components -- --root-dir .
+pnpm --filter @hypoth-ui/docs-core audit:components -- --root-dir .
 ```
 
 #### Example Validation Output

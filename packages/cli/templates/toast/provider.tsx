@@ -7,7 +7,7 @@
  */
 
 import { type ReactNode, createContext, useCallback, useMemo, useState } from "react";
-import { Portal } from "@/lib/primitives/portal.js";
+import { Portal } from "../../primitives/portal.js";
 import { ToastItem } from "./toast.js";
 
 export type ToastVariant = "info" | "success" | "warning" | "error";

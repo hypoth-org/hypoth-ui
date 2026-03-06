@@ -1,6 +1,6 @@
 /**
  * Feedback components barrel file.
- * Import from '@ds/wc/feedback' for tree-shaking.
+ * Import from '@hypoth-ui/wc/feedback' for tree-shaking.
  */
 
 // Alert component

@@ -1,7 +1,7 @@
 /**
  * Behavior Primitives Contracts
  *
- * These interfaces define the API for behavior primitives in @ds/primitives-dom.
+ * These interfaces define the API for behavior primitives in @hypoth-ui/primitives-dom.
  * Both React and Web Component implementations consume these primitives.
  */
 
@@ -269,7 +269,7 @@ export type CreateMenuBehavior = (options?: MenuBehaviorOptions) => MenuBehavior
 // =============================================================================
 
 /**
- * Expected exports from @ds/primitives-dom after implementation:
+ * Expected exports from @hypoth-ui/primitives-dom after implementation:
  *
  * // Existing exports
  * export { createFocusTrap, type FocusTrap, type FocusTrapOptions } from './focus/focus-trap';

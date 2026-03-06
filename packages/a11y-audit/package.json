@@ -1,8 +1,16 @@
 {
-  "name": "@ds/a11y-audit",
+  "name": "@hypoth-ui/a11y-audit",
   "version": "0.0.0",
   "type": "module",
-  "description": "Accessibility audit tooling for automated CI checks, manual checklists, and conformance reporting",
+  "description": "Accessibility audit and conformance reporting for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/a11y-audit"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["accessibility", "a11y", "wcag", "audit", "hypoth-ui"],
   "bin": {
     "a11y-audit": "./dist/cli/index.js"
   },

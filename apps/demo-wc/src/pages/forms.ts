@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { formsSectionContent } from '@ds/demo-shared';
+import { formsSectionContent } from '@hypoth-ui/demo-shared';
 
 // Import WC components (bundled exports)
-import '@ds/wc/form-controls';
+import '@hypoth-ui/wc/form-controls';
 
 /**
  * Forms page component showcasing form input components

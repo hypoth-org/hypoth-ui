@@ -17,7 +17,7 @@ A developer clones the repository and runs the standard build commands. The buil
 
 **Acceptance Scenarios**:
 
-1. **Given** a fresh clone of the repository, **When** developer runs `pnpm install`, **Then** installation completes without errors related to @ds/governance
+1. **Given** a fresh clone of the repository, **When** developer runs `pnpm install`, **Then** installation completes without errors related to @hypoth-ui/governance
 2. **Given** installed dependencies, **When** developer runs `pnpm build`, **Then** all active packages build successfully
 3. **Given** installed dependencies, **When** developer runs `pnpm test`, **Then** all tests pass without governance-related failures
 
@@ -51,7 +51,7 @@ The CI/CD pipeline runs pull request checks and release workflows without govern
 
 1. **Given** a pull request, **When** CI workflow runs, **Then** no governance gate checks are executed
 2. **Given** a release trigger, **When** release workflow runs, **Then** no governance checks block the release
-3. **Given** CI configuration files, **When** reviewing workflow definitions, **Then** no references to @ds/governance exist
+3. **Given** CI configuration files, **When** reviewing workflow definitions, **Then** no references to @hypoth-ui/governance exist
 
 ---
 
@@ -65,8 +65,8 @@ A developer working on component documentation can still validate manifests usin
 
 **Acceptance Scenarios**:
 
-1. **Given** component manifests in docs-content, **When** developer runs `pnpm validate:manifests`, **Then** validation runs successfully using @ds/docs-core
-2. **Given** docs-core package, **When** checking its dependencies, **Then** it has no dependency on @ds/governance
+1. **Given** component manifests in docs-content, **When** developer runs `pnpm validate:manifests`, **Then** validation runs successfully using @hypoth-ui/docs-core
+2. **Given** docs-core package, **When** checking its dependencies, **Then** it has no dependency on @hypoth-ui/governance
 
 ---
 
@@ -86,17 +86,17 @@ A developer working on component documentation can still validate manifests usin
 - **FR-004**: System MUST update CLAUDE.md to remove references to governance commands and tooling
 - **FR-005**: System MUST remove governance-related jobs from CI workflow (.github/workflows/ci.yml)
 - **FR-006**: System MUST remove governance-related steps from release workflow (.github/workflows/release.yml)
-- **FR-007**: System MUST update .changeset/config.json to remove @ds/governance from ignore list
+- **FR-007**: System MUST update .changeset/config.json to remove @hypoth-ui/governance from ignore list
 - **FR-008**: System MUST create GOVERNANCE.md at repository root documenting what was deferred and reactivation path
-- **FR-009**: System MUST preserve @ds/docs-core manifest validation functionality without modification
-- **FR-010**: System MUST preserve @ds/a11y-audit package functionality without modification
-- **FR-011**: System MUST preserve @ds/docs-content package functionality without modification
+- **FR-009**: System MUST preserve @hypoth-ui/docs-core manifest validation functionality without modification
+- **FR-010**: System MUST preserve @hypoth-ui/a11y-audit package functionality without modification
+- **FR-011**: System MUST preserve @hypoth-ui/docs-content package functionality without modification
 - **FR-012**: System MUST ensure pnpm install completes without errors after changes
 - **FR-013**: System MUST ensure pnpm build completes for all remaining active packages
 
 ### Key Entities
 
-- **Governance Package**: The @ds/governance package containing deprecation registry, contribution gates, tenant diff CLI, and version management tooling - currently at packages/governance/
+- **Governance Package**: The @hypoth-ui/governance package containing deprecation registry, contribution gates, tenant diff CLI, and version management tooling - currently at packages/governance/
 - **Archive Directory**: The `.archive/` directory at repository root where deferred packages are stored for future reactivation
 - **Reactivation Documentation**: GOVERNANCE.md file explaining deferral rationale, contents inventory, and step-by-step restoration process
 
@@ -173,17 +173,17 @@ The approach scores highest on all evaluation criteria:
 - **SC-001**: `pnpm install` completes successfully with zero governance-related warnings or errors
 - **SC-002**: `pnpm build` completes successfully for all active packages
 - **SC-003**: `pnpm test` passes with 100% of existing tests succeeding
-- **SC-004**: Zero references to @ds/governance exist in active workspace (verified by repository-wide search)
+- **SC-004**: Zero references to @hypoth-ui/governance exist in active workspace (verified by repository-wide search)
 - **SC-005**: 100% of original governance package files exist in `.archive/governance/` directory
 - **SC-006**: GOVERNANCE.md contains complete reactivation steps (minimum 5 steps covering move, scripts, CI, config)
 - **SC-007**: CI workflows pass without governance-related job failures
-- **SC-008**: `pnpm validate:manifests` continues to work correctly via @ds/docs-core
+- **SC-008**: `pnpm validate:manifests` continues to work correctly via @hypoth-ui/docs-core
 
 ## Assumptions
 
 - The governance package has no runtime dependencies from other active packages (verified: it's devDependency only)
-- The @ds/docs-core package's manifest validation does not depend on @ds/governance (separate functionality)
-- The @ds/a11y-audit package is completely independent of governance
+- The @hypoth-ui/docs-core package's manifest validation does not depend on @hypoth-ui/governance (separate functionality)
+- The @hypoth-ui/a11y-audit package is completely independent of governance
 - Changesets versioning workflow will continue to work without governance integration
 - The 40+ components threshold for considering reactivation is a guideline, not a hard requirement
-- No external consumers depend on @ds/governance being published (it was internal tooling)
+- No external consumers depend on @hypoth-ui/governance being published (it was internal tooling)

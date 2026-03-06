@@ -76,7 +76,7 @@ export async function initContentPacks(options: InitContentPacksOptions): Promis
   // Add base pack (always lowest priority = 0)
   const baseVersion = await getPackageVersion(basePackRoot);
   packs.push({
-    id: "@ds/docs-content",
+    id: "@hypoth-ui/docs-content",
     root: basePackRoot,
     type: "base",
     priority: 0,

@@ -74,7 +74,7 @@ export interface ThemeProviderProps {
  *
  * // In Next.js App Router
  * // app/layout.tsx
- * import { ThemeProvider, getThemeScriptProps } from '@ds/react/theme';
+ * import { ThemeProvider, getThemeScriptProps } from '@hypoth-ui/react/theme';
  *
  * export default function RootLayout({ children }) {
  *   return (

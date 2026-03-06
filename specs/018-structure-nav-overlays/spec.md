@@ -294,7 +294,7 @@ As a developer, I need a Command (cmdk-style) palette for keyboard-driven applic
 
 ### Approach A: Compound Component Pattern with Shared Primitives
 
-Build each component as compound components (Root/Trigger/Content pattern) that compose shared primitives from `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead).
+Build each component as compound components (Root/Trigger/Content pattern) that compose shared primitives from `@hypoth-ui/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead).
 
 **Pros**:
 - Maximizes code reuse across overlay components (Sheet, Dialog, Menu share focus-trap)
@@ -340,7 +340,7 @@ This approach:
 1. Scores best on bundle size through tree-shaking and primitive reuse
 2. Aligns with constitution principle hierarchy (Performance > Accessibility > Customizability)
 3. Maintains consistency with existing components (Dialog, Popover, Select from spec-017)
-4. Leverages existing `@ds/primitives-dom` investments
+4. Leverages existing `@hypoth-ui/primitives-dom` investments
 
 The complexity trade-off is acceptable because:
 - Documentation and examples mitigate learning curve
@@ -362,8 +362,8 @@ The complexity trade-off is acceptable because:
 
 ## Assumptions
 
-- Existing `@ds/primitives-dom` package provides required behavior utilities (focus-trap, dismissable-layer, roving-focus, type-ahead)
-- Token system from `@ds/tokens` includes appropriate surface, overlay, and navigation tokens
+- Existing `@hypoth-ui/primitives-dom` package provides required behavior utilities (focus-trap, dismissable-layer, roving-focus, type-ahead)
+- Token system from `@hypoth-ui/tokens` includes appropriate surface, overlay, and navigation tokens
 - Animation utilities from spec-016 (motion-system) are available for transitions
 - Portal implementation exists for overlay rendering
 - The design system follows Light DOM strategy per platform conventions (spec-006)

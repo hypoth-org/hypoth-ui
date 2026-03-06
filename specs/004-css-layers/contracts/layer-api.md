@@ -1,12 +1,12 @@
 # CSS Layer API Contract
 
-**Package**: `@ds/css`
+**Package**: `@hypoth-ui/css`
 **Version**: 0.1.0
 **Date**: 2026-01-01
 
 ## Overview
 
-This document defines the public CSS API contract for `@ds/css`. Breaking changes to items marked as **Stable** require a major version bump.
+This document defines the public CSS API contract for `@hypoth-ui/css`. Breaking changes to items marked as **Stable** require a major version bump.
 
 ---
 
@@ -15,12 +15,12 @@ This document defines the public CSS API contract for `@ds/css`. Breaking change
 ### Main Entry Point
 
 ```
-@ds/css → dist/index.css
+@hypoth-ui/css → dist/index.css
 ```
 
 **Stability**: Stable
 
-Importing `@ds/css` provides:
+Importing `@hypoth-ui/css` provides:
 - Complete layer structure with correct precedence
 - All token CSS custom properties
 - Base element styles
@@ -33,9 +33,9 @@ Importing `@ds/css` provides:
 Reserved for future implementation:
 
 ```
-@ds/css/layers/reset → dist/layers/reset.css
-@ds/css/layers/base → dist/layers/base.css
-@ds/css/layers/utilities → dist/layers/utilities.css
+@hypoth-ui/css/layers/reset → dist/layers/reset.css
+@hypoth-ui/css/layers/base → dist/layers/base.css
+@hypoth-ui/css/layers/utilities → dist/layers/utilities.css
 ```
 
 **Stability**: Experimental (not yet implemented)
@@ -69,7 +69,7 @@ The layer order is fixed and MUST NOT change between minor versions:
 
 All token variables follow the pattern `--ds-{category}-{path}`.
 
-**Stability**: Stable (defined by `@ds/tokens`)
+**Stability**: Stable (defined by `@hypoth-ui/tokens`)
 
 | Category | Example Variables |
 |----------|-------------------|
@@ -167,7 +167,7 @@ Styles in `@layer overrides` will ALWAYS take precedence over base styles, regar
 | Reorder layers | Major |
 | Remove stable class | Major |
 | Rename stable class | Major |
-| Remove token variable | Major (coordinated with @ds/tokens) |
+| Remove token variable | Major (coordinated with @hypoth-ui/tokens) |
 | Add new layer | Minor |
 | Add new utility class | Minor |
 | Add new component class | Minor |
@@ -194,14 +194,14 @@ Styles in `@layer overrides` will ALWAYS take precedence over base styles, regar
 
 ```css
 /* In your app's global CSS */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 ```
 
 ### With Tenant Override
 
 ```css
 /* In your app's global CSS */
-@import "@ds/css";
+@import "@hypoth-ui/css";
 @import "./tenant-acme.css";
 ```
 
@@ -209,7 +209,7 @@ Styles in `@layer overrides` will ALWAYS take precedence over base styles, regar
 
 ```typescript
 // app/layout.tsx
-import "@ds/css";
+import "@hypoth-ui/css";
 ```
 
 ### In HTML

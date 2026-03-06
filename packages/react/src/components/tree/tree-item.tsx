@@ -8,7 +8,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 
 export interface TreeItemProps extends Omit<HTMLAttributes<HTMLElement>, "onSelect"> {
   /**

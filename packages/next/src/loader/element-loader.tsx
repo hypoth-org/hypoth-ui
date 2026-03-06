@@ -15,7 +15,7 @@ export interface DsLoaderProps extends RegisterOptions {
  * @example
  * ```tsx
  * // In app/layout.tsx
- * import { DsLoader } from "@ds/next";
+ * import { DsLoader } from "@hypoth-ui/next";
  *
  * export default function RootLayout({ children }) {
  *   return (

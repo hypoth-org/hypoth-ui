@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "_comment": "This file defines the target exports structure for @ds/wc package.json",
+  "_comment": "This file defines the target exports structure for @hypoth-ui/wc package.json",
 
-  "name": "@ds/wc",
+  "name": "@hypoth-ui/wc",
   "sideEffects": false,
 
   "exports": {
@@ -146,9 +146,9 @@
       "dts": true
     },
     "usage_examples": {
-      "full_import": "import { Button, Dialog } from '@ds/wc';",
-      "category_import": "import { Button, Checkbox } from '@ds/wc/form-controls';",
-      "individual_import": "import { DsButton } from '@ds/wc/button';"
+      "full_import": "import { Button, Dialog } from '@hypoth-ui/wc';",
+      "category_import": "import { Button, Checkbox } from '@hypoth-ui/wc/form-controls';",
+      "individual_import": "import { DsButton } from '@hypoth-ui/wc/button';"
     }
   }
 }

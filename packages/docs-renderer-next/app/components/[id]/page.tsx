@@ -6,7 +6,7 @@ import {
   type Edition,
   getMinimumEdition,
   isComponentAvailable,
-} from "@ds/docs-core";
+} from "@hypoth-ui/docs-core";
 import {
   getEditionConfig,
   loadManifestByIdFromPacks,

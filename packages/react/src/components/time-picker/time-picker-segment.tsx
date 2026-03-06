@@ -2,7 +2,7 @@
  * TimePicker Segment component - individual time segment (hour, minute, second, period).
  */
 
-import type { TimeSegment } from "@ds/primitives-dom";
+import type { TimeSegment } from "@hypoth-ui/primitives-dom";
 import {
   type FocusEvent,
   type HTMLAttributes,

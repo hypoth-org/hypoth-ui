@@ -2,9 +2,9 @@
 
 **Feature**: 017-advanced-form-controls
 **Date**: 2026-01-06
-**Package**: `@ds/primitives-dom`
+**Package**: `@hypoth-ui/primitives-dom`
 
-This document defines the TypeScript contracts for new behavior primitives to be added to `@ds/primitives-dom`.
+This document defines the TypeScript contracts for new behavior primitives to be added to `@hypoth-ui/primitives-dom`.
 
 ---
 
@@ -502,7 +502,7 @@ import {
   createSliderBehavior,
   createPinInputBehavior,
   createVirtualizedList,
-} from '@ds/primitives-dom';
+} from '@hypoth-ui/primitives-dom';
 
 // Select with virtualization
 const select = createSelectBehavior({

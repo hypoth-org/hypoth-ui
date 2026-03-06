@@ -12,11 +12,11 @@ Build a customizable documentation site renderer that consumes docs content pack
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode)
-**Primary Dependencies**: Next.js 14+ (App Router), @ds/docs-core (existing), @ds/docs-content (existing), @mdx-js/mdx 3.x, gray-matter 4.x
+**Primary Dependencies**: Next.js 14+ (App Router), @hypoth-ui/docs-core (existing), @hypoth-ui/docs-content (existing), @mdx-js/mdx 3.x, gray-matter 4.x
 **Storage**: File-based (content packs as npm packages, edition-config.json per deployment)
 **Testing**: vitest (unit/integration), Playwright (e2e)
 **Target Platform**: Next.js App Router (SSR/SSG), Node.js 20+
-**Project Type**: Monorepo packages (extends existing @ds/docs-renderer-next)
+**Project Type**: Monorepo packages (extends existing @hypoth-ui/docs-renderer-next)
 **Performance Goals**: Build <60s for 100-component site; Lighthouse 90+ on rendered pages
 **Constraints**: Zero runtime CSS-in-JS; minimal client boundaries; content resolution at build time
 **Scale/Scope**: 100+ components, 50+ guides, multiple editions (core/pro/enterprise)
@@ -39,11 +39,11 @@ Verify compliance with Hypoth UI Design System Constitution:
   - Branding via edition-config.json maps to CSS custom properties
   - All styles in CSS layers (base, components, overrides)
   - No inline styles blocking customization
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - @ds/docs-core has dev deps only (build-time validation)
-  - @ds/docs-renderer-next has peer deps (Next.js, React)
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - @hypoth-ui/docs-core has dev deps only (build-time validation)
+  - @hypoth-ui/docs-renderer-next has peer deps (Next.js, React)
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
-  - Docs site consumes @ds/wc components which use Light DOM
+  - Docs site consumes @hypoth-ui/wc components which use Light DOM
   - Theme switching via CSS custom properties
 - [x] **Dependency Management**: Latest stable versions verified; pnpm used; bundle impact assessed
   - Next.js 14+, React 18+, MDX 3.x (already in use)
@@ -111,7 +111,7 @@ packages/
     └── edition-config.json        # Tenant edition config
 ```
 
-**Structure Decision**: Extends existing monorepo packages (@ds/docs-core, @ds/docs-content, @ds/docs-renderer-next) with new functionality. Creates example tenant content pack to demonstrate overlay workflow.
+**Structure Decision**: Extends existing monorepo packages (@hypoth-ui/docs-core, @hypoth-ui/docs-content, @hypoth-ui/docs-renderer-next) with new functionality. Creates example tenant content pack to demonstrate overlay workflow.
 
 ## Complexity Tracking
 

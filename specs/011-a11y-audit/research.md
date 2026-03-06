@@ -165,8 +165,8 @@ Use **static generation** with conformance data loaded at build time.
 | External service | Professional dashboards | External dependency | Constitution: no external deps |
 
 ### Integration Points
-1. `@ds/docs-core`: Load conformance JSON at build time
-2. `@ds/docs-app`: Render conformance table + filters
+1. `@hypoth-ui/docs-core`: Load conformance JSON at build time
+2. `@hypoth-ui/docs-app`: Render conformance table + filters
 3. Tenant config: Filter/extend component list
 
 ---
@@ -236,7 +236,7 @@ Use **configuration overlay pattern** with JSON merge.
 ```json
 // tenant-config/a11y-conformance.json
 {
-  "extends": "@ds/a11y-audit/base-conformance.json",
+  "extends": "@hypoth-ui/a11y-audit/base-conformance.json",
   "additionalComponents": [
     {
       "id": "custom-date-picker",

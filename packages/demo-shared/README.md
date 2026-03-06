@@ -1,4 +1,4 @@
-# @ds/demo-shared
+# @hypoth-ui/demo-shared
 
 Shared types, navigation config, mock data, and content definitions for the Hypoth UI demo applications.
 
@@ -17,7 +17,7 @@ import {
   dataDisplaySectionContent,
   overlaysSectionContent,
   feedbackSectionContent,
-} from '@ds/demo-shared';
+} from '@hypoth-ui/demo-shared';
 ```
 
 ## Exports
@@ -55,5 +55,5 @@ import {
 ## Build
 
 ```bash
-pnpm --filter @ds/demo-shared build
+pnpm --filter @hypoth-ui/demo-shared build
 ```

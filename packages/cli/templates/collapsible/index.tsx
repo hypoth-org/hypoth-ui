@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Collapsible } from "@ds/react";
+ * import { Collapsible } from "@/components/ui";
  *
  * <Collapsible.Root>
  *   <Collapsible.Trigger>Toggle</Collapsible.Trigger>

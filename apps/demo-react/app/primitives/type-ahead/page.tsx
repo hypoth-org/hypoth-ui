@@ -1,6 +1,6 @@
 "use client";
 
-import { createTypeAhead } from "@ds/primitives-dom";
+import { createTypeAhead } from "@hypoth-ui/primitives-dom";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

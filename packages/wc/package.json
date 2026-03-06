@@ -1,9 +1,17 @@
 {
-  "name": "@ds/wc",
+  "name": "@hypoth-ui/wc",
   "version": "0.0.0",
   "type": "module",
   "sideEffects": false,
-  "description": "Lit-based Web Components with Light DOM",
+  "description": "Web Components (Lit) for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/wc"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["web-components", "lit", "design-system", "custom-elements", "hypoth-ui"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -54,18 +62,18 @@
   },
   "dependencies": {
     "@date-fns/tz": "^1.2.0",
-    "@ds/primitives-dom": "workspace:*",
+    "@hypoth-ui/primitives-dom": "workspace:*",
     "date-fns": "^4.1.0",
     "lit": "^3.1.0",
     "lucide": "^0.468.0"
   },
   "peerDependencies": {
-    "@ds/css": "workspace:*",
-    "@ds/tokens": "workspace:*"
+    "@hypoth-ui/css": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
-    "@ds/test-utils": "workspace:*",
+    "@hypoth-ui/test-utils": "workspace:*",
     "happy-dom": "^13.10.0",
     "jest-axe": "^8.0.0",
     "playwright-core": "^1.40.0",

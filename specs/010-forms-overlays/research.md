@@ -78,7 +78,7 @@
 - Selection changes propagate via events; group ensures single selection
 
 **Implementation Approach**:
-1. RadioGroup uses `createRovingFocus` primitive from `@ds/primitives-dom`
+1. RadioGroup uses `createRovingFocus` primitive from `@hypoth-ui/primitives-dom`
 2. On arrow key: primitive moves focus; RadioGroup updates selection to match focus
 3. Radio emits `ds:change` when selected; group listens and deselects others
 4. Initial selection: First radio with `checked` attribute, or first radio if none checked
@@ -110,7 +110,7 @@
 
 ### 6. Menu Type-ahead Integration
 
-**Decision**: Use existing `createTypeAhead` primitive from `@ds/primitives-dom`
+**Decision**: Use existing `createTypeAhead` primitive from `@hypoth-ui/primitives-dom`
 
 **Rationale**:
 - Type-ahead allows users to jump to menu items by typing
@@ -170,13 +170,13 @@
 
 | Primitive | Location | Status |
 |-----------|----------|--------|
-| `createFocusTrap` | `@ds/primitives-dom/focus/focus-trap.ts` | Exists |
-| `createDismissableLayer` | `@ds/primitives-dom/layer/dismissable-layer.ts` | Exists |
-| `createRovingFocus` | `@ds/primitives-dom/keyboard/roving-focus.ts` | Exists |
-| `createTypeAhead` | `@ds/primitives-dom/keyboard/type-ahead.ts` | Exists |
-| `createActivation` | `@ds/primitives-dom/keyboard/activation.ts` | Exists |
-| `createArrowKeys` | `@ds/primitives-dom/keyboard/arrow-keys.ts` | Exists |
-| `createAnchorPosition` | `@ds/primitives-dom/positioning/anchor-position.ts` | **NEW** |
+| `createFocusTrap` | `@hypoth-ui/primitives-dom/focus/focus-trap.ts` | Exists |
+| `createDismissableLayer` | `@hypoth-ui/primitives-dom/layer/dismissable-layer.ts` | Exists |
+| `createRovingFocus` | `@hypoth-ui/primitives-dom/keyboard/roving-focus.ts` | Exists |
+| `createTypeAhead` | `@hypoth-ui/primitives-dom/keyboard/type-ahead.ts` | Exists |
+| `createActivation` | `@hypoth-ui/primitives-dom/keyboard/activation.ts` | Exists |
+| `createArrowKeys` | `@hypoth-ui/primitives-dom/keyboard/arrow-keys.ts` | Exists |
+| `createAnchorPosition` | `@hypoth-ui/primitives-dom/positioning/anchor-position.ts` | **NEW** |
 
 ## Outstanding Decisions
 

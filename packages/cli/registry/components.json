@@ -30,7 +30,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "dialog",
@@ -63,7 +64,8 @@
           "Escape",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "menu",
@@ -129,7 +131,8 @@
           "ArrowDown",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "popover",
@@ -160,7 +163,8 @@
           "Escape",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "tooltip",
@@ -190,7 +194,8 @@
         "keyboardSupport": [
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "input",
@@ -221,7 +226,8 @@
         "keyboardSupport": [
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "textarea",
@@ -252,7 +258,8 @@
         "keyboardSupport": [
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "checkbox",
@@ -283,7 +290,8 @@
         "keyboardSupport": [
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "radio-group",
@@ -330,7 +338,8 @@
           "ArrowLeft",
           "ArrowRight"
         ]
-      }
+      },
+      "hasTemplates": false
     },
     {
       "name": "switch",
@@ -361,7 +370,8 @@
         "keyboardSupport": [
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "field",
@@ -388,7 +398,8 @@
       "a11y": {
         "apgPattern": "landmark-form",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "icon",
@@ -415,7 +426,8 @@
       "a11y": {
         "apgPattern": "img",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "link",
@@ -444,7 +456,8 @@
         "keyboardSupport": [
           "Enter"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "spinner",
@@ -471,7 +484,8 @@
       "a11y": {
         "apgPattern": "status",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "text",
@@ -498,7 +512,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "visually-hidden",
@@ -525,7 +540,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "select",
@@ -564,7 +580,8 @@
           "Space",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "combobox",
@@ -637,7 +654,8 @@
           "Escape",
           "Backspace"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "date-picker",
@@ -699,7 +717,8 @@
           "Enter",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "slider",
@@ -756,7 +775,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "number-input",
@@ -812,7 +832,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "file-upload",
@@ -864,7 +885,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "time-picker",
@@ -906,7 +928,8 @@
           "ArrowRight",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "pin-input",
@@ -947,7 +970,8 @@
           "Backspace",
           "Delete"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "card",
@@ -974,7 +998,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "separator",
@@ -1001,7 +1026,8 @@
       "a11y": {
         "apgPattern": "separator",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "aspect-ratio",
@@ -1028,7 +1054,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "collapsible",
@@ -1059,7 +1086,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "tabs",
@@ -1092,7 +1120,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "accordion",
@@ -1129,7 +1158,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "alert-dialog",
@@ -1162,7 +1192,8 @@
           "Escape",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "sheet",
@@ -1195,7 +1226,8 @@
           "Escape",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "drawer",
@@ -1228,7 +1260,8 @@
           "Escape",
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "dropdown-menu",
@@ -1264,7 +1297,8 @@
           "ArrowDown",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "context-menu",
@@ -1298,7 +1332,8 @@
           "Space",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "hover-card",
@@ -1328,7 +1363,8 @@
         "keyboardSupport": [
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "navigation-menu",
@@ -1363,7 +1399,8 @@
           "Space",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "scroll-area",
@@ -1397,7 +1434,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "breadcrumb",
@@ -1426,7 +1464,8 @@
       "a11y": {
         "apgPattern": "breadcrumb",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "pagination",
@@ -1455,7 +1494,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "stepper",
@@ -1485,7 +1525,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "command",
@@ -1518,7 +1559,8 @@
           "Enter",
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "alert",
@@ -1545,7 +1587,8 @@
       "a11y": {
         "apgPattern": "alert",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "toast",
@@ -1587,7 +1630,8 @@
         "keyboardSupport": [
           "Escape"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "progress",
@@ -1614,7 +1658,8 @@
       "a11y": {
         "apgPattern": "progressbar",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "avatar",
@@ -1653,7 +1698,8 @@
       "a11y": {
         "apgPattern": "img",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "table",
@@ -1722,7 +1768,8 @@
           "ArrowLeft",
           "ArrowRight"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "data-table",
@@ -1759,7 +1806,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "skeleton",
@@ -1786,7 +1834,8 @@
       "a11y": {
         "apgPattern": "none",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "badge",
@@ -1813,7 +1862,8 @@
       "a11y": {
         "apgPattern": "status",
         "keyboardSupport": []
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "tag",
@@ -1845,7 +1895,8 @@
           "Backspace",
           "Delete"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "tree",
@@ -1894,7 +1945,8 @@
           "Home",
           "End"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "list",
@@ -1941,7 +1993,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "calendar",
@@ -1979,7 +2032,8 @@
           "Enter",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "layout",
@@ -2080,7 +2134,8 @@
         "keyboardSupport": [
           "Tab"
         ]
-      }
+      },
+      "hasTemplates": true
     },
     {
       "name": "radio",
@@ -2115,7 +2170,8 @@
           "ArrowRight",
           "Space"
         ]
-      }
+      },
+      "hasTemplates": true
     }
   ]
 }

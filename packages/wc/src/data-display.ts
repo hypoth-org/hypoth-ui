@@ -1,6 +1,6 @@
 /**
  * Data display components barrel file.
- * Import from '@ds/wc/data-display' for tree-shaking.
+ * Import from '@hypoth-ui/wc/data-display' for tree-shaking.
  */
 
 // Table components

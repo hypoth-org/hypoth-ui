@@ -13,14 +13,14 @@ Before implementing, ensure you have:
    - TypeScript 5.3+
 
 2. **Existing Infrastructure**
-   - `@ds/wc` package with `DSElement` base class
-   - `@ds/tokens` package with CSS custom properties
-   - `@ds/css` package with layer structure
-   - `@ds/docs-core` package with manifest validation
+   - `@hypoth-ui/wc` package with `DSElement` base class
+   - `@hypoth-ui/tokens` package with CSS custom properties
+   - `@hypoth-ui/css` package with layer structure
+   - `@hypoth-ui/docs-core` package with manifest validation
 
 3. **Dependencies to Add**
    ```bash
-   pnpm --filter @ds/wc add lucide@^0.468.0
+   pnpm --filter @hypoth-ui/wc add lucide@^0.468.0
    ```
 
 ## Component Implementation Pattern
@@ -108,23 +108,23 @@ emitEvent(this, StandardEvents.CLICK, {
 Run validation before committing:
 
 ```bash
-pnpm --filter @ds/docs-core validate --strict
+pnpm --filter @hypoth-ui/docs-core validate --strict
 ```
 
 ## Testing Commands
 
 ```bash
 # Run all tests
-pnpm --filter @ds/wc test
+pnpm --filter @hypoth-ui/wc test
 
 # Run unit tests only
-pnpm --filter @ds/wc test:unit
+pnpm --filter @hypoth-ui/wc test:unit
 
 # Run a11y tests only
-pnpm --filter @ds/wc test:a11y
+pnpm --filter @hypoth-ui/wc test:a11y
 
 # Type checking
-pnpm --filter @ds/wc typecheck
+pnpm --filter @hypoth-ui/wc typecheck
 ```
 
 ## Implementation Order (Recommended)

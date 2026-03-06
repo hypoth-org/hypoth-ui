@@ -53,8 +53,8 @@ This is a monorepo with multiple packages:
   - ARIA: trigger props, content props, item props
   - Integration: uses createDismissableLayer, createRovingFocus, createTypeAhead, createAnchorPosition
 - [x] T007 Export behavior primitives from `packages/primitives-dom/src/index.ts`
-- [x] T008 Run `pnpm --filter @ds/primitives-dom build` to verify primitives compile
-- [x] T009 Run `pnpm --filter @ds/primitives-dom test` to verify existing tests pass
+- [x] T008 Run `pnpm --filter @hypoth-ui/primitives-dom build` to verify primitives compile
+- [x] T009 Run `pnpm --filter @hypoth-ui/primitives-dom test` to verify existing tests pass
 
 **Checkpoint**: Behavior primitives ready - React and WC implementation can now begin
 
@@ -64,7 +64,7 @@ This is a monorepo with multiple packages:
 
 **Goal**: React developers can use Dialog with compound component pattern and native React elements (no `ds-*` custom elements)
 
-**Independent Test**: Import Dialog from @ds/react, compose using Dialog.Root/Trigger/Content pattern, verify rendered output has no custom elements and proper ARIA attributes
+**Independent Test**: Import Dialog from @hypoth-ui/react, compose using Dialog.Root/Trigger/Content pattern, verify rendered output has no custom elements and proper ARIA attributes
 
 ### Implementation for User Story 1
 
@@ -78,7 +78,7 @@ This is a monorepo with multiple packages:
 - [x] T017 [P] [US1] Create `packages/react/src/components/dialog/dialog-close.tsx` Close button with asChild
 - [x] T018 [US1] Create `packages/react/src/components/dialog/index.ts` assembling Dialog compound component
 - [x] T019 [US1] Update `packages/react/src/index.ts` to export Dialog and Button
-- [x] T020 [US1] Run `pnpm --filter @ds/react build` to verify React components compile
+- [x] T020 [US1] Run `pnpm --filter @hypoth-ui/react build` to verify React components compile
 
 **Checkpoint**: React Dialog works with compound component pattern - no ds-* elements in DOM
 
@@ -94,9 +94,9 @@ This is a monorepo with multiple packages:
 
 - [x] T021 [P] [US2] Refactor `packages/wc/src/components/button/button.ts` to use createButtonBehavior
 - [x] T022 [P] [US2] Refactor `packages/wc/src/components/dialog/dialog.ts` to use createDialogBehavior (skipped - already uses primitives directly)
-- [x] T023 [US2] Run `pnpm --filter @ds/wc test` to verify existing WC tests pass
-- [x] T024 [US2] Run `pnpm --filter @ds/wc test:a11y` to verify WC a11y tests pass
-- [x] T025 [US2] Run `pnpm --filter @ds/react test:a11y` to verify React a11y tests pass
+- [x] T023 [US2] Run `pnpm --filter @hypoth-ui/wc test` to verify existing WC tests pass
+- [x] T024 [US2] Run `pnpm --filter @hypoth-ui/wc test:a11y` to verify WC a11y tests pass
+- [x] T025 [US2] Run `pnpm --filter @hypoth-ui/react test:a11y` to verify React a11y tests pass
 - [x] T026 [US2] Create `packages/react/tests/a11y/dialog.test.tsx` axe-core tests for React Dialog
 
 **Checkpoint**: Both implementations pass identical a11y tests - behavior parity validated
@@ -114,7 +114,7 @@ This is a monorepo with multiple packages:
 - [x] T027 [P] [US3] Refactor `packages/wc/src/components/menu/menu.ts` to use createMenuBehavior (skipped - already uses primitives directly)
 - [x] T028 [P] [US3] Refactor `packages/wc/src/components/menu/menu-content.ts` to integrate with behavior (skipped - already uses primitives directly)
 - [x] T029 [P] [US3] Refactor `packages/wc/src/components/menu/menu-item.ts` to use behavior item props (skipped - already uses primitives directly)
-- [x] T030 [US3] Run `pnpm --filter @ds/wc test` to verify all WC tests pass
+- [x] T030 [US3] Run `pnpm --filter @hypoth-ui/wc test` to verify all WC tests pass
 - [x] T031 [US3] Verify ds-menu works in vanilla HTML test page (roving focus, type-ahead, keyboard)
 
 **Checkpoint**: WC Menu works with unchanged API - non-React framework support maintained
@@ -138,7 +138,7 @@ This is a monorepo with multiple packages:
 - [x] T038 [P] [US4] Create `packages/react/src/components/menu/menu-label.tsx` Label component
 - [x] T039 [US4] Create `packages/react/src/components/menu/index.ts` assembling Menu compound component
 - [x] T040 [US4] Update `packages/react/src/index.ts` to export Menu
-- [x] T041 [US4] Run `pnpm --filter @ds/react build && pnpm --filter @ds/react test`
+- [x] T041 [US4] Run `pnpm --filter @hypoth-ui/react build && pnpm --filter @hypoth-ui/react test`
 
 **Checkpoint**: React Menu compound components work with flexible composition
 
@@ -250,7 +250,7 @@ Task: "Create dialog-close.tsx"
 2. Complete Phase 2: Foundational (T004-T009)
 3. Complete Phase 3: User Story 1 (T010-T020)
 4. **STOP and VALIDATE**: Test React Dialog independently
-   - Import from @ds/react, compose with Root/Trigger/Content
+   - Import from @hypoth-ui/react, compose with Root/Trigger/Content
    - Verify no ds-* custom elements in DOM
    - Verify ARIA attributes correct
 5. Deploy/demo if ready

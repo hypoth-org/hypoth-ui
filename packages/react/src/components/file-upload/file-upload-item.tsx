@@ -2,7 +2,7 @@
  * FileUpload Item component - individual file display.
  */
 
-import { type FileInfo, formatBytes } from "@ds/primitives-dom";
+import { type FileInfo, formatBytes } from "@hypoth-ui/primitives-dom";
 import { type HTMLAttributes, type ReactNode, forwardRef, useCallback } from "react";
 import { useFileUploadContext } from "./file-upload-context.js";
 

@@ -168,7 +168,7 @@ A single configuration defines the navigation structure, mock data, and content.
 
 ### Approach C: Monorepo Shared Package with Divergent Implementations
 
-Create a shared `@ds/demo-shared` package containing mock data, images, and content. Each demo imports from this package but implements layouts independently. Visual regression tests ensure parity.
+Create a shared `@hypoth-ui/demo-shared` package containing mock data, images, and content. Each demo imports from this package but implements layouts independently. Visual regression tests ensure parity.
 
 **Pros**:
 - Balances independence with shared resources

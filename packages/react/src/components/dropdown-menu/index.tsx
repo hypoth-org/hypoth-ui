@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { DropdownMenu } from "@ds/react";
+ * import { DropdownMenu } from "@hypoth-ui/react";
  *
  * <DropdownMenu.Root>
  *   <DropdownMenu.Trigger>

@@ -1,4 +1,4 @@
-# @ds/demo-react
+# @hypoth-ui/demo-react
 
 React/Next.js demo application showcasing the Hypoth UI design system.
 
@@ -23,7 +23,7 @@ pnpm build          # Build all packages first
 pnpm dev:demo-react
 
 # Or directly
-pnpm --filter @ds/demo-react dev
+pnpm --filter @hypoth-ui/demo-react dev
 ```
 
 The app runs at **http://localhost:3001**.
@@ -63,5 +63,5 @@ pnpm test:e2e -- --project=visual-desktop
 ## Build
 
 ```bash
-pnpm --filter @ds/demo-react build
+pnpm --filter @hypoth-ui/demo-react build
 ```

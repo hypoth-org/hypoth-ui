@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { navigation } from '@ds/demo-shared';
+import { navigation } from '@hypoth-ui/demo-shared';
 
 export function SidebarNav() {
   const pathname = usePathname();

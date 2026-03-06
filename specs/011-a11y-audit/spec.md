@@ -219,5 +219,5 @@ Trade-off acknowledged: Building a CLI tool for checklist completion adds develo
 - CI runs on GitHub Actions (based on existing infrastructure)
 - WCAG 2.1 AA is the target conformance level (industry standard for web applications)
 - Manual audits are performed by team members with accessibility testing knowledge; training is outside this feature's scope
-- White-label tenants deploy their own documentation sites based on the @ds/docs-app package
+- White-label tenants deploy their own documentation sites based on the @hypoth-ui/docs-app package
 - Documentation site uses static generation; conformance status is current as of the last build, triggered automatically when audit records change

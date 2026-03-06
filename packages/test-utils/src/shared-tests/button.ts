@@ -50,7 +50,7 @@ export interface ButtonTestContext {
  * @example
  * ```ts
  * // In WC test file
- * import { runButtonKeyboardTests } from '@ds/test-utils/shared-tests/button';
+ * import { runButtonKeyboardTests } from '@hypoth-ui/test-utils/shared-tests/button';
  *
  * describe('ds-button keyboard', () => {
  *   runButtonKeyboardTests({

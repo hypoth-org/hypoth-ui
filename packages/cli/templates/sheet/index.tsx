@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { Sheet } from "@ds/react";
+ * import { Sheet } from "@/components/ui";
  *
  * <Sheet.Root>
  *   <Sheet.Trigger>

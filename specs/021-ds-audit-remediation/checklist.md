@@ -25,7 +25,7 @@
 
 ## P1 - Tree-Shaking
 
-- [x] CHK017 @ds/wc package.json has `"sideEffects": false`
+- [x] CHK017 @hypoth-ui/wc package.json has `"sideEffects": false`
 - [x] CHK018 No module-level side effects in component files (except define())
 - [x] CHK019 Single-component import bundle size verified <20KB gzipped
 - [x] CHK020 Unused components excluded from bundle (verified with bundle analyzer)
@@ -33,7 +33,7 @@
 
 ## P1 - Behavior Deduplication (Dialog Family)
 
-- [x] CHK022 DsDialog imports createDialogBehavior from @ds/primitives-dom
+- [x] CHK022 DsDialog imports createDialogBehavior from @hypoth-ui/primitives-dom
 - [x] CHK023 DsDialog removes inline FocusTrap creation code
 - [x] CHK024 DsDialog removes inline DismissableLayer creation code
 - [x] CHK025 DsAlertDialog uses createDialogBehavior with role="alertdialog"
@@ -46,17 +46,17 @@
 
 ## P1 - Behavior Deduplication (Menu Family)
 
-- [x] CHK032 DsDropdownMenu imports createMenuBehavior from @ds/primitives-dom
+- [x] CHK032 DsDropdownMenu imports createMenuBehavior from @hypoth-ui/primitives-dom
 - [x] CHK033 DsDropdownMenu removes inline keyboard handling code
-- [x] CHK034 DsContextMenu imports createMenuBehavior from @ds/primitives-dom
+- [x] CHK034 DsContextMenu imports createMenuBehavior from @hypoth-ui/primitives-dom
 - [x] CHK035 DsContextMenu removes inline keyboard handling code
 - [x] CHK036 Arrow key navigation matches React implementations
 - [x] CHK037 Type-ahead search matches React implementations
 
 ## P2 - Tabs Behavior Primitive
 
-- [x] CHK038 createTabsBehavior exists in @ds/primitives-dom
-- [x] CHK039 createTabsBehavior exported from @ds/primitives-dom index
+- [x] CHK038 createTabsBehavior exists in @hypoth-ui/primitives-dom
+- [x] CHK039 createTabsBehavior exported from @hypoth-ui/primitives-dom index
 - [x] CHK040 createTabsBehavior handles horizontal orientation (Left/Right arrows)
 - [x] CHK041 createTabsBehavior handles vertical orientation (Up/Down arrows)
 - [x] CHK042 createTabsBehavior supports automatic activation mode
@@ -67,19 +67,19 @@
 
 ## P2 - Granular Package Exports
 
-- [x] CHK047 @ds/wc package.json has exports field
-- [x] CHK048 Subpath export for @ds/wc/primitives exists
-- [x] CHK049 Subpath export for @ds/wc/form-controls exists
-- [x] CHK050 Subpath export for @ds/wc/overlays exists
-- [x] CHK051 Subpath export for @ds/wc/navigation exists
-- [x] CHK052 Subpath export for @ds/wc/data-display exists
+- [x] CHK047 @hypoth-ui/wc package.json has exports field
+- [x] CHK048 Subpath export for @hypoth-ui/wc/primitives exists
+- [x] CHK049 Subpath export for @hypoth-ui/wc/form-controls exists
+- [x] CHK050 Subpath export for @hypoth-ui/wc/overlays exists
+- [x] CHK051 Subpath export for @hypoth-ui/wc/navigation exists
+- [x] CHK052 Subpath export for @hypoth-ui/wc/data-display exists
 - [x] CHK053 All subpath exports include TypeScript types
 - [x] CHK054 Main entry (.) remains backward compatible
 - [x] CHK055 At least 10 subpath entries defined (9 defined: core, primitives, form-controls, overlays, navigation, data-display, feedback, layout, package.json)
 
 ## P3 - Test Harness
 
-- [x] CHK056 Shared test utilities package exists (@ds/test-utils)
+- [x] CHK056 Shared test utilities package exists (@hypoth-ui/test-utils)
 - [x] CHK057 Framework-agnostic keyboard simulation helpers exist (pressKey, Keys, etc.)
 - [x] CHK058 Framework-agnostic ARIA assertion helpers exist (hasRole, isDisabled, etc.)
 - [x] CHK059 Button keyboard test runs on both WC and React
@@ -87,8 +87,8 @@
 
 ## Regression Testing
 
-- [x] CHK061 All existing @ds/wc tests pass (950 tests)
-- [x] CHK062 All existing @ds/react tests pass (250 tests)
+- [x] CHK061 All existing @hypoth-ui/wc tests pass (950 tests)
+- [x] CHK062 All existing @hypoth-ui/react tests pass (250 tests)
 - [x] CHK063 TypeScript compilation succeeds with no errors
 - [x] CHK064 Biome linting passes
 - [x] CHK065 Build command completes successfully

@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Select } from "@ds/react";
+ * import { Select } from "@hypoth-ui/react";
  *
  * <Select.Root onValueChange={(value) => console.log(value)}>
  *   <Select.Trigger>
@@ -54,4 +54,4 @@ export type {
 };
 
 // Re-export Placement from primitives-dom
-export type { Placement } from "@ds/primitives-dom";
+export type { Placement } from "@hypoth-ui/primitives-dom";

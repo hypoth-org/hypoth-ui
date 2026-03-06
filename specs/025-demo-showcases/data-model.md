@@ -144,4 +144,4 @@ MockUser, MockProduct, MockNotification (read-only demo data)
 
 ## Type Definitions
 
-All types are defined in `@ds/demo-shared/src/types.ts` and exported for consumption by both demo apps.
+All types are defined in `@hypoth-ui/demo-shared/src/types.ts` and exported for consumption by both demo apps.

@@ -383,7 +383,7 @@ export interface ThemeProviderProps {
  * @example
  * ```tsx
  * import { useTheme as useNextTheme } from "next-themes";
- * import { useExternalColorMode } from "@ds/react";
+ * import { useExternalColorMode } from "@hypoth-ui/react";
  *
  * // In your app setup
  * const { resolvedTheme } = useNextTheme();
@@ -405,7 +405,7 @@ export interface NextThemesIntegrationProps {
    * @example
    * ```tsx
    * import { ThemeProvider as NextThemeProvider } from "next-themes";
-   * import { ThemeProvider as DSProvider } from "@ds/react";
+   * import { ThemeProvider as DSProvider } from "@hypoth-ui/react";
    *
    * function Providers({ children }) {
    *   return (
@@ -460,7 +460,7 @@ export interface DensityProviderProps {
  * ```ts
  * // app/layout.tsx
  * import { cookies } from "next/headers";
- * import { parseThemeCookie } from "@ds/react";
+ * import { parseThemeCookie } from "@hypoth-ui/react";
  *
  * export default function RootLayout({ children }) {
  *   const cookieStore = cookies();
@@ -490,7 +490,7 @@ export interface ThemeCookieValue {
  * @example Next.js
  * ```tsx
  * // app/layout.tsx
- * import { getThemeScript } from "@ds/react";
+ * import { getThemeScript } from "@hypoth-ui/react";
  *
  * export default function RootLayout({ children }) {
  *   return (
@@ -568,7 +568,7 @@ export const DensityCSSProperties = {
  * // app/providers.tsx
  * "use client";
  *
- * import { ThemeProvider } from "@ds/react";
+ * import { ThemeProvider } from "@hypoth-ui/react";
  *
  * export function Providers({ children }: { children: React.ReactNode }) {
  *   return (
@@ -587,7 +587,7 @@ export const DensityCSSProperties = {
  * ```tsx
  * // app/layout.tsx
  * import { cookies } from "next/headers";
- * import { ThemeProvider, parseThemeCookie, getThemeScript } from "@ds/react";
+ * import { ThemeProvider, parseThemeCookie, getThemeScript } from "@hypoth-ui/react";
  *
  * export default function RootLayout({ children }: { children: React.ReactNode }) {
  *   // Read preferences from cookie on server
@@ -622,7 +622,7 @@ export const DensityCSSProperties = {
  *
  * @example Theme/density toggle component
  * ```tsx
- * import { useTheme } from "@ds/react";
+ * import { useTheme } from "@hypoth-ui/react";
  *
  * function ThemeToggle() {
  *   const { colorMode, setColorMode, density, setDensity } = useTheme();
@@ -719,7 +719,7 @@ export const DensityCSSProperties = {
  * "use client";
  *
  * import { ThemeProvider as NextThemeProvider } from "next-themes";
- * import { ThemeProvider as DSProvider } from "@ds/react";
+ * import { ThemeProvider as DSProvider } from "@hypoth-ui/react";
  *
  * export function Providers({ children }: { children: React.ReactNode }) {
  *   return (
@@ -746,7 +746,7 @@ export const DensityCSSProperties = {
  * @example Using both theme hooks together
  * ```tsx
  * import { useTheme as useNextTheme } from "next-themes";
- * import { useTheme as useDSTheme } from "@ds/react";
+ * import { useTheme as useDSTheme } from "@hypoth-ui/react";
  *
  * function SettingsPanel() {
  *   // Color mode from next-themes

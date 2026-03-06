@@ -1,6 +1,6 @@
 /**
  * Overlay components barrel file.
- * Import from '@ds/wc/overlays' for tree-shaking.
+ * Import from '@hypoth-ui/wc/overlays' for tree-shaking.
  */
 
 // Dialog components

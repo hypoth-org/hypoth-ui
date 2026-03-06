@@ -26,7 +26,7 @@ export { useToast, type ToastOptions, type UseToastReturn } from "./use-toast.js
  * @example
  * ```tsx
  * // In your app root (e.g., layout.tsx)
- * import { Toast } from "@ds/react/client";
+ * import { Toast } from "@hypoth-ui/react/client";
  *
  * export default function RootLayout({ children }) {
  *   return (
@@ -41,7 +41,7 @@ export { useToast, type ToastOptions, type UseToastReturn } from "./use-toast.js
  * }
  *
  * // In any component
- * import { useToast } from "@ds/react/client";
+ * import { useToast } from "@hypoth-ui/react/client";
  *
  * function SaveButton() {
  *   const { toast } = useToast();

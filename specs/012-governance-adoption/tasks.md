@@ -29,11 +29,11 @@ Based on plan.md structure:
 
 - [x] T001 Install @changesets/cli and @changesets/changelog-github as devDependencies in root package.json
 - [x] T002 Run `pnpm changeset init` to create .changeset/ directory
-- [x] T003 Configure fixed versioning in .changeset/config.json for all @ds/* packages
+- [x] T003 Configure fixed versioning in .changeset/config.json for all @hypoth-ui/* packages
 - [x] T004 [P] Create packages/governance/ directory structure per plan.md
 - [x] T005 [P] Create packages/governance/package.json with dependencies (commander, ajv)
 - [x] T006 [P] Create packages/governance/tsconfig.json with strict mode configuration
-- [x] T007 Add @ds/governance to pnpm workspace packages in pnpm-workspace.yaml
+- [x] T007 Add @hypoth-ui/governance to pnpm workspace packages in pnpm-workspace.yaml
 
 ---
 

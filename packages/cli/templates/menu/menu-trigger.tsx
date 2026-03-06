@@ -10,7 +10,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { Slot } from "@/lib/primitives/slot.js";
+import { Slot } from "../../primitives/slot.js";
 import { useMenuContext } from "./menu-context.js";
 
 export interface MenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {

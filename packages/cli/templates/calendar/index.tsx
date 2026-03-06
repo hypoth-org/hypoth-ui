@@ -1,7 +1,7 @@
 "use client";
 
 import { type HTMLAttributes, createElement, forwardRef, useEffect, useRef } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 
 export type CalendarSize = "default" | "compact";
 

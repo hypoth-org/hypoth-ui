@@ -5,7 +5,7 @@
 
 ## Summary
 
-Implement a complete CSS layered output system for `@ds/css` that provides consistent baseline styling across Web Components (Light DOM), plain HTML recipes, and Next.js apps. The system uses native CSS `@layer` declarations with the order: `reset, tokens, base, components, utilities, overrides`. It enables override-friendly customization without specificity wars and supports tenant branding via the `overrides` layer. Deliverables include the complete layer structure, tenant override example, styling guidelines documentation page, and a demo app showing brand switching.
+Implement a complete CSS layered output system for `@hypoth-ui/css` that provides consistent baseline styling across Web Components (Light DOM), plain HTML recipes, and Next.js apps. The system uses native CSS `@layer` declarations with the order: `reset, tokens, base, components, utilities, overrides`. It enables override-friendly customization without specificity wars and supports tenant branding via the `overrides` layer. Deliverables include the complete layer structure, tenant override example, styling guidelines documentation page, and a demo app showing brand switching.
 
 ## Technical Context
 
@@ -14,7 +14,7 @@ Implement a complete CSS layered output system for `@ds/css` that provides consi
 **Storage**: N/A (static CSS files)
 **Testing**: Vitest (unit tests for build output), Playwright (E2E for visual consistency)
 **Target Platform**: Evergreen browsers only (Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+)
-**Project Type**: Monorepo package (`@ds/css`) with demo app integration
+**Project Type**: Monorepo package (`@hypoth-ui/css`) with demo app integration
 **Performance Goals**: <20KB gzipped for full bundle (excluding tree-shakeable utilities)
 **Constraints**: Zero runtime dependencies; all styling via CSS custom properties; SSR-friendly
 **Scale/Scope**: 6 CSS layers, ~50 utility classes, 1 tenant example, 1 docs page
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; CSS layers are build-time only; zero runtime overhead
 - [x] **Accessibility**: Reset layer includes `prefers-reduced-motion`; high-contrast mode supported via tokens
 - [x] **Customizability**: Uses DTCG tokens in `tokens` layer; `overrides` layer enables consumer customization; no inline styles
-- [x] **Zero-dep Core**: `@ds/css` has no runtime dependencies; PostCSS is dev-only
+- [x] **Zero-dep Core**: `@hypoth-ui/css` has no runtime dependencies; PostCSS is dev-only
 - [x] **Web Components**: Light DOM components consume styles via CSS classes; theme via CSS vars
 - [x] **Dependency Management**: PostCSS 8.x stable; pnpm used; minimal build tooling
 
@@ -55,9 +55,9 @@ packages/css/
 │   └── layers/
 │       ├── index.css          # Layer order declaration
 │       ├── reset.css          # Browser reset (existing)
-│       ├── tokens.css         # Token import (new: imports @ds/tokens/css)
+│       ├── tokens.css         # Token import (new: imports @hypoth-ui/tokens/css)
 │       ├── base.css           # Semantic HTML styles (existing)
-│       ├── components.css     # Component styles (new: aggregates from @ds/wc)
+│       ├── components.css     # Component styles (new: aggregates from @hypoth-ui/wc)
 │       ├── utilities.css      # Minimal utility classes (existing, expand)
 │       └── overrides.css      # Empty placeholder (new)
 ├── dist/
@@ -73,7 +73,7 @@ packages/docs-content/
 
 apps/demo/
 ├── app/
-│   └── layout.tsx             # Already imports @ds/css
+│   └── layout.tsx             # Already imports @hypoth-ui/css
 ├── styles/
 │   └── tenant-acme.css        # New: tenant override example
 └── components/
@@ -81,7 +81,7 @@ apps/demo/
 
 packages/docs-renderer-next/
 └── styles/
-    └── globals.css            # Update to use @ds/css layers
+    └── globals.css            # Update to use @hypoth-ui/css layers
 ```
 
 **Structure Decision**: Extends existing `packages/css/` with complete layer structure. Demo app gains tenant override example. Docs content package gains styling guidelines page.

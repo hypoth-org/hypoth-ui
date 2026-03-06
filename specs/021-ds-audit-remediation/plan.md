@@ -5,19 +5,19 @@
 
 ## Summary
 
-Address comprehensive design system audit findings by implementing ElementInternals form association for WC form controls, enabling tree-shaking via sideEffects:false, migrating WC overlays to use shared behavior primitives from @ds/primitives-dom, creating a createTabsBehavior primitive, and adding granular package exports. Approach is incremental refactoring with no backward compatibility concerns.
+Address comprehensive design system audit findings by implementing ElementInternals form association for WC form controls, enabling tree-shaking via sideEffects:false, migrating WC overlays to use shared behavior primitives from @hypoth-ui/primitives-dom, creating a createTabsBehavior primitive, and adding granular package exports. Approach is incremental refactoring with no backward compatibility concerns.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer), @ds/primitives-dom (behavior primitives)
+**Primary Dependencies**: Lit 3.1+ (WC), React 18+ (adapter peer), @hypoth-ui/primitives-dom (behavior primitives)
 **Storage**: N/A (stateless UI components)
 **Testing**: Vitest (unit/integration), axe-core (a11y automation)
 **Target Platform**: Modern browsers - Chrome 77+, Firefox 93+, Safari 16.4+ (no polyfills)
 **Project Type**: Monorepo with multiple packages
 **Performance Goals**: Single-component import <15KB gzipped; zero duplicated behavior logic
 **Constraints**: Zero runtime deps for core packages; Light DOM default; sideEffects:false
-**Scale/Scope**: ~60+ components across @ds/wc and @ds/react packages
+**Scale/Scope**: ~60+ components across @hypoth-ui/wc and @hypoth-ui/react packages
 
 ## Constitution Check
 
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; tree-shaking enabled via sideEffects:false; SSR-friendly Light DOM
 - [x] **Accessibility**: WCAG 2.1 AA maintained; APG patterns via shared behavior primitives; a11y testing via axe-core
 - [x] **Customizability**: Uses DTCG tokens; CSS layers preserved; no inline styles blocking customization
-- [x] **Zero-dep Core**: @ds/primitives-dom has zero runtime deps; behavior primitives are stateless utilities
+- [x] **Zero-dep Core**: @hypoth-ui/primitives-dom has zero runtime deps; behavior primitives are stateless utilities
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars maintained
 - [x] **Dependency Management**: No new dependencies added; refactoring existing code only
 
@@ -88,7 +88,7 @@ packages/
         └── components/           # Already uses behavior primitives (reference)
 ```
 
-**Structure Decision**: Monorepo structure maintained. Changes span @ds/primitives-dom (new tabs behavior), @ds/wc (form association, behavior migrations, package exports), with @ds/react serving as reference implementation.
+**Structure Decision**: Monorepo structure maintained. Changes span @hypoth-ui/primitives-dom (new tabs behavior), @hypoth-ui/wc (form association, behavior migrations, package exports), with @hypoth-ui/react serving as reference implementation.
 
 ## Complexity Tracking
 

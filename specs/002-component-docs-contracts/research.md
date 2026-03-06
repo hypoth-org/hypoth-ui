@@ -182,4 +182,4 @@ Line numbers for frontmatter fields require parsing YAML separately since gray-m
 | ajv | ^8.17.1 | JSON Schema validation | ~127KB (build-only) |
 | ajv-errors | ^3.0.0 | Custom error messages | ~3KB (build-only) |
 
-**Note**: gray-matter and glob already exist in @ds/docs-core.
+**Note**: gray-matter and glob already exist in @hypoth-ui/docs-core.

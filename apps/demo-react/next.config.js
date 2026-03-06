@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@ds/wc", "@ds/react", "@ds/next"],
+  transpilePackages: ["@hypoth-ui/wc", "@hypoth-ui/react", "@hypoth-ui/next"],
 };
 
 export default nextConfig;

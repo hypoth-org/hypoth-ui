@@ -1,6 +1,6 @@
 /**
  * Token category constants for docs-core
- * Mirrors the token categories from @ds/tokens
+ * Mirrors the token categories from @hypoth-ui/tokens
  */
 
 /** All valid token categories */

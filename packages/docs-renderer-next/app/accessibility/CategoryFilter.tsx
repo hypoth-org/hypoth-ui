@@ -1,6 +1,6 @@
 "use client";
 
-import type { CategoryInfo, ConformanceStatus } from "@ds/docs-core";
+import type { CategoryInfo, ConformanceStatus } from "@hypoth-ui/docs-core";
 import { useState } from "react";
 
 interface CategoryFilterProps {

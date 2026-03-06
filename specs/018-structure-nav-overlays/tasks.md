@@ -58,8 +58,8 @@ Per plan.md structure:
 - [X] T020 Create Collapsible barrel export in packages/wc/src/components/collapsible/index.ts
 - [X] T021 [P] Create Collapsible CSS in packages/css/src/components/collapsible.css
 - [X] T022 [P] Create Collapsible React wrappers in packages/react/src/components/collapsible/index.tsx
-- [X] T023 Update @ds/wc barrel exports in packages/wc/src/index.ts (Card, Separator, AspectRatio, Collapsible)
-- [X] T024 Update @ds/react barrel exports in packages/react/src/index.ts (Card, Separator, AspectRatio, Collapsible)
+- [X] T023 Update @hypoth-ui/wc barrel exports in packages/wc/src/index.ts (Card, Separator, AspectRatio, Collapsible)
+- [X] T024 Update @hypoth-ui/react barrel exports in packages/react/src/index.ts (Card, Separator, AspectRatio, Collapsible)
 
 **Checkpoint**: Foundation ready - user story implementation can begin
 
@@ -95,8 +95,8 @@ Per plan.md structure:
 
 **Exports**
 
-- [X] T039 [US1] Update @ds/wc barrel exports in packages/wc/src/index.ts (Tabs, Accordion)
-- [X] T040 [US1] Update @ds/react barrel exports in packages/react/src/index.ts (Tabs, Accordion)
+- [X] T039 [US1] Update @hypoth-ui/wc barrel exports in packages/wc/src/index.ts (Tabs, Accordion)
+- [X] T040 [US1] Update @hypoth-ui/react barrel exports in packages/react/src/index.ts (Tabs, Accordion)
 
 **Checkpoint**: Structure primitives (Card, Tabs, Accordion) are functional and testable
 
@@ -122,7 +122,7 @@ Per plan.md structure:
 - [X] T050 [US2] Create AlertDialog barrel export in packages/wc/src/components/alert-dialog/index.ts
 - [X] T051 [P] [US2] Create AlertDialog CSS with modal overlay and animations in packages/css/src/components/alert-dialog.css
 - [X] T052 [US2] Create AlertDialog React wrappers in packages/react/src/components/alert-dialog/index.tsx
-- [X] T053 [US2] Update @ds/wc and @ds/react barrel exports for AlertDialog
+- [X] T053 [US2] Update @hypoth-ui/wc and @hypoth-ui/react barrel exports for AlertDialog
 
 **Checkpoint**: AlertDialog is functional with focus trap, escape handling, and focus return
 

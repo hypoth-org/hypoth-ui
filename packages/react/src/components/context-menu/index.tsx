@@ -6,7 +6,7 @@
  *
  * @example
  * ```tsx
- * import { ContextMenu } from "@ds/react";
+ * import { ContextMenu } from "@hypoth-ui/react";
  *
  * <ContextMenu.Root>
  *   <ContextMenu.Trigger>

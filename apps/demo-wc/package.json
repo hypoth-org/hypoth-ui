@@ -1,5 +1,5 @@
 {
-  "name": "@ds/demo-wc",
+  "name": "@hypoth-ui/demo-wc",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,10 +12,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ds/wc": "workspace:*",
-    "@ds/tokens": "workspace:*",
-    "@ds/css": "workspace:*",
-    "@ds/demo-shared": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/css": "workspace:*",
+    "@hypoth-ui/demo-shared": "workspace:*",
     "lit": "^3.1.0"
   },
   "devDependencies": {

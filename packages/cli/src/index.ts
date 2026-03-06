@@ -42,6 +42,7 @@ program
   .command("add")
   .description("Add components to your project")
   .argument("[components...]", "Component names to add")
+  .option("-c, --copy", "Copy component source files instead of installing package")
   .option("-o, --overwrite", "Overwrite existing components")
   .option("-a, --all", "Add all available components")
   .action(async (components: string[], options: AddOptions) => {

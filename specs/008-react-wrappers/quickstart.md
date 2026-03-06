@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-pnpm add @ds/react @ds/wc @ds/css
+pnpm add @hypoth-ui/react @hypoth-ui/wc @hypoth-ui/css
 ```
 
 ## Basic Usage
@@ -18,7 +18,7 @@ pnpm add @ds/react @ds/wc @ds/css
 // app/page.tsx (Next.js App Router)
 'use client';
 
-import { Button, Link, Input, Text, Box } from '@ds/react/client';
+import { Button, Link, Input, Text, Box } from '@hypoth-ui/react/client';
 
 export default function Page() {
   return (
@@ -51,7 +51,7 @@ export default function Page() {
 The `asChild` prop lets you render a different element while keeping the component's styling:
 
 ```tsx
-import { Text, Link, Box } from '@ds/react/client';
+import { Text, Link, Box } from '@hypoth-ui/react/client';
 import NextLink from 'next/link';
 
 // Render Text as an h1
@@ -76,7 +76,7 @@ import NextLink from 'next/link';
 
 ```tsx
 // app/layout.tsx - Server Component
-import type { ButtonProps } from '@ds/react'; // Types are server-safe
+import type { ButtonProps } from '@hypoth-ui/react'; // Types are server-safe
 
 export default function Layout({ children }) {
   return <html><body>{children}</body></html>;
@@ -84,7 +84,7 @@ export default function Layout({ children }) {
 
 // app/interactive.tsx - Client Component
 'use client';
-import { Button } from '@ds/react/client'; // Components need 'use client'
+import { Button } from '@hypoth-ui/react/client'; // Components need 'use client'
 
 export function InteractiveButton(props: ButtonProps) {
   return <Button {...props} />;
@@ -96,7 +96,7 @@ export function InteractiveButton(props: ButtonProps) {
 ### Button
 
 ```tsx
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 
 // Variants
 <Button variant="primary">Primary</Button>
@@ -122,7 +122,7 @@ import { Button } from '@ds/react/client';
 ### Link
 
 ```tsx
-import { Link } from '@ds/react/client';
+import { Link } from '@hypoth-ui/react/client';
 
 // Basic link
 <Link href="/about">About Us</Link>
@@ -158,7 +158,7 @@ import NextLink from 'next/link';
 ### Input
 
 ```tsx
-import { Input } from '@ds/react/client';
+import { Input } from '@hypoth-ui/react/client';
 
 // Basic input
 <Input placeholder="Enter text" />
@@ -188,7 +188,7 @@ import { Input } from '@ds/react/client';
 ### Text
 
 ```tsx
-import { Text } from '@ds/react/client';
+import { Text } from '@hypoth-ui/react/client';
 
 // Sizes
 <Text size="xs">Extra small</Text>
@@ -227,7 +227,7 @@ import { Text } from '@ds/react/client';
 ### Box
 
 ```tsx
-import { Box } from '@ds/react/client';
+import { Box } from '@hypoth-ui/react/client';
 
 // Spacing (padding)
 <Box p={4}>Padding all sides</Box>
@@ -269,7 +269,7 @@ import { Box } from '@ds/react/client';
 ### Icon
 
 ```tsx
-import { Icon } from '@ds/react/client';
+import { Icon } from '@hypoth-ui/react/client';
 
 // Decorative icon (hidden from screen readers)
 <Icon name="search" />
@@ -292,7 +292,7 @@ import { Icon } from '@ds/react/client';
 ### Spinner
 
 ```tsx
-import { Spinner } from '@ds/react/client';
+import { Spinner } from '@hypoth-ui/react/client';
 
 // Basic spinner
 <Spinner />
@@ -315,8 +315,8 @@ import { Spinner } from '@ds/react/client';
 ### VisuallyHidden
 
 ```tsx
-import { VisuallyHidden } from '@ds/react/client';
-import { Icon } from '@ds/react/client';
+import { VisuallyHidden } from '@hypoth-ui/react/client';
+import { Icon } from '@hypoth-ui/react/client';
 
 // Hidden label for icon button
 <button>
@@ -342,8 +342,8 @@ import { useEffect } from 'react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Import @ds/wc to register custom elements
-    import('@ds/wc');
+    // Import @hypoth-ui/wc to register custom elements
+    import('@hypoth-ui/wc');
   }, []);
 
   return <>{children}</>;
@@ -351,7 +351,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 // app/layout.tsx
 import { Providers } from './providers';
-import '@ds/css/index.css';
+import '@hypoth-ui/css/index.css';
 
 export default function RootLayout({ children }) {
   return (
@@ -368,7 +368,7 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // components/hero.tsx - Server Component
-import type { TextProps } from '@ds/react';
+import type { TextProps } from '@hypoth-ui/react';
 
 interface HeroProps {
   title: string;
@@ -385,7 +385,7 @@ export function Hero({ title, titleSize = 'xl' }: HeroProps) {
 
 // components/client-text.tsx - Client Component
 'use client';
-import { Text } from '@ds/react/client';
+import { Text } from '@hypoth-ui/react/client';
 
 export function ClientText(props: React.ComponentProps<typeof Text>) {
   return <Text {...props} />;
@@ -397,7 +397,7 @@ export function ClientText(props: React.ComponentProps<typeof Text>) {
 ### Extracting Component Props
 
 ```tsx
-import type { Button, Link } from '@ds/react/client';
+import type { Button, Link } from '@hypoth-ui/react/client';
 import type { ComponentProps } from 'react';
 
 // Get props type from component
@@ -408,7 +408,7 @@ type MyLinkProps = ComponentProps<typeof Link>;
 ### Type-Safe Event Handlers
 
 ```tsx
-import type { DsNavigateEventDetail } from '@ds/react';
+import type { DsNavigateEventDetail } from '@hypoth-ui/react';
 
 function handleNavigate(event: CustomEvent<DsNavigateEventDetail>) {
   if (event.detail.external) {

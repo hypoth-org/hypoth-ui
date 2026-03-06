@@ -167,7 +167,7 @@ Below is the full contrast matrix for a typical scale. Values represent contrast
 ### Built-in Contrast Checker
 
 ```typescript
-import { checkContrast, formatRatio } from '@ds/tokens/scripts/contrast';
+import { checkContrast, formatRatio } from '@hypoth-ui/tokens/scripts/contrast';
 
 const result = checkContrast('#ffffff', '#0066cc');
 console.log(formatRatio(result.ratio)); // "7.21:1"

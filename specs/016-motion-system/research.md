@@ -86,7 +86,7 @@ function createPresence(options: {
 ```
 
 ### Decision
-- Create `createPresence` utility in `@ds/primitives-dom`
+- Create `createPresence` utility in `@hypoth-ui/primitives-dom`
 - Use `animationend` event to detect completion
 - Use `data-state="open|closed"` attribute to trigger CSS animations
 - Integrate with existing behavior primitives via state callbacks
@@ -109,7 +109,7 @@ Must respect `prefers-reduced-motion` for accessibility compliance.
 ### Findings
 
 **Existing Infrastructure**:
-- `@ds/tokens` already has `modes/reduced-motion.json` that sets all durations to `0ms`
+- `@hypoth-ui/tokens` already has `modes/reduced-motion.json` that sets all durations to `0ms`
 - This mode is applied via CSS class or media query
 
 **CSS Media Query Approach**:
@@ -248,7 +248,7 @@ function Presence({ present, children }: PresenceProps) {
 ```
 
 ### Decision
-- Implement `Presence` component in `@ds/react`
+- Implement `Presence` component in `@hypoth-ui/react`
 - Use `animationend` event detection
 - Support `forceMount` prop for controlled visibility
 - Integrate with reduced motion detection

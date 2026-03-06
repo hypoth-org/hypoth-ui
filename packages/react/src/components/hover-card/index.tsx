@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { HoverCard } from "@ds/react";
+ * import { HoverCard } from "@hypoth-ui/react";
  *
  * <HoverCard.Root>
  *   <HoverCard.Trigger>

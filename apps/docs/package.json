@@ -1,5 +1,5 @@
 {
-  "name": "@ds/docs-app",
+  "name": "@hypoth-ui/docs-app",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -19,12 +19,12 @@
     "validate": "tsx ../../packages/docs-core/src/cli/validate.ts --root-dir ../.."
   },
   "dependencies": {
-    "@ds/css": "workspace:*",
-    "@ds/docs-content": "workspace:*",
-    "@ds/docs-core": "workspace:*",
-    "@ds/docs-renderer-next": "workspace:*",
-    "@ds/next": "workspace:*",
-    "@ds/tokens": "workspace:*",
+    "@hypoth-ui/css": "workspace:*",
+    "@hypoth-ui/docs-content": "workspace:*",
+    "@hypoth-ui/docs-core": "workspace:*",
+    "@hypoth-ui/docs-renderer-next": "workspace:*",
+    "@hypoth-ui/next": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

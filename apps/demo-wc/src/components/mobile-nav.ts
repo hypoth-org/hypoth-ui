@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { getWCNavigation } from '@ds/demo-shared';
+import { getWCNavigation } from '@hypoth-ui/demo-shared';
 
 // Import WC components (bundled exports)
-import '@ds/wc/overlays';
+import '@hypoth-ui/wc/overlays';
 
 /**
  * Mobile navigation component with hamburger trigger and Sheet

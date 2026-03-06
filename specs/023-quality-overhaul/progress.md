@@ -167,7 +167,7 @@
 - [ ] REQ112 Add manifests for Layout (8 components)
 - [ ] REQ113 Add manifests for Typography (3 components)
 - [ ] REQ114 Add manifests for Utilities (3 components)
-- [ ] REQ115 Verify `pnpm --filter @ds/docs-core validate:manifests` passes
+- [ ] REQ115 Verify `pnpm --filter @hypoth-ui/docs-core validate:manifests` passes
 
 ## Phase 1 - Development Warnings (P1)
 

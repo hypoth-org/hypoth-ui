@@ -1,6 +1,6 @@
 /**
  * Form control components barrel file.
- * Import from '@ds/wc/form-controls' for tree-shaking.
+ * Import from '@hypoth-ui/wc/form-controls' for tree-shaking.
  */
 
 // Basic form controls

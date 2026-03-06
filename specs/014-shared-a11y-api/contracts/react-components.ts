@@ -1,8 +1,8 @@
 /**
  * React Components Contracts
  *
- * These interfaces define the API for native React components in @ds/react.
- * Components use compound patterns and consume behavior primitives from @ds/primitives-dom.
+ * These interfaces define the API for native React components in @hypoth-ui/react.
+ * Components use compound patterns and consume behavior primitives from @hypoth-ui/primitives-dom.
  */
 
 import type {
@@ -268,7 +268,7 @@ export interface MenuContextValue {
 // =============================================================================
 
 /**
- * Expected exports from @ds/react after implementation:
+ * Expected exports from @hypoth-ui/react after implementation:
  *
  * // Components
  * export { Button, type ButtonProps } from './components/button';

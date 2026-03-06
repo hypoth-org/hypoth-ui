@@ -23,14 +23,14 @@ This guide walks through setting up a documentation site with the docs renderer,
 
 ```bash
 # In your Next.js app directory
-pnpm add @ds/docs-renderer-next @ds/docs-content @ds/docs-core
+pnpm add @hypoth-ui/docs-renderer-next @hypoth-ui/docs-content @hypoth-ui/docs-core
 ```
 
 ### Configure Next.js
 
 ```typescript
 // next.config.mjs
-import { withDocsRenderer } from '@ds/docs-renderer-next/config';
+import { withDocsRenderer } from '@hypoth-ui/docs-renderer-next/config';
 
 export default withDocsRenderer({
   // Your existing Next.js config
@@ -41,8 +41,8 @@ export default withDocsRenderer({
 
 ```tsx
 // app/layout.tsx
-import { DocsLayout } from '@ds/docs-renderer-next/components';
-import '@ds/docs-renderer-next/styles/globals.css';
+import { DocsLayout } from '@hypoth-ui/docs-renderer-next/components';
+import '@hypoth-ui/docs-renderer-next/styles/globals.css';
 
 export default function RootLayout({ children }) {
   return (
@@ -60,13 +60,13 @@ export default function RootLayout({ children }) {
 ```tsx
 // app/components/[id]/page.tsx
 export { ComponentPage as default, generateStaticParams, generateMetadata }
-  from '@ds/docs-renderer-next/pages/component';
+  from '@hypoth-ui/docs-renderer-next/pages/component';
 ```
 
 ```tsx
 // app/guides/[id]/page.tsx
 export { GuidePage as default, generateStaticParams, generateMetadata }
-  from '@ds/docs-renderer-next/pages/guide';
+  from '@hypoth-ui/docs-renderer-next/pages/guide';
 ```
 
 ### Run the Site
@@ -84,7 +84,7 @@ Visit `http://localhost:3000` to see your docs site with default content.
 ```json
 // edition-config.json (at project root)
 {
-  "$schema": "./node_modules/@ds/docs-core/schemas/edition-config.schema.json",
+  "$schema": "./node_modules/@hypoth-ui/docs-core/schemas/edition-config.schema.json",
   "id": "my-docs",
   "name": "My Docs",
   "edition": "pro"
@@ -179,7 +179,7 @@ pnpm init
   "type": "module",
   "docsContent": {
     "type": "overlay",
-    "extends": "@ds/docs-content"
+    "extends": "@hypoth-ui/docs-content"
   },
   "exports": {
     "./components/*": "./components/*.mdx",
@@ -187,7 +187,7 @@ pnpm init
     "./edition-config.json": "./edition-config.json"
   },
   "peerDependencies": {
-    "@ds/docs-content": "workspace:*"
+    "@hypoth-ui/docs-content": "workspace:*"
   }
 }
 ```
@@ -282,7 +282,7 @@ pnpm build
 ### Check Features in Components
 
 ```tsx
-import { useFeatures } from '@ds/docs-renderer-next/hooks';
+import { useFeatures } from '@hypoth-ui/docs-renderer-next/hooks';
 
 function MyComponent() {
   const { search, darkMode } = useFeatures();

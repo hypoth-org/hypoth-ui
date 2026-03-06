@@ -26,15 +26,15 @@
 
 **Purpose**: Project initialization and shared package creation
 
-- [x] T001 Rename `apps/demo` to `apps/demo-react` and update package.json name to `@ds/demo-react`
-- [x] T002 Create `packages/demo-shared/` package structure with package.json (name: `@ds/demo-shared`)
+- [x] T001 Rename `apps/demo` to `apps/demo-react` and update package.json name to `@hypoth-ui/demo-react`
+- [x] T002 Create `packages/demo-shared/` package structure with package.json (name: `@hypoth-ui/demo-shared`)
 - [x] T003 [P] Create type definitions in `packages/demo-shared/src/types.ts` (NavItem, NavSection, ThemeState, MockUser, MockProduct, MockNotification, SectionContent, ComponentShowcase)
 - [x] T004 [P] Create navigation config in `packages/demo-shared/src/navigation.ts` with 5 sections
 - [x] T005 [P] Create mock users data in `packages/demo-shared/src/mock-data/users.ts`
 - [x] T006 [P] Create mock products data in `packages/demo-shared/src/mock-data/products.ts`
 - [x] T007 [P] Create mock notifications data in `packages/demo-shared/src/mock-data/notifications.ts`
 - [x] T008 Create barrel export in `packages/demo-shared/src/index.ts`
-- [x] T009 Create `apps/demo-wc/` with Vite vanilla-ts template and package.json (name: `@ds/demo-wc`)
+- [x] T009 Create `apps/demo-wc/` with Vite vanilla-ts template and package.json (name: `@hypoth-ui/demo-wc`)
 - [x] T010 [P] Configure Vite in `apps/demo-wc/vite.config.ts` with workspace aliases
 - [x] T011 [P] Add workspace dependencies to both demo apps (pnpm add in root package.json)
 - [x] T012 Run `pnpm install` to link workspace packages
@@ -68,8 +68,8 @@
 
 ### Implementation for User Story 1
 
-- [x] T021 [US1] Create SidebarNav component in `apps/demo-react/components/sidebar-nav.tsx` using @ds/react components
-- [x] T022 [P] [US1] Create sidebar-nav component in `apps/demo-wc/src/components/sidebar-nav.ts` using @ds/wc
+- [x] T021 [US1] Create SidebarNav component in `apps/demo-react/components/sidebar-nav.tsx` using @hypoth-ui/react components
+- [x] T022 [P] [US1] Create sidebar-nav component in `apps/demo-wc/src/components/sidebar-nav.ts` using @hypoth-ui/wc
 - [x] T023 [US1] Create Dashboard page in `apps/demo-react/app/page.tsx` with overview content
 - [x] T024 [P] [US1] Create dashboard page in `apps/demo-wc/src/pages/dashboard.ts`
 - [x] T025 [US1] Create Overlays section page in `apps/demo-react/app/overlays/page.tsx` with Dialog and Drawer demos
@@ -89,8 +89,8 @@
 
 ### Implementation for User Story 2
 
-- [x] T029 [US2] Create ThemeToggle component in `apps/demo-react/components/theme-toggle.tsx` with Switch from @ds/react
-- [x] T030 [P] [US2] Create theme-toggle component in `apps/demo-wc/src/components/theme-toggle.ts` with @ds/wc Switch
+- [x] T029 [US2] Create ThemeToggle component in `apps/demo-react/components/theme-toggle.tsx` with Switch from @hypoth-ui/react
+- [x] T030 [P] [US2] Create theme-toggle component in `apps/demo-wc/src/components/theme-toggle.ts` with @hypoth-ui/wc Switch
 - [x] T031 [US2] Add ThemeToggle to header area in `apps/demo-react/components/app-shell.tsx`
 - [x] T032 [P] [US2] Add theme-toggle to header in `apps/demo-wc/src/components/app-shell.ts`
 - [x] T033 [US2] Implement theme persistence on toggle in React (localStorage write)

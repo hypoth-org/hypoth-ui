@@ -28,7 +28,7 @@ Based on plan.md structure:
 
 **Purpose**: Ensure build tooling and package structure is ready
 
-- [x] T001 Verify @ds/primitives-dom package.json has correct exports in packages/primitives-dom/package.json
+- [x] T001 Verify @hypoth-ui/primitives-dom package.json has correct exports in packages/primitives-dom/package.json
 - [x] T002 [P] Create layer/ directory structure in packages/primitives-dom/src/layer/
 - [x] T003 [P] Create shared types file with Direction, LogicalDirection types in packages/primitives-dom/src/types.ts
 
@@ -65,7 +65,7 @@ Based on plan.md structure:
 - [x] T010 [US1] Add fallbackFocus option support to focus-trap in packages/primitives-dom/src/focus/focus-trap.ts
 - [x] T011 [US1] Update focus-trap deactivate() to handle HTMLElement returnFocus in packages/primitives-dom/src/focus/focus-trap.ts
 - [x] T012 [US1] Export enhanced FocusTrapOptions type in packages/primitives-dom/src/index.ts
-- [x] T013 [US1] Verify all focus-trap tests pass with pnpm --filter @ds/primitives-dom test
+- [x] T013 [US1] Verify all focus-trap tests pass with pnpm --filter @hypoth-ui/primitives-dom test
 
 **Checkpoint**: User Story 1 complete - focus trap enhanced with returnFocus and fallbackFocus options
 
@@ -88,7 +88,7 @@ Based on plan.md structure:
 - [x] T017 [US2] Add skipDisabled option to RovingFocusOptions in packages/primitives-dom/src/keyboard/roving-focus.ts
 - [x] T018 [US2] Implement disabled item skipping in navigation logic in packages/primitives-dom/src/keyboard/roving-focus.ts
 - [x] T019 [US2] Export enhanced RovingFocusOptions type in packages/primitives-dom/src/index.ts
-- [x] T020 [US2] Verify all roving-focus tests pass with pnpm --filter @ds/primitives-dom test
+- [x] T020 [US2] Verify all roving-focus tests pass with pnpm --filter @hypoth-ui/primitives-dom test
 
 **Checkpoint**: User Story 2 complete - roving focus supports disabled item skipping
 
@@ -115,7 +115,7 @@ Based on plan.md structure:
 - [x] T028 [US3] Implement Escape key handler with capture phase in packages/primitives-dom/src/layer/dismissable-layer.ts
 - [x] T029 [US3] Implement outside click handler with excludeElements in packages/primitives-dom/src/layer/dismissable-layer.ts
 - [x] T030 [US3] Export createDismissableLayer and types in packages/primitives-dom/src/index.ts
-- [x] T031 [US3] Verify all dismissable-layer tests pass with pnpm --filter @ds/primitives-dom test
+- [x] T031 [US3] Verify all dismissable-layer tests pass with pnpm --filter @hypoth-ui/primitives-dom test
 
 **Checkpoint**: User Story 3 complete - dismissable layers work with stacking and exclusions
 
@@ -141,7 +141,7 @@ Based on plan.md structure:
 - [x] T038 [US4] Create createArrowKeyHandler factory with RTL support in packages/primitives-dom/src/keyboard/arrow-keys.ts
 - [x] T039 [US4] Create createTypeAhead factory with buffer management in packages/primitives-dom/src/keyboard/type-ahead.ts
 - [x] T040 [US4] Export all keyboard helpers and types in packages/primitives-dom/src/index.ts
-- [x] T041 [US4] Verify all keyboard helper tests pass with pnpm --filter @ds/primitives-dom test
+- [x] T041 [US4] Verify all keyboard helper tests pass with pnpm --filter @hypoth-ui/primitives-dom test
 
 **Checkpoint**: User Story 4 complete - keyboard helpers available for component development
 
@@ -162,7 +162,7 @@ Based on plan.md structure:
 - [x] T046 [P] [US5] Create keyboard-helpers demo page with activation and arrow key demos in apps/demo/app/primitives/keyboard-helpers/page.tsx
 - [x] T047 [P] [US5] Create type-ahead demo page with buffer display in apps/demo/app/primitives/type-ahead/page.tsx
 - [x] T048 [US5] Create E2E test file for all primitives in apps/demo/tests/e2e/primitives.test.ts
-- [x] T049 [US5] Verify all test harness pages render correctly with pnpm --filter @ds/demo dev
+- [x] T049 [US5] Verify all test harness pages render correctly with pnpm --filter @hypoth-ui/demo dev
 
 **Checkpoint**: User Story 5 complete - test harness pages ready for E2E testing
 
@@ -194,9 +194,9 @@ Based on plan.md structure:
 **Purpose**: Final validation and cleanup
 
 - [x] T058 Run full build across all packages with pnpm build
-- [x] T059 [P] Verify each utility is under 2KB gzipped (per SC-003) with pnpm --filter @ds/primitives-dom build
-- [x] T060 [P] Run all unit tests with pnpm --filter @ds/primitives-dom test
-- [x] T061 [P] Run E2E tests with pnpm --filter @ds/demo test:e2e
+- [x] T059 [P] Verify each utility is under 2KB gzipped (per SC-003) with pnpm --filter @hypoth-ui/primitives-dom build
+- [x] T060 [P] Run all unit tests with pnpm --filter @hypoth-ui/primitives-dom test
+- [x] T061 [P] Run E2E tests with pnpm --filter @hypoth-ui/demo test:e2e
 - [x] T062 Verify all exports match contracts/primitives-dom.d.ts
 - [x] T063 Run quickstart.md validation - follow steps and verify they work
 - [x] T064 [P] Add axe-core accessibility tests to verify SC-001 in packages/primitives-dom/tests/a11y.test.ts

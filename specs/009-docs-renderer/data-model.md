@@ -5,7 +5,7 @@
 
 ## Overview
 
-This document defines the data structures, relationships, and validation rules for the docs renderer with white-label overlay support. The model extends existing `@ds/docs-core` types and introduces new structures for content overlay and search indexing.
+This document defines the data structures, relationships, and validation rules for the docs renderer with white-label overlay support. The model extends existing `@hypoth-ui/docs-core` types and introduces new structures for content overlay and search indexing.
 
 ## Entity Relationship Diagram
 
@@ -17,7 +17,7 @@ This document defines the data structures, relationships, and validation rules f
 │  ┌──────────────────┐         overlays          ┌──────────────────┐        │
 │  │  Base Content    │◄─────────────────────────│  Tenant Content  │        │
 │  │  Pack            │                           │  Pack            │        │
-│  │  (@ds/docs-      │                           │  (@tenant/docs-  │        │
+│  │  (@hypoth-ui/docs-      │                           │  (@tenant/docs-  │        │
 │  │   content)       │                           │   content)       │        │
 │  └────────┬─────────┘                           └────────┬─────────┘        │
 │           │                                              │                   │
@@ -71,7 +71,7 @@ Represents a documentation content package (npm module).
  * Metadata for a documentation content pack
  */
 interface ContentPack {
-  /** Package identifier (e.g., "@ds/docs-content") */
+  /** Package identifier (e.g., "@hypoth-ui/docs-content") */
   id: string;
 
   /** Absolute path to package root */
@@ -451,4 +451,4 @@ The codebase has two EditionConfig types:
 
 - Existing `edition-config.json` files continue to work
 - New fields are optional with sensible defaults
-- `contentPacks` defaults to `[@ds/docs-content]` if not specified
+- `contentPacks` defaults to `[@hypoth-ui/docs-content]` if not specified

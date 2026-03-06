@@ -95,7 +95,7 @@
     {
       "label": "Base Content Pack",
       "body": {
-        "name": "@ds/docs-content",
+        "name": "@hypoth-ui/docs-content",
         "version": "0.0.0",
         "type": "module",
         "description": "Base documentation content pack",
@@ -128,7 +128,7 @@
         "description": "Tenant documentation content overlay",
         "docsContent": {
           "type": "overlay",
-          "extends": "@ds/docs-content",
+          "extends": "@hypoth-ui/docs-content",
           "directories": {
             "manifests": "manifests",
             "components": "components",
@@ -143,7 +143,7 @@
           "./edition-config.json": "./edition-config.json"
         },
         "peerDependencies": {
-          "@ds/docs-content": "workspace:*"
+          "@hypoth-ui/docs-content": "workspace:*"
         }
       }
     }

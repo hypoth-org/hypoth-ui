@@ -2,7 +2,7 @@
  * Select Root component - provides context to all Select compound components.
  */
 
-import { type Placement, createSelectBehavior } from "@ds/primitives-dom";
+import { type Placement, createSelectBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { useStableId } from "../../hooks/use-stable-id.js";
 import { SelectProvider } from "./select-context.js";

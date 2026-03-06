@@ -5,14 +5,14 @@
 
 ## Summary
 
-Create two parallel demo applications—`demo-react` (renamed from existing `apps/demo`) and `demo-wc` (new)—that showcase the design system's components in a realistic app shell layout. Both demos share mock data and assets via a new `@ds/demo-shared` package while implementing layouts idiomatically for their respective frameworks. Visual regression tests ensure cross-framework parity.
+Create two parallel demo applications—`demo-react` (renamed from existing `apps/demo`) and `demo-wc` (new)—that showcase the design system's components in a realistic app shell layout. Both demos share mock data and assets via a new `@hypoth-ui/demo-shared` package while implementing layouts idiomatically for their respective frameworks. Visual regression tests ensure cross-framework parity.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
 **Primary Dependencies**:
-- demo-react: Next.js 14+, React 18+, @ds/react, @ds/tokens, @ds/css
-- demo-wc: Vite 5+, @ds/wc, @ds/tokens, @ds/css
+- demo-react: Next.js 14+, React 18+, @hypoth-ui/react, @hypoth-ui/tokens, @hypoth-ui/css
+- demo-wc: Vite 5+, @hypoth-ui/wc, @hypoth-ui/tokens, @hypoth-ui/css
 - demo-shared: None (pure TypeScript/JSON data)
 
 **Storage**: localStorage (theme persistence only)
@@ -38,18 +38,18 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly
   - demo-react uses Next.js with minimal `'use client'` boundaries
   - demo-wc is client-only (appropriate for WC showcase)
-  - Both use CSS variables from @ds/tokens
+  - Both use CSS variables from @hypoth-ui/tokens
 - [x] **Accessibility**: WCAG 2.1 AA plan; APG patterns identified; a11y testing strategy defined
   - Components already implement APG patterns
   - Playwright axe-core tests for each demo
   - Keyboard navigation testing included
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
-  - Both demos consume @ds/tokens
+  - Both demos consume @hypoth-ui/tokens
   - CSS layers respected (reset, tokens, base, components)
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
   - demos depend on these but don't modify them
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
-  - demo-wc showcases existing @ds/wc components
+  - demo-wc showcases existing @hypoth-ui/wc components
 - [x] **Dependency Management**: Latest stable versions verified; pnpm used; bundle impact assessed
   - Vite for demo-wc (minimal bundler overhead)
   - Next.js already in use for demo-react
@@ -127,7 +127,7 @@ packages/
     └── package.json
 ```
 
-**Structure Decision**: Monorepo with two demo apps sharing data via `@ds/demo-shared` package. This follows Approach C from the spec, allowing idiomatic implementations while sharing mock data and assets.
+**Structure Decision**: Monorepo with two demo apps sharing data via `@hypoth-ui/demo-shared` package. This follows Approach C from the spec, allowing idiomatic implementations while sharing mock data and assets.
 
 ## Complexity Tracking
 

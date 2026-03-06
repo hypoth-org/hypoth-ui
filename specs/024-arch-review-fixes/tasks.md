@@ -52,7 +52,7 @@ This is a monorepo with:
 - [x] T009 [US1] Remove `this.click()` call from handleKeyDown method in packages/wc/src/components/button/button.ts
 - [x] T010 [US1] Remove unused handleActivate method in packages/wc/src/components/button/button.ts
 - [x] T011 [US1] Remove onActivate callback from connectedCallback in packages/wc/src/components/button/button.ts
-- [x] T012 [US1] Run button tests to verify fix: `pnpm --filter @ds/wc test -- --run button`
+- [x] T012 [US1] Run button tests to verify fix: `pnpm --filter @hypoth-ui/wc test -- --run button`
 
 **Checkpoint**: Button emits exactly one ds:press event per activation (mouse click, Enter, Space)
 
@@ -220,7 +220,7 @@ This is a monorepo with:
 
 - [x] T10 [US4] Verify all 55 MDX files exist: `ls packages/docs-content/components/*.mdx | wc -l`
 - [x] T10 [US4] Validate MDX frontmatter for all new docs
-- [x] T10 [US4] Verify docs site builds successfully: `pnpm --filter @ds/docs-app build`
+- [x] T10 [US4] Verify docs site builds successfully: `pnpm --filter @hypoth-ui/docs-app build`
 
 **Checkpoint**: All 55 components have MDX documentation with required sections
 

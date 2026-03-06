@@ -14,7 +14,7 @@ Deliver a framework-agnostic layout layer with 14 token-driven, Light DOM compon
 **Storage**: N/A (stateless layout components)
 **Testing**: Vitest (unit tests), axe-core (a11y automation), Playwright (visual regression)
 **Target Platform**: Browser (SSR-compatible with Next.js App Router)
-**Project Type**: Monorepo packages (`@ds/wc`, `@ds/react`, `@ds/css`)
+**Project Type**: Monorepo packages (`@hypoth-ui/wc`, `@hypoth-ui/react`, `@hypoth-ui/css`)
 **Performance Goals**: <3KB gzipped total bundle for all layout components (tree-shaken)
 **Constraints**: Zero runtime JS for responsive behavior; CSS-only media queries; Light DOM only
 **Scale/Scope**: 14 components, ~40 functional requirements
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; CSS-only responsive via pre-generated media query classes; SSR-friendly (layout correct on first paint)
 - [x] **Accessibility**: WCAG 2.1 AA plan; APG patterns for landmarks (Header=banner, Footer=contentinfo, Main=main); a11y testing via axe-core
 - [x] **Customizability**: Uses DTCG tokens for spacing, sizing, breakpoints; CSS layers for overrides; no inline styles blocking customization
-- [x] **Zero-dep Core**: Layout CSS extends `@ds/css` with zero runtime deps; `@ds/tokens` provides CSS variables
+- [x] **Zero-dep Core**: Layout CSS extends `@hypoth-ui/css` with zero runtime deps; `@hypoth-ui/tokens` provides CSS variables
 - [x] **Web Components**: Light DOM via DSElement base class; Lit-based; theme via CSS vars
 - [x] **Dependency Management**: No new dependencies required; uses existing Lit 3.1+, React 18+
 
@@ -119,7 +119,7 @@ packages/
                 └── index.ts
 ```
 
-**Structure Decision**: Layout components follow existing pattern with CSS in `@ds/css`, Web Components in `@ds/wc`, and React adapters in `@ds/react`. All components use Light DOM via `DSElement` base class.
+**Structure Decision**: Layout components follow existing pattern with CSS in `@hypoth-ui/css`, Web Components in `@hypoth-ui/wc`, and React adapters in `@hypoth-ui/react`. All components use Light DOM via `DSElement` base class.
 
 ## Complexity Tracking
 

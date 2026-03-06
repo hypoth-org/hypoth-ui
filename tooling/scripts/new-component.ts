@@ -249,7 +249,7 @@ ${config.description}
 ### React
 
 \`\`\`tsx
-import { ${config.className} } from "@ds/react";
+import { ${config.className} } from "@hypoth-ui/react";
 
 function MyComponent() {
   return <${config.className}>Content here</${config.className}>;

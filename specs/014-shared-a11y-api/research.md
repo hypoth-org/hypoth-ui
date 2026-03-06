@@ -10,7 +10,7 @@
 **Rationale**:
 - Framework-agnostic state machines return prop objects (`getTriggerProps()`, `getContentProps()`)
 - ARIA attributes computed once in the primitive, consumed identically by React and WC
-- Matches existing `@ds/primitives-dom` patterns (`createFocusTrap`, `createDismissableLayer`)
+- Matches existing `@hypoth-ui/primitives-dom` patterns (`createFocusTrap`, `createDismissableLayer`)
 - Closure-captured state with `activate()`/`deactivate()` lifecycle fits both React `useEffect` and Lit `disconnectedCallback`
 
 **Alternatives considered**:
@@ -88,7 +88,7 @@ function createCompoundContext<T>(displayName: string) {
 - Avoids TypeScript performance issues with `as` prop polymorphism
 - Prop merging handles className concatenation, style merging, event handler composition
 - Child handlers execute first, can prevent parent via `event.preventDefault()`
-- Existing `mergeProps` utility in `@ds/react` already handles this correctly
+- Existing `mergeProps` utility in `@hypoth-ui/react` already handles this correctly
 
 **Alternatives considered**:
 - `as` prop polymorphism: TypeScript complexity, type inference issues with generic components
@@ -132,7 +132,7 @@ function createCompoundContext<T>(displayName: string) {
 
 ## Decision 5: Keyboard Interaction Integration
 
-**Decision**: Compose existing primitives from `@ds/primitives-dom`
+**Decision**: Compose existing primitives from `@hypoth-ui/primitives-dom`
 
 **Rationale**:
 - `createFocusTrap`: Dialog focus containment (already implemented)

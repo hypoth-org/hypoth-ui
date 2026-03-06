@@ -1,9 +1,17 @@
 {
-  "name": "@ds/test-utils",
+  "name": "@hypoth-ui/test-utils",
   "version": "0.0.0",
   "type": "module",
   "sideEffects": false,
-  "description": "Framework-agnostic test utilities for WC and React component testing",
+  "description": "Test utilities for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/test-utils"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["testing", "utilities", "design-system", "vitest", "hypoth-ui"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

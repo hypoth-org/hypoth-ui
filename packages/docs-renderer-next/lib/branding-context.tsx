@@ -13,7 +13,7 @@ import type {
   Edition,
   RequiredFeatureConfig,
   UpgradeConfig,
-} from "@ds/docs-core";
+} from "@hypoth-ui/docs-core";
 import { type ReactNode, createContext, useContext } from "react";
 
 /**

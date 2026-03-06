@@ -40,7 +40,7 @@
 - [x] T007 Add reduced motion media query support in packages/css/src/layers/animations.css
   - @media (prefers-reduced-motion: reduce) to disable all animations
 - [x] T008 Import animations.css in packages/css/src/index.css
-- [x] T009 Build and verify CSS output with `pnpm --filter @ds/css build`
+- [x] T009 Build and verify CSS output with `pnpm --filter @hypoth-ui/css build`
 
 **Checkpoint**: CSS animations ready - utility classes work, reduced motion respected
 
@@ -75,7 +75,7 @@
 - [x] T016 [US1] Update ds-dialog to coordinate animation timing in packages/wc/src/components/dialog/dialog.ts
   - Wait for exit animation before removing content from DOM
   - Call presence.hide() on close, listen for onExitComplete
-- [x] T017 [US1] Verify dialog animation works with `pnpm --filter @ds/wc build && pnpm --filter @ds/wc test`
+- [x] T017 [US1] Verify dialog animation works with `pnpm --filter @hypoth-ui/wc build && pnpm --filter @hypoth-ui/wc test`
 
 **Checkpoint**: Dialog animates in/out with fade+scale. Exit animation completes before removal.
 
@@ -157,7 +157,7 @@
 - [x] T032 [US4] Create usePresence hook in packages/react/src/primitives/use-presence.ts
   - Return { isPresent, ref } for custom implementations
 - [x] T033 [US4] Export Presence and usePresence from packages/react/src/index.ts
-- [x] T034 [US4] Build and verify React package with `pnpm --filter @ds/react build && pnpm --filter @ds/react test`
+- [x] T034 [US4] Build and verify React package with `pnpm --filter @hypoth-ui/react build && pnpm --filter @hypoth-ui/react test`
 
 **Checkpoint**: React Presence works. All 4 overlay WC components animate. Same visual behavior.
 
@@ -167,7 +167,7 @@
 
 **Purpose**: Final verification, cleanup, and documentation
 
-- [x] T035 [P] Verify all overlay components animate correctly with `pnpm --filter @ds/wc test`
+- [x] T035 [P] Verify all overlay components animate correctly with `pnpm --filter @hypoth-ui/wc test`
 - [x] T036 [P] Verify bundle size meets ≤3KB target for presence logic
 - [x] T037 [P] Run full build to verify no regressions with `pnpm build`
 - [x] T038 [P] Run typecheck across affected packages with `pnpm typecheck`
@@ -272,7 +272,7 @@ For a single developer:
 
 - [P] tasks = different files, no dependencies between them
 - [Story] label maps task to user story for traceability
-- Motion tokens already exist - no changes needed to @ds/tokens
+- Motion tokens already exist - no changes needed to @hypoth-ui/tokens
 - CSS animations reference existing token CSS variables
 - Presence utility is the core JS logic (~2KB budget)
 - Each user story can be independently validated

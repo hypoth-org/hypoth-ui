@@ -103,12 +103,12 @@ Brand files customize tokens per brand. Create in `packages/tokens/src/tokens/br
 
 ```bash
 # Build all token outputs
-pnpm --filter @ds/tokens build
+pnpm --filter @hypoth-ui/tokens build
 ```
 
 **Expected Output:**
 ```
-> @ds/tokens@0.0.0 build
+> @hypoth-ui/tokens@0.0.0 build
 > tsx src/build/build.ts
 
 Building tokens...
@@ -174,7 +174,7 @@ Add theme attributes to your HTML:
         (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.dataset.mode = mode;
     </script>
-    <link rel="stylesheet" href="@ds/tokens/css">
+    <link rel="stylesheet" href="@hypoth-ui/tokens/css">
   </head>
 </html>
 ```
@@ -182,7 +182,7 @@ Add theme attributes to your HTML:
 Switch modes at runtime using the theme controller:
 
 ```javascript
-import { setMode, setBrand, toggleMode, onModeChange } from '@ds/tokens/runtime';
+import { setMode, setBrand, toggleMode, onModeChange } from '@hypoth-ui/tokens/runtime';
 
 // Set mode directly
 setMode('dark');
@@ -289,16 +289,16 @@ export type TokenPath =
 
 ```bash
 # Build tokens
-pnpm --filter @ds/tokens build
+pnpm --filter @hypoth-ui/tokens build
 
 # Validate token references
-pnpm --filter @ds/docs-core validate:tokens
+pnpm --filter @hypoth-ui/docs-core validate:tokens
 
 # Generate token docs
-pnpm --filter @ds/docs-core build:token-docs
+pnpm --filter @hypoth-ui/docs-core build:token-docs
 
 # Validate component tokensUsed
-pnpm --filter @ds/docs-core validate
+pnpm --filter @hypoth-ui/docs-core validate
 ```
 
 ## File Locations

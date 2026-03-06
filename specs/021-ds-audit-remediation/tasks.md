@@ -16,7 +16,7 @@
 ## Path Conventions
 
 - **Monorepo**: `packages/[package-name]/src/`
-- Key packages: `@ds/wc` (packages/wc/), `@ds/primitives-dom` (packages/primitives-dom/), `@ds/react` (packages/react/)
+- Key packages: `@hypoth-ui/wc` (packages/wc/), `@hypoth-ui/primitives-dom` (packages/primitives-dom/), `@hypoth-ui/react` (packages/react/)
 
 ---
 
@@ -27,7 +27,7 @@
 - [x] T001 Add `"sideEffects": false` to packages/wc/package.json
 - [x] T002 [P] Verify existing Vitest configuration supports form submission tests in packages/wc/vitest.config.ts
 
-**Checkpoint**: Tree-shaking enabled for @ds/wc package
+**Checkpoint**: Tree-shaking enabled for @hypoth-ui/wc package
 
 ---
 
@@ -69,7 +69,7 @@
 
 ## Phase 4: User Story 2 - Tree-Shaking Support (Priority: P1)
 
-**Goal**: Enable bundlers to eliminate unused component code from @ds/wc imports
+**Goal**: Enable bundlers to eliminate unused component code from @hypoth-ui/wc imports
 
 **Independent Test**: Import only DsButton, build with Vite, verify bundle <20KB and excludes Dialog code
 
@@ -86,7 +86,7 @@
 
 ## Phase 5: User Story 3 - Unified Behavior Primitives for Overlays (Priority: P1)
 
-**Goal**: Migrate WC overlay components to use shared behavior primitives from @ds/primitives-dom
+**Goal**: Migrate WC overlay components to use shared behavior primitives from @hypoth-ui/primitives-dom
 
 **Independent Test**: Verify DsDialog uses createDialogBehavior; keyboard navigation matches React Dialog
 
@@ -135,9 +135,9 @@
 
 ## Phase 7: User Story 5 - Granular Package Exports (Priority: P2)
 
-**Goal**: Add subpath exports to @ds/wc for maximum tree-shaking certainty
+**Goal**: Add subpath exports to @hypoth-ui/wc for maximum tree-shaking certainty
 
-**Independent Test**: Import @ds/wc/button, verify TypeScript types resolve and bundle contains only button code
+**Independent Test**: Import @hypoth-ui/wc/button, verify TypeScript types resolve and bundle contains only button code
 
 ### Implementation for User Story 5
 
@@ -152,7 +152,7 @@
 - [x] T049 [US5] Verify main entry (.) remains backward compatible
 - [x] T050 [US5] Build package and verify at least 10 subpath entries exist
 
-**Checkpoint**: @ds/wc supports granular imports like @ds/wc/button with proper TypeScript support
+**Checkpoint**: @hypoth-ui/wc supports granular imports like @hypoth-ui/wc/button with proper TypeScript support
 
 ---
 
@@ -183,7 +183,7 @@
 
 - [x] T059 Run full TypeScript compilation across all modified packages
 - [x] T060 Run existing test suites to verify no regressions
-- [ ] T061 [P] Update @ds/wc README with new import patterns
+- [ ] T061 [P] Update @hypoth-ui/wc README with new import patterns
 - [ ] T062 [P] Verify all checklist items in specs/021-ds-audit-remediation/checklist.md
 - [ ] T063 Run quickstart.md validation scenarios
 

@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { loadManifestById } from "@ds/docs-core";
-import { MdxRenderer } from "@ds/docs-renderer-next/components/mdx-renderer";
+import { loadManifestById } from "@hypoth-ui/docs-core";
+import { MdxRenderer } from "@hypoth-ui/docs-renderer-next/components/mdx-renderer";
 import { notFound } from "next/navigation";
 
 interface ComponentPageProps {

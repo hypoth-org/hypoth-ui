@@ -168,10 +168,10 @@ jobs:
           name: dist
 
       - name: Validate manifests and docs (strict mode)
-        run: pnpm --filter @ds/docs-core validate --strict
+        run: pnpm --filter @hypoth-ui/docs-core validate --strict
 
       - name: Build edition map
-        run: pnpm --filter @ds/docs-app build:edition-map
+        run: pnpm --filter @hypoth-ui/docs-app build:edition-map
 
   bundle-size:
     name: Bundle Size Check
@@ -203,21 +203,21 @@ jobs:
           echo "📦 Bundle Size Report"
           echo "===================="
 
-          # Check @ds/tokens CSS
+          # Check @hypoth-ui/tokens CSS
           TOKEN_SIZE=$(gzip -c packages/tokens/dist/css/tokens.css 2>/dev/null | wc -c || echo "0")
-          echo "📊 @ds/tokens CSS: ${TOKEN_SIZE} bytes gzipped"
+          echo "📊 @hypoth-ui/tokens CSS: ${TOKEN_SIZE} bytes gzipped"
 
-          # Check @ds/css
+          # Check @hypoth-ui/css
           CSS_SIZE=$(gzip -c packages/css/dist/index.css 2>/dev/null | wc -c || echo "0")
-          echo "📊 @ds/css: ${CSS_SIZE} bytes gzipped"
+          echo "📊 @hypoth-ui/css: ${CSS_SIZE} bytes gzipped"
 
-          # Check @ds/wc
+          # Check @hypoth-ui/wc
           WC_SIZE=$(gzip -c packages/wc/dist/index.js 2>/dev/null | wc -c || echo "0")
-          echo "📊 @ds/wc: ${WC_SIZE} bytes gzipped"
+          echo "📊 @hypoth-ui/wc: ${WC_SIZE} bytes gzipped"
 
-          # Check @ds/react
+          # Check @hypoth-ui/react
           REACT_SIZE=$(gzip -c packages/react/dist/index.js 2>/dev/null | wc -c || echo "0")
-          echo "📊 @ds/react: ${REACT_SIZE} bytes gzipped"
+          echo "📊 @hypoth-ui/react: ${REACT_SIZE} bytes gzipped"
 
           # Foundation packages limits (gzipped)
           # WC package includes form controls, overlays, navigation, structure, feedback, and data display components
@@ -225,12 +225,12 @@ jobs:
           REACT_LIMIT=30720  # 30KB
 
           if [ "$WC_SIZE" -gt "$WC_LIMIT" ]; then
-            echo "❌ @ds/wc exceeds 60KB limit!"
+            echo "❌ @hypoth-ui/wc exceeds 60KB limit!"
             exit 1
           fi
 
           if [ "$REACT_SIZE" -gt "$REACT_LIMIT" ]; then
-            echo "❌ @ds/react exceeds 30KB limit!"
+            echo "❌ @hypoth-ui/react exceeds 30KB limit!"
             exit 1
           fi
 

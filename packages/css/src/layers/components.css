@@ -1,53 +1,53 @@
 /* Components Layer - Design system component styles */
 /* These styles are wrapped in @layer components by their source files */
 
-/* Import component styles from @ds/wc */
+/* Import component styles from @hypoth-ui/wc */
 /* Note: Component CSS files already declare @layer components internally */
 /* postcss-import resolves these through node_modules */
-@import "@ds/wc/src/components/button/button.css";
-@import "@ds/wc/src/components/input/input.css";
-@import "@ds/wc/src/components/link/link.css";
-@import "@ds/wc/src/components/text/text.css";
-@import "@ds/wc/src/components/icon/icon.css";
-@import "@ds/wc/src/components/spinner/spinner.css";
-@import "@ds/wc/src/components/visually-hidden/visually-hidden.css";
-@import "@ds/wc/src/components/textarea/textarea.css";
-@import "@ds/wc/src/components/checkbox/checkbox.css";
-@import "@ds/wc/src/components/radio/radio.css";
-@import "@ds/wc/src/components/switch/switch.css";
-@import "@ds/wc/src/components/popover/popover.css";
-@import "@ds/wc/src/components/tooltip/tooltip.css";
-@import "@ds/wc/src/components/menu/menu.css";
+@import "@hypoth-ui/wc/src/components/button/button.css";
+@import "@hypoth-ui/wc/src/components/input/input.css";
+@import "@hypoth-ui/wc/src/components/link/link.css";
+@import "@hypoth-ui/wc/src/components/text/text.css";
+@import "@hypoth-ui/wc/src/components/icon/icon.css";
+@import "@hypoth-ui/wc/src/components/spinner/spinner.css";
+@import "@hypoth-ui/wc/src/components/visually-hidden/visually-hidden.css";
+@import "@hypoth-ui/wc/src/components/textarea/textarea.css";
+@import "@hypoth-ui/wc/src/components/checkbox/checkbox.css";
+@import "@hypoth-ui/wc/src/components/radio/radio.css";
+@import "@hypoth-ui/wc/src/components/switch/switch.css";
+@import "@hypoth-ui/wc/src/components/popover/popover.css";
+@import "@hypoth-ui/wc/src/components/tooltip/tooltip.css";
+@import "@hypoth-ui/wc/src/components/menu/menu.css";
 
 /* Advanced Form Controls */
-@import "@ds/wc/src/components/select/select.css";
-@import "@ds/wc/src/components/combobox/combobox.css";
-@import "@ds/wc/src/components/date-picker/date-picker.css";
-@import "@ds/wc/src/components/slider/slider.css";
-@import "@ds/wc/src/components/number-input/number-input.css";
-@import "@ds/wc/src/components/file-upload/file-upload.css";
-@import "@ds/wc/src/components/time-picker/time-picker.css";
-@import "@ds/wc/src/components/pin-input/pin-input.css";
+@import "@hypoth-ui/wc/src/components/select/select.css";
+@import "@hypoth-ui/wc/src/components/combobox/combobox.css";
+@import "@hypoth-ui/wc/src/components/date-picker/date-picker.css";
+@import "@hypoth-ui/wc/src/components/slider/slider.css";
+@import "@hypoth-ui/wc/src/components/number-input/number-input.css";
+@import "@hypoth-ui/wc/src/components/file-upload/file-upload.css";
+@import "@hypoth-ui/wc/src/components/time-picker/time-picker.css";
+@import "@hypoth-ui/wc/src/components/pin-input/pin-input.css";
 
 /* Structure & Navigation Components */
-@import "@ds/wc/src/components/card/card.css";
-@import "@ds/wc/src/components/separator/separator.css";
-@import "@ds/wc/src/components/aspect-ratio/aspect-ratio.css";
-@import "@ds/wc/src/components/collapsible/collapsible.css";
-@import "@ds/wc/src/components/tabs/tabs.css";
-@import "@ds/wc/src/components/accordion/accordion.css";
-@import "@ds/wc/src/components/alert-dialog/alert-dialog.css";
-@import "@ds/wc/src/components/sheet/sheet.css";
-@import "@ds/wc/src/components/drawer/drawer.css";
-@import "@ds/wc/src/components/dropdown-menu/dropdown-menu.css";
-@import "@ds/wc/src/components/context-menu/context-menu.css";
-@import "@ds/wc/src/components/hover-card/hover-card.css";
-@import "@ds/wc/src/components/navigation-menu/navigation-menu.css";
-@import "@ds/wc/src/components/scroll-area/scroll-area.css";
-@import "@ds/wc/src/components/breadcrumb/breadcrumb.css";
-@import "@ds/wc/src/components/pagination/pagination.css";
-@import "@ds/wc/src/components/stepper/stepper.css";
-@import "@ds/wc/src/components/command/command.css";
+@import "@hypoth-ui/wc/src/components/card/card.css";
+@import "@hypoth-ui/wc/src/components/separator/separator.css";
+@import "@hypoth-ui/wc/src/components/aspect-ratio/aspect-ratio.css";
+@import "@hypoth-ui/wc/src/components/collapsible/collapsible.css";
+@import "@hypoth-ui/wc/src/components/tabs/tabs.css";
+@import "@hypoth-ui/wc/src/components/accordion/accordion.css";
+@import "@hypoth-ui/wc/src/components/alert-dialog/alert-dialog.css";
+@import "@hypoth-ui/wc/src/components/sheet/sheet.css";
+@import "@hypoth-ui/wc/src/components/drawer/drawer.css";
+@import "@hypoth-ui/wc/src/components/dropdown-menu/dropdown-menu.css";
+@import "@hypoth-ui/wc/src/components/context-menu/context-menu.css";
+@import "@hypoth-ui/wc/src/components/hover-card/hover-card.css";
+@import "@hypoth-ui/wc/src/components/navigation-menu/navigation-menu.css";
+@import "@hypoth-ui/wc/src/components/scroll-area/scroll-area.css";
+@import "@hypoth-ui/wc/src/components/breadcrumb/breadcrumb.css";
+@import "@hypoth-ui/wc/src/components/pagination/pagination.css";
+@import "@hypoth-ui/wc/src/components/stepper/stepper.css";
+@import "@hypoth-ui/wc/src/components/command/command.css";
 
 /* Layout Primitives */
-@import "@ds/wc/src/components/layout/index.css";
+@import "@hypoth-ui/wc/src/components/layout/index.css";

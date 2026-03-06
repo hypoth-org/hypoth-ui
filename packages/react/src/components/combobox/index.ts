@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Combobox } from "@ds/react";
+ * import { Combobox } from "@hypoth-ui/react";
  *
  * <Combobox.Root onValueChange={(value) => console.log(value)}>
  *   <Combobox.Input placeholder="Search fruits..." />
@@ -59,4 +59,4 @@ export type {
 };
 
 // Re-export Placement and Option from primitives-dom
-export type { Placement, Option } from "@ds/primitives-dom";
+export type { Placement, Option } from "@hypoth-ui/primitives-dom";

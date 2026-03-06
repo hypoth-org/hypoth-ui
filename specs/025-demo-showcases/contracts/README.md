@@ -14,7 +14,7 @@ This feature has **no API contracts** in the traditional sense. The demos are:
 
 The following internal contracts exist between the shared package and demo apps:
 
-### @ds/demo-shared Exports
+### @hypoth-ui/demo-shared Exports
 
 ```typescript
 // Navigation

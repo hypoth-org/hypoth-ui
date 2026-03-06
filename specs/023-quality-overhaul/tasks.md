@@ -236,7 +236,7 @@ Note: Core implementation in Phase 2. This phase is for refinement and documenta
 
 **Goal**: Add manifest.json files for all 55 components
 
-**Independent Test**: Run `pnpm --filter @ds/docs-core validate:manifests`
+**Independent Test**: Run `pnpm --filter @hypoth-ui/docs-core validate:manifests`
 
 ### Implementation for User Story 7
 

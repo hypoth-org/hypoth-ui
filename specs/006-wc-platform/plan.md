@@ -5,7 +5,7 @@
 
 ## Summary
 
-Establish standardized Web Components platform conventions for the design system, including: a DSElement base class extending Lit's LightElement for Light DOM rendering, consistent naming conventions (ds-{name} tags, ds:{event} events), a centralized component registry, the @ds/next root loader for Next.js App Router integration, and an AST-based enforcement script to prevent accidental self-registration.
+Establish standardized Web Components platform conventions for the design system, including: a DSElement base class extending Lit's LightElement for Light DOM rendering, consistent naming conventions (ds-{name} tags, ds:{event} events), a centralized component registry, the @hypoth-ui/next root loader for Next.js App Router integration, and an AST-based enforcement script to prevent accidental self-registration.
 
 ## Technical Context
 
@@ -31,8 +31,8 @@ Verify compliance with Hypoth UI Design System Constitution:
   - Light DOM enables standard accessibility tree; components follow APG patterns
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
   - Components consume tokens via CSS custom properties; Light DOM allows CSS layer overrides
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - DSElement in @ds/wc depends only on Lit; enforcement script has no runtime deps
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - DSElement in @hypoth-ui/wc depends only on Lit; enforcement script has no runtime deps
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - DSElement extends LitElement with createRenderRoot returning `this` for Light DOM
 - [x] **Dependency Management**: Latest stable versions verified; pnpm used; bundle impact assessed
@@ -56,7 +56,7 @@ specs/006-wc-platform/
 
 ```text
 packages/
-├── wc/                           # @ds/wc - Web Components
+├── wc/                           # @hypoth-ui/wc - Web Components
 │   └── src/
 │       ├── base/
 │       │   └── ds-element.ts     # DSElement base class (rename from light-element.ts)
@@ -67,7 +67,7 @@ packages/
 │       │   └── emit.ts           # Event helper with ds: prefix (new)
 │       └── components/           # Individual components
 │
-├── next/                         # @ds/next - Next.js integration
+├── next/                         # @hypoth-ui/next - Next.js integration
 │   └── src/
 │       └── loader/
 │           ├── element-loader.tsx  # DsLoader component (exists)
@@ -85,7 +85,7 @@ apps/
 └── demo/                         # Demo application
 ```
 
-**Structure Decision**: Extends existing @ds/wc and @ds/next packages with new modules for registry, events, and enforcement. Documentation added to apps/docs.
+**Structure Decision**: Extends existing @hypoth-ui/wc and @hypoth-ui/next packages with new modules for registry, events, and enforcement. Documentation added to apps/docs.
 
 ## Constitution Check (Post-Design Verification)
 

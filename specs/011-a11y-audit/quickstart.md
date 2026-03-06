@@ -18,13 +18,13 @@ pnpm install
 ### Run all accessibility tests
 
 ```bash
-pnpm --filter @ds/wc test:a11y
+pnpm --filter @hypoth-ui/wc test:a11y
 ```
 
 ### Run a11y tests for a specific component
 
 ```bash
-pnpm --filter @ds/wc test:a11y -- --grep "ds-button"
+pnpm --filter @hypoth-ui/wc test:a11y -- --grep "ds-button"
 ```
 
 ### CI behavior
@@ -124,7 +124,7 @@ pnpm a11y:report --version 1.5.0
 ### Local development
 
 ```bash
-pnpm --filter @ds/docs-app dev
+pnpm --filter @hypoth-ui/docs-app dev
 # Navigate to /accessibility
 ```
 
@@ -142,7 +142,7 @@ Create `a11y-conformance.json` in your tenant config:
 
 ```json
 {
-  "extends": "@ds/a11y-audit/base-conformance.json",
+  "extends": "@hypoth-ui/a11y-audit/base-conformance.json",
   "additionalComponents": [
     {
       "id": "custom-date-picker",
@@ -157,7 +157,7 @@ Create `a11y-conformance.json` in your tenant config:
 
 ```json
 {
-  "extends": "@ds/a11y-audit/base-conformance.json",
+  "extends": "@hypoth-ui/a11y-audit/base-conformance.json",
   "excludeComponents": ["ds-internal-debug"]
 }
 ```
@@ -185,7 +185,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
-      - run: pnpm --filter @ds/wc test:a11y
+      - run: pnpm --filter @hypoth-ui/wc test:a11y
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -199,11 +199,11 @@ jobs:
 
 | Task | Command |
 |------|---------|
-| Run all a11y tests | `pnpm --filter @ds/wc test:a11y` |
+| Run all a11y tests | `pnpm --filter @hypoth-ui/wc test:a11y` |
 | Start manual audit | `pnpm a11y:audit --component <id> --category <cat>` |
 | Generate release report | `pnpm a11y:report --version <ver>` |
 | Validate audit records | `pnpm a11y:validate` |
-| View docs locally | `pnpm --filter @ds/docs-app dev` |
+| View docs locally | `pnpm --filter @hypoth-ui/docs-app dev` |
 
 ## Troubleshooting
 

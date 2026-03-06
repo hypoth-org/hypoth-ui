@@ -16,7 +16,7 @@ Technical approach: Hybrid system using axe-core for automation + structured JSO
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: axe-core (automated testing), Vitest (test runner), @ds/docs-core (documentation integration)
+**Primary Dependencies**: axe-core (automated testing), Vitest (test runner), @hypoth-ui/docs-core (documentation integration)
 **Storage**: File-based (JSON artifacts in repository, 5-year retention)
 **Testing**: Vitest with vitest-axe for a11y assertions
 **Target Platform**: Node.js CLI (audit tools), GitHub Actions (CI), Next.js (docs integration)
@@ -113,7 +113,7 @@ a11y-audits/                       # Audit artifacts storage (git-tracked)
         └── report.html
 ```
 
-**Structure Decision**: Monorepo structure with new `@ds/a11y-audit` package for CLI tooling. A11y tests co-located with components in `@ds/wc`. Audit artifacts stored in dedicated `a11y-audits/` directory at repo root for easy access and git history. Documentation integration through existing `@ds/docs-core` and `@ds/docs-app` packages.
+**Structure Decision**: Monorepo structure with new `@hypoth-ui/a11y-audit` package for CLI tooling. A11y tests co-located with components in `@hypoth-ui/wc`. Audit artifacts stored in dedicated `a11y-audits/` directory at repo root for easy access and git history. Documentation integration through existing `@hypoth-ui/docs-core` and `@hypoth-ui/docs-app` packages.
 
 ## Complexity Tracking
 

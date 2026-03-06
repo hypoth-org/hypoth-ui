@@ -56,7 +56,7 @@
 
 **Goal**: Deploy a docs site that automatically renders component documentation and guides from content packs with auto-generated navigation
 
-**Independent Test**: Deploy docs site with @ds/docs-content, navigate to component and guide pages, verify content renders correctly and navigation reflects all available content
+**Independent Test**: Deploy docs site with @hypoth-ui/docs-content, navigate to component and guide pages, verify content renders correctly and navigation reflects all available content
 
 ### Implementation for User Story 1
 

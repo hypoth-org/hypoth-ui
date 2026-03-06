@@ -5,7 +5,7 @@
 
 ## Summary
 
-Extend the `@ds/primitives-dom` package with framework-agnostic behavior utilities for accessible components: dismissable layer (Escape/outside-click), keyboard helpers (activation, arrow keys, type-ahead), and enhanced APIs for existing focus-trap and roving-focus utilities. Create test harness pages in the demo app and usage documentation for the docs site.
+Extend the `@hypoth-ui/primitives-dom` package with framework-agnostic behavior utilities for accessible components: dismissable layer (Escape/outside-click), keyboard helpers (activation, arrow keys, type-ahead), and enhanced APIs for existing focus-trap and roving-focus utilities. Create test harness pages in the demo app and usage documentation for the docs site.
 
 ## Technical Context
 
@@ -28,7 +28,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: No runtime CSS-in-JS; minimal client boundaries; SSR-friendly (utilities don't access DOM at import time)
 - [x] **Accessibility**: WCAG 2.1 AA plan (all utilities implement APG patterns); APG patterns identified (focus-trap, roving-tabindex, combobox navigation); a11y testing strategy defined (axe-core + vitest)
 - [x] **Customizability**: Uses DTCG tokens (N/A - behavior utilities, not styling); CSS layers for overrides (N/A); no inline styles blocking customization (N/A)
-- [x] **Zero-dep Core**: `@ds/primitives-dom` has no runtime deps (maintained)
+- [x] **Zero-dep Core**: `@hypoth-ui/primitives-dom` has no runtime deps (maintained)
 - [x] **Web Components**: Light DOM default (utilities work with Light DOM); Lit-based (N/A - framework-agnostic utilities); theme via CSS vars (N/A)
 - [x] **Dependency Management**: Latest stable versions verified (vitest, tsup); pnpm used; bundle impact assessed (<2KB per utility)
 

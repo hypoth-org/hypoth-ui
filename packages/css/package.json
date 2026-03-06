@@ -1,8 +1,16 @@
 {
-  "name": "@ds/css",
+  "name": "@hypoth-ui/css",
   "version": "0.0.0",
   "type": "module",
-  "description": "CSS layers and base styles for the design system",
+  "description": "CSS layers and base styles for the hypoth-ui design system (Alpha)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypoth-ui/hypoth-ui.git",
+    "directory": "packages/css"
+  },
+  "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
+  "keywords": ["css", "css-layers", "design-system", "styles", "hypoth-ui"],
   "exports": {
     ".": "./dist/index.css",
     "./layers/reset": "./src/layers/reset.css",
@@ -15,8 +23,8 @@
   },
   "files": ["dist", "src/layers"],
   "dependencies": {
-    "@ds/tokens": "workspace:*",
-    "@ds/wc": "workspace:*"
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*"
   },
   "scripts": {
     "build": "postcss src/index.css -o dist/index.css",

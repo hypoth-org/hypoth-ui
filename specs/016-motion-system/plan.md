@@ -6,15 +6,15 @@
 ## Summary
 
 Implement a CSS-first animation system for component enter/exit transitions with motion tokens integration. The system provides:
-- CSS animation keyframes and utility classes in `@ds/css`
-- Presence utility in `@ds/primitives-dom` for exit animation coordination
+- CSS animation keyframes and utility classes in `@hypoth-ui/css`
+- Presence utility in `@hypoth-ui/primitives-dom` for exit animation coordination
 - Integration with existing overlay components (dialog, popover, tooltip, menu)
 - Full prefers-reduced-motion support via existing reduced-motion tokens
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: Lit 3.1+ (WC only), React 18+ (adapter peer dependency), existing `@ds/primitives-dom`
+**Primary Dependencies**: Lit 3.1+ (WC only), React 18+ (adapter peer dependency), existing `@hypoth-ui/primitives-dom`
 **Storage**: N/A (stateless animation system)
 **Testing**: Vitest 1.x (unit tests), happy-dom (DOM simulation)
 **Target Platform**: Browser (SSR-compatible), Next.js 14+ App Router
@@ -32,7 +32,7 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Performance**: CSS animations use GPU acceleration; no runtime CSS-in-JS; presence logic is minimal (~2KB)
 - [x] **Accessibility**: prefers-reduced-motion fully supported via existing reduced-motion tokens that set all durations to 0ms
 - [x] **Customizability**: Uses existing DTCG motion tokens; CSS layers for animation overrides; token-driven timing
-- [x] **Zero-dep Core**: Presence utility in `@ds/primitives-dom` has no runtime deps; CSS animations are pure CSS
+- [x] **Zero-dep Core**: Presence utility in `@hypoth-ui/primitives-dom` has no runtime deps; CSS animations are pure CSS
 - [x] **Web Components**: Animation via CSS classes and data attributes; Lit components consume motion tokens via CSS vars
 - [x] **Dependency Management**: No new dependencies required; uses existing Lit, React, and vitest
 
@@ -78,7 +78,7 @@ packages/
             └── Presence.tsx       # NEW: React Presence component
 ```
 
-**Structure Decision**: Extends existing monorepo packages. Animation CSS goes in `@ds/css`, presence utility in `@ds/primitives-dom`, React Presence in `@ds/react`. No new packages required.
+**Structure Decision**: Extends existing monorepo packages. Animation CSS goes in `@hypoth-ui/css`, presence utility in `@hypoth-ui/primitives-dom`, React Presence in `@hypoth-ui/react`. No new packages required.
 
 ## Complexity Tracking
 

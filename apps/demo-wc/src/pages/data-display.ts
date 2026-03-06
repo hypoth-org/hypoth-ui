@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { dataDisplaySectionContent, mockUsers, mockProducts, formatPrice } from '@ds/demo-shared';
+import { dataDisplaySectionContent, mockUsers, mockProducts, formatPrice } from '@hypoth-ui/demo-shared';
 
 // Import WC components (bundled exports)
-import '@ds/wc/data-display';
+import '@hypoth-ui/wc/data-display';
 
 /**
  * Data Display page component showcasing data presentation components

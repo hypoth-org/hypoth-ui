@@ -32,6 +32,6 @@
 ## Notes
 
 - Specification is complete and ready for `/speckit.clarify` or `/speckit.plan`
-- Existing @ds/primitives-dom utilities (focus-trap.ts, roving-focus.ts, live-region.ts) provide reference implementations
+- Existing @hypoth-ui/primitives-dom utilities (focus-trap.ts, roving-focus.ts, live-region.ts) provide reference implementations
 - All 6 user stories are independently testable and prioritized
 - Approach analysis recommends factory function pattern consistent with existing codebase

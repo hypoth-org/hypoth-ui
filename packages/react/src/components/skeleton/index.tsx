@@ -1,7 +1,7 @@
 "use client";
 
 import { type HTMLAttributes, createElement, forwardRef } from "react";
-import "@ds/wc";
+import "@hypoth-ui/wc";
 import {
   type ResponsiveProp,
   generateResponsiveDataAttr,

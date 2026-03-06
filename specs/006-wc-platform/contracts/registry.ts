@@ -2,7 +2,7 @@
  * Component Registry API Contract
  * Centralized mapping of tag names to component classes
  *
- * @package @ds/wc
+ * @package @hypoth-ui/wc
  * @path packages/wc/src/registry/registry.ts
  */
 

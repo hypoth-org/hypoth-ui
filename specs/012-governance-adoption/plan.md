@@ -10,7 +10,7 @@ Implement governance documentation, versioning processes, and adoption tooling f
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode)
-**Primary Dependencies**: @changesets/cli (versioning), conventional-commits (commit format), @ds/docs-core (docs integration)
+**Primary Dependencies**: @changesets/cli (versioning), conventional-commits (commit format), @hypoth-ui/docs-core (docs integration)
 **Storage**: File-based (JSON deprecation registry, markdown templates, changelog files)
 **Testing**: Vitest (unit tests for utilities), manual validation for docs
 **Target Platform**: Node.js 20+ (CI/tooling), web (docs site)
@@ -102,7 +102,7 @@ packages/docs-content/
 └── PULL_REQUEST_TEMPLATE.md     # PR template with checklist
 ```
 
-**Structure Decision**: Governance tooling lives in a dedicated `@ds/governance` package (devDependency only). Adopter documentation integrates into existing `@ds/docs-content`. Contributor documentation stays at repo root per industry convention.
+**Structure Decision**: Governance tooling lives in a dedicated `@hypoth-ui/governance` package (devDependency only). Adopter documentation integrates into existing `@hypoth-ui/docs-content`. Contributor documentation stays at repo root per industry convention.
 
 ## Complexity Tracking
 
@@ -115,7 +115,7 @@ No constitution violations to justify.
 - [x] **Performance**: Confirmed - all tooling runs at build/CI time only; no runtime impact
 - [x] **Accessibility**: Confirmed - deprecation banners will use `role="alert"` and proper ARIA
 - [x] **Customizability**: Confirmed - JSON schemas allow extension; templates are customizable
-- [x] **Zero-dep Core**: Confirmed - @ds/governance is devDependency only; no changes to core packages
+- [x] **Zero-dep Core**: Confirmed - @hypoth-ui/governance is devDependency only; no changes to core packages
 - [x] **Web Components**: N/A - no component changes
 - [x] **Dependency Management**: Confirmed - @changesets/cli v2.27.0 is latest stable; bundle impact = 0 (dev only)
 

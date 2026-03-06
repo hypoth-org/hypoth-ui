@@ -5,7 +5,7 @@
 
 ## What This Feature Does
 
-Moves the `@ds/governance` package from active workspace to `.archive/` directory, removing governance tooling from the build pipeline while preserving all code for future reactivation.
+Moves the `@hypoth-ui/governance` package from active workspace to `.archive/` directory, removing governance tooling from the build pipeline while preserving all code for future reactivation.
 
 ## Implementation Summary
 
@@ -32,7 +32,7 @@ Remove these scripts:
 
 ### Step 3: Update .changeset/config.json
 
-Remove `@ds/governance` from the ignore array.
+Remove `@hypoth-ui/governance` from the ignore array.
 
 ### Step 4: Update CI Workflows
 
@@ -67,9 +67,9 @@ When the component library reaches maturity (40+ components), governance can be 
    ```json
    {
      "scripts": {
-       "ds-deprecate": "pnpm --filter @ds/governance deprecate",
-       "ds-check-gates": "pnpm --filter @ds/governance check-gates",
-       "ds-tenant-diff": "pnpm --filter @ds/governance tenant-diff"
+       "ds-deprecate": "pnpm --filter @hypoth-ui/governance deprecate",
+       "ds-check-gates": "pnpm --filter @hypoth-ui/governance check-gates",
+       "ds-tenant-diff": "pnpm --filter @hypoth-ui/governance tenant-diff"
      }
    }
    ```
@@ -77,7 +77,7 @@ When the component library reaches maturity (40+ components), governance can be 
 3. **Add to .changeset/config.json ignore list**:
    ```json
    {
-     "ignore": ["@ds/governance"]
+     "ignore": ["@hypoth-ui/governance"]
    }
    ```
 
@@ -99,7 +99,7 @@ After implementation:
 - [ ] `pnpm install` succeeds
 - [ ] `pnpm build` succeeds for all active packages
 - [ ] `pnpm test` passes
-- [ ] `grep -r "@ds/governance" packages/` returns no results
+- [ ] `grep -r "@hypoth-ui/governance" packages/` returns no results
 - [ ] `.archive/governance/` contains all original files
 - [ ] `GOVERNANCE.md` exists at repository root
 - [ ] CI workflows pass

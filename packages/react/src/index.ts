@@ -1,5 +1,5 @@
 /**
- * Main entry point for @ds/react package.
+ * Main entry point for @hypoth-ui/react package.
  *
  * This module provides server-safe exports that can be imported in Next.js
  * App Router server components. Types have no runtime cost.
@@ -8,13 +8,13 @@
  * @example
  * ```tsx
  * "use client";
- * import { Button, Input } from "@ds/react/client";
+ * import { Button, Input } from "@hypoth-ui/react/client";
  * ```
  *
  * For type-only imports in server components:
  * @example
  * ```tsx
- * import type { ButtonProps, InputProps } from "@ds/react";
+ * import type { ButtonProps, InputProps } from "@hypoth-ui/react";
  * ```
  */
 

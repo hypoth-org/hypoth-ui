@@ -1,6 +1,6 @@
 # Contract: Package Exports
 
-**Package**: `@ds/react`
+**Package**: `@hypoth-ui/react`
 **Path**: `packages/react/`
 
 ## Purpose
@@ -105,7 +105,7 @@ export { Slot } from './primitives/slot';
 
 ```tsx
 // app/components/hero.tsx (Server Component)
-import type { TextProps, ButtonProps } from '@ds/react';
+import type { TextProps, ButtonProps } from '@hypoth-ui/react';
 
 interface HeroProps {
   titleSize?: TextProps['size'];
@@ -127,12 +127,12 @@ export function Hero({ titleSize = 'xl', ctaVariant = 'primary' }: HeroProps) {
 ```tsx
 // app/components/client-button.tsx
 'use client';
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 export { Button as ClientButton };
 
 // app/components/client-heading.tsx
 'use client';
-import { Text } from '@ds/react/client';
+import { Text } from '@hypoth-ui/react/client';
 
 export function ClientHeading(props: React.ComponentProps<typeof Text>) {
   return <Text {...props} asChild><h1>{props.children}</h1></Text>;
@@ -144,7 +144,7 @@ export function ClientHeading(props: React.ComponentProps<typeof Text>) {
 ```tsx
 // app/page.tsx
 'use client';
-import { Button, Link, Text, Box } from '@ds/react/client';
+import { Button, Link, Text, Box } from '@hypoth-ui/react/client';
 
 export default function Page() {
   return (
@@ -160,8 +160,8 @@ export default function Page() {
 
 | Import Path | Use Case | Requires 'use client' |
 |-------------|----------|----------------------|
-| `@ds/react` | Types, utilities | No |
-| `@ds/react/client` | Interactive components | Yes |
+| `@hypoth-ui/react` | Types, utilities | No |
+| `@hypoth-ui/react/client` | Interactive components | Yes |
 
 ## Validation
 
@@ -169,18 +169,18 @@ export default function Page() {
 
 ```tsx
 // ❌ This will error in a Server Component
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 // Error: You're importing a component that needs 'use client'
 
 // ✅ This works in a Server Component
-import type { ButtonProps } from '@ds/react';
+import type { ButtonProps } from '@hypoth-ui/react';
 ```
 
 ### Client Boundary Detection
 
 ```tsx
 // ❌ Importing client components without 'use client'
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 export function MyComponent() {
   return <Button>Click</Button>;
 }
@@ -188,7 +188,7 @@ export function MyComponent() {
 
 // ✅ Correct usage
 'use client';
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 export function MyComponent() {
   return <Button>Click</Button>;
 }
@@ -200,18 +200,18 @@ All exports are individually tree-shakeable:
 
 ```tsx
 // Only Button code is included in bundle
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 
 // Only types - zero runtime cost
-import type { ButtonProps, LinkProps } from '@ds/react';
+import type { ButtonProps, LinkProps } from '@hypoth-ui/react';
 ```
 
 ## Bundle Impact Targets
 
 | Export | Size Target |
 |--------|-------------|
-| `@ds/react` (types only) | 0 bytes runtime |
-| `@ds/react/client` (all components) | <6KB minified |
+| `@hypoth-ui/react` (types only) | 0 bytes runtime |
+| `@hypoth-ui/react/client` (all components) | <6KB minified |
 | Individual component | <1KB each |
 
 ## sideEffects

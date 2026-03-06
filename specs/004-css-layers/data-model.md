@@ -169,8 +169,8 @@ This feature has no state machines. CSS layers are static and declarative.
 ## Relationships
 
 ```
-@ds/tokens/css ──imports──> layers/tokens.css
-@ds/wc/*/css ──imports──> layers/components.css
+@hypoth-ui/tokens/css ──imports──> layers/tokens.css
+@hypoth-ui/wc/*/css ──imports──> layers/components.css
 layers/*.css ──imports──> layers/index.css
 layers/index.css ──imports──> src/index.css
 src/index.css ──builds──> dist/index.css

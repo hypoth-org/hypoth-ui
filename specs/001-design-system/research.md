@@ -61,7 +61,7 @@ declare global {
   sheet.replaceSync(buttonStyles);
   document.adoptedStyleSheets.push(sheet);
   ```
-- Alternative: Import component CSS from `@ds/css` package (preferred for this project)
+- Alternative: Import component CSS from `@hypoth-ui/css` package (preferred for this project)
 
 ### Limitations Acknowledged
 - No automatic style isolation (mitigated by CSS layers + BEM naming)
@@ -212,8 +212,8 @@ Single root client loader pattern with custom elements rendering as HTML tags in
 
 ```
 app/layout.tsx (Server Component)
-├── import '@ds/css' (CSS streams with HTML)
-├── import '@ds/tokens/css' (tokens available immediately)
+├── import '@hypoth-ui/css' (CSS streams with HTML)
+├── import '@hypoth-ui/tokens/css' (tokens available immediately)
 └── <DsElementLoader /> (Client Component - single 'use client' boundary)
     └── Registers all custom elements once
 ```
@@ -227,8 +227,8 @@ app/layout.tsx (Server Component)
 import { useEffect } from 'react';
 
 // Import all component definitions
-import { DsButton } from '@ds/wc/button';
-import { DsInput } from '@ds/wc/input';
+import { DsButton } from '@hypoth-ui/wc/button';
+import { DsInput } from '@hypoth-ui/wc/input';
 // ...
 
 const elements = [
@@ -326,7 +326,7 @@ Six-layer CSS architecture for predictable cascade control.
 
 ```css
 /* Consumer's app.css */
-@import '@ds/css';
+@import '@hypoth-ui/css';
 
 @layer overrides {
   .ds-button--primary {

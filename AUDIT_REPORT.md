@@ -11,11 +11,11 @@
 
 ### Core Value Proposition (2-4 sentences)
 
-Hypoth-UI is a **white-label design system** providing Web Components (Lit Light DOM) with React adapters, targeting organizations that need **multi-tenant/multi-brand documentation** and **framework-agnostic component distribution**. Its key differentiation is a robust **behavior primitives layer** (`@ds/primitives-dom`) that extracts accessibility and interaction logic into framework-agnostic factories, enabling true behavioral parity across WC and React implementations.
+Hypoth-UI is a **white-label design system** providing Web Components (Lit Light DOM) with React adapters, targeting organizations that need **multi-tenant/multi-brand documentation** and **framework-agnostic component distribution**. Its key differentiation is a robust **behavior primitives layer** (`@hypoth-ui/primitives-dom`) that extracts accessibility and interaction logic into framework-agnostic factories, enabling true behavioral parity across WC and React implementations.
 
 ### 5 Biggest Strengths (with evidence)
 
-1. **Behavior Primitives Architecture** - The `@ds/primitives-dom` package (`packages/primitives-dom/src/index.ts:1-263`) provides 14+ behavior factories (dialog, menu, select, combobox, tabs, slider, etc.) that encapsulate ARIA, keyboard, and focus management. This is comparable to Radix's internal state machines but framework-agnostic.
+1. **Behavior Primitives Architecture** - The `@hypoth-ui/primitives-dom` package (`packages/primitives-dom/src/index.ts:1-263`) provides 14+ behavior factories (dialog, menu, select, combobox, tabs, slider, etc.) that encapsulate ARIA, keyboard, and focus management. This is comparable to Radix's internal state machines but framework-agnostic.
 
 2. **Light DOM Strategy** - Using Light DOM (`packages/wc/src/base/ds-element.ts:40-42`) enables CSS styling from external stylesheets, form participation via ElementInternals, and standard DOM APIs. This solves the Shadow DOM pain points that plague most WC libraries.
 
@@ -33,7 +33,7 @@ Hypoth-UI is a **white-label design system** providing Web Components (Lit Light
 
 3. **Incomplete Documentation** - 30 of 55 components lack manifest.json files (see Glob results). No searchable docs site with interactive examples. MDX content exists but isn't deployed. Component API tables are incomplete.
 
-4. **No "Copy/Paste" Adoption Model** - Unlike shadcn/ui where you own the code, Hypoth-UI is library-only. No CLI to scaffold individual components into your codebase. The CLI package (`@ds/cli`) exists but isn't feature-complete.
+4. **No "Copy/Paste" Adoption Model** - Unlike shadcn/ui where you own the code, Hypoth-UI is library-only. No CLI to scaffold individual components into your codebase. The CLI package (`@hypoth-ui/cli`) exists but isn't feature-complete.
 
 5. **SSR ID Collision Risk** - Dialog behavior uses incrementing `idCounter` (`packages/primitives-dom/src/behavior/dialog.ts:109-113`). Without deterministic ID generation, server/client hydration mismatches are likely. React 18's `useId` pattern isn't integrated.
 
@@ -77,12 +77,12 @@ hypoth-ui/
 
 | Package | Responsibility | Dependencies |
 |---------|---------------|--------------|
-| `@ds/tokens` | Token compilation | None (build-time only) |
-| `@ds/css` | Cascade layers | `@ds/tokens`, `@ds/wc` (peer) |
-| `@ds/primitives-dom` | Behavior + A11y | **Zero runtime deps** |
-| `@ds/wc` | WC implementation | `@ds/primitives-dom`, `lit`, `date-fns` |
-| `@ds/react` | React wrappers | `@ds/primitives-dom`, `react` (peer) |
-| `@ds/next` | SSR loader | `@ds/wc` (peer), `react` (peer) |
+| `@hypoth-ui/tokens` | Token compilation | None (build-time only) |
+| `@hypoth-ui/css` | Cascade layers | `@hypoth-ui/tokens`, `@hypoth-ui/wc` (peer) |
+| `@hypoth-ui/primitives-dom` | Behavior + A11y | **Zero runtime deps** |
+| `@hypoth-ui/wc` | WC implementation | `@hypoth-ui/primitives-dom`, `lit`, `date-fns` |
+| `@hypoth-ui/react` | React wrappers | `@hypoth-ui/primitives-dom`, `react` (peer) |
+| `@hypoth-ui/next` | SSR loader | `@hypoth-ui/wc` (peer), `react` (peer) |
 
 ### Component Taxonomy
 
@@ -134,7 +134,7 @@ hypoth-ui/
 | Error Messages | 2/5 | No dev-mode warnings for common mistakes. |
 | Documentation | 2/5 | Manifests exist but no deployed searchable docs. |
 | Escape Hatches | 4/5 | `asChild` for React, slots for WC. CSS vars for styling. |
-| Import Ergonomics | 5/5 | Granular exports: `@ds/wc/form-controls`, `@ds/wc/overlays`, etc. |
+| Import Ergonomics | 5/5 | Granular exports: `@hypoth-ui/wc/form-controls`, `@hypoth-ui/wc/overlays`, etc. |
 | Polymorphism | 4/5 | `asChild` in React, slot in WC. No `as` prop for HTML element swap. |
 | Async State | 3/5 | `loading` prop on Button. No loading states for Select/Combobox. |
 | Dark Mode | 4/5 | `data-theme="dark"` attribute. CSS vars swap. No JS API. |
@@ -259,8 +259,8 @@ tokens/
 
 **Token Consumption:**
 - CSS Variables: `--ds-color-primary-default`, `--ds-spacing-md`
-- TypeScript: `@ds/tokens/dist/ts/tokens.ts` (generated)
-- JSON: `@ds/tokens/dist/json/tokens.json` (generated)
+- TypeScript: `@hypoth-ui/tokens/dist/ts/tokens.ts` (generated)
+- JSON: `@hypoth-ui/tokens/dist/json/tokens.json` (generated)
 - No runtime style props (Chakra-like `px={4}`)
 
 ### Theme Application
@@ -475,23 +475,23 @@ Manual Checklist:
 
 **Package Sizes (built):**
 ```
-@ds/wc:      1.8 MB (all components)
-@ds/react:   584 KB
-@ds/css:     144 KB
-@ds/tokens:  144 KB
+@hypoth-ui/wc:      1.8 MB (all components)
+@hypoth-ui/react:   584 KB
+@hypoth-ui/css:     144 KB
+@hypoth-ui/tokens:  144 KB
 ```
 
 **Tree-Shaking Configuration:**
 - `"sideEffects": false` in `packages/wc/package.json`
-- Granular exports: `@ds/wc/form-controls`, `@ds/wc/overlays`, etc.
+- Granular exports: `@hypoth-ui/wc/form-controls`, `@hypoth-ui/wc/overlays`, etc.
 - ESM-only (`"type": "module"`)
 
 **Single Component Import:**
 ```ts
 // Tree-shakeable
-import { DsButton } from '@ds/wc/primitives';
+import { DsButton } from '@hypoth-ui/wc/primitives';
 // Full bundle
-import { DsButton } from '@ds/wc';
+import { DsButton } from '@hypoth-ui/wc';
 ```
 
 ### Runtime Costs
@@ -544,7 +544,7 @@ function defaultGenerateId(): string {
 | Next.js RSC | **Caution** | ID collision risk |
 | Remix | Untested | Should work |
 | Vite CSR | Works | |
-| Plain HTML | Works | Import `@ds/wc` |
+| Plain HTML | Works | Import `@hypoth-ui/wc` |
 | Astro | Untested | Should work (Islands) |
 
 ### Performance Quick Wins
@@ -552,7 +552,7 @@ function defaultGenerateId(): string {
 1. **Lazy-load DatePicker** - 40KB due to date-fns
 2. **Virtualize long lists** - Already supported via `virtualize` prop
 3. **Code-split overlays** - Dialog/Sheet/Drawer can be async
-4. **Preload critical CSS** - `@ds/css/dist/index.css`
+4. **Preload critical CSS** - `@hypoth-ui/css/dist/index.css`
 
 ---
 
@@ -584,7 +584,7 @@ function defaultGenerateId(): string {
 | A11y | 17 files | jest-axe |
 | Integration | Minimal | Playwright (configured) |
 | Visual Regression | None | - |
-| Shared Tests | 1 file | `@ds/test-utils` |
+| Shared Tests | 1 file | `@hypoth-ui/test-utils` |
 
 **Test Counts:**
 - WC: 950 tests passing
@@ -811,7 +811,7 @@ The Light DOM decision is bold and correct for the use cases targeted (form inte
 | Complete React adapters | L | None | All 55 components have React versions |
 | Add 12-step color scales | M | Token system | `color.blue.1-12` tokens |
 | Add density system | M | Token system | `size="1-5"` prop support |
-| Create CLI component scaffold | M | None | `npx @ds/cli add button` works |
+| Create CLI component scaffold | M | None | `npx @hypoth-ui/cli add button` works |
 | Add style props (optional) | L | React package | `<Box px={4}>` syntax |
 | RTL full support | M | CSS + behaviors | Logical properties, RTL arrow keys |
 
@@ -821,7 +821,7 @@ The Light DOM decision is bold and correct for the use cases targeted (form inte
 |------|--------|------------|-------------------|
 | Visual regression testing | L | CI setup | Percy/Chromatic integration |
 | Figma token sync | M | Token system | Design ↔ Code parity |
-| Copy/paste mode (shadcn-like) | L | CLI | `npx @ds/cli copy button` outputs source |
+| Copy/paste mode (shadcn-like) | L | CLI | `npx @hypoth-ui/cli copy button` outputs source |
 | RSC compatibility audit | M | SSR fixes | All components work in RSC |
 | Performance monitoring | M | Build system | Bundle size CI checks |
 | Live region announcements | S | A11y | Toast/Alert/Progress announce changes |
@@ -900,7 +900,7 @@ The `createDialogBehavior` and other behavior factories use an incrementing `idC
 - [ ] Create React adapter for each missing component
 - [ ] Add unit tests
 - [ ] Add a11y tests
-- [ ] Export from `@ds/react`
+- [ ] Export from `@hypoth-ui/react`
 
 ---
 

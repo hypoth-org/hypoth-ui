@@ -2,7 +2,7 @@
  * Slider Thumb component - draggable handle for value selection.
  */
 
-import type { ThumbType } from "@ds/primitives-dom";
+import type { ThumbType } from "@hypoth-ui/primitives-dom";
 import {
   type HTMLAttributes,
   type KeyboardEvent,

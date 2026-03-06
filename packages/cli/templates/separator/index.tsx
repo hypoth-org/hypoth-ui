@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Separator } from "@ds/react";
+ * import { Separator } from "@/components/ui";
  *
  * <Separator />
  * <Separator orientation="vertical" />

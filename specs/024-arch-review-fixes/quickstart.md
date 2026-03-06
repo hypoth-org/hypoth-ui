@@ -138,7 +138,7 @@ Templates must use these import patterns:
 
 ```typescript
 // Transform FROM (React package)
-import { createAccordionBehavior } from "@ds/primitives-dom";
+import { createAccordionBehavior } from "@hypoth-ui/primitives-dom";
 import { Slot } from "../primitives/slot";
 
 // Transform TO (CLI template)
@@ -160,7 +160,7 @@ for component in $(ls $REACT_DIR); do
     mkdir -p "$TEMPLATES_DIR/$component"
     # Copy and transform imports
     for file in $REACT_DIR/$component/*.tsx; do
-      sed 's|@ds/primitives-dom|@hypoth-ui/primitives-dom|g; s|"\.\./primitives/|"@/lib/primitives/|g' \
+      sed 's|@hypoth-ui/primitives-dom|@hypoth-ui/primitives-dom|g; s|"\.\./primitives/|"@/lib/primitives/|g' \
         "$file" > "$TEMPLATES_DIR/$component/$(basename $file)"
     done
     echo "Created template: $component"
@@ -204,7 +204,7 @@ order: [number]
 ### React
 
 \`\`\`tsx
-import { [Component] } from "@ds/react";
+import { [Component] } from "@hypoth-ui/react";
 
 function Example() {
   return <[Component]>[content]</[Component]>;
@@ -281,7 +281,7 @@ Use this data to populate the Accessibility section of the MDX.
 
 ```bash
 # Button tests
-pnpm --filter @ds/wc test -- --run button
+pnpm --filter @hypoth-ui/wc test -- --run button
 
 # Full test suite
 pnpm test

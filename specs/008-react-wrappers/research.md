@@ -36,7 +36,7 @@ function Button({ asChild, ...props }) {
 - Fragment children not supported (must be single element)
 - Ref merging requires careful implementation
 
-### 2. Existing @ds/react Patterns
+### 2. Existing @hypoth-ui/react Patterns
 
 The codebase already has React wrapper patterns in `packages/react/`:
 
@@ -149,14 +149,14 @@ CSS class mapping:
 - `p="4"` → `class="ds-p-4"`
 - `display="flex"` → `class="ds-d-flex"`
 
-**Prerequisite:** @ds/css must export utility classes (already planned in 004-css-layers)
+**Prerequisite:** @hypoth-ui/css must export utility classes (already planned in 004-css-layers)
 
 ### Decision 5: Next.js Compatibility
 
 **Client Boundary Strategy:**
 
 ```text
-@ds/react
+@hypoth-ui/react
 ├── index.ts          # Type exports, server-safe
 ├── client.ts         # 'use client' - interactive components
 └── components/*.tsx  # No directive (imported by client.ts)
@@ -165,11 +165,11 @@ CSS class mapping:
 Usage:
 ```tsx
 // Server component - types only
-import type { ButtonProps } from '@ds/react';
+import type { ButtonProps } from '@hypoth-ui/react';
 
 // Client component
 'use client';
-import { Button } from '@ds/react/client';
+import { Button } from '@hypoth-ui/react/client';
 ```
 
 **Alternative considered:** Single entry with all `'use client'`

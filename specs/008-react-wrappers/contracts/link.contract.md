@@ -178,11 +178,11 @@ const anchorRef = useRef<HTMLAnchorElement>(null);
 ## Dependencies
 
 - React 18+ (forwardRef, useEffect)
-- @ds/wc ds-link component
+- @hypoth-ui/wc ds-link component
 - Slot component (internal, for asChild)
-- @ds/css link classes (for asChild styling)
+- @hypoth-ui/css link classes (for asChild styling)
 
 ## Bundle Impact
 
 - Target: <800 bytes minified
-- Plus @ds/wc peer dependency
+- Plus @hypoth-ui/wc peer dependency

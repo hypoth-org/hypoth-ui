@@ -31,7 +31,7 @@
 
 ## Notes
 
-- Spec builds on existing `@ds/docs-core` infrastructure (edition filtering, navigation generation, manifest validation)
-- Existing `@ds/docs-renderer-next` package provides foundation - this feature extends it
+- Spec builds on existing `@hypoth-ui/docs-core` infrastructure (edition filtering, navigation generation, manifest validation)
+- Existing `@hypoth-ui/docs-renderer-next` package provides foundation - this feature extends it
 - Search functionality (US5) is a stub/strategy definition, not full implementation
 - Tenant overlay example will demonstrate the workflow without requiring real multi-tenant setup

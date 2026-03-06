@@ -2,7 +2,7 @@
  * Combobox Root component - provides context to all Combobox compound components.
  */
 
-import { type Option, type Placement, createComboboxBehavior } from "@ds/primitives-dom";
+import { type Option, type Placement, createComboboxBehavior } from "@hypoth-ui/primitives-dom";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { ComboboxProvider } from "./combobox-context.js";
 

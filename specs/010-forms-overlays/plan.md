@@ -5,18 +5,18 @@
 
 ## Summary
 
-Implement accessible form controls (Input Field pattern, Textarea, Checkbox, Radio, Switch) and overlay components (Dialog, Popover, Tooltip, Menu) using existing `@ds/primitives-dom` behavior utilities. Components will extend `DSElement` with Light DOM rendering, integrate with DTCG token system, and follow WAI-ARIA APG patterns. Positioning for overlays uses CSS anchor positioning with JS fallback.
+Implement accessible form controls (Input Field pattern, Textarea, Checkbox, Radio, Switch) and overlay components (Dialog, Popover, Tooltip, Menu) using existing `@hypoth-ui/primitives-dom` behavior utilities. Components will extend `DSElement` with Light DOM rendering, integrate with DTCG token system, and follow WAI-ARIA APG patterns. Positioning for overlays uses CSS anchor positioning with JS fallback.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.3+ (strict mode, ES2022 target)
-**Primary Dependencies**: Lit 3.1+ (Web Components), `@ds/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
+**Primary Dependencies**: Lit 3.1+ (Web Components), `@hypoth-ui/primitives-dom` (focus-trap, dismissable-layer, roving-focus, type-ahead)
 **Storage**: N/A (stateless UI components)
 **Testing**: Vitest (unit), jest-axe (a11y automation), Playwright (E2E)
 **Target Platform**: Modern browsers (Chrome, Firefox, Safari, Edge latest 2 versions), SSR-compatible
-**Project Type**: Monorepo package (`@ds/wc`)
+**Project Type**: Monorepo package (`@hypoth-ui/wc`)
 **Performance Goals**: <2KB per component (minified+gzipped), SSR renders meaningful HTML before hydration
-**Constraints**: Zero runtime deps in primitives, Lit-only in `@ds/wc`, CSS layers for styling
+**Constraints**: Zero runtime deps in primitives, Lit-only in `@hypoth-ui/wc`, CSS layers for styling
 **Scale/Scope**: 10 new components (Field pattern: 4, Form controls: 5, Overlays: 4), ~67 functional requirements
 
 ## Constitution Check
@@ -36,8 +36,8 @@ Verify compliance with Hypoth UI Design System Constitution:
 - [x] **Customizability**: Uses DTCG tokens; CSS layers for overrides; no inline styles blocking customization
   - Components consume tokens via CSS custom properties
   - Styles in `components` layer, consumer overrides in `overrides` layer
-- [x] **Zero-dep Core**: Core packages (`@ds/tokens`, `@ds/css`, `@ds/primitives-dom`) have no runtime deps
-  - All behavior utilities in `@ds/primitives-dom` have zero runtime deps
+- [x] **Zero-dep Core**: Core packages (`@hypoth-ui/tokens`, `@hypoth-ui/css`, `@hypoth-ui/primitives-dom`) have no runtime deps
+  - All behavior utilities in `@hypoth-ui/primitives-dom` have zero runtime deps
   - Components use primitives via composition, not inheritance
 - [x] **Web Components**: Light DOM default; Lit-based; theme via CSS vars
   - All components extend `DSElement` (Light DOM rendering)
@@ -172,7 +172,7 @@ packages/docs-content/
         └── menu.mdx                # NEW
 ```
 
-**Structure Decision**: Extends existing monorepo structure. New components added to `@ds/wc`, new primitive (anchor-position) to `@ds/primitives-dom`, component styles to `@ds/css`, documentation to `@ds/docs-content`.
+**Structure Decision**: Extends existing monorepo structure. New components added to `@hypoth-ui/wc`, new primitive (anchor-position) to `@hypoth-ui/primitives-dom`, component styles to `@hypoth-ui/css`, documentation to `@hypoth-ui/docs-content`.
 
 ## Complexity Tracking
 

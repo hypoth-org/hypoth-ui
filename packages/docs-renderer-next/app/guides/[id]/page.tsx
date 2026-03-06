@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { parseFrontmatter } from "@ds/docs-core";
+import { parseFrontmatter } from "@hypoth-ui/docs-core";
 import { notFound } from "next/navigation";
 import { MdxRenderer } from "../../../components/mdx-renderer";
 import { discoverGuides, resolveContentFile } from "../../../lib/content-resolver";

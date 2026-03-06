@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { Collapsible } from "@ds/react";
+ * import { Collapsible } from "@hypoth-ui/react";
  *
  * <Collapsible.Root>
  *   <Collapsible.Trigger>Toggle</Collapsible.Trigger>
