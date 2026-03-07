@@ -1,5 +1,5 @@
 // Base element class
-export { DSElement, LightElement } from "./ds-element.js";
+export { DSElement } from "./ds-element.js";
 
 // Form-associated mixin
 export { FormAssociatedMixin } from "./form-associated.js";

@@ -42,6 +42,10 @@ Auto-generated from all feature plans. Last updated: 2026-01-03
 - localStorage (theme persistence only) (025-demo-showcases)
 - TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI), @changesets/cli (versioning) (026-publish-cli-readiness)
 - File-based (package.json, registry JSON, markdown templates) (026-publish-cli-readiness)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+/19+ (adapters), Next.js 14+/15+ (integration), @changesets/cli (versioning) (027-dx-deficiency-fixes)
+- File-based (package.json, registry JSON, markdown) (027-dx-deficiency-fixes)
+- TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+/19+ (adapters), Next.js 14+/15+/16+ (integration) (028-consumer-adoption-fixes)
+- N/A (package configuration files only) (028-consumer-adoption-fixes)
 
 - TypeScript 5.x (strict mode) + Lit 3.x (WC only), React 18+ (adapter peer), Next.js 14+ (adapter peer) (001-design-system)
 
@@ -107,9 +111,9 @@ pnpm --filter @hypoth-ui/cli sync:templates # Sync component templates from sour
 TypeScript 5.x (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 028-consumer-adoption-fixes: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+/19+ (adapters), Next.js 14+/15+/16+ (integration)
+- 027-dx-deficiency-fixes: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+/19+ (adapters), Next.js 14+/15+ (integration), @changesets/cli (versioning)
 - 026-publish-cli-readiness: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI), @changesets/cli (versioning)
-- 025-demo-showcases: Added TypeScript 5.3+ (strict mode, ES2022 target)
-- 024-arch-review-fixes: Added TypeScript 5.3+ (strict mode, ES2022 target) + Lit 3.1+ (WC), React 18+ (adapters), Commander.js (CLI)
 
 
 <!-- MANUAL ADDITIONS START -->

@@ -1,7 +1,5 @@
 # @hypoth-ui/a11y-audit
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Accessibility audit and conformance reporting tools for the hypoth-ui design system. Provides automated CI checks, manual audit checklists, and WCAG conformance report generation.
 
 ## Installation

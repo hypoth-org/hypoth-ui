@@ -64,7 +64,7 @@ This creates:
 ### Web Component Structure
 
 Each Web Component should:
-- Extend `LightElement` for Light DOM rendering
+- Extend `DSElement` for Light DOM rendering
 - Use `@property` decorators for reactive properties
 - Use `html` template literals for rendering
 - Be registered with `define("ds-<name>", DsName)`
@@ -72,10 +72,10 @@ Each Web Component should:
 ```ts
 import { html } from "lit";
 import { property } from "lit/decorators.js";
-import { LightElement } from "../../base/light-element.js";
+import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
-export class DsMyComponent extends LightElement {
+export class DsMyComponent extends DSElement {
   @property({ type: String, reflect: true })
   variant = "default";
 

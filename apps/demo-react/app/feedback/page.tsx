@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, Progress, Spinner, Skeleton, useToast } from '@hypoth-ui/react';
+import { Alert, Progress, Spinner, Skeleton, useToast } from '@hypoth-ui/react/client';
 import { DsButton as Button } from '@hypoth-ui/react/client';
 import { feedbackSectionContent } from '@hypoth-ui/demo-shared';
 import { SidebarNav } from '../../components/sidebar-nav';

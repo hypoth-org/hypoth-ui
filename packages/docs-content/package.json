@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/docs-content",
   "version": "1.0.0",
   "type": "module",
-  "description": "Documentation content packs for the hypoth-ui design system (Alpha)",
+  "description": "Documentation content packs for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -1,7 +1,5 @@
 # @hypoth-ui/docs-renderer-next
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Next.js-based documentation site renderer for the hypoth-ui design system. Renders MDX content packs with edition filtering, tenant branding, search, and live component previews.
 
 ## Installation

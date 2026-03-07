@@ -113,12 +113,12 @@ describe("DsPopover", () => {
       expect(popover.open).toBe(false);
     });
 
-    it("should emit ds:open event when opened", async () => {
-      const openHandler = vi.fn();
+    it("should emit ds:open-change event when opened", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-popover @ds:open=${openHandler}>
+          <ds-popover @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open</button>
             <ds-popover-content>Content</ds-popover-content>
           </ds-popover>
@@ -133,15 +133,17 @@ describe("DsPopover", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(openHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const event = openChangeHandler.mock.calls[0][0] as CustomEvent;
+      expect(event.detail.open).toBe(true);
     });
 
-    it("should emit ds:close event when closed", async () => {
-      const closeHandler = vi.fn();
+    it("should emit ds:open-change event when closed", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-popover open @ds:close=${closeHandler}>
+          <ds-popover open @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open</button>
             <ds-popover-content>Content</ds-popover-content>
           </ds-popover>
@@ -156,7 +158,9 @@ describe("DsPopover", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(closeHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const event = openChangeHandler.mock.calls[0][0] as CustomEvent;
+      expect(event.detail.open).toBe(false);
     });
 
     it("should close on Escape key", async () => {

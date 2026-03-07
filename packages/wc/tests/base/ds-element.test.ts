@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { DSElement, LightElement } from "../../src/base/ds-element.js";
+import { DSElement } from "../../src/base/ds-element.js";
 
 // Test component that extends DSElement
 class TestElement extends DSElement {
@@ -63,10 +63,6 @@ describe("DSElement", () => {
   it("should inherit from LitElement", () => {
     expect(DSElement.prototype).toBeInstanceOf(Object);
     expect(new TestElement()).toBeInstanceOf(DSElement);
-  });
-
-  it("should export LightElement as alias for backwards compatibility", () => {
-    expect(LightElement).toBe(DSElement);
   });
 
   it("createRenderRoot should return the element itself", () => {

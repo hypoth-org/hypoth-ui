@@ -148,12 +148,12 @@ describe("DsMenu", () => {
       expect(menu.open).toBe(false);
     });
 
-    it("should emit ds:open event when opened", async () => {
-      const openHandler = vi.fn();
+    it("should emit ds:open-change event when opened", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-menu @ds:open=${openHandler}>
+          <ds-menu @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open Menu</button>
             <ds-menu-content>
               <ds-menu-item>Item 1</ds-menu-item>
@@ -170,15 +170,17 @@ describe("DsMenu", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(openHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const event = openChangeHandler.mock.calls[0][0] as CustomEvent;
+      expect(event.detail.open).toBe(true);
     });
 
-    it("should emit ds:close event when closed", async () => {
-      const closeHandler = vi.fn();
+    it("should emit ds:open-change event when closed", async () => {
+      const openChangeHandler = vi.fn();
 
       render(
         html`
-          <ds-menu open @ds:close=${closeHandler}>
+          <ds-menu open @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Open Menu</button>
             <ds-menu-content>
               <ds-menu-item>Item 1</ds-menu-item>
@@ -195,7 +197,9 @@ describe("DsMenu", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(closeHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const event = openChangeHandler.mock.calls[0][0] as CustomEvent;
+      expect(event.detail.open).toBe(false);
     });
 
     it("should close on Escape key", async () => {

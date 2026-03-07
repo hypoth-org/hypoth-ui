@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-// Test that type-only imports work (these should have no runtime code)
+// Test that type-only imports work from main entry (server-safe)
 import type {
   AlignValue,
   AsChildProps,
@@ -32,90 +32,22 @@ import type {
   VisuallyHiddenProps,
 } from "../src/index.js";
 
-// Test that component exports work
+// Test that pure utility exports work from main entry (server-safe)
 import {
-  Box,
-  Button,
-  Icon,
-  Input,
-  Link,
-  Slot,
-  Spinner,
-  Text,
-  VisuallyHidden,
-  attachEventListeners,
   composeEventHandlers,
-  createComponent,
-  createEventHandler,
   mergeClassNames,
   mergeProps,
   mergeStyles,
+  getThemeScriptContent,
+  getThemeScriptTag,
+  getThemeScriptProps,
+  parseThemeCookie,
+  getSystemColorMode,
+  syncThemeStorage,
 } from "../src/index.js";
 
-describe("Package exports", () => {
-  describe("component exports", () => {
-    it("should export Button component", () => {
-      expect(Button).toBeDefined();
-      expect(typeof Button).toBe("object"); // forwardRef returns object
-    });
-
-    it("should export Input component", () => {
-      expect(Input).toBeDefined();
-      expect(typeof Input).toBe("object");
-    });
-
-    it("should export Link component", () => {
-      expect(Link).toBeDefined();
-      expect(typeof Link).toBe("object");
-    });
-
-    it("should export Icon component", () => {
-      expect(Icon).toBeDefined();
-      expect(typeof Icon).toBe("object");
-    });
-
-    it("should export Spinner component", () => {
-      expect(Spinner).toBeDefined();
-      expect(typeof Spinner).toBe("object");
-    });
-
-    it("should export VisuallyHidden component", () => {
-      expect(VisuallyHidden).toBeDefined();
-      expect(typeof VisuallyHidden).toBe("object");
-    });
-
-    it("should export Text component", () => {
-      expect(Text).toBeDefined();
-      expect(typeof Text).toBe("object");
-    });
-
-    it("should export Box primitive", () => {
-      expect(Box).toBeDefined();
-      expect(typeof Box).toBe("object");
-    });
-
-    it("should export Slot primitive", () => {
-      expect(Slot).toBeDefined();
-      expect(typeof Slot).toBe("object");
-    });
-  });
-
-  describe("utility exports", () => {
-    it("should export createEventHandler", () => {
-      expect(createEventHandler).toBeDefined();
-      expect(typeof createEventHandler).toBe("function");
-    });
-
-    it("should export attachEventListeners", () => {
-      expect(attachEventListeners).toBeDefined();
-      expect(typeof attachEventListeners).toBe("function");
-    });
-
-    it("should export createComponent", () => {
-      expect(createComponent).toBeDefined();
-      expect(typeof createComponent).toBe("function");
-    });
-
+describe("Main entry (server-safe)", () => {
+  describe("pure utility exports", () => {
     it("should export composeEventHandlers", () => {
       expect(composeEventHandlers).toBeDefined();
       expect(typeof composeEventHandlers).toBe("function");
@@ -137,12 +69,40 @@ describe("Package exports", () => {
     });
   });
 
-  describe("type exports compile correctly", () => {
-    // These tests verify that TypeScript type exports work correctly.
-    // If these fail to compile, the type exports are broken.
+  describe("server-safe theme utilities", () => {
+    it("should export getThemeScriptContent", () => {
+      expect(getThemeScriptContent).toBeDefined();
+      expect(typeof getThemeScriptContent).toBe("function");
+    });
 
+    it("should export getThemeScriptTag", () => {
+      expect(getThemeScriptTag).toBeDefined();
+      expect(typeof getThemeScriptTag).toBe("function");
+    });
+
+    it("should export getThemeScriptProps", () => {
+      expect(getThemeScriptProps).toBeDefined();
+      expect(typeof getThemeScriptProps).toBe("function");
+    });
+
+    it("should export parseThemeCookie", () => {
+      expect(parseThemeCookie).toBeDefined();
+      expect(typeof parseThemeCookie).toBe("function");
+    });
+
+    it("should export getSystemColorMode", () => {
+      expect(getSystemColorMode).toBeDefined();
+      expect(typeof getSystemColorMode).toBe("function");
+    });
+
+    it("should export syncThemeStorage", () => {
+      expect(syncThemeStorage).toBeDefined();
+      expect(typeof syncThemeStorage).toBe("function");
+    });
+  });
+
+  describe("type exports compile correctly", () => {
     it("should allow creating typed objects using exported types", () => {
-      // This test verifies types are properly exported by using them
       const buttonProps: ButtonProps = { children: "Click me" };
       const variant: ButtonVariant = "primary";
       const size: ButtonSize = "md";
@@ -247,7 +207,7 @@ describe("Package exports", () => {
 });
 
 describe("Client entry point", () => {
-  it("should export components from client entry", async () => {
+  it("should export base components from client entry", async () => {
     const clientExports = await import("../src/client.js");
 
     expect(clientExports.DsButton).toBeDefined();
@@ -259,6 +219,68 @@ describe("Client entry point", () => {
     expect(clientExports.Text).toBeDefined();
     expect(clientExports.Box).toBeDefined();
     expect(clientExports.Slot).toBeDefined();
+  });
+
+  it("should export form controls from client entry", async () => {
+    const clientExports = await import("../src/client.js");
+
+    expect(clientExports.Field).toBeDefined();
+    expect(clientExports.Label).toBeDefined();
+    expect(clientExports.FieldDescription).toBeDefined();
+    expect(clientExports.FieldError).toBeDefined();
+    expect(clientExports.Textarea).toBeDefined();
+    expect(clientExports.Checkbox).toBeDefined();
+    expect(clientExports.RadioGroup).toBeDefined();
+    expect(clientExports.Radio).toBeDefined();
+    expect(clientExports.Switch).toBeDefined();
+  });
+
+  it("should export overlay and menu components from client entry", async () => {
+    const clientExports = await import("../src/client.js");
+
+    expect(clientExports.Dialog).toBeDefined();
+    expect(clientExports.Popover).toBeDefined();
+    expect(clientExports.Tooltip).toBeDefined();
+    expect(clientExports.AlertDialog).toBeDefined();
+    expect(clientExports.Sheet).toBeDefined();
+    expect(clientExports.Drawer).toBeDefined();
+    expect(clientExports.Menu).toBeDefined();
+    expect(clientExports.Select).toBeDefined();
+    expect(clientExports.Combobox).toBeDefined();
+    expect(clientExports.DropdownMenu).toBeDefined();
+    expect(clientExports.ContextMenu).toBeDefined();
+  });
+
+  it("should export layout and structure from client entry", async () => {
+    const clientExports = await import("../src/client.js");
+
+    expect(clientExports.Card).toBeDefined();
+    expect(clientExports.Tabs).toBeDefined();
+    expect(clientExports.Accordion).toBeDefined();
+    expect(clientExports.Collapsible).toBeDefined();
+    expect(clientExports.Flow).toBeDefined();
+    expect(clientExports.Stack).toBeDefined();
+    expect(clientExports.Container).toBeDefined();
+  });
+
+  it("should export theme providers from client entry", async () => {
+    const clientExports = await import("../src/client.js");
+
+    expect(clientExports.ThemeProvider).toBeDefined();
+    expect(clientExports.DensityProvider).toBeDefined();
+    expect(clientExports.useTheme).toBeDefined();
+    expect(clientExports.useColorMode).toBeDefined();
+  });
+
+  it("should export EmptyState from client entry", async () => {
+    const clientExports = await import("../src/client.js");
+
+    expect(clientExports.EmptyState).toBeDefined();
+    expect(clientExports.EmptyStateRoot).toBeDefined();
+    expect(clientExports.EmptyStateIcon).toBeDefined();
+    expect(clientExports.EmptyStateTitle).toBeDefined();
+    expect(clientExports.EmptyStateDescription).toBeDefined();
+    expect(clientExports.EmptyStateAction).toBeDefined();
   });
 
   it("should export utilities from client entry", async () => {

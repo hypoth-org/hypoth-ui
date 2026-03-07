@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/react",
   "version": "1.0.0",
   "type": "module",
-  "description": "React adapter components for the hypoth-ui design system (Alpha)",
+  "description": "React adapter components for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",

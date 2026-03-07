@@ -8,8 +8,7 @@
  * @slot trigger - Button or element that toggles the collapsible
  * @slot - Collapsible content (ds-collapsible-content)
  *
- * @fires ds:open - Fired when collapsible opens
- * @fires ds:close - Fired when collapsible closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  *
  * @example
  * ```html
@@ -73,7 +72,9 @@ export class DsCollapsible extends DSElement {
     if (this.disabled || this.open === open) return;
 
     this.open = open;
-    emitEvent(this, open ? StandardEvents.OPEN : StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open, reason: "trigger" },
+    });
     this.updateContent();
   }
 

@@ -37,8 +37,11 @@ export interface EmitEventOptions<T = unknown> {
  * // Emit ds:dismiss with reason
  * emitEvent(this, 'dismiss', { detail: { reason: 'escape' } });
  *
- * // Emit cancelable event
- * const event = emitEvent(this, 'before-close', { cancelable: true });
+ * // Emit cancelable open-change event
+ * const event = emitEvent(this, 'open-change', {
+ *   detail: { open: false, reason: 'escape' },
+ *   cancelable: true,
+ * });
  * if (event.defaultPrevented) {
  *   // Consumer called event.preventDefault()
  *   return;
@@ -104,14 +107,6 @@ export const StandardEvents = {
   COPY: "copy",
   /** Element resized */
   RESIZE: "resize",
-  /** @deprecated Use OPEN_CHANGE instead */
-  OPEN: "open",
-  /** @deprecated Use OPEN_CHANGE instead */
-  CLOSE: "close",
-  /** @deprecated Use OPEN_CHANGE with cancelable: true instead */
-  BEFORE_CLOSE: "before-close",
-  /** @deprecated Use PRESS instead */
-  CLICK: "click",
   /** Navigate event (links) */
   NAVIGATE: "navigate",
 } as const;

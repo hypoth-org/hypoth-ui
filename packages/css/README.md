@@ -1,7 +1,5 @@
 # @hypoth-ui/css
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 CSS layers and base styles for the hypoth-ui design system. Provides a structured CSS foundation using native `@layer` for reset, tokens, base styles, component styles, utilities, and overrides.
 
 ## Installation

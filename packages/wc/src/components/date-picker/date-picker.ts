@@ -41,8 +41,7 @@ export type DatePickerMode = "single" | "range";
  * @slot trigger - Trigger element (button or input)
  * @slot - Calendar content (ds-date-picker-calendar)
  *
- * @fires ds:open - Fired when calendar opens
- * @fires ds:close - Fired when calendar closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  * @fires ds:change - Fired when date changes (detail: { date } or { start, end })
  *
  * @example
@@ -169,14 +168,27 @@ export class DsDatePicker extends DSElement {
   public show(): void {
     if (this.open || this.disabled) return;
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the calendar.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const calendar = this.querySelector("ds-date-picker-calendar") as DsDatePickerCalendar | null;
 
@@ -193,15 +205,17 @@ export class DsDatePicker extends DSElement {
     } else {
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
       this.getTriggerElement()?.focus();
     }
   }
 
+  /**
+   * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
+   */
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
     this.getTriggerElement()?.focus();
   }
 

@@ -11,8 +11,7 @@
  * @slot trigger - Button or element that opens the alert dialog
  * @slot - AlertDialog content (ds-alert-dialog-content)
  *
- * @fires ds:open - Fired when alert dialog opens
- * @fires ds:close - Fired when alert dialog closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  *
  * @example
  * ```html
@@ -135,14 +134,22 @@ export class DsAlertDialog extends DSElement {
 
     this.open = true;
     this.dialogBehavior?.open();
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the alert dialog.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit open-change event
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+    });
 
     const content = this.querySelector("ds-alert-dialog-content") as DsAlertDialogContent | null;
 
@@ -164,19 +171,18 @@ export class DsAlertDialog extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
   /**
    * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
    */
   private completeClose(): void {
     this.presence?.destroy();
     this.presence = null;
     this.open = false;
     this.isClosing = false;
-    emitEvent(this, StandardEvents.CLOSE);
   }
 
   private handleTriggerClick = (event: Event): void => {

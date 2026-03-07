@@ -143,7 +143,9 @@ export class DsSheet extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
@@ -163,7 +165,9 @@ export class DsSheet extends DSElement {
 
     this.open = true;
     this.dialogBehavior?.open();
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -192,7 +196,9 @@ export class DsSheet extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
@@ -204,7 +210,9 @@ export class DsSheet extends DSElement {
     this.presence = null;
     this.open = false;
     this.isClosing = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
   }
 
   private handleTriggerClick = (event: Event): void => {

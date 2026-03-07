@@ -1,7 +1,5 @@
 # @hypoth-ui/docs-core
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Internal documentation engine and validation tooling for the hypoth-ui design system. Handles manifest validation, edition filtering, search indexing, and component auditing.
 
 ## Installation

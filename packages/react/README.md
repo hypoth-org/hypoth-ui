@@ -1,7 +1,5 @@
 # @hypoth-ui/react
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 React adapter components for the hypoth-ui design system. Provides type-safe React wrappers around the underlying Lit Web Components with full support for Server Components and Client Components in Next.js.
 
 ## Installation
@@ -18,11 +16,19 @@ npm install @hypoth-ui/wc react react-dom
 
 ## Usage
 
+### Type Imports (Server-Safe)
+
 ```tsx
-import { Button } from '@hypoth-ui/react';
+import type { ButtonProps, DialogRootProps } from '@hypoth-ui/react';
+```
+
+### Runtime Components
+
+```tsx
+import { DsButton } from '@hypoth-ui/react/client';
 
 function App() {
-  return <Button variant="primary">Click me</Button>;
+  return <DsButton variant="primary">Click me</DsButton>;
 }
 ```
 
@@ -30,8 +36,7 @@ function App() {
 
 ```tsx
 "use client";
-import { Dialog, Input } from "@hypoth-ui/react";
-import { DsButton } from "@hypoth-ui/react/client";
+import { Dialog, Input, DsButton } from "@hypoth-ui/react/client";
 
 function MyComponent() {
   return (
@@ -53,7 +58,7 @@ function MyComponent() {
 Most complex components use the compound pattern:
 
 ```tsx
-import { Select } from "@hypoth-ui/react";
+import { Select } from "@hypoth-ui/react/client";
 
 <Select.Root onValueChange={(value) => console.log(value)}>
   <Select.Trigger>

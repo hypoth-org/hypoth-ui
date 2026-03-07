@@ -1,7 +1,5 @@
 # @hypoth-ui/wc
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Lit-based Web Components with Light DOM rendering for the hypoth-ui design system. Framework-agnostic custom elements that work with any frontend stack.
 
 ## Installation

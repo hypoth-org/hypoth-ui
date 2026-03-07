@@ -116,7 +116,9 @@ export class DsPopover extends DSElement {
     if (this.open) return;
 
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -144,7 +146,9 @@ export class DsPopover extends DSElement {
       // No animation - close immediately
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
 
       // Return focus to trigger
       this.triggerElement?.focus();
@@ -157,7 +161,9 @@ export class DsPopover extends DSElement {
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
 
     // Return focus to trigger
     this.triggerElement?.focus();

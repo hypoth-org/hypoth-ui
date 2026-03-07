@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/css",
   "version": "1.0.0",
   "type": "module",
-  "description": "CSS layers and base styles for the hypoth-ui design system (Alpha)",
+  "description": "CSS layers and base styles for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",

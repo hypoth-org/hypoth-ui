@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Avatar, Badge, Tag, Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@hypoth-ui/react';
+import { Card, Avatar, Badge, Tag, Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@hypoth-ui/react/client';
 import { dataDisplaySectionContent, mockUsers, mockProducts, formatPrice } from '@hypoth-ui/demo-shared';
 import { SidebarNav } from '../../components/sidebar-nav';
 import { AppShell } from '../../components/app-shell';

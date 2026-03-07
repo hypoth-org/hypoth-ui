@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/docs-renderer-next",
   "version": "1.0.0",
   "type": "module",
-  "description": "Next.js documentation renderer for the hypoth-ui design system (Alpha)",
+  "description": "Next.js documentation renderer for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",

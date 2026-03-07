@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/primitives-dom",
   "version": "1.0.0",
   "type": "module",
-  "description": "DOM behavior primitives for the hypoth-ui design system — focus trap, roving focus, type-ahead (Alpha)",
+  "description": "DOM behavior primitives for the hypoth-ui design system — focus trap, roving focus, type-ahead",
   "license": "MIT",
   "repository": {
     "type": "git",

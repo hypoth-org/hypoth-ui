@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "sideEffects": false,
-  "description": "Test utilities for the hypoth-ui design system (Alpha)",
+  "description": "Test utilities for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",
