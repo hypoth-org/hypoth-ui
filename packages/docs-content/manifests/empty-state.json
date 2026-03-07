@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../specs/001-design-system/contracts/component-manifest.schema.json",
+  "id": "empty-state",
+  "name": "EmptyState",
+  "description": "A compound component for displaying empty state messaging with icon, title, description, and action",
+  "status": "alpha",
+  "since": "0.2.0",
+  "availabilityTags": ["public"],
+  "platforms": ["wc", "react"],
+  "a11y": {
+    "role": "status",
+    "keyboardInteractions": [],
+    "ariaAttributes": ["aria-hidden"],
+    "focusManagement": "Inherits from child action components"
+  },
+  "tokensUsed": [
+    "color.text.muted",
+    "color.text.default",
+    "color.icon.muted",
+    "spacing.component.lg",
+    "typography.heading.sm",
+    "typography.body.md"
+  ],
+  "props": [
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Additional CSS class names"
+    }
+  ],
+  "subComponents": [
+    {
+      "name": "EmptyState.Icon",
+      "description": "Decorative icon container (aria-hidden)"
+    },
+    {
+      "name": "EmptyState.Title",
+      "description": "Heading text (renders as h3)"
+    },
+    {
+      "name": "EmptyState.Description",
+      "description": "Body text with muted color (renders as p)"
+    },
+    {
+      "name": "EmptyState.Action",
+      "description": "Container for CTA buttons or links"
+    }
+  ],
+  "category": "feedback"
+}

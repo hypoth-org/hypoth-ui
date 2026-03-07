@@ -42,3 +42,12 @@ export {
 // Spinner component
 export { DsSpinner } from "./components/spinner/spinner.js";
 export type { SpinnerSize } from "./components/spinner/spinner.js";
+
+// EmptyState component
+export {
+  DsEmptyState,
+  DsEmptyStateIcon,
+  DsEmptyStateTitle,
+  DsEmptyStateDescription,
+  DsEmptyStateAction,
+} from "./components/empty-state/index.js";

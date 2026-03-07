@@ -1,7 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
 import { createElement, createRef } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Button } from "../src/components/button.js";
+import { DsButton as Button } from "../src/components/ds-button.js";
 import { Icon } from "../src/components/icon.js";
 import { Input } from "../src/components/input.js";
 import { Link } from "../src/components/link.js";

@@ -154,6 +154,24 @@ export default function Page() {
 }
 ```
 
+#### Selective Component Loading
+
+By default, `DsLoader` registers all Web Components. Use `include` or `exclude` to load only what you need:
+
+```tsx
+// Register only the components you use (reduces bundle)
+<DsLoader include={["ds-button", "ds-dialog", "ds-input"]} />
+
+// Register all except specific components
+<DsLoader exclude={["ds-data-table"]} />
+```
+
+When both are provided, `include` takes precedence. You can also enable `debug` logging and an `onLoad` callback:
+
+```tsx
+<DsLoader include={["ds-button"]} debug onLoad={() => console.log("Ready")} />
+```
+
 ---
 
 ## Tooling & Documentation Packages

@@ -250,7 +250,7 @@ describe("Client entry point", () => {
   it("should export components from client entry", async () => {
     const clientExports = await import("../src/client.js");
 
-    expect(clientExports.Button).toBeDefined();
+    expect(clientExports.DsButton).toBeDefined();
     expect(clientExports.Input).toBeDefined();
     expect(clientExports.Link).toBeDefined();
     expect(clientExports.Icon).toBeDefined();

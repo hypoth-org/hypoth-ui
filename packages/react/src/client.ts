@@ -9,7 +9,7 @@
  * @example
  * ```tsx
  * "use client";
- * import { Button, Input, Link } from "@hypoth-ui/react/client";
+ * import { DsButton, Input, Link } from "@hypoth-ui/react/client";
  * ```
  *
  * For type-only imports in server components, use the main entry point:
@@ -21,11 +21,11 @@
 
 // Components (all are client-only due to event handlers and refs)
 export {
-  Button,
-  type ButtonProps,
+  DsButton,
+  type DsButtonProps,
   type ButtonVariant,
   type ButtonSize,
-} from "./components/button.js";
+} from "./components/ds-button.js";
 export { Input, type InputProps, type InputType, type InputSize } from "./components/input.js";
 export { Link, type LinkProps, type LinkVariant } from "./components/link.js";
 export { Icon, type IconProps, type IconName, type IconSize } from "./components/icon.js";

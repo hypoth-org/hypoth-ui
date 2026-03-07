@@ -112,6 +112,44 @@ define("ds-my-component", DsMyComponent);
 - Use `createElement` instead of JSX for custom elements
 - Map props to Web Component attributes
 
+### Event Prop Naming Convention
+
+All React adapter event props follow a strict mapping from WC CustomEvents:
+
+```
+WC:    ds:{kebab-case-action}    →  React: on{PascalCaseAction}
+```
+
+For native DOM events on WC wrappers, use standard React naming (`onClick`, `onChange`).
+
+**Complete Event Map:**
+
+| WC Event | React Prop | Used By |
+|----------|-----------|---------|
+| `ds:press` | `onPress` | Button (headless) |
+| `ds:change` | `onChange` | Checkbox, Switch, RadioGroup |
+| `ds:change` | `onValueChange` | Accordion, Tabs, Input |
+| `ds:open-change` | `onOpenChange` | Dialog, Drawer, Select, Menu, DatePicker, Combobox, Collapsible |
+| `ds:select` | `onSelect` | Menu |
+| `ds:complete` | `onComplete` | PinInput |
+| `ds:error` | `onError` | FileUpload |
+| `ds:files-add` | `onFilesAdd` | FileUpload |
+| `ds:file-remove` | `onFileRemove` | FileUpload |
+| `ds:files-change` | `onFilesChange` | FileUpload |
+| `ds:input-change` | `onInputChange` | Combobox |
+| `ds:create-value` | `onCreateValue` | Combobox |
+| `ds:range-change` | `onRangeChange` | Slider, DatePicker |
+| Native `click` | `onClick` | DsButton (WC wrapper) |
+| Native `change` | `onChange` | Input (native) |
+
+**Rules for New Components:**
+
+1. Custom events MUST use `ds:` prefix with kebab-case: `ds:value-change`
+2. React props MUST use `on` + PascalCase: `onValueChange`
+3. One WC event maps to exactly one React prop name
+4. When a component has both `change` and value semantics, use `onChange` for boolean and `onValueChange` for arbitrary values
+5. Native DOM events on WC wrappers keep standard React naming (`onClick`, `onChange`)
+
 ### Manifest Requirements
 
 All manifests must include:

@@ -44,7 +44,7 @@
     "@hypoth-ui/primitives-dom": "workspace:*"
   },
   "peerDependencies": {
-    "@hypoth-ui/wc": "workspace:*",
+    "@hypoth-ui/wc": ">=0.1.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },

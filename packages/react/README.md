@@ -30,13 +30,14 @@ function App() {
 
 ```tsx
 "use client";
-import { Button, Dialog, Input } from "@hypoth-ui/react/client";
+import { Dialog, Input } from "@hypoth-ui/react";
+import { DsButton } from "@hypoth-ui/react/client";
 
 function MyComponent() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button>Open Dialog</Button>
+        <DsButton>Open Dialog</DsButton>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Edit Profile</Dialog.Title>
