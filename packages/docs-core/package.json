@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/docs-core",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "type": "module",
   "description": "Documentation engine and validation tools for the hypoth-ui design system (Alpha)",
   "license": "MIT",
