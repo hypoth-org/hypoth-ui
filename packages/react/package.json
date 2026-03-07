@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/react",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "type": "module",
   "description": "React adapter components for the hypoth-ui design system",
   "license": "MIT",
