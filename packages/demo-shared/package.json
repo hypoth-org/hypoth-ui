@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/demo-shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Shared mock data, navigation config, and content for demo applications",

@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/css",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "CSS layers and base styles for the hypoth-ui design system (Alpha)",
   "license": "MIT",
