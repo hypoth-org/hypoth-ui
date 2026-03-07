@@ -65,7 +65,7 @@ describe("EmptyState React Component", () => {
       const { container } = render(
         createElement(EmptyState, null,
           createElement(EmptyState.Action, null,
-            createElement("button", null, "Retry"),
+            createElement("button", { type: "button" }, "Retry"),
           ),
         )
       );
@@ -83,7 +83,7 @@ describe("EmptyState React Component", () => {
           createElement(EmptyState.Title, null, "No messages"),
           createElement(EmptyState.Description, null, "Your inbox is empty."),
           createElement(EmptyState.Action, null,
-            createElement("button", null, "Compose"),
+            createElement("button", { type: "button" }, "Compose"),
           ),
         )
       );
