@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/next",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Next.js App Router integration for hypoth-ui Web Components (Alpha)",
   "license": "MIT",
@@ -39,8 +39,8 @@
     "test:integration": "vitest run --passWithNoTests"
   },
   "peerDependencies": {
-    "@hypoth-ui/react": ">=0.1.0",
-    "@hypoth-ui/wc": ">=0.1.0",
+    "@hypoth-ui/react": ">=0.1.2",
+    "@hypoth-ui/wc": ">=0.1.2",
     "next": "^14.0.0 || ^15.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"

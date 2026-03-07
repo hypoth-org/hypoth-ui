@@ -1,5 +1,13 @@
 # @hypoth-ui/css
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @hypoth-ui/tokens@0.1.2
+  - @hypoth-ui/wc@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
