@@ -2172,6 +2172,35 @@
         ]
       },
       "hasTemplates": true
+    },
+    {
+      "name": "empty-state",
+      "displayName": "EmptyState",
+      "description": "Empty state messaging with icon, title, description, and action",
+      "version": "1.0.0",
+      "status": "alpha",
+      "frameworks": [
+        "react",
+        "wc"
+      ],
+      "dependencies": [
+        "@hypoth-ui/tokens"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "empty-state/index.tsx",
+          "target": "empty-state.tsx",
+          "type": "tsx",
+          "framework": "react"
+        }
+      ],
+      "a11y": {
+        "apgPattern": "custom",
+        "keyboardSupport": [],
+        "knownLimitations": []
+      },
+      "hasTemplates": true
     }
   ]
 }

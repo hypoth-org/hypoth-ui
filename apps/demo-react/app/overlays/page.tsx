@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Dialog, Sheet, LegacyButton as Button, Input } from '@hypoth-ui/react';
+import { Dialog, Sheet, Input } from '@hypoth-ui/react';
+import { DsButton as Button } from '@hypoth-ui/react/client';
 import { overlaysSectionContent } from '@hypoth-ui/demo-shared';
 import { SidebarNav } from '../../components/sidebar-nav';
 import { AppShell } from '../../components/app-shell';

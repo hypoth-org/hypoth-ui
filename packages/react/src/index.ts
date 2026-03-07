@@ -1,17 +1,12 @@
+"use client";
+
 /**
  * Main entry point for @hypoth-ui/react package.
  *
- * This module provides server-safe exports that can be imported in Next.js
- * App Router server components. Types have no runtime cost.
+ * This module exports all React components for the hypoth-ui design system.
+ * The "use client" directive marks this as a client module boundary for Next.js.
  *
- * For interactive components, import from the client entry point:
- * @example
- * ```tsx
- * "use client";
- * import { Button, Input } from "@hypoth-ui/react/client";
- * ```
- *
- * For type-only imports in server components:
+ * Type-only imports are unaffected by the directive:
  * @example
  * ```tsx
  * import type { ButtonProps, InputProps } from "@hypoth-ui/react";
@@ -20,11 +15,6 @@
 
 // Component types (server-safe, no runtime code)
 export type { ButtonProps } from "./components/button/index.js";
-export type {
-  ButtonProps as LegacyButtonProps,
-  ButtonVariant,
-  ButtonSize,
-} from "./components/button.js";
 export type { InputProps, InputType, InputSize } from "./components/input.js";
 export type { LinkProps, LinkVariant } from "./components/link.js";
 export type { IconProps, IconName, IconSize } from "./components/icon.js";
@@ -199,7 +189,6 @@ export type {
 // Re-export components from client entry for backwards compatibility
 // These will include the 'use client' directive when bundled
 export { Button } from "./components/button/index.js";
-export { Button as LegacyButton } from "./components/button.js";
 export { Input } from "./components/input.js";
 export { Link } from "./components/link.js";
 export { Icon } from "./components/icon.js";
@@ -663,3 +652,20 @@ export type {
   ThemeScriptProps,
   StorageKeys,
 } from "./theme/index.js";
+
+// EmptyState compound component
+export {
+  EmptyState,
+  EmptyStateRoot,
+  EmptyStateIcon,
+  EmptyStateTitle,
+  EmptyStateDescription,
+  EmptyStateAction,
+} from "./components/empty-state/index.js";
+export type {
+  EmptyStateProps,
+  EmptyStateIconProps,
+  EmptyStateTitleProps,
+  EmptyStateDescriptionProps,
+  EmptyStateActionProps,
+} from "./components/empty-state/index.js";

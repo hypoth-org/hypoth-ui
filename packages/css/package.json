@@ -32,8 +32,7 @@
     "src/layers"
   ],
   "dependencies": {
-    "@hypoth-ui/tokens": "workspace:*",
-    "@hypoth-ui/wc": "workspace:*"
+    "@hypoth-ui/tokens": "workspace:*"
   },
   "scripts": {
     "build": "postcss src/index.css -o dist/index.css",
@@ -42,6 +41,7 @@
     "test:unit": "vitest run"
   },
   "devDependencies": {
+    "@hypoth-ui/wc": "workspace:*",
     "postcss": "^8.4.0",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.0.0",

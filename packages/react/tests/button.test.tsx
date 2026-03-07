@@ -1,7 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Button } from "../src/components/button";
+import { DsButton as Button } from "../src/components/ds-button";
 
 // Mock the Web Component
 class MockDsButton extends HTMLElement {
@@ -42,7 +42,7 @@ describe("Button React Component", () => {
     });
 
     it("should have displayName", () => {
-      expect(Button.displayName).toBe("Button");
+      expect(Button.displayName).toBe("DsButton");
     });
   });
 

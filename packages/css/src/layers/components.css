@@ -49,5 +49,8 @@
 @import "@hypoth-ui/wc/src/components/stepper/stepper.css";
 @import "@hypoth-ui/wc/src/components/command/command.css";
 
+/* EmptyState */
+@import "@hypoth-ui/wc/src/components/empty-state/empty-state.css";
+
 /* Layout Primitives */
 @import "@hypoth-ui/wc/src/components/layout/index.css";
