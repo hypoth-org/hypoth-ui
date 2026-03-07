@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.1.2/schema.json",
-  "changelog": ["./.changeset/edition-changelog.js", { "repo": "hypoth-ui/hypoth-ui" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "hypoth-org/hypoth-ui" }],
   "commit": false,
   "fixed": [["@hypoth-ui/*"]],
   "linked": [],
