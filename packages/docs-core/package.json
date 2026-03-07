@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/docs-core",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Documentation engine and validation tools for the hypoth-ui design system (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/docs-core"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["documentation", "design-system", "content-pack", "validation", "hypoth-ui"],
+  "keywords": [
+    "documentation",
+    "design-system",
+    "content-pack",
+    "validation",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,7 +24,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "clean": "rm -rf dist",

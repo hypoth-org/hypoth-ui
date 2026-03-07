@@ -1,0 +1,17 @@
+# @hypoth-ui/docs-renderer-next
+
+## 1.0.0
+
+### Minor Changes
+
+- [#27](https://github.com/hypoth-org/hypoth-ui/pull/27) [`a1ea90c`](https://github.com/hypoth-org/hypoth-ui/commit/a1ea90c544a626e79db4556c3e3f55b8366b623a) Thanks [@JasonGrant](https://github.com/JasonGrant)! - Initial alpha release (0.1.0)
+
+### Patch Changes
+
+- Updated dependencies [[`a1ea90c`](https://github.com/hypoth-org/hypoth-ui/commit/a1ea90c544a626e79db4556c3e3f55b8366b623a)]:
+  - @hypoth-ui/wc@1.0.0
+  - @hypoth-ui/tokens@1.0.0
+  - @hypoth-ui/css@1.0.0
+  - @hypoth-ui/next@1.0.0
+  - @hypoth-ui/docs-core@1.0.0
+  - @hypoth-ui/docs-content@1.0.0

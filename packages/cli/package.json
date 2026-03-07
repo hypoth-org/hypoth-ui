@@ -1,13 +1,17 @@
 {
   "name": "@hypoth-ui/cli",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "CLI tool for adding hypoth-ui components to your project (Alpha)",
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
   "type": "module",
   "bin": {
     "hypoth-ui": "./dist/index.js"
   },
-  "files": ["dist", "registry", "templates"],
+  "files": [
+    "dist",
+    "registry",
+    "templates"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -39,7 +43,12 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["cli", "design-system", "components", "hypoth-ui"],
+  "keywords": [
+    "cli",
+    "design-system",
+    "components",
+    "hypoth-ui"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

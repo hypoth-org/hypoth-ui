@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/primitives-dom",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "DOM behavior primitives for the hypoth-ui design system — focus trap, roving focus, type-ahead (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/primitives-dom"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["primitives", "dom", "focus-trap", "accessibility", "hypoth-ui"],
+  "keywords": [
+    "primitives",
+    "dom",
+    "focus-trap",
+    "accessibility",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,7 +24,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "clean": "rm -rf dist",

@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/next",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Next.js App Router integration for hypoth-ui Web Components (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/next"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["nextjs", "design-system", "web-components", "app-router", "hypoth-ui"],
+  "keywords": [
+    "nextjs",
+    "design-system",
+    "web-components",
+    "app-router",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -22,7 +28,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf dist",
