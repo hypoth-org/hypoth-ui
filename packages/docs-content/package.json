@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/docs-content",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "type": "module",
   "description": "Documentation content packs for the hypoth-ui design system",
   "license": "MIT",

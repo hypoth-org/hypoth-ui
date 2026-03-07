@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/react",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "type": "module",
   "description": "React adapter components for the hypoth-ui design system",
   "license": "MIT",
@@ -44,7 +44,7 @@
     "@hypoth-ui/primitives-dom": "workspace:*"
   },
   "peerDependencies": {
-    "@hypoth-ui/wc": ">=1.0.0",
+    "@hypoth-ui/wc": ">=1.0.1",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
