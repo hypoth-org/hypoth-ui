@@ -273,7 +273,9 @@ export class DsCombobox extends FormAssociatedMixin(DSElement) {
     if (this.open || this.disabled) return;
     this.behavior?.open();
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -299,7 +301,9 @@ export class DsCombobox extends FormAssociatedMixin(DSElement) {
       this.cleanup();
       this.behavior?.close();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
@@ -307,7 +311,9 @@ export class DsCombobox extends FormAssociatedMixin(DSElement) {
     this.cleanup();
     this.behavior?.close();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
   }
 
   /**

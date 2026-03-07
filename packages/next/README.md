@@ -1,7 +1,5 @@
 # @hypoth-ui/next
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Next.js App Router integration for hypoth-ui Web Components. Provides a client-side loader that registers custom elements for use with Server Components and React Server Components (RSC).
 
 ## Installation
@@ -37,13 +35,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-Then use components in any page or Server Component:
+Then use components in any client component or page:
 
 ```tsx
-import { Button } from '@hypoth-ui/react';
+"use client";
+import { DsButton } from '@hypoth-ui/react/client';
 
 export default function Page() {
-  return <Button variant="primary">Click me</Button>;
+  return <DsButton variant="primary">Click me</DsButton>;
 }
 ```
 

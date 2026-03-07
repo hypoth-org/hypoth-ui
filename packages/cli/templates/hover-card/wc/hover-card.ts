@@ -117,7 +117,9 @@ export class DsHoverCard extends DSElement {
 
     this.clearTimers();
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -143,14 +145,18 @@ export class DsHoverCard extends DSElement {
     } else {
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
   }
 
   private clearTimers(): void {

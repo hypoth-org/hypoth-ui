@@ -44,9 +44,6 @@ export interface DsButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEleme
 /**
  * React wrapper for ds-button Web Component.
  * Provides type-safe props and event handling.
- *
- * @deprecated Use the headless `Button` from `@hypoth-ui/react` instead.
- * This WC-wrapping variant is available as `DsButton` for direct WC integration.
  */
 export const DsButton = forwardRef<HTMLElement, DsButtonProps>((props, forwardedRef) => {
   const {

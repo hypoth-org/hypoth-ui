@@ -20,7 +20,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - No security updates yet
-
-### Breaking Changes
-
-- No breaking changes yet (pre-1.0)

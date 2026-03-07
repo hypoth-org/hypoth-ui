@@ -52,8 +52,7 @@ import "./combobox-tag.js";
  * @slot tags - Selected value tags (for multi-select)
  * @slot - Combobox content (ds-combobox-content with ds-combobox-option children)
  *
- * @fires ds:open - Fired when combobox opens
- * @fires ds:close - Fired when combobox closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  * @fires ds:change - Fired when value changes (detail: { value, label } or { values, labels })
  * @fires ds:input - Fired when input value changes (detail: { value })
  * @fires ds:invalid - Fired when customValidation is true and validation fails
@@ -273,14 +272,27 @@ export class DsCombobox extends FormAssociatedMixin(DSElement) {
     if (this.open || this.disabled) return;
     this.behavior?.open();
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the combobox.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const content = this.querySelector("ds-combobox-content") as DsComboboxContent | null;
 
@@ -299,15 +311,17 @@ export class DsCombobox extends FormAssociatedMixin(DSElement) {
       this.cleanup();
       this.behavior?.close();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
+  /**
+   * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
+   */
   private completeClose(): void {
     this.cleanup();
     this.behavior?.close();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
   }
 
   /**

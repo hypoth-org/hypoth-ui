@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/tokens",
   "version": "1.0.0",
   "type": "module",
-  "description": "Design tokens for the hypoth-ui design system — CSS custom properties, TypeScript constants (Alpha)",
+  "description": "Design tokens for the hypoth-ui design system — CSS custom properties, TypeScript constants",
   "license": "MIT",
   "repository": {
     "type": "git",

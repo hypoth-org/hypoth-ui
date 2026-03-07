@@ -29,8 +29,7 @@ import "./popover-content.js";
  * @slot trigger - Button or element that opens the popover
  * @slot - Popover content (ds-popover-content)
  *
- * @fires ds:open - Fired when popover opens
- * @fires ds:close - Fired when popover closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  *
  * @example
  * ```html
@@ -116,14 +115,27 @@ export class DsPopover extends DSElement {
     if (this.open) return;
 
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the popover.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const content = this.querySelector("ds-popover-content") as DsPopoverContent | null;
 
@@ -144,7 +156,6 @@ export class DsPopover extends DSElement {
       // No animation - close immediately
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
 
       // Return focus to trigger
       this.triggerElement?.focus();
@@ -153,11 +164,11 @@ export class DsPopover extends DSElement {
 
   /**
    * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
    */
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
 
     // Return focus to trigger
     this.triggerElement?.focus();

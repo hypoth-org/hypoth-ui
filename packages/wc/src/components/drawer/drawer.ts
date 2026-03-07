@@ -9,8 +9,7 @@
  * @slot trigger - Button or element that opens the drawer
  * @slot - Drawer content (ds-drawer-content)
  *
- * @fires ds:open - Fired when drawer opens
- * @fires ds:close - Fired when drawer closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  *
  * @example
  * ```html
@@ -129,7 +128,19 @@ export class DsDrawer extends DSElement {
   /**
    * Handles close triggered by the behavior (escape/outside click).
    */
-  private handleBehaviorClose(): void {
+  private handleBehaviorClose(reason: "escape" | "outside-click" = "escape"): void {
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      // Re-open the behavior since we're preventing close
+      this.dialogBehavior?.open();
+      return;
+    }
+
     const content = this.querySelector("ds-drawer-content") as DsDrawerContent | null;
 
     // If animated, use presence for exit animation
@@ -147,7 +158,6 @@ export class DsDrawer extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
@@ -167,14 +177,27 @@ export class DsDrawer extends DSElement {
 
     this.open = true;
     this.dialogBehavior?.open();
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the drawer.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const content = this.querySelector("ds-drawer-content") as DsDrawerContent | null;
 
@@ -196,19 +219,18 @@ export class DsDrawer extends DSElement {
       // No animation - close immediately
       this.open = false;
       this.isClosing = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
   /**
    * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
    */
   private completeClose(): void {
     this.presence?.destroy();
     this.presence = null;
     this.open = false;
     this.isClosing = false;
-    emitEvent(this, StandardEvents.CLOSE);
   }
 
   private handleTriggerClick = (event: Event): void => {

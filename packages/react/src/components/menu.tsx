@@ -65,12 +65,13 @@ export const Menu = forwardRef<HTMLElement, MenuProps>((props, forwardedRef) => 
   }, [forwardedRef]);
 
   // Stable handlers that read from refs
-  const handleOpen = useCallback(() => {
-    onOpenRef.current?.();
-  }, []);
-
-  const handleClose = useCallback(() => {
-    onCloseRef.current?.();
+  const handleOpenChange = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ open: boolean; reason?: string }>;
+    if (customEvent.detail.open) {
+      onOpenRef.current?.();
+    } else {
+      onCloseRef.current?.();
+    }
   }, []);
 
   const handleSelect = useCallback((event: Event) => {
@@ -83,16 +84,14 @@ export const Menu = forwardRef<HTMLElement, MenuProps>((props, forwardedRef) => 
     const element = internalRef.current;
     if (!element) return;
 
-    element.addEventListener("ds:open", handleOpen);
-    element.addEventListener("ds:close", handleClose);
+    element.addEventListener("ds:open-change", handleOpenChange);
     element.addEventListener("ds:select", handleSelect);
 
     return () => {
-      element.removeEventListener("ds:open", handleOpen);
-      element.removeEventListener("ds:close", handleClose);
+      element.removeEventListener("ds:open-change", handleOpenChange);
       element.removeEventListener("ds:select", handleSelect);
     };
-  }, [handleOpen, handleClose, handleSelect]);
+  }, [handleOpenChange, handleSelect]);
 
   return createElement(
     "ds-menu",

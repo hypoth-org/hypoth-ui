@@ -78,13 +78,14 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>((props, forwardedRe
     }
   }, [forwardedRef]);
 
-  // Stable handlers that read from refs
-  const handleOpen = useCallback(() => {
-    onOpenRef.current?.();
-  }, []);
-
-  const handleClose = useCallback(() => {
-    onCloseRef.current?.();
+  // Stable handler that reads from refs
+  const handleOpenChange = useCallback((event: Event) => {
+    const customEvent = event as CustomEvent<{ open: boolean; reason?: string }>;
+    if (customEvent.detail.open) {
+      onOpenRef.current?.();
+    } else {
+      onCloseRef.current?.();
+    }
   }, []);
 
   // Handle events - no handler deps needed
@@ -92,14 +93,12 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>((props, forwardedRe
     const element = internalRef.current;
     if (!element) return;
 
-    element.addEventListener("ds:open", handleOpen);
-    element.addEventListener("ds:close", handleClose);
+    element.addEventListener("ds:open-change", handleOpenChange);
 
     return () => {
-      element.removeEventListener("ds:open", handleOpen);
-      element.removeEventListener("ds:close", handleClose);
+      element.removeEventListener("ds:open-change", handleOpenChange);
     };
-  }, [handleOpen, handleClose]);
+  }, [handleOpenChange]);
 
   return createElement(
     "ds-popover",

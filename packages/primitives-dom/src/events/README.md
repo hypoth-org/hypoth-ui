@@ -210,14 +210,6 @@ useEffect(() => {
 }, [onPress]);
 ```
 
-## Migration from Legacy Events
-
-| Old Event | New Event | Notes |
-|-----------|-----------|-------|
-| `ds:click` | `ds:press` | Includes keyboard activation |
-| `ds:open` + `ds:close` | `ds:open-change` | Single event with `open` detail |
-| `ds:before-close` | `ds:open-change` | Use cancelable option |
-
 ## See Also
 
 - [event-names.ts](./event-names.ts) - Type definitions and helpers

@@ -169,7 +169,9 @@ export class DsDatePicker extends DSElement {
   public show(): void {
     if (this.open || this.disabled) return;
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -193,7 +195,9 @@ export class DsDatePicker extends DSElement {
     } else {
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
       this.getTriggerElement()?.focus();
     }
   }
@@ -201,7 +205,9 @@ export class DsDatePicker extends DSElement {
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     this.getTriggerElement()?.focus();
   }
 

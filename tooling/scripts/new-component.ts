@@ -36,7 +36,7 @@ function toPascalCase(str: string): string {
 function generateWebComponent(config: ComponentConfig): string {
   return `import { html, css } from "lit";
 import { property } from "lit/decorators.js";
-import { LightElement } from "../../base/light-element.js";
+import { DSElement } from "../../base/ds-element.js";
 import { define } from "../../registry/define.js";
 
 export type ${config.className}Variant = "default" | "outlined";
@@ -47,7 +47,7 @@ export type ${config.className}Variant = "default" | "outlined";
  * @element ${config.tagName}
  * @slot default - Content slot
  */
-export class Ds${config.className} extends LightElement {
+export class Ds${config.className} extends DSElement {
   /** Visual variant */
   @property({ type: String, reflect: true })
   variant: ${config.className}Variant = "default";

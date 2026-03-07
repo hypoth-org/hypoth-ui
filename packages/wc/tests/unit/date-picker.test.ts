@@ -374,11 +374,11 @@ describe("DsDatePicker", () => {
   });
 
   describe("events", () => {
-    it("should emit ds:open event when opened", async () => {
-      const openHandler = vi.fn();
+    it("should emit ds:open-change event when opened", async () => {
+      const openChangeHandler = vi.fn();
       render(
         html`
-          <ds-date-picker @ds:open=${openHandler}>
+          <ds-date-picker @ds:open-change=${openChangeHandler}>
             <button slot="trigger">Select date</button>
             <ds-date-picker-calendar></ds-date-picker-calendar>
           </ds-date-picker>
@@ -393,7 +393,9 @@ describe("DsDatePicker", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(openHandler).toHaveBeenCalled();
+      expect(openChangeHandler).toHaveBeenCalled();
+      const event = openChangeHandler.mock.calls[0][0] as CustomEvent;
+      expect(event.detail.open).toBe(true);
     });
   });
 

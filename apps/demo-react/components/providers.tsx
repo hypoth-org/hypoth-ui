@@ -1,6 +1,6 @@
 'use client';
 
-import { Toast } from '@hypoth-ui/react';
+import { Toast } from '@hypoth-ui/react/client';
 import type { ReactNode } from 'react';
 import { ThemeProvider } from './theme-provider';
 

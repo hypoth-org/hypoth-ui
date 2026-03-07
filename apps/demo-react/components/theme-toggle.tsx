@@ -1,6 +1,6 @@
 'use client';
 
-import { Switch } from '@hypoth-ui/react';
+import { Switch } from '@hypoth-ui/react/client';
 import { useTheme } from './theme-provider';
 
 /**

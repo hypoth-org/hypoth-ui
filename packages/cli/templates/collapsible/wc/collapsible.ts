@@ -73,7 +73,9 @@ export class DsCollapsible extends DSElement {
     if (this.disabled || this.open === open) return;
 
     this.open = open;
-    emitEvent(this, open ? StandardEvents.OPEN : StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open, reason: "trigger" },
+    });
     this.updateContent();
   }
 

@@ -129,8 +129,8 @@ const DrawerRoot = forwardRef<HTMLElement, DrawerRootProps>(function DrawerRoot(
 
   const handleOpenChange = useCallback(
     (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const isOpen = customEvent.type === "ds:open";
+      const customEvent = event as CustomEvent<{ open: boolean; reason?: string }>;
+      const isOpen = customEvent.detail.open;
 
       if (!isControlled) {
         setInternalOpen(isOpen);
@@ -145,12 +145,10 @@ const DrawerRoot = forwardRef<HTMLElement, DrawerRootProps>(function DrawerRoot(
     const element = elementRef.current;
     if (!element) return;
 
-    element.addEventListener("ds:open", handleOpenChange);
-    element.addEventListener("ds:close", handleOpenChange);
+    element.addEventListener("ds:open-change", handleOpenChange);
 
     return () => {
-      element.removeEventListener("ds:open", handleOpenChange);
-      element.removeEventListener("ds:close", handleOpenChange);
+      element.removeEventListener("ds:open-change", handleOpenChange);
     };
   }, [handleOpenChange]);
 

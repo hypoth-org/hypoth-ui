@@ -8,8 +8,7 @@
  * @slot trigger - Button that opens the menu
  * @slot - Menu content (ds-dropdown-menu-content)
  *
- * @fires ds:open - Fired when menu opens
- * @fires ds:close - Fired when menu closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  * @fires ds:select - Fired when an item is selected
  *
  * @example
@@ -138,7 +137,18 @@ export class DsDropdownMenu extends DSElement {
   /**
    * Handles close triggered by the behavior (escape/outside click).
    */
-  private handleBehaviorClose(): void {
+  private handleBehaviorClose(reason: "escape" | "outside-click" = "escape"): void {
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      this.menuBehavior?.open();
+      return;
+    }
+
     const content = this.querySelector("ds-dropdown-menu-content") as DsDropdownMenuContent | null;
 
     if (this.animated && content && !prefersReducedMotion()) {
@@ -150,7 +160,6 @@ export class DsDropdownMenu extends DSElement {
       this.presence.hide(content);
     } else {
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
@@ -162,14 +171,27 @@ export class DsDropdownMenu extends DSElement {
 
     this.open = true;
     this.menuBehavior?.open(this.focusFirstOnOpen ?? "first");
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the menu.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const content = this.querySelector("ds-dropdown-menu-content") as DsDropdownMenuContent | null;
 
@@ -185,15 +207,17 @@ export class DsDropdownMenu extends DSElement {
       this.presence.hide(content);
     } else {
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
     }
   }
 
+  /**
+   * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
+   */
   private completeClose(): void {
     this.presence?.destroy();
     this.presence = null;
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
   }
 
   public toggle(): void {

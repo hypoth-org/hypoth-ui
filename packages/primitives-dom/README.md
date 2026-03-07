@@ -1,7 +1,5 @@
 # @hypoth-ui/primitives-dom
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Low-level DOM behavior primitives for the hypoth-ui design system. Provides framework-agnostic utilities for focus management, keyboard navigation, and ARIA patterns used by higher-level components.
 
 ## Installation

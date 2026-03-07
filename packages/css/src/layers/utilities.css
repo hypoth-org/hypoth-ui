@@ -319,7 +319,7 @@
   padding-block: var(--ds-spacing-xl);
 }
 
-/* Legacy spacing utilities (kept for compatibility) */
+/* Zero and auto spacing utilities */
 .m-0 {
   margin: var(--ds-spacing-primitives-0);
 }
@@ -395,7 +395,7 @@
   background-color: var(--ds-color-primary-default);
 }
 
-/* Flexbox utilities (legacy, kept for compatibility) */
+/* Flexbox utilities */
 .flex {
   display: flex;
 }

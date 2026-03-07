@@ -37,8 +37,7 @@ import "./menu-item.js";
  * @slot trigger - Button that opens the menu
  * @slot - Menu content (ds-menu-content with ds-menu-item children)
  *
- * @fires ds:open - Fired when menu opens
- * @fires ds:close - Fired when menu closes
+ * @fires ds:open-change - Fired when open state changes (detail: { open, reason })
  * @fires ds:select - Fired when a menu item is selected (bubbles from ds-menu-item)
  *
  * @example
@@ -114,14 +113,27 @@ export class DsMenu extends DSElement {
     if (this.open) return;
 
     this.open = true;
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
    * Closes the menu.
+   * @param reason - The reason for closing (default: "programmatic")
    */
-  public close(): void {
+  public close(reason: "escape" | "outside-click" | "trigger" | "programmatic" = "programmatic"): void {
     if (!this.open) return;
+
+    // Emit cancelable open-change event before closing
+    const openChangeEvent = emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason },
+      cancelable: true,
+    });
+
+    if (openChangeEvent.defaultPrevented) {
+      return;
+    }
 
     const content = this.querySelector("ds-menu-content") as DsMenuContent | null;
 
@@ -142,7 +154,6 @@ export class DsMenu extends DSElement {
       // No animation - close immediately
       this.cleanup();
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
 
       // Return focus to trigger
       this.triggerElement?.focus();
@@ -151,11 +162,11 @@ export class DsMenu extends DSElement {
 
   /**
    * Completes the close after exit animation.
+   * Note: The open-change event was already emitted before animation started.
    */
   private completeClose(): void {
     this.cleanup();
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
 
     // Return focus to trigger
     this.triggerElement?.focus();

@@ -1,7 +1,5 @@
 # @hypoth-ui/test-utils
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Shared test utilities for the hypoth-ui design system. Provides helpers for rendering, querying, and asserting on Web Components and React adapters in Vitest.
 
 ## Installation

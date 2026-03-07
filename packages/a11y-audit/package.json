@@ -2,7 +2,7 @@
   "name": "@hypoth-ui/a11y-audit",
   "version": "1.0.0",
   "type": "module",
-  "description": "Accessibility audit and conformance reporting for the hypoth-ui design system (Alpha)",
+  "description": "Accessibility audit and conformance reporting for the hypoth-ui design system",
   "license": "MIT",
   "repository": {
     "type": "git",

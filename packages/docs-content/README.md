@@ -1,7 +1,5 @@
 # @hypoth-ui/docs-content
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 Documentation content packs for the hypoth-ui design system. Contains component manifests, MDX documentation files, and edition configuration used by the docs renderer.
 
 ## Installation

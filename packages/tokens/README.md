@@ -1,7 +1,5 @@
 # @hypoth-ui/tokens
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 DTCG-compliant design tokens for the hypoth-ui design system. Provides CSS custom properties, JSON, and TypeScript constants for colors, spacing, typography, and more.
 
 ## Installation

@@ -41,6 +41,3 @@ export class DSElement extends LitElement {
     return this;
   }
 }
-
-// Re-export with legacy name for backwards compatibility
-export { DSElement as LightElement };

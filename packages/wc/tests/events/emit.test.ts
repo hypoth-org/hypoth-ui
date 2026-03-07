@@ -116,12 +116,10 @@ describe("StandardEvents", () => {
   it("should define standard event names", () => {
     expect(StandardEvents.CHANGE).toBe("change");
     expect(StandardEvents.SELECT).toBe("select");
-    expect(StandardEvents.OPEN).toBe("open");
-    expect(StandardEvents.CLOSE).toBe("close");
-    expect(StandardEvents.BEFORE_CLOSE).toBe("before-close");
+    expect(StandardEvents.OPEN_CHANGE).toBe("open-change");
+    expect(StandardEvents.PRESS).toBe("press");
     expect(StandardEvents.DISMISS).toBe("dismiss");
     expect(StandardEvents.FOCUS_CHANGE).toBe("focus-change");
-    expect(StandardEvents.CLICK).toBe("click");
   });
 
   it("should be usable with emitEvent", () => {

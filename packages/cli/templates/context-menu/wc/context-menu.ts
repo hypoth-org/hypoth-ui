@@ -127,7 +127,9 @@ export class DsContextMenu extends DSElement {
       this.presence.hide(content);
     } else {
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
@@ -143,7 +145,9 @@ export class DsContextMenu extends DSElement {
     this.pointerY = y;
     this.open = true;
     this.menuBehavior?.open("first");
-    emitEvent(this, StandardEvents.OPEN);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: true, reason: "trigger" },
+    });
   }
 
   /**
@@ -166,7 +170,9 @@ export class DsContextMenu extends DSElement {
       this.presence.hide(content);
     } else {
       this.open = false;
-      emitEvent(this, StandardEvents.CLOSE);
+      emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
     }
   }
 
@@ -174,7 +180,9 @@ export class DsContextMenu extends DSElement {
     this.presence?.destroy();
     this.presence = null;
     this.open = false;
-    emitEvent(this, StandardEvents.CLOSE);
+    emitEvent(this, StandardEvents.OPEN_CHANGE, {
+      detail: { open: false, reason: "programmatic" },
+    });
   }
 
   private handleContextMenu = (event: MouseEvent): void => {

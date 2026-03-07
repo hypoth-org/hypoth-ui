@@ -1,7 +1,7 @@
 <!--
   SYNC IMPACT REPORT
   ==================
-  Version: 1.0.0 (initial)
+  Version: 1.1.0
 
   Principles:
   - I. Performance First
@@ -9,16 +9,17 @@
   - III. Customizability
 
   Sections:
+  - Alpha Policy (NEW — suspends API Stability, Deprecation, Migration requirements)
   - Architecture Commitments
-  - Component Contract
+  - Component Contract (API Stability items suspended during Alpha)
   - Documentation Contract
   - Spec Kit Discipline (includes Research Requirement)
   - Dependency Management
-  - Governance
+  - Governance (Migration Plan and API Stability gates suspended during Alpha)
 
   Templates updated:
-  - .specify/templates/plan-template.md: ✅ Updated (Constitution Check)
-  - .specify/templates/spec-template.md: ✅ Updated (Approach Analysis section added)
+  - .specify/templates/plan-template.md: ✅ Compatible (no changes needed)
+  - .specify/templates/spec-template.md: ✅ Compatible (no changes needed)
   - .specify/templates/tasks-template.md: ✅ Compatible (no changes needed)
 
   Deferred items: None
@@ -63,6 +64,21 @@ Token-driven theming enables multi-brand, multi-mode support without forks.
 - **No style lock-in**: Components MUST NOT inline styles that prevent CSS customization
 
 **Rationale**: Design systems serve multiple products and brands. Forks create maintenance nightmares and divergence.
+
+## Alpha Policy
+
+**hypoth-ui is alpha. Alpha has no users.** Until the project is explicitly promoted to beta:
+
+- Do not add `@deprecated` tags or deprecation warnings
+- Do not create migration guides or breaking change documentation
+- Do not add backward-compatibility shims, dual-export workarounds, or re-export aliases
+- Do not hedge architectural decisions around hypothetical consumer impact
+- Make the correct technical decision directly; do not add bloat for users who don't exist
+- Semver is used for internal tracking, not as a stability contract to external consumers
+
+**Promotion to beta**: This section is removed when the project is explicitly promoted to beta, at which point the Component Contract and Governance sections apply in full.
+
+**Scope**: This policy overrides API Stability, Deprecation Policy, and Migration Path requirements in the Component Contract and Governance sections below. All other constitutional requirements (Performance, Accessibility, Customizability, testing, a11y evidence) still apply — quality is not deferred, only consumer-facing ceremony is.
 
 ## Architecture Commitments
 
@@ -115,8 +131,8 @@ Every component MUST satisfy these requirements before release:
 ### API Stability
 
 - **Stable public API**: Attributes, properties, events, slots, and CSS custom properties documented
-- **Semantic versioning**: Breaking changes MUST increment major version
-- **Deprecation policy**: Minimum 2 minor versions warning before removal
+- **Semantic versioning**: Breaking changes MUST increment major version *(suspended during Alpha — see Alpha Policy)*
+- **Deprecation policy**: Minimum 2 minor versions warning before removal *(suspended during Alpha — see Alpha Policy)*
 
 ### Accessibility Requirements
 
@@ -272,7 +288,7 @@ Every spec MUST include an **Approach Analysis** section that documents research
 1. Propose change via ADR (Architecture Decision Record)
 2. Discussion period: minimum 1 week
 3. Approval: Requires maintainer consensus
-4. Migration plan: Breaking changes require documented migration path
+4. Migration plan: Breaking changes require documented migration path *(suspended during Alpha — see Alpha Policy)*
 5. Version bump: Follow semantic versioning for constitution changes
 
 ### Versioning Policy
@@ -288,7 +304,7 @@ All PRs MUST pass these gates before merge:
 
 - [ ] **A11y evidence**: Automated tests pass; manual checklist completed
 - [ ] **Performance check**: Bundle size delta reported; no regressions without justification
-- [ ] **API stability**: Public API changes documented; breaking changes follow deprecation policy
+- [ ] **API stability**: Public API changes documented; breaking changes follow deprecation policy *(suspended during Alpha — see Alpha Policy)*
 - [ ] **Spec Kit discipline**: Correct artifact separation verified
 
 ### ADR Requirements
@@ -303,4 +319,4 @@ All PRs MUST pass these gates before merge:
 - Complexity MUST be justified against simplicity principles
 - Performance regressions MUST be justified and approved
 
-**Version**: 1.0.0 | **Ratified**: 2026-01-01 | **Last Amended**: 2026-01-01
+**Version**: 1.1.0 | **Ratified**: 2026-01-01 | **Last Amended**: 2026-03-07

@@ -2,7 +2,6 @@
 
 **A modern, accessible design system with Web Components and React adapters.**
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 ---
@@ -38,14 +37,15 @@ import '@hypoth-ui/css';
 **3. Import and use a component:**
 
 ```tsx
-import { Button } from '@hypoth-ui/react';
+import '@hypoth-ui/css';
+import { DsButton } from '@hypoth-ui/react/client';
 
 export default function App() {
-  return <Button onPress={() => console.log('clicked')}>Click me</Button>;
+  return <DsButton onPress={() => console.log('clicked')}>Click me</DsButton>;
 }
 ```
 
-Components provide accessible behavior out of the box. Use `@hypoth-ui/css` for base styles, or apply your own CSS classes.
+`DsButton` is the styled component — it renders with the design system's default appearance via `@hypoth-ui/css`. For behavior-only (unstyled) usage, import the headless `Button` from `@hypoth-ui/react`.
 
 ---
 
@@ -92,18 +92,18 @@ Files are copied to your configured components directory with transformed import
 
 ```tsx
 import '@hypoth-ui/css';
-import { Button, Dialog } from '@hypoth-ui/react';
+import { DsButton, Dialog } from '@hypoth-ui/react/client';
 
 export default function App() {
   return (
-    <Dialog>
+    <Dialog.Root>
       <Dialog.Trigger>
-        <Button>Open</Button>
+        <DsButton>Open</DsButton>
       </Dialog.Trigger>
       <Dialog.Content>
         <p>Dialog content here.</p>
       </Dialog.Content>
-    </Dialog>
+    </Dialog.Root>
   );
 }
 ```
@@ -147,10 +147,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ```tsx
 // app/page.tsx
-import { Button } from '@hypoth-ui/react';
+import { DsButton } from '@hypoth-ui/react/client';
 
 export default function Page() {
-  return <Button onPress={() => console.log('clicked')}>Click me</Button>;
+  return <DsButton onPress={() => console.log('clicked')}>Click me</DsButton>;
 }
 ```
 
@@ -184,12 +184,6 @@ When both are provided, `include` takes precedence. You can also enable `debug` 
 | `@hypoth-ui/docs-renderer-next` | Next.js docs renderer |
 | `@hypoth-ui/test-utils` | Test utilities |
 | `@hypoth-ui/a11y-audit` | Accessibility audit tools |
-
----
-
-## Alpha Notice
-
-> **Alpha:** APIs may change between minor versions before 1.0. Pin your versions for stability.
 
 ---
 

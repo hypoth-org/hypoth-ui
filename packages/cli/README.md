@@ -1,7 +1,5 @@
 # @hypoth-ui/cli
 
-![Alpha](https://img.shields.io/badge/status-alpha-orange)
-
 CLI tool for scaffolding and managing hypoth-ui components in your project. Initialize configuration, browse available components, and add them with a single command.
 
 ## Installation
