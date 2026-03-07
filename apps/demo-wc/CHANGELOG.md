@@ -1,5 +1,15 @@
 # @hypoth-ui/demo-wc
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`8e9cdf2`](https://github.com/hypoth-org/hypoth-ui/commit/8e9cdf252d6b95aaeb8837182ef771529c01257c)]:
+  - @hypoth-ui/wc@1.0.1
+  - @hypoth-ui/css@1.0.1
+  - @hypoth-ui/tokens@1.0.1
+  - @hypoth-ui/demo-shared@1.0.1
+
 ## 0.1.2
 
 ### Patch Changes

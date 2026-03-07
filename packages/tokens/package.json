@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/tokens",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "type": "module",
   "description": "Design tokens for the hypoth-ui design system — CSS custom properties, TypeScript constants",
   "license": "MIT",

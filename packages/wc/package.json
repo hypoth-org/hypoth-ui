@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/wc",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "type": "module",
   "sideEffects": false,
   "description": "Web Components (Lit) for the hypoth-ui design system",
@@ -74,15 +74,21 @@
   },
   "peerDependencies": {
     "@date-fns/tz": "^1.2.0",
-    "@hypoth-ui/css": ">=1.0.0",
-    "@hypoth-ui/tokens": ">=1.0.0",
+    "@hypoth-ui/css": ">=1.0.1",
+    "@hypoth-ui/tokens": ">=1.0.1",
     "date-fns": "^4.1.0",
     "lucide": "^0.468.0"
   },
   "peerDependenciesMeta": {
-    "date-fns": { "optional": true },
-    "@date-fns/tz": { "optional": true },
-    "lucide": { "optional": true }
+    "date-fns": {
+      "optional": true
+    },
+    "@date-fns/tz": {
+      "optional": true
+    },
+    "lucide": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
