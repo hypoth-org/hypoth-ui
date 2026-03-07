@@ -481,34 +481,34 @@ importers:
 
   packages/wc:
     dependencies:
-      '@date-fns/tz':
-        specifier: ^1.2.0
-        version: 1.4.1
       '@hypoth-ui/primitives-dom':
         specifier: workspace:*
         version: link:../primitives-dom
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
       lit:
         specifier: ^3.1.0
         version: 3.3.2
-      lucide:
-        specifier: ^0.468.0
-        version: 0.468.0
     devDependencies:
       '@axe-core/playwright':
         specifier: ^4.8.0
         version: 4.11.0(playwright-core@1.57.0)
+      '@date-fns/tz':
+        specifier: ^1.2.0
+        version: 1.4.1
       '@hypoth-ui/test-utils':
         specifier: workspace:*
         version: link:../test-utils
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       happy-dom:
         specifier: ^13.10.0
         version: 13.10.1
       jest-axe:
         specifier: ^8.0.0
         version: 8.0.0
+      lucide:
+        specifier: ^0.468.0
+        version: 0.468.0
       playwright-core:
         specifier: ^1.40.0
         version: 1.57.0
