@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/demo-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "React/Next.js demo application for the design system",

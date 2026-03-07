@@ -1,5 +1,17 @@
 # @hypoth-ui/docs-renderer-next
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`6175dd9`](https://github.com/hypoth-org/hypoth-ui/commit/6175dd9d937aba5f5128ba65db002f3feab8a5b6)]:
+  - @hypoth-ui/next@0.1.2
+  - @hypoth-ui/css@0.1.2
+  - @hypoth-ui/docs-content@0.1.2
+  - @hypoth-ui/docs-core@0.1.2
+  - @hypoth-ui/tokens@0.1.2
+  - @hypoth-ui/wc@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

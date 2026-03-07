@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/wc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "sideEffects": false,
   "description": "Web Components (Lit) for the hypoth-ui design system (Alpha)",
@@ -76,8 +76,8 @@
     "lucide": "^0.468.0"
   },
   "peerDependencies": {
-    "@hypoth-ui/css": ">=0.1.1",
-    "@hypoth-ui/tokens": ">=0.1.1"
+    "@hypoth-ui/css": ">=0.1.2",
+    "@hypoth-ui/tokens": ">=0.1.2"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
