@@ -3,7 +3,7 @@
  */
 
 import type { NumberInputBehavior } from "@hypoth-ui/primitives-dom";
-import { createCompoundContext } from "../../utils/create-context.js";
+import { createCompoundContext } from "../_shared/utils/create-context.js";
 
 export type NumberInputFormat = "decimal" | "currency" | "percent";
 

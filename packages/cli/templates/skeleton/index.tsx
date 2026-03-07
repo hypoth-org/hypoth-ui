@@ -7,7 +7,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 
 export type SkeletonVariant = "text" | "circular" | "rectangular" | "rounded";
 export type SkeletonSize = "xs" | "sm" | "md" | "lg" | "xl";

@@ -2,7 +2,7 @@
  * File copy utilities for copy mode installation
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { ComponentDefinition, ComponentFile, DSConfig, Framework } from "../types/index.js";
 
@@ -29,6 +29,9 @@ export async function copyComponentFiles(
     skipped: [],
     errors: [],
   };
+
+  // Auto-copy _shared utilities (idempotent - skips if already copied)
+  copySharedFiles(targetDir, overwrite);
 
   for (const file of files) {
     const targetPath = join(targetDir, component.name, file.target);
@@ -133,6 +136,39 @@ function getBundledTemplatePath(componentName: string, filePath: string): string
   // In production, these would be in packages/cli/templates/
   const __dirname = new URL(".", import.meta.url).pathname;
   return join(__dirname, "../../templates", componentName, filePath);
+}
+
+/**
+ * Copy _shared utility files that component templates depend on.
+ * Copies recursively from bundled templates/_shared/ to the target components directory.
+ * Skips files that already exist unless overwrite is true.
+ */
+function copySharedFiles(targetDir: string, overwrite: boolean): void {
+  const __dirname = new URL(".", import.meta.url).pathname;
+  const sharedSourceDir = join(__dirname, "../../templates/_shared");
+
+  if (!existsSync(sharedSourceDir)) {
+    return;
+  }
+
+  function copyDir(srcDir: string, destDir: string): void {
+    if (!existsSync(destDir)) {
+      mkdirSync(destDir, { recursive: true });
+    }
+
+    for (const entry of readdirSync(srcDir, { withFileTypes: true })) {
+      const srcPath = join(srcDir, entry.name);
+      const destPath = join(destDir, entry.name);
+
+      if (entry.isDirectory()) {
+        copyDir(srcPath, destPath);
+      } else if (!existsSync(destPath) || overwrite) {
+        writeFileSync(destPath, readFileSync(srcPath, "utf-8"), "utf-8");
+      }
+    }
+  }
+
+  copyDir(sharedSourceDir, join(targetDir, "_shared"));
 }
 
 /**

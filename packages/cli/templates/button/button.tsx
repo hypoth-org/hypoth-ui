@@ -12,7 +12,7 @@ import {
   useEffect,
   useMemo,
 } from "react";
-import { Slot } from "../../primitives/slot.js";
+import { Slot } from "../_shared/primitives/slot.js";
 
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type" | "disabled"> {

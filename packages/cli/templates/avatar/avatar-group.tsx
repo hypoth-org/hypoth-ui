@@ -7,7 +7,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 import type { AvatarSize } from "./avatar.js";
 
 export interface AvatarGroupProps extends HTMLAttributes<HTMLElement> {

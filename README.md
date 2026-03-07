@@ -7,20 +7,21 @@
 
 ---
 
-## Core Packages
+## Architecture
 
-| Package | Install | Description |
-|---------|---------|-------------|
-| `@hypoth-ui/react` | `npm install @hypoth-ui/react` | React adapter components |
-| `@hypoth-ui/wc` | `npm install @hypoth-ui/wc` | Web Components (Lit) |
-| `@hypoth-ui/tokens` | `npm install @hypoth-ui/tokens` | Design tokens -- CSS custom properties |
-| `@hypoth-ui/css` | `npm install @hypoth-ui/css` | Base styles and CSS layers |
-| `@hypoth-ui/next` | `npm install @hypoth-ui/next` | Next.js App Router integration |
-| `@hypoth-ui/cli` | `npx @hypoth-ui/cli` | CLI for adding components |
+hypoth-ui provides **accessible behavior** (ARIA, keyboard, focus management) through React components and Web Components, with **styling via CSS layers and design tokens**. Components are headless by default — they handle behavior and accessibility, and you style them with the provided token-based CSS or your own styles.
+
+| Layer | Package | What it provides |
+|-------|---------|-----------------|
+| **Behavior** | `@hypoth-ui/react` or `@hypoth-ui/wc` | Accessible components (ARIA, keyboard, focus) |
+| **Tokens** | `@hypoth-ui/tokens` | CSS custom properties for colors, spacing, typography |
+| **Styles** | `@hypoth-ui/css` | Base component styles using CSS layers |
+| **Next.js** | `@hypoth-ui/next` | App Router integration (WC registration, SSR) |
+| **CLI** | `@hypoth-ui/cli` | Copy component source into your project (shadcn-style) |
 
 ---
 
-## Getting Started -- Package Mode
+## Getting Started — Package Mode
 
 **1. Install packages:**
 
@@ -40,15 +41,17 @@ import '@hypoth-ui/css';
 import { Button } from '@hypoth-ui/react';
 
 export default function App() {
-  return <Button variant="primary">Click me</Button>;
+  return <Button onPress={() => console.log('clicked')}>Click me</Button>;
 }
 ```
 
+Components provide accessible behavior out of the box. Use `@hypoth-ui/css` for base styles, or apply your own CSS classes.
+
 ---
 
-## Getting Started -- Copy Mode
+## Getting Started — Copy Mode
 
-Copy component source files directly into your project for full customization control.
+Copy component source files directly into your project for full customization control (similar to shadcn/ui).
 
 **1. Initialize configuration:**
 
@@ -95,7 +98,7 @@ export default function App() {
   return (
     <Dialog>
       <Dialog.Trigger>
-        <Button variant="primary">Open</Button>
+        <Button>Open</Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <p>Dialog content here.</p>
@@ -114,9 +117,9 @@ export default function App() {
 
 <link rel="stylesheet" href="node_modules/@hypoth-ui/css/dist/index.css" />
 
-<ds-button variant="primary">Click me</ds-button>
+<ds-button>Click me</ds-button>
 <ds-dialog>
-  <ds-button slot="trigger" variant="primary">Open</ds-button>
+  <ds-button slot="trigger">Open</ds-button>
   <p>Dialog content here.</p>
 </ds-dialog>
 ```
@@ -147,7 +150,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 import { Button } from '@hypoth-ui/react';
 
 export default function Page() {
-  return <Button variant="primary">Click me</Button>;
+  return <Button onPress={() => console.log('clicked')}>Click me</Button>;
 }
 ```
 

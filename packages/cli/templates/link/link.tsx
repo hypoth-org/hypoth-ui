@@ -1,9 +1,9 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { createElement, forwardRef, useCallback, useEffect, useRef } from "react";
-import { Slot } from "../primitives/slot.js";
-import type { DsNavigateEventDetail, NavigateEventHandler } from "../types/events.js";
-import type { AsChildProps } from "../types/polymorphic.js";
-import { mergeClassNames } from "../utils/merge-props.js";
+import { Slot } from "../_shared/primitives/slot.js";
+import type { DsNavigateEventDetail, NavigateEventHandler } from "../_shared/types/events.js";
+import type { AsChildProps } from "../_shared/types/polymorphic.js";
+import { mergeClassNames } from "../_shared/utils/merge-props.js";
 
 export type LinkVariant = "default" | "muted" | "underline";
 

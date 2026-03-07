@@ -6,7 +6,7 @@
 
 import type React from "react";
 import { createElement, forwardRef, useMemo } from "react";
-import { type ResponsiveValue, parseResponsiveValue } from "../../hooks/use-responsive-classes.js";
+import { type ResponsiveValue, parseResponsiveValue } from "../_shared/hooks/use-responsive-classes.js";
 
 type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto-fit" | "auto-fill";
 type SpacingToken = "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";

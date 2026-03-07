@@ -10,7 +10,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { Slot } from "../../primitives/slot.js";
+import { Slot } from "../_shared/primitives/slot.js";
 import { useDialogContext } from "./dialog-context.js";
 
 export interface DialogTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {

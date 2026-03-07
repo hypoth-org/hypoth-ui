@@ -4,7 +4,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
 

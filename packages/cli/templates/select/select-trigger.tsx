@@ -3,7 +3,7 @@
  */
 
 import { type ButtonHTMLAttributes, type ReactNode, forwardRef, useCallback, useRef } from "react";
-import { Slot } from "../../primitives/slot.js";
+import { Slot } from "../_shared/primitives/slot.js";
 import { useSelectContext } from "./select-context.js";
 
 export interface SelectTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {

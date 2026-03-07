@@ -3,7 +3,7 @@
  */
 
 import { type ButtonHTMLAttributes, type ReactNode, forwardRef, useCallback, useRef } from "react";
-import { Slot } from "../../primitives/slot.js";
+import { Slot } from "../_shared/primitives/slot.js";
 import { useDatePickerContext } from "./date-picker-context.js";
 
 export interface DatePickerTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -3,7 +3,7 @@
  */
 
 import type { ComboboxBehavior, Option } from "@hypoth-ui/primitives-dom";
-import { createCompoundContext } from "../../utils/create-context.js";
+import { createCompoundContext } from "../_shared/utils/create-context.js";
 
 export interface ComboboxContextValue<Multi extends boolean = false> {
   /** Combobox behavior instance */

@@ -12,7 +12,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 
 export type TextareaSize = "sm" | "md" | "lg";
 

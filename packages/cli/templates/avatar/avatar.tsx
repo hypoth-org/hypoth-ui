@@ -7,7 +7,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type AvatarShape = "circle" | "square";

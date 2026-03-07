@@ -6,7 +6,7 @@
 
 import type React from "react";
 import { createElement, forwardRef, useMemo } from "react";
-import { type ResponsiveValue, parseResponsiveValue } from "../../hooks/use-responsive-classes.js";
+import { type ResponsiveValue, parseResponsiveValue } from "../_shared/hooks/use-responsive-classes.js";
 
 type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
 type FlexAlign = "start" | "center" | "end" | "stretch" | "baseline";

@@ -3,7 +3,7 @@
  */
 
 import type { TimePickerBehavior, TimeSegment, TimeValue } from "@hypoth-ui/primitives-dom";
-import { createCompoundContext } from "../../utils/create-context.js";
+import { createCompoundContext } from "../_shared/utils/create-context.js";
 
 export interface TimePickerContextValue {
   /** TimePicker behavior instance */

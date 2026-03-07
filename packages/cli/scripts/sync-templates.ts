@@ -153,13 +153,13 @@ function syncComponent(componentName: string): SyncResult {
 
 /**
  * Transform imports for copy mode
- * Replaces internal package imports with relative imports
+ * Rewrites internal relative imports to use _shared/ utilities
  */
 function transformForCopyMode(content: string, framework: "react" | "wc"): string {
   let result = content;
 
   if (framework === "react") {
-    // Transform @hypoth-ui/react imports to relative
+    // Transform package imports
     result = result.replace(
       /from ["']@hypoth-ui\/react["']/g,
       'from "@/components/ui"'
@@ -168,10 +168,37 @@ function transformForCopyMode(content: string, framework: "react" | "wc"): strin
       /from ["']@hypoth-ui\/wc["']/g,
       'from "@hypoth-ui/wc"'
     );
-    // Transform internal imports
+
+    // Transform internal relative imports to _shared/ paths
+    // ../../primitives/ -> ../_shared/primitives/
     result = result.replace(
-      /from ["']\.\.\/primitives\//g,
-      'from "@/lib/primitives/'
+      /from (["'])\.\.\/\.\.\/primitives\//g,
+      'from $1../_shared/primitives/'
+    );
+    // ../primitives/ -> ../_shared/primitives/
+    result = result.replace(
+      /from (["'])\.\.\/primitives\//g,
+      'from $1../_shared/primitives/'
+    );
+    // ../../hooks/ -> ../_shared/hooks/
+    result = result.replace(
+      /from (["'])\.\.\/\.\.\/hooks\//g,
+      'from $1../_shared/hooks/'
+    );
+    // ../../utils/create-context -> ../_shared/utils/create-context
+    result = result.replace(
+      /from (["'])\.\.\/\.\.\/utils\/create-context/g,
+      'from $1../_shared/utils/create-context'
+    );
+    // ../utils/merge-props -> ../_shared/utils/merge-props
+    result = result.replace(
+      /from (["'])\.\.\/utils\/merge-props/g,
+      'from $1../_shared/utils/merge-props'
+    );
+    // ../types/ -> ../_shared/types/
+    result = result.replace(
+      /from (["'])\.\.\/types\//g,
+      'from $1../_shared/types/'
     );
   } else {
     // Transform @hypoth-ui/wc imports

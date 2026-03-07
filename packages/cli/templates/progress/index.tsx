@@ -7,7 +7,7 @@ import {
   generateResponsiveDataAttr,
   isResponsiveObject,
   resolveResponsiveValue,
-} from "../../primitives/responsive.js";
+} from "../_shared/primitives/responsive.js";
 
 export type ProgressVariant = "linear" | "circular";
 export type ProgressSize = "sm" | "md" | "lg";

@@ -3,7 +3,7 @@
  */
 
 import type { FileInfo, FileUploadBehavior } from "@hypoth-ui/primitives-dom";
-import { createCompoundContext } from "../../utils/create-context.js";
+import { createCompoundContext } from "../_shared/utils/create-context.js";
 
 export interface FileUploadContextValue {
   /** FileUpload behavior instance */

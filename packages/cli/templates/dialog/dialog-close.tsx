@@ -3,7 +3,7 @@
  */
 
 import { type ButtonHTMLAttributes, type ReactNode, forwardRef, useCallback } from "react";
-import { Slot } from "../../primitives/slot.js";
+import { Slot } from "../_shared/primitives/slot.js";
 import { useDialogContext } from "./dialog-context.js";
 
 export interface DialogCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
