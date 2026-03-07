@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/wc",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "sideEffects": false,
   "description": "Web Components (Lit) for the hypoth-ui design system (Alpha)",

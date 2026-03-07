@@ -1,3 +1,3 @@
 # @hypoth-ui/tsconfig
 
-## 1.0.0
+## 0.1.0
