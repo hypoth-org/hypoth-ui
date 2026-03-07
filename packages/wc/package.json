@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/wc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "sideEffects": false,
   "description": "Web Components (Lit) for the hypoth-ui design system (Alpha)",
@@ -11,7 +11,13 @@
     "directory": "packages/wc"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["web-components", "lit", "design-system", "custom-elements", "hypoth-ui"],
+  "keywords": [
+    "web-components",
+    "lit",
+    "design-system",
+    "custom-elements",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -51,7 +57,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf dist",

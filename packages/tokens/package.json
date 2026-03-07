@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/tokens",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Design tokens for the hypoth-ui design system — CSS custom properties, TypeScript constants (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/tokens"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["design-tokens", "css-variables", "theming", "design-system", "hypoth-ui"],
+  "keywords": [
+    "design-tokens",
+    "css-variables",
+    "theming",
+    "design-system",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/ts/index.d.ts",
@@ -24,7 +30,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsx src/build/build.ts",
     "clean": "rm -rf dist",

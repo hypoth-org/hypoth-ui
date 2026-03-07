@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/docs-content",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Documentation content packs for the hypoth-ui design system (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/docs-content"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["documentation", "content", "design-system", "mdx", "hypoth-ui"],
+  "keywords": [
+    "documentation",
+    "content",
+    "design-system",
+    "mdx",
+    "hypoth-ui"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -22,7 +28,13 @@
     "./editions/*": "./editions/*.json",
     "./package.json": "./package.json"
   },
-  "files": ["dist", "manifests", "components", "guides", "editions"],
+  "files": [
+    "dist",
+    "manifests",
+    "components",
+    "guides",
+    "editions"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
     "clean": "rm -rf dist",

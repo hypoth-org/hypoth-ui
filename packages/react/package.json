@@ -1,6 +1,6 @@
 {
   "name": "@hypoth-ui/react",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "React adapter components for the hypoth-ui design system (Alpha)",
   "license": "MIT",
@@ -10,7 +10,13 @@
     "directory": "packages/react"
   },
   "homepage": "https://github.com/hypoth-ui/hypoth-ui#readme",
-  "keywords": ["react", "design-system", "components", "web-components", "hypoth-ui"],
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "web-components",
+    "hypoth-ui"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -23,7 +29,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/client.ts --format esm --dts --external react --external @hypoth-ui/primitives-dom",
     "clean": "rm -rf dist",
