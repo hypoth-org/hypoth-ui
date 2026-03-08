@@ -452,10 +452,10 @@ describe("DsDatePicker", () => {
       await new Promise((resolve) => setTimeout(resolve, 50));
 
       const datePicker = container.querySelector("ds-date-picker") as HTMLElement & {
-        parseInput: (input: string) => { valid: boolean; date: string | null };
+        parseInput: (input: string) => Promise<{ valid: boolean; date: string | null }>;
       };
 
-      const result = datePicker?.parseInput("01/15/2024");
+      const result = await datePicker?.parseInput("01/15/2024");
       expect(result?.valid).toBe(true);
       expect(result?.date).toBe("2024-01-15");
     });
@@ -474,10 +474,10 @@ describe("DsDatePicker", () => {
       await new Promise((resolve) => setTimeout(resolve, 50));
 
       const datePicker = container.querySelector("ds-date-picker") as HTMLElement & {
-        parseInput: (input: string) => { valid: boolean; error: string | null };
+        parseInput: (input: string) => Promise<{ valid: boolean; error: string | null }>;
       };
 
-      const result = datePicker?.parseInput("invalid-date");
+      const result = await datePicker?.parseInput("invalid-date");
       expect(result?.valid).toBe(false);
       expect(result?.error).toContain("Invalid");
     });
@@ -536,36 +536,36 @@ describe("Date Format Utilities - Locale Support", () => {
   describe("parseTypedDate - en-US format (MM/dd/yyyy)", () => {
     const locale = "en-US";
 
-    it("should parse valid date", () => {
-      const result = parseTypedDate("01/15/2024", locale);
+    it("should parse valid date", async () => {
+      const result = await parseTypedDate("01/15/2024", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
 
-    it("should parse date with different separators", () => {
-      const result1 = parseTypedDate("01-15-2024", locale);
+    it("should parse date with different separators", async () => {
+      const result1 = await parseTypedDate("01-15-2024", locale);
       expect(result1.valid).toBe(true);
       expect(result1.date).toBe("2024-01-15");
 
-      const result2 = parseTypedDate("01.15.2024", locale);
+      const result2 = await parseTypedDate("01.15.2024", locale);
       expect(result2.valid).toBe(true);
       expect(result2.date).toBe("2024-01-15");
     });
 
-    it("should parse ISO format as fallback", () => {
-      const result = parseTypedDate("2024-01-15", locale);
+    it("should parse ISO format as fallback", async () => {
+      const result = await parseTypedDate("2024-01-15", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
 
-    it("should return error for invalid date", () => {
-      const result = parseTypedDate("invalid", locale);
+    it("should return error for invalid date", async () => {
+      const result = await parseTypedDate("invalid", locale);
       expect(result.valid).toBe(false);
       expect(result.error).toBeTruthy();
     });
 
-    it("should handle empty input", () => {
-      const result = parseTypedDate("", locale);
+    it("should handle empty input", async () => {
+      const result = await parseTypedDate("", locale);
       expect(result.valid).toBe(false);
       expect(result.error).toBeNull();
     });
@@ -574,14 +574,14 @@ describe("Date Format Utilities - Locale Support", () => {
   describe("parseTypedDate - de-DE format (dd.MM.yyyy)", () => {
     const locale = "de-DE";
 
-    it("should parse valid date", () => {
-      const result = parseTypedDate("15.01.2024", locale);
+    it("should parse valid date", async () => {
+      const result = await parseTypedDate("15.01.2024", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
 
-    it("should parse date with different separators", () => {
-      const result = parseTypedDate("15/01/2024", locale);
+    it("should parse date with different separators", async () => {
+      const result = await parseTypedDate("15/01/2024", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
@@ -590,8 +590,8 @@ describe("Date Format Utilities - Locale Support", () => {
   describe("parseTypedDate - fr-FR format (dd/MM/yyyy)", () => {
     const locale = "fr-FR";
 
-    it("should parse valid date", () => {
-      const result = parseTypedDate("15/01/2024", locale);
+    it("should parse valid date", async () => {
+      const result = await parseTypedDate("15/01/2024", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
@@ -600,8 +600,8 @@ describe("Date Format Utilities - Locale Support", () => {
   describe("parseTypedDate - es-ES format (dd/MM/yyyy)", () => {
     const locale = "es-ES";
 
-    it("should parse valid date", () => {
-      const result = parseTypedDate("15/01/2024", locale);
+    it("should parse valid date", async () => {
+      const result = await parseTypedDate("15/01/2024", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
@@ -610,82 +610,82 @@ describe("Date Format Utilities - Locale Support", () => {
   describe("parseTypedDate - ja-JP format (yyyy/MM/dd)", () => {
     const locale = "ja-JP";
 
-    it("should parse valid date", () => {
-      const result = parseTypedDate("2024/01/15", locale);
+    it("should parse valid date", async () => {
+      const result = await parseTypedDate("2024/01/15", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
 
-    it("should parse date with different separators", () => {
-      const result = parseTypedDate("2024-01-15", locale);
+    it("should parse date with different separators", async () => {
+      const result = await parseTypedDate("2024-01-15", locale);
       expect(result.valid).toBe(true);
       expect(result.date).toBe("2024-01-15");
     });
   });
 
   describe("formatTypedDate", () => {
-    it("should format date for en-US", () => {
-      expect(formatTypedDate("2024-01-15", "en-US")).toBe("01/15/2024");
+    it("should format date for en-US", async () => {
+      expect(await formatTypedDate("2024-01-15", "en-US")).toBe("01/15/2024");
     });
 
-    it("should format date for de-DE", () => {
-      expect(formatTypedDate("2024-01-15", "de-DE")).toBe("15.01.2024");
+    it("should format date for de-DE", async () => {
+      expect(await formatTypedDate("2024-01-15", "de-DE")).toBe("15.01.2024");
     });
 
-    it("should format date for fr-FR", () => {
-      expect(formatTypedDate("2024-01-15", "fr-FR")).toBe("15/01/2024");
+    it("should format date for fr-FR", async () => {
+      expect(await formatTypedDate("2024-01-15", "fr-FR")).toBe("15/01/2024");
     });
 
-    it("should format date for es-ES", () => {
-      expect(formatTypedDate("2024-01-15", "es-ES")).toBe("15/01/2024");
+    it("should format date for es-ES", async () => {
+      expect(await formatTypedDate("2024-01-15", "es-ES")).toBe("15/01/2024");
     });
 
-    it("should format date for ja-JP", () => {
-      expect(formatTypedDate("2024-01-15", "ja-JP")).toBe("2024/01/15");
+    it("should format date for ja-JP", async () => {
+      expect(await formatTypedDate("2024-01-15", "ja-JP")).toBe("2024/01/15");
     });
 
-    it("should return empty string for empty input", () => {
-      expect(formatTypedDate("", "en-US")).toBe("");
+    it("should return empty string for empty input", async () => {
+      expect(await formatTypedDate("", "en-US")).toBe("");
     });
 
-    it("should return empty string for invalid date", () => {
-      expect(formatTypedDate("invalid", "en-US")).toBe("");
+    it("should return empty string for invalid date", async () => {
+      expect(await formatTypedDate("invalid", "en-US")).toBe("");
     });
   });
 
   describe("validateTypedDate", () => {
     const locale = "en-US";
 
-    it("should pass validation for valid date in range", () => {
-      const result = validateTypedDate("2024-06-15", "2024-01-01", "2024-12-31", locale);
+    it("should pass validation for valid date in range", async () => {
+      const result = await validateTypedDate("2024-06-15", "2024-01-01", "2024-12-31", locale);
       expect(result.valid).toBe(true);
       expect(result.error).toBeNull();
     });
 
-    it("should fail validation for date before min", () => {
-      const result = validateTypedDate("2023-12-15", "2024-01-01", "2024-12-31", locale);
+    it("should fail validation for date before min", async () => {
+      const result = await validateTypedDate("2023-12-15", "2024-01-01", "2024-12-31", locale);
       expect(result.valid).toBe(false);
       expect(result.error).toContain("on or after");
     });
 
-    it("should fail validation for date after max", () => {
-      const result = validateTypedDate("2025-01-15", "2024-01-01", "2024-12-31", locale);
+    it("should fail validation for date after max", async () => {
+      const result = await validateTypedDate("2025-01-15", "2024-01-01", "2024-12-31", locale);
       expect(result.valid).toBe(false);
       expect(result.error).toContain("on or before");
     });
 
-    it("should pass validation for date on min boundary", () => {
-      const result = validateTypedDate("2024-01-01", "2024-01-01", "2024-12-31", locale);
+    it("should pass validation for date on min boundary", async () => {
+      const result = await validateTypedDate("2024-01-01", "2024-01-01", "2024-12-31", locale);
       expect(result.valid).toBe(true);
     });
 
-    it("should pass validation for date on max boundary", () => {
-      const result = validateTypedDate("2024-12-31", "2024-01-01", "2024-12-31", locale);
+    it("should pass validation for date on max boundary", async () => {
+      const result = await validateTypedDate("2024-12-31", "2024-01-01", "2024-12-31", locale);
       expect(result.valid).toBe(true);
     });
 
-    it("should pass validation when no constraints", () => {
-      const result = validateTypedDate("2024-06-15", undefined, undefined, locale);
+    it("should pass validation when no constraints", async () => {
+      const result = await validateTypedDate("2024-06-15", undefined, undefined, locale);
       expect(result.valid).toBe(true);
     });
   });

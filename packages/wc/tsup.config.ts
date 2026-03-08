@@ -15,6 +15,6 @@ export default defineConfig({
   format: ["esm"],
   dts: true,
   clean: true,
-  external: ["lit"],
+  external: ["lit", "lucide", "date-fns", "@date-fns/tz"],
   sourcemap: true,
 });

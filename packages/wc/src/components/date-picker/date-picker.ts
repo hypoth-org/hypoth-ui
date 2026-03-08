@@ -148,7 +148,9 @@ export class DsDatePicker extends DSElement {
 
     // Initialize input value from date value
     if (this.value) {
-      this.inputValue = formatTypedDate(this.value, this.locale);
+      formatTypedDate(this.value, this.locale).then((formatted) => {
+        this.inputValue = formatted;
+      });
     }
   }
 
@@ -339,7 +341,7 @@ export class DsDatePicker extends DSElement {
   /**
    * Handles typed input events.
    */
-  private handleTypedInput = (event: Event): void => {
+  private handleTypedInput = async (event: Event): Promise<void> => {
     if (!this.typedInput) return;
 
     const target = event.target as HTMLInputElement;
@@ -350,10 +352,10 @@ export class DsDatePicker extends DSElement {
     this.inputError = null;
 
     // Parse on each keystroke for real-time feedback
-    const result = parseTypedDate(target.value, this.locale);
+    const result = await parseTypedDate(target.value, this.locale);
     if (result.valid && result.date) {
       // Validate against min/max
-      const validation = validateTypedDate(result.date, this.minDate, this.maxDate, this.locale);
+      const validation = await validateTypedDate(result.date, this.minDate, this.maxDate, this.locale);
       if (validation.valid) {
         this.inputError = null;
       } else {
@@ -378,7 +380,7 @@ export class DsDatePicker extends DSElement {
   /**
    * Commits the typed input value as the selected date.
    */
-  private commitTypedInput(): void {
+  private async commitTypedInput(): Promise<void> {
     if (!this.inputValue) {
       // Clear the date if input is empty
       if (this.value) {
@@ -389,14 +391,14 @@ export class DsDatePicker extends DSElement {
       return;
     }
 
-    const result = parseTypedDate(this.inputValue, this.locale);
+    const result = await parseTypedDate(this.inputValue, this.locale);
     if (!result.valid || !result.date) {
       this.inputError = result.error;
       return;
     }
 
     // Validate against min/max
-    const validation = validateTypedDate(result.date, this.minDate, this.maxDate, this.locale);
+    const validation = await validateTypedDate(result.date, this.minDate, this.maxDate, this.locale);
     if (!validation.valid) {
       this.inputError = validation.error;
       return;
@@ -405,7 +407,7 @@ export class DsDatePicker extends DSElement {
     // Commit the value
     this.inputError = null;
     this.value = result.date;
-    this.inputValue = formatTypedDate(result.date, this.locale);
+    this.inputValue = await formatTypedDate(result.date, this.locale);
     emitEvent(this, StandardEvents.CHANGE, { detail: { date: result.date } });
   }
 
@@ -426,8 +428,8 @@ export class DsDatePicker extends DSElement {
   /**
    * Parses a typed date string and returns the validation result.
    */
-  public parseInput(input: string): DateParseResult {
-    const result = parseTypedDate(input, this.locale);
+  public async parseInput(input: string): Promise<DateParseResult> {
+    const result = await parseTypedDate(input, this.locale);
     if (result.valid && result.date) {
       return validateTypedDate(result.date, this.minDate, this.maxDate, this.locale);
     }
@@ -547,11 +549,12 @@ export class DsDatePicker extends DSElement {
     // Sync typed input value when value changes externally
     if (changedProperties.has("value") && this.typedInput) {
       // Only update inputValue if it wasn't set from typed input
-      const expectedInput = formatTypedDate(this.value, this.locale);
-      if (this.inputValue !== expectedInput) {
-        this.inputValue = expectedInput;
-        this.inputError = null;
-      }
+      formatTypedDate(this.value, this.locale).then((expectedInput) => {
+        if (this.inputValue !== expectedInput) {
+          this.inputValue = expectedInput;
+          this.inputError = null;
+        }
+      });
     }
 
     // Sync props to calendar when open

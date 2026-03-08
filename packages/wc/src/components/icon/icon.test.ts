@@ -32,6 +32,9 @@ describe("DsIcon", () => {
       icon.name = "search";
       container.appendChild(icon);
       await icon.updateComplete;
+      // Wait for async icon load (dynamic import of lucide)
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await icon.updateComplete;
 
       const svg = icon.querySelector("svg");
       expect(svg).toBeTruthy();
@@ -43,6 +46,9 @@ describe("DsIcon", () => {
       const icon = document.createElement("ds-icon") as DsIcon;
       icon.name = "invalid-icon-name-xyz";
       container.appendChild(icon);
+      await icon.updateComplete;
+      // Wait for async icon load attempt
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await icon.updateComplete;
 
       // Should show fallback placeholder
@@ -157,12 +163,18 @@ describe("DsIcon", () => {
       icon.name = "search";
       container.appendChild(icon);
       await icon.updateComplete;
+      // Wait for async icon load
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await icon.updateComplete;
 
       // Verify initial icon rendered
       expect(icon.querySelector("svg")).toBeTruthy();
 
       // Change the icon
       icon.name = "home";
+      await icon.updateComplete;
+      // Wait for async icon load
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await icon.updateComplete;
 
       // Should still have an SVG (different icon)
