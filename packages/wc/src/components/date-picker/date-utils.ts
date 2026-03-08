@@ -1,33 +1,58 @@
 /**
  * Date utility functions for DatePicker component.
  * Uses date-fns for reliable date manipulation across timezones.
+ * Lazily loaded so consumers who don't use DatePicker don't need date-fns installed.
  */
 
-import {
-  addMonths,
-  addYears,
-  isToday as dateFnsIsToday,
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
-  format,
-  isAfter,
-  isBefore,
-  isSameDay,
-  isSameMonth,
-  isValid,
-  parse,
-  parseISO,
-  startOfMonth,
-  startOfWeek,
-} from "date-fns";
+type DateFnsModule = typeof import("date-fns");
+
+let _dateFns: DateFnsModule | null = null;
+let _loadPromise: Promise<DateFnsModule | null> | null = null;
+let _loadFailed = false;
+
+/**
+ * Lazily load the date-fns module. Throws if date-fns is not installed
+ * (since DatePicker cannot function without it).
+ */
+async function loadDateFns(): Promise<DateFnsModule> {
+  if (_dateFns) return _dateFns;
+
+  if (_loadFailed) {
+    throw new Error(
+      '[ds-date-picker] "date-fns" is required for the DatePicker component.\n  npm install date-fns'
+    );
+  }
+
+  if (!_loadPromise) {
+    _loadPromise = import("date-fns")
+      .then((mod) => {
+        _dateFns = mod;
+        return mod;
+      })
+      .catch(() => {
+        _loadFailed = true;
+        throw new Error(
+          '[ds-date-picker] "date-fns" is not installed. Install it to use the DatePicker component:\n  npm install date-fns'
+        );
+      });
+  }
+
+  const mod = await _loadPromise;
+  if (!mod) {
+    throw new Error(
+      '[ds-date-picker] "date-fns" is not installed. Install it to use the DatePicker component:\n  npm install date-fns'
+    );
+  }
+  return mod;
+}
 
 export type WeekStartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 /**
  * Returns today's date in ISO format (YYYY-MM-DD).
  */
-export function getTodayIso(): string {
+export async function getTodayIso(): Promise<string> {
+  const { format } = await loadDateFns();
   return format(new Date(), "yyyy-MM-dd");
 }
 
@@ -35,8 +60,9 @@ export function getTodayIso(): string {
  * Parses a date string to a Date object.
  * Returns null if the string is empty or invalid.
  */
-export function parseDate(dateStr: string): Date | null {
+export async function parseDate(dateStr: string): Promise<Date | null> {
   if (!dateStr) return null;
+  const { parseISO, isValid } = await loadDateFns();
   const parsed = parseISO(dateStr);
   return isValid(parsed) ? parsed : null;
 }
@@ -44,21 +70,24 @@ export function parseDate(dateStr: string): Date | null {
 /**
  * Formats a Date object to ISO format (YYYY-MM-DD).
  */
-export function formatIso(date: Date): string {
+export async function formatIso(date: Date): Promise<string> {
+  const { format } = await loadDateFns();
   return format(date, "yyyy-MM-dd");
 }
 
 /**
  * Formats a Date object to a viewing month string (YYYY-MM).
  */
-export function formatViewingMonth(date: Date): string {
+export async function formatViewingMonth(date: Date): Promise<string> {
+  const { format } = await loadDateFns();
   return format(date, "yyyy-MM");
 }
 
 /**
  * Parses a viewing month string (YYYY-MM) to a Date object (first day of month).
  */
-export function parseViewingMonth(viewingMonth: string): Date {
+export async function parseViewingMonth(viewingMonth: string): Promise<Date> {
+  const { parse, isValid, startOfMonth } = await loadDateFns();
   if (!viewingMonth) {
     return startOfMonth(new Date());
   }
@@ -75,9 +104,6 @@ export function getWeekdayNames(
   formatStyle: "short" | "narrow" | "long" = "short"
 ): string[] {
   const formatter = new Intl.DateTimeFormat(locale, { weekday: formatStyle });
-
-  // Start from January 2024, which starts on Monday (day 1)
-  // We adjust based on weekStartsOn
   const baseDate = new Date(2024, 0, weekStartsOn);
   const names: string[] = [];
 
@@ -94,12 +120,12 @@ export function getWeekdayNames(
  * Gets all days to display in a calendar month grid.
  * Includes padding days from previous and next months.
  */
-export function getMonthDays(viewingMonth: string, weekStartsOn: WeekStartsOn = 0): Date[] {
-  const monthDate = parseViewingMonth(viewingMonth);
+export async function getMonthDays(viewingMonth: string, weekStartsOn: WeekStartsOn = 0): Promise<Date[]> {
+  const { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval } = await loadDateFns();
+  const monthDate = await parseViewingMonth(viewingMonth);
   const monthStart = startOfMonth(monthDate);
   const monthEnd = endOfMonth(monthDate);
 
-  // Get calendar bounds (including days from adjacent months)
   const calendarStart = startOfWeek(monthStart, { weekStartsOn });
   const calendarEnd = endOfWeek(monthEnd, { weekStartsOn });
 
@@ -109,47 +135,50 @@ export function getMonthDays(viewingMonth: string, weekStartsOn: WeekStartsOn = 
 /**
  * Gets the formatted month label (e.g., "January 2026").
  */
-export function getMonthLabel(
+export async function getMonthLabel(
   viewingMonth: string,
   locale: string,
   options: Intl.DateTimeFormatOptions = { month: "long", year: "numeric" }
-): string {
-  const date = parseViewingMonth(viewingMonth);
+): Promise<string> {
+  const date = await parseViewingMonth(viewingMonth);
   return new Intl.DateTimeFormat(locale, options).format(date);
 }
 
 /**
  * Navigates to the previous or next month.
  */
-export function navigateMonth(viewingMonth: string, delta: number): string {
-  const date = parseViewingMonth(viewingMonth);
+export async function navigateMonth(viewingMonth: string, delta: number): Promise<string> {
+  const { addMonths } = await loadDateFns();
+  const date = await parseViewingMonth(viewingMonth);
   return formatViewingMonth(addMonths(date, delta));
 }
 
 /**
  * Navigates to the previous or next year.
  */
-export function navigateYear(viewingMonth: string, delta: number): string {
-  const date = parseViewingMonth(viewingMonth);
+export async function navigateYear(viewingMonth: string, delta: number): Promise<string> {
+  const { addYears } = await loadDateFns();
+  const date = await parseViewingMonth(viewingMonth);
   return formatViewingMonth(addYears(date, delta));
 }
 
 /**
  * Checks if a date is disabled (outside min/max range).
  */
-export function isDateDisabled(
+export async function isDateDisabled(
   date: Date,
   minDate: string | undefined,
   maxDate: string | undefined
-): boolean {
+): Promise<boolean> {
+  const { isBefore, isAfter, isSameDay } = await loadDateFns();
   if (minDate) {
-    const min = parseDate(minDate);
+    const min = await parseDate(minDate);
     if (min && isBefore(date, min) && !isSameDay(date, min)) {
       return true;
     }
   }
   if (maxDate) {
-    const max = parseDate(maxDate);
+    const max = await parseDate(maxDate);
     if (max && isAfter(date, max) && !isSameDay(date, max)) {
       return true;
     }
@@ -160,27 +189,28 @@ export function isDateDisabled(
 /**
  * Checks if a date is selected (single mode or range endpoints).
  */
-export function isDateSelected(
+export async function isDateSelected(
   date: Date,
   selectedDate: string | undefined,
   rangeStart: string | undefined,
   rangeEnd: string | undefined,
   isRangeMode: boolean
-): boolean {
+): Promise<boolean> {
+  const { isSameDay } = await loadDateFns();
   if (isRangeMode) {
     if (rangeStart) {
-      const start = parseDate(rangeStart);
+      const start = await parseDate(rangeStart);
       if (start && isSameDay(date, start)) return true;
     }
     if (rangeEnd) {
-      const end = parseDate(rangeEnd);
+      const end = await parseDate(rangeEnd);
       if (end && isSameDay(date, end)) return true;
     }
     return false;
   }
 
   if (selectedDate) {
-    const selected = parseDate(selectedDate);
+    const selected = await parseDate(selectedDate);
     return selected ? isSameDay(date, selected) : false;
   }
 
@@ -190,15 +220,16 @@ export function isDateSelected(
 /**
  * Checks if a date is within a selected range (exclusive of endpoints).
  */
-export function isDateInRange(
+export async function isDateInRange(
   date: Date,
   rangeStart: string | undefined,
   rangeEnd: string | undefined
-): boolean {
+): Promise<boolean> {
   if (!rangeStart || !rangeEnd) return false;
+  const { isAfter, isBefore } = await loadDateFns();
 
-  const start = parseDate(rangeStart);
-  const end = parseDate(rangeEnd);
+  const start = await parseDate(rangeStart);
+  const end = await parseDate(rangeEnd);
 
   if (!start || !end) return false;
 
@@ -208,15 +239,17 @@ export function isDateInRange(
 /**
  * Checks if a date is today.
  */
-export function isToday(date: Date): boolean {
+export async function isToday(date: Date): Promise<boolean> {
+  const { isToday: dateFnsIsToday } = await loadDateFns();
   return dateFnsIsToday(date);
 }
 
 /**
  * Checks if a date is in the currently viewed month.
  */
-export function isDateInCurrentMonth(date: Date, viewingMonth: string): boolean {
-  const monthDate = parseViewingMonth(viewingMonth);
+export async function isDateInCurrentMonth(date: Date, viewingMonth: string): Promise<boolean> {
+  const { isSameMonth } = await loadDateFns();
+  const monthDate = await parseViewingMonth(viewingMonth);
   return isSameMonth(date, monthDate);
 }
 
@@ -235,14 +268,14 @@ export function formatDisplayDate(
 /**
  * Formats a date range for display.
  */
-export function formatDisplayRange(
+export async function formatDisplayRange(
   start: string | undefined,
   end: string | undefined,
   locale: string,
   options: Intl.DateTimeFormatOptions = { dateStyle: "medium" }
-): string {
-  const startDate = start ? parseDate(start) : null;
-  const endDate = end ? parseDate(end) : null;
+): Promise<string> {
+  const startDate = start ? await parseDate(start) : null;
+  const endDate = end ? await parseDate(end) : null;
   const formatter = new Intl.DateTimeFormat(locale, options);
 
   if (startDate && endDate) {
@@ -257,10 +290,11 @@ export function formatDisplayRange(
 /**
  * Validates a date string format (YYYY-MM-DD).
  */
-export function isValidDateString(dateStr: string): boolean {
+export async function isValidDateString(dateStr: string): Promise<boolean> {
   if (!dateStr) return false;
   const regex = /^\d{4}-\d{2}-\d{2}$/;
   if (!regex.test(dateStr)) return false;
+  const { parseISO, isValid } = await loadDateFns();
   const parsed = parseISO(dateStr);
   return isValid(parsed);
 }
@@ -268,22 +302,23 @@ export function isValidDateString(dateStr: string): boolean {
 /**
  * Clamps a date to within min/max bounds.
  */
-export function clampDate(
+export async function clampDate(
   date: Date,
   minDate: string | undefined,
   maxDate: string | undefined
-): Date {
+): Promise<Date> {
+  const { isBefore, isAfter } = await loadDateFns();
   let result = date;
 
   if (minDate) {
-    const min = parseDate(minDate);
+    const min = await parseDate(minDate);
     if (min && isBefore(result, min)) {
       result = min;
     }
   }
 
   if (maxDate) {
-    const max = parseDate(maxDate);
+    const max = await parseDate(maxDate);
     if (max && isAfter(result, max)) {
       result = max;
     }
@@ -294,7 +329,6 @@ export function clampDate(
 
 /**
  * Date format patterns for common locales.
- * Maps locale codes to their date-fns format patterns.
  */
 const LOCALE_DATE_FORMATS: Record<string, string> = {
   "en-US": "MM/dd/yyyy",
@@ -327,15 +361,12 @@ const LOCALE_DATE_FORMATS: Record<string, string> = {
 
 /**
  * Gets the date format pattern for a locale.
- * Returns MM/dd/yyyy as default for unknown locales.
  */
 export function getDateFormat(locale: string): string {
-  // Try exact match
   if (LOCALE_DATE_FORMATS[locale]) {
     return LOCALE_DATE_FORMATS[locale];
   }
 
-  // Try language only (e.g., "en" from "en-XX")
   const lang = locale.split("-")[0];
   for (const [key, fmt] of Object.entries(LOCALE_DATE_FORMATS)) {
     if (key.startsWith(`${lang}-`)) {
@@ -343,13 +374,11 @@ export function getDateFormat(locale: string): string {
     }
   }
 
-  // Default to MM/dd/yyyy
   return "MM/dd/yyyy";
 }
 
 /**
  * Gets a human-readable date format placeholder for a locale.
- * E.g., "MM/DD/YYYY" for en-US, "DD/MM/YYYY" for en-GB
  */
 export function getDateFormatPlaceholder(locale: string): string {
   const fmt = getDateFormat(locale);
@@ -360,47 +389,44 @@ export function getDateFormatPlaceholder(locale: string): string {
  * Result of parsing a typed date input.
  */
 export interface DateParseResult {
-  /** Whether the input was successfully parsed */
   valid: boolean;
-  /** The parsed date in ISO format (YYYY-MM-DD), if valid */
   date: string | null;
-  /** Error message if invalid */
   error: string | null;
 }
 
 /**
  * Parses a user-typed date string based on locale format.
- * Supports flexible separator matching (/, -, .).
  */
-export function parseTypedDate(input: string, locale: string): DateParseResult {
+export async function parseTypedDate(input: string, locale: string): Promise<DateParseResult> {
   if (!input || !input.trim()) {
     return { valid: false, date: null, error: null };
   }
 
+  const { parse, isValid, parseISO } = await loadDateFns();
   const trimmed = input.trim();
   const fmt = getDateFormat(locale);
 
-  // Try parsing with the locale format
   const parsed = parse(trimmed, fmt, new Date());
   if (isValid(parsed)) {
-    return { valid: true, date: formatIso(parsed), error: null };
+    const iso = await formatIso(parsed);
+    return { valid: true, date: iso, error: null };
   }
 
-  // Try common separator variations
   const separators = ["/", "-", "."];
   for (const sep of separators) {
     const normalizedInput = trimmed.replace(/[\/\-\.]/g, sep);
     const normalizedFormat = fmt.replace(/[\/\-\.]/g, sep);
     const attempt = parse(normalizedInput, normalizedFormat, new Date());
     if (isValid(attempt)) {
-      return { valid: true, date: formatIso(attempt), error: null };
+      const iso = await formatIso(attempt);
+      return { valid: true, date: iso, error: null };
     }
   }
 
-  // Try ISO format as fallback
   const isoAttempt = parseISO(trimmed);
   if (isValid(isoAttempt)) {
-    return { valid: true, date: formatIso(isoAttempt), error: null };
+    const iso = await formatIso(isoAttempt);
+    return { valid: true, date: iso, error: null };
   }
 
   return {
@@ -412,37 +438,38 @@ export function parseTypedDate(input: string, locale: string): DateParseResult {
 
 /**
  * Formats a date for display in a typed input field.
- * Uses the locale-specific format pattern.
  */
-export function formatTypedDate(dateIso: string, locale: string): string {
+export async function formatTypedDate(dateIso: string, locale: string): Promise<string> {
   if (!dateIso) return "";
-  const date = parseDate(dateIso);
+  const date = await parseDate(dateIso);
   if (!date) return "";
+  const { format } = await loadDateFns();
   return format(date, getDateFormat(locale));
 }
 
 /**
  * Validates a typed date against min/max constraints.
  */
-export function validateTypedDate(
+export async function validateTypedDate(
   dateIso: string,
   minDate: string | undefined,
   maxDate: string | undefined,
   locale: string
-): DateParseResult {
+): Promise<DateParseResult> {
   if (!dateIso) {
     return { valid: false, date: null, error: null };
   }
 
-  const date = parseDate(dateIso);
+  const { isBefore, isAfter, isSameDay } = await loadDateFns();
+  const date = await parseDate(dateIso);
   if (!date) {
     return { valid: false, date: null, error: "Invalid date" };
   }
 
   if (minDate) {
-    const min = parseDate(minDate);
+    const min = await parseDate(minDate);
     if (min && isBefore(date, min) && !isSameDay(date, min)) {
-      const minFormatted = formatTypedDate(minDate, locale);
+      const minFormatted = await formatTypedDate(minDate, locale);
       return {
         valid: false,
         date: dateIso,
@@ -452,9 +479,9 @@ export function validateTypedDate(
   }
 
   if (maxDate) {
-    const max = parseDate(maxDate);
+    const max = await parseDate(maxDate);
     if (max && isAfter(date, max) && !isSameDay(date, max)) {
-      const maxFormatted = formatTypedDate(maxDate, locale);
+      const maxFormatted = await formatTypedDate(maxDate, locale);
       return {
         valid: false,
         date: dateIso,

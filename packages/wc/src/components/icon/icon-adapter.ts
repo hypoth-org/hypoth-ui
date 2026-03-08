@@ -2,11 +2,42 @@
  * Icon Adapter for Lucide Icons
  *
  * Provides a unified interface for accessing icons from the Lucide library.
- * Uses createElement() for efficient SVG generation.
+ * Uses dynamic imports so lucide is only loaded when the Icon component is actually used.
+ * Consumers who don't use <ds-icon> don't need lucide installed.
  */
 
-import { createElement, icons } from "lucide";
-import type { IconNode } from "lucide";
+type LucideModule = typeof import("lucide");
+
+let _lucide: LucideModule | null = null;
+let _loadPromise: Promise<LucideModule | null> | null = null;
+let _loadFailed = false;
+
+/**
+ * Lazily load the lucide module. Returns null if lucide is not installed.
+ */
+async function loadLucide(): Promise<LucideModule | null> {
+  if (_lucide) return _lucide;
+  if (_loadFailed) return null;
+
+  if (!_loadPromise) {
+    _loadPromise = import("lucide")
+      .then((mod) => {
+        _lucide = mod;
+        return mod;
+      })
+      .catch(() => {
+        _loadFailed = true;
+        if (process.env.NODE_ENV !== "production") {
+          console.warn(
+            '[ds-icon] "lucide" is not installed. Install it to use the Icon component:\n  npm install lucide'
+          );
+        }
+        return null;
+      });
+  }
+
+  return _loadPromise;
+}
 
 /**
  * Convert kebab-case to PascalCase for Lucide icon names
@@ -21,32 +52,27 @@ function toPascalCase(str: string): string {
 
 /**
  * Get an SVG element for the specified icon name.
+ * Returns null if lucide is not installed or icon not found.
  *
  * @param name - The icon name in kebab-case (e.g., "arrow-right", "search", "external-link")
  * @param options - Optional attributes to apply to the SVG
  * @returns SVGSVGElement or null if icon not found
- *
- * @example
- * ```typescript
- * const svg = getIconSvg("search");
- * if (svg) {
- *   container.appendChild(svg);
- * }
- * ```
  */
-export function getIconSvg(
+export async function getIconSvg(
   name: string,
   options?: {
     size?: number | string;
     color?: string;
     strokeWidth?: number | string;
   }
-): SVGSVGElement | null {
-  // Convert kebab-case name to PascalCase for Lucide lookup
-  const pascalName = toPascalCase(name);
+): Promise<SVGSVGElement | null> {
+  const lucide = await loadLucide();
+  if (!lucide) return null;
 
-  // Check if icon exists in Lucide
-  const iconNode = icons[pascalName as keyof typeof icons] as IconNode | undefined;
+  const pascalName = toPascalCase(name);
+  const iconNode = lucide.icons[pascalName as keyof typeof lucide.icons] as
+    | import("lucide").IconNode
+    | undefined;
 
   if (!iconNode) {
     if (process.env.NODE_ENV !== "production") {
@@ -55,7 +81,6 @@ export function getIconSvg(
     return null;
   }
 
-  // Build custom attributes to merge with default icon attrs
   const customAttrs: Record<string, string | number> = {};
 
   if (options?.size) {
@@ -71,13 +96,13 @@ export function getIconSvg(
     customAttrs["stroke-width"] = options.strokeWidth;
   }
 
-  // Merge custom attributes with the icon's default attributes
-  // IconNode is [tag, attrs, children?]
   const [tag, defaultAttrs, children] = iconNode;
   const mergedAttrs = { ...defaultAttrs, ...customAttrs };
-  const modifiedIconNode: IconNode = children ? [tag, mergedAttrs, children] : [tag, mergedAttrs];
+  const modifiedIconNode: import("lucide").IconNode = children
+    ? [tag, mergedAttrs, children]
+    : [tag, mergedAttrs];
 
-  const element = createElement(modifiedIconNode);
+  const element = lucide.createElement(modifiedIconNode);
 
   return element as SVGSVGElement;
 }
@@ -88,9 +113,11 @@ export function getIconSvg(
  * @param name - The icon name in kebab-case
  * @returns True if the icon exists
  */
-export function hasIcon(name: string): boolean {
+export async function hasIcon(name: string): Promise<boolean> {
+  const lucide = await loadLucide();
+  if (!lucide) return false;
   const pascalName = toPascalCase(name);
-  return pascalName in icons;
+  return pascalName in lucide.icons;
 }
 
 /**
@@ -98,8 +125,10 @@ export function hasIcon(name: string): boolean {
  *
  * @returns Array of icon names in kebab-case
  */
-export function getAvailableIcons(): string[] {
-  return Object.keys(icons).map((name) =>
+export async function getAvailableIcons(): Promise<string[]> {
+  const lucide = await loadLucide();
+  if (!lucide) return [];
+  return Object.keys(lucide.icons).map((name) =>
     name
       .replace(/([A-Z])/g, "-$1")
       .toLowerCase()

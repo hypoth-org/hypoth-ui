@@ -157,6 +157,9 @@ describe("DsIcon Accessibility", () => {
       icon.name = "search";
       container.appendChild(icon);
       await icon.updateComplete;
+      // Wait for async icon load (dynamic import of lucide)
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await icon.updateComplete;
 
       const svg = icon.querySelector("svg");
       // SVG should be inside the wrapper which handles accessibility
