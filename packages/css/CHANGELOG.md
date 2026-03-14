@@ -1,5 +1,14 @@
 # @hypoth-ui/css
 
+## 1.0.2
+
+### Patch Changes
+
+- [`999e35a`](https://github.com/hypoth-org/hypoth-ui/commit/999e35a123101364b80e5c46a126e798f5a43496) Thanks [@JasonGrant](https://github.com/JasonGrant)! - feat(tokens): four-tier component styling token system with Shadow DOM button fix
+
+- Updated dependencies [[`999e35a`](https://github.com/hypoth-org/hypoth-ui/commit/999e35a123101364b80e5c46a126e798f5a43496)]:
+  - @hypoth-ui/tokens@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
