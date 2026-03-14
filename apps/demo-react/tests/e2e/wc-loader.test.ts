@@ -26,25 +26,25 @@ test.describe("Web Components Loader (DsLoader)", () => {
     expect(componentsRegistered.input).toBe(true);
   });
 
-  test("should render ds-button in Light DOM", async ({ page }) => {
+  test("should render ds-button in Shadow DOM with slot projection", async ({ page }) => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
 
-    const lightDomCheck = await page.evaluate(() => {
+    const shadowDomCheck = await page.evaluate(() => {
       const button = document.querySelector("ds-button");
       if (!button) return { exists: false };
 
       return {
         exists: true,
-        noShadowRoot: button.shadowRoot === null,
-        hasInnerButton: button.querySelector("button") !== null,
-        innerButtonClass: button.querySelector("button")?.className || "",
+        hasShadowRoot: button.shadowRoot !== null,
+        hasInnerButton: button.shadowRoot?.querySelector("button") !== null,
+        innerButtonClass: button.shadowRoot?.querySelector("button")?.className || "",
       };
     });
 
-    expect(lightDomCheck.exists).toBe(true);
-    expect(lightDomCheck.noShadowRoot).toBe(true);
-    expect(lightDomCheck.hasInnerButton).toBe(true);
-    expect(lightDomCheck.innerButtonClass).toContain("ds-button");
+    expect(shadowDomCheck.exists).toBe(true);
+    expect(shadowDomCheck.hasShadowRoot).toBe(true);
+    expect(shadowDomCheck.hasInnerButton).toBe(true);
+    expect(shadowDomCheck.innerButtonClass).toContain("ds-button");
   });
 
   test("should render ds-input in Light DOM", async ({ page }) => {
@@ -128,14 +128,19 @@ test.describe("Web Components Loader (DsLoader)", () => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
     await page.waitForFunction(() => customElements.get("ds-input") !== undefined);
 
-    // This is the key benefit of Light DOM - elements are queryable from parent
     const queryCheck = await page.evaluate(() => {
-      // Query for internal elements using standard DOM APIs
-      const buttonsFromDocument = document.querySelectorAll("button.ds-button");
+      // Button uses Shadow DOM — query via shadowRoot
+      const dsButtons = document.querySelectorAll("ds-button");
+      let buttonCount = 0;
+      dsButtons.forEach((b) => {
+        if (b.shadowRoot?.querySelector("button.ds-button")) buttonCount++;
+      });
+
+      // Input uses Light DOM — queryable from document
       const inputsFromDocument = document.querySelectorAll("input.ds-input__field");
 
       return {
-        buttonCount: buttonsFromDocument.length,
+        buttonCount,
         inputCount: inputsFromDocument.length,
       };
     });
@@ -147,12 +152,13 @@ test.describe("Web Components Loader (DsLoader)", () => {
   test("should support button variants", async ({ page }) => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
 
-    // Check that variant buttons exist and have proper classes
+    // Check that variant buttons exist and have proper classes via shadowRoot
     const variants = await page.evaluate(() => {
-      const primary = document.querySelector('ds-button[variant="primary"] button');
-      const secondary = document.querySelector('ds-button[variant="secondary"] button');
-      const ghost = document.querySelector('ds-button[variant="ghost"] button');
-      const destructive = document.querySelector('ds-button[variant="destructive"] button');
+      const getInner = (sel: string) => document.querySelector(sel)?.shadowRoot?.querySelector("button");
+      const primary = getInner('ds-button[variant="primary"]');
+      const secondary = getInner('ds-button[variant="secondary"]');
+      const ghost = getInner('ds-button[variant="ghost"]');
+      const destructive = getInner('ds-button[variant="destructive"]');
 
       return {
         primary: primary?.classList.contains("ds-button--primary"),
@@ -172,9 +178,10 @@ test.describe("Web Components Loader (DsLoader)", () => {
     await page.waitForFunction(() => customElements.get("ds-button") !== undefined);
 
     const sizes = await page.evaluate(() => {
-      const sm = document.querySelector('ds-button[size="sm"] button');
-      const md = document.querySelector('ds-button[size="md"] button');
-      const lg = document.querySelector('ds-button[size="lg"] button');
+      const getInner = (sel: string) => document.querySelector(sel)?.shadowRoot?.querySelector("button");
+      const sm = getInner('ds-button[size="sm"]');
+      const md = getInner('ds-button[size="md"]');
+      const lg = getInner('ds-button[size="lg"]');
 
       return {
         sm: sm?.classList.contains("ds-button--sm"),
