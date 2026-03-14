@@ -23,6 +23,8 @@
       "import": "./dist/ts/index.js"
     },
     "./css": "./dist/css/tokens.css",
+    "./css/type-tokens": "./dist/css/type-tokens.css",
+    "./css/component-tokens": "./dist/css/component-tokens.css",
     "./json": "./dist/json/tokens.json",
     "./runtime": {
       "types": "./dist/ts/runtime/index.d.ts",

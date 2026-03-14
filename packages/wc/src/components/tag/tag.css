@@ -1,0 +1,46 @@
+/* Tag Component Styles */
+@layer components {
+  .ds-tag {
+    /* Base styles */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-tag-gap);
+    background-color: var(--ds-tag-bg);
+    color: var(--ds-tag-color);
+    border: 1px solid var(--ds-tag-border-color);
+    border-radius: var(--ds-tag-border-radius);
+    padding: var(--ds-tag-padding-y) var(--ds-tag-padding-x);
+    font-size: var(--ds-tag-font-size);
+    font-weight: var(--ds-tag-font-weight);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Primary variant */
+  .ds-tag--primary {
+    background-color: var(--ds-tag-primary-bg);
+    color: var(--ds-tag-primary-color);
+    border-color: var(--ds-tag-primary-border-color);
+  }
+
+  /* Destructive variant */
+  .ds-tag--destructive {
+    background-color: var(--ds-tag-destructive-bg);
+    color: var(--ds-tag-destructive-color);
+    border-color: var(--ds-tag-destructive-border-color);
+  }
+
+  /* Success variant */
+  .ds-tag--success {
+    background-color: var(--ds-tag-success-bg);
+    color: var(--ds-tag-success-color);
+    border-color: var(--ds-tag-success-border-color);
+  }
+
+  /* Warning variant */
+  .ds-tag--warning {
+    background-color: var(--ds-tag-warning-bg);
+    color: var(--ds-tag-warning-color);
+    border-color: var(--ds-tag-warning-border-color);
+  }
+}

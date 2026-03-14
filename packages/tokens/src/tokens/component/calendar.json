@@ -1,0 +1,34 @@
+{
+  "$description": "Calendar component tokens — references form-controls type tokens",
+  "calendar": {
+    "header": {
+      "title-font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Calendar header title font size" },
+      "title-font-weight": { "$value": "{font-weight.semibold}", "$type": "fontWeight", "$description": "Calendar header title font weight" },
+      "title-color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Calendar header title color" },
+      "nav-button-size": { "$value": "2rem", "$type": "dimension", "$description": "Calendar navigation button size" },
+      "nav-button-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Calendar navigation button color" },
+      "nav-button-color-hover": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Calendar navigation button color on hover" },
+      "nav-button-bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Calendar navigation button background on hover" },
+      "nav-button-border-radius": { "$value": "{radius.sm}", "$type": "dimension", "$description": "Calendar navigation button border radius" }
+    },
+    "grid": {
+      "gap": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Gap between calendar grid cells" },
+      "weekday-font-size": { "$value": "{font-size.xs}", "$type": "dimension", "$description": "Weekday header font size" },
+      "weekday-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Weekday header text color" }
+    },
+    "cell": {
+      "size": { "$value": "2.5rem", "$type": "dimension", "$description": "Calendar day cell size" },
+      "font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Calendar day cell font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Calendar day cell text color" },
+      "border-radius": { "$value": "{radius.sm}", "$type": "dimension", "$description": "Calendar day cell border radius" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Calendar day cell hover background" },
+      "bg-selected": { "$value": "{color.primary.default}", "$type": "color", "$description": "Calendar day cell selected background" },
+      "color-selected": { "$value": "{color.primary.foreground}", "$type": "color", "$description": "Calendar day cell selected text color" },
+      "bg-range": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "Calendar day cell in-range background" },
+      "color-outside": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Calendar outside-month day text color" },
+      "today-indicator-color": { "$value": "{color.primary.default}", "$type": "color", "$description": "Calendar today indicator dot color" },
+      "today-font-weight": { "$value": "{font-weight.bold}", "$type": "fontWeight", "$description": "Calendar today text weight" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Calendar focus ring color" }
+  }
+}

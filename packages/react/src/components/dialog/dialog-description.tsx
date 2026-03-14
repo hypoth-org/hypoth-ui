@@ -26,9 +26,10 @@ export interface DialogDescriptionProps extends HTMLAttributes<HTMLParagraphElem
  * ```
  */
 export const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
-  ({ children, ...restProps }, ref) => {
+  ({ children, className, ...restProps }, ref) => {
     const { behavior, setDescriptionId } = useDialogContext("Dialog.Description");
     const descriptionProps = behavior.getDescriptionProps();
+    const descClassName = ["ds-dialog-description", className].filter(Boolean).join(" ");
 
     // Register description presence with both behavior and React context
     useEffect(() => {
@@ -41,7 +42,7 @@ export const DialogDescription = forwardRef<HTMLParagraphElement, DialogDescript
     }, [behavior, descriptionProps.id, setDescriptionId]);
 
     return (
-      <p ref={ref} id={descriptionProps.id} {...restProps}>
+      <p ref={ref} id={descriptionProps.id} className={descClassName} {...restProps}>
         {children}
       </p>
     );

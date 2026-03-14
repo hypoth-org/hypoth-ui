@@ -1,0 +1,17 @@
+{
+  "$description": "Navigation type tokens — shared styling for Tabs, Breadcrumb, Pagination, Menu, etc.",
+  "nav": {
+    "item": {
+      "padding-x": { "$value": "0.75rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.5rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "color-hover": { "$value": "{color.foreground.default}", "$type": "color" },
+      "color-active": { "$value": "{color.foreground.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" },
+      "bg-active": { "$value": "{color.background.muted}", "$type": "color" },
+      "border-radius": { "$value": "{radius.md}", "$type": "dimension" }
+    },
+    "indicator-color": { "$value": "{color.primary.default}", "$type": "color" },
+    "separator-color": { "$value": "{color.border.default}", "$type": "color" }
+  }
+}

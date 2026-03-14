@@ -20,6 +20,12 @@
     display: contents;
   }
 
+  /* Hide overlay and content when drawer is closed */
+  ds-drawer:not([open]) > .ds-drawer__overlay,
+  ds-drawer:not([open]) > ds-drawer-content {
+    display: none;
+  }
+
   /* Overlay */
   .ds-drawer__overlay {
     position: fixed;

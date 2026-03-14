@@ -2,51 +2,51 @@
 @layer components {
   .ds-link {
     /* Base styles */
-    color: var(--ds-color-link-default);
-    text-decoration: none;
+    color: var(--ds-link-color);
+    text-decoration: var(--ds-link-text-decoration);
     cursor: pointer;
     transition: color 150ms ease;
     display: inline;
     align-items: center;
-    gap: 0.25em;
+    gap: var(--ds-link-gap);
   }
 
   .ds-link:hover {
-    color: var(--ds-color-link-hover);
-    text-decoration: underline;
+    color: var(--ds-link-color-hover);
+    text-decoration: var(--ds-link-text-decoration-hover);
   }
 
   .ds-link:active {
-    color: var(--ds-color-link-active);
+    color: var(--ds-link-color-active);
   }
 
   .ds-link:visited {
-    color: var(--ds-color-link-visited);
+    color: var(--ds-link-color-visited);
   }
 
   /* Focus state */
   .ds-link:focus-visible {
-    outline: 2px solid var(--ds-color-focus-ring);
+    outline: 2px solid var(--ds-link-focus-ring);
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: var(--ds-radius-xs, 2px);
   }
 
   /* Variant: default - blue link color */
   .ds-link--default {
-    color: var(--ds-color-link-default);
+    color: var(--ds-link-color);
   }
 
   /* Variant: muted - subdued color for secondary links */
   .ds-link--muted {
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-link-color-muted);
   }
 
   .ds-link--muted:hover {
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-link-color-muted-hover);
   }
 
   .ds-link--muted:visited {
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-link-color-muted);
   }
 
   /* Variant: underline - always underlined */
@@ -62,14 +62,14 @@
   .ds-link--external {
     display: inline-flex;
     align-items: center;
-    gap: 0.25em;
+    gap: var(--ds-link-gap);
   }
 
   .ds-link__external-icon {
     display: inline-flex;
     flex-shrink: 0;
-    width: 0.875em;
-    height: 0.875em;
+    width: var(--ds-link-external-icon-size);
+    height: var(--ds-link-external-icon-size);
   }
 
   .ds-link__external-icon svg {

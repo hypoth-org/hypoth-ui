@@ -1,0 +1,102 @@
+/**
+ * Token Isolation Test
+ *
+ * This file verifies that component tokens provide sub-element isolation:
+ * overriding a token for one sub-element should NOT affect other sub-elements
+ * of the same component or any other component.
+ *
+ * Usage: Import this CSS file alongside the design system styles in a test page.
+ * Visually inspect that ONLY the described sub-element changes to hotpink.
+ *
+ * Each override block documents:
+ *   - SHOULD change: the exact sub-element affected
+ *   - SHOULD NOT change: related sub-elements that must remain unaffected
+ */
+
+/* ==========================================================================
+ * TEST 1: Select Trigger Background Isolation
+ *
+ * Override: --ds-select-trigger-bg
+ *
+ * SHOULD change:
+ *   - The Select trigger button background color turns hotpink
+ *
+ * SHOULD NOT change:
+ *   - Select dropdown content background (controlled by --ds-select-content-bg)
+ *   - Select option backgrounds (controlled by --ds-select-option-bg-hover / bg-active)
+ *   - Select trigger text color (controlled by --ds-select-trigger-color)
+ *   - Select trigger border color (controlled by --ds-select-trigger-border-color)
+ *   - Any Combobox, Dialog, Sheet, or Stepper element
+ * ========================================================================== */
+:root {
+  --ds-select-trigger-bg: hotpink;
+}
+
+/* ==========================================================================
+ * TEST 2: Dialog Title Color Isolation
+ *
+ * Override: --ds-dialog-title-color
+ *
+ * SHOULD change:
+ *   - The Dialog title text color turns hotpink
+ *
+ * SHOULD NOT change:
+ *   - Dialog description text color (controlled by --ds-dialog-description-color)
+ *   - Dialog backdrop color (controlled by --ds-dialog-backdrop-color)
+ *   - Dialog content background (controlled by --ds-dialog-content-bg)
+ *   - Dialog title font size/weight (controlled by --ds-dialog-title-font-size/font-weight)
+ *   - Sheet title color (controlled by --ds-sheet-title-color, a separate token)
+ *   - Any Select, Combobox, or Stepper element
+ * ========================================================================== */
+:root {
+  --ds-dialog-title-color: hotpink;
+}
+
+/* ==========================================================================
+ * TEST 3: Combobox Tag Background Isolation
+ *
+ * Override: --ds-combobox-tag-bg
+ *
+ * SHOULD change:
+ *   - The Combobox multi-select tag pill background turns hotpink
+ *
+ * SHOULD NOT change:
+ *   - Combobox input wrapper background (controlled by --ds-combobox-input-bg)
+ *   - Combobox dropdown content background (controlled by --ds-combobox-content-bg)
+ *   - Combobox option hover background (controlled by --ds-combobox-option-bg-hover)
+ *   - Combobox tag text color (controlled by --ds-combobox-tag-color)
+ *   - Combobox tag remove button color (controlled by --ds-combobox-tag-remove-color)
+ *   - Select option backgrounds (separate component namespace --ds-select-*)
+ *   - Any Dialog, Sheet, or Stepper element
+ * ========================================================================== */
+:root {
+  --ds-combobox-tag-bg: hotpink;
+}
+
+/* ==========================================================================
+ * VERIFICATION NOTES
+ *
+ * The token architecture guarantees isolation through the naming convention:
+ *
+ *   --ds-{component}-{sub-element}-{property}
+ *
+ * Examples:
+ *   --ds-select-trigger-bg      -> only Select trigger background
+ *   --ds-select-content-bg      -> only Select dropdown background
+ *   --ds-dialog-title-color     -> only Dialog title text
+ *   --ds-dialog-description-color -> only Dialog description text
+ *   --ds-combobox-tag-bg        -> only Combobox tag pills
+ *   --ds-combobox-input-bg      -> only Combobox input wrapper
+ *
+ * Cross-component isolation:
+ *   --ds-dialog-title-color vs --ds-sheet-title-color
+ *     These are independent tokens. Changing one does NOT affect the other,
+ *     even though both reference {color.foreground.default} by default.
+ *
+ *   --ds-select-option-bg-hover vs --ds-combobox-option-bg-hover
+ *     These are independent tokens. Select and Combobox dropdowns can be
+ *     themed separately despite both referencing {color.background.subtle}.
+ *
+ * If any of the "SHOULD NOT change" items turn hotpink, the token isolation
+ * is broken and the component token definitions need to be fixed.
+ * ========================================================================== */

@@ -1,0 +1,188 @@
+/**
+ * Calendar Component Styles
+ *
+ * CSS custom properties for theming:
+ * --ds-calendar-width - Calendar overall width
+ * --ds-calendar-cell-size - Day cell size (default: 2.5rem)
+ */
+
+@layer components {
+  ds-calendar {
+    display: block;
+  }
+
+  .ds-calendar {
+    --_calendar-cell-size: var(--ds-calendar-cell-size, 2.5rem);
+
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-2);
+  }
+
+  /* Header */
+  .ds-calendar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--ds-spacing-2);
+  }
+
+  .ds-calendar__title {
+    font-size: var(--ds-font-size-base);
+    font-weight: var(--ds-font-weight-semibold);
+    color: var(--ds-color-foreground-default);
+  }
+
+  .ds-calendar__nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: var(--ds-color-foreground-muted);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: var(--ds-radius-sm);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .ds-calendar__nav-button:hover {
+    color: var(--ds-color-foreground-default);
+    background-color: var(--ds-color-background-subtle);
+  }
+
+  .ds-calendar__nav-button:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .ds-calendar__nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-calendar__nav-button svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Weekday headers */
+  .ds-calendar__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, var(--_calendar-cell-size));
+    gap: var(--ds-spacing-1);
+  }
+
+  .ds-calendar__weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--_calendar-cell-size);
+    font-size: var(--ds-font-size-xs);
+    font-weight: var(--ds-font-weight-medium);
+    color: var(--ds-color-foreground-muted);
+    text-transform: uppercase;
+  }
+
+  /* Grid */
+  .ds-calendar__grid {
+    display: grid;
+    grid-template-columns: repeat(7, var(--_calendar-cell-size));
+    gap: var(--ds-spacing-1);
+  }
+
+  /* Day cells */
+  .ds-calendar__day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--_calendar-cell-size);
+    height: var(--_calendar-cell-size);
+    font-family: inherit;
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-foreground-default);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: var(--ds-radius-sm);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .ds-calendar__day:hover:not(:disabled):not([data-selected]) {
+    background-color: var(--ds-color-background-subtle);
+  }
+
+  .ds-calendar__day:focus-visible {
+    outline: 2px solid var(--ds-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Today */
+  .ds-calendar__day[data-today] {
+    font-weight: var(--ds-font-weight-bold);
+  }
+
+  .ds-calendar__day[data-today]::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--ds-color-primary-default);
+    border-radius: 50%;
+  }
+
+  /* Selected */
+  .ds-calendar__day[data-selected] {
+    color: var(--ds-color-primary-foreground, #fff);
+    background-color: var(--ds-color-primary-default);
+  }
+
+  /* Outside month */
+  .ds-calendar__day[data-outside] {
+    color: var(--ds-color-foreground-muted);
+    opacity: 0.5;
+  }
+
+  /* Disabled */
+  .ds-calendar__day[data-disabled],
+  .ds-calendar__day:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Compact size variant */
+  .ds-calendar[data-size="compact"] {
+    --_calendar-cell-size: 2rem;
+  }
+
+  .ds-calendar[data-size="compact"] .ds-calendar__day {
+    font-size: var(--ds-font-size-xs);
+  }
+
+  .ds-calendar[data-size="compact"] .ds-calendar__nav-button {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .ds-calendar[data-size="compact"] .ds-calendar__title {
+    font-size: var(--ds-font-size-sm);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-calendar__day {
+      transition: none;
+    }
+
+    .ds-calendar__nav-button {
+      transition: none;
+    }
+  }
+}

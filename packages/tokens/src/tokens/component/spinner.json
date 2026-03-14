@@ -1,0 +1,13 @@
+{
+  "$description": "Spinner component tokens — loading indicator styling",
+  "spinner": {
+    "color": { "$value": "currentColor", "$type": "color" },
+    "size-sm": { "$value": "1rem", "$type": "dimension" },
+    "size-md": { "$value": "1.25rem", "$type": "dimension" },
+    "size-lg": { "$value": "1.5rem", "$type": "dimension" },
+    "border-width-sm": { "$value": "2px", "$type": "dimension" },
+    "border-width-md": { "$value": "2px", "$type": "dimension" },
+    "border-width-lg": { "$value": "3px", "$type": "dimension" },
+    "speed": { "$value": "1s", "$type": "duration" }
+  }
+}

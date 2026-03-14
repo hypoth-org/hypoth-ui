@@ -1,0 +1,34 @@
+{
+  "$description": "Input component tokens — references form-controls type tokens",
+  "input": {
+    "field": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Input field background color" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Input field border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "Input field border color on hover" },
+      "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "Input field border color on focus" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "Input field border radius" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Input field text color" },
+      "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Input field placeholder text color" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Input field font size (md)" },
+      "font-size-sm": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Input field font size (sm)" },
+      "font-size-lg": { "$value": "{form-control.font-size.lg}", "$type": "dimension", "$description": "Input field font size (lg)" },
+      "height": { "$value": "{form-control.height.md}", "$type": "dimension", "$description": "Input field height (md)" },
+      "height-sm": { "$value": "{form-control.height.sm}", "$type": "dimension", "$description": "Input field height (sm)" },
+      "height-lg": { "$value": "{form-control.height.lg}", "$type": "dimension", "$description": "Input field height (lg)" },
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Input field horizontal padding (md)" },
+      "padding-x-sm": { "$value": "{form-control.padding-x.sm}", "$type": "dimension", "$description": "Input field horizontal padding (sm)" },
+      "padding-x-lg": { "$value": "{form-control.padding-x.lg}", "$type": "dimension", "$description": "Input field horizontal padding (lg)" }
+    },
+    "label": {
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Input label font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Input label text color" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Input focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "Input border color in error state" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Input background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Input text color when disabled" },
+      "border-color": { "$value": "{form-control.disabled.border-color}", "$type": "color", "$description": "Input border color when disabled" }
+    }
+  }
+}

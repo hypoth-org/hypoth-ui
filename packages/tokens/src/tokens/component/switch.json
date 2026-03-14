@@ -1,0 +1,27 @@
+{
+  "$description": "Switch component tokens — references form-controls type tokens",
+  "switch": {
+    "track": {
+      "width": { "$value": "2.75rem", "$type": "dimension", "$description": "Switch track width" },
+      "height": { "$value": "1.5rem", "$type": "dimension", "$description": "Switch track height" },
+      "bg": { "$value": "{color.background.muted}", "$type": "color", "$description": "Switch track background (unchecked)" },
+      "bg-checked": { "$value": "{color.primary.default}", "$type": "color", "$description": "Switch track background (checked)" },
+      "border-radius": { "$value": "{radius.full}", "$type": "dimension", "$description": "Switch track border radius" }
+    },
+    "thumb": {
+      "size": { "$value": "1.25rem", "$type": "dimension", "$description": "Switch thumb diameter" },
+      "bg": { "$value": "{color.background.default}", "$type": "color", "$description": "Switch thumb background color" }
+    },
+    "label": {
+      "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Gap between switch control and label" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Switch label font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Switch label text color" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Switch focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "Switch border color in error state" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Switch track background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Switch label color when disabled" }
+    }
+  }
+}

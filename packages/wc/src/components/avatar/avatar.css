@@ -1,0 +1,90 @@
+/**
+ * Avatar Component Styles
+ *
+ * User avatar with image, initials fallback, and group layout.
+ */
+
+@layer components {
+  ds-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: var(--ds-avatar-size, var(--ds-avatar-size-md, 2.5rem));
+    height: var(--ds-avatar-size, var(--ds-avatar-size-md, 2.5rem));
+    border-radius: var(--ds-avatar-border-radius, 9999px);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Size variants */
+  ds-avatar[size="sm"] {
+    width: var(--ds-avatar-size-sm, 2rem);
+    height: var(--ds-avatar-size-sm, 2rem);
+  }
+
+  ds-avatar[size="md"] {
+    width: var(--ds-avatar-size-md, 2.5rem);
+    height: var(--ds-avatar-size-md, 2.5rem);
+  }
+
+  ds-avatar[size="lg"] {
+    width: var(--ds-avatar-size-lg, 3rem);
+    height: var(--ds-avatar-size-lg, 3rem);
+  }
+
+  ds-avatar[size="xl"] {
+    width: var(--ds-avatar-size-xl, 4rem);
+    height: var(--ds-avatar-size-xl, 4rem);
+  }
+
+  /* Image */
+  .ds-avatar__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Fallback (initials or icon) */
+  .ds-avatar__fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--ds-avatar-fallback-bg, #e5e7eb);
+    color: var(--ds-avatar-fallback-color, #6b7280);
+    font-size: var(--ds-avatar-fallback-font-size, var(--ds-font-size-sm, 0.875rem));
+    font-weight: 500;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  ds-avatar[size="sm"] .ds-avatar__fallback {
+    font-size: var(--ds-font-size-xs, 0.75rem);
+  }
+
+  ds-avatar[size="lg"] .ds-avatar__fallback {
+    font-size: var(--ds-font-size-base, 1rem);
+  }
+
+  ds-avatar[size="xl"] .ds-avatar__fallback {
+    font-size: var(--ds-font-size-lg, 1.25rem);
+  }
+
+  /* Avatar group */
+  ds-avatar-group {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  ds-avatar-group ds-avatar {
+    border: 2px solid var(--ds-avatar-group-border-color, #ffffff);
+    margin-left: var(--ds-avatar-group-overlap, -0.5rem);
+  }
+
+  ds-avatar-group ds-avatar:last-child {
+    margin-left: 0;
+  }
+}

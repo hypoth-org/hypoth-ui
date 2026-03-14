@@ -1,0 +1,19 @@
+{
+  "$description": "Link component tokens — references actions type tokens and semantic colors",
+  "link": {
+    "color": { "$value": "{color.link.default}", "$type": "color" },
+    "color-hover": { "$value": "{color.link.hover}", "$type": "color" },
+    "color-active": { "$value": "{color.link.active}", "$type": "color" },
+    "color-visited": { "$value": "{color.link.visited}", "$type": "color" },
+    "color-muted": { "$value": "{color.foreground.muted}", "$type": "color" },
+    "color-muted-hover": { "$value": "{color.foreground.default}", "$type": "color" },
+    "font-weight": { "$value": "inherit", "$type": "fontWeight" },
+    "text-decoration": { "$value": "none", "$type": "string" },
+    "text-decoration-hover": { "$value": "underline", "$type": "string" },
+    "focus-ring": { "$value": "{action.focus-ring}", "$type": "color" },
+    "gap": { "$value": "0.25em", "$type": "dimension" },
+    "external-icon": {
+      "size": { "$value": "0.875em", "$type": "dimension" }
+    }
+  }
+}

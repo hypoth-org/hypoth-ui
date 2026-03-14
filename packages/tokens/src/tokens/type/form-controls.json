@@ -1,0 +1,39 @@
+{
+  "$description": "Form controls type tokens — shared styling for Input, Select, Checkbox, Radio, Textarea, Switch, etc.",
+  "form-control": {
+    "bg": { "$value": "{color.background.default}", "$type": "color" },
+    "border-color": { "$value": "{color.border.default}", "$type": "color" },
+    "border-color-hover": { "$value": "{color.border.emphasis}", "$type": "color" },
+    "border-color-focus": { "$value": "{color.primary.default}", "$type": "color" },
+    "border-radius": { "$value": "{radius.md}", "$type": "dimension" },
+    "focus-ring": { "$value": "{color.focus.ring}", "$type": "color" },
+    "error-color": { "$value": "{color.destructive.default}", "$type": "color" },
+    "error-border-color": { "$value": "{color.destructive.default}", "$type": "color" },
+    "placeholder-color": { "$value": "{color.foreground.muted}", "$type": "color" },
+    "height": {
+      "sm": { "$value": "2rem", "$type": "dimension" },
+      "md": { "$value": "2.25rem", "$type": "dimension" },
+      "lg": { "$value": "2.75rem", "$type": "dimension" }
+    },
+    "padding-x": {
+      "sm": { "$value": "0.5rem", "$type": "dimension" },
+      "md": { "$value": "0.75rem", "$type": "dimension" },
+      "lg": { "$value": "1rem", "$type": "dimension" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.25rem", "$type": "dimension" },
+      "md": { "$value": "0.375rem", "$type": "dimension" },
+      "lg": { "$value": "0.5rem", "$type": "dimension" }
+    },
+    "font-size": {
+      "sm": { "$value": "0.75rem", "$type": "dimension" },
+      "md": { "$value": "0.875rem", "$type": "dimension" },
+      "lg": { "$value": "1rem", "$type": "dimension" }
+    },
+    "disabled": {
+      "bg": { "$value": "{color.background.muted}", "$type": "color" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "border-color": { "$value": "{color.border.muted}", "$type": "color" }
+    }
+  }
+}

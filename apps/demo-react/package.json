@@ -13,21 +13,22 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@hypoth-ui/wc": "workspace:*",
-    "@hypoth-ui/react": "workspace:*",
-    "@hypoth-ui/next": "workspace:*",
-    "@hypoth-ui/tokens": "workspace:*",
     "@hypoth-ui/css": "workspace:*",
-    "@hypoth-ui/primitives-dom": "workspace:*",
     "@hypoth-ui/demo-shared": "workspace:*",
+    "@hypoth-ui/next": "workspace:*",
+    "@hypoth-ui/primitives-dom": "workspace:*",
+    "@hypoth-ui/react": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
+    "geist": "1.7.0",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.0",
-    "@playwright/test": "^1.40.0"
+    "typescript": "^5.3.0"
   }
 }

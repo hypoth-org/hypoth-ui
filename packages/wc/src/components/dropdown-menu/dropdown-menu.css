@@ -157,7 +157,7 @@
     width: 1rem;
     text-align: center;
     color: var(--ds-color-primary, #2563eb);
-    font-size: 0.75rem;
+    font-size: var(--ds-font-size-xs, 0.75rem);
   }
 
   /* Radio group */

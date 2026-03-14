@@ -1,0 +1,93 @@
+/**
+ * DataTable Component Styles
+ *
+ * Interactive table with sorting, selection, and filtering.
+ *
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-data-table-*)
+ */
+
+@layer components {
+  ds-data-table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border: 1px solid var(--ds-data-table-border-color);
+    border-radius: var(--ds-data-table-border-radius);
+    background-color: var(--ds-data-table-bg);
+  }
+
+  ds-data-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  ds-data-table thead {
+    background-color: var(--ds-data-table-header-bg);
+  }
+
+  ds-data-table th {
+    padding: var(--ds-data-table-header-padding);
+    font-size: var(--ds-data-table-header-font-size);
+    font-weight: var(--ds-data-table-header-font-weight);
+    color: var(--ds-data-table-header-color);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--ds-data-table-border-color);
+    user-select: none;
+  }
+
+  ds-data-table th[data-sortable] {
+    cursor: pointer;
+    transition: background-color 150ms;
+  }
+
+  ds-data-table th[data-sortable]:hover {
+    background-color: var(--ds-data-table-row-bg-hover);
+  }
+
+  ds-data-table td {
+    padding: var(--ds-data-table-cell-padding);
+    font-size: var(--ds-data-table-cell-font-size);
+    color: var(--ds-data-table-cell-color);
+    border-bottom: 1px solid var(--ds-data-table-row-border-color);
+    vertical-align: middle;
+  }
+
+  ds-data-table tbody tr {
+    transition: background-color 150ms;
+  }
+
+  ds-data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  ds-data-table tbody tr:hover {
+    background-color: var(--ds-data-table-row-bg-hover);
+  }
+
+  ds-data-table tbody tr[data-selected] {
+    background-color: var(--ds-data-table-row-bg-selected);
+  }
+
+  /* Toolbar */
+  .ds-data-table__toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-data-table-toolbar-gap);
+    padding: var(--ds-data-table-toolbar-padding);
+    border-bottom: 1px solid var(--ds-data-table-border-color);
+  }
+
+  /* Pagination footer */
+  .ds-data-table__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--ds-data-table-toolbar-padding);
+    border-top: 1px solid var(--ds-data-table-border-color);
+    font-size: var(--ds-data-table-cell-font-size);
+    color: var(--ds-data-table-header-color);
+  }
+}

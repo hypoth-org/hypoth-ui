@@ -1,0 +1,32 @@
+{
+  "$description": "Dialog component tokens — references overlay type tokens",
+  "dialog": {
+    "backdrop": {
+      "color": { "$value": "{overlay.backdrop-color}", "$type": "color" }
+    },
+    "content": {
+      "bg": { "$value": "{overlay.bg}", "$type": "color" },
+      "border-radius": { "$value": "{overlay.border-radius}", "$type": "dimension" },
+      "shadow": { "$value": "{overlay.shadow}", "$type": "shadow" },
+      "padding": { "$value": "{overlay.padding}", "$type": "dimension" },
+      "gap": { "$value": "1rem", "$type": "dimension", "$description": "Gap between dialog content children" },
+      "margin": { "$value": "1rem", "$type": "dimension", "$description": "Margin around dialog content" },
+      "max-width": { "$value": "{overlay.max-width}", "$type": "dimension" }
+    },
+    "title": {
+      "font-size": { "$value": "1.125rem", "$type": "dimension" },
+      "font-weight": { "$value": "600", "$type": "fontWeight" },
+      "line-height": { "$value": "1.25", "$type": "number", "$description": "Dialog title line height" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" }
+    },
+    "description": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "line-height": { "$value": "1.5", "$type": "number", "$description": "Dialog description line height" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    },
+    "close": {
+      "size": { "$value": "1.5rem", "$type": "dimension" }
+    },
+    "z-index": { "$value": "{overlay.z-index}", "$type": "number" }
+  }
+}

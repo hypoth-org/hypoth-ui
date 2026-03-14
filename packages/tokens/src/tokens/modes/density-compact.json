@@ -1,0 +1,37 @@
+{
+  "$description": "Compact density mode — reduces heights by ~15%, padding by ~25%. Applied via [data-density=\"compact\"].",
+  "action": {
+    "height": {
+      "sm": { "$value": "1.75rem", "$type": "dimension", "$description": "Compact small action height (28px)" },
+      "md": { "$value": "2rem", "$type": "dimension", "$description": "Compact medium action height (32px)" },
+      "lg": { "$value": "2.25rem", "$type": "dimension", "$description": "Compact large action height (36px)" }
+    },
+    "padding-x": {
+      "sm": { "$value": "0.5rem", "$type": "dimension", "$description": "Compact small action horizontal padding" },
+      "md": { "$value": "0.75rem", "$type": "dimension", "$description": "Compact medium action horizontal padding" },
+      "lg": { "$value": "1.125rem", "$type": "dimension", "$description": "Compact large action horizontal padding" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.125rem", "$type": "dimension", "$description": "Compact small action vertical padding" },
+      "md": { "$value": "0.25rem", "$type": "dimension", "$description": "Compact medium action vertical padding" },
+      "lg": { "$value": "0.375rem", "$type": "dimension", "$description": "Compact large action vertical padding" }
+    }
+  },
+  "form-control": {
+    "height": {
+      "sm": { "$value": "1.75rem", "$type": "dimension", "$description": "Compact small form-control height (28px)" },
+      "md": { "$value": "2rem", "$type": "dimension", "$description": "Compact medium form-control height (32px)" },
+      "lg": { "$value": "2.25rem", "$type": "dimension", "$description": "Compact large form-control height (36px)" }
+    },
+    "padding-x": {
+      "sm": { "$value": "0.375rem", "$type": "dimension", "$description": "Compact small form-control horizontal padding" },
+      "md": { "$value": "0.5rem", "$type": "dimension", "$description": "Compact medium form-control horizontal padding" },
+      "lg": { "$value": "0.75rem", "$type": "dimension", "$description": "Compact large form-control horizontal padding" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.125rem", "$type": "dimension", "$description": "Compact small form-control vertical padding" },
+      "md": { "$value": "0.25rem", "$type": "dimension", "$description": "Compact medium form-control vertical padding" },
+      "lg": { "$value": "0.375rem", "$type": "dimension", "$description": "Compact large form-control vertical padding" }
+    }
+  }
+}

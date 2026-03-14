@@ -1,0 +1,28 @@
+{
+  "$description": "Feedback type tokens — shared styling for Alert, Badge, Toast, Progress, etc.",
+  "feedback": {
+    "border-radius": { "$value": "{radius.md}", "$type": "dimension" },
+    "padding": { "$value": "1rem", "$type": "dimension" },
+    "font-size": { "$value": "0.875rem", "$type": "dimension" },
+    "info": {
+      "bg": { "$value": "{color.status.info.background}", "$type": "color" },
+      "color": { "$value": "{color.status.info.foreground}", "$type": "color" },
+      "border-color": { "$value": "{color.status.info.border}", "$type": "color" }
+    },
+    "success": {
+      "bg": { "$value": "{color.status.success.background}", "$type": "color" },
+      "color": { "$value": "{color.status.success.foreground}", "$type": "color" },
+      "border-color": { "$value": "{color.status.success.border}", "$type": "color" }
+    },
+    "warning": {
+      "bg": { "$value": "{color.status.warning.background}", "$type": "color" },
+      "color": { "$value": "{color.status.warning.foreground}", "$type": "color" },
+      "border-color": { "$value": "{color.status.warning.border}", "$type": "color" }
+    },
+    "error": {
+      "bg": { "$value": "{color.status.error.background}", "$type": "color" },
+      "color": { "$value": "{color.status.error.foreground}", "$type": "color" },
+      "border-color": { "$value": "{color.status.error.border}", "$type": "color" }
+    }
+  }
+}

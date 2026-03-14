@@ -58,29 +58,29 @@
     font-size: var(--ds-typography-body-md-size, 0.875rem);
     line-height: var(--ds-typography-body-md-line-height, 1.5);
     color: var(--ds-empty-state-description-color, #64748b);
-    max-width: 28rem;
+    max-width: var(--ds-empty-state-max-width, 28rem);
   }
 
   ds-empty-state-action {
     display: block;
-    margin-top: 0.5rem;
+    margin-top: var(--ds-space-2, 0.5rem);
   }
 
   .ds-empty-state-action {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--ds-space-2, 0.5rem);
   }
 
   /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     .ds-empty-state-icon {
-      --ds-empty-state-icon-color: #64748b;
+      --ds-empty-state-icon-color: var(--ds-color-text-muted, #64748b);
     }
 
     .ds-empty-state-description {
-      --ds-empty-state-description-color: #94a3b8;
+      --ds-empty-state-description-color: var(--ds-color-text-subtle, #94a3b8);
     }
   }
 }

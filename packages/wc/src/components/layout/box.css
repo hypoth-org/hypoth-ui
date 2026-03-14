@@ -162,6 +162,6 @@
   }
 
   .ds-box[data-radius="full"] {
-    border-radius: 9999px;
+    border-radius: var(--ds-radius-full, 9999px);
   }
 }

@@ -1,0 +1,14 @@
+{
+  "$description": "Popover component tokens — references overlay type tokens",
+  "popover": {
+    "content": {
+      "bg": { "$value": "{overlay.bg}", "$type": "color" },
+      "border-color": { "$value": "{overlay.border-color}", "$type": "color" },
+      "border-radius": { "$value": "{overlay.border-radius}", "$type": "dimension" },
+      "shadow": { "$value": "{overlay.shadow}", "$type": "shadow" },
+      "padding": { "$value": "1rem", "$type": "dimension" },
+      "max-width": { "$value": "20rem", "$type": "dimension" }
+    },
+    "z-index": { "$value": "{overlay.z-index}", "$type": "number" }
+  }
+}

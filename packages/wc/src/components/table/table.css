@@ -1,0 +1,60 @@
+/**
+ * Table Component Styles
+ *
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-table-*)
+ */
+
+@layer components {
+  ds-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--ds-table-bg);
+    border: 1px solid var(--ds-table-border-color);
+    border-radius: var(--ds-table-border-radius);
+    overflow: hidden;
+    font-size: var(--ds-table-cell-font-size);
+  }
+
+  ds-table-header {
+    display: table-header-group;
+  }
+
+  ds-table-body {
+    display: table-row-group;
+  }
+
+  ds-table-row {
+    display: table-row;
+    border-bottom: 1px solid var(--ds-table-row-border-color);
+    transition: background-color 150ms;
+  }
+
+  ds-table-body ds-table-row:last-child {
+    border-bottom: none;
+  }
+
+  ds-table-body ds-table-row:hover {
+    background-color: var(--ds-table-row-bg-hover);
+  }
+
+  ds-table-head {
+    display: table-cell;
+    padding: var(--ds-table-header-padding);
+    background-color: var(--ds-table-header-bg);
+    font-size: var(--ds-table-header-font-size);
+    font-weight: var(--ds-table-header-font-weight);
+    color: var(--ds-table-header-color);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  ds-table-cell {
+    display: table-cell;
+    padding: var(--ds-table-cell-padding);
+    color: var(--ds-table-cell-color);
+    vertical-align: middle;
+  }
+}

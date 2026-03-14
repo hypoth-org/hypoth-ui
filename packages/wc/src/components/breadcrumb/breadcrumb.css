@@ -2,6 +2,9 @@
  * Breadcrumb Component Styles
  *
  * Navigation trail showing current page location.
+ *
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-breadcrumb-*)
  */
 
 @layer components {
@@ -15,7 +18,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--ds-space-1, 0.25rem);
+    gap: var(--ds-breadcrumb-list-gap);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -31,20 +34,20 @@
   ds-breadcrumb-link {
     display: inline-flex;
     align-items: center;
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    color: var(--ds-color-text-muted, #6b7280);
+    font-size: var(--ds-breadcrumb-item-font-size);
+    color: var(--ds-breadcrumb-link-color);
     text-decoration: none;
     cursor: pointer;
     transition: color 150ms;
   }
 
   ds-breadcrumb-link:hover {
-    color: var(--ds-color-text, #1a1a1a);
+    color: var(--ds-breadcrumb-link-color-hover);
     text-decoration: underline;
   }
 
   ds-breadcrumb-link:focus-visible {
-    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline: 2px solid var(--ds-tabs-focus-ring);
     outline-offset: 2px;
     border-radius: var(--ds-radius-sm, 0.25rem);
   }
@@ -53,16 +56,16 @@
   ds-breadcrumb-page {
     display: inline-flex;
     align-items: center;
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    font-weight: var(--ds-font-weight-medium, 500);
-    color: var(--ds-color-text, #1a1a1a);
+    font-size: var(--ds-breadcrumb-item-font-size);
+    font-weight: var(--ds-breadcrumb-page-font-weight);
+    color: var(--ds-breadcrumb-page-color);
   }
 
   /* Separator */
   ds-breadcrumb-separator {
     display: inline-flex;
     align-items: center;
-    color: var(--ds-color-text-muted, #6b7280);
+    color: var(--ds-breadcrumb-separator-color);
     user-select: none;
   }
 }

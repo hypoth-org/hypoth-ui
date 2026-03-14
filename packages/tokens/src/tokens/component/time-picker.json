@@ -1,0 +1,43 @@
+{
+  "$description": "TimePicker component tokens — references form-controls type tokens",
+  "time-picker": {
+    "segment": {
+      "min-width": { "$value": "2.5rem", "$type": "dimension", "$description": "Time segment minimum width" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Time segment font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Time segment text color" },
+      "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Time segment placeholder color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Time segment background on hover" },
+      "bg-focus": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "Time segment background on focus" },
+      "border-radius": { "$value": "{radius.sm}", "$type": "dimension", "$description": "Time segment border radius" }
+    },
+    "separator": {
+      "width": { "$value": "0.75rem", "$type": "dimension", "$description": "Separator width between segments" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Separator color" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Separator font size" }
+    },
+    "icon": {
+      "size": { "$value": "1.25rem", "$type": "dimension", "$description": "Clock icon size" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Clock icon color" }
+    },
+    "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "TimePicker container background" },
+    "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "TimePicker container border color" },
+    "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "TimePicker container border color on hover" },
+    "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "TimePicker container border color on focus" },
+    "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "TimePicker container border radius" },
+    "dropdown": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "TimePicker dropdown background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "TimePicker dropdown border color" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "TimePicker dropdown border radius" },
+      "shadow": { "$value": "{shadow.lg}", "$type": "shadow", "$description": "TimePicker dropdown shadow" }
+    },
+    "option": {
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "TimePicker dropdown option hover background" },
+      "bg-selected": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "TimePicker dropdown option selected background" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "TimePicker dropdown option text color" },
+      "color-selected": { "$value": "{color.primary.default}", "$type": "color", "$description": "TimePicker dropdown option selected text color" },
+      "font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "TimePicker dropdown option font size" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "TimePicker focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "TimePicker border color in error state" }
+  }
+}

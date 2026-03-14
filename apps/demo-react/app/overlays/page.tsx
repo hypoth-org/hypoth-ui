@@ -42,7 +42,7 @@ export default function OverlaysPage() {
         </p>
         <div className="showcase-demo">
           <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Dialog.Trigger>
+            <Dialog.Trigger asChild>
               <Button>Open Dialog</Button>
             </Dialog.Trigger>
             <Dialog.Content>
@@ -61,7 +61,7 @@ export default function OverlaysPage() {
                 </div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '24px' }}>
-                <Dialog.Close>
+                <Dialog.Close asChild>
                   <Button variant="secondary">Cancel</Button>
                 </Dialog.Close>
                 <Button onClick={() => setDialogOpen(false)}>Save changes</Button>
@@ -79,7 +79,7 @@ export default function OverlaysPage() {
         </p>
         <div className="showcase-demo">
           <Dialog.Root open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
-            <Dialog.Trigger>
+            <Dialog.Trigger asChild>
               <Button variant="destructive">Delete Account</Button>
             </Dialog.Trigger>
             <Dialog.Content>
@@ -89,7 +89,7 @@ export default function OverlaysPage() {
                 and remove your data from our servers.
               </Dialog.Description>
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '24px' }}>
-                <Dialog.Close>
+                <Dialog.Close asChild>
                   <Button variant="secondary">Cancel</Button>
                 </Dialog.Close>
                 <Button variant="destructive" onClick={() => setAlertDialogOpen(false)}>

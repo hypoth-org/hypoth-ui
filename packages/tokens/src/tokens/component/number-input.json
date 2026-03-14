@@ -1,0 +1,37 @@
+{
+  "$description": "NumberInput component tokens — references form-controls type tokens",
+  "number-input": {
+    "field": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "NumberInput field background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "NumberInput field border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "NumberInput field border color on hover" },
+      "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "NumberInput field border color on focus" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "NumberInput field border radius" },
+      "height": { "$value": "{form-control.height.md}", "$type": "dimension", "$description": "NumberInput field height" },
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "NumberInput field horizontal padding" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "NumberInput field font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "NumberInput field text color" }
+    },
+    "button": {
+      "width": { "$value": "2rem", "$type": "dimension", "$description": "Increment/decrement button width" },
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Button background" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Button background on hover" },
+      "bg-active": { "$value": "{color.background.muted}", "$type": "color", "$description": "Button background when pressed" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Button icon color" },
+      "color-disabled": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Button icon color when disabled" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Button border color" }
+    },
+    "prefix": {
+      "bg": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Prefix/suffix background" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Prefix/suffix text color" },
+      "font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Prefix/suffix font size" },
+      "padding-x": { "$value": "{form-control.padding-x.sm}", "$type": "dimension", "$description": "Prefix/suffix horizontal padding" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "NumberInput focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "NumberInput border color in error state" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "NumberInput background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "NumberInput text color when disabled" }
+    }
+  }
+}

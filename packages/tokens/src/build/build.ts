@@ -24,6 +24,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const TOKENS_DIR = join(__dirname, "../tokens");
 const COLORS_DIR = join(__dirname, "../colors");
 const DENSITY_DIR = join(__dirname, "../density");
+const TYPE_TOKENS_DIR = join(TOKENS_DIR, "type");
+const COMPONENT_TOKENS_DIR = join(TOKENS_DIR, "component");
 const DIST_DIR = join(__dirname, "../../dist");
 
 interface BuildResult {
@@ -159,6 +161,38 @@ function loadDensityTokens(): Map<string, ParsedToken[]> {
 /**
  * Generate CSS for 16-step color tokens
  */
+/**
+ * Non-color semantic bridge tokens that map --ds- prefixed names
+ * to values from the global token namespace.
+ * These are needed because type/component tokens reference --ds-* vars.
+ */
+const BRIDGE_TOKENS: Record<string, string> = {
+  "--ds-font-family-sans": "var(--font-geist-sans, 'Geist'), system-ui, -apple-system, sans-serif",
+  "--ds-font-family-mono": "var(--font-geist-mono, 'Geist Mono'), ui-monospace, monospace",
+  "--ds-font-family-serif": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+  "--ds-radius-sm": "0.125rem",
+  "--ds-radius-md": "0.375rem",
+  "--ds-radius-lg": "0.5rem",
+  "--ds-radius-xl": "0.75rem",
+  "--ds-radius-full": "9999px",
+  "--ds-font-weight-medium": "500",
+  "--ds-font-weight-semibold": "600",
+  "--ds-font-weight-bold": "700",
+  "--ds-font-size-xs": "0.75rem",
+  "--ds-font-size-sm": "0.875rem",
+  "--ds-font-size-base": "1rem",
+  "--ds-font-size-lg": "1.125rem",
+  "--ds-font-size-xl": "1.25rem",
+  "--ds-shadow-sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "--ds-shadow-md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+  "--ds-shadow-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+  "--ds-shadow-xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+  "--ds-spacing-1": "0.25rem",
+  "--ds-spacing-2": "0.5rem",
+  "--ds-spacing-3": "0.75rem",
+  "--ds-spacing-4": "1rem",
+};
+
 function generateColorCSS(primitives: ParsedToken[], semantic: ParsedToken[], dark: ParsedToken[]): string {
   const lines: string[] = [];
 
@@ -219,6 +253,15 @@ function generateColorCSS(primitives: ParsedToken[], semantic: ParsedToken[], da
     lines.push(`      ${cssVar}: ${value};`);
   }
   lines.push("    }");
+  lines.push("  }");
+
+  // Non-color semantic bridge tokens
+  lines.push("");
+  lines.push("  /* Non-Color Semantic Bridge Tokens */");
+  lines.push("  :root {");
+  for (const [varName, value] of Object.entries(BRIDGE_TOKENS)) {
+    lines.push(`    ${varName}: ${value};`);
+  }
   lines.push("  }");
   lines.push("}");
 
@@ -334,6 +377,97 @@ function generateDensityCSS(densityModes: Map<string, ParsedToken[]>): string {
 }
 
 /**
+ * Convert a DTCG {reference} value to a CSS var() expression.
+ * If the value is not a reference, return it as-is.
+ */
+function referenceToVar(value: string): string {
+  if (value.startsWith("{") && value.endsWith("}")) {
+    const ref = value.slice(1, -1).replace(/\./g, "-");
+    return `var(--ds-${ref})`;
+  }
+  return value;
+}
+
+/**
+ * Generate CSS for tiered tokens (type or component).
+ * Unlike global tokens which are fully resolved, these preserve {reference}
+ * values as var() calls to maintain the CSS cascade chain.
+ */
+function generateTierCSS(tokens: ParsedToken[], tierName: string): string {
+  if (tokens.length === 0) return "";
+
+  const lines: string[] = [];
+
+  lines.push("/**");
+  lines.push(` * ${tierName} Tokens`);
+  lines.push(" * Generated from DTCG tokens — references preserved as var()");
+  lines.push(" */");
+  lines.push("");
+  lines.push("@layer tokens {");
+  lines.push("  :root {");
+
+  const sorted = [...tokens].sort((a, b) => a.path.localeCompare(b.path));
+  for (const token of sorted) {
+    const cssVar = `--ds-${token.path.replace(/\./g, "-")}`;
+    const cssValue = referenceToVar(String(token.value));
+    if (token.description) {
+      lines.push(`    /* ${token.description} */`);
+    }
+    lines.push(`    ${cssVar}: ${cssValue};`);
+  }
+
+  lines.push("  }");
+  lines.push("}");
+
+  return lines.join("\n");
+}
+
+/**
+ * Generate TypeScript union types for tiered token paths
+ */
+function generateTierTypes(tokens: ParsedToken[], typeName: string): string {
+  if (tokens.length === 0) return "";
+
+  const sorted = [...tokens].sort((a, b) => a.path.localeCompare(b.path));
+  const paths = sorted.map((t) => `  | '${t.path}'`).join("\n");
+
+  const lines: string[] = [];
+  lines.push(`/** ${typeName} token paths */`);
+  lines.push(`export type ${typeName} =`);
+  lines.push(paths);
+  lines.push(";");
+  lines.push("");
+  return lines.join("\n");
+}
+
+/**
+ * Generate CSS for density mode tokens that override type-tier tokens.
+ * Uses --ds- prefix to match the type-tier CSS variables, and
+ * [data-density="..."] selectors for activation.
+ */
+function generateDensityModeCSS(tokens: ParsedToken[], densityName: string): string {
+  if (tokens.length === 0) return "";
+
+  const lines: string[] = [];
+
+  lines.push("@layer tokens {");
+  lines.push(`  /* ${densityName.charAt(0).toUpperCase() + densityName.slice(1)} Density — type-tier overrides */`);
+  lines.push(`  [data-density="${densityName}"] {`);
+
+  const sorted = [...tokens].sort((a, b) => a.path.localeCompare(b.path));
+  for (const token of sorted) {
+    const cssVar = `--ds-${token.path.replace(/\./g, "-")}`;
+    const cssValue = referenceToVar(String(token.value));
+    lines.push(`    ${cssVar}: ${cssValue};`);
+  }
+
+  lines.push("  }");
+  lines.push("}");
+
+  return lines.join("\n");
+}
+
+/**
  * Main build function
  */
 async function build(): Promise<BuildResult> {
@@ -355,6 +489,10 @@ async function build(): Promise<BuildResult> {
   const colorTokens = loadColorTokens();
   const densityTokens = loadDensityTokens();
 
+  // Load type and component tier tokens
+  const typeTokens = loadTokensFromDir(TYPE_TOKENS_DIR);
+  const componentTokens = loadTokensFromDir(COMPONENT_TOKENS_DIR);
+
   console.info(`Loaded ${globalTokens.length} global tokens`);
   console.info(`Loaded ${brandTokens.size} brands`);
   console.info(`Loaded ${modeTokens.size} modes`);
@@ -362,6 +500,8 @@ async function build(): Promise<BuildResult> {
   console.info(`Loaded ${colorTokens.semantic.length} semantic color tokens`);
   console.info(`Loaded ${colorTokens.dark.length} dark mode color tokens`);
   console.info(`Loaded ${densityTokens.size} density modes`);
+  console.info(`Loaded ${typeTokens.length} type tokens`);
+  console.info(`Loaded ${componentTokens.length} component tokens`);
 
   // Validate tokens
   const validation = validateTokens(globalTokens);
@@ -400,8 +540,15 @@ async function build(): Promise<BuildResult> {
 
   // Resolve and generate mode CSS
   for (const [mode, tokens] of modeTokens) {
-    const resolved = resolveTokens(tokens, sources, { mode });
-    cssOutput.modes.set(mode, generateModeCSS(resolved.resolved, mode));
+    if (mode.startsWith("density-")) {
+      // Density modes use --ds- prefix to match type-tier tokens
+      // and [data-density="..."] selectors for activation
+      const densityName = mode.replace("density-", "");
+      cssOutput.modes.set(mode, generateDensityModeCSS(tokens, densityName));
+    } else {
+      const resolved = resolveTokens(tokens, sources, { mode });
+      cssOutput.modes.set(mode, generateModeCSS(resolved.resolved, mode));
+    }
   }
 
   // Resolve and generate brand CSS
@@ -436,13 +583,41 @@ async function build(): Promise<BuildResult> {
     console.info("Written: dist/css/density.css");
   }
 
+  // Write type token CSS
+  if (typeTokens.length > 0) {
+    const typeCSS = generateTierCSS(typeTokens, "Type");
+    writeFileSync(join(DIST_DIR, "css/type-tokens.css"), typeCSS);
+    console.info(`Written: dist/css/type-tokens.css (${typeTokens.length} tokens)`);
+  } else {
+    // Write empty file so imports don't break
+    writeFileSync(join(DIST_DIR, "css/type-tokens.css"), "/* Type tokens — none defined yet */\n");
+    console.info("Written: dist/css/type-tokens.css (empty)");
+  }
+
+  // Write component token CSS
+  if (componentTokens.length > 0) {
+    const componentCSS = generateTierCSS(componentTokens, "Component");
+    writeFileSync(join(DIST_DIR, "css/component-tokens.css"), componentCSS);
+    console.info(`Written: dist/css/component-tokens.css (${componentTokens.length} tokens)`);
+  } else {
+    writeFileSync(join(DIST_DIR, "css/component-tokens.css"), "/* Component tokens — none defined yet */\n");
+    console.info("Written: dist/css/component-tokens.css (empty)");
+  }
+
   // Write JSON output using new emitter
   const jsonBundle = generateJSONBundle(defaultResolved.resolved, { version: "0.0.0" });
   writeFileSync(join(DIST_DIR, "json/tokens.json"), serializeJSONBundle(jsonBundle));
   console.info("Written: dist/json/tokens.json");
 
   // Write TypeScript output using new emitter
-  const tsOutput = generateTypeScript(globalTokens);
+  let tsOutput = generateTypeScript(globalTokens);
+
+  // Append type and component tier types
+  const typeTypes = generateTierTypes(typeTokens, "TypeTokenPath");
+  const componentTypes = generateTierTypes(componentTokens, "ComponentTokenPath");
+  if (typeTypes) tsOutput += `\n${typeTypes}`;
+  if (componentTypes) tsOutput += `\n${componentTypes}`;
+
   writeFileSync(join(DIST_DIR, "ts/index.ts"), tsOutput);
   console.info("Written: dist/ts/index.ts");
 

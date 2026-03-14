@@ -1,0 +1,21 @@
+{
+  "$description": "EmptyState component tokens — placeholder content styling",
+  "empty-state": {
+    "padding": { "$value": "3rem 1.5rem", "$type": "dimension" },
+    "gap": { "$value": "1rem", "$type": "dimension" },
+    "icon": {
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "size": { "$value": "3rem", "$type": "dimension" }
+    },
+    "title": {
+      "font-size": { "$value": "1.125rem", "$type": "dimension" },
+      "font-weight": { "$value": "600", "$type": "fontWeight" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" }
+    },
+    "description": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "max-width": { "$value": "28rem", "$type": "dimension" }
+    }
+  }
+}

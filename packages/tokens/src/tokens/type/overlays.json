@@ -1,0 +1,13 @@
+{
+  "$description": "Overlay type tokens — shared styling for Dialog, Popover, Tooltip, Sheet, etc.",
+  "overlay": {
+    "bg": { "$value": "{color.background.default}", "$type": "color" },
+    "border-color": { "$value": "{color.border.default}", "$type": "color" },
+    "border-radius": { "$value": "{radius.lg}", "$type": "dimension" },
+    "shadow": { "$value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)", "$type": "shadow" },
+    "padding": { "$value": "1.5rem", "$type": "dimension" },
+    "backdrop-color": { "$value": "oklch(0 0 0 / 0.5)", "$type": "color" },
+    "z-index": { "$value": "50", "$type": "number" },
+    "max-width": { "$value": "32rem", "$type": "dimension" }
+  }
+}

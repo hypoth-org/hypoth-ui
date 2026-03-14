@@ -1,0 +1,19 @@
+{
+  "$description": "Progress component tokens — track and bar styling",
+  "progress": {
+    "track": {
+      "bg": { "$value": "{color.background.muted}", "$type": "color" },
+      "height": { "$value": "0.5rem", "$type": "dimension" },
+      "border-radius": { "$value": "9999px", "$type": "dimension" }
+    },
+    "bar": {
+      "bg": { "$value": "{color.primary.default}", "$type": "color" },
+      "border-radius": { "$value": "9999px", "$type": "dimension" }
+    },
+    "label": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "font-weight": { "$value": "500", "$type": "fontWeight" }
+    }
+  }
+}

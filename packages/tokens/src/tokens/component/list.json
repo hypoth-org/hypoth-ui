@@ -1,0 +1,17 @@
+{
+  "$description": "List component tokens — references container type tokens",
+  "list": {
+    "item": {
+      "padding-x": { "$value": "0.75rem", "$type": "dimension" },
+      "padding-y": { "$value": "0.5rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" },
+      "border-radius": { "$value": "{container.border-radius}", "$type": "dimension" }
+    },
+    "gap": { "$value": "0.25rem", "$type": "dimension" },
+    "separator": {
+      "color": { "$value": "{container.border-color}", "$type": "color" },
+      "size": { "$value": "1px", "$type": "dimension" }
+    }
+  }
+}

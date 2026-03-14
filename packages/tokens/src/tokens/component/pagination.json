@@ -1,0 +1,27 @@
+{
+  "$description": "Pagination component tokens — references navigation type tokens",
+  "pagination": {
+    "item": {
+      "size": { "$value": "2rem", "$type": "dimension" },
+      "border-radius": { "$value": "0.25rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" }
+    },
+    "link": {
+      "color": { "$value": "{nav.item.color-active}", "$type": "color" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" },
+      "bg-hover": { "$value": "{nav.item.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{color.primary.default}", "$type": "color" },
+      "color-active": { "$value": "#ffffff", "$type": "color" }
+    },
+    "previous": {
+      "padding": { "$value": "0.25rem 0.5rem", "$type": "dimension" }
+    },
+    "next": {
+      "padding": { "$value": "0.25rem 0.5rem", "$type": "dimension" }
+    },
+    "ellipsis": {
+      "color": { "$value": "{nav.item.color}", "$type": "color" }
+    },
+    "gap": { "$value": "0.25rem", "$type": "dimension" }
+  }
+}

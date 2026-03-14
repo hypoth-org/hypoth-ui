@@ -1,0 +1,39 @@
+{
+  "$description": "Sheet component tokens — references overlay type tokens",
+  "sheet": {
+    "overlay": {
+      "color": { "$value": "{overlay.backdrop-color}", "$type": "color" }
+    },
+    "content": {
+      "bg": { "$value": "{overlay.bg}", "$type": "color" },
+      "shadow": { "$value": "{overlay.shadow}", "$type": "shadow" },
+      "width": { "$value": "24rem", "$type": "dimension" },
+      "padding": { "$value": "{overlay.padding}", "$type": "dimension", "$description": "Sheet content body padding" }
+    },
+    "header": {
+      "padding": { "$value": "{overlay.padding}", "$type": "dimension" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" },
+      "gap": { "$value": "0.25rem", "$type": "dimension", "$description": "Sheet header gap between title and description" }
+    },
+    "footer": {
+      "padding": { "$value": "{overlay.padding}", "$type": "dimension" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" },
+      "gap": { "$value": "0.75rem", "$type": "dimension" }
+    },
+    "title": {
+      "font-size": { "$value": "1.125rem", "$type": "dimension" },
+      "font-weight": { "$value": "600", "$type": "fontWeight" },
+      "line-height": { "$value": "1.25", "$type": "number", "$description": "Sheet title line height" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" }
+    },
+    "description": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "line-height": { "$value": "1.5", "$type": "number", "$description": "Sheet description line height" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    },
+    "close": {
+      "size": { "$value": "1.5rem", "$type": "dimension" }
+    },
+    "z-index": { "$value": "{overlay.z-index}", "$type": "number" }
+  }
+}

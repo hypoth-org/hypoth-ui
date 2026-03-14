@@ -1,0 +1,9 @@
+{
+  "$description": "Skeleton component tokens — loading placeholder styling",
+  "skeleton": {
+    "bg": { "$value": "{color.background.muted}", "$type": "color" },
+    "bg-shimmer": { "$value": "{color.background.subtle}", "$type": "color" },
+    "border-radius": { "$value": "{feedback.border-radius}", "$type": "dimension" },
+    "animation-duration": { "$value": "1.5s", "$type": "duration" }
+  }
+}

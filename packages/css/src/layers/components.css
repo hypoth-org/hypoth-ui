@@ -37,6 +37,8 @@
 @import "@hypoth-ui/wc/src/components/tabs/tabs.css";
 @import "@hypoth-ui/wc/src/components/accordion/accordion.css";
 @import "@hypoth-ui/wc/src/components/alert-dialog/alert-dialog.css";
+/* Dialog uses class-based selectors for both React and WC compatibility */
+@import "../components/dialog.css";
 @import "@hypoth-ui/wc/src/components/sheet/sheet.css";
 @import "@hypoth-ui/wc/src/components/drawer/drawer.css";
 @import "@hypoth-ui/wc/src/components/dropdown-menu/dropdown-menu.css";

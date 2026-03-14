@@ -187,8 +187,8 @@ export function createWCButtonTestContext(
 ): Omit<ButtonTestContext, "createButton" | "cleanup"> {
   return {
     getClickableElement: (button: HTMLElement) => {
-      // WC buttons typically have an inner button element
-      return button.querySelector("button") ?? button;
+      // WC button uses Shadow DOM — query via shadowRoot first, fall back to Light DOM
+      return button.shadowRoot?.querySelector("button") ?? button.querySelector("button") ?? button;
     },
     expect: expectFn,
     createMockFn: mockFn,

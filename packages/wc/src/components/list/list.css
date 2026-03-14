@@ -1,0 +1,63 @@
+/**
+ * List Component Styles
+ *
+ * CSS custom properties for theming:
+ * --ds-list-gap: Gap between items
+ * --ds-list-item-padding-x: Item horizontal padding
+ * --ds-list-item-padding-y: Item vertical padding
+ * --ds-list-item-bg-hover: Item hover background
+ * --ds-list-separator-color: Separator line color
+ */
+
+@layer components {
+  ds-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-list-gap, 0.25rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ds-list-item {
+    display: flex;
+    align-items: center;
+    padding: var(--ds-list-item-padding-y, 0.5rem) var(--ds-list-item-padding-x, 0.75rem);
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    color: var(--ds-color-text, #1a1a1a);
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    transition: background-color 150ms;
+  }
+
+  ds-list-item[interactive] {
+    cursor: pointer;
+  }
+
+  ds-list-item[interactive]:hover {
+    background-color: var(--ds-list-item-bg-hover, var(--ds-color-surface-hover, #f3f4f6));
+  }
+
+  ds-list-item[interactive]:focus-visible {
+    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline-offset: -2px;
+  }
+
+  ds-list-item[disabled] {
+    color: var(--ds-color-text-disabled, #9ca3af);
+    cursor: not-allowed;
+  }
+
+  ds-list-item[disabled]:hover {
+    background-color: transparent;
+  }
+
+  /* Separated variant */
+  ds-list[separated] ds-list-item + ds-list-item {
+    border-top: 1px solid var(--ds-list-separator-color, var(--ds-color-border, #e5e7eb));
+    border-radius: 0;
+  }
+
+  ds-list[separated] {
+    gap: 0;
+  }
+}

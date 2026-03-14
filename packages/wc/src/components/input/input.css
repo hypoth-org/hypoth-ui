@@ -15,69 +15,74 @@
 
   .ds-input__field {
     width: 100%;
-    font-family: var(--ds-font-family-sans);
-    font-size: var(--ds-font-size-base);
+    font-family: inherit;
+    font-size: var(--ds-input-field-font-size);
     line-height: 1.5;
-    color: var(--ds-color-text-default);
-    background-color: var(--ds-color-background-default);
-    border: 1px solid var(--ds-color-border-default);
-    border-radius: var(--ds-radius-md);
+    color: var(--ds-input-field-color);
+    background-color: var(--ds-input-field-bg);
+    border: 1px solid var(--ds-input-field-border-color);
+    border-radius: var(--ds-input-field-border-radius);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
   /* Size variants */
   .ds-input[data-size="sm"] .ds-input__field {
-    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
-    font-size: var(--ds-font-size-sm);
+    padding: 0 var(--ds-input-field-padding-x-sm);
+    font-size: var(--ds-input-field-font-size-sm);
+    height: var(--ds-input-field-height-sm);
   }
 
   .ds-input[data-size="md"] .ds-input__field {
-    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md);
-    font-size: var(--ds-font-size-base);
+    padding: 0 var(--ds-input-field-padding-x);
+    font-size: var(--ds-input-field-font-size);
+    height: var(--ds-input-field-height);
   }
 
   .ds-input[data-size="lg"] .ds-input__field {
-    padding: var(--ds-spacing-component-padding-md) var(--ds-spacing-component-padding-lg);
-    font-size: var(--ds-font-size-lg);
+    padding: 0 var(--ds-input-field-padding-x-lg);
+    font-size: var(--ds-input-field-font-size-lg);
+    height: var(--ds-input-field-height-lg);
   }
 
   /* Placeholder */
   .ds-input__field::placeholder {
-    color: var(--ds-color-text-muted);
+    color: var(--ds-input-field-placeholder-color);
     opacity: 1;
   }
 
   /* Focus state */
   .ds-input__field:focus {
     outline: none;
-    border-color: var(--ds-color-primary-default);
-    box-shadow: 0 0 0 3px var(--ds-color-focus-ring);
+    border-color: var(--ds-input-field-border-color-focus);
+    box-shadow: 0 0 0 3px var(--ds-input-focus-ring);
   }
 
   /* Hover state */
   .ds-input__field:hover:not(:focus):not(:disabled) {
-    border-color: var(--ds-color-border-hover, #999);
+    border-color: var(--ds-input-field-border-color-hover);
   }
 
   /* Error state */
   ds-input[error] .ds-input__field {
-    border-color: var(--ds-color-destructive-default);
+    border-color: var(--ds-input-error-border-color);
   }
 
   ds-input[error] .ds-input__field:focus {
-    border-color: var(--ds-color-destructive-default);
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+    border-color: var(--ds-input-error-border-color);
+    box-shadow: 0 0 0 3px var(--ds-input-focus-ring);
   }
 
   /* Disabled state */
   .ds-input__field:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-input-disabled-bg);
+    border-color: var(--ds-input-disabled-border-color);
+    color: var(--ds-input-disabled-color);
   }
 
   /* Read-only state */
   .ds-input__field:read-only {
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-input-disabled-bg);
   }
 }

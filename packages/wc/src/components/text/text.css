@@ -5,76 +5,76 @@
     margin: 0;
     padding: 0;
     font-family: inherit;
-    line-height: var(--ds-line-height-normal);
+    line-height: var(--ds-text-line-height-normal);
   }
 
   /* Size variants */
   .ds-text--xs {
-    font-size: var(--ds-font-size-xs);
-    line-height: var(--ds-line-height-tight);
+    font-size: var(--ds-text-font-size-xs);
+    line-height: var(--ds-text-line-height-tight);
   }
 
   .ds-text--sm {
-    font-size: var(--ds-font-size-sm);
-    line-height: var(--ds-line-height-tight);
+    font-size: var(--ds-text-font-size-sm);
+    line-height: var(--ds-text-line-height-tight);
   }
 
   .ds-text--md {
-    font-size: var(--ds-font-size-base);
-    line-height: var(--ds-line-height-normal);
+    font-size: var(--ds-text-font-size-md);
+    line-height: var(--ds-text-line-height-normal);
   }
 
   .ds-text--lg {
-    font-size: var(--ds-font-size-lg);
-    line-height: var(--ds-line-height-normal);
+    font-size: var(--ds-text-font-size-lg);
+    line-height: var(--ds-text-line-height-normal);
   }
 
   .ds-text--xl {
-    font-size: var(--ds-font-size-xl);
-    line-height: var(--ds-line-height-relaxed);
+    font-size: var(--ds-text-font-size-xl);
+    line-height: var(--ds-text-line-height-relaxed);
   }
 
   .ds-text--2xl {
-    font-size: var(--ds-font-size-2xl);
-    line-height: var(--ds-line-height-relaxed);
+    font-size: var(--ds-text-font-size-2xl);
+    line-height: var(--ds-text-line-height-relaxed);
   }
 
   /* Weight variants */
   .ds-text--normal {
-    font-weight: var(--ds-font-weight-normal);
+    font-weight: var(--ds-text-font-weight-normal);
   }
 
   .ds-text--medium {
-    font-weight: var(--ds-font-weight-medium);
+    font-weight: var(--ds-text-font-weight-medium);
   }
 
   .ds-text--semibold {
-    font-weight: var(--ds-font-weight-semibold);
+    font-weight: var(--ds-text-font-weight-semibold);
   }
 
   .ds-text--bold {
-    font-weight: var(--ds-font-weight-bold);
+    font-weight: var(--ds-text-font-weight-bold);
   }
 
   /* Color variants */
   .ds-text--default {
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-text-color);
   }
 
   .ds-text--muted {
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-text-color-muted);
   }
 
   .ds-text--success {
-    color: var(--ds-color-success-default);
+    color: var(--ds-text-color-success);
   }
 
   .ds-text--warning {
-    color: var(--ds-color-warning-default);
+    color: var(--ds-text-color-warning);
   }
 
   .ds-text--error {
-    color: var(--ds-color-destructive-default);
+    color: var(--ds-text-color-error);
   }
 
   /* Truncate modifier */

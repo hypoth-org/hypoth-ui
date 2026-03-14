@@ -1,0 +1,25 @@
+{
+  "$description": "Textarea component tokens — references form-controls type tokens",
+  "textarea": {
+    "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Textarea background color" },
+    "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Textarea border color" },
+    "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "Textarea border color on hover" },
+    "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "Textarea border color on focus" },
+    "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "Textarea border radius" },
+    "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Textarea horizontal padding" },
+    "padding-y": { "$value": "{form-control.padding-y.md}", "$type": "dimension", "$description": "Textarea vertical padding" },
+    "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Textarea font size (md)" },
+    "font-size-sm": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Textarea font size (sm)" },
+    "font-size-lg": { "$value": "{form-control.font-size.lg}", "$type": "dimension", "$description": "Textarea font size (lg)" },
+    "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Textarea text color" },
+    "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Textarea placeholder text color" },
+    "min-height": { "$value": "5rem", "$type": "dimension", "$description": "Textarea minimum height" },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Textarea focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "Textarea border color in error state" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Textarea background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Textarea text color when disabled" },
+      "border-color": { "$value": "{form-control.disabled.border-color}", "$type": "color", "$description": "Textarea border color when disabled" }
+    }
+  }
+}

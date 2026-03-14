@@ -18,8 +18,8 @@ describe("ds-button accessibility", () => {
     container.appendChild(button);
     document.body.appendChild(container);
     await button.updateComplete;
-    // Set accessible name after render to work with Light DOM
-    const innerButton = button.querySelector("button");
+    // Set accessible name after render
+    const innerButton = button.shadowRoot!.querySelector("button");
     if (innerButton) {
       innerButton.setAttribute("aria-label", "Click me");
     }
@@ -74,22 +74,24 @@ describe("ds-button accessibility", () => {
   describe("ARIA attributes", () => {
     it("should have proper role", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       // Native button elements have implicit role="button"
       expect(innerButton?.tagName.toLowerCase()).toBe("button");
     });
 
     it("should be focusable", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.focus();
-      expect(document.activeElement).toBe(innerButton);
+      // With Shadow DOM, document.activeElement is the host; inner focus is on shadowRoot
+      expect(document.activeElement).toBe(button);
+      expect(button.shadowRoot!.activeElement).toBe(innerButton);
     });
 
     it("should not be focusable when disabled", async () => {
       button.disabled = true;
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.focus();
       // Disabled buttons should not receive focus
       expect(innerButton?.disabled).toBe(true);
@@ -98,14 +100,14 @@ describe("ds-button accessibility", () => {
     it("should indicate busy state with aria-busy", async () => {
       button.loading = true;
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-busy")).toBe("true");
     });
 
     it("should indicate disabled state with aria-disabled", async () => {
       button.disabled = true;
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-disabled")).toBe("true");
     });
   });
@@ -113,11 +115,12 @@ describe("ds-button accessibility", () => {
   describe("keyboard navigation", () => {
     it("should be keyboard accessible with Tab", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
 
       // Native button elements are focusable by default
       innerButton?.focus();
-      expect(document.activeElement).toBe(innerButton);
+      expect(document.activeElement).toBe(button);
+      expect(button.shadowRoot!.activeElement).toBe(innerButton);
     });
 
     it("should respond to Enter key", async () => {
@@ -127,7 +130,7 @@ describe("ds-button accessibility", () => {
         pressed = true;
       });
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: "Enter",
         bubbles: true,
@@ -144,7 +147,7 @@ describe("ds-button accessibility", () => {
         pressed = true;
       });
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: " ",
         bubbles: true,
@@ -158,13 +161,14 @@ describe("ds-button accessibility", () => {
   describe("focus visible", () => {
     it("should have visible focus indicator", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
 
       // Focus the button
       innerButton?.focus();
 
       // Button should be focusable and show focus indicator
-      expect(document.activeElement).toBe(innerButton);
+      expect(document.activeElement).toBe(button);
+      expect(button.shadowRoot!.activeElement).toBe(innerButton);
       // Focus styles are applied via CSS, so we just verify focus works
     });
   });

@@ -1,0 +1,18 @@
+{
+  "$description": "Tooltip component tokens — inverted overlay styling",
+  "tooltip": {
+    "content": {
+      "bg": { "$value": "#1e293b", "$type": "color" },
+      "color": { "$value": "#ffffff", "$type": "color" },
+      "padding": { "$value": "0.5rem 0.75rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "border-radius": { "$value": "0.25rem", "$type": "dimension" },
+      "max-width": { "$value": "16rem", "$type": "dimension" },
+      "shadow": { "$value": "0 2px 4px -1px rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)", "$type": "shadow" }
+    },
+    "arrow": {
+      "size": { "$value": "8px", "$type": "dimension" }
+    },
+    "z-index": { "$value": "1100", "$type": "number" }
+  }
+}

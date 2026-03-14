@@ -126,6 +126,65 @@
     "subtle": { "$value": "{red.2}", "$type": "color", "$description": "Subtle background" },
     "muted": { "$value": "{red.15}", "$type": "color", "$description": "Muted text" }
   },
+  "background": {
+    "$description": "Background colors for surfaces and containers",
+    "default": { "$value": "#ffffff", "$type": "color", "$description": "Default page/card background" },
+    "subtle": { "$value": "{gray.2}", "$type": "color", "$description": "Subtle hover/zebra background" },
+    "muted": { "$value": "{gray.3}", "$type": "color", "$description": "Muted/disabled background" }
+  },
+  "foreground": {
+    "$description": "Text and icon foreground colors",
+    "default": { "$value": "{gray.15}", "$type": "color", "$description": "Primary text color" },
+    "muted": { "$value": "{gray.10}", "$type": "color", "$description": "Secondary/placeholder text" }
+  },
+  "border": {
+    "$description": "Border colors",
+    "default": { "$value": "{gray.6}", "$type": "color", "$description": "Default border" },
+    "emphasis": { "$value": "{gray.8}", "$type": "color", "$description": "Emphasized border" },
+    "muted": { "$value": "{gray.4}", "$type": "color", "$description": "Subtle/disabled border" }
+  },
+  "destructive": {
+    "$description": "Destructive action colors - alias of error",
+    "default": { "$value": "{red.11}", "$type": "color" },
+    "hover": { "$value": "{red.12}", "$type": "color" },
+    "active": { "$value": "{red.13}", "$type": "color" },
+    "foreground": { "$value": "#ffffff", "$type": "color" },
+    "subtle": { "$value": "{red.2}", "$type": "color" }
+  },
+  "focus": {
+    "$description": "Focus indicator colors",
+    "ring": { "$value": "{blue.11}", "$type": "color", "$description": "Focus ring color" }
+  },
+  "link": {
+    "$description": "Link text colors",
+    "default": { "$value": "{blue.11}", "$type": "color" },
+    "hover": { "$value": "{blue.12}", "$type": "color" },
+    "active": { "$value": "{blue.13}", "$type": "color" },
+    "visited": { "$value": "{purple.11}", "$type": "color" }
+  },
+  "status": {
+    "$description": "Status indicator colors for feedback components",
+    "info": {
+      "background": { "$value": "{blue.2}", "$type": "color" },
+      "foreground": { "$value": "{blue.11}", "$type": "color" },
+      "border": { "$value": "{blue.6}", "$type": "color" }
+    },
+    "success": {
+      "background": { "$value": "{green.2}", "$type": "color" },
+      "foreground": { "$value": "{green.11}", "$type": "color" },
+      "border": { "$value": "{green.6}", "$type": "color" }
+    },
+    "warning": {
+      "background": { "$value": "{yellow.2}", "$type": "color" },
+      "foreground": { "$value": "{yellow.11}", "$type": "color" },
+      "border": { "$value": "{yellow.6}", "$type": "color" }
+    },
+    "error": {
+      "background": { "$value": "{red.2}", "$type": "color" },
+      "foreground": { "$value": "{red.11}", "$type": "color" },
+      "border": { "$value": "{red.6}", "$type": "color" }
+    }
+  },
   "neutral": {
     "$description": "Neutral color - backgrounds, borders, text",
     "1": { "$value": "{gray.1}", "$type": "color" },

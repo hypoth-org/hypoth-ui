@@ -1,45 +1,45 @@
 {
   "$schema": "../../schemas/dtcg-token.schema.json",
-  "$description": "Dark mode token overrides",
+  "$description": "Dark mode token overrides — oklch palette",
   "color": {
     "background": {
-      "default": { "$value": "{color.primitives.gray.950}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.gray.900}", "$type": "color" },
-      "muted": { "$value": "{color.primitives.gray.800}", "$type": "color" },
-      "emphasis": { "$value": "{color.primitives.gray.50}", "$type": "color" }
+      "default": { "$value": "oklch(0.145 0 0)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.205 0 0)", "$type": "color" },
+      "muted": { "$value": "oklch(0.269 0 0)", "$type": "color" },
+      "emphasis": { "$value": "oklch(0.97 0 0)", "$type": "color" }
     },
     "foreground": {
-      "default": { "$value": "{color.primitives.gray.50}", "$type": "color" },
-      "muted": { "$value": "{color.primitives.gray.400}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.gray.500}", "$type": "color" },
-      "inverted": { "$value": "{color.primitives.gray.900}", "$type": "color" }
+      "default": { "$value": "oklch(0.97 0 0)", "$type": "color" },
+      "muted": { "$value": "oklch(0.7 0 0)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.556 0 0)", "$type": "color" },
+      "inverted": { "$value": "oklch(0.145 0 0)", "$type": "color" }
     },
     "border": {
-      "default": { "$value": "{color.primitives.gray.800}", "$type": "color" },
-      "muted": { "$value": "{color.primitives.gray.900}", "$type": "color" },
-      "emphasis": { "$value": "{color.primitives.gray.600}", "$type": "color" }
+      "default": { "$value": "oklch(0.3 0 0)", "$type": "color" },
+      "muted": { "$value": "oklch(0.205 0 0)", "$type": "color" },
+      "emphasis": { "$value": "oklch(0.556 0 0)", "$type": "color" }
     },
     "primary": {
-      "default": { "$value": "{color.primitives.blue.500}", "$type": "color" },
-      "hover": { "$value": "{color.primitives.blue.400}", "$type": "color" },
-      "active": { "$value": "{color.primitives.blue.300}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.blue.950}", "$type": "color" }
+      "default": { "$value": "oklch(0.65 0.19 250)", "$type": "color" },
+      "hover": { "$value": "oklch(0.71 0.19 250)", "$type": "color" },
+      "active": { "$value": "oklch(0.77 0.19 250)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.25 0.06 250)", "$type": "color" }
     },
     "destructive": {
-      "default": { "$value": "{color.primitives.red.500}", "$type": "color" },
-      "hover": { "$value": "{color.primitives.red.400}", "$type": "color" },
-      "active": { "$value": "{color.primitives.red.300}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.red.950}", "$type": "color" }
+      "default": { "$value": "oklch(0.65 0.2 35)", "$type": "color" },
+      "hover": { "$value": "oklch(0.71 0.2 35)", "$type": "color" },
+      "active": { "$value": "oklch(0.77 0.2 35)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.25 0.06 35)", "$type": "color" }
     },
     "success": {
-      "default": { "$value": "{color.primitives.green.500}", "$type": "color" },
-      "hover": { "$value": "{color.primitives.green.400}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.green.950}", "$type": "color" }
+      "default": { "$value": "oklch(0.65 0.14 185)", "$type": "color" },
+      "hover": { "$value": "oklch(0.71 0.14 185)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.25 0.04 185)", "$type": "color" }
     },
     "warning": {
-      "default": { "$value": "{color.primitives.amber.400}", "$type": "color" },
-      "hover": { "$value": "{color.primitives.amber.300}", "$type": "color" },
-      "subtle": { "$value": "{color.primitives.amber.950}", "$type": "color" }
+      "default": { "$value": "oklch(0.80 0.15 70)", "$type": "color" },
+      "hover": { "$value": "oklch(0.85 0.15 70)", "$type": "color" },
+      "subtle": { "$value": "oklch(0.25 0.05 70)", "$type": "color" }
     }
   }
 }
