@@ -1,0 +1,19 @@
+{
+  "$description": "ScrollArea component tokens — custom scrollbar styling",
+  "scroll-area": {
+    "viewport": {
+      "focus-ring": { "$value": "{color.primary.default}", "$type": "color" }
+    },
+    "scrollbar": {
+      "size": { "$value": "10px", "$type": "dimension" },
+      "padding": { "$value": "2px", "$type": "dimension" },
+      "bg-hover": { "$value": "rgba(0, 0, 0, 0.05)", "$type": "color" }
+    },
+    "thumb": {
+      "bg": { "$value": "{color.border.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "border-radius": { "$value": "9999px", "$type": "dimension" },
+      "min-size": { "$value": "30px", "$type": "dimension" }
+    }
+  }
+}

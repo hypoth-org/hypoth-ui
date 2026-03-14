@@ -1,0 +1,50 @@
+{
+  "$description": "Stepper component tokens — step-by-step progress indicator",
+  "stepper": {
+    "gap": { "$value": "0.5rem", "$type": "dimension" },
+    "item": {
+      "gap": { "$value": "0.25rem", "$type": "dimension" },
+      "gap-vertical": { "$value": "0.75rem", "$type": "dimension", "$description": "Stepper item gap in vertical orientation" }
+    },
+    "indicator": {
+      "size": { "$value": "2rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "font-weight": { "$value": "500", "$type": "fontWeight" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "bg": { "$value": "{color.background.default}", "$type": "color" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" },
+      "border-width": { "$value": "2px", "$type": "dimension" },
+      "border-radius": { "$value": "9999px", "$type": "dimension" },
+      "color-active": { "$value": "{color.primary.default}", "$type": "color" },
+      "border-color-active": { "$value": "{color.primary.default}", "$type": "color" },
+      "bg-completed": { "$value": "{color.primary.default}", "$type": "color" },
+      "color-completed": { "$value": "#ffffff", "$type": "color" }
+    },
+    "separator": {
+      "color": { "$value": "{color.border.default}", "$type": "color" },
+      "color-completed": { "$value": "{color.primary.default}", "$type": "color" },
+      "height": { "$value": "2px", "$type": "dimension" },
+      "min-width": { "$value": "2rem", "$type": "dimension" },
+      "offset": { "$value": "1rem", "$type": "dimension", "$description": "Separator vertical offset to align with indicator center" }
+    },
+    "trigger": {
+      "gap": { "$value": "0.25rem", "$type": "dimension" },
+      "focus-ring": { "$value": "{color.primary.default}", "$type": "color", "$description": "Stepper trigger focus ring color" },
+      "focus-ring-radius": { "$value": "0.25rem", "$type": "dimension", "$description": "Stepper trigger focus ring border radius" }
+    },
+    "title": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "font-weight": { "$value": "500", "$type": "fontWeight" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "color-active": { "$value": "{color.foreground.default}", "$type": "color" }
+    },
+    "description": {
+      "font-size": { "$value": "0.75rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    },
+    "content": {
+      "padding": { "$value": "1rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Stepper content text color" }
+    }
+  }
+}

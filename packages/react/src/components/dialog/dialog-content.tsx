@@ -28,7 +28,7 @@ export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
 
 /**
  * Dialog content panel with focus trap and ARIA attributes.
- * Renders in a portal by default.
+ * Renders in a portal by default with backdrop overlay.
  *
  * @example
  * ```tsx
@@ -40,8 +40,8 @@ export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
-  ({ children, size = "md", container, forceMount = false, ...restProps }, ref) => {
-    const { behavior, open, modal, descriptionId } = useDialogContext("Dialog.Content");
+  ({ children, size = "md", container, forceMount = false, className, style, ...restProps }, ref) => {
+    const { behavior, open, setOpen, modal, descriptionId } = useDialogContext("Dialog.Content");
     const internalRef = useRef<HTMLDivElement>(null);
 
     // Register content element with behavior for focus trap and dismissable layer
@@ -71,25 +71,49 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
       [ref]
     );
 
+    // Handle backdrop click to close dialog
+    const handleBackdropClick = useCallback(
+      (e: React.MouseEvent) => {
+        // Only close if clicking directly on backdrop, not content
+        if (e.target === e.currentTarget) {
+          setOpen(false);
+        }
+      },
+      [setOpen]
+    );
+
     // Don't render if closed and not force mounted
     if (!open && !forceMount) {
       return null;
     }
 
+    const contentClassName = ["ds-dialog-content", className].filter(Boolean).join(" ");
+
     const content = (
-      <div
-        ref={mergedRef}
-        id={contentProps.id}
-        role={contentProps.role}
-        aria-modal={modal ? contentProps["aria-modal"] : undefined}
-        aria-labelledby={contentProps["aria-labelledby"]}
-        aria-describedby={descriptionId ?? undefined}
-        tabIndex={contentProps.tabIndex}
-        data-state={open ? "open" : "closed"}
-        data-size={size}
-        {...restProps}
-      >
-        {children}
+      <div className="ds-dialog">
+        {/* biome-ignore lint/a11y/useKeyWithClickEvents: backdrop is not keyboard-interactive; Escape key handled by dialog behavior */}
+        <div
+          className="ds-dialog__backdrop"
+          data-state={open ? "open" : "closed"}
+          onClick={handleBackdropClick}
+        >
+          <div
+            ref={mergedRef}
+            className={contentClassName}
+            id={contentProps.id}
+            role={contentProps.role}
+            aria-modal={modal ? contentProps["aria-modal"] : undefined}
+            aria-labelledby={contentProps["aria-labelledby"]}
+            aria-describedby={descriptionId ?? undefined}
+            tabIndex={contentProps.tabIndex}
+            data-state={open ? "open" : "closed"}
+            data-size={size}
+            style={style}
+            {...restProps}
+          >
+            {children}
+          </div>
+        </div>
       </div>
     );
 

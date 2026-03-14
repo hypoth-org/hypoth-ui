@@ -27,7 +27,7 @@ describe("Component Events", () => {
       const handler = vi.fn();
       button.addEventListener("ds:press", handler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(handler).toHaveBeenCalledTimes(1);
@@ -41,7 +41,7 @@ describe("Component Events", () => {
       const handler = vi.fn();
       button.addEventListener("ds:press", handler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       const event = handler.mock.calls[0][0] as CustomEvent;
@@ -57,7 +57,7 @@ describe("Component Events", () => {
       const handler = vi.fn();
       button.addEventListener("ds:press", handler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(handler).not.toHaveBeenCalled();
@@ -71,7 +71,7 @@ describe("Component Events", () => {
       const handler = vi.fn();
       container.addEventListener("ds:press", handler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(handler).toHaveBeenCalledTimes(1);
@@ -135,7 +135,7 @@ describe("Component Events", () => {
       const handler = vi.fn();
       button.addEventListener("ds:press", handler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       const event = handler.mock.calls[0][0] as CustomEvent;

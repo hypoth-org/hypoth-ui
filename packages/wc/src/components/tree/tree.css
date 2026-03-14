@@ -1,0 +1,102 @@
+/**
+ * Tree Component Styles
+ *
+ * Hierarchical list with expandable nodes and indentation.
+ *
+ * CSS custom properties for theming:
+ * --ds-tree-item-indent: Indentation per level
+ * --ds-tree-item-padding-x: Item horizontal padding
+ * --ds-tree-item-padding-y: Item vertical padding
+ * --ds-tree-item-bg-hover: Item hover background
+ * --ds-tree-item-bg-active: Active/selected item background
+ * --ds-tree-item-color-active: Active/selected item text color
+ * --ds-tree-icon-size: Expand/collapse icon size
+ * --ds-tree-icon-color: Icon color
+ */
+
+@layer components {
+  ds-tree {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ds-tree-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ds-tree-item__content {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-tree-icon-gap, 0.5rem);
+    padding: var(--ds-tree-item-padding-y, 0.375rem) var(--ds-tree-item-padding-x, 0.5rem);
+    padding-left: calc(var(--ds-tree-item-padding-x, 0.5rem) + var(--_tree-depth, 0) * var(--ds-tree-item-indent, 1.5rem));
+    font-size: var(--ds-font-size-sm, 0.875rem);
+    color: var(--ds-color-text, #1a1a1a);
+    cursor: pointer;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+    transition: background-color 150ms;
+    outline: none;
+    user-select: none;
+  }
+
+  .ds-tree-item__content:hover {
+    background-color: var(--ds-tree-item-bg-hover, var(--ds-color-surface-hover, #f3f4f6));
+  }
+
+  .ds-tree-item__content:focus-visible {
+    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline-offset: -2px;
+  }
+
+  ds-tree-item[aria-selected="true"] > .ds-tree-item__content {
+    background-color: var(--ds-tree-item-bg-active, var(--ds-color-primary-subtle, #eff6ff));
+    color: var(--ds-tree-item-color-active, var(--ds-color-primary, #2563eb));
+  }
+
+  /* Expand/collapse icon */
+  .ds-tree-item__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ds-tree-icon-size, 1rem);
+    height: var(--ds-tree-icon-size, 1rem);
+    color: var(--ds-tree-icon-color, var(--ds-color-text-muted, #6b7280));
+    flex-shrink: 0;
+    transition: transform 150ms;
+  }
+
+  ds-tree-item[aria-expanded="true"] > .ds-tree-item__content .ds-tree-item__toggle {
+    transform: rotate(90deg);
+  }
+
+  /* Children container */
+  .ds-tree-item__children {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ds-tree-item__children[hidden] {
+    display: none;
+  }
+
+  /* Disabled state */
+  ds-tree-item[disabled] > .ds-tree-item__content {
+    color: var(--ds-color-text-disabled, #9ca3af);
+    cursor: not-allowed;
+  }
+
+  ds-tree-item[disabled] > .ds-tree-item__content:hover {
+    background-color: transparent;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-tree-item__toggle {
+      transition: none;
+    }
+  }
+}

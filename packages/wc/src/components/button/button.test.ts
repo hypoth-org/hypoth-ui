@@ -23,7 +23,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton).toBeTruthy();
       expect(innerButton?.classList.contains("ds-button")).toBe(true);
       expect(innerButton?.classList.contains("ds-button--primary")).toBe(true);
@@ -36,7 +36,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--destructive")).toBe(true);
     });
 
@@ -46,7 +46,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--lg")).toBe(true);
     });
   });
@@ -58,7 +58,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.disabled).toBe(true);
       expect(innerButton?.getAttribute("aria-disabled")).toBe("true");
     });
@@ -72,7 +72,7 @@ describe("DsButton", () => {
       const clickHandler = vi.fn();
       button.addEventListener("ds:press", clickHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(clickHandler).not.toHaveBeenCalled();
@@ -86,7 +86,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const spinner = button.querySelector(".ds-button__spinner");
+      const spinner = button.shadowRoot!.querySelector(".ds-button__spinner");
       expect(spinner).toBeTruthy();
     });
 
@@ -96,7 +96,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-busy")).toBe("true");
     });
 
@@ -109,7 +109,7 @@ describe("DsButton", () => {
       const clickHandler = vi.fn();
       button.addEventListener("ds:press", clickHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(clickHandler).not.toHaveBeenCalled();
@@ -125,7 +125,7 @@ describe("DsButton", () => {
       const clickHandler = vi.fn();
       button.addEventListener("ds:press", clickHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(clickHandler).toHaveBeenCalled();
@@ -141,7 +141,7 @@ describe("DsButton", () => {
         eventDetail = e.detail;
       }) as EventListener);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(eventDetail).toHaveProperty("originalEvent");
@@ -157,7 +157,7 @@ describe("DsButton", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: "Enter" });
       innerButton?.dispatchEvent(event);
 
@@ -172,7 +172,7 @@ describe("DsButton", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: " " });
       innerButton?.dispatchEvent(event);
 
@@ -188,7 +188,7 @@ describe("DsButton", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", { key: "Enter" });
       innerButton?.dispatchEvent(event);
 
@@ -202,7 +202,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.type).toBe("button");
     });
 
@@ -212,7 +212,7 @@ describe("DsButton", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.type).toBe("submit");
     });
   });

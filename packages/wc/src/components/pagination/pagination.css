@@ -2,6 +2,9 @@
  * Pagination Component Styles
  *
  * Page navigation with previous/next and page numbers.
+ *
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-pagination-*)
  */
 
 @layer components {
@@ -14,7 +17,7 @@
   ds-pagination-content {
     display: flex;
     align-items: center;
-    gap: var(--ds-space-1, 0.25rem);
+    gap: var(--ds-pagination-gap);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -30,31 +33,31 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2rem;
-    height: 2rem;
+    min-width: var(--ds-pagination-item-size);
+    height: var(--ds-pagination-item-size);
     padding: 0 var(--ds-space-2, 0.5rem);
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    color: var(--ds-color-text, #1a1a1a);
+    font-size: var(--ds-pagination-item-font-size);
+    color: var(--ds-pagination-link-color);
     background-color: transparent;
-    border: 1px solid var(--ds-color-border, #e5e7eb);
-    border-radius: var(--ds-radius-sm, 0.25rem);
+    border: 1px solid var(--ds-pagination-link-border-color);
+    border-radius: var(--ds-pagination-item-border-radius);
     cursor: pointer;
     transition: background-color 150ms, border-color 150ms;
   }
 
   ds-pagination-link:hover:not([active]) {
-    background-color: var(--ds-color-surface-hover, #f3f4f6);
+    background-color: var(--ds-pagination-link-bg-hover);
   }
 
   ds-pagination-link:focus-visible {
-    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline: 2px solid var(--ds-tabs-focus-ring);
     outline-offset: 2px;
   }
 
   ds-pagination-link[active] {
-    background-color: var(--ds-color-primary, #2563eb);
-    border-color: var(--ds-color-primary, #2563eb);
-    color: var(--ds-color-text-on-primary, #ffffff);
+    background-color: var(--ds-pagination-link-bg-active);
+    border-color: var(--ds-pagination-link-bg-active);
+    color: var(--ds-pagination-link-color-active);
   }
 
   /* Previous/Next buttons */
@@ -62,31 +65,31 @@
   ds-pagination-next {
     display: inline-flex;
     align-items: center;
-    gap: var(--ds-space-1, 0.25rem);
-    padding: var(--ds-space-1, 0.25rem) var(--ds-space-2, 0.5rem);
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    color: var(--ds-color-text, #1a1a1a);
+    gap: var(--ds-pagination-gap);
+    padding: var(--ds-pagination-previous-padding);
+    font-size: var(--ds-pagination-item-font-size);
+    color: var(--ds-pagination-link-color);
     background-color: transparent;
-    border: 1px solid var(--ds-color-border, #e5e7eb);
-    border-radius: var(--ds-radius-sm, 0.25rem);
+    border: 1px solid var(--ds-pagination-link-border-color);
+    border-radius: var(--ds-pagination-item-border-radius);
     cursor: pointer;
     transition: background-color 150ms, border-color 150ms;
   }
 
   ds-pagination-previous:hover:not([disabled]),
   ds-pagination-next:hover:not([disabled]) {
-    background-color: var(--ds-color-surface-hover, #f3f4f6);
+    background-color: var(--ds-pagination-link-bg-hover);
   }
 
   ds-pagination-previous:focus-visible,
   ds-pagination-next:focus-visible {
-    outline: 2px solid var(--ds-color-focus, #2563eb);
+    outline: 2px solid var(--ds-tabs-focus-ring);
     outline-offset: 2px;
   }
 
   ds-pagination-previous[disabled],
   ds-pagination-next[disabled] {
-    color: var(--ds-color-text-disabled, #9ca3af);
+    color: var(--ds-pagination-ellipsis-color);
     cursor: not-allowed;
   }
 
@@ -95,9 +98,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2rem;
-    height: 2rem;
-    color: var(--ds-color-text-muted, #6b7280);
+    min-width: var(--ds-pagination-item-size);
+    height: var(--ds-pagination-item-size);
+    color: var(--ds-pagination-ellipsis-color);
     user-select: none;
   }
 }

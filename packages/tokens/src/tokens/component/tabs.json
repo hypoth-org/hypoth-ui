@@ -1,0 +1,29 @@
+{
+  "$description": "Tabs component tokens — references navigation type tokens",
+  "tabs": {
+    "list": {
+      "bg": { "$value": "{color.background.subtle}", "$type": "color" },
+      "border-color": { "$value": "{nav.separator-color}", "$type": "color" },
+      "border-radius": { "$value": "{nav.item.border-radius}", "$type": "dimension" },
+      "padding": { "$value": "0.25rem", "$type": "dimension" }
+    },
+    "trigger": {
+      "padding-x": { "$value": "{nav.item.padding-x}", "$type": "dimension" },
+      "padding-y": { "$value": "{nav.item.padding-y}", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "font-weight": { "$value": "500", "$type": "fontWeight" },
+      "color": { "$value": "{nav.item.color}", "$type": "color" },
+      "color-hover": { "$value": "{nav.item.color-hover}", "$type": "color" },
+      "color-active": { "$value": "{nav.item.color-active}", "$type": "color" },
+      "bg": { "$value": "transparent", "$type": "color" },
+      "bg-hover": { "$value": "{nav.item.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{nav.item.bg-active}", "$type": "color" },
+      "border-radius": { "$value": "0.25rem", "$type": "dimension" }
+    },
+    "content": {
+      "padding": { "$value": "1rem", "$type": "dimension" }
+    },
+    "indicator-color": { "$value": "{nav.indicator-color}", "$type": "color" },
+    "focus-ring": { "$value": "{color.primary.default}", "$type": "color" }
+  }
+}

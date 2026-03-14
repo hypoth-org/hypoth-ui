@@ -1,0 +1,40 @@
+{
+  "$description": "Alert component tokens — references feedback type tokens with per-severity variants",
+  "alert": {
+    "padding": { "$value": "{feedback.padding}", "$type": "dimension" },
+    "border-radius": { "$value": "{feedback.border-radius}", "$type": "dimension" },
+    "font-size": { "$value": "{feedback.font-size}", "$type": "dimension" },
+    "icon": {
+      "size": { "$value": "1.25rem", "$type": "dimension" },
+      "gap": { "$value": "0.75rem", "$type": "dimension" }
+    },
+    "title": {
+      "font-weight": { "$value": "600", "$type": "fontWeight" },
+      "margin-bottom": { "$value": "0.25rem", "$type": "dimension" }
+    },
+    "info": {
+      "bg": { "$value": "{feedback.info.bg}", "$type": "color" },
+      "color": { "$value": "{feedback.info.color}", "$type": "color" },
+      "border-color": { "$value": "{feedback.info.border-color}", "$type": "color" },
+      "icon-color": { "$value": "{feedback.info.color}", "$type": "color" }
+    },
+    "success": {
+      "bg": { "$value": "{feedback.success.bg}", "$type": "color" },
+      "color": { "$value": "{feedback.success.color}", "$type": "color" },
+      "border-color": { "$value": "{feedback.success.border-color}", "$type": "color" },
+      "icon-color": { "$value": "{feedback.success.color}", "$type": "color" }
+    },
+    "warning": {
+      "bg": { "$value": "{feedback.warning.bg}", "$type": "color" },
+      "color": { "$value": "{feedback.warning.color}", "$type": "color" },
+      "border-color": { "$value": "{feedback.warning.border-color}", "$type": "color" },
+      "icon-color": { "$value": "{feedback.warning.color}", "$type": "color" }
+    },
+    "error": {
+      "bg": { "$value": "{feedback.error.bg}", "$type": "color" },
+      "color": { "$value": "{feedback.error.color}", "$type": "color" },
+      "border-color": { "$value": "{feedback.error.border-color}", "$type": "color" },
+      "icon-color": { "$value": "{feedback.error.color}", "$type": "color" }
+    }
+  }
+}

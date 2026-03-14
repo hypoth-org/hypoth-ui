@@ -156,7 +156,8 @@ describe("Button Accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const button = container.querySelector("button, [role='button']");
+      const dsButton = container.querySelector("ds-button");
+      const button = dsButton?.shadowRoot?.querySelector("button, [role='button']");
       expect(button).toBeTruthy();
     });
 
@@ -165,7 +166,8 @@ describe("Button Accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const button = container.querySelector("button");
+      const dsButton = container.querySelector("ds-button");
+      const button = dsButton?.shadowRoot?.querySelector("button");
       expect(
         button?.disabled || button?.getAttribute("aria-disabled") === "true"
       ).toBe(true);
@@ -176,7 +178,8 @@ describe("Button Accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const button = container.querySelector("button");
+      const dsButton = container.querySelector("ds-button");
+      const button = dsButton?.shadowRoot?.querySelector("button");
       expect(button?.getAttribute("aria-busy")).toBe("true");
     });
   });
@@ -187,7 +190,8 @@ describe("Button Accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const button = container.querySelector("button") as HTMLButtonElement;
+      const dsButton = container.querySelector("ds-button");
+      const button = dsButton?.shadowRoot?.querySelector("button") as HTMLButtonElement;
       expect(button?.tabIndex).toBeGreaterThanOrEqual(0);
     });
 
@@ -196,7 +200,8 @@ describe("Button Accessibility", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const button = container.querySelector("button") as HTMLButtonElement;
+      const dsButton = container.querySelector("ds-button");
+      const button = dsButton?.shadowRoot?.querySelector("button") as HTMLButtonElement;
       expect(button?.disabled || button?.tabIndex === -1).toBe(true);
     });
   });

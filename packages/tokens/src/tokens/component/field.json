@@ -1,0 +1,23 @@
+{
+  "$description": "Field component tokens — wrapper tokens for form field layout",
+  "field": {
+    "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Gap between field children (label, control, description, error)" },
+    "label": {
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Field label font size" },
+      "font-weight": { "$value": "{font-weight.medium}", "$type": "fontWeight", "$description": "Field label font weight" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Field label text color" },
+      "required-indicator-color": { "$value": "{form-control.error-color}", "$type": "color", "$description": "Required asterisk color" }
+    },
+    "description": {
+      "font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Field description font size" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Field description text color" }
+    },
+    "error": {
+      "font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Field error message font size" },
+      "color": { "$value": "{form-control.error-color}", "$type": "color", "$description": "Field error message text color" }
+    },
+    "disabled": {
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Field text color when disabled" }
+    }
+  }
+}

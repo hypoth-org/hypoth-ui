@@ -1,0 +1,27 @@
+{
+  "$description": "PinInput component tokens — references form-controls type tokens",
+  "pin-input": {
+    "field": {
+      "size": { "$value": "3rem", "$type": "dimension", "$description": "PinInput field width and height" },
+      "size-sm": { "$value": "2.5rem", "$type": "dimension", "$description": "PinInput field size (sm)" },
+      "size-lg": { "$value": "3.5rem", "$type": "dimension", "$description": "PinInput field size (lg)" },
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "PinInput field background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "PinInput field border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "PinInput field border color on hover" },
+      "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "PinInput field border color on focus" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "PinInput field border radius" },
+      "font-size": { "$value": "{font-size.xl}", "$type": "dimension", "$description": "PinInput field font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "PinInput field text color" },
+      "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "PinInput placeholder color" }
+    },
+    "separator": {
+      "width": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separator width between field groups" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Separator color" },
+      "font-size": { "$value": "{font-size.xl}", "$type": "dimension", "$description": "Separator font size" }
+    },
+    "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Gap between pin fields" },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "PinInput focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "PinInput border color in error state" },
+    "success-border-color": { "$value": "{color.success.default}", "$type": "color", "$description": "PinInput border color when complete" }
+  }
+}

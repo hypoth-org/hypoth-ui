@@ -1,0 +1,62 @@
+{
+  "$description": "Button component tokens — references actions type tokens",
+  "button": {
+    "height": { "$value": "{action.height.md}", "$type": "dimension" },
+    "height-sm": { "$value": "{action.height.sm}", "$type": "dimension" },
+    "height-lg": { "$value": "{action.height.lg}", "$type": "dimension" },
+    "padding-x": { "$value": "{action.padding-x.md}", "$type": "dimension" },
+    "padding-x-sm": { "$value": "{action.padding-x.sm}", "$type": "dimension" },
+    "padding-x-lg": { "$value": "{action.padding-x.lg}", "$type": "dimension" },
+    "padding-y": { "$value": "{action.padding-y.md}", "$type": "dimension" },
+    "padding-y-sm": { "$value": "{action.padding-y.sm}", "$type": "dimension" },
+    "padding-y-lg": { "$value": "{action.padding-y.lg}", "$type": "dimension" },
+    "font-size": { "$value": "{action.font-size.md}", "$type": "dimension" },
+    "font-size-sm": { "$value": "{action.font-size.sm}", "$type": "dimension" },
+    "font-size-lg": { "$value": "{action.font-size.lg}", "$type": "dimension" },
+    "font-weight": { "$value": "{action.font-weight}", "$type": "fontWeight" },
+    "border-radius": { "$value": "{action.border-radius}", "$type": "dimension" },
+    "gap": { "$value": "{action.gap}", "$type": "dimension" },
+    "primary": {
+      "bg": { "$value": "{action.primary.bg}", "$type": "color" },
+      "bg-hover": { "$value": "{action.primary.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{action.primary.bg-active}", "$type": "color" },
+      "color": { "$value": "{action.primary.color}", "$type": "color" },
+      "border-color": { "$value": "{action.primary.bg}", "$type": "color" }
+    },
+    "secondary": {
+      "bg": { "$value": "{action.secondary.bg}", "$type": "color" },
+      "bg-hover": { "$value": "{action.secondary.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{color.background.muted}", "$type": "color" },
+      "color": { "$value": "{action.secondary.color}", "$type": "color" },
+      "border-color": { "$value": "{action.secondary.border-color}", "$type": "color" },
+      "border-color-hover": { "$value": "{color.border.emphasis}", "$type": "color" }
+    },
+    "ghost": {
+      "bg": { "$value": "transparent", "$type": "color" },
+      "bg-hover": { "$value": "{action.ghost.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{color.background.muted}", "$type": "color" },
+      "color": { "$value": "{action.ghost.color}", "$type": "color" },
+      "border-color": { "$value": "transparent", "$type": "color" }
+    },
+    "destructive": {
+      "bg": { "$value": "{action.destructive.bg}", "$type": "color" },
+      "bg-hover": { "$value": "{action.destructive.bg-hover}", "$type": "color" },
+      "bg-active": { "$value": "{action.destructive.bg-active}", "$type": "color" },
+      "color": { "$value": "{action.destructive.color}", "$type": "color" },
+      "border-color": { "$value": "{action.destructive.bg}", "$type": "color" }
+    },
+    "disabled": {
+      "bg": { "$value": "{action.disabled.bg}", "$type": "color" },
+      "color": { "$value": "{action.disabled.color}", "$type": "color" }
+    },
+    "focus-ring": { "$value": "{action.focus-ring}", "$type": "color" },
+    "spinner": {
+      "color": { "$value": "currentColor", "$type": "color" },
+      "size": { "$value": "1em", "$type": "dimension" }
+    },
+    "icon": {
+      "size": { "$value": "1em", "$type": "dimension" },
+      "gap": { "$value": "{action.gap}", "$type": "dimension" }
+    }
+  }
+}

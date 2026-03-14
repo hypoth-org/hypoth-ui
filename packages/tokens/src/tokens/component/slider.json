@@ -1,0 +1,33 @@
+{
+  "$description": "Slider component tokens — references form-controls type tokens",
+  "slider": {
+    "track": {
+      "height": { "$value": "4px", "$type": "dimension", "$description": "Slider track height" },
+      "bg": { "$value": "{color.background.muted}", "$type": "color", "$description": "Slider track background" },
+      "border-radius": { "$value": "{radius.full}", "$type": "dimension", "$description": "Slider track border radius" }
+    },
+    "range": {
+      "bg": { "$value": "{color.primary.default}", "$type": "color", "$description": "Slider filled range background" }
+    },
+    "thumb": {
+      "size": { "$value": "1.25rem", "$type": "dimension", "$description": "Slider thumb diameter" },
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Slider thumb background" },
+      "border-color": { "$value": "{color.primary.default}", "$type": "color", "$description": "Slider thumb border color" },
+      "shadow": { "$value": "{shadow.sm}", "$type": "shadow", "$description": "Slider thumb shadow" }
+    },
+    "tooltip": {
+      "bg": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Slider tooltip background" },
+      "color": { "$value": "{color.primary.foreground}", "$type": "color", "$description": "Slider tooltip text color" },
+      "font-size": { "$value": "{font-size.xs}", "$type": "dimension", "$description": "Slider tooltip font size" },
+      "border-radius": { "$value": "{radius.sm}", "$type": "dimension", "$description": "Slider tooltip border radius" }
+    },
+    "tick": {
+      "color": { "$value": "{color.border.emphasis}", "$type": "color", "$description": "Slider tick mark color" }
+    },
+    "label": {
+      "font-size": { "$value": "{font-size.xs}", "$type": "dimension", "$description": "Slider label font size" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Slider label text color" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Slider focus ring color" }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$description": "Tag component tokens — references actions type tokens",
+  "tag": {
+    "bg": { "$value": "{color.background.subtle}", "$type": "color" },
+    "color": { "$value": "{color.foreground.default}", "$type": "color" },
+    "border-color": { "$value": "{color.border.default}", "$type": "color" },
+    "border-radius": { "$value": "{action.border-radius}", "$type": "dimension" },
+    "padding-x": { "$value": "{action.padding-x.sm}", "$type": "dimension" },
+    "padding-y": { "$value": "{action.padding-y.sm}", "$type": "dimension" },
+    "font-size": { "$value": "{action.font-size.sm}", "$type": "dimension" },
+    "font-weight": { "$value": "{action.font-weight}", "$type": "fontWeight" },
+    "gap": { "$value": "{action.gap}", "$type": "dimension" },
+    "primary": {
+      "bg": { "$value": "{color.primary.subtle}", "$type": "color" },
+      "color": { "$value": "{color.primary.default}", "$type": "color" },
+      "border-color": { "$value": "{color.primary.default}", "$type": "color" }
+    },
+    "destructive": {
+      "bg": { "$value": "{color.destructive.subtle}", "$type": "color" },
+      "color": { "$value": "{color.destructive.default}", "$type": "color" },
+      "border-color": { "$value": "{color.destructive.default}", "$type": "color" }
+    },
+    "success": {
+      "bg": { "$value": "{color.success.subtle}", "$type": "color" },
+      "color": { "$value": "{color.success.default}", "$type": "color" },
+      "border-color": { "$value": "{color.success.default}", "$type": "color" }
+    },
+    "warning": {
+      "bg": { "$value": "{color.warning.subtle}", "$type": "color" },
+      "color": { "$value": "{color.warning.default}", "$type": "color" },
+      "border-color": { "$value": "{color.warning.default}", "$type": "color" }
+    }
+  }
+}

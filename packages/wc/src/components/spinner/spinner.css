@@ -3,29 +3,29 @@
   .ds-spinner {
     display: inline-block;
     border-style: solid;
-    border-color: currentColor;
+    border-color: var(--ds-spinner-color);
     border-right-color: transparent;
     border-radius: 50%;
-    animation: ds-spin 1s linear infinite;
+    animation: ds-spin var(--ds-spinner-speed) linear infinite;
   }
 
   /* Size variants */
   .ds-spinner--sm {
-    width: var(--ds-icon-size-sm);
-    height: var(--ds-icon-size-sm);
-    border-width: 2px;
+    width: var(--ds-spinner-size-sm);
+    height: var(--ds-spinner-size-sm);
+    border-width: var(--ds-spinner-border-width-sm);
   }
 
   .ds-spinner--md {
-    width: var(--ds-icon-size-md);
-    height: var(--ds-icon-size-md);
-    border-width: 2px;
+    width: var(--ds-spinner-size-md);
+    height: var(--ds-spinner-size-md);
+    border-width: var(--ds-spinner-border-width-md);
   }
 
   .ds-spinner--lg {
-    width: var(--ds-icon-size-lg);
-    height: var(--ds-icon-size-lg);
-    border-width: 3px;
+    width: var(--ds-spinner-size-lg);
+    height: var(--ds-spinner-size-lg);
+    border-width: var(--ds-spinner-border-width-lg);
   }
 
   /* Spin animation */

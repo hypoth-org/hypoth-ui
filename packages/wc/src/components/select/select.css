@@ -2,20 +2,6 @@
 @layer components {
   /* Select container */
   .ds-select {
-    --_select-trigger-bg: var(--ds-select-trigger-bg, var(--ds-color-background-default));
-    --_select-trigger-border: var(--ds-select-trigger-border, var(--ds-color-border-default));
-    --_select-trigger-border-radius: var(--ds-select-border-radius, var(--ds-radius-md));
-    --_select-trigger-padding: var(
-      --ds-select-padding,
-      var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md)
-    );
-    --_select-content-bg: var(--ds-select-content-bg, var(--ds-color-background-default));
-    --_select-content-shadow: var(--ds-select-shadow, var(--ds-shadow-lg));
-    --_select-option-padding: var(
-      --ds-select-option-padding,
-      var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md)
-    );
-
     position: relative;
     display: inline-flex;
     flex-direction: column;
@@ -26,41 +12,63 @@
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--ds-spacing-component-gap-sm);
+    gap: var(--ds-select-trigger-gap);
     min-width: 10rem;
-    padding: var(--_select-trigger-padding);
+    padding: var(--ds-select-trigger-padding-y) var(--ds-select-trigger-padding-x);
     font-family: inherit;
-    font-size: var(--ds-font-size-base);
-    line-height: var(--ds-line-height-normal);
-    color: var(--ds-color-foreground-default);
+    font-size: var(--ds-select-trigger-font-size);
+    line-height: 1.5;
+    color: var(--ds-select-trigger-color);
     text-align: left;
     cursor: pointer;
-    background-color: var(--_select-trigger-bg);
-    border: 1px solid var(--_select-trigger-border);
-    border-radius: var(--_select-trigger-border-radius);
+    background-color: var(--ds-select-trigger-bg);
+    border: 1px solid var(--ds-select-trigger-border-color);
+    border-radius: var(--ds-select-trigger-border-radius);
+    height: var(--ds-select-trigger-height);
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
 
   .ds-select-trigger:hover:not(:disabled) {
-    border-color: var(--ds-color-border-emphasis);
+    border-color: var(--ds-select-trigger-border-color-hover);
   }
 
   .ds-select-trigger:focus-visible {
-    outline: 2px solid var(--ds-color-focus-ring);
+    outline: 2px solid var(--ds-select-focus-ring);
     outline-offset: 2px;
   }
 
   .ds-select-trigger:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background-color: var(--ds-select-disabled-bg);
+    color: var(--ds-select-disabled-color);
   }
 
   .ds-select-trigger[data-invalid] {
-    border-color: var(--ds-color-destructive-default);
+    border-color: var(--ds-select-error-border-color);
   }
 
   .ds-select-trigger[aria-expanded="true"] {
-    border-color: var(--ds-color-primary-default);
+    border-color: var(--ds-select-trigger-border-color-focus);
+  }
+
+  /* Size variants */
+  .ds-select[data-size="sm"] .ds-select-trigger {
+    height: var(--ds-select-trigger-height-sm);
+    padding: var(--ds-select-trigger-padding-y) var(--ds-select-trigger-padding-x-sm);
+    font-size: var(--ds-select-trigger-font-size-sm);
+  }
+
+  .ds-select[data-size="md"] .ds-select-trigger {
+    height: var(--ds-select-trigger-height);
+    padding: var(--ds-select-trigger-padding-y) var(--ds-select-trigger-padding-x);
+    font-size: var(--ds-select-trigger-font-size);
+  }
+
+  .ds-select[data-size="lg"] .ds-select-trigger {
+    height: var(--ds-select-trigger-height-lg);
+    padding: var(--ds-select-trigger-padding-y) var(--ds-select-trigger-padding-x-lg);
+    font-size: var(--ds-select-trigger-font-size-lg);
   }
 
   /* Trigger value display */
@@ -72,15 +80,15 @@
   }
 
   .ds-select-value[data-placeholder] {
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-select-trigger-placeholder-color);
   }
 
   /* Trigger icon */
   .ds-select-trigger__icon {
     flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    color: var(--ds-color-foreground-muted);
+    width: var(--ds-select-trigger-icon-size);
+    height: var(--ds-select-trigger-icon-size);
+    color: var(--ds-select-trigger-placeholder-color);
     transition: transform 150ms ease;
   }
 
@@ -91,18 +99,18 @@
   /* Content popover */
   .ds-select-content {
     position: absolute;
-    z-index: var(--ds-z-popover, 100);
+    z-index: var(--ds-select-content-z-index);
     top: 100%;
     left: 0;
     right: 0;
     min-width: max-content;
-    max-height: 15rem;
-    margin-top: var(--ds-spacing-1);
+    max-height: var(--ds-select-content-max-height);
+    margin-top: 0.25rem;
     overflow-y: auto;
-    background-color: var(--_select-content-bg);
-    border: 1px solid var(--ds-color-border-default);
-    border-radius: var(--_select-trigger-border-radius);
-    box-shadow: var(--_select-content-shadow);
+    background-color: var(--ds-select-content-bg);
+    border: 1px solid var(--ds-select-content-border-color);
+    border-radius: var(--ds-select-content-border-radius);
+    box-shadow: var(--ds-select-content-shadow);
     animation: ds-select-content-in 150ms ease-out;
   }
 
@@ -136,23 +144,23 @@
   .ds-select-option {
     display: flex;
     align-items: center;
-    gap: var(--ds-spacing-component-gap-sm);
-    padding: var(--_select-option-padding);
-    font-size: var(--ds-font-size-base);
-    line-height: var(--ds-line-height-normal);
-    color: var(--ds-color-foreground-default);
+    gap: var(--ds-select-option-padding-x);
+    padding: var(--ds-select-option-padding-y) var(--ds-select-option-padding-x);
+    font-size: var(--ds-select-option-font-size);
+    line-height: 1.5;
+    color: var(--ds-select-option-color);
     cursor: pointer;
     transition: background-color 100ms ease;
   }
 
   .ds-select-option:hover,
   .ds-select-option[data-highlighted] {
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-select-option-bg-hover);
   }
 
   .ds-select-option[data-selected] {
-    background-color: var(--ds-color-primary-subtle);
-    color: var(--ds-color-primary-default);
+    background-color: var(--ds-select-option-bg-active);
+    color: var(--ds-select-option-color-active);
   }
 
   .ds-select-option[data-disabled] {
@@ -175,19 +183,19 @@
 
   /* Option group */
   .ds-select-group {
-    padding: var(--ds-spacing-1) 0;
+    padding: var(--ds-select-content-padding-y) 0;
   }
 
   .ds-select-group + .ds-select-group {
-    border-top: 1px solid var(--ds-color-border-default);
+    border-top: 1px solid var(--ds-select-content-border-color);
   }
 
   .ds-select-group__label,
   .ds-select-label {
-    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-md);
-    font-size: var(--ds-font-size-xs);
-    font-weight: var(--ds-font-weight-semibold);
-    color: var(--ds-color-foreground-muted);
+    padding: var(--ds-select-group-label-padding-y) var(--ds-select-group-label-padding-x);
+    font-size: var(--ds-select-group-label-font-size);
+    font-weight: var(--ds-select-group-label-font-weight);
+    color: var(--ds-select-group-label-color);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -195,8 +203,8 @@
   /* Separator */
   .ds-select-separator {
     height: 1px;
-    margin: var(--ds-spacing-1) 0;
-    background-color: var(--ds-color-border-default);
+    margin: var(--ds-select-content-padding-y) 0;
+    background-color: var(--ds-select-content-border-color);
   }
 
   /* Clear button */
@@ -207,46 +215,46 @@
     width: 1.25rem;
     height: 1.25rem;
     padding: 0;
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-select-trigger-placeholder-color);
     cursor: pointer;
     background: transparent;
     border: none;
-    border-radius: var(--ds-radius-sm);
+    border-radius: var(--ds-select-content-border-radius);
     transition: color 150ms ease;
   }
 
   .ds-select__clear:hover {
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-select-trigger-color);
   }
 
   /* Search input in searchable mode */
   .ds-select__search {
     position: sticky;
     top: 0;
-    padding: var(--ds-spacing-component-padding-sm);
-    background-color: var(--_select-content-bg);
-    border-bottom: 1px solid var(--ds-color-border-default);
+    padding: var(--ds-select-option-padding-y);
+    background-color: var(--ds-select-content-bg);
+    border-bottom: 1px solid var(--ds-select-content-border-color);
   }
 
   .ds-select__search-input {
     width: 100%;
-    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
+    padding: var(--ds-select-option-padding-y) var(--ds-select-option-padding-x);
     font-family: inherit;
-    font-size: var(--ds-font-size-sm);
-    border: 1px solid var(--ds-color-border-default);
-    border-radius: var(--ds-radius-sm);
+    font-size: var(--ds-select-option-font-size);
+    border: 1px solid var(--ds-select-content-border-color);
+    border-radius: var(--ds-select-content-border-radius);
   }
 
   .ds-select__search-input:focus {
-    outline: 2px solid var(--ds-color-focus-ring);
+    outline: 2px solid var(--ds-select-focus-ring);
     outline-offset: -1px;
   }
 
   /* Empty state */
   .ds-select__empty {
-    padding: var(--ds-spacing-component-padding-md);
-    font-size: var(--ds-font-size-sm);
-    color: var(--ds-color-foreground-muted);
+    padding: var(--ds-select-option-padding-x);
+    font-size: var(--ds-select-option-font-size);
+    color: var(--ds-select-trigger-placeholder-color);
     text-align: center;
   }
 

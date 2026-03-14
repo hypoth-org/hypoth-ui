@@ -1,0 +1,37 @@
+{
+  "$description": "Spacious density mode — increases heights by ~15%, padding by ~25%. Applied via [data-density=\"spacious\"].",
+  "action": {
+    "height": {
+      "sm": { "$value": "2.25rem", "$type": "dimension", "$description": "Spacious small action height (36px)" },
+      "md": { "$value": "2.625rem", "$type": "dimension", "$description": "Spacious medium action height (42px)" },
+      "lg": { "$value": "3.125rem", "$type": "dimension", "$description": "Spacious large action height (50px)" }
+    },
+    "padding-x": {
+      "sm": { "$value": "1rem", "$type": "dimension", "$description": "Spacious small action horizontal padding" },
+      "md": { "$value": "1.25rem", "$type": "dimension", "$description": "Spacious medium action horizontal padding" },
+      "lg": { "$value": "1.875rem", "$type": "dimension", "$description": "Spacious large action horizontal padding" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.375rem", "$type": "dimension", "$description": "Spacious small action vertical padding" },
+      "md": { "$value": "0.5rem", "$type": "dimension", "$description": "Spacious medium action vertical padding" },
+      "lg": { "$value": "0.625rem", "$type": "dimension", "$description": "Spacious large action vertical padding" }
+    }
+  },
+  "form-control": {
+    "height": {
+      "sm": { "$value": "2.25rem", "$type": "dimension", "$description": "Spacious small form-control height (36px)" },
+      "md": { "$value": "2.625rem", "$type": "dimension", "$description": "Spacious medium form-control height (42px)" },
+      "lg": { "$value": "3.125rem", "$type": "dimension", "$description": "Spacious large form-control height (50px)" }
+    },
+    "padding-x": {
+      "sm": { "$value": "0.625rem", "$type": "dimension", "$description": "Spacious small form-control horizontal padding" },
+      "md": { "$value": "1rem", "$type": "dimension", "$description": "Spacious medium form-control horizontal padding" },
+      "lg": { "$value": "1.25rem", "$type": "dimension", "$description": "Spacious large form-control horizontal padding" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.375rem", "$type": "dimension", "$description": "Spacious small form-control vertical padding" },
+      "md": { "$value": "0.5rem", "$type": "dimension", "$description": "Spacious medium form-control vertical padding" },
+      "lg": { "$value": "0.625rem", "$type": "dimension", "$description": "Spacious large form-control vertical padding" }
+    }
+  }
+}

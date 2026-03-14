@@ -19,30 +19,30 @@ describe("Light DOM Rendering", () => {
   });
 
   describe("DsButton", () => {
-    it("should render in Light DOM (no shadow root)", async () => {
+    it("should render in Shadow DOM for slot content projection", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
-      expect(button.shadowRoot).toBeNull();
+      expect(button.shadowRoot).not.toBeNull();
     });
 
-    it("should be queryable from parent with standard DOM APIs", async () => {
+    it("should be queryable via shadowRoot", async () => {
       const button = document.createElement("ds-button") as DsButton;
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = container.querySelector("button.ds-button");
+      const innerButton = button.shadowRoot!.querySelector("button.ds-button");
       expect(innerButton).not.toBeNull();
     });
 
-    it("should apply CSS classes directly to inner elements", async () => {
+    it("should apply CSS classes to inner elements", async () => {
       const button = document.createElement("ds-button") as DsButton;
       button.variant = "primary";
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--primary")).toBe(true);
     });
   });
@@ -87,7 +87,7 @@ describe("Light DOM Rendering", () => {
   });
 
   describe("General Light DOM Benefits", () => {
-    it("should support querySelector across component boundaries", async () => {
+    it("should support querySelector for Light DOM components", async () => {
       const wrapper = document.createElement("div");
       wrapper.innerHTML = "<ds-button>Click</ds-button><ds-input></ds-input>";
       container.appendChild(wrapper);
@@ -97,12 +97,13 @@ describe("Light DOM Rendering", () => {
       const input = wrapper.querySelector("ds-input") as DsInput;
       await Promise.all([button.updateComplete, input.updateComplete]);
 
-      // Query for internal elements from the wrapper
-      const buttons = wrapper.querySelectorAll("button");
+      // Input uses Light DOM — queryable from parent
       const inputs = wrapper.querySelectorAll("input");
-
-      expect(buttons.length).toBe(1);
       expect(inputs.length).toBe(1);
+
+      // Button uses Shadow DOM — queryable via shadowRoot
+      const innerButton = button.shadowRoot!.querySelector("button");
+      expect(innerButton).not.toBeNull();
     });
   });
 });

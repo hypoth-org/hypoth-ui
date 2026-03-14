@@ -198,7 +198,13 @@ export function generateModeCSS(
     lines.push(`@layer ${layerName} {`);
   }
 
-  lines.push(`:root[data-mode="${mode}"] {`);
+  // Density modes use [data-density="..."] selectors instead of [data-mode="..."]
+  if (mode.startsWith("density-")) {
+    const densityName = mode.replace("density-", "");
+    lines.push(`[data-density="${densityName}"] {`);
+  } else {
+    lines.push(`:root[data-mode="${mode}"] {`);
+  }
 
   const sortedPaths = [...resolved.keys()].sort();
   lines.push(...generateTokenLines(resolved, sortedPaths));

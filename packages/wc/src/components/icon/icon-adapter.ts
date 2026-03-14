@@ -2,8 +2,10 @@
  * Icon Adapter for Lucide Icons
  *
  * Provides a unified interface for accessing icons from the Lucide library.
- * Uses dynamic imports so lucide is only loaded when the Icon component is actually used.
- * Consumers who don't use <ds-icon> don't need lucide installed.
+ * Uses a bundler-opaque dynamic import so lucide is only loaded when the Icon
+ * component is actually used. Consumers who don't use <ds-icon> don't need
+ * lucide installed — the build will not fail and no "Module not found" error
+ * will be emitted.
  */
 
 type LucideModule = typeof import("lucide");
@@ -14,13 +16,19 @@ let _loadFailed = false;
 
 /**
  * Lazily load the lucide module. Returns null if lucide is not installed.
+ *
+ * The `webpackIgnore` magic comment tells webpack (and Next.js, which uses
+ * webpack under the hood) to skip static resolution of this import at build
+ * time. Without it, consumers who don't have lucide installed get a hard
+ * "Module not found: Can't resolve 'lucide'" build error even though lucide
+ * is an optional peer dependency.
  */
 async function loadLucide(): Promise<LucideModule | null> {
   if (_lucide) return _lucide;
   if (_loadFailed) return null;
 
   if (!_loadPromise) {
-    _loadPromise = import("lucide")
+    _loadPromise = import(/* webpackIgnore: true */ "lucide")
       .then((mod) => {
         _lucide = mod;
         return mod;

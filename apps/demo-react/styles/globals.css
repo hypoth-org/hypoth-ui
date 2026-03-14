@@ -25,7 +25,7 @@
   }
 
   html {
-    font-family: var(--font-family-sans, system-ui, sans-serif);
+    font-family: var(--ds-font-family-sans, system-ui, sans-serif);
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;

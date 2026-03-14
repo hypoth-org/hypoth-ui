@@ -1,0 +1,39 @@
+{
+  "$description": "DatePicker component tokens — references form-controls type tokens",
+  "date-picker": {
+    "trigger": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "DatePicker trigger background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "DatePicker trigger border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "DatePicker trigger border color on hover" },
+      "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "DatePicker trigger border color on focus" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "DatePicker trigger border radius" },
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "DatePicker trigger horizontal padding" },
+      "padding-y": { "$value": "{form-control.padding-y.sm}", "$type": "dimension", "$description": "DatePicker trigger vertical padding" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "DatePicker trigger font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "DatePicker trigger text color" },
+      "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "DatePicker trigger placeholder color" },
+      "icon-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "DatePicker trigger icon color" }
+    },
+    "content": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "DatePicker popover background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "DatePicker popover border color" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "DatePicker popover border radius" },
+      "shadow": { "$value": "{shadow.lg}", "$type": "shadow", "$description": "DatePicker popover shadow" },
+      "z-index": { "$value": "100", "$type": "number", "$description": "DatePicker popover z-index" }
+    },
+    "calendar": {
+      "cell-size": { "$value": "2.5rem", "$type": "dimension", "$description": "Calendar cell size within DatePicker" },
+      "cell-bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Calendar cell hover background" },
+      "cell-bg-selected": { "$value": "{color.primary.default}", "$type": "color", "$description": "Calendar cell selected background" },
+      "cell-color-selected": { "$value": "{color.primary.foreground}", "$type": "color", "$description": "Calendar cell selected text color" },
+      "cell-bg-range": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "Calendar cell range highlight background" },
+      "cell-font-size": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Calendar cell font size" },
+      "today-indicator-color": { "$value": "{color.primary.default}", "$type": "color", "$description": "Calendar today indicator color" },
+      "nav-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Calendar navigation icon color" },
+      "nav-color-hover": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Calendar navigation icon color on hover" },
+      "weekday-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Calendar weekday header color" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "DatePicker focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "DatePicker border color in error state" }
+  }
+}

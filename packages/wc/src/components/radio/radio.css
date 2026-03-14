@@ -11,13 +11,13 @@
   .ds-radio-group {
     display: flex;
     flex-direction: column;
-    gap: var(--ds-spacing-2, 0.5rem);
+    gap: var(--ds-radio-label-gap);
   }
 
   .ds-radio-group[data-orientation="horizontal"] {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--ds-spacing-4, 1rem);
+    gap: var(--ds-radio-label-gap);
   }
 
   /* Individual Radio */
@@ -28,7 +28,7 @@
   .ds-radio {
     display: inline-flex;
     align-items: flex-start;
-    gap: var(--ds-spacing-2, 0.5rem);
+    gap: var(--ds-radio-label-gap);
     cursor: pointer;
     user-select: none;
   }
@@ -37,24 +37,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: var(--ds-radio-control-size);
+    height: var(--ds-radio-control-size);
     flex-shrink: 0;
-    border: 2px solid var(--ds-color-border-default);
+    border: 2px solid var(--ds-radio-control-border-color);
     border-radius: 50%;
-    background-color: var(--ds-color-background-default);
+    background-color: var(--ds-radio-control-bg);
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   }
 
   .ds-radio__control:focus {
     outline: none;
-    border-color: var(--ds-color-primary-default);
-    box-shadow: 0 0 0 3px var(--ds-color-focus-ring);
+    border-color: var(--ds-radio-control-border-color-hover);
+    box-shadow: 0 0 0 3px var(--ds-radio-focus-ring);
   }
 
   /* Checked state */
   .ds-radio__control[aria-checked="true"] {
-    border-color: var(--ds-color-primary-default);
+    border-color: var(--ds-radio-indicator-color);
   }
 
   .ds-radio__indicator {
@@ -66,23 +66,23 @@
   }
 
   .ds-radio__dot {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: var(--ds-radio-indicator-size);
+    height: var(--ds-radio-indicator-size);
     border-radius: 50%;
-    background-color: var(--ds-color-primary-default);
+    background-color: var(--ds-radio-indicator-color);
   }
 
   .ds-radio__label {
-    font-family: var(--ds-font-family-sans);
-    font-size: var(--ds-font-size-base);
+    font-family: inherit;
+    font-size: var(--ds-radio-label-font-size);
     line-height: 1.5;
-    color: var(--ds-color-text-default);
+    color: var(--ds-radio-label-color);
     cursor: pointer;
   }
 
   /* Hover state */
   .ds-radio:hover .ds-radio__control:not([aria-disabled="true"]) {
-    border-color: var(--ds-color-primary-default);
+    border-color: var(--ds-radio-control-border-color-hover);
   }
 
   /* Disabled state */
@@ -93,11 +93,11 @@
   ds-radio[disabled] .ds-radio__control {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-radio-disabled-bg);
   }
 
   ds-radio[disabled] .ds-radio__label {
-    color: var(--ds-color-text-disabled, #9ca3af);
+    color: var(--ds-radio-disabled-color);
     cursor: not-allowed;
   }
 
@@ -109,11 +109,11 @@
   ds-radio-group[disabled] .ds-radio__control {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-radio-disabled-bg);
   }
 
   ds-radio-group[disabled] .ds-radio__label {
-    color: var(--ds-color-text-disabled, #9ca3af);
+    color: var(--ds-radio-disabled-color);
     cursor: not-allowed;
   }
 }

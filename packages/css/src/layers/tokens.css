@@ -1,3 +1,7 @@
 /* Token Layer - Design token CSS custom properties */
 /* Import the compiled token CSS from @hypoth-ui/tokens */
 @import "@hypoth-ui/tokens/dist/css/tokens.css";
+@import "@hypoth-ui/tokens/dist/css/colors.css";
+@import "@hypoth-ui/tokens/dist/css/density.css";
+@import "@hypoth-ui/tokens/dist/css/type-tokens.css";
+@import "@hypoth-ui/tokens/dist/css/component-tokens.css";

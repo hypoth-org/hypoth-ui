@@ -82,23 +82,26 @@ export class DsIcon extends DSElement {
     }
   }
 
-  private updateSvg(): void {
+  private async updateSvg(): Promise<void> {
     if (!this.name) {
       this._svgElement = null;
       this._isValidIcon = false;
       return;
     }
 
-    if (!hasIcon(this.name)) {
+    const iconExists = await hasIcon(this.name);
+    if (!iconExists) {
       this._svgElement = null;
       this._isValidIcon = false;
+      this.requestUpdate();
       return;
     }
 
-    this._svgElement = getIconSvg(this.name, {
+    this._svgElement = await getIconSvg(this.name, {
       size: SIZE_MAP[this.size],
     });
     this._isValidIcon = this._svgElement !== null;
+    this.requestUpdate();
   }
 
   override render(): TemplateResult {

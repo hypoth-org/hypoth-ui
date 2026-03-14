@@ -1,0 +1,31 @@
+{
+  "$description": "Checkbox component tokens — references form-controls type tokens",
+  "checkbox": {
+    "control": {
+      "size": { "$value": "1.25rem", "$type": "dimension", "$description": "Checkbox control width and height (md)" },
+      "size-sm": { "$value": "1rem", "$type": "dimension", "$description": "Checkbox control width and height (sm)" },
+      "size-lg": { "$value": "1.5rem", "$type": "dimension", "$description": "Checkbox control width and height (lg)" },
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Checkbox control background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Checkbox control border color" },
+      "border-radius": { "$value": "{radius.sm}", "$type": "dimension", "$description": "Checkbox control border radius" },
+      "bg-checked": { "$value": "{color.primary.default}", "$type": "color", "$description": "Checkbox control background when checked" },
+      "border-color-checked": { "$value": "{color.primary.default}", "$type": "color", "$description": "Checkbox control border color when checked" },
+      "bg-hover": { "$value": "{color.primary.hover}", "$type": "color", "$description": "Checkbox control background on hover when checked" }
+    },
+    "indicator": {
+      "color": { "$value": "{color.primary.foreground}", "$type": "color", "$description": "Checkbox check indicator color" }
+    },
+    "label": {
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Checkbox label font size (md)" },
+      "font-size-sm": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Checkbox label font size (sm)" },
+      "font-size-lg": { "$value": "{form-control.font-size.lg}", "$type": "dimension", "$description": "Checkbox label font size (lg)" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Checkbox label text color" },
+      "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Gap between checkbox control and label" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Checkbox focus ring color" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Checkbox background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Checkbox label color when disabled" }
+    }
+  }
+}

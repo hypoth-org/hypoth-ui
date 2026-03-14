@@ -45,13 +45,13 @@ describe("ds-button", () => {
   describe("rendering", () => {
     it("should render a button element", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton).not.toBeNull();
     });
 
     it("should render with ds-button class", async () => {
       await button.updateComplete;
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button")).toBe(true);
     });
 
@@ -59,7 +59,7 @@ describe("ds-button", () => {
       await button.updateComplete;
 
       // The button should contain a span for content
-      const contentSpan = button.querySelector("span");
+      const contentSpan = button.shadowRoot!.querySelector("span");
       expect(contentSpan).not.toBeNull();
     });
 
@@ -67,7 +67,7 @@ describe("ds-button", () => {
       button.variant = "secondary";
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--secondary")).toBe(true);
     });
 
@@ -75,7 +75,7 @@ describe("ds-button", () => {
       button.size = "lg";
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--lg")).toBe(true);
     });
   });
@@ -85,7 +85,7 @@ describe("ds-button", () => {
       button.disabled = true;
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.disabled).toBe(true);
     });
 
@@ -93,7 +93,7 @@ describe("ds-button", () => {
       button.disabled = true;
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-disabled")).toBe("true");
     });
 
@@ -101,7 +101,7 @@ describe("ds-button", () => {
       button.disabled = true;
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--disabled")).toBe(true);
     });
 
@@ -112,7 +112,7 @@ describe("ds-button", () => {
       const clickHandler = vi.fn();
       button.addEventListener("click", clickHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(clickHandler).not.toHaveBeenCalled();
@@ -124,7 +124,7 @@ describe("ds-button", () => {
       button.loading = true;
       await button.updateComplete;
 
-      const spinner = button.querySelector(".ds-button__spinner");
+      const spinner = button.shadowRoot!.querySelector(".ds-button__spinner");
       expect(spinner).not.toBeNull();
     });
 
@@ -132,7 +132,7 @@ describe("ds-button", () => {
       button.loading = true;
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-busy")).toBe("true");
     });
 
@@ -140,7 +140,7 @@ describe("ds-button", () => {
       button.loading = true;
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.classList.contains("ds-button--loading")).toBe(true);
     });
 
@@ -151,7 +151,7 @@ describe("ds-button", () => {
       const clickHandler = vi.fn();
       button.addEventListener("click", clickHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(clickHandler).not.toHaveBeenCalled();
@@ -165,7 +165,7 @@ describe("ds-button", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: "Enter",
         bubbles: true,
@@ -181,7 +181,7 @@ describe("ds-button", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: " ",
         bubbles: true,
@@ -198,7 +198,7 @@ describe("ds-button", () => {
       const pressHandler = vi.fn();
       button.addEventListener("ds:press", pressHandler);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: "Enter",
         bubbles: true,
@@ -216,7 +216,7 @@ describe("ds-button", () => {
       let eventCount = 0;
       button.addEventListener("ds:press", () => eventCount++);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(eventCount).toBe(1);
@@ -228,7 +228,7 @@ describe("ds-button", () => {
       let eventCount = 0;
       button.addEventListener("ds:press", () => eventCount++);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: "Enter",
         bubbles: true,
@@ -244,7 +244,7 @@ describe("ds-button", () => {
       let eventCount = 0;
       button.addEventListener("ds:press", () => eventCount++);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: " ",
         bubbles: true,
@@ -262,7 +262,7 @@ describe("ds-button", () => {
         capturedDetail = e.detail;
       }) as EventListener);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       const event = new KeyboardEvent("keydown", {
         key: "Enter",
         bubbles: true,
@@ -281,7 +281,7 @@ describe("ds-button", () => {
         capturedDetail = e.detail;
       }) as EventListener);
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.click();
 
       expect(capturedDetail).not.toBeNull();
@@ -297,7 +297,7 @@ describe("ds-button", () => {
         button.variant = variant;
         await button.updateComplete;
 
-        const innerButton = button.querySelector("button");
+        const innerButton = button.shadowRoot!.querySelector("button");
         expect(innerButton?.classList.contains(`ds-button--${variant}`)).toBe(true);
       });
     }
@@ -311,7 +311,7 @@ describe("ds-button", () => {
         button.size = size;
         await button.updateComplete;
 
-        const innerButton = button.querySelector("button");
+        const innerButton = button.shadowRoot!.querySelector("button");
         expect(innerButton?.classList.contains(`ds-button--${size}`)).toBe(true);
       });
     }
@@ -322,7 +322,7 @@ describe("ds-button", () => {
       button.type = "submit";
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.type).toBe("submit");
     });
   });

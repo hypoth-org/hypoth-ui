@@ -1,0 +1,65 @@
+/**
+ * Skeleton Component Styles
+ *
+ * Loading placeholder with shimmer animation.
+ */
+
+@layer components {
+  ds-skeleton {
+    display: block;
+    background-color: var(--ds-skeleton-bg);
+    border-radius: var(--ds-skeleton-border-radius);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Shimmer animation */
+  ds-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--ds-skeleton-bg-shimmer) 50%,
+      transparent 100%
+    );
+    animation: ds-skeleton-shimmer var(--ds-skeleton-animation-duration) ease-in-out infinite;
+  }
+
+  @keyframes ds-skeleton-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Shape variants */
+  ds-skeleton[variant="circle"] {
+    border-radius: var(--ds-radius-full, 9999px);
+  }
+
+  ds-skeleton[variant="text"] {
+    height: 1em;
+    border-radius: var(--ds-radius-sm, 0.25rem);
+  }
+
+  /* Reduced motion: replace shimmer with pulse */
+  @media (prefers-reduced-motion: reduce) {
+    ds-skeleton::after {
+      animation: none;
+      display: none;
+    }
+
+    ds-skeleton {
+      animation: ds-skeleton-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes ds-skeleton-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  }
+}

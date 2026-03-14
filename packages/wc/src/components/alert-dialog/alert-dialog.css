@@ -8,20 +8,6 @@
 @layer components {
   /* AlertDialog container */
   ds-alert-dialog {
-    /* Component token references */
-    --_alert-dialog-backdrop-color: var(--ds-alert-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
-    --_alert-dialog-content-bg: var(--ds-alert-dialog-content-bg, var(--ds-color-surface, #ffffff));
-    --_alert-dialog-content-border-radius: var(
-      --ds-alert-dialog-border-radius,
-      var(--ds-radius-lg, 0.5rem)
-    );
-    --_alert-dialog-content-shadow: var(
-      --ds-alert-dialog-shadow,
-      var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04))
-    );
-    --_alert-dialog-content-padding: var(--ds-alert-dialog-padding, var(--ds-space-6, 1.5rem));
-    --_alert-dialog-max-width: var(--ds-alert-dialog-max-width, 28rem);
-
     display: contents;
   }
 
@@ -29,11 +15,11 @@
   .ds-alert-dialog__backdrop {
     position: fixed;
     inset: 0;
-    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    z-index: var(--ds-alert-dialog-z-index);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--_alert-dialog-backdrop-color);
+    background-color: var(--ds-alert-dialog-backdrop-color);
     animation: ds-alert-dialog-backdrop-in 150ms ease-out;
   }
 
@@ -66,16 +52,16 @@
   /* Content container */
   ds-alert-dialog-content {
     position: relative;
-    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    z-index: var(--ds-alert-dialog-z-index);
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: var(--_alert-dialog-max-width);
-    padding: var(--_alert-dialog-content-padding);
+    max-width: var(--ds-alert-dialog-content-max-width);
+    padding: var(--ds-alert-dialog-content-padding);
     margin: var(--ds-space-4, 1rem);
-    background-color: var(--_alert-dialog-content-bg);
-    border-radius: var(--_alert-dialog-content-border-radius);
-    box-shadow: var(--_alert-dialog-content-shadow);
+    background-color: var(--ds-alert-dialog-content-bg);
+    border-radius: var(--ds-alert-dialog-content-border-radius);
+    box-shadow: var(--ds-alert-dialog-content-shadow);
     animation: ds-alert-dialog-content-in 200ms ease-out;
   }
 
@@ -105,29 +91,11 @@
     }
   }
 
-  /* Size variants */
-  ds-alert-dialog-content[size="sm"] {
-    --_alert-dialog-max-width: 20rem;
-    --_alert-dialog-content-padding: var(--ds-space-4, 1rem);
-  }
-
-  ds-alert-dialog-content[size="lg"] {
-    --_alert-dialog-max-width: 40rem;
-  }
-
-  ds-alert-dialog-content[size="xl"] {
-    --_alert-dialog-max-width: 56rem;
-  }
-
-  ds-alert-dialog-content[size="full"] {
-    --_alert-dialog-max-width: calc(100vw - 2rem);
-  }
-
   /* Header */
   ds-alert-dialog-header {
     display: flex;
     flex-direction: column;
-    gap: var(--ds-space-2, 0.5rem);
+    gap: var(--ds-alert-dialog-header-gap);
     text-align: center;
   }
 
@@ -135,15 +103,15 @@
   ds-alert-dialog-footer {
     display: flex;
     flex-direction: column-reverse;
-    gap: var(--ds-space-2, 0.5rem);
-    margin-top: var(--ds-space-6, 1.5rem);
+    gap: var(--ds-alert-dialog-header-gap);
+    margin-top: var(--ds-alert-dialog-footer-margin-top);
   }
 
   @media (min-width: 640px) {
     ds-alert-dialog-footer {
       flex-direction: row;
       justify-content: flex-end;
-      gap: var(--ds-space-3, 0.75rem);
+      gap: var(--ds-alert-dialog-footer-gap);
     }
   }
 
@@ -151,19 +119,19 @@
   ds-alert-dialog-title {
     display: block;
     margin: 0;
-    font-size: var(--ds-font-size-lg, 1.125rem);
-    font-weight: var(--ds-font-weight-semibold, 600);
-    line-height: var(--ds-line-height-tight, 1.25);
-    color: var(--ds-color-text, #1a1a1a);
+    font-size: var(--ds-alert-dialog-title-font-size);
+    font-weight: var(--ds-alert-dialog-title-font-weight);
+    line-height: 1.25;
+    color: var(--ds-alert-dialog-title-color);
   }
 
   /* Description */
   ds-alert-dialog-description {
     display: block;
     margin: 0;
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    line-height: var(--ds-line-height-normal, 1.5);
-    color: var(--ds-color-text-muted, #6b7280);
+    font-size: var(--ds-alert-dialog-description-font-size);
+    line-height: 1.5;
+    color: var(--ds-alert-dialog-description-color);
   }
 
   /* Trigger - display contents to let child button handle styling */

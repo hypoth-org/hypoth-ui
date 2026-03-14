@@ -3,7 +3,8 @@
  * Registers custom elements and initializes the application
  */
 
-// Import design system styles
+// Import fonts and design system styles
+import '../styles/fonts.css';
 import '@hypoth-ui/tokens/css';
 import '@hypoth-ui/css';
 import '../styles/globals.css';

@@ -1,0 +1,21 @@
+{
+  "$description": "Layout component tokens — spacing and container sizing",
+  "layout": {
+    "gap": { "$value": "1rem", "$type": "dimension" },
+    "padding": { "$value": "1rem", "$type": "dimension" },
+    "container": {
+      "padding": { "$value": "1rem", "$type": "dimension" },
+      "max-width-sm": { "$value": "640px", "$type": "dimension" },
+      "max-width-md": { "$value": "768px", "$type": "dimension" },
+      "max-width-lg": { "$value": "1024px", "$type": "dimension" },
+      "max-width-xl": { "$value": "1280px", "$type": "dimension" },
+      "max-width-2xl": { "$value": "1536px", "$type": "dimension" }
+    },
+    "section": {
+      "spacing": { "$value": "1.5rem", "$type": "dimension" }
+    },
+    "z-sticky": { "$value": "100", "$type": "number" },
+    "z-header": { "$value": "100", "$type": "number" },
+    "z-footer": { "$value": "100", "$type": "number" }
+  }
+}

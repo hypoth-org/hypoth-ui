@@ -1,0 +1,8 @@
+{
+  "$description": "Separator component tokens — references container type tokens",
+  "separator": {
+    "color": { "$value": "{container.border-color}", "$type": "color" },
+    "size": { "$value": "1px", "$type": "dimension" },
+    "margin": { "$value": "1rem", "$type": "dimension" }
+  }
+}

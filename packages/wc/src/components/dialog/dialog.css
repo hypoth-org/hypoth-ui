@@ -1,0 +1,127 @@
+/**
+ * Dialog Component Styles
+ *
+ * Modal dialog with backdrop, content, title, description, and close button.
+ */
+
+@layer components {
+  /* Dialog container */
+  ds-dialog {
+    display: contents;
+  }
+
+  /* Backdrop */
+  .ds-dialog__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-dialog-z-index);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ds-dialog-backdrop-color);
+    animation: ds-dialog-backdrop-in 150ms ease-out;
+  }
+
+  .ds-dialog__backdrop[hidden] {
+    display: none;
+  }
+
+  .ds-dialog__backdrop[data-closing] {
+    animation: ds-dialog-backdrop-out 150ms ease-in;
+  }
+
+  @keyframes ds-dialog-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes ds-dialog-backdrop-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  /* Content container */
+  ds-dialog-content {
+    position: relative;
+    z-index: var(--ds-dialog-z-index);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-dialog-content-gap);
+    width: 100%;
+    max-width: var(--ds-dialog-content-max-width);
+    padding: var(--ds-dialog-content-padding);
+    margin: var(--ds-dialog-content-margin);
+    background-color: var(--ds-dialog-content-bg);
+    border-radius: var(--ds-dialog-content-border-radius);
+    box-shadow: var(--ds-dialog-content-shadow);
+    animation: ds-dialog-content-in 200ms ease-out;
+  }
+
+  ds-dialog-content[data-state="closed"] {
+    animation: ds-dialog-content-out 150ms ease-in;
+  }
+
+  @keyframes ds-dialog-content-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes ds-dialog-content-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+  }
+
+  /* Title */
+  ds-dialog-title {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-dialog-title-font-size);
+    font-weight: var(--ds-dialog-title-font-weight);
+    line-height: var(--ds-dialog-title-line-height);
+    color: var(--ds-dialog-title-color);
+  }
+
+  /* Description */
+  ds-dialog-description {
+    display: block;
+    margin: 0;
+    font-size: var(--ds-dialog-description-font-size);
+    line-height: var(--ds-dialog-description-line-height);
+    color: var(--ds-dialog-description-color);
+  }
+
+  /* Close button */
+  ds-dialog-close {
+    display: contents;
+  }
+
+  /* Trigger */
+  ds-dialog-trigger {
+    display: contents;
+  }
+
+  /* Prevent body scroll when dialog is open */
+  body:has(ds-dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-dialog__backdrop,
+    ds-dialog-content {
+      animation: none;
+    }
+  }
+}

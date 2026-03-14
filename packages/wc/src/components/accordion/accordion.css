@@ -1,27 +1,22 @@
 /**
  * Accordion component styles
  *
- * CSS custom properties for theming:
- * --ds-accordion-border-color: Border color (default: #e2e8f0)
- * --ds-accordion-trigger-bg: Trigger background (default: transparent)
- * --ds-accordion-trigger-bg-hover: Trigger hover background (default: #f8fafc)
- * --ds-accordion-trigger-padding: Trigger padding (default: 1rem)
- * --ds-accordion-content-padding: Content padding (default: 1rem)
- * --ds-accordion-animation-duration: Animation duration (default: 200ms)
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-accordion-*)
  */
 
 @layer components {
   ds-accordion {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--ds-accordion-border-color, #e2e8f0);
-    border-radius: 0.5rem;
+    border: 1px solid var(--ds-accordion-border-color);
+    border-radius: var(--ds-accordion-border-radius);
     overflow: hidden;
   }
 
   ds-accordion-item {
     display: block;
-    border-bottom: 1px solid var(--ds-accordion-border-color, #e2e8f0);
+    border-bottom: 1px solid var(--ds-accordion-item-border-color);
   }
 
   ds-accordion-item:last-child {
@@ -33,11 +28,11 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: var(--ds-accordion-trigger-padding, 1rem);
-    font-size: 0.875rem;
-    font-weight: 500;
+    padding: var(--ds-accordion-trigger-padding);
+    font-size: var(--ds-accordion-trigger-font-size);
+    font-weight: var(--ds-accordion-trigger-font-weight);
     text-align: left;
-    background-color: var(--ds-accordion-trigger-bg, transparent);
+    background-color: var(--ds-accordion-trigger-bg);
     border: none;
     cursor: pointer;
     transition: background-color 0.15s ease;
@@ -45,11 +40,11 @@
   }
 
   ds-accordion-trigger:hover:not([aria-disabled="true"]) {
-    background-color: var(--ds-accordion-trigger-bg-hover, #f8fafc);
+    background-color: var(--ds-accordion-trigger-bg-hover);
   }
 
   ds-accordion-trigger:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--ds-accordion-focus-ring, #3b82f6);
+    box-shadow: inset 0 0 0 2px var(--ds-accordion-trigger-focus-ring);
   }
 
   ds-accordion-trigger[aria-disabled="true"] {
@@ -68,7 +63,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    transition: transform var(--ds-accordion-animation-duration, 200ms) ease;
+    transition: transform var(--ds-accordion-animation-duration) ease;
     flex-shrink: 0;
   }
 
@@ -78,7 +73,7 @@
 
   ds-accordion-content {
     display: block;
-    padding: var(--ds-accordion-content-padding, 1rem);
+    padding: var(--ds-accordion-content-padding);
     padding-top: 0;
     overflow: hidden;
   }
@@ -89,12 +84,12 @@
 
   /* Expand animation */
   ds-accordion-content[data-state="open"] {
-    animation: ds-accordion-expand var(--ds-accordion-animation-duration, 200ms) ease-out;
+    animation: ds-accordion-expand var(--ds-accordion-animation-duration) ease-out;
   }
 
   /* Collapse animation */
   ds-accordion-content[data-state="closed"]:not([hidden]) {
-    animation: ds-accordion-collapse var(--ds-accordion-animation-duration, 200ms) ease-out;
+    animation: ds-accordion-collapse var(--ds-accordion-animation-duration) ease-out;
   }
 
   @keyframes ds-accordion-expand {
@@ -128,21 +123,6 @@
     ds-accordion-content[data-state="open"],
     ds-accordion-content[data-state="closed"]:not([hidden]) {
       animation: none;
-    }
-  }
-
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    ds-accordion {
-      --ds-accordion-border-color: #334155;
-    }
-
-    ds-accordion-trigger {
-      --ds-accordion-trigger-bg-hover: #1e293b;
-    }
-
-    ds-accordion-trigger::after {
-      filter: invert(1);
     }
   }
 }

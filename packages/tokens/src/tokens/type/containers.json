@@ -1,0 +1,10 @@
+{
+  "$description": "Container type tokens — shared styling for Card, Accordion, Table, etc.",
+  "container": {
+    "bg": { "$value": "{color.background.default}", "$type": "color" },
+    "border-color": { "$value": "{color.border.default}", "$type": "color" },
+    "border-radius": { "$value": "{radius.lg}", "$type": "dimension" },
+    "shadow": { "$value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)", "$type": "shadow" },
+    "padding": { "$value": "1.5rem", "$type": "dimension" }
+  }
+}

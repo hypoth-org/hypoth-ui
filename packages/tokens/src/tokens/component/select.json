@@ -1,0 +1,57 @@
+{
+  "$description": "Select component tokens — references form-controls type tokens",
+  "select": {
+    "trigger": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Select trigger background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Select trigger border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "Select trigger border color on hover" },
+      "border-color-focus": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "Select trigger border color on focus" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "Select trigger border radius" },
+      "height": { "$value": "{form-control.height.md}", "$type": "dimension", "$description": "Select trigger height (md)" },
+      "height-sm": { "$value": "{form-control.height.sm}", "$type": "dimension", "$description": "Select trigger height (sm)" },
+      "height-lg": { "$value": "{form-control.height.lg}", "$type": "dimension", "$description": "Select trigger height (lg)" },
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Select trigger horizontal padding (md)" },
+      "padding-x-sm": { "$value": "{form-control.padding-x.sm}", "$type": "dimension", "$description": "Select trigger horizontal padding (sm)" },
+      "padding-x-lg": { "$value": "{form-control.padding-x.lg}", "$type": "dimension", "$description": "Select trigger horizontal padding (lg)" },
+      "padding-y": { "$value": "{form-control.padding-y.sm}", "$type": "dimension", "$description": "Select trigger vertical padding" },
+      "gap": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Select trigger gap between value and icon" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Select trigger font size (md)" },
+      "font-size-sm": { "$value": "{form-control.font-size.sm}", "$type": "dimension", "$description": "Select trigger font size (sm)" },
+      "font-size-lg": { "$value": "{form-control.font-size.lg}", "$type": "dimension", "$description": "Select trigger font size (lg)" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Select trigger text color" },
+      "placeholder-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Select trigger placeholder color" },
+      "icon-size": { "$value": "1rem", "$type": "dimension", "$description": "Select trigger chevron icon size" }
+    },
+    "content": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Select dropdown background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Select dropdown border color" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "Select dropdown border radius" },
+      "shadow": { "$value": "{shadow.lg}", "$type": "shadow", "$description": "Select dropdown shadow" },
+      "padding-y": { "$value": "0.25rem", "$type": "dimension", "$description": "Select dropdown vertical padding" },
+      "max-height": { "$value": "15rem", "$type": "dimension", "$description": "Select dropdown max height" },
+      "z-index": { "$value": "100", "$type": "number", "$description": "Select dropdown z-index" }
+    },
+    "option": {
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Select option horizontal padding" },
+      "padding-y": { "$value": "{form-control.padding-y.sm}", "$type": "dimension", "$description": "Select option vertical padding" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Select option background on hover" },
+      "bg-active": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "Select option background when selected" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Select option text color" },
+      "color-active": { "$value": "{color.primary.default}", "$type": "color", "$description": "Select option text color when selected" },
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Select option font size" }
+    },
+    "group-label": {
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Select group label font size" },
+      "font-weight": { "$value": "600", "$type": "fontWeight", "$description": "Select group label font weight" },
+      "color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Select group label text color" },
+      "padding-x": { "$value": "{form-control.padding-x.md}", "$type": "dimension", "$description": "Select group label horizontal padding" },
+      "padding-y": { "$value": "0.25rem", "$type": "dimension", "$description": "Select group label vertical padding" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Select focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "Select border color in error state" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Select background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Select text color when disabled" }
+    }
+  }
+}

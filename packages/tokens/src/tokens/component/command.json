@@ -1,0 +1,43 @@
+{
+  "$description": "Command palette component tokens — references overlay type tokens",
+  "command": {
+    "bg": { "$value": "{overlay.bg}", "$type": "color" },
+    "border-color": { "$value": "{overlay.border-color}", "$type": "color" },
+    "border-radius": { "$value": "{overlay.border-radius}", "$type": "dimension" },
+    "shadow": { "$value": "{overlay.shadow}", "$type": "shadow" },
+    "max-width": { "$value": "640px", "$type": "dimension" },
+    "input": {
+      "padding": { "$value": "0.75rem 1rem", "$type": "dimension" },
+      "font-size": { "$value": "1rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "placeholder-color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" }
+    },
+    "list": {
+      "max-height": { "$value": "300px", "$type": "dimension" },
+      "padding": { "$value": "0.5rem", "$type": "dimension" }
+    },
+    "item": {
+      "padding": { "$value": "0.5rem 0.75rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" },
+      "border-radius": { "$value": "0.375rem", "$type": "dimension" }
+    },
+    "group": {
+      "heading-padding": { "$value": "0.25rem 0.75rem", "$type": "dimension" },
+      "heading-font-size": { "$value": "0.75rem", "$type": "dimension" },
+      "heading-font-weight": { "$value": "500", "$type": "fontWeight" },
+      "heading-color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    },
+    "separator": {
+      "color": { "$value": "{color.border.default}", "$type": "color" },
+      "margin": { "$value": "0.5rem", "$type": "dimension" }
+    },
+    "empty": {
+      "padding": { "$value": "1.5rem 1rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    }
+  }
+}

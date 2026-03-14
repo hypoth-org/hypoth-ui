@@ -2,7 +2,7 @@
   "font": {
     "family": {
       "sans": {
-        "$value": "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "$value": "'Geist', system-ui, -apple-system, sans-serif",
         "$type": "fontFamily"
       },
       "serif": {
@@ -10,7 +10,7 @@
         "$type": "fontFamily"
       },
       "mono": {
-        "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+        "$value": "'Geist Mono', ui-monospace, monospace",
         "$type": "fontFamily"
       }
     },

@@ -12,10 +12,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@hypoth-ui/wc": "workspace:*",
-    "@hypoth-ui/tokens": "workspace:*",
     "@hypoth-ui/css": "workspace:*",
     "@hypoth-ui/demo-shared": "workspace:*",
+    "@hypoth-ui/tokens": "workspace:*",
+    "@hypoth-ui/wc": "workspace:*",
+    "geist": "1.7.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {

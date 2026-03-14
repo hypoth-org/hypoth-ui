@@ -1,0 +1,22 @@
+{
+  "$description": "Breadcrumb component tokens — references navigation type tokens",
+  "breadcrumb": {
+    "list": {
+      "gap": { "$value": "0.25rem", "$type": "dimension" }
+    },
+    "item": {
+      "font-size": { "$value": "0.875rem", "$type": "dimension" }
+    },
+    "link": {
+      "color": { "$value": "{nav.item.color}", "$type": "color" },
+      "color-hover": { "$value": "{nav.item.color-hover}", "$type": "color" }
+    },
+    "page": {
+      "color": { "$value": "{nav.item.color-active}", "$type": "color" },
+      "font-weight": { "$value": "500", "$type": "fontWeight" }
+    },
+    "separator": {
+      "color": { "$value": "{nav.item.color}", "$type": "color" }
+    }
+  }
+}

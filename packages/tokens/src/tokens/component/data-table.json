@@ -1,0 +1,29 @@
+{
+  "$description": "DataTable component tokens — extends table pattern with interactive features",
+  "data-table": {
+    "bg": { "$value": "{container.bg}", "$type": "color" },
+    "border-color": { "$value": "{container.border-color}", "$type": "color" },
+    "border-radius": { "$value": "{container.border-radius}", "$type": "dimension" },
+    "header": {
+      "bg": { "$value": "{color.background.subtle}", "$type": "color" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "font-size": { "$value": "0.75rem", "$type": "dimension" },
+      "font-weight": { "$value": "600", "$type": "fontWeight" },
+      "padding": { "$value": "0.75rem 1rem", "$type": "dimension" }
+    },
+    "row": {
+      "border-color": { "$value": "{container.border-color}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" },
+      "bg-selected": { "$value": "{color.primary.subtle}", "$type": "color" }
+    },
+    "cell": {
+      "padding": { "$value": "0.75rem 1rem", "$type": "dimension" },
+      "font-size": { "$value": "0.875rem", "$type": "dimension" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" }
+    },
+    "toolbar": {
+      "padding": { "$value": "0.75rem 1rem", "$type": "dimension" },
+      "gap": { "$value": "0.5rem", "$type": "dimension" }
+    }
+  }
+}

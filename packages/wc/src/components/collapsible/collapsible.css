@@ -1,8 +1,8 @@
 /**
  * Collapsible component styles
  *
- * CSS custom properties for theming:
- * --ds-collapsible-animation-duration: Animation duration (default: 200ms)
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-collapsible-*)
  */
 
 @layer components {
@@ -13,7 +13,7 @@
   ds-collapsible-trigger {
     display: inline-flex;
     align-items: center;
-    cursor: pointer;
+    cursor: var(--ds-collapsible-trigger-cursor);
     user-select: none;
   }
 
@@ -24,7 +24,7 @@
 
   ds-collapsible-content {
     display: block;
-    overflow: hidden;
+    overflow: var(--ds-collapsible-content-overflow);
   }
 
   ds-collapsible-content[hidden] {
@@ -33,12 +33,12 @@
 
   /* Expand animation */
   ds-collapsible-content[data-state="open"] {
-    animation: ds-collapsible-expand var(--ds-collapsible-animation-duration, 200ms) ease-out;
+    animation: ds-collapsible-expand var(--ds-collapsible-animation-duration) ease-out;
   }
 
   /* Collapse animation */
   ds-collapsible-content[data-state="closed"]:not([hidden]) {
-    animation: ds-collapsible-collapse var(--ds-collapsible-animation-duration, 200ms) ease-out;
+    animation: ds-collapsible-collapse var(--ds-collapsible-animation-duration) ease-out;
   }
 
   @keyframes ds-collapsible-expand {

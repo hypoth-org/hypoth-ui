@@ -1,0 +1,26 @@
+{
+  "$description": "Radio component tokens — references form-controls type tokens",
+  "radio": {
+    "control": {
+      "size": { "$value": "1.25rem", "$type": "dimension", "$description": "Radio control width and height" },
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Radio control background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Radio control border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-focus}", "$type": "color", "$description": "Radio control border color on hover" },
+      "bg-checked": { "$value": "{color.primary.default}", "$type": "color", "$description": "Radio control border color when checked" }
+    },
+    "indicator": {
+      "color": { "$value": "{color.primary.default}", "$type": "color", "$description": "Radio dot indicator color" },
+      "size": { "$value": "0.5rem", "$type": "dimension", "$description": "Radio dot indicator size" }
+    },
+    "label": {
+      "font-size": { "$value": "{form-control.font-size.md}", "$type": "dimension", "$description": "Radio label font size" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Radio label text color" },
+      "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Gap between radio control and label" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "Radio focus ring color" },
+    "disabled": {
+      "bg": { "$value": "{form-control.disabled.bg}", "$type": "color", "$description": "Radio background when disabled" },
+      "color": { "$value": "{form-control.disabled.color}", "$type": "color", "$description": "Radio label color when disabled" }
+    }
+  }
+}

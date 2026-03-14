@@ -168,22 +168,22 @@
         valueDisplay.textContent = `Value: ${e.detail.value}`;
       });
 
-      // Test Light DOM
+      // Test Shadow DOM (button uses Shadow DOM for slot content projection)
       const lightDomBtn = document.getElementById('light-dom-btn');
       const lightDomResult = document.getElementById('light-dom-result');
 
-      // Check if button uses Light DOM (no shadow root)
+      // Button uses Shadow DOM so <slot> projects children correctly
       const hasShadowRoot = lightDomBtn.shadowRoot !== null;
-      const hasInnerButton = lightDomBtn.querySelector('button') !== null;
+      const hasInnerButton = hasShadowRoot && lightDomBtn.shadowRoot.querySelector('button') !== null;
 
-      if (!hasShadowRoot && hasInnerButton) {
-        lightDomResult.textContent = '✓ Light DOM confirmed: No shadow root, inner elements accessible';
+      if (hasShadowRoot && hasInnerButton) {
+        lightDomResult.textContent = '✓ Shadow DOM confirmed: Inner button accessible via shadowRoot';
         lightDomResult.classList.add('pass');
-      } else if (hasShadowRoot) {
-        lightDomResult.textContent = '✗ Shadow DOM detected';
+      } else if (!hasShadowRoot) {
+        lightDomResult.textContent = '✗ No shadow root found';
         lightDomResult.classList.add('fail');
       } else {
-        lightDomResult.textContent = '✗ Inner button not found';
+        lightDomResult.textContent = '✗ Inner button not found in shadow root';
         lightDomResult.classList.add('fail');
       }
 

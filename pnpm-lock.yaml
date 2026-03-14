@@ -77,6 +77,9 @@ importers:
       '@hypoth-ui/wc':
         specifier: workspace:*
         version: link:../../packages/wc
+      geist:
+        specifier: 1.7.0
+        version: 1.7.0(next@14.2.35(@playwright/test@1.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       next:
         specifier: ^14.0.0
         version: 14.2.35(@playwright/test@1.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -114,6 +117,9 @@ importers:
       '@hypoth-ui/wc':
         specifier: workspace:*
         version: link:../../packages/wc
+      geist:
+        specifier: 1.7.0
+        version: 1.7.0(next@14.2.35(@playwright/test@1.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       lit:
         specifier: ^3.1.0
         version: 3.3.2
@@ -1904,6 +1910,11 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
+  geist@1.7.0:
+    resolution: {integrity: sha512-ZaoiZwkSf0DwwB1ncdLKp+ggAldqxl5L1+SXaNIBGkPAqcu+xjVJLxlf3/S8vLt9UHx1xu5fz3lbzKCj5iOVdQ==}
+    peerDependencies:
+      next: '>=13.2.0'
+
   get-caller-file@2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
@@ -1936,6 +1947,7 @@ packages:
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globby@11.1.0:
@@ -4840,6 +4852,10 @@ snapshots:
   function-bind@1.1.2: {}
 
   functions-have-names@1.2.3: {}
+
+  geist@1.7.0(next@14.2.35(@playwright/test@1.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+    dependencies:
+      next: 14.2.35(@playwright/test@1.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   get-caller-file@2.0.5: {}
 

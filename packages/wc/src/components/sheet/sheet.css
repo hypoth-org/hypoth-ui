@@ -7,24 +7,21 @@
 @layer components {
   /* Sheet container */
   ds-sheet {
-    /* Component token references */
-    --_sheet-overlay-color: var(--ds-sheet-overlay-color, rgba(0, 0, 0, 0.5));
-    --_sheet-content-bg: var(--ds-sheet-content-bg, var(--ds-color-surface, #ffffff));
-    --_sheet-content-shadow: var(
-      --ds-sheet-shadow,
-      var(--ds-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04))
-    );
-    --_sheet-content-padding: var(--ds-sheet-padding, var(--ds-space-6, 1.5rem));
-
     display: contents;
+  }
+
+  /* Hide overlay and content when sheet is closed */
+  ds-sheet:not([open]) > ds-sheet-overlay,
+  ds-sheet:not([open]) > ds-sheet-content {
+    display: none;
   }
 
   /* Overlay */
   ds-sheet-overlay {
     position: fixed;
     inset: 0;
-    z-index: var(--ds-z-index-overlay, var(--ds-z-overlay, 900));
-    background-color: var(--_sheet-overlay-color);
+    z-index: var(--ds-sheet-z-index);
+    background-color: var(--ds-sheet-overlay-color);
     animation: ds-sheet-overlay-in 150ms ease-out;
   }
 
@@ -57,11 +54,11 @@
   /* Content container */
   ds-sheet-content {
     position: fixed;
-    z-index: var(--ds-z-index-modal, var(--ds-z-modal, 1000));
+    z-index: var(--ds-sheet-z-index);
     display: flex;
     flex-direction: column;
-    background-color: var(--_sheet-content-bg);
-    box-shadow: var(--_sheet-content-shadow);
+    background-color: var(--ds-sheet-content-bg);
+    box-shadow: var(--ds-sheet-content-shadow);
   }
 
   /* Side positioning */
@@ -69,7 +66,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: var(--_sheet-width, 24rem);
+    width: var(--ds-sheet-content-width);
     max-width: 100vw;
     animation: ds-sheet-slide-in-right 200ms ease-out;
   }
@@ -82,7 +79,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--_sheet-width, 24rem);
+    width: var(--ds-sheet-content-width);
     max-width: 100vw;
     animation: ds-sheet-slide-in-left 200ms ease-out;
   }
@@ -95,7 +92,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: var(--_sheet-height, 24rem);
+    height: var(--ds-sheet-content-width);
     max-height: 100vh;
     animation: ds-sheet-slide-in-top 200ms ease-out;
   }
@@ -108,7 +105,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: var(--_sheet-height, 24rem);
+    height: var(--ds-sheet-content-width);
     max-height: 100vh;
     animation: ds-sheet-slide-in-bottom 200ms ease-out;
   }
@@ -190,86 +187,42 @@
     }
   }
 
-  /* Size variants for horizontal (left/right) sheets */
-  ds-sheet-content[side="right"][size="sm"],
-  ds-sheet-content[side="left"][size="sm"] {
-    --_sheet-width: 18rem;
-  }
-
-  ds-sheet-content[side="right"][size="lg"],
-  ds-sheet-content[side="left"][size="lg"] {
-    --_sheet-width: 32rem;
-  }
-
-  ds-sheet-content[side="right"][size="xl"],
-  ds-sheet-content[side="left"][size="xl"] {
-    --_sheet-width: 40rem;
-  }
-
-  ds-sheet-content[side="right"][size="full"],
-  ds-sheet-content[side="left"][size="full"] {
-    --_sheet-width: 100vw;
-  }
-
-  /* Size variants for vertical (top/bottom) sheets */
-  ds-sheet-content[side="top"][size="sm"],
-  ds-sheet-content[side="bottom"][size="sm"] {
-    --_sheet-height: 16rem;
-  }
-
-  ds-sheet-content[side="top"][size="lg"],
-  ds-sheet-content[side="bottom"][size="lg"] {
-    --_sheet-height: 32rem;
-  }
-
-  ds-sheet-content[side="top"][size="xl"],
-  ds-sheet-content[side="bottom"][size="xl"] {
-    --_sheet-height: 40rem;
-  }
-
-  ds-sheet-content[side="top"][size="full"],
-  ds-sheet-content[side="bottom"][size="full"] {
-    --_sheet-height: 100vh;
-  }
-
   /* Header */
   ds-sheet-header {
     display: flex;
     flex-direction: column;
-    gap: var(--ds-space-1, 0.25rem);
-    padding: var(--_sheet-content-padding);
-    padding-bottom: var(--ds-space-4, 1rem);
-    border-bottom: 1px solid var(--ds-color-border, #e5e7eb);
+    gap: var(--ds-sheet-header-gap);
+    padding: var(--ds-sheet-header-padding);
+    border-bottom: 1px solid var(--ds-sheet-header-border-color);
   }
 
   /* Footer */
   ds-sheet-footer {
     display: flex;
-    gap: var(--ds-space-3, 0.75rem);
+    gap: var(--ds-sheet-footer-gap);
     justify-content: flex-end;
-    padding: var(--_sheet-content-padding);
-    padding-top: var(--ds-space-4, 1rem);
+    padding: var(--ds-sheet-footer-padding);
     margin-top: auto;
-    border-top: 1px solid var(--ds-color-border, #e5e7eb);
+    border-top: 1px solid var(--ds-sheet-footer-border-color);
   }
 
   /* Title */
   ds-sheet-title {
     display: block;
     margin: 0;
-    font-size: var(--ds-font-size-lg, 1.125rem);
-    font-weight: var(--ds-font-weight-semibold, 600);
-    line-height: var(--ds-line-height-tight, 1.25);
-    color: var(--ds-color-text, #1a1a1a);
+    font-size: var(--ds-sheet-title-font-size);
+    font-weight: var(--ds-sheet-title-font-weight);
+    line-height: var(--ds-sheet-title-line-height);
+    color: var(--ds-sheet-title-color);
   }
 
   /* Description */
   ds-sheet-description {
     display: block;
     margin: 0;
-    font-size: var(--ds-font-size-sm, 0.875rem);
-    line-height: var(--ds-line-height-normal, 1.5);
-    color: var(--ds-color-text-muted, #6b7280);
+    font-size: var(--ds-sheet-description-font-size);
+    line-height: var(--ds-sheet-description-line-height);
+    color: var(--ds-sheet-description-color);
   }
 
   /* Close button - display contents to let child handle styling */

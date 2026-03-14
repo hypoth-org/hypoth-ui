@@ -20,10 +20,10 @@ describe("DsButton Accessibility", () => {
     container.remove();
   });
 
-  // Helper to add accessible name to button (Light DOM doesn't support slot projection)
+  // Helper to add accessible name to button
   const addAccessibleName = async (button: DsButton, label: string) => {
     await button.updateComplete;
-    const innerButton = button.querySelector("button");
+    const innerButton = button.shadowRoot!.querySelector("button");
     if (innerButton) {
       innerButton.setAttribute("aria-label", label);
     }
@@ -81,7 +81,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       // Native button element has implicit button role
       expect(innerButton?.tagName.toLowerCase()).toBe("button");
     });
@@ -92,7 +92,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-disabled")).toBe("true");
     });
 
@@ -102,7 +102,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-disabled")).toBe("true");
     });
 
@@ -112,7 +112,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       expect(innerButton?.getAttribute("aria-busy")).toBe("true");
     });
 
@@ -122,7 +122,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const spinner = button.querySelector(".ds-button__spinner");
+      const spinner = button.shadowRoot!.querySelector(".ds-button__spinner");
       expect(spinner?.getAttribute("aria-hidden")).toBe("true");
     });
   });
@@ -133,9 +133,11 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       innerButton?.focus();
-      expect(document.activeElement).toBe(innerButton);
+      // With Shadow DOM, document.activeElement is the host element
+      expect(document.activeElement).toBe(button);
+      expect(button.shadowRoot!.activeElement).toBe(innerButton);
     });
 
     it("is not focusable when disabled", async () => {
@@ -144,7 +146,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       // Disabled buttons should not receive focus programmatically
       // (browsers handle this differently, but the disabled attribute prevents activation)
       expect(innerButton?.disabled).toBe(true);
@@ -157,7 +159,7 @@ describe("DsButton Accessibility", () => {
       container.appendChild(button);
       await button.updateComplete;
 
-      const innerButton = button.querySelector("button");
+      const innerButton = button.shadowRoot!.querySelector("button");
       // The button element exists and can be given an accessible name
       expect(innerButton).toBeTruthy();
     });
@@ -169,7 +171,7 @@ describe("DsButton Accessibility", () => {
       await button.updateComplete;
 
       // Content wrapper should exist for accessible content
-      const content = button.querySelector(".ds-button__content");
+      const content = button.shadowRoot!.querySelector(".ds-button__content");
       expect(content).toBeTruthy();
     });
   });

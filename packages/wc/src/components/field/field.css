@@ -1,0 +1,79 @@
+/**
+ * Field Component Styles
+ *
+ * CSS custom properties for theming:
+ * --ds-field-gap - Gap between field children (default: 0.5rem)
+ * --ds-field-label-font-size - Label font size
+ * --ds-field-label-font-weight - Label font weight
+ * --ds-field-label-color - Label text color
+ * --ds-field-description-font-size - Description font size
+ * --ds-field-description-color - Description text color
+ * --ds-field-error-color - Error message color
+ */
+
+@layer components {
+  ds-field {
+    display: block;
+  }
+
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-field-gap, 0.5rem);
+  }
+
+  /* Label */
+  ds-label {
+    display: block;
+  }
+
+  .ds-label {
+    font-family: var(--ds-font-family-sans);
+    font-size: var(--ds-field-label-font-size, var(--ds-font-size-base));
+    font-weight: var(--ds-field-label-font-weight, var(--ds-font-weight-medium));
+    line-height: 1.5;
+    color: var(--ds-field-label-color, var(--ds-color-foreground-default));
+    cursor: default;
+  }
+
+  /* Required indicator */
+  .ds-label[data-required]::after {
+    content: " *";
+    color: var(--ds-field-required-color, var(--ds-color-destructive-default));
+  }
+
+  /* Description */
+  ds-field-description {
+    display: block;
+  }
+
+  .ds-field-description {
+    font-family: var(--ds-font-family-sans);
+    font-size: var(--ds-field-description-font-size, var(--ds-font-size-sm));
+    line-height: 1.5;
+    color: var(--ds-field-description-color, var(--ds-color-foreground-muted));
+  }
+
+  /* Error message */
+  ds-field-error {
+    display: block;
+  }
+
+  .ds-field-error {
+    font-family: var(--ds-font-family-sans);
+    font-size: var(--ds-field-error-font-size, var(--ds-font-size-sm));
+    line-height: 1.5;
+    color: var(--ds-field-error-color, var(--ds-color-destructive-default));
+  }
+
+  /* Disabled state */
+  ds-field[data-disabled] .ds-label {
+    color: var(--ds-color-foreground-muted);
+    cursor: not-allowed;
+  }
+
+  ds-field[data-disabled] .ds-field-description {
+    color: var(--ds-color-foreground-muted);
+    opacity: 0.7;
+  }
+}

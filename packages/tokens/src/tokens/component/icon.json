@@ -1,0 +1,17 @@
+{
+  "$description": "Icon component tokens — size scale and color",
+  "icon": {
+    "color": { "$value": "currentColor", "$type": "color" },
+    "size-xs": { "$value": "0.75rem", "$type": "dimension" },
+    "size-sm": { "$value": "1rem", "$type": "dimension" },
+    "size-md": { "$value": "1.25rem", "$type": "dimension" },
+    "size-lg": { "$value": "1.5rem", "$type": "dimension" },
+    "size-xl": { "$value": "2rem", "$type": "dimension" },
+    "stroke-width": { "$value": "2", "$type": "number" },
+    "fallback": {
+      "bg": { "$value": "{color.background.subtle}", "$type": "color" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" },
+      "border-radius": { "$value": "2px", "$type": "dimension" }
+    }
+  }
+}

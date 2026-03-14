@@ -1,0 +1,55 @@
+{
+  "$description": "Actions type tokens — shared styling for Button, Link, Icon, Tag",
+  "action": {
+    "height": {
+      "sm": { "$value": "2rem", "$type": "dimension", "$description": "Small action height" },
+      "md": { "$value": "2.25rem", "$type": "dimension", "$description": "Medium action height (default)" },
+      "lg": { "$value": "2.75rem", "$type": "dimension", "$description": "Large action height" }
+    },
+    "padding-x": {
+      "sm": { "$value": "0.75rem", "$type": "dimension" },
+      "md": { "$value": "1rem", "$type": "dimension" },
+      "lg": { "$value": "1.5rem", "$type": "dimension" }
+    },
+    "padding-y": {
+      "sm": { "$value": "0.25rem", "$type": "dimension" },
+      "md": { "$value": "0.375rem", "$type": "dimension" },
+      "lg": { "$value": "0.5rem", "$type": "dimension" }
+    },
+    "font-size": {
+      "sm": { "$value": "0.75rem", "$type": "dimension" },
+      "md": { "$value": "0.875rem", "$type": "dimension" },
+      "lg": { "$value": "1rem", "$type": "dimension" }
+    },
+    "font-weight": { "$value": "{font.weight.medium}", "$type": "fontWeight" },
+    "border-radius": { "$value": "{radius.md}", "$type": "dimension" },
+    "gap": { "$value": "0.5rem", "$type": "dimension" },
+    "primary": {
+      "bg": { "$value": "{color.primary.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.primary.hover}", "$type": "color" },
+      "bg-active": { "$value": "{color.primary.active}", "$type": "color" },
+      "color": { "$value": "{color.primary.foreground}", "$type": "color" }
+    },
+    "secondary": {
+      "bg": { "$value": "{color.background.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" },
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "border-color": { "$value": "{color.border.default}", "$type": "color" }
+    },
+    "ghost": {
+      "color": { "$value": "{color.foreground.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color" }
+    },
+    "destructive": {
+      "bg": { "$value": "{color.destructive.default}", "$type": "color" },
+      "bg-hover": { "$value": "{color.destructive.hover}", "$type": "color" },
+      "bg-active": { "$value": "{color.destructive.active}", "$type": "color" },
+      "color": { "$value": "{color.destructive.foreground}", "$type": "color" }
+    },
+    "disabled": {
+      "bg": { "$value": "{color.background.muted}", "$type": "color" },
+      "color": { "$value": "{color.foreground.muted}", "$type": "color" }
+    },
+    "focus-ring": { "$value": "{color.focus.ring}", "$type": "color" }
+  }
+}

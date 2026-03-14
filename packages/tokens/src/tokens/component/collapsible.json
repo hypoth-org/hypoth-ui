@@ -1,0 +1,12 @@
+{
+  "$description": "Collapsible component tokens — references container type tokens",
+  "collapsible": {
+    "trigger": {
+      "cursor": { "$value": "pointer", "$type": "string" }
+    },
+    "content": {
+      "overflow": { "$value": "hidden", "$type": "string" }
+    },
+    "animation-duration": { "$value": "200ms", "$type": "duration" }
+  }
+}

@@ -1,0 +1,78 @@
+/**
+ * Progress Component Styles
+ *
+ * Horizontal progress bar with optional label.
+ */
+
+@layer components {
+  ds-progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-2, 0.5rem);
+    width: 100%;
+  }
+
+  /* Label row */
+  .ds-progress__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ds-progress__label {
+    font-size: var(--ds-progress-label-font-size);
+    font-weight: var(--ds-progress-label-font-weight);
+    color: var(--ds-progress-label-color);
+  }
+
+  .ds-progress__value {
+    font-size: var(--ds-progress-label-font-size);
+    color: var(--ds-progress-label-color);
+    opacity: 0.7;
+  }
+
+  /* Track */
+  .ds-progress__track {
+    width: 100%;
+    height: var(--ds-progress-track-height);
+    background-color: var(--ds-progress-track-bg);
+    border-radius: var(--ds-progress-track-border-radius);
+    overflow: hidden;
+  }
+
+  /* Bar (fill) */
+  .ds-progress__bar {
+    height: 100%;
+    background-color: var(--ds-progress-bar-bg);
+    border-radius: var(--ds-progress-bar-border-radius);
+    transition: width 300ms ease;
+  }
+
+  /* Indeterminate animation */
+  ds-progress[indeterminate] .ds-progress__bar {
+    width: 50% !important;
+    animation: ds-progress-indeterminate 1.5s ease-in-out infinite;
+  }
+
+  @keyframes ds-progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ds-progress__bar {
+      transition: none;
+    }
+
+    ds-progress[indeterminate] .ds-progress__bar {
+      animation: none;
+      width: 100% !important;
+      opacity: 0.5;
+    }
+  }
+}

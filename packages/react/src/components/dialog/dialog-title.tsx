@@ -23,12 +23,13 @@ export interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
  * ```
  */
 export const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ children, ...restProps }, ref) => {
+  ({ children, className, ...restProps }, ref) => {
     const { behavior } = useDialogContext("Dialog.Title");
     const titleProps = behavior.getTitleProps();
+    const titleClassName = ["ds-dialog-title", className].filter(Boolean).join(" ");
 
     return (
-      <h2 ref={ref} id={titleProps.id} {...restProps}>
+      <h2 ref={ref} id={titleProps.id} className={titleClassName} {...restProps}>
         {children}
       </h2>
     );

@@ -1,0 +1,23 @@
+{
+  "$description": "Text component tokens — typography scale and color variants",
+  "text": {
+    "color": { "$value": "{color.foreground.default}", "$type": "color" },
+    "color-muted": { "$value": "{color.foreground.muted}", "$type": "color" },
+    "color-success": { "$value": "{color.success.default}", "$type": "color" },
+    "color-warning": { "$value": "{color.warning.default}", "$type": "color" },
+    "color-error": { "$value": "{color.destructive.default}", "$type": "color" },
+    "font-size-xs": { "$value": "0.75rem", "$type": "dimension" },
+    "font-size-sm": { "$value": "0.875rem", "$type": "dimension" },
+    "font-size-md": { "$value": "1rem", "$type": "dimension" },
+    "font-size-lg": { "$value": "1.125rem", "$type": "dimension" },
+    "font-size-xl": { "$value": "1.25rem", "$type": "dimension" },
+    "font-size-2xl": { "$value": "1.5rem", "$type": "dimension" },
+    "font-weight-normal": { "$value": "400", "$type": "fontWeight" },
+    "font-weight-medium": { "$value": "500", "$type": "fontWeight" },
+    "font-weight-semibold": { "$value": "600", "$type": "fontWeight" },
+    "font-weight-bold": { "$value": "700", "$type": "fontWeight" },
+    "line-height-tight": { "$value": "1.25", "$type": "number" },
+    "line-height-normal": { "$value": "1.5", "$type": "number" },
+    "line-height-relaxed": { "$value": "1.625", "$type": "number" }
+  }
+}

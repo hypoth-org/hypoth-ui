@@ -1,0 +1,57 @@
+/**
+ * Badge Component Styles
+ *
+ * Small status indicator labels.
+ */
+
+@layer components {
+  ds-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--ds-badge-padding-y) var(--ds-badge-padding-x);
+    font-size: var(--ds-badge-font-size);
+    font-weight: var(--ds-badge-font-weight);
+    line-height: var(--ds-badge-line-height);
+    border-radius: var(--ds-badge-border-radius);
+    background-color: var(--ds-badge-bg);
+    color: var(--ds-badge-color);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* Variant: primary */
+  ds-badge[variant="primary"] {
+    background-color: var(--ds-badge-primary-bg);
+    color: var(--ds-badge-primary-color);
+  }
+
+  /* Variant: success */
+  ds-badge[variant="success"] {
+    background-color: var(--ds-badge-success-bg);
+    color: var(--ds-badge-success-color);
+  }
+
+  /* Variant: warning */
+  ds-badge[variant="warning"] {
+    background-color: var(--ds-badge-warning-bg);
+    color: var(--ds-badge-warning-color);
+  }
+
+  /* Variant: error */
+  ds-badge[variant="error"] {
+    background-color: var(--ds-badge-error-bg);
+    color: var(--ds-badge-error-color);
+  }
+
+  /* Variant: info */
+  ds-badge[variant="info"] {
+    background-color: var(--ds-badge-info-bg);
+    color: var(--ds-badge-info-color);
+  }
+
+  /* Outlined variant modifier */
+  ds-badge[outlined] {
+    background-color: transparent;
+    border: 1px solid currentColor;
+  }
+}

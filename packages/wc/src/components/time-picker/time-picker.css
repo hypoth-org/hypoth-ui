@@ -2,28 +2,23 @@
 @layer components {
   /* TimePicker container */
   .ds-time-picker {
-    --_time-picker-bg: var(--ds-time-picker-bg, var(--ds-color-background-default));
-    --_time-picker-border: var(--ds-time-picker-border, var(--ds-color-border-default));
-    --_time-picker-border-radius: var(--ds-time-picker-border-radius, var(--ds-radius-md));
-    --_time-picker-segment-width: var(--ds-time-picker-segment-width, 2.5rem);
-
     display: inline-flex;
     align-items: center;
     gap: 0;
-    padding: var(--ds-spacing-component-padding-sm) var(--ds-spacing-component-padding-md);
-    background-color: var(--_time-picker-bg);
-    border: 1px solid var(--_time-picker-border);
-    border-radius: var(--_time-picker-border-radius);
+    padding: 0.5rem 1rem;
+    background-color: var(--ds-time-picker-bg);
+    border: 1px solid var(--ds-time-picker-border-color);
+    border-radius: var(--ds-time-picker-border-radius);
     transition: border-color 150ms ease;
   }
 
   .ds-time-picker:hover:not([data-disabled]) {
-    border-color: var(--ds-color-border-emphasis);
+    border-color: var(--ds-time-picker-border-color-hover);
   }
 
   .ds-time-picker:focus-within {
-    border-color: var(--ds-color-primary-default);
-    outline: 2px solid var(--ds-color-focus-ring);
+    border-color: var(--ds-time-picker-border-color-focus);
+    outline: 2px solid var(--ds-time-picker-focus-ring);
     outline-offset: 2px;
   }
 
@@ -33,7 +28,7 @@
   }
 
   .ds-time-picker[data-invalid] {
-    border-color: var(--ds-color-destructive-default);
+    border-color: var(--ds-time-picker-error-border-color);
   }
 
   /* Time segment (hour, minute, second) */
@@ -41,32 +36,32 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: var(--_time-picker-segment-width);
-    padding: var(--ds-spacing-component-padding-xs);
+    min-width: var(--ds-time-picker-segment-min-width);
+    padding: 0.25rem;
     font-family: inherit;
-    font-size: var(--ds-font-size-base);
+    font-size: var(--ds-time-picker-segment-font-size);
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-time-picker-segment-color);
     text-align: center;
     background: transparent;
     border: none;
-    border-radius: var(--ds-radius-sm);
+    border-radius: var(--ds-time-picker-segment-border-radius);
     caret-color: transparent;
     transition: background-color 150ms ease;
   }
 
   .ds-time-picker-segment:hover {
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-time-picker-segment-bg-hover);
   }
 
   .ds-time-picker-segment:focus {
     outline: none;
-    background-color: var(--ds-color-primary-subtle);
+    background-color: var(--ds-time-picker-segment-bg-focus);
   }
 
   .ds-time-picker-segment[data-placeholder] {
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-time-picker-segment-placeholder-color);
   }
 
   .ds-time-picker-segment:disabled {
@@ -78,18 +73,18 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 0.75rem;
-    font-size: var(--ds-font-size-base);
-    font-weight: var(--ds-font-weight-medium);
-    color: var(--ds-color-foreground-muted);
+    width: var(--ds-time-picker-separator-width);
+    font-size: var(--ds-time-picker-separator-font-size);
+    font-weight: 500;
+    color: var(--ds-time-picker-separator-color);
     user-select: none;
   }
 
   /* AM/PM segment */
   .ds-time-picker-segment[data-type="period"] {
-    min-width: 2.5rem;
-    font-size: var(--ds-font-size-sm);
-    font-weight: var(--ds-font-weight-medium);
+    min-width: var(--ds-time-picker-segment-min-width);
+    font-size: var(--ds-time-picker-option-font-size);
+    font-weight: 500;
     text-transform: uppercase;
   }
 
@@ -98,10 +93,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-left: var(--ds-spacing-1);
-    color: var(--ds-color-foreground-muted);
+    width: var(--ds-time-picker-icon-size);
+    height: var(--ds-time-picker-icon-size);
+    margin-left: 0.25rem;
+    color: var(--ds-time-picker-icon-color);
   }
 
   /* Clear button */
@@ -109,24 +104,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-left: var(--ds-spacing-1);
+    width: var(--ds-time-picker-icon-size);
+    height: var(--ds-time-picker-icon-size);
+    margin-left: 0.25rem;
     padding: 0;
-    color: var(--ds-color-foreground-muted);
+    color: var(--ds-time-picker-icon-color);
     cursor: pointer;
     background: transparent;
     border: none;
-    border-radius: var(--ds-radius-xs);
+    border-radius: var(--ds-time-picker-segment-border-radius);
     transition: color 150ms ease;
   }
 
   .ds-time-picker__clear:hover {
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-time-picker-segment-color);
   }
 
   .ds-time-picker__clear:focus-visible {
-    outline: 2px solid var(--ds-color-focus-ring);
+    outline: 2px solid var(--ds-time-picker-focus-ring);
     outline-offset: 2px;
   }
 
@@ -137,31 +132,31 @@
 
   /* Size variants */
   .ds-time-picker--sm {
-    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
+    padding: 0.25rem 0.5rem;
   }
 
   .ds-time-picker--sm .ds-time-picker-segment {
     min-width: 2rem;
-    font-size: var(--ds-font-size-sm);
+    font-size: var(--ds-time-picker-option-font-size);
   }
 
   .ds-time-picker--sm .ds-time-picker__separator {
     width: 0.5rem;
-    font-size: var(--ds-font-size-sm);
+    font-size: var(--ds-time-picker-option-font-size);
   }
 
   .ds-time-picker--lg {
-    padding: var(--ds-spacing-component-padding-md) var(--ds-spacing-component-padding-lg);
+    padding: 0.75rem 1.25rem;
   }
 
   .ds-time-picker--lg .ds-time-picker-segment {
     min-width: 3rem;
-    font-size: var(--ds-font-size-lg);
+    font-size: var(--ds-time-picker-segment-font-size);
   }
 
   .ds-time-picker--lg .ds-time-picker__separator {
     width: 1rem;
-    font-size: var(--ds-font-size-lg);
+    font-size: var(--ds-time-picker-segment-font-size);
   }
 
   /* With seconds */
@@ -177,17 +172,17 @@
   /* Dropdown variant (for hour/minute selection) */
   .ds-time-picker-dropdown {
     position: absolute;
-    z-index: var(--ds-z-popover, 100);
+    z-index: var(--ds-time-picker-dropdown-bg);
     top: 100%;
     left: 0;
     display: flex;
-    gap: var(--ds-spacing-1);
-    margin-top: var(--ds-spacing-1);
-    padding: var(--ds-spacing-component-padding-sm);
-    background-color: var(--_time-picker-bg);
-    border: 1px solid var(--ds-color-border-default);
-    border-radius: var(--_time-picker-border-radius);
-    box-shadow: var(--ds-shadow-lg);
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    background-color: var(--ds-time-picker-dropdown-bg);
+    border: 1px solid var(--ds-time-picker-dropdown-border-color);
+    border-radius: var(--ds-time-picker-dropdown-border-radius);
+    box-shadow: var(--ds-time-picker-dropdown-shadow);
   }
 
   .ds-time-picker-dropdown__column {
@@ -201,29 +196,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.5rem;
-    padding: var(--ds-spacing-component-padding-xs) var(--ds-spacing-component-padding-sm);
-    font-size: var(--ds-font-size-sm);
+    min-width: var(--ds-time-picker-segment-min-width);
+    padding: 0.25rem 0.5rem;
+    font-size: var(--ds-time-picker-option-font-size);
     font-variant-numeric: tabular-nums;
-    color: var(--ds-color-foreground-default);
+    color: var(--ds-time-picker-option-color);
     cursor: pointer;
     background: transparent;
     border: none;
-    border-radius: var(--ds-radius-sm);
+    border-radius: var(--ds-time-picker-segment-border-radius);
     transition: background-color 100ms ease;
   }
 
   .ds-time-picker-dropdown__option:hover {
-    background-color: var(--ds-color-background-subtle);
+    background-color: var(--ds-time-picker-option-bg-hover);
   }
 
   .ds-time-picker-dropdown__option[data-selected] {
-    background-color: var(--ds-color-primary-subtle);
-    color: var(--ds-color-primary-default);
+    background-color: var(--ds-time-picker-option-bg-selected);
+    color: var(--ds-time-picker-option-color-selected);
   }
 
   .ds-time-picker-dropdown__option:focus-visible {
-    outline: 2px solid var(--ds-color-focus-ring);
+    outline: 2px solid var(--ds-time-picker-focus-ring);
     outline-offset: -2px;
   }
 

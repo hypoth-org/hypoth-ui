@@ -1,0 +1,34 @@
+{
+  "$description": "FileUpload component tokens — references form-controls type tokens",
+  "file-upload": {
+    "dropzone": {
+      "bg": { "$value": "{form-control.bg}", "$type": "color", "$description": "Dropzone background" },
+      "border-color": { "$value": "{form-control.border-color}", "$type": "color", "$description": "Dropzone border color" },
+      "border-color-hover": { "$value": "{form-control.border-color-hover}", "$type": "color", "$description": "Dropzone border color on hover" },
+      "border-color-active": { "$value": "{color.primary.default}", "$type": "color", "$description": "Dropzone border color when drag-over" },
+      "border-radius": { "$value": "{radius.lg}", "$type": "dimension", "$description": "Dropzone border radius" },
+      "bg-hover": { "$value": "{color.background.subtle}", "$type": "color", "$description": "Dropzone background on hover" },
+      "bg-active": { "$value": "{color.primary.subtle}", "$type": "color", "$description": "Dropzone background when drag-over" },
+      "min-height": { "$value": "10rem", "$type": "dimension", "$description": "Dropzone minimum height" },
+      "icon-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Dropzone icon color" },
+      "text-color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "Dropzone text color" },
+      "hint-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "Dropzone hint text color" }
+    },
+    "item": {
+      "bg": { "$value": "{color.background.subtle}", "$type": "color", "$description": "File item background" },
+      "border-radius": { "$value": "{form-control.border-radius}", "$type": "dimension", "$description": "File item border radius" },
+      "icon-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "File item icon color" },
+      "name-color": { "$value": "{color.foreground.default}", "$type": "color", "$description": "File item name text color" },
+      "meta-color": { "$value": "{form-control.placeholder-color}", "$type": "color", "$description": "File item meta text color" },
+      "error-bg": { "$value": "{color.destructive.subtle}", "$type": "color", "$description": "File item background in error state" },
+      "success-bg": { "$value": "{color.success.subtle}", "$type": "color", "$description": "File item background on success" }
+    },
+    "progress": {
+      "bg": { "$value": "{color.background.muted}", "$type": "color", "$description": "Progress bar track background" },
+      "bar-color": { "$value": "{color.primary.default}", "$type": "color", "$description": "Progress bar fill color" },
+      "height": { "$value": "4px", "$type": "dimension", "$description": "Progress bar height" }
+    },
+    "focus-ring": { "$value": "{form-control.focus-ring}", "$type": "color", "$description": "FileUpload focus ring color" },
+    "error-border-color": { "$value": "{form-control.error-border-color}", "$type": "color", "$description": "FileUpload border color in error state" }
+  }
+}

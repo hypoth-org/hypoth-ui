@@ -1,10 +1,8 @@
 /**
  * Separator component styles
  *
- * CSS custom properties for theming:
- * --ds-separator-color: Border color (default: #e2e8f0)
- * --ds-separator-size: Thickness (default: 1px)
- * --ds-separator-margin: Margin for spacing (default: 1rem 0)
+ * Themed via component tokens defined in @layer tokens.
+ * See: packages/tokens/dist/css/component-tokens.css (--ds-separator-*)
  */
 
 @layer components {
@@ -14,24 +12,17 @@
   }
 
   ds-separator[orientation="horizontal"] {
-    height: var(--ds-separator-size, 1px);
+    height: var(--ds-separator-size);
     width: 100%;
-    background-color: var(--ds-separator-color, #e2e8f0);
-    margin: var(--ds-separator-margin, 1rem 0);
+    background-color: var(--ds-separator-color);
+    margin: var(--ds-separator-margin) 0;
   }
 
   ds-separator[orientation="vertical"] {
-    width: var(--ds-separator-size, 1px);
+    width: var(--ds-separator-size);
     height: 100%;
-    background-color: var(--ds-separator-color, #e2e8f0);
-    margin: var(--ds-separator-margin, 0 1rem);
+    background-color: var(--ds-separator-color);
+    margin: 0 var(--ds-separator-margin);
     align-self: stretch;
-  }
-
-  /* Dark mode support */
-  @media (prefers-color-scheme: dark) {
-    ds-separator {
-      --ds-separator-color: #334155;
-    }
   }
 }
