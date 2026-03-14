@@ -1,5 +1,12 @@
 # @hypoth-ui/docs-content
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @hypoth-ui/docs-core@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
